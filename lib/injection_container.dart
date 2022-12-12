@@ -1,0 +1,157 @@
+import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mo3tv/core/api/api_consumer.dart';
+import 'package:mo3tv/core/api/app_interceptors.dart';
+import 'package:mo3tv/core/api/dio_consumer.dart';
+import 'package:mo3tv/core/network/network_info.dart';
+import 'package:mo3tv/core/shared/shared_prefrences.dart';
+import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
+import 'package:mo3tv/features/account/data/datasources/account_datasource.dart';
+import 'package:mo3tv/features/account/data/repositories/account_repository_impl.dart';
+import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_fav_movies_list_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_movies_watchlist_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_rated_movies_list_usecase.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/login/data/data_sources/login_datasource.dart';
+import 'package:mo3tv/features/login/data/repositories/login_repository_impl.dart';
+import 'package:mo3tv/features/login/domain/repositories/login_repository.dart';
+import 'package:mo3tv/features/login/domain/usecases/get_sessionid_usecase.dart';
+import 'package:mo3tv/features/login/domain/usecases/get_token_usecase.dart';
+import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
+import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
+import 'package:mo3tv/features/movies/data/repositories/movies_repository.dart';
+import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
+import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_movie_gallery_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_movie_keywords.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_movie_videos_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+final sl = GetIt.instance;
+
+Future<void> init() async {
+  ///features
+
+  //blocs
+  sl.registerFactory(() =>AccountCubit(
+      getFavMoviesListUsecase: sl(),
+      getMoviesWatchlistUsecase: sl(),
+      getRatedMoviesListUsecase: sl()));
+
+  sl.registerFactory<MovieCubit>(() => MovieCubit(
+      getNowPlayingMoviesUsecase: sl(),
+      rateMovieUseCase: sl(),
+      popularMoviesUsecase: sl(),
+      getMovieGalleryUsecase: sl(),
+      getMovieReviewsUsecase: sl(),
+      getTopRatedMoviesUsecase: sl(),
+      deleteRateMovieUseCase: sl(),
+      markMovieAsFavUsecase: sl(),
+      addMovieToWatchListUseCase: sl(),
+      getMovieCreditsUsecase: sl(),
+      getMovieRecommendationsUseCase: sl(),
+      getMovieKeywords: sl(),
+      getMovieVideosUsecase: sl(),
+      getMovieDetailsUseCase: sl()));
+
+  //useCases
+  sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
+      () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));
+  sl.registerLazySingleton<GetPopularMoviesUsecase>(
+      () => GetPopularMoviesUsecase(sl()));
+  sl.registerLazySingleton<GetTopRatedMoviesUsecase>(
+      () => GetTopRatedMoviesUsecase(sl()));
+  sl.registerLazySingleton<GetMovieDetailsUseCase>(
+          () => GetMovieDetailsUseCase( baseMovieRepository: sl(),));
+  sl.registerLazySingleton<GetMovieRecommendationsUseCase>(
+          () => GetMovieRecommendationsUseCase( baseMovieRepository: sl(),));
+  sl.registerLazySingleton<GetMovieVideosUsecase>(
+          () => GetMovieVideosUsecase(sl()));
+  sl.registerLazySingleton<GetMovieKeywords>(
+          () => GetMovieKeywords(sl()));
+  sl.registerLazySingleton<GetMovieReviewsUsecase>(
+          () => GetMovieReviewsUsecase(sl()));
+  sl.registerLazySingleton<GetMovieCreditsUsecase>(
+          () => GetMovieCreditsUsecase(sl()));
+  sl.registerLazySingleton<GetMovieGalleryUsecase>(
+          () => GetMovieGalleryUsecase(sl()));
+  sl.registerLazySingleton<RateMovieUseCase>(
+          () => RateMovieUseCase(sl()));
+  sl.registerLazySingleton<DeleteRateMovieUseCase>(
+          () => DeleteRateMovieUseCase(sl()));
+  sl.registerLazySingleton<MarkMovieAsFavUsecase>(
+          () => MarkMovieAsFavUsecase(sl()));
+  sl.registerLazySingleton<AddMovieToWatchListUseCase>(
+          () => AddMovieToWatchListUseCase(sl()));
+  sl.registerLazySingleton<GetFavMoviesListUsecase>(
+          () => GetFavMoviesListUsecase(accountRepository: sl(),));
+  sl.registerLazySingleton<GetRatedMoviesListUsecase>(
+          () => GetRatedMoviesListUsecase(accountRepository: sl(),));
+  sl.registerLazySingleton<GetMoviesWatchlistUsecase>(
+          () => GetMoviesWatchlistUsecase(accountRepository: sl(),));
+
+  // Repository
+
+  sl.registerLazySingleton<MovieRepository>(
+      () => MoviesRepositoryImpl(baseMovieRemoteDataSource: sl(),networkInfo: sl()));
+  sl.registerLazySingleton<AccountRepository>(
+          () => AccountRepositoryImpl(accountDataSource:sl(),networkInfo: sl()));
+
+  //dataSource
+
+  sl.registerLazySingleton<MovieRemoteDataSource>(
+      () => MovieRemoteDataSourceImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<AccountDataSource>(
+          () => AccountDataSourceImpl(sl()));
+
+
+  ///core
+
+  sl.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImpl(connectionChecker: sl()));
+
+  ///External
+
+  final sharedPreference = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreference);
+  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));
+  sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton<SharedPrefrencesConsumer>(() => SharedPrefrencesManager(sharedPreferences: sl()));
+  sl.registerLazySingleton(() => InternetConnectionChecker());
+  sl.registerLazySingleton(() => AppInterceptors());
+  sl.registerLazySingleton(() => LogInterceptor(
+        request: true,
+        requestBody: true,
+        requestHeader: true,
+        responseBody: true,
+        responseHeader: true,
+        error: true,
+      ));
+}
+
+login(){
+  if (!GetIt.I.isRegistered<GetTokenUsecase>())
+    {
+      sl.registerFactory<LoginCubit>(() =>LoginCubit(getTokenUsecase: sl(),getSessionIdUsecase: sl(),sharedPrefrencesConsumer: sl()),);
+      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(networkInfo: sl(), loginDataSource: sl()),);
+      sl.registerLazySingleton<GetTokenUsecase>(
+              () => GetTokenUsecase(loginRepository: sl()));
+      sl.registerLazySingleton<GetSessionIdUsecase>(
+              () => GetSessionIdUsecase(loginRepository: sl()));
+      sl.registerLazySingleton<LoginDataSource>(
+              () => LoginDataSourceImpl(sl()));
+    }
+}
