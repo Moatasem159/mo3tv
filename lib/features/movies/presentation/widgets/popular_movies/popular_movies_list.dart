@@ -14,7 +14,7 @@ class PopularMoviesList extends StatelessWidget {
         children: [
           const ListTitle(title: "Popular"),
           SizedBox(
-            height: 180.0,
+            height: 170,
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,

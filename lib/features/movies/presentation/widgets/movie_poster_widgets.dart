@@ -20,18 +20,16 @@ class MoviePoster extends StatelessWidget {
         BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
         // BlocProvider.of<MovieCubit>(context).getMovieVideos(movieId: movie.id!);
-
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie: movie),));
       },
-      child: Stack(
-        alignment: Alignment.topRight,
+      child: Column(
         children: [
           ClipRRect(
             borderRadius:
-            const BorderRadius.all(Radius.circular(8.0)),
+             BorderRadius.circular(8.0),
             child: CachedNetworkImage(
-              width: 120.0,
-              height: 180,
+              width: 115,
+              height: 170,
               fit: BoxFit.cover,
               imageUrl: EndPoints.posterUrl(movie.posterPath!),
               placeholder: (context, url) => Shimmer.fromColors(
@@ -50,15 +48,6 @@ class MoviePoster extends StatelessWidget {
                   Image.asset("assets/images/movieplaceholder.png"),
             ),
           ),
-          Row(
-            children: [
-              Text("${movie.voteAverage}",style: const TextStyle(
-                fontWeight: FontWeight.bold
-              ),),
-              const Icon(Icons.star,color: Colors.yellow,size: 20,),
-
-            ],
-          )
         ],
       ),
     );

@@ -19,35 +19,11 @@ class MovieDescription extends StatelessWidget {
         Text(
           movie.overview!,
           style:
-          const TextStyle(wordSpacing: 3, height: 1.3, letterSpacing: 1.5),
+          const TextStyle(wordSpacing: 2, height: 1.4, letterSpacing: 1.1),
         ),
         const SizedBox(
           height: 10,
         ),
-        if (movie.genres!.isNotEmpty)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Genre:",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 7,
-              ),
-              Wrap(
-                children: movie.genres!.map((e) {
-                  return Container(
-                      padding: const EdgeInsets.all(6),
-                      margin: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                          color: Colors.black38.withOpacity(.5),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Text(e.name!));
-                }).toList(),
-              ),
-            ],
-          ),
         if (keywords.isNotEmpty)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,31 +54,24 @@ class MovieDescription extends StatelessWidget {
         ),
         if (movie.productionCompanies!.isNotEmpty)
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Center(child: Text("Production Companies")),
               const SizedBox(
                 height: 7,
               ),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 1.5),
-                itemCount: movie.productionCompanies!.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return Column(
-                    mainAxisAlignment: movie.productionCompanies!.length > 1
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.start,
+              Wrap(
+                alignment: WrapAlignment.center,
+                children: movie.productionCompanies!.map((e)=> SizedBox(
+                  width: 170,
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CachedNetworkImage(
                         width: 90,
                         height: 70,
                         imageUrl: EndPoints.logoUrl(
-                            movie.productionCompanies![index].logoPath),
+                            e.logoPath),
                         errorWidget: (context, url, error) =>
                             Image.asset("assets/images/movieplaceholder.png"),
                       ),
@@ -110,11 +79,12 @@ class MovieDescription extends StatelessWidget {
                         height: 5,
                       ),
                       FittedBox(
-                          child: Text(movie.productionCompanies![index].name)),
+                          child: Text(e.name)),
                     ],
-                  );
-                },
-              )
+                  ),
+                )
+                ).toList(),
+              ),
             ],
           ),
       ],

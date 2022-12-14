@@ -48,8 +48,42 @@ class MovieDetails extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 10,
+          height: 5
         ),
+        if (movie.genres!.isNotEmpty)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Wrap(
+                runSpacing: 5,
+                spacing: 7,
+                children: movie.genres!.map((e){
+                  return Wrap(
+                      children: [
+                        Text(movie.genres!.last.id !=e.id?
+                        "${e.name},": "${e.name}",style:const TextStyle(
+                            fontWeight: FontWeight.bold
+                        ),),
+                        if(e.id==movie.genres!.last.id)
+                            Wrap(children: [
+                              const SizedBox(width:5 ,),
+                              const Padding(
+                                padding: EdgeInsets.only(top: 7),
+                                child: CircleAvatar(
+                                  radius: 3,
+                                  backgroundColor: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(width:5 ,),
+                              Text("${(movie.runtime / 60).toInt()}h ${movie.runtime % 60}m",style:const TextStyle(
+                                fontWeight: FontWeight.bold
+                              )),
+                            ],)
+                      ]
+                  );
+                }).toList()
+            ),
+          ),
+        const SizedBox(height: 15,)
       ],
     );
   }
