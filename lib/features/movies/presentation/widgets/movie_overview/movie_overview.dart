@@ -18,8 +18,7 @@ class MovieOverview extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
-        if (state is GetMovieDetailsSuccessState ||
-            cubit.movie != Movie()) {
+        if (state is GetMovieDetailsSuccessState || cubit.movie != Movie()) {
           return SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -33,7 +32,7 @@ class MovieOverview extends StatelessWidget {
                     MovieButtons(movie: cubit.movie),
                     MovieDescription(
                       movie: cubit.movie,
-                      keywords: cubit.movieKeywords,
+                      keywords: cubit.movie.keywords!,
                     ),
                     const SizedBox(
                       height: 17,

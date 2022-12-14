@@ -20,6 +20,9 @@ class MovieInfo extends StatelessWidget {
               movie.title!,
               maxLines: null,
               overflow: TextOverflow.visible,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold
+              ),
             ),
           ),
           if (movie.tagline != "")
@@ -41,37 +44,39 @@ class MovieInfo extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 3,
                 ),
               ],
             ),
-          Text("${(movie.runtime / 60).toInt()}h ${movie.runtime % 60}m "),
+          const Text("Status",style:TextStyle(
+          fontWeight: FontWeight.bold
+          ),),
           const SizedBox(
-            height: 5,
-          ),
-          const Text("Status"),
-          const SizedBox(
-            height: 5,
+            height: 4,
           ),
           Text(movie.status!),
           const SizedBox(
-            height: 10,
+            height: 7,
           ),
-          const Text("Release Date"),
+          const Text("Release Date",style:TextStyle(
+    fontWeight: FontWeight.bold
+    )),
           const SizedBox(
-            height: 5,
+            height: 4,
           ),
           Text(
             movie.releaseDate!,
           ),
           const SizedBox(
-            height: 10,
+            height: 7,
           ),
           if (movie.budget != 0)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Budget"),
+                const Text("Budget",style:TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
                 const SizedBox(
                   height: 5,
                 ),
@@ -79,13 +84,15 @@ class MovieInfo extends StatelessWidget {
               ],
             ),
           const SizedBox(
-            height: 10,
+            height: 7,
           ),
           if (movie.revenue != 0)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Revenue"),
+                const Text("Revenue",style:TextStyle(
+                    fontWeight: FontWeight.bold
+                )),
                 const SizedBox(
                   height: 5,
                 ),

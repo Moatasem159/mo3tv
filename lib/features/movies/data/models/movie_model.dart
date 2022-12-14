@@ -7,6 +7,7 @@ class MovieModel extends Movie {
       super.backdropPath,
       super.budget,
        super.genres,
+       super.keywords,
       super.homepage,
       super.id,
        super.imdbId,
@@ -29,6 +30,7 @@ class MovieModel extends Movie {
        super.voteCount,
        super.belongsToCollection,
            super.rating,
+           super.movieAccountDetails,
       });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
@@ -37,6 +39,7 @@ class MovieModel extends Movie {
       belongsToCollection: json["belongs_to_collection"]??'',
       budget: json["budget"]??0,
       genres: json["genres"]==null?[]:List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
+      keywords:json["keywords"]==null?[]:List<GenreModel>.from(json["keywords"]['keywords'].map((x) => GenreModel.fromJson(x))),
       homepage: json["homepage"]??'',
       id: json["id"],
       imdbId: json["imdb_id"]??"",
@@ -48,6 +51,7 @@ class MovieModel extends Movie {
       productionCompanies:json["production_companies"]==null?[]:List<ProductionCompany>.from(json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
       // productionCountries: List<ProductionCountry>.from(json["production_countries"]),
       releaseDate:json["release_date"]??'',
+      movieAccountDetails:json["account_states"]==null?MovieAccountDetails():MovieAccountDetails.fromJson(json["account_states"]),
       revenue: json["revenue"]??0,
       runtime: json["runtime"]??0,
       // spokenLanguages: List<SpokenLanguage>.from(json["spoken_languages"]??List<SpokenLanguage>),

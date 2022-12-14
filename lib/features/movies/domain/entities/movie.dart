@@ -9,6 +9,7 @@ class Movie extends Equatable {
   final dynamic belongsToCollection;
   final dynamic budget;
   final List<GenreModel>? genres;
+  final List<GenreModel>? keywords;
   final String ?homepage;
   final int ?id;
   final String? imdbId;
@@ -30,6 +31,7 @@ class Movie extends Equatable {
   final dynamic voteAverage;
   final dynamic voteCount;
   dynamic rating;
+  MovieAccountDetails? movieAccountDetails;
 
    Movie({
    this.adult,
@@ -56,7 +58,9 @@ class Movie extends Equatable {
   this.video,
    this.voteAverage,
    this.voteCount,
-    this.rating
+   this.keywords,
+    this.rating,
+    this.movieAccountDetails,
   });
   @override
   List<Object?> get props => [
@@ -151,5 +155,33 @@ class ProductionCompany {
     "logo_path": logoPath,
     "name": name,
     "origin_country": originCountry,
+  };
+}
+
+
+class MovieAccountDetails {
+  MovieAccountDetails({
+    this.favorite,
+    this.rated,
+    this.watchlist,
+    this.ratedValue
+  });
+
+  bool? favorite;
+  dynamic rated;
+  dynamic ratedValue;
+  bool? watchlist;
+
+  factory MovieAccountDetails.fromJson(Map<String, dynamic> json) => MovieAccountDetails(
+    favorite: json["favorite"],
+    rated: json["rated"]??true,
+    ratedValue:json["rated"]==false?0.0:json["rated"]["value"],
+    watchlist: json["watchlist"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "favorite": favorite,
+    "rated": rated,
+    "watchlist": watchlist,
   };
 }

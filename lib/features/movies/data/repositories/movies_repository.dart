@@ -6,7 +6,6 @@ import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.da
 import 'package:mo3tv/features/movies/data/models/video_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/cast.dart';
 import 'package:mo3tv/features/movies/domain/entities/image.dart';
-import 'package:mo3tv/features/movies/domain/entities/keyword.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/entities/message.dart';
 import 'package:mo3tv/features/movies/domain/entities/review.dart';
@@ -125,23 +124,6 @@ class MoviesRepositoryImpl extends MovieRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, List<Keyword>>> getMovieKeywords({required int movieId})async {
-    if(await networkInfo.isConnected)
-      {
-        final result = await baseMovieRemoteDataSource.getMovieKeywords(movieId: movieId);
-
-        try {
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
-      }
-    else{
-      return left(const ServerFailure("No Internet Connections"));
-
-    }
-  }
 
   @override
   Future<Either<Failure, List<Review>>> getMovieReviews({required int movieId}) async{

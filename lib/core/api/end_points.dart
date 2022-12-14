@@ -5,21 +5,21 @@ class EndPoints{
   static const String basePosterUrl = "https://image.tmdb.org/t/p/w500";
   static const String baseBackDropsUrl = "https://image.tmdb.org/t/p/w780";
   static const String baseLogoUrl = "https://image.tmdb.org/t/p/w185";
-  static String nowPlayingMoviesPath({required int page}) =>
-      "$baseUrl/movie/now_playing?api_key=$apiKey&page=$page";
-  static String nowPopularMoviesPath ({required int page})=>
-      "$baseUrl/movie/popular?api_key=$apiKey&page=$page";
-  static  String nowTopRatedMoviesPath({required int page}) =>
-      "$baseUrl/movie/top_rated?api_key=$apiKey&page=$page";
 
-  static String movieDetailsPath(int movieId) =>
-      "$baseUrl/movie/$movieId?api_key=$apiKey";
+
+
+  static String mediaDetailsPath(int mediaId,String sessionId,String mediaType) =>
+      "$baseUrl/$mediaType/$mediaId?api_key=$apiKey&session_id=$sessionId&append_to_response=keywords,account_states";
+  static String nowPlayingMediaPath({required int page,required String mediaType,required nowPlaying}) =>
+      "$baseUrl/$mediaType/$nowPlaying?api_key=$apiKey&page=$page";
+  static String popularMediaPath ({required int page,required String mediaType})=>
+      "$baseUrl/$mediaType/popular?api_key=$apiKey&page=$page";
+  static  String topRatedMediaPath({required int page,required String mediaType}) =>
+      "$baseUrl/$mediaType/top_rated?api_key=$apiKey&page=$page";
 
   static String recommendationPath(int movieId,int page) =>
       "$baseUrl/movie/$movieId/recommendations?api_key=$apiKey&page=$page";
 
-  static String movieKeywordsPath(int movieId) =>
-      "$baseUrl/movie/$movieId/keywords?api_key=$apiKey";
   static String movieReviewsPath(int movieId) =>
       "$baseUrl/movie/$movieId/reviews?api_key=$apiKey";
   static String movieCreditsPath(int movieId) =>
@@ -44,5 +44,6 @@ class EndPoints{
  static String favMoviesListPath(String sessionid)=>"${baseUrl}account/{account_id}/favorite/movies?api_key=$apiKey&session_id=$sessionid";
  static String addToWatchListPath(String sessionid)=>"${baseUrl}account/{account_id}/watchlist?api_key=$apiKey&session_id=$sessionid";
  static String moviesWatchListPath(String sessionid)=>"${baseUrl}account/{account_id}/watchlist/movies?api_key=$apiKey&session_id=$sessionid";
+
 
 }
