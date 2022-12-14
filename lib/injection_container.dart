@@ -28,7 +28,6 @@ import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_gallery_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_keywords.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_videos_usecase.dart';
@@ -38,6 +37,14 @@ import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_useca
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
+import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
+import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_top_rated_tv_shows_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -63,11 +70,16 @@ Future<void> init() async {
       addMovieToWatchListUseCase: sl(),
       getMovieCreditsUsecase: sl(),
       getMovieRecommendationsUseCase: sl(),
-      getMovieKeywords: sl(),
       getMovieVideosUsecase: sl(),
       getMovieDetailsUseCase: sl()));
+  sl.registerFactory<TvCubit>(() => TvCubit(
+    getTvShowDetailsUsecase: sl(),
+    getTopRatedTvShowUsecase: sl(),
+    getPopularTvShowsUsecase: sl(),
+      getNowPlayingTvShowsUsecase: sl(),
+  ));
 
-  //useCases
+  // movie useCases
   sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
       () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));
   sl.registerLazySingleton<GetPopularMoviesUsecase>(
@@ -80,8 +92,6 @@ Future<void> init() async {
           () => GetMovieRecommendationsUseCase( baseMovieRepository: sl(),));
   sl.registerLazySingleton<GetMovieVideosUsecase>(
           () => GetMovieVideosUsecase(sl()));
-  sl.registerLazySingleton<GetMovieKeywords>(
-          () => GetMovieKeywords(sl()));
   sl.registerLazySingleton<GetMovieReviewsUsecase>(
           () => GetMovieReviewsUsecase(sl()));
   sl.registerLazySingleton<GetMovieCreditsUsecase>(
@@ -103,12 +113,24 @@ Future<void> init() async {
   sl.registerLazySingleton<GetMoviesWatchlistUsecase>(
           () => GetMoviesWatchlistUsecase(accountRepository: sl(),));
 
+
+  //// tv Usecases
+  sl.registerLazySingleton<GetNowPlayingTvShowsUsecase>(
+          () => GetNowPlayingTvShowsUsecase(tvRepository: sl(),));
+  sl.registerLazySingleton<GetPopularTvShowsUsecase>(
+          () => GetPopularTvShowsUsecase(tvRepository: sl(),));
+  sl.registerLazySingleton<GetTopRatedTvShowUsecase>(
+          () => GetTopRatedTvShowUsecase(tvRepository: sl(),));
+  sl.registerLazySingleton<GetTvShowDetailsUsecase>(
+          () => GetTvShowDetailsUsecase(tvRepository: sl(),));
   // Repository
 
   sl.registerLazySingleton<MovieRepository>(
       () => MoviesRepositoryImpl(baseMovieRemoteDataSource: sl(),networkInfo: sl()));
   sl.registerLazySingleton<AccountRepository>(
           () => AccountRepositoryImpl(accountDataSource:sl(),networkInfo: sl()));
+  sl.registerLazySingleton<TvRepository>(
+          () => TvShowRepositoryImpl(tvShowRemoteDataSource:sl(),networkInfo: sl()));
 
   //dataSource
 
@@ -116,6 +138,8 @@ Future<void> init() async {
       () => MovieRemoteDataSourceImpl(apiConsumer: sl()));
   sl.registerLazySingleton<AccountDataSource>(
           () => AccountDataSourceImpl(sl()));
+  sl.registerLazySingleton<TvShowRemoteDataSource>(
+          () => TvShowRemoteDataSourceImpl( apiConsumer: sl(),));
 
 
   ///core

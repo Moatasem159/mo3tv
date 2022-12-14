@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/features/movies/domain/entities/cast.dart';
 import 'package:mo3tv/features/movies/domain/entities/image.dart';
-import 'package:mo3tv/features/movies/domain/entities/keyword.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/entities/message.dart';
 import 'package:mo3tv/features/movies/domain/entities/review.dart';
@@ -14,7 +13,6 @@ import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_gallery_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_keywords.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_videos_usecase.dart';
@@ -36,7 +34,7 @@ class MovieCubit extends Cubit<MovieStates> {
         required this.getMovieGalleryUsecase,
         required this.getMovieRecommendationsUseCase,
         required this.getMovieVideosUsecase,
-        required this.getMovieKeywords,
+        // required this.getMovieKeywords,
         required this.rateMovieUseCase,
         required this.markMovieAsFavUsecase,
         required this.addMovieToWatchListUseCase,
@@ -51,7 +49,6 @@ class MovieCubit extends Cubit<MovieStates> {
   GetMovieDetailsUseCase getMovieDetailsUseCase;
   GetMovieRecommendationsUseCase getMovieRecommendationsUseCase;
   GetMovieVideosUsecase getMovieVideosUsecase;
-  GetMovieKeywords getMovieKeywords;
   GetMovieReviewsUsecase getMovieReviewsUsecase;
   GetMovieCreditsUsecase getMovieCreditsUsecase;
   GetMovieGalleryUsecase getMovieGalleryUsecase;
@@ -109,22 +106,14 @@ class MovieCubit extends Cubit<MovieStates> {
   }
 
   Movie movie=Movie();
-  List<Keyword> movieKeywords=[];
   Future<void> getMovieDetailsData({required int movieId}) async {
     emit(GetMovieDetailsLoadingState());
     Either<Failure,Movie> response =
     await getMovieDetailsUseCase.call(movieId);
-    Either<Failure,List<Keyword>> words =
-    await getMovieKeywords.call(movieId);
     movie=Movie();
-    emit(response.fold(
-            (failure) =>
-            GetMovieDetailsErrorState(msg: _mapFailureToMsg(failure)),
-            (movie) {
+    emit(response.fold((failure) =>
+            GetMovieDetailsErrorState(msg: _mapFailureToMsg(failure)), (movie) {
           this.movie = movie;
-          words.fold((l) =>GetMovieDetailsErrorState(msg: _mapFailureToMsg(l)),(r){
-            movieKeywords=r;
-          });
           return GetMovieDetailsSuccessState();
         }));
   }
@@ -222,7 +211,7 @@ class MovieCubit extends Cubit<MovieStates> {
   List<int> moviesId=[];
   void clearObjects(){
     movie=Movie();
-    movieKeywords.clear();
+    // movieKeywords.clear();
     if(movieVideos!=null)
       {
         movieVideos=null;

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/button.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_overview.dart';
 
 class AddMovieToWatchlistButton extends StatelessWidget {
   final Movie movie;
@@ -34,27 +32,17 @@ class AddMovieToWatchlistButton extends StatelessWidget {
       },
       child: MovieButton(
         onTap: () {
-          if (BlocProvider.of<AccountCubit>(context)
-              .moviesWatchlist!
-              .any((element) => element.id! == movie.id!)) {
-            BlocProvider.of<MovieCubit>(context)
-                .addToWatchList(movieId: movie.id!, watchlist: false);
-            BlocProvider.of<AccountCubit>(context)
-                .moviesWatchlist!
-                .removeWhere(
-                  (element) => element.id! == movie.id!,
-            );
+          if (movie.movieAccountDetails!.watchlist!) {
+            BlocProvider.of<MovieCubit>(context).addToWatchList(movieId: movie.id!, watchlist: false);
+            movie.movieAccountDetails!.watchlist=false;
+
           } else {
-            BlocProvider.of<MovieCubit>(context)
-                .addToWatchList(movieId: movie.id!, watchlist: true);
-            BlocProvider.of<AccountCubit>(context)
-                .moviesWatchlist!
-                .add(movie);
+            BlocProvider.of<MovieCubit>(context).addToWatchList(movieId: movie.id!, watchlist: true);
+            movie.movieAccountDetails!.watchlist=true;
+
           }
         },
-        icon: BlocProvider.of<AccountCubit>(context)
-            .moviesWatchlist!
-            .any((element) => element.id! == movie.id!)
+        icon: movie.movieAccountDetails!.watchlist!
             ? const Icon(
           Icons.bookmark,
           color: Colors.green,

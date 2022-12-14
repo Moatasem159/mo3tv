@@ -7,7 +7,7 @@ class GenreModel extends Keyword{
   });
 
   factory GenreModel.fromJson(Map<String, dynamic> json) => GenreModel(
-    id: json["id"]??"0",
+    id: json["id"]??0,
     name: json["name"]??'',
   );
 

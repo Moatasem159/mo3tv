@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
@@ -33,18 +32,19 @@ class MovieFavButton extends StatelessWidget {
       },
       child: MovieButton(
             onTap:() {
-              if(BlocProvider.of<AccountCubit>(context).favMovies!.any((element)=>element.id! ==movie.id!)){
+              if(movie.movieAccountDetails!.favorite!){
                 BlocProvider.of<MovieCubit>(context).favMovie(movieId: movie.id!, fav: false);
-                BlocProvider.of<AccountCubit>(context).favMovies!.removeWhere((element) => element.id! ==movie.id!,);
+                movie.movieAccountDetails!.favorite =false;
               }
               else{
                 BlocProvider.of<MovieCubit>(context).favMovie(movieId: movie.id!, fav: true);
-                BlocProvider.of<AccountCubit>(context).favMovies!.add(movie);
+                movie.movieAccountDetails!.favorite =true;
               }
             },
           icon: Icon(
             Icons.favorite,
-            color: BlocProvider.of<AccountCubit>(context).favMovies!.any((element)=>element.id! ==movie.id!)?Colors.red:Colors.white,
+            color:
+              movie.movieAccountDetails!.favorite!?Colors.red:Colors.white
           ),
         ),
     );
