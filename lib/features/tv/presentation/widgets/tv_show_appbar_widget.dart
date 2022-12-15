@@ -1,0 +1,111 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
+
+class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
+  final TvShow tvShow;
+
+  TvShowDetailsAppBar(this.tvShow);
+
+  final double maxSize = 200;
+  final double minSize = 70;
+  final double maxImageSize = 200;
+  final double minImageSize = 70;
+  final double maxTitleSize = 20;
+  final double minTitleSize = 15;
+  final double maxIconSize = 30;
+  final double mixIconSize = 20;
+  final double maxImageMargin = 0;
+  final double minImageMargin = 60;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final p = shrinkOffset / maxSize;
+    var size = MediaQuery.of(context).size;
+    final c = (maxImageSize * (1 - p)).clamp(minImageSize, maxImageSize);
+    final iconSize = (maxIconSize * (1 - p)).clamp(mixIconSize, maxIconSize);
+    final titleSize =
+        (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
+    final maxTitleMargin = size.height / 4.3;
+    dynamic textMovement =
+        // BlocProvider.of<MovieBottomNavCubit>(context).isGallery ? 155 :
+    190;
+    final double top = maxTitleMargin + (1 - textMovement * p);
+    final maxMargin = size.width / 30;
+    const textLeftMovement = 50;
+    final left = maxMargin + (textLeftMovement * p);
+    final radius = 15 * p;
+    final imageMargin = (minImageMargin * (p));
+    return Container(
+      color: Colors.black,
+      child: Stack(
+        children: [
+          Positioned(
+              bottom: 0,
+              left: imageMargin,
+              height: c,
+              child: Container(
+                width: 380,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(radius),
+                        topLeft: Radius.circular(radius)),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                        EndPoints.backDropsUrl(tvShow.backdropPath!),
+                      ),
+                    )),
+              )),
+          Positioned(
+              left: 15,
+              top: 5,
+              child: GestureDetector(
+                  onTap: () {
+                    BlocProvider.of<TvCubit>(context).clearObjects();
+                    BlocProvider.of<TvCubit>(context).backToBackTvShows();
+
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    size: iconSize,
+                  ))),
+          Positioned(
+              left: left,
+              top: top,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  maxWidth: 300,
+                ),
+                child: FittedBox(
+                  child: Text(
+                    tvShow.originalName!,
+                    maxLines: null,
+                    overflow: TextOverflow.visible,
+                    style: TextStyle(
+                      fontSize: titleSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              )),
+        ],
+      ),
+    );
+    // 4.3
+  }
+
+  @override
+  double get maxExtent => maxSize;
+
+  @override
+  double get minExtent => minSize;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
+}
