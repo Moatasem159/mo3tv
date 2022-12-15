@@ -3,13 +3,13 @@ import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
-import 'package:mo3tv/features/movies/data/models/video_model.dart';
-import 'package:mo3tv/features/movies/domain/entities/cast.dart';
-import 'package:mo3tv/features/movies/domain/entities/image.dart';
+import 'package:mo3tv/core/models/video_model.dart';
+import 'package:mo3tv/core/entities/cast.dart';
+import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/domain/entities/message.dart';
-import 'package:mo3tv/features/movies/domain/entities/review.dart';
-import 'package:mo3tv/features/movies/domain/entities/video.dart';
+import 'package:mo3tv/core/entities/message.dart';
+import 'package:mo3tv/core/entities/review.dart';
+import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
 
 class MoviesRepositoryImpl extends MovieRepository {
@@ -181,7 +181,7 @@ class MoviesRepositoryImpl extends MovieRepository {
   Future<Either<Failure, Message>> deleteMovieRate({required int movieId})async {
     if(await networkInfo.isConnected)
     {
-      final result = await baseMovieRemoteDataSource.deleteRateMovie(movieId: movieId);
+      final result = await baseMovieRemoteDataSource.deleteMovieRate(movieId: movieId);
       try {
         return Right(result);
       } on ServerException catch (failure) {

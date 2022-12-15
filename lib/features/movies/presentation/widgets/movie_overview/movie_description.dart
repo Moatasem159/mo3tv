@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/features/movies/domain/entities/keyword.dart';
+import 'package:mo3tv/core/entities/keyword.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 
 class MovieDescription extends StatelessWidget {

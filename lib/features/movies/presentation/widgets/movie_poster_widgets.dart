@@ -37,7 +37,7 @@ class MoviePoster extends StatelessWidget {
                 highlightColor: Colors.grey[600]!,
                 child: Container(
                   height: 170.0,
-                  width: 120.0,
+                  width: 115.0,
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(8.0),
@@ -66,7 +66,8 @@ class MoviePosterLoading extends StatelessWidget {
       baseColor: Colors.grey[700]!,
       highlightColor: Colors.grey[600]!,
       child: Container(
-        width: 120.0,
+        height: 170.0,
+        width: 115.0,
         decoration: BoxDecoration(
           color: Colors.grey,
           borderRadius: BorderRadius.circular(8.0),

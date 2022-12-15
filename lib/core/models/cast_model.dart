@@ -1,4 +1,4 @@
-import 'package:mo3tv/features/movies/domain/entities/cast.dart';
+import 'package:mo3tv/core/entities/cast.dart';
 
 class CastMemberModel extends CastMember{
 

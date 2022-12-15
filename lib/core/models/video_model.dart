@@ -1,10 +1,8 @@
-// To parse this JSON data, do
-//
-//     final video = videoFromJson(jsonString);
+
 
 import 'dart:convert';
 
-import 'package:mo3tv/features/movies/domain/entities/video.dart';
+import 'package:mo3tv/core/entities/video.dart';
 
 VideoModel videoFromJson(String str) => VideoModel.fromJson(json.decode(str));
 

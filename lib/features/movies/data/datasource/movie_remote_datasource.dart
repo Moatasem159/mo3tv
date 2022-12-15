@@ -1,12 +1,12 @@
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/movies/data/models/cast_model.dart';
-import 'package:mo3tv/features/movies/data/models/gallery_model.dart';
+import 'package:mo3tv/core/models/cast_model.dart';
+import 'package:mo3tv/core/models/gallery_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
-import 'package:mo3tv/features/movies/data/models/message_model.dart';
-import 'package:mo3tv/features/movies/data/models/review_model.dart';
-import 'package:mo3tv/features/movies/data/models/video_model.dart';
+import 'package:mo3tv/core/models/message_model.dart';
+import 'package:mo3tv/core/models/review_model.dart';
+import 'package:mo3tv/core/models/video_model.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies({required int page});
@@ -14,8 +14,7 @@ abstract class MovieRemoteDataSource {
   Future<MessageModel> rateMovie({required dynamic rate,required int movieId});
   Future<MessageModel> markMovieAsFavourite({required int movieId,required bool fav});
   Future<MessageModel> addMovieToWatchList({required int movieId,required bool watchList});
-  Future<MessageModel> removeMovieFromFavourite({required int movieId});
-  Future<MessageModel> deleteRateMovie({required int movieId});
+  Future<MessageModel> deleteMovieRate({required int movieId});
   Future<List<MovieModel>> getTopRatedMovies({required int page});
   Future<MovieModel> getMovieDetails({required int movieId});
   Future<GalleryModel> getMovieGallery({required int movieId});
@@ -110,20 +109,20 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
 
   @override
   Future<GalleryModel> getMovieGallery({required int movieId}) async{
-    final response = await apiConsumer.get(EndPoints.movieGalleryPath(movieId));
+    final response = await apiConsumer.get(EndPoints.mediaGalleryPath(movieId,"movie"));
 
     return GalleryModel.fromJson(response);
   }
 
   @override
-  Future<MessageModel> deleteRateMovie({required int movieId}) async{
-    final response = await apiConsumer.delete(EndPoints.rateMoviePath(AppStrings.sessionId,movieId));
+  Future<MessageModel> deleteMovieRate({required int movieId}) async{
+    final response = await apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,"movie"));
     return MessageModel.fromJson(response);
   }
 
   @override
   Future<MessageModel> rateMovie({required rate,required int movieId})async {
-    final response = await apiConsumer.post(EndPoints.rateMoviePath(AppStrings.sessionId,movieId),
+    final response = await apiConsumer.post(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,"movie"),
         body:{
           "value":rate,
     });
@@ -132,7 +131,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
 
   @override
   Future<MessageModel> markMovieAsFavourite({required int movieId,required bool fav})async {
-    final response = await apiConsumer.post(EndPoints.favMoviePath(AppStrings.sessionId),
+    final response = await apiConsumer.post(EndPoints.favMediaPath(AppStrings.sessionId),
         body:{
           "media_type":"movie",
           "media_id": movieId,
@@ -140,16 +139,9 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
         });
     return MessageModel.fromJson(response);
   }
-
-  @override
-  Future<MessageModel> removeMovieFromFavourite({required int movieId}) {
-    // TODO: implement removeMovieFromFavourite
-    throw UnimplementedError();
-  }
-
   @override
   Future<MessageModel> addMovieToWatchList({required int movieId, required bool watchList}) async{
-    final response = await apiConsumer.post(EndPoints.addToWatchListPath(AppStrings.sessionId),
+    final response = await apiConsumer.post(EndPoints.addMediaToWatchListPath(AppStrings.sessionId),
         body:{
           "media_type":"movie",
           "media_id": movieId,

@@ -1,4 +1,4 @@
-import 'package:mo3tv/features/movies/domain/entities/message.dart';
+import 'package:mo3tv/core/entities/message.dart';
 
 class MessageModel extends Message{
 

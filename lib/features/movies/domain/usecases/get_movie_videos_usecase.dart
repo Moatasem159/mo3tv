@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/usecase/base_usecase.dart';
-import 'package:mo3tv/features/movies/domain/entities/video.dart';
+import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
 
 class GetMovieVideosUsecase extends BaseUsecase{

@@ -1,8 +1,4 @@
 class Video{
-
-
-
-
   String ?iso6391;
   String? iso31661;
   String ?name;

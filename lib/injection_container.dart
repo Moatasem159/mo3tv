@@ -40,6 +40,8 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
+import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_top_rated_tv_shows_usecase.dart';
@@ -47,6 +49,9 @@ import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_gallery_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -83,6 +88,11 @@ Future<void> init() async {
     getTvRecommendationsUseCase: sl(),
     getTvShowsReviewsUsecase: sl(),
     getTvShowCreditsUsecase: sl(),
+    getTvShowGalleryUsecase: sl(),
+    markTvShowAsFavUsecase: sl(),
+    addTvShowToWatchListUseCase: sl(),
+    deleteTvShowRateUseCase: sl(),
+    rateTvShowUseCase: sl(),
   ));
 
   // movie useCases
@@ -135,6 +145,16 @@ Future<void> init() async {
           () => GetTvShowsReviewsUsecase(sl()));
   sl.registerLazySingleton<GetTvShowCreditsUsecase>(
           () => GetTvShowCreditsUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowGalleryUsecase>(
+          () => GetTvShowGalleryUsecase(sl()));
+  sl.registerLazySingleton<MarkTvShowAsFavUsecase>(
+          () => MarkTvShowAsFavUsecase(sl()));
+  sl.registerLazySingleton<AddTvShowToWatchListUseCase>(
+          () => AddTvShowToWatchListUseCase(sl()));
+  sl.registerLazySingleton<DeleteTvShowRateUseCase>(
+          () => DeleteTvShowRateUseCase(sl()));
+  sl.registerLazySingleton<RateTvShowUseCase>(
+          () => RateTvShowUseCase(sl()));
   // Repository
 
   sl.registerLazySingleton<MovieRepository>(

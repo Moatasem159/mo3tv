@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/widgets/video_widget/youtube_video_player.dart';
-import 'package:mo3tv/features/movies/domain/entities/video.dart';
+import 'package:mo3tv/core/entities/video.dart';
 
 class MovieVideosList extends StatelessWidget {
   final  List<Video> movieVideos;

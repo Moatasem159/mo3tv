@@ -1,4 +1,4 @@
-import 'package:mo3tv/features/movies/domain/entities/review.dart';
+import 'package:mo3tv/core/entities/review.dart';
 
 class ReviewModel extends Review{
   ReviewModel(

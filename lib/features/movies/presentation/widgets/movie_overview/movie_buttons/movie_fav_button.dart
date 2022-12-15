@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/button.dart';
 
 class MovieFavButton extends StatelessWidget {
   final Movie movie;
@@ -30,7 +30,7 @@ class MovieFavButton extends StatelessWidget {
                   Text("Added to favourites")));
         }
       },
-      child: MovieButton(
+      child: MediaIconButton(
             onTap:() {
               if(movie.movieAccountDetails!.favorite!){
                 BlocProvider.of<MovieCubit>(context).favMovie(movieId: movie.id!, fav: false);

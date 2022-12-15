@@ -2,12 +2,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
-import 'package:mo3tv/features/movies/domain/entities/cast.dart';
-import 'package:mo3tv/features/movies/domain/entities/image.dart';
+import 'package:mo3tv/core/entities/cast.dart';
+import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/domain/entities/message.dart';
-import 'package:mo3tv/features/movies/domain/entities/review.dart';
-import 'package:mo3tv/features/movies/domain/entities/video.dart';
+import 'package:mo3tv/core/entities/message.dart';
+import 'package:mo3tv/core/entities/review.dart';
+import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
@@ -23,7 +23,6 @@ import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/gallery/backdrops/movie_backdrops.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/videos/movie_videos.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/gallery/logos/movie_logos.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/gallery/posters/movie_posters.dart';
 
@@ -124,7 +123,6 @@ class MovieCubit extends Cubit<MovieStates> {
     emit(GetMovieRecommendationsLoadingState());
     Either<Failure, List<Movie>> response =
     await getMovieRecommendationsUseCase.call(movieId: movieId,page: page);
-    // movieRecommendations = [];
     emit(response.fold(
             (failure) =>
             GetMovieRecommendationsErrorState(msg: _mapFailureToMsg(failure)),
@@ -201,8 +199,6 @@ class MovieCubit extends Cubit<MovieStates> {
   }
 
   Gallery? movieGallery;
-  int backdropsLength=20;
-  List<ImageEntity>? backdrops=[];
   Future<void> getMovieGallery({required movieId}) async {
     emit(GetMovieGalleryLoadingState());
     Either<Failure, Gallery> response =
@@ -358,7 +354,7 @@ class MovieCubit extends Cubit<MovieStates> {
   }
 
 
-  Future<void> addToWatchList({required int movieId,required bool watchlist})async{
+  Future<void> addMovieToWatchList({required int movieId,required bool watchlist})async{
 
     emit(AddToWatchListLoadingState());
     Either<Failure, Message> response =
@@ -383,7 +379,7 @@ class MovieCubit extends Cubit<MovieStates> {
     const MovieBackdrops(),
     const MoviePosters(),
     const MovieLogos(),
-    const MovieVideos(),
+    // const MovieVideos(),
   ];
 
   gallery(value,id){

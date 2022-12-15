@@ -18,7 +18,7 @@ class MovieDetailsScreen extends StatelessWidget {
     final SliverOverlapAbsorberHandle disconnectBar =
     SliverOverlapAbsorberHandle();
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: BlocProvider(
         create: (context) => MovieBottomNavCubit(),
         child: BlocConsumer<MovieBottomNavCubit, MovieBottomNavStates>(
@@ -34,6 +34,7 @@ class MovieDetailsScreen extends StatelessWidget {
               },
               child: SafeArea(
                   child: Scaffold(
+                    // backgroundColor: Theme.of(context).backgroundColor,
                     body:NestedScrollView(
                       physics: const ClampingScrollPhysics(),
                       controller:cubit.controller ,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/features/movies/domain/entities/review.dart';
+import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/core/widgets/review/review_widgets/review_widget.dart';
 
 

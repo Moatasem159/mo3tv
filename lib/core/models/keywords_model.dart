@@ -1,4 +1,4 @@
-import 'package:mo3tv/features/movies/domain/entities/keyword.dart';
+import 'package:mo3tv/core/entities/keyword.dart';
 
 class GenreModel extends Keyword{
   GenreModel({

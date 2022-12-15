@@ -13,6 +13,7 @@ class MainScreen extends StatelessWidget {
       create: (context) => BottomNavCubit(),
       child: const SafeArea(
         child: Scaffold(
+          // backgroundColor: Theme.of(context).backgroundColor,
           body: ActiveScreen(),
           bottomNavigationBar: BottomNavBar(),
         ),
