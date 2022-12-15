@@ -14,6 +14,7 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   MovieBottomNavCubit() : super(MovieBottomNavInitialState());
 
 
+
   int index=0;
   bool isGallery=false;
 
@@ -45,6 +46,7 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
 
   void changeScreen(int index,context,int movieId){
     emit(MovieBottomNavChangingState());
+    controller.animateTo(0, duration: const Duration(milliseconds:500), curve: Curves.ease);
     isGallery=false;
     if(index==0)
       {

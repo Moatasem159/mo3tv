@@ -5,6 +5,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/m
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/tab_bar.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   final Movie movie;
@@ -13,6 +14,9 @@ class MovieDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
+    final SliverOverlapAbsorberHandle disconnectBar =
+    SliverOverlapAbsorberHandle();
     return DefaultTabController(
       length: 4,
       child: BlocProvider(
@@ -30,66 +34,45 @@ class MovieDetailsScreen extends StatelessWidget {
               },
               child: SafeArea(
                   child: Scaffold(
-                    body: NestedScrollView(
+                    body:NestedScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      controller:cubit.controller ,
                       headerSliverBuilder: (context, innerBoxIsScrolled) {
                         return [
-
                           SliverOverlapAbsorber(
-                            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                context),
+                            handle: appBar,
                             sliver: SliverPersistentHeader(
                               delegate: MovieDetailsAppBar(movie),
                               pinned: true,
                             ),
                           ),
                           if(cubit.isGallery)
-                          SliverAppBar(
-                            pinned: true,
-                            elevation: 10,
-                            backgroundColor: Colors.black,
-                            automaticallyImplyLeading: false,
-                            toolbarHeight: 0,
-                            bottom: PreferredSize(
-                              preferredSize: const Size(0, 30),
-                              child: TabBar(
-                                indicatorWeight: 2,
-                                indicatorColor: Colors.red,
-                                labelPadding: const EdgeInsets.only(bottom: 5),
-                                onTap: (value) {
-                                  BlocProvider.of<MovieCubit>(context).gallery(value,movie.id);
-                                },
-                                tabs: const [
-                                  Text("Backdrops"),
-                                  Text("posters"),
-                                  Text("logos"),
-                                  Text("Videos"),
-                                ],
-                              ),
+                            SliverOverlapAbsorber(
+                              handle:disconnectBar,
+                              sliver: GalleryTabBar(id: movie.id!,),
                             ),
-                          ),
-
 
                         ];
                       },
-                      body: Builder(builder: (context) {
-                        return CustomScrollView(
-                          slivers: [
-                            SliverOverlapInjector(
-                              handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context),
-                            ),
-                            const SliverToBoxAdapter(
-                              child: SizedBox(height: 15),
-                            ),
-                            BlocBuilder<MovieBottomNavCubit,MovieBottomNavStates>(
-                              builder: (context, state) {
-                                return cubit.screens[cubit.index];
-                              },
-                            ),
-                          ],
-                        );
-                      }),
+                      body:Builder(
+                          builder: (context) {
+                            return CustomScrollView(
+                              slivers: [
+                                SliverOverlapInjector(handle: appBar),
+                                if(cubit.isGallery)
+                                  SliverOverlapInjector(handle: disconnectBar),
+                                const SliverToBoxAdapter(
+                                  child: SizedBox(height: 15),
+                                ),
+                                BlocBuilder<MovieBottomNavCubit,MovieBottomNavStates>(
+                                  builder: (context, state) {
+                                    return cubit.screens[cubit.index];
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                      ),
                     ),
                     bottomNavigationBar: NavigationBar(
                         elevation:3,
@@ -98,10 +81,9 @@ class MovieDetailsScreen extends StatelessWidget {
                         height: 60,
                         animationDuration: const Duration(seconds: 2),
                         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-
                         destinations: cubit.items,
-                      selectedIndex: cubit.index,
-                      onDestinationSelected: (value) {
+                        selectedIndex: cubit.index,
+                        onDestinationSelected: (value) {
                         cubit.changeScreen(value,context,movie.id!);
                       },
                     ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 
 class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
@@ -32,8 +31,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
     final titleSize =
         (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
     final maxTitleMargin = size.height / 4.3;
-    dynamic textMovement =
-        BlocProvider.of<MovieBottomNavCubit>(context).isGallery ? 155 : 190;
+    dynamic textMovement =190;
     final double top = maxTitleMargin + (1 - textMovement * p);
     final maxMargin = size.width / 30;
     const textLeftMovement = 50;
