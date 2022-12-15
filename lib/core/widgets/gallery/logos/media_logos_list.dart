@@ -1,12 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/features/movies/domain/entities/image.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:mo3tv/core/entities/image.dart';
+import 'package:mo3tv/core/widgets/gallery/gallery_image.dart';
 
-class MovieLogosList extends StatelessWidget {
+class MediaLogosList extends StatelessWidget {
   final List<ImageEntity> logos;
-  const MovieLogosList({Key? key, required this.logos}) : super(key: key);
+  const MediaLogosList({Key? key, required this.logos}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +34,10 @@ class MovieLogosList extends StatelessWidget {
           delegate: SliverChildBuilderDelegate(
             childCount: logos.length,
                 (context, index) {
-              return CachedNetworkImage(
-                  imageUrl: EndPoints.backDropsUrl(
-                      logos[index].filePath!),
-                  placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: Colors.grey[700]!,
-                    highlightColor: Colors.grey[600]!,
-                    child: Container(
-                      color: Colors.black,
-                    ),
-                  )
-              );
-            },
-          ),
+                  return GalleryImage(image:logos[index]);
+          }
+
+        ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 1.5,
               crossAxisCount: 2,

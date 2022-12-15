@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/features/movies/domain/entities/cast.dart';
+import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/widgets/credits/cast_widget.dart';
 
 class MediaCreditsList extends StatelessWidget {

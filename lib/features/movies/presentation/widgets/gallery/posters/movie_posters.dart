@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/gallery/posters/media_posters_list.dart';
+import 'package:mo3tv/core/widgets/gallery/posters/media_posters_loading_list.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/empty_image_list.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/posters/movie_posters_list.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/posters/movie_posters_loading_list.dart';
+import 'package:mo3tv/core/widgets/gallery/empty_image_list.dart';
 
 class MoviePosters extends StatelessWidget {
   const MoviePosters({Key? key}) : super(key: key);
@@ -21,11 +21,11 @@ class MoviePosters extends StatelessWidget {
         }
         if(cubit.movieGallery!=null&&cubit.movieGallery!.posters!=null)
         {
-          return MoviePostersList(posters: cubit.movieGallery!.posters!);
+          return MediaPostersList(posters: cubit.movieGallery!.posters!);
         }
         if(state is GetMovieGalleryLoadingState||cubit.movieGallery ==null||cubit.movieGallery!.posters ==null)
         {
-          return const MoviePosterLoadingList();
+          return const MediaPosterLoadingList();
         }
         return Container();
 

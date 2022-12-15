@@ -1,4 +1,4 @@
-import 'package:mo3tv/features/movies/domain/entities/image.dart';
+import 'package:mo3tv/core/entities/image.dart';
 
 
 

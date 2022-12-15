@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MoviePosterLoadingList extends StatelessWidget {
-  const MoviePosterLoadingList({Key? key}) : super(key: key);
+class MediaPosterLoadingList extends StatelessWidget {
+  const MediaPosterLoadingList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
