@@ -19,11 +19,11 @@ class ImageEntity{
   dynamic width;
 
   ImageEntity(
-      {this.aspectRatio,
-      this.height,
-      this.iso6391,
-      this.filePath,
-      this.voteAverage,
-      this.voteCount,
-      this.width});
+      {this.aspectRatio=0,
+      this.height=0,
+      this.iso6391="",
+      this.filePath='',
+      this.voteAverage=0,
+      this.voteCount=0,
+      this.width=0});
 }

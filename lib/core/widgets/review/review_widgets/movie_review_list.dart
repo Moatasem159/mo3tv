@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/movies/domain/entities/review.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/review/review_widget.dart';
+import 'package:mo3tv/core/widgets/review/review_widgets/review_widget.dart';
 
 
-class MovieReviewsList extends StatelessWidget {
+class MediaReviewsList extends StatelessWidget {
   final List<Review> reviews ;
-  const MovieReviewsList({Key? key, required this.reviews}) : super(key: key);
+  const MediaReviewsList({Key? key, required this.reviews}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

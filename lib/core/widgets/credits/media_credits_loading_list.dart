@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_poster_widgets.dart';
 
-class MovieCreditsLoadingList extends StatelessWidget {
-  const MovieCreditsLoadingList({Key? key}) : super(key: key);
+class MediaCreditsLoadingList extends StatelessWidget {
+  const MediaCreditsLoadingList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

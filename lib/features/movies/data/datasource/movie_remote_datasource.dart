@@ -73,7 +73,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getMovieRecommendations({required int page, required int movieId})async {
-    final response = await apiConsumer.get(EndPoints.recommendationPath(movieId, page));
+    final response = await apiConsumer.get(EndPoints.recommendationMediaPath(movieId, page,"movie"));
     return List<MovieModel>.from(
       (response['results'] as List).map(
             (x) => MovieModel.fromJson(x),
@@ -89,7 +89,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
   }
   @override
   Future<List<ReviewModel>> getMovieReviews({required int movieId}) async{
-    final response = await apiConsumer.get(EndPoints.movieReviewsPath(movieId));
+    final response = await apiConsumer.get(EndPoints.mediaReviewsPath(movieId,"movie"));
 
     return List<ReviewModel>.from(
       (response['results'] as List).map(
@@ -100,8 +100,7 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
 
   @override
   Future<List<CastMemberModel>> getMovieCredits({required int movieId})async {
-    final response = await apiConsumer.get(EndPoints.movieCreditsPath(movieId));
-
+    final response = await apiConsumer.get(EndPoints.mediaCreditsPath(movieId,"movie"));
     return List<CastMemberModel>.from(
       (response['cast'] as List).map(
             (x) => CastMemberModel.fromJson(x),

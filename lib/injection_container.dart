@@ -43,6 +43,9 @@ import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_top_rated_tv_shows_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,6 +80,9 @@ Future<void> init() async {
     getTopRatedTvShowUsecase: sl(),
     getPopularTvShowsUsecase: sl(),
       getNowPlayingTvShowsUsecase: sl(),
+    getTvRecommendationsUseCase: sl(),
+    getTvShowsReviewsUsecase: sl(),
+    getTvShowCreditsUsecase: sl(),
   ));
 
   // movie useCases
@@ -123,6 +129,12 @@ Future<void> init() async {
           () => GetTopRatedTvShowUsecase(tvRepository: sl(),));
   sl.registerLazySingleton<GetTvShowDetailsUsecase>(
           () => GetTvShowDetailsUsecase(tvRepository: sl(),));
+  sl.registerLazySingleton<GetTvRecommendationsUseCase>(
+          () => GetTvRecommendationsUseCase(tvRepository: sl(),));
+  sl.registerLazySingleton<GetTvShowsReviewsUsecase>(
+          () => GetTvShowsReviewsUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowCreditsUsecase>(
+          () => GetTvShowCreditsUsecase(sl()));
   // Repository
 
   sl.registerLazySingleton<MovieRepository>(

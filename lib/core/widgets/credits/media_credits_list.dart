@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/movies/domain/entities/cast.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/credits/cast_widget.dart';
+import 'package:mo3tv/core/widgets/credits/cast_widget.dart';
 
-class MovieCreditsList extends StatelessWidget {
-  final List<CastMember> movieCredits;
-  const MovieCreditsList({Key? key, required this.movieCredits}) : super(key: key);
+class MediaCreditsList extends StatelessWidget {
+  final List<CastMember> mediaCredits;
+  const MediaCreditsList({Key? key, required this.mediaCredits}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MovieCreditsList extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 11),
                   child: Text(
-                    "Cast : ${movieCredits.length}",
+                    "Cast : ${mediaCredits.length}",
                     style: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 18),
                   ),
@@ -33,10 +33,10 @@ class MovieCreditsList extends StatelessWidget {
           ),
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
-              childCount: movieCredits.length,
+              childCount: mediaCredits.length,
                   (context, index) {
                 return CastMemberWidget(
-                    member:movieCredits[index]);
+                    member:mediaCredits[index]);
               },
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

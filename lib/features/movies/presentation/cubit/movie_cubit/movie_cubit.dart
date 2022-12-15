@@ -34,7 +34,6 @@ class MovieCubit extends Cubit<MovieStates> {
         required this.getMovieGalleryUsecase,
         required this.getMovieRecommendationsUseCase,
         required this.getMovieVideosUsecase,
-        // required this.getMovieKeywords,
         required this.rateMovieUseCase,
         required this.markMovieAsFavUsecase,
         required this.addMovieToWatchListUseCase,
@@ -118,21 +117,29 @@ class MovieCubit extends Cubit<MovieStates> {
         }));
   }
 
-  List<Movie>? movieRecommendations;
+  List<Movie>? movieRecommendations=[];
+  int page=1;
+  bool allRec=false;
   Future<void> getMovieRecommendations({int page=1,required movieId}) async {
     emit(GetMovieRecommendationsLoadingState());
     Either<Failure, List<Movie>> response =
     await getMovieRecommendationsUseCase.call(movieId: movieId,page: page);
-    movieRecommendations = [];
+    // movieRecommendations = [];
     emit(response.fold(
             (failure) =>
             GetMovieRecommendationsErrorState(msg: _mapFailureToMsg(failure)),
             (movieRecommendations) {
+              if(movieRecommendations.isEmpty){
+                allRec=true;
+              }
               for (var element in movieRecommendations) {
-                if(element.backdropPath!=""|| element.posterPath!="")
-                  {
-                    this.movieRecommendations!.add(element);
-                  }
+                if (element.backdropPath != "" || element.posterPath != "") {
+                  if(!this.movieRecommendations!.any((e) =>e.id==element.id,))
+                    {
+                      this.movieRecommendations!.add(element);
+                    }
+
+                }
               }
           return GetMovieRecommendationsSuccessState();
         }));
@@ -194,23 +201,50 @@ class MovieCubit extends Cubit<MovieStates> {
   }
 
   Gallery? movieGallery;
+  int backdropsLength=20;
+  List<ImageEntity>? backdrops=[];
   Future<void> getMovieGallery({required movieId}) async {
     emit(GetMovieGalleryLoadingState());
     Either<Failure, Gallery> response =
     await getMovieGalleryUsecase.call(movieId);
     movieGallery=Gallery();
+    movieGallery!.backdrops=[];
+    movieGallery!.logos=[];
+    movieGallery!.posters=[];
     emit(response.fold(
             (failure) =>
             GetMovieGalleryErrorState(msg: _mapFailureToMsg(failure)),
             (movieGallery) {
-              this.movieGallery=movieGallery;
+              for (var element in movieGallery.backdrops!){
+                if(element.iso6391=="en")
+                  {
+                    this.movieGallery!.backdrops!.add(element);
+                  }
+              }
+              for (var element in movieGallery.posters!){
+                if(element.iso6391=="en")
+                {
+                  this.movieGallery!.posters!.add(element);
+                }
+              }
+              for (var element in movieGallery.logos!){
+                if(element.iso6391=="en")
+                {
+                  this.movieGallery!.logos!.add(element);
+                }
+              }
+
+              // this.movieGallery=movieGallery;
           return GetMovieGallerySuccessState();
         }));
   }
 
+
   List<int> moviesId=[];
   void clearObjects(){
     movie=Movie();
+    allRec=false;
+    page=1;
     // movieKeywords.clear();
     if(movieVideos!=null)
       {

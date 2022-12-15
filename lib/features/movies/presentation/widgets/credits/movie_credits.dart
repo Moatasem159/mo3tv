@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/credits/movie_credits_list.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/credits/movie_credits_loading_list.dart';
+import 'package:mo3tv/core/widgets/credits/media_credits_list.dart';
+import 'package:mo3tv/core/widgets/credits/media_credits_loading_list.dart';
 
 class MoviesCredits extends StatelessWidget {
   const MoviesCredits({Key? key}) : super(key: key);
@@ -15,10 +15,10 @@ class MoviesCredits extends StatelessWidget {
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
         if (cubit.movieCredits!.isNotEmpty) {
-          return MovieCreditsList(movieCredits: cubit.movieCredits!);
+          return MediaCreditsList(mediaCredits: cubit.movieCredits!);
         }
         if (state is GetMovieRecommendationsLoadingState || cubit.movieCredits!.isEmpty) {
-          return const MovieCreditsLoadingList();
+          return const MediaCreditsLoadingList();
         }
         return SliverToBoxAdapter(
           child: Container(),

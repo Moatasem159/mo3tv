@@ -16,14 +16,15 @@ class EndPoints{
       "$baseUrl/$mediaType/popular?api_key=$apiKey&page=$page";
   static  String topRatedMediaPath({required int page,required String mediaType}) =>
       "$baseUrl/$mediaType/top_rated?api_key=$apiKey&page=$page";
+  static String recommendationMediaPath(int mediaId,int page,String mediaType) =>
+      "$baseUrl/$mediaType/$mediaId/recommendations?api_key=$apiKey&page=$page";
+  static String mediaReviewsPath(int mediaId,String mediaType) =>
+      "$baseUrl/$mediaType/$mediaId/reviews?api_key=$apiKey";
 
-  static String recommendationPath(int movieId,int page) =>
-      "$baseUrl/movie/$movieId/recommendations?api_key=$apiKey&page=$page";
 
-  static String movieReviewsPath(int movieId) =>
-      "$baseUrl/movie/$movieId/reviews?api_key=$apiKey";
-  static String movieCreditsPath(int movieId) =>
-      "$baseUrl/movie/$movieId/credits?api_key=$apiKey";
+
+  static String mediaCreditsPath(int mediaId,String mediaType) =>
+      "$baseUrl/$mediaType/$mediaId/credits?api_key=$apiKey";
   static String movieVideos(int movieId) =>
       "$baseUrl/movie/$movieId/videos?api_key=$apiKey";
   static String movieGalleryPath(int movieId) =>

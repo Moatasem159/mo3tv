@@ -23,7 +23,7 @@ class CastMemberModel extends CastMember{
     knownForDepartment: json["known_for_department"]??'',
     name: json["name"]??'',
     id: json["id"]??0,
-    castId: json["cast_id"]??'',
+    castId: json["cast_id"]??0,
     creditId: json["credit_id"]??0,
     originalName: json["original_name"]??'',
     character: json["character"]??'',
