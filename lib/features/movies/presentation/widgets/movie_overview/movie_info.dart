@@ -14,19 +14,17 @@ class MovieInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 150,
-            child: Text(
-              movie.title!,
-              maxLines: null,
-              overflow: TextOverflow.visible,
-              style: const TextStyle(
+          Text(
+            "${movie.title!} (${movie.releaseDate!.substring(0,4)}) ",
+            maxLines: null,
+            overflow: TextOverflow.visible,
+            style:const TextStyle(
+                height: 1.2,
                 fontWeight: FontWeight.bold
-              ),
             ),
           ),
           if (movie.tagline != "")
-            Column(
+          Column(
               children: [
                 const SizedBox(
                   height: 5,
@@ -43,11 +41,12 @@ class MovieInfo extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 3,
-                ),
+
               ],
             ),
+          const SizedBox(
+            height: 5,
+          ),
           const Text("Status",style:TextStyle(
           fontWeight: FontWeight.bold
           ),),
@@ -58,45 +57,33 @@ class MovieInfo extends StatelessWidget {
           const SizedBox(
             height: 7,
           ),
-          const Text("Release Date",style:TextStyle(
-    fontWeight: FontWeight.bold
-    )),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            movie.releaseDate!,
-          ),
-          const SizedBox(
-            height: 7,
-          ),
-          if (movie.budget != 0)
-            Column(
+          Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Budget",style:TextStyle(
                     fontWeight: FontWeight.bold
                 )),
+                if (movie.budget != 0)
                 const SizedBox(
                   height: 5,
                 ),
-                Text("\$ ${myFormat.format(movie.budget)}"),
+                Text(movie.budget!=0?"\$ ${myFormat.format(movie.budget)}":"------"),
               ],
             ),
           const SizedBox(
             height: 7,
           ),
-          if (movie.revenue != 0)
-            Column(
+          Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Revenue",style:TextStyle(
                     fontWeight: FontWeight.bold
                 )),
+                if (movie.revenue != 0)
                 const SizedBox(
                   height: 5,
                 ),
-                Text("\$ ${myFormat.format(movie.revenue)}"),
+                Text(movie.revenue!=0?"\$ ${myFormat.format(movie.revenue)}":"------"),
               ],
             ),
         ],

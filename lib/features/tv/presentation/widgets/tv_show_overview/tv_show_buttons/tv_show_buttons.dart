@@ -59,8 +59,8 @@ class TvShowButtons extends StatelessWidget {
                 onPressed: () {},
                 child: const Icon(Icons.list)),
             TvShowFavButton(tvShow: tvShow),
+            TvShowRatingButton(tvShow: tvShow,),
             AddTvShowToWatchlistButton(tvShow: tvShow),
-            TvShowRatingButton(tvShow: tvShow,)
           ],
         ),
         const SizedBox(

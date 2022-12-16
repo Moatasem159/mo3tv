@@ -7,7 +7,6 @@ import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/entities/review.dart';
-import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
@@ -15,7 +14,6 @@ import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_gallery_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_videos_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
@@ -32,7 +30,6 @@ class MovieCubit extends Cubit<MovieStates> {
         required this.getMovieDetailsUseCase,
         required this.getMovieGalleryUsecase,
         required this.getMovieRecommendationsUseCase,
-        required this.getMovieVideosUsecase,
         required this.rateMovieUseCase,
         required this.markMovieAsFavUsecase,
         required this.addMovieToWatchListUseCase,
@@ -46,7 +43,6 @@ class MovieCubit extends Cubit<MovieStates> {
   GetTopRatedMoviesUsecase getTopRatedMoviesUsecase;
   GetMovieDetailsUseCase getMovieDetailsUseCase;
   GetMovieRecommendationsUseCase getMovieRecommendationsUseCase;
-  GetMovieVideosUsecase getMovieVideosUsecase;
   GetMovieReviewsUsecase getMovieReviewsUsecase;
   GetMovieCreditsUsecase getMovieCreditsUsecase;
   GetMovieGalleryUsecase getMovieGalleryUsecase;
@@ -108,11 +104,28 @@ class MovieCubit extends Cubit<MovieStates> {
     emit(GetMovieDetailsLoadingState());
     Either<Failure,Movie> response =
     await getMovieDetailsUseCase.call(movieId);
-    movie=Movie();
     emit(response.fold((failure) =>
             GetMovieDetailsErrorState(msg: _mapFailureToMsg(failure)), (movie) {
           this.movie = movie;
-          return GetMovieDetailsSuccessState();
+          for (var element in this.movie.videos!) {
+            if(element.name=="Official Trailer")
+            {
+              this.movie.trailer =element;
+              break;
+            }
+            else if(element.name=="Official Teaser")
+              {
+                this.movie.trailer =element;
+                break;
+              }
+            else if(element.type=="Trailer")
+            {
+              this.movie.trailer =element;
+              break;
+            }
+          }
+          this.movie.videos!.clear();
+      return GetMovieDetailsSuccessState();
         }));
   }
 
@@ -142,27 +155,6 @@ class MovieCubit extends Cubit<MovieStates> {
           return GetMovieRecommendationsSuccessState();
         }));
   }
-
-  List<Video>? movieVideos;
-  Future<void> getMovieVideos({required movieId}) async {
-    emit(GetMovieVideosLoadingState());
-    Either<Failure, List<Video>> response =
-    await getMovieVideosUsecase.call(movieId);
-    movieVideos = [];
-    emit(response.fold(
-            (failure) =>
-            GetMovieVideosErrorState(msg: _mapFailureToMsg(failure)),
-            (movieVideos) {
-              for (var element in movieVideos) {
-                if(element.type=="Trailer"||element.type=="Teaser")
-                  {
-                    this.movieVideos!.add(element);
-                  }
-              }
-          return GetMovieVideosSuccessState();
-        }));
-  }
-
   List<Review>? movieReviews;
   Future<void> getMovieReviews({required movieId}) async {
     emit(GetMovieReviewsLoadingState());
@@ -242,10 +234,6 @@ class MovieCubit extends Cubit<MovieStates> {
     allRec=false;
     page=1;
     // movieKeywords.clear();
-    if(movieVideos!=null)
-      {
-        movieVideos=null;
-      }
     index=0;
    if(movieGallery!=null){
      if(movieGallery!.backdrops!=null)
@@ -379,19 +367,11 @@ class MovieCubit extends Cubit<MovieStates> {
     const MovieBackdrops(),
     const MoviePosters(),
     const MovieLogos(),
-    // const MovieVideos(),
   ];
 
   gallery(value,id){
     emit(ChangeGalleryLoadingState());
     index=value;
-    if(index==3)
-      {
-        if(movieVideos==null||movieVideos!.isEmpty){
-          getMovieVideos(movieId: id);
-        }
-
-      }
     emit(ChangeGallerySuccessState());
   }
   String _mapFailureToMsg(Failure failure) {

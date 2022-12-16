@@ -30,12 +30,9 @@ class VideoModel {
 
 class Result extends Video{
   Result({
-    super.iso6391,
-    super.iso31661,
     super.name,
     super.key,
     super.site,
-    super.size,
     super.type,
     super.official,
     super.publishedAt,
@@ -45,28 +42,22 @@ class Result extends Video{
 
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-    iso6391: json["iso_639_1"],
-    iso31661: json["iso_3166_1"],
-    name: json["name"],
-    key: json["key"],
-    site: json["site"],
-    size: json["size"],
-    type: json["type"],
-    official: json["official"],
-    publishedAt: DateTime.parse(json["published_at"]),
-    id: json["id"],
+    name: json["name"]??'',
+    key: json["key"]??'',
+    site: json["site"]??'',
+    type: json["type"]??'',
+    official: json["official"]??false,
+    publishedAt:json["published_at"]??'',
+    id: json["id"]??'',
   );
 
   Map<String, dynamic> toJson() => {
-    "iso_639_1": iso6391,
-    "iso_3166_1": iso31661,
     "name": name,
     "key": key,
     "site": site,
-    "size": size,
     "type": type,
     "official": official,
-    "published_at": publishedAt!.toIso8601String(),
+    "published_at": publishedAt,
     "id": id,
   };
 }

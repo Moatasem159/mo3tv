@@ -1,5 +1,6 @@
 
 import 'package:equatable/equatable.dart';
+import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
@@ -27,12 +28,13 @@ class Movie extends Equatable {
   final String? status;
   final String ?tagline;
   final String? title;
-  final bool? video;
   final dynamic voteAverage;
   final dynamic voteCount;
   MediaAccountDetails? movieAccountDetails;
-
+  Video? trailer;
+  final List<Video>?videos;
   Movie({
+    this.videos,
     this.adult,
     this.backdropPath,
     this.belongsToCollection,
@@ -53,11 +55,11 @@ class Movie extends Equatable {
     this.status,
     this.tagline,
     this.title,
-    this.video,
     this.voteAverage,
     this.voteCount,
     this.keywords,
     this.movieAccountDetails,
+    this.trailer,
   });
   @override
   List<Object?> get props => [
@@ -76,6 +78,7 @@ class Movie extends Equatable {
         imdbId,
         originalLanguage,
         originalTitle,
+        trailer
       ];
 }
 

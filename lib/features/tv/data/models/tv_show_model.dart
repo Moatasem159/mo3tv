@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
+import 'package:mo3tv/core/models/video_model.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 
 TvShowModel tvShowFromJson(String str) => TvShowModel.fromJson(json.decode(str));
@@ -27,22 +28,19 @@ class TvShowModel extends TvShow {
     super.networks,
     super.numberOfEpisodes,
     super.numberOfSeasons,
-    super.originCountry,
     super.originalLanguage,
     super.originalName,
     super.overview,
     super.popularity,
     super.posterPath,
-    super.productionCompanies,
-    super.productionCountries,
     super.seasons,
-    super.spokenLanguages,
     super.status,
     super.tagline,
     super.type,
     super.voteAverage,
     super.voteCount,
     super.tvShowAccountDetails,
+   super.videos,
   });
 
   factory TvShowModel.fromJson(Map<String, dynamic> json) => TvShowModel(
@@ -65,21 +63,18 @@ class TvShowModel extends TvShow {
     networks:json["networks"]==null?[]: List<Network>.from(json["networks"].map((x) => Network.fromJson(x))),
     numberOfEpisodes: json["number_of_episodes"]??0,
     numberOfSeasons: json["number_of_seasons"]??0,
-    originCountry: json["origin_country"]==null?[]:List<String>.from(json["origin_country"].map((x) => x)),
     originalLanguage: json["original_language"]??'',
     originalName: json["original_name"]??'',
     overview: json["overview"]??'',
     popularity: json["popularity"]==null?0:json["popularity"].toDouble(),
     posterPath: json["poster_path"]??'',
-    productionCompanies: json["production_companies"]==null?[]:List<Network>.from(json["production_companies"].map((x) => Network.fromJson(x))),
-    productionCountries:json["production_countries"]==null?[]: List<ProductionCountry>.from(json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
     seasons:json["seasons"]==null?[]:List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
-    spokenLanguages:json["spoken_languages"]==null?[]: List<SpokenLanguage>.from(json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
     status: json["status"]??'',
     tagline: json["tagline"]??'',
     type: json["type"]??'',
     voteAverage: json["vote_average"]==null?0: json["vote_average"].toDouble(),
     voteCount: json["vote_count"]??0,
+    videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -100,16 +95,12 @@ class TvShowModel extends TvShow {
     "networks": List<dynamic>.from(networks!.map((x) => x.toJson())),
     "number_of_episodes": numberOfEpisodes,
     "number_of_seasons": numberOfSeasons,
-    "origin_country": List<dynamic>.from(originCountry!.map((x) => x)),
     "original_language": originalLanguage,
     "original_name": originalName,
     "overview": overview,
     "popularity": popularity,
     "poster_path": posterPath,
-    "production_companies": List<dynamic>.from(productionCompanies!.map((x) => x.toJson())),
-    "production_countries": List<dynamic>.from(productionCountries!.map((x) => x.toJson())),
     "seasons": List<dynamic>.from(seasons!.map((x) => x.toJson())),
-    "spoken_languages": List<dynamic>.from(spokenLanguages!.map((x) => x.toJson())),
     "status": status,
     "tagline": tagline,
     "type": type,

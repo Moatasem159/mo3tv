@@ -10,7 +10,7 @@ class EndPoints{
 
 
   static String mediaDetailsPath(int mediaId,String sessionId,String mediaType) =>
-      "$baseUrl/$mediaType/$mediaId?api_key=$apiKey&session_id=$sessionId&append_to_response=keywords,account_states";
+      "$baseUrl/$mediaType/$mediaId?api_key=$apiKey&session_id=$sessionId&append_to_response=keywords,account_states,videos";
   static String nowPlayingMediaPath({required int page,required String mediaType,required nowPlaying}) =>
       "$baseUrl/$mediaType/$nowPlaying?api_key=$apiKey&page=$page";
   static String popularMediaPath ({required int page,required String mediaType})=>

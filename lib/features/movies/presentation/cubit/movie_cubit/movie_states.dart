@@ -76,19 +76,6 @@ class GetMovieRecommendationsErrorState extends MovieStates{
 }
 
 
-class GetMovieVideosLoadingState extends MovieStates{}
-class GetMovieVideosSuccessState extends MovieStates{}
-class GetMovieVideosErrorState extends MovieStates{
-
-
-  final String msg;
-
-  GetMovieVideosErrorState({required this.msg});
-
-  @override
-  List<Object>get props=>[msg];
-}
-
 
 class GetMovieReviewsLoadingState extends MovieStates{}
 class GetMovieReviewsSuccessState extends MovieStates{}

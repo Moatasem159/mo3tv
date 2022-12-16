@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
+import 'package:mo3tv/core/widgets/play_media_trailer.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 
 class MovieDescription extends StatelessWidget {
@@ -16,6 +17,12 @@ class MovieDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (movie.trailer!=null)
+        PlayMediaTrailer(
+            url: movie.trailer!.key!,
+           title: movie.trailer!.name!,
+          ),
+        const SizedBox(height: 10,),
         Text(
           movie.overview!,
           style:

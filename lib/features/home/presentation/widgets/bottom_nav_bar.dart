@@ -28,17 +28,17 @@ class BottomNavBar extends StatelessWidget {
                   width: 45,
                   height: 40,
                   decoration: BoxDecoration(
-                      color: cubit.index == 0 ? Colors.black54 : Colors.black12,
+                      color: cubit.movie? Colors.black54 : Colors.black12,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
-                        if(cubit.index == 0)
+                        if(cubit.movie)
                           const BoxShadow(
                               blurRadius: 10,
                               spreadRadius: 1.1,
                               blurStyle: BlurStyle.inner,
                               color: Colors.white10
                           ),
-                        if(cubit.index == 1)
+                        if(!cubit.movie)
                           const BoxShadow(
                             blurRadius: 5,
                             spreadRadius: 1,
@@ -59,17 +59,17 @@ class BottomNavBar extends StatelessWidget {
                   width: 45,
                   height: 40,
                   decoration: BoxDecoration(
-                      color: cubit.index == 1 ? Colors.black54 : Colors.black12,
+                      color: cubit.tv ? Colors.black54 : Colors.black12,
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
-                        if(cubit.index == 0)
+                        if(!cubit.tv)
                           const BoxShadow(
                             blurRadius: 5,
                             spreadRadius: 1,
                             blurStyle: BlurStyle.outer,
                             color: Colors.white30,
                           ),
-                        if(cubit.index == 1)
+                        if(cubit.tv)
                           const BoxShadow(
                               blurRadius: 10,
                               spreadRadius: 1.1,
@@ -79,6 +79,37 @@ class BottomNavBar extends StatelessWidget {
                       ]
                   ),
                   child: const Icon(Icons.tv),
+                ),
+              ),
+              const SizedBox(width: 80,),
+              GestureDetector(
+                onTap: () {
+                  cubit.changeIndex(2, context);
+                },
+                child: Container(
+                  width: 45,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: cubit.account ? Colors.black54 : Colors.black12,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        if(!cubit.account)
+                          const BoxShadow(
+                            blurRadius: 5,
+                            spreadRadius: 1,
+                            blurStyle: BlurStyle.outer,
+                            color: Colors.white30,
+                          ),
+                        if(cubit.account)
+                          const BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 1.1,
+                              blurStyle: BlurStyle.inner,
+                              color: Colors.white10
+                          )
+                      ]
+                  ),
+                  child: const Icon(Icons.account_circle_outlined),
                 ),
               )
             ],

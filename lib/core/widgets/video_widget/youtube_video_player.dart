@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
 
 class YoutubePlayerVideo extends StatefulWidget {
   final String url;
@@ -17,25 +18,27 @@ class _YoutubePlayerVideoState extends State<YoutubePlayerVideo> {
   @override
   void initState() {
     super.initState();
-    controller = YoutubePlayerController(
-        initialVideoId: YoutubePlayer.convertUrlToId(widget.url)!,
-      flags: const YoutubePlayerFlags(
-        disableDragSeek: false,
-        autoPlay: false),
-    )..addListener(() {setState(() {});});
+    controller =YoutubePlayerController.fromVideoId(
+      videoId: YoutubePlayerController.convertUrlToId(widget.url)!,
+      params:const YoutubePlayerParams(
+        color: "red",
+        showVideoAnnotations: false,
+      ),
+      autoPlay: false,
+    );
 
 
   }
 
   @override
   void deactivate() {
-    controller.pause();
+    controller.pauseVideo();
     super.deactivate();
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    controller.stopVideo();
     super.dispose();
   }
 
@@ -48,25 +51,14 @@ class _YoutubePlayerVideoState extends State<YoutubePlayerVideo> {
         borderRadius: BorderRadius.circular(5),
         border: Border.all(color: Colors.white)
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          YoutubePlayer(
-            controller: controller,
-            progressColors: const ProgressBarColors(playedColor: Colors.red,backgroundColor: Colors.grey,handleColor: Colors.red),
-            progressIndicatorColor: Colors.red,
-            showVideoProgressIndicator: true,
-            bottomActions: const[],
-
-            topActions: const[],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(widget.title,),
-          ),
-        ],
+      child: YoutubePlayerControllerProvider(
+          controller: controller,
+          child:SizedBox(
+            height: 500,
+            child: YoutubePlayer(
+        controller:controller,
       ),
+          )),
     );
   }
 }

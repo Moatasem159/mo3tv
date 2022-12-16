@@ -58,7 +58,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
                   onPressed: () {
                     BlocProvider.of<TvCubit>(context).page++;
                     BlocProvider.of<TvCubit>(context).getTvShowsRecommendations(
-                        tvId:BlocProvider.of<TvCubit>(context).tvShow!.id,
+                        tvId:BlocProvider.of<TvCubit>(context).tvShow.id,
                         page:BlocProvider.of<TvCubit>(context).page );
                   },
                 ),

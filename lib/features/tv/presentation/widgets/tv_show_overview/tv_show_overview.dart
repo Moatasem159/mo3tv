@@ -26,12 +26,12 @@ class TvShowOverview extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TvShowDetails(
-                      tvShow: cubit.tvShow!,
+                      tvShow: cubit.tvShow,
                     ),
-                    TvShowButtons(tvShow: cubit.tvShow!),
+                    TvShowButtons(tvShow: cubit.tvShow),
                     TvShowDescription(
-                      tvShow: cubit.tvShow!,
-                      keywords: cubit.tvShow!.keywords!,
+                      tvShow: cubit.tvShow,
+                      keywords: cubit.tvShow.keywords!,
                     ),
                     const SizedBox(
                       height: 17,

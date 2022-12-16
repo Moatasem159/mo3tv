@@ -30,7 +30,6 @@ import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_gallery_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_videos_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
@@ -78,7 +77,6 @@ Future<void> init() async {
       addMovieToWatchListUseCase: sl(),
       getMovieCreditsUsecase: sl(),
       getMovieRecommendationsUseCase: sl(),
-      getMovieVideosUsecase: sl(),
       getMovieDetailsUseCase: sl()));
   sl.registerFactory<TvCubit>(() => TvCubit(
     getTvShowDetailsUsecase: sl(),
@@ -106,8 +104,6 @@ Future<void> init() async {
           () => GetMovieDetailsUseCase( baseMovieRepository: sl(),));
   sl.registerLazySingleton<GetMovieRecommendationsUseCase>(
           () => GetMovieRecommendationsUseCase( baseMovieRepository: sl(),));
-  sl.registerLazySingleton<GetMovieVideosUsecase>(
-          () => GetMovieVideosUsecase(sl()));
   sl.registerLazySingleton<GetMovieReviewsUsecase>(
           () => GetMovieReviewsUsecase(sl()));
   sl.registerLazySingleton<GetMovieCreditsUsecase>(

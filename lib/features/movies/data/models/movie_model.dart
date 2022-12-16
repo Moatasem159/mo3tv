@@ -1,5 +1,6 @@
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
+import 'package:mo3tv/core/models/video_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 //ignore: must_be_immutable
 class MovieModel extends Movie {
@@ -24,11 +25,12 @@ class MovieModel extends Movie {
        super.status,
        super.tagline,
        super.title,
-       super.video,
        super.voteAverage,
        super.voteCount,
        super.belongsToCollection,
        super.movieAccountDetails,
+        super.trailer,
+        super.videos
       });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
@@ -54,9 +56,9 @@ class MovieModel extends Movie {
       status: json["status"]??'',
       tagline: json["tagline"]??'',
       title: json["title"]??'',
-      video: json["video"],
       voteAverage: json["vote_average"]??0,
       voteCount: json["vote_count"]??0,
+     videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -80,7 +82,6 @@ class MovieModel extends Movie {
       "status": status,
       "tagline": tagline,
       "title": title,
-      "video": video,
       "vote_average": voteAverage,
       "vote_count": voteCount,
   };
