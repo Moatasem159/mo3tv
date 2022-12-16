@@ -6,7 +6,6 @@ import 'package:mo3tv/core/models/gallery_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/models/review_model.dart';
-import 'package:mo3tv/core/models/video_model.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies({required int page});
@@ -20,7 +19,6 @@ abstract class MovieRemoteDataSource {
   Future<GalleryModel> getMovieGallery({required int movieId});
   Future<List<ReviewModel>> getMovieReviews({required int movieId});
   Future<List<CastMemberModel>> getMovieCredits({required int movieId});
-  Future<VideoModel> getMovieVideos({required int movieId});
   Future<List<MovieModel>> getMovieRecommendations({required int page,required int movieId});
 }
 
@@ -78,13 +76,6 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
             (x) => MovieModel.fromJson(x),
       ),
     );
-  }
-
-  @override
-  Future<VideoModel> getMovieVideos({required int movieId})async {
-    final response = await apiConsumer.get(EndPoints.movieVideos(movieId));
-
-    return VideoModel.fromJson(response);
   }
   @override
   Future<List<ReviewModel>> getMovieReviews({required int movieId}) async{

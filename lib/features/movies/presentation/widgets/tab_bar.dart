@@ -27,7 +27,6 @@ class GalleryTabBar extends StatelessWidget {
             Text("Backdrops"),
             Text("posters"),
             Text("logos"),
-            // Text("Videos"),
           ],
         ),
       ),

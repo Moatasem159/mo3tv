@@ -3,13 +3,11 @@ import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
-import 'package:mo3tv/core/models/video_model.dart';
 import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/entities/review.dart';
-import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
 
 class MoviesRepositoryImpl extends MovieRepository {
@@ -107,23 +105,6 @@ class MoviesRepositoryImpl extends MovieRepository {
      return left(const ServerFailure("No Internet Connections"));
     }
   }
-
-  @override
-  Future<Either<Failure, List<Video>>> getMovieVideos({required int movieId})async {
-    if(await networkInfo.isConnected)
-      {
-        final VideoModel res = await baseMovieRemoteDataSource.getMovieVideos(movieId: movieId);
-        try {
-          return Right(res.results!);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
-      }
-    else{
-    return left(const ServerFailure("No Internet Connections"));
-    }
-  }
-
 
   @override
   Future<Either<Failure, List<Review>>> getMovieReviews({required int movieId}) async{
