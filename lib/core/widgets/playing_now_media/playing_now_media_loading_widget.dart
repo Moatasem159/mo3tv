@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class PlayingNowTvShowsLoadingWidget extends StatelessWidget {
+class PlayingNowMediaLoadingWidget extends StatelessWidget {
 
 
   final double height;
   final double width;
 
-  const PlayingNowTvShowsLoadingWidget({super.key, required this.height, required this.width});
+  const PlayingNowMediaLoadingWidget({super.key, required this.height, required this.width});
 
   @override
   Widget build(BuildContext context) {

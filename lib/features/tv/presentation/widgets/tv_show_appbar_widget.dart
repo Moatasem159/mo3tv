@@ -31,9 +31,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
     final titleSize =
         (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
     final maxTitleMargin = size.height / 4.3;
-    dynamic textMovement =
-        // BlocProvider.of<MovieBottomNavCubit>(context).isGallery ? 155 :
-    190;
+    dynamic textMovement = 190;
     final double top = maxTitleMargin + (1 - textMovement * p);
     final maxMargin = size.width / 30;
     const textLeftMovement = 50;

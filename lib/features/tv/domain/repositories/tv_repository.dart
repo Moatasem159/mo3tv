@@ -9,6 +9,7 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 abstract class TvRepository{
   Future<Either<Failure,List<TvShow>>> getNowPlayingTvShows({required int page});
   Future<Either<Failure,List<TvShow>>> getPopularTvShows({required int page});
+  Future<Either<Failure,List<TvShow>>> getTrendingTvShows({required int page});
   Future<Either<Failure,List<TvShow>>> getTopRatedTvShows({required int page});
   Future<Either<Failure,TvShow>> getTvShowDetails({required int tvShowId});
   Future<Either<Failure,List<TvShow>>> getTvShowRecommendations({required int tvId,required int page});

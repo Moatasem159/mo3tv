@@ -10,6 +10,7 @@ import 'package:mo3tv/core/entities/review.dart';
 abstract class MovieRepository{
 Future<Either<Failure,List<Movie>>> getNowPlayingMovies({required int page});
 Future<Either<Failure,List<Movie>>> getPopularMovies({required int page});
+Future<Either<Failure,List<Movie>>> getTrendingMovies({required int page});
 Future<Either<Failure,List<Movie>>> getTopRatedMovies({required int page});
 Future<Either<Failure,Movie>> getMovieDetails({required int movieId});
 Future<Either<Failure,Message>> rateMovie({required dynamic rate,required int movieId});

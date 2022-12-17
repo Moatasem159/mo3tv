@@ -10,6 +10,7 @@ import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 abstract class TvShowRemoteDataSource {
   Future<List<TvShowModel>> getNowPlayingTvShows({required int page});
   Future<List<TvShowModel>> getPopularTvShows({required int page});
+  Future<List<TvShowModel>> getTrendingTvShows({required int page});
   Future<List<TvShowModel>> getTopRatedTvShows({required int page});
   Future<TvShowModel> getTvShowDetails({required int tvShowId});
   Future<List<TvShowModel>> getTvShowRecommendations({required int page,required int tvId});
@@ -137,5 +138,15 @@ class TvShowRemoteDataSourceImpl extends TvShowRemoteDataSource{
           "value":rate,
         });
     return MessageModel.fromJson(response);
+  }
+
+  @override
+  Future<List<TvShowModel>> getTrendingTvShows({required int page}) async{
+    final response = await apiConsumer.get(EndPoints.trendingMediaPath(page: page,mediaType: "tv"));
+    return List<TvShowModel>.from(
+      (response['results'] as List).map(
+            (x) => TvShowModel.fromJson(x),
+      ),
+    );
   }
 }

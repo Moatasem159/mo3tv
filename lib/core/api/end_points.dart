@@ -13,6 +13,8 @@ class EndPoints{
       "$baseUrl/$mediaType/$mediaId?api_key=$apiKey&session_id=$sessionId&append_to_response=keywords,account_states,videos";
   static String nowPlayingMediaPath({required int page,required String mediaType,required nowPlaying}) =>
       "$baseUrl/$mediaType/$nowPlaying?api_key=$apiKey&page=$page";
+  static String trendingMediaPath ({required int page,required String mediaType})=>
+      "$baseUrl/trending/$mediaType/day?api_key=$apiKey&page=$page";
   static String popularMediaPath ({required int page,required String mediaType})=>
       "$baseUrl/$mediaType/popular?api_key=$apiKey&page=$page";
   static  String topRatedMediaPath({required int page,required String mediaType}) =>
@@ -34,9 +36,6 @@ class EndPoints{
 
 
 
-
-  static String movieVideos(int movieId) =>
-      "$baseUrl/movie/$movieId/videos?api_key=$apiKey";
 
 
   static  String backDropsUrl(String path) => "$baseBackDropsUrl$path";

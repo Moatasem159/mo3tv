@@ -225,4 +225,21 @@ class MoviesRepositoryImpl extends MovieRepository {
       return left(const ServerFailure("No Internet Connections"));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
+    if(await networkInfo.isConnected)
+    {
+      final result = await baseMovieRemoteDataSource.getTrendingMovies(page: page);
+
+      try {
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure("No Internet Connections"));
+    }
+  }
 }

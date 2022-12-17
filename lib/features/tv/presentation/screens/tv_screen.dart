@@ -4,8 +4,9 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_state.dart';
 import 'package:mo3tv/features/login/presentation/pages/login_screen.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/popular_tv_shows/popular_tv_shows.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/top_rated_tv_shows/top_rated_tv_shows.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/popular_tv_shows.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/top_rated_tv_shows.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/trending_tv_shows.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_appbar_widget.dart';
 
 class TvScreen extends StatelessWidget {
@@ -67,8 +68,12 @@ class TvScreen extends StatelessWidget {
                     handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                         context),
                   ),
+                  const TrendingTvShows(),
                   const PopularTvShows(),
                   const TopRatedTvShows(),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(height: 15),
+                  )
                 ]
             );
           }

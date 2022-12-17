@@ -15,7 +15,6 @@ class TvShow extends Equatable{
   final String ?homepage;
   final int ?id;
   final bool ?inProduction;
-  final List<String>? languages;
   final String ?lastAirDate;
   final LastEpisodeToAir? lastEpisodeToAir;
   final String ?name;
@@ -48,7 +47,6 @@ class TvShow extends Equatable{
       this.homepage,
       this.id,
       this.inProduction,
-      this.languages,
       this.lastAirDate,
       this.lastEpisodeToAir,
       this.name,

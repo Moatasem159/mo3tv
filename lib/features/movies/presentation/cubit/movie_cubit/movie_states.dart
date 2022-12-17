@@ -48,6 +48,18 @@ class GetTopRatedMoviesErrorState extends MovieStates{
   @override
   List<Object>get props=>[msg];
 }
+class GetTrendingMoviesLoadingState extends MovieStates{}
+class GetTrendingMoviesSuccessState extends MovieStates{}
+class GetTrendingMoviesErrorState extends MovieStates{
+
+
+  final String msg;
+
+  GetTrendingMoviesErrorState({required this.msg});
+
+  @override
+  List<Object>get props=>[msg];
+}
 
 class GetMovieDetailsLoadingState extends MovieStates{}
 class GetMovieDetailsSuccessState extends MovieStates{}

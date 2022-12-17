@@ -10,6 +10,7 @@ import 'package:mo3tv/core/models/review_model.dart';
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies({required int page});
   Future<List<MovieModel>> getPopularMovies({required int page});
+  Future<List<MovieModel>> getTrendingMovies({required int page});
   Future<MessageModel> rateMovie({required dynamic rate,required int movieId});
   Future<MessageModel> markMovieAsFavourite({required int movieId,required bool fav});
   Future<MessageModel> addMovieToWatchList({required int movieId,required bool watchList});
@@ -139,5 +140,15 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
           "watchlist": watchList
         });
     return MessageModel.fromJson(response);
+  }
+
+  @override
+  Future<List<MovieModel>> getTrendingMovies({required int page}) async{
+    final response = await apiConsumer.get(EndPoints.trendingMediaPath(page:page,mediaType:"movie"));
+    return List<MovieModel>.from(
+      (response['results'] as List).map(
+            (x) => MovieModel.fromJson(x),
+      ),
+    );
   }
 }

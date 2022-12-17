@@ -35,6 +35,16 @@ class GetTopRatedTvShowsErrorState extends TvStates{
   GetTopRatedTvShowsErrorState({required this.msg});
 }
 
+class GetTrendingTvShowsLoadingState extends TvStates{}
+class GetTrendingTvShowsSuccessState extends TvStates{}
+class GetTrendingTvShowsErrorState extends TvStates{
+
+
+  final String msg;
+
+  GetTrendingTvShowsErrorState({required this.msg});
+}
+
 class GetTvShowDetailsLoadingState extends TvStates{}
 class GetTvShowDetailsSuccessState extends TvStates{}
 class GetTvShowDetailsErrorState extends TvStates{

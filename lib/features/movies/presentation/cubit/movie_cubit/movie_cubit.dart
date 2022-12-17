@@ -17,6 +17,7 @@ import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
@@ -28,6 +29,7 @@ class MovieCubit extends Cubit<MovieStates> {
   MovieCubit({required this.getNowPlayingMoviesUsecase,
       required this.popularMoviesUsecase,
         required this.getMovieDetailsUseCase,
+        required this.getTrendingMoviesUsecase,
         required this.getMovieGalleryUsecase,
         required this.getMovieRecommendationsUseCase,
         required this.rateMovieUseCase,
@@ -40,6 +42,7 @@ class MovieCubit extends Cubit<MovieStates> {
 
   GetNowPlayingMoviesUsecase getNowPlayingMoviesUsecase;
   GetPopularMoviesUsecase popularMoviesUsecase;
+  GetTrendingMoviesUsecase getTrendingMoviesUsecase;
   GetTopRatedMoviesUsecase getTopRatedMoviesUsecase;
   GetMovieDetailsUseCase getMovieDetailsUseCase;
   GetMovieRecommendationsUseCase getMovieRecommendationsUseCase;
@@ -67,38 +70,74 @@ class MovieCubit extends Cubit<MovieStates> {
     }));
   }
 
-  List<Movie>? popularMovies;
+  List<Movie> popularMovies=[];
 
+  int movieListPage=1;
   Future<void> getPopularMoviesData({int page=1}) async {
     emit(GetNowPlayingMoviesLoadingState());
     Either<Failure, List<Movie>> response =
         await popularMoviesUsecase.call(page);
-    popularMovies = [];
     emit(response.fold(
         (failure) =>
             GetNowPlayingMoviesErrorState(msg: _mapFailureToMsg(failure)),
         (popularMovies) {
-      this.popularMovies = popularMovies;
+      for (var element in popularMovies) {
+        if(element.backdropPath != "" && element.posterPath != "")
+          {
+            if(!this.popularMovies.any((e) =>e.id==element.id,))
+            {
+              this.popularMovies.add(element);
+            }
+          }
+      }
       return GetNowPlayingMoviesSuccessState();
     }));
   }
 
-  List<Movie>? topRatedMovies;
+  List<Movie> topRatedMovies=[];
 
   Future<void> getTopRatedMoviesData({int page=1}) async {
     emit(GetTopRatedMoviesLoadingState());
     Either<Failure, List<Movie>> response =
         await getTopRatedMoviesUsecase.call(page);
-    topRatedMovies = [];
     emit(response.fold(
         (failure) =>
             GetTopRatedMoviesErrorState(msg: _mapFailureToMsg(failure)),
         (topRatedMovies) {
-      this.topRatedMovies = topRatedMovies;
+          for (var element in topRatedMovies) {
+            if(element.backdropPath != "" && element.posterPath != "")
+            {
+              if(!this.topRatedMovies.any((e) =>e.id==element.id,))
+              {
+                this.topRatedMovies.add(element);
+              }
+            }
+          }
       return GetTopRatedMoviesSuccessState();
     }));
   }
+  List<Movie> trendingMovies=[];
 
+  Future<void> getTrendingMoviesData({int page=1}) async {
+    emit(GetTrendingMoviesLoadingState());
+    Either<Failure, List<Movie>> response =
+    await getTrendingMoviesUsecase.call(page);
+    emit(response.fold(
+            (failure) =>
+                GetTrendingMoviesErrorState(msg: _mapFailureToMsg(failure)),
+            (trendingMovies) {
+          for (var element in trendingMovies) {
+            if(element.backdropPath != "" && element.posterPath != "")
+            {
+              if(!this.trendingMovies.any((e) =>e.id==element.id,))
+              {
+                this.trendingMovies.add(element);
+              }
+            }
+          }
+          return GetTrendingMoviesSuccessState();
+        }));
+  }
   Movie movie=Movie();
   Future<void> getMovieDetailsData({required int movieId}) async {
     emit(GetMovieDetailsLoadingState());
@@ -130,7 +169,7 @@ class MovieCubit extends Cubit<MovieStates> {
   }
 
   List<Movie>? movieRecommendations=[];
-  int page=1;
+  int recPage=1;
   bool allRec=false;
   Future<void> getMovieRecommendations({int page=1,required movieId}) async {
     emit(GetMovieRecommendationsLoadingState());
@@ -232,7 +271,7 @@ class MovieCubit extends Cubit<MovieStates> {
   void clearObjects(){
     movie=Movie();
     allRec=false;
-    page=1;
+    recPage=1;
     // movieKeywords.clear();
     index=0;
    if(movieGallery!=null){

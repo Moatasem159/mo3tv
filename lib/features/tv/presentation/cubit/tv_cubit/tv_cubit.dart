@@ -1,5 +1,3 @@
-
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +12,7 @@ import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.da
 import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_top_rated_tv_shows_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
@@ -31,6 +30,7 @@ class TvCubit extends Cubit<TvStates> {
     required this.getNowPlayingTvShowsUsecase,
     required this.getPopularTvShowsUsecase,
     required this.getTopRatedTvShowUsecase,
+    required this.getTrendingTvShowsUsecase,
     required this.getTvShowDetailsUsecase,
     required this.getTvRecommendationsUseCase,
     required this.getTvShowsReviewsUsecase,
@@ -56,6 +56,7 @@ class TvCubit extends Cubit<TvStates> {
   AddTvShowToWatchListUseCase addTvShowToWatchListUseCase;
   RateTvShowUseCase rateTvShowUseCase;
   DeleteTvShowRateUseCase deleteTvShowRateUseCase;
+  GetTrendingTvShowsUsecase getTrendingTvShowsUsecase;
 
 
 
@@ -78,38 +79,74 @@ class TvCubit extends Cubit<TvStates> {
         }));
   }
 
-  List<TvShow>? popularTvShows;
+  List<TvShow>popularTvShows=[];
+  int tvShowListPage=1;
   Future<void> getPopularTvShowsData({int page=1}) async {
     emit(GetPopularTvShowsLoadingState());
     Either<Failure, List<TvShow>> response =
     await getPopularTvShowsUsecase.call(page);
-    popularTvShows = [];
     emit(response.fold(
             (failure) =>
             GetPopularTvShowsErrorState(msg: _mapFailureToMsg(failure)),
             (popularTvShows) {
-              this.popularTvShows = popularTvShows;
+              for (var element in popularTvShows) {
+                if(element.posterPath != "" && element.backdropPath != "")
+                {
+                  if(!this.popularTvShows.any((e) =>e.id==element.id,))
+                  {
+                    this.popularTvShows.add(element);
+                  }
+                }
+              }
           return GetPopularTvShowsSuccessState();
         }));
   }
 
-  List<TvShow>? topRatedTvShows;
+  List<TvShow> topRatedTvShows=[];
   Future<void> getTopRatedTvShowsData({int page=1}) async {
     emit(GetTopRatedTvShowsLoadingState());
     Either<Failure, List<TvShow>> response =
     await getTopRatedTvShowUsecase.call(page);
-    topRatedTvShows = [];
     emit(response.fold(
             (failure) =>
             GetTopRatedTvShowsErrorState(msg: _mapFailureToMsg(failure)),
             (topRatedTvShows) {
-          this.topRatedTvShows = topRatedTvShows;
+              for (var element in topRatedTvShows) {
+                if(element.backdropPath != "" && element.posterPath != "")
+                {
+                  if(!this.topRatedTvShows.any((e) =>e.id==element.id,))
+                  {
+                    this.topRatedTvShows.add(element);
+                  }
+                }
+              }
           return GetTopRatedTvShowsSuccessState();
         }));
   }
 
-  TvShow tvShow= TvShow();
+  List<TvShow> trendingTvShows=[];
+  Future<void> getTrendingTvShowsData({int page=1}) async {
+    emit(GetTrendingTvShowsLoadingState());
+    Either<Failure, List<TvShow>> response =
+    await getTrendingTvShowsUsecase.call(page);
+    emit(response.fold(
+            (failure) =>
+                GetTrendingTvShowsErrorState(msg: _mapFailureToMsg(failure)),
+            (trendingTvShows) {
+          for (var element in trendingTvShows) {
+            if(element.backdropPath != "" && element.posterPath != "")
+            {
+              if(!this.trendingTvShows.any((e) =>e.id==element.id,))
+              {
+                this.trendingTvShows.add(element);
+              }
+            }
+          }
+          return GetTrendingTvShowsSuccessState();
+        }));
+  }
 
+  TvShow tvShow= TvShow();
   Future<void> getTvShowDetailsData({required int tvShowId}) async {
     emit(GetTvShowDetailsLoadingState());
     Either<Failure,TvShow> response =
