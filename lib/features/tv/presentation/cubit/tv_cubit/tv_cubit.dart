@@ -7,6 +7,7 @@ import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
@@ -18,6 +19,7 @@ import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_gallery_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -40,6 +42,7 @@ class TvCubit extends Cubit<TvStates> {
     required this.addTvShowToWatchListUseCase,
     required this.deleteTvShowRateUseCase,
     required this.rateTvShowUseCase,
+    required this.getTvShowSeasonDetailsUsecase,
 
 }) : super(TvInitialState());
 
@@ -57,6 +60,7 @@ class TvCubit extends Cubit<TvStates> {
   RateTvShowUseCase rateTvShowUseCase;
   DeleteTvShowRateUseCase deleteTvShowRateUseCase;
   GetTrendingTvShowsUsecase getTrendingTvShowsUsecase;
+  GetTvShowSeasonDetailsUsecase getTvShowSeasonDetailsUsecase;
 
 
 
@@ -163,6 +167,13 @@ class TvCubit extends Cubit<TvStates> {
               {
                   this.tvShow.seasons!.removeLast();
                 }
+              for (var element in this.tvShow.seasons!){
+                if(element.posterPath=='')
+                  {
+                    this.tvShow.seasons!.clear();
+                    break;
+                  }
+              }
               for (var element in this.tvShow.videos!) {
                 if(element.name=="Final Trailer")
                 {
@@ -294,20 +305,12 @@ class TvCubit extends Cubit<TvStates> {
     const TvShowBackdrops(),
     const TvShowPosters(),
     const TvShowLogos(),
-    // const MovieVideos(),
   ];
 
 
   gallery(value,id){
     emit(ChangeGalleryLoadingState());
     index=value;
-    // if(index==3)
-    // {
-    //   if(movieVideos==null||movieVideos!.isEmpty){
-    //     getMovieVideos(movieId: id);
-    //   }
-    //
-    // }
     emit(ChangeGallerySuccessState());
   }
 
@@ -369,10 +372,19 @@ class TvCubit extends Cubit<TvStates> {
 
 
 
-
-
-
-
+  TvShowSeason ?tvShowSeason=const TvShowSeason();
+  Future<void> getTvShowSeasonDetailsData({required int tvShowId,required int seasonNumber}) async {
+    emit(GetTvShowSeasonDetailsLoadingState());
+    Either<Failure,TvShowSeason> response =
+    await getTvShowSeasonDetailsUsecase.call(seasonNumber: seasonNumber,tvId: tvShowId);
+    tvShowSeason=const TvShowSeason();
+    emit(response.fold((failure) =>
+        GetTvShowSeasonDetailsErrorState(msg: _mapFailureToMsg(failure)),
+            (tvShowSeason) {
+          this.tvShowSeason = tvShowSeason;
+          return GetTvShowSeasonDetailsSuccessState();
+        }));
+  }
   String _mapFailureToMsg(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:

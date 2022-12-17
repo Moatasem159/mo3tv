@@ -3,6 +3,7 @@ import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
+import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 //ignore: must_be_immutable
 class TvShow extends Equatable{
   final bool ?adult;
@@ -27,7 +28,7 @@ class TvShow extends Equatable{
   final String ?overview;
   final double ?popularity;
   final String ?posterPath;
-  final List<Season> ?seasons;
+  final List<TvShowSeasonModel> ?seasons;
   final String ?status;
   final String ?tagline;
   final String ?type;

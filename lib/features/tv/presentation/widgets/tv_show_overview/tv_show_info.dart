@@ -44,6 +44,14 @@ class TvShowInfo extends StatelessWidget {
                 ),
               ],
             ),
+          if(tvShow.seasons!.isEmpty&&tvShow.numberOfSeasons==1)
+            Text("${tvShow.numberOfSeasons} Season",style:const TextStyle(
+                fontWeight: FontWeight.bold
+            ),),
+          if(tvShow.seasons!.isEmpty&&tvShow.numberOfSeasons! > 1)
+            Text("${tvShow.numberOfSeasons} Seasons",style:const TextStyle(
+                fontWeight: FontWeight.bold
+            ),),
           if(tvShow.seasons!.length>1)
           Text("${tvShow.seasons!.length} Seasons",style:const TextStyle(
               fontWeight: FontWeight.bold

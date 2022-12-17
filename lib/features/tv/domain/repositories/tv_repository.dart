@@ -5,6 +5,7 @@ import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 
 abstract class TvRepository{
   Future<Either<Failure,List<TvShow>>> getNowPlayingTvShows({required int page});
@@ -12,6 +13,7 @@ abstract class TvRepository{
   Future<Either<Failure,List<TvShow>>> getTrendingTvShows({required int page});
   Future<Either<Failure,List<TvShow>>> getTopRatedTvShows({required int page});
   Future<Either<Failure,TvShow>> getTvShowDetails({required int tvShowId});
+  Future<Either<Failure,TvShowSeason>> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});
   Future<Either<Failure,List<TvShow>>> getTvShowRecommendations({required int tvId,required int page});
   Future<Either<Failure,List<Review>>> getTvShowsReviews({required int tvId});
   Future<Either<Failure,List<CastMember>>> getTvShowCredits({required int tvId});

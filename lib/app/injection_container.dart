@@ -51,6 +51,7 @@ import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_gallery_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
@@ -83,6 +84,7 @@ Future<void> init() async {
       getMovieDetailsUseCase: sl()));
   sl.registerFactory<TvCubit>(() => TvCubit(
     getTvShowDetailsUsecase: sl(),
+    getTvShowSeasonDetailsUsecase: sl(),
     getTopRatedTvShowUsecase: sl(),
     getTrendingTvShowsUsecase: sl(),
     getPopularTvShowsUsecase: sl(),
@@ -132,6 +134,7 @@ Future<void> init() async {
           () => GetMoviesWatchlistUsecase(accountRepository: sl(),));
 
 
+
   //// tv Usecases
   sl.registerLazySingleton<GetNowPlayingTvShowsUsecase>(
           () => GetNowPlayingTvShowsUsecase(tvRepository: sl(),));
@@ -159,6 +162,8 @@ Future<void> init() async {
           () => DeleteTvShowRateUseCase(sl()));
   sl.registerLazySingleton<RateTvShowUseCase>(
           () => RateTvShowUseCase(sl()));
+  sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(
+          () => GetTvShowSeasonDetailsUsecase(sl(),));
   // Repository
 
   sl.registerLazySingleton<MovieRepository>(

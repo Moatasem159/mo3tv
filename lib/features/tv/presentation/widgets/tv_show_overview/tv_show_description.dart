@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
 import 'package:mo3tv/core/widgets/play_media_trailer.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/season_poster.dart';
 
 class TvShowDescription extends StatelessWidget {
   final TvShow tvShow;
@@ -29,6 +27,7 @@ class TvShowDescription extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
+        if(tvShow.seasons!.isNotEmpty)
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,70 +38,14 @@ class TvShowDescription extends StatelessWidget {
             const SizedBox(
               height: 7,
             ),
-            if(tvShow.seasons!.isNotEmpty)
+
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.start,
               children: tvShow.seasons!.map((e) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    alignment: Alignment.bottomLeft,
-                    children: [
-                      ClipRRect(
-                        borderRadius:
-                        const BorderRadius.all(Radius.circular(8.0)),
-                        child: CachedNetworkImage(
-                          width:155 ,
-                          height: 230,
-                          fit: BoxFit.cover,
-                          imageUrl: EndPoints.posterUrl(e.posterPath!),
-                          placeholder: (context, url) => Shimmer.fromColors(
-                            baseColor: Colors.grey[700]!,
-                            highlightColor: Colors.grey[600]!,
-                            child: Container(
-                              height: 230,
-                              width: 155,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Image.asset("assets/images/movieplaceholder.png"),
-                        ),
-                      ),
-                      const SizedBox(height: 7,),
-                      Container(
-                        width: 155,
-                        padding:const EdgeInsets.all(5),
-                        decoration:const BoxDecoration(
-                            color:Colors.black87,
-                          borderRadius:BorderRadius.vertical(bottom: Radius.circular(8))
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(e.name!,style:const TextStyle(
-                                fontWeight: FontWeight.bold
-                            ),),
-                            Text(
-                              e.airDate!=''?
-                              "${e.airDate!.substring(0,4)} | ${e.episodeCount} Episodes":
-                              "${e.episodeCount} Episodes",
-                              maxLines: null,
-                              overflow: TextOverflow.visible,
-                              style:const TextStyle(
-                                  height: 1.2,
-                                  fontWeight: FontWeight.bold
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                return SeasonPoster(
+                  season: e,
+                  tvShowId: tvShow.id!,
+                  tvShowName: tvShow.originalName!,
                 );
               }).toList(),
             ),

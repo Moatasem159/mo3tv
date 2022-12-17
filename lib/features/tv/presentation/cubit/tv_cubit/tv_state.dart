@@ -55,6 +55,16 @@ class GetTvShowDetailsErrorState extends TvStates{
   GetTvShowDetailsErrorState({required this.msg});
 }
 
+class GetTvShowSeasonDetailsLoadingState extends TvStates{}
+class GetTvShowSeasonDetailsSuccessState extends TvStates{}
+class GetTvShowSeasonDetailsErrorState extends TvStates{
+
+
+  final String msg;
+
+  GetTvShowSeasonDetailsErrorState({required this.msg});
+}
+
 class GetTvShowRecommendationsLoadingState extends TvStates{}
 class GetTvShowRecommendationsSuccessState extends TvStates{}
 class GetTvShowRecommendationsErrorState extends TvStates{

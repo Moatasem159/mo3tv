@@ -16,6 +16,8 @@ class CastMemberModel extends CastMember{
   super.originalName,
   super.popularity,
   super.profilePath,
+    super.department,
+    super.job,
   });
 
   factory CastMemberModel.fromJson(Map<String, dynamic> json) => CastMemberModel(
@@ -31,6 +33,8 @@ class CastMemberModel extends CastMember{
     gender: json["gender"]??0,
     order: json["order"]??0,
     profilePath: json["profile_path"]??'',
+    department: json["department"]??'',
+    job: json["job"]??'',
   );
 
   Map<String, dynamic> toJson() => {

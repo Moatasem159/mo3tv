@@ -6,6 +6,7 @@ import 'package:mo3tv/core/models/cast_model.dart';
 import 'package:mo3tv/core/models/gallery_model.dart';
 import 'package:mo3tv/core/models/review_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
+import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 
 abstract class TvShowRemoteDataSource {
   Future<List<TvShowModel>> getNowPlayingTvShows({required int page});
@@ -13,6 +14,7 @@ abstract class TvShowRemoteDataSource {
   Future<List<TvShowModel>> getTrendingTvShows({required int page});
   Future<List<TvShowModel>> getTopRatedTvShows({required int page});
   Future<TvShowModel> getTvShowDetails({required int tvShowId});
+  Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});
   Future<List<TvShowModel>> getTvShowRecommendations({required int page,required int tvId});
   Future<List<ReviewModel>> getTvShowsReviews({required int tvId});
   Future<List<CastMemberModel>> getTvShowCredits({required int tvId});
@@ -148,5 +150,12 @@ class TvShowRemoteDataSourceImpl extends TvShowRemoteDataSource{
             (x) => TvShowModel.fromJson(x),
       ),
     );
+  }
+
+  @override
+  Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber}) async{
+    final response = await apiConsumer.get(EndPoints.tvShowSeasonDetailsPath(
+        tvShowId,seasonNumber));
+    return TvShowSeasonModel.fromJson(response);
   }
 }

@@ -12,6 +12,8 @@ class CastMember{
   final String ?character;
   final String ?creditId;
   final dynamic order;
+  final String? department;
+  final String? job;
 
   const CastMember({
       this.id,
@@ -25,6 +27,8 @@ class CastMember{
       this.castId,
       this.character,
       this.creditId,
+    this.department,
+    this.job,
       this.order});
 
 

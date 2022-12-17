@@ -1,12 +1,9 @@
-import 'dart:convert';
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/core/models/video_model.dart';
+import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 
-TvShowModel tvShowFromJson(String str) => TvShowModel.fromJson(json.decode(str));
-
-String tvShowToJson(TvShowModel data) => json.encode(data.toJson());
 //ignore: must_be_immutable
 class TvShowModel extends TvShow {
    TvShowModel({
@@ -66,7 +63,7 @@ class TvShowModel extends TvShow {
     overview: json["overview"]??'',
     popularity: json["popularity"]==null?0:json["popularity"].toDouble(),
     posterPath: json["poster_path"]??'',
-    seasons:json["seasons"]==null?[]:List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
+    seasons:json["seasons"]==null?[]:List<TvShowSeasonModel>.from(json["seasons"].map((x) => TvShowSeasonModel.fromJson(x))),
     status: json["status"]??'',
     tagline: json["tagline"]??'',
     type: json["type"]??'',
@@ -74,36 +71,6 @@ class TvShowModel extends TvShow {
     voteCount: json["vote_count"]??0,
     videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
   );
-
-  Map<String, dynamic> toJson() => {
-    "adult": adult,
-    "backdrop_path": backdropPath,
-    "created_by": List<dynamic>.from(createdBy!.map((x) => x.toJson())),
-    "episode_run_time": List<dynamic>.from(episodeRunTime!.map((x) => x)),
-    "first_air_date": firstAirDate,
-    "genres": List<GenreModel>.from(genres!.map((x) => x.toJson())),
-    "homepage": homepage,
-    "id": id,
-    "in_production": inProduction,
-    "last_air_date": lastAirDate,
-    "last_episode_to_air": lastEpisodeToAir!.toJson(),
-    "name": name,
-    "next_episode_to_air": nextEpisodeToAir,
-    "networks": List<dynamic>.from(networks!.map((x) => x.toJson())),
-    "number_of_episodes": numberOfEpisodes,
-    "number_of_seasons": numberOfSeasons,
-    "original_language": originalLanguage,
-    "original_name": originalName,
-    "overview": overview,
-    "popularity": popularity,
-    "poster_path": posterPath,
-    "seasons": List<dynamic>.from(seasons!.map((x) => x.toJson())),
-    "status": status,
-    "tagline": tagline,
-    "type": type,
-    "vote_average": voteAverage,
-    "vote_count": voteCount,
-  };
 }
 
 class CreatedBy {
@@ -226,42 +193,3 @@ class LastEpisodeToAir {
   };
 }
 
-class Season {
-  Season({
-    this.airDate,
-    this.episodeCount,
-    this.id,
-    this.name,
-    this.overview,
-    this.posterPath,
-    this.seasonNumber,
-  });
-
-  String? airDate;
-  int ?episodeCount;
-  int ?id;
-  String ?name;
-  String ?overview;
-  String ?posterPath;
-  int ?seasonNumber;
-
-  factory Season.fromJson(Map<String, dynamic> json) => Season(
-    airDate: json["air_date"]??'',
-    episodeCount: json["episode_count"]??0,
-    id: json["id"],
-    name: json["name"]??'',
-    overview: json["overview"]??'',
-    posterPath: json["poster_path"]??'',
-    seasonNumber: json["season_number"]??0,
-  );
-
-  Map<String, dynamic> toJson() => {
-    "air_date": airDate,
-    "episode_count": episodeCount,
-    "id": id,
-    "name": name,
-    "overview": overview,
-    "poster_path": posterPath,
-    "season_number": seasonNumber,
-  };
-}

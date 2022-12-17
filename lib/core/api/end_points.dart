@@ -33,7 +33,8 @@ class EndPoints{
       "${baseUrl}account/{account_id}/watchlist?api_key=$apiKey&session_id=$sessionid";
   static String rateMediaPath(String sessionid,int mediaId,String mediaType)=>
       "$baseUrl/$mediaType/$mediaId/rating?api_key=$apiKey&session_id=$sessionid";
-
+  static String tvShowSeasonDetailsPath(int tvId,int seasonNumber) =>
+      "$baseUrl/tv/$tvId/season/$seasonNumber?api_key=$apiKey";
 
 
 

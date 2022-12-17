@@ -8,6 +8,7 @@ import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
 
 class TvShowRepositoryImpl extends TvRepository{
@@ -226,6 +227,24 @@ class TvShowRepositoryImpl extends TvRepository{
     {
       final result = await tvShowRemoteDataSource.getTrendingTvShows(
           page: page);
+
+      try {
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure("No Internet Connections"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails(
+      {required int tvShowId, required int seasonNumber})async {
+    if(await networkInfo.isConnected){
+      final TvShowSeason result = await tvShowRemoteDataSource.getTvShowSeasonDetails(
+          tvShowId: tvShowId, seasonNumber: seasonNumber);
 
       try {
         return Right(result);
