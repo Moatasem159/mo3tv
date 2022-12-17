@@ -33,6 +33,7 @@ import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
@@ -44,6 +45,7 @@ import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.da
 import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_top_rated_tv_shows_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
@@ -69,6 +71,7 @@ Future<void> init() async {
       getNowPlayingMoviesUsecase: sl(),
       rateMovieUseCase: sl(),
       popularMoviesUsecase: sl(),
+      getTrendingMoviesUsecase: sl(),
       getMovieGalleryUsecase: sl(),
       getMovieReviewsUsecase: sl(),
       getTopRatedMoviesUsecase: sl(),
@@ -81,6 +84,7 @@ Future<void> init() async {
   sl.registerFactory<TvCubit>(() => TvCubit(
     getTvShowDetailsUsecase: sl(),
     getTopRatedTvShowUsecase: sl(),
+    getTrendingTvShowsUsecase: sl(),
     getPopularTvShowsUsecase: sl(),
       getNowPlayingTvShowsUsecase: sl(),
     getTvRecommendationsUseCase: sl(),
@@ -95,9 +99,11 @@ Future<void> init() async {
 
   // movie useCases
   sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
-      () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));
+          () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));
   sl.registerLazySingleton<GetPopularMoviesUsecase>(
       () => GetPopularMoviesUsecase(sl()));
+  sl.registerLazySingleton<GetTrendingMoviesUsecase>(
+          () => GetTrendingMoviesUsecase(sl()));
   sl.registerLazySingleton<GetTopRatedMoviesUsecase>(
       () => GetTopRatedMoviesUsecase(sl()));
   sl.registerLazySingleton<GetMovieDetailsUseCase>(
@@ -131,6 +137,8 @@ Future<void> init() async {
           () => GetNowPlayingTvShowsUsecase(tvRepository: sl(),));
   sl.registerLazySingleton<GetPopularTvShowsUsecase>(
           () => GetPopularTvShowsUsecase(tvRepository: sl(),));
+  sl.registerLazySingleton<GetTrendingTvShowsUsecase>(
+          () => GetTrendingTvShowsUsecase(tvRepository: sl(),));
   sl.registerLazySingleton<GetTopRatedTvShowUsecase>(
           () => GetTopRatedTvShowUsecase(tvRepository: sl(),));
   sl.registerLazySingleton<GetTvShowDetailsUsecase>(

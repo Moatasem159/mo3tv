@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_poster_widgets.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_poster_widget.dart';
 
 class RecommendationsMoviesList extends StatelessWidget {
   final List<Movie> recommendationMovies;
@@ -57,16 +57,16 @@ class RecommendationsMoviesList extends StatelessWidget {
               child: ElevatedButton(
                 child: const Text("Load more"),
                 onPressed: () {
-                  BlocProvider.of<MovieCubit>(context).page++;
+                  BlocProvider.of<MovieCubit>(context).recPage++;
                   BlocProvider.of<MovieCubit>(context).getMovieRecommendations(
                       movieId:  BlocProvider.of<MovieCubit>(context).movie.id,
-                      page:BlocProvider.of<MovieCubit>(context).page );
+                      page:BlocProvider.of<MovieCubit>(context).recPage );
                 },
               ),
             ),
           ),
           if(BlocProvider.of<MovieCubit>(context).allRec)
-            SliverToBoxAdapter(
+          SliverToBoxAdapter(
                child:Column(
                  children: const [
                    SizedBox(

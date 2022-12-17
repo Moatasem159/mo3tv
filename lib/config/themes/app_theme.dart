@@ -141,6 +141,9 @@ class AppTheme {
       contentTextStyle: const TextStyle(
         fontFamily: AppStrings.fontFamily,
       )
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Colors.red
     )
 
   );

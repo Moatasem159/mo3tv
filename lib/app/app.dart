@@ -6,7 +6,7 @@ import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-import 'package:mo3tv/injection_container.dart' as di;
+import 'package:mo3tv/app/injection_container.dart' as di;
 
 class Mo3Tv extends StatelessWidget {
   const Mo3Tv({super.key});
@@ -19,22 +19,17 @@ class Mo3Tv extends StatelessWidget {
             create: (context) =>
             di.sl<MovieCubit>()
             ..getNowPlayingMoviesData()
+            ..getTrendingMoviesData()
             ..getPopularMoviesData()
             ..getTopRatedMoviesData(),
           ),
           BlocProvider(create: (context) => di.sl<TvCubit>()
             ..getNowPlayingTvShowsData()
             ..getPopularTvShowsData()
-            ..getTopRatedTvShowsData()
-            ,
-          ),
-          BlocProvider(create: (context) =>
-          di.sl<AccountCubit>()
-            // ..getLists(),
-          ),
-
-          BlocProvider(
-              create: (context) => di.sl<LoginCubit>())
+            ..getTrendingTvShowsData()
+            ..getTopRatedTvShowsData(),),
+          BlocProvider(create: (context) => di.sl<AccountCubit>()..getLists()),
+          BlocProvider(create: (context) => di.sl<LoginCubit>())
         ],
         child: MaterialApp(
       debugShowCheckedModeBanner: false,

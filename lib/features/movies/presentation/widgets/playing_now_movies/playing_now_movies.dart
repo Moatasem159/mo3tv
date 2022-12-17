@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_widget.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/playing_now_movies/playing_now_movie_list.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/playing_now_movies/playing_now_movie_loading_widget.dart';
 
 
 
@@ -49,7 +49,7 @@ class PlayingNowMovies extends SliverPersistentHeaderDelegate {
               titleSize: titleSize);
         }
         if(cubit.nowPlayingMovies == null) {
-            return PlayingNowMovieLoadingWidget(height: c, width: size.width);
+            return PlayingNowMediaLoadingWidget(height: c, width: size.width);
           }
         return Container();
       },

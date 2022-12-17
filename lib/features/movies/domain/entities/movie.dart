@@ -6,7 +6,7 @@ import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 
 //ignore: must_be_immutable
-class Movie extends Equatable {
+class Movie extends Equatable{
   final bool ?adult;
   final String ?backdropPath;
   final dynamic belongsToCollection;

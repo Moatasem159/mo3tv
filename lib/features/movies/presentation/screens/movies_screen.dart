@@ -4,9 +4,10 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_state.dart';
 import 'package:mo3tv/features/login/presentation/pages/login_screen.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/popular_movies/popular_movies.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/top_rated_movies/top_rated_movies.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/popular_movies.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/top_rated_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movies_appbar_widget.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/trending_movies.dart';
 
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({Key? key}) : super(key: key);
@@ -70,8 +71,12 @@ class MoviesScreen extends StatelessWidget {
                     handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                         context),
                   ),
+                  const TrendingMovies(),
                   const PopularMovies(),
                   const TopRatedMovies(),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(height: 15),
+                  )
                 ]
             );
           }

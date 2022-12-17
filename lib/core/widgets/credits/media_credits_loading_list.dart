@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_poster_widgets.dart';
+import 'package:mo3tv/core/widgets/media_poster_loading.dart';
 
 class MediaCreditsLoadingList extends StatelessWidget {
   const MediaCreditsLoadingList({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class MediaCreditsLoadingList extends StatelessWidget {
       SliverChildBuilderDelegate(childCount: 10, (context, index) {
         return const Padding(
           padding: EdgeInsets.symmetric(horizontal: 5),
-          child: MoviePosterLoading(),
+          child: MediaPosterLoading(),
         );
       }),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movie_empty.dart';
+import 'package:mo3tv/core/widgets/empty_recommendations_media_widget.dart';
+import 'package:mo3tv/core/widgets/recommendations_media_loading_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv_list.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv_loading_list.dart';
 
 class RecommendationsTvShows extends StatelessWidget {
   const RecommendationsTvShows({Key? key}) : super(key: key);
@@ -17,13 +17,16 @@ class RecommendationsTvShows extends StatelessWidget {
         if (cubit.tvRecommendations != null && cubit.tvRecommendations!.isNotEmpty) {
           return RecommendationsTvShowsList(recommendationTvShows: cubit.tvRecommendations!);
         }
-        if (state is GetTvShowRecommendationsLoadingState ||
-            cubit.tvRecommendations == null||cubit.tvRecommendations!.isEmpty) {
-          return const RecommendationsTvShowsLoadingList();
+        if (cubit.tvRecommendations == null||(state is GetTvShowRecommendationsLoadingState &&
+            cubit.tvRecommendations!.isEmpty)) {
+          return const RecommendationsMediaLoadingList();
         }
         if (state is GetTvShowRecommendationsSuccessState &&
             cubit.tvRecommendations!.isEmpty) {
-          return const RecommendationsEmpty();
+          return const RecommendationsMediaEmptyWidget(
+            msg: "No recommendations",
+            icon: Icons.tv_off,
+          );
         }
         return SliverToBoxAdapter(child: Container());
       },

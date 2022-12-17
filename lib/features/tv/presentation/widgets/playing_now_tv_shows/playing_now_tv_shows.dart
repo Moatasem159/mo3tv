@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_widget.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/playing_now_tv_shows/playing_now_tv_show_loading_widget.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/playing_now_tv_shows/playing_now_tv_shows_list.dart';
 
 
@@ -49,7 +49,7 @@ class PlayingNowTvShows extends SliverPersistentHeaderDelegate {
               titleSize: titleSize);
         }
         if(cubit.nowPlayingTvShows == null) {
-            return PlayingNowTvShowsLoadingWidget(height: c, width: size.width);
+            return PlayingNowMediaLoadingWidget(height: c, width: size.width);
           }
         return Container();
       },

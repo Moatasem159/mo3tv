@@ -15,16 +15,18 @@ class ListTitle extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 19,
+              fontSize: 18,
               fontWeight: FontWeight.w500,
               letterSpacing: 0.15,
             ),
           ),
           InkWell(
+            borderRadius: BorderRadius.circular(10),
             onTap: onPressed,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: const [
                   Text('See More'),
                   Icon(

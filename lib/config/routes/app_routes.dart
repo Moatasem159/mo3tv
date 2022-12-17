@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
-import 'package:mo3tv/injection_container.dart';
+import 'package:mo3tv/app/injection_container.dart';
 
 class Routes {
 

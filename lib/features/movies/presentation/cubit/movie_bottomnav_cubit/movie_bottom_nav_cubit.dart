@@ -4,10 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/credits/movie_credits.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_credits.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/gallery/movie_gallery.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movies.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/review/movie_reviews.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_reviews.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_overview.dart';
 
 class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {

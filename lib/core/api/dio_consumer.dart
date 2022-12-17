@@ -8,7 +8,7 @@ import 'package:mo3tv/core/api/app_interceptors.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/api/status_code.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
-import 'package:mo3tv/injection_container.dart'as di;
+import 'package:mo3tv/app/injection_container.dart'as di;
 
 
 
