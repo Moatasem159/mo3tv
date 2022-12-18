@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:mo3tv/app/app.dart';
 import 'package:mo3tv/app/bloc_observer.dart';
 import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';

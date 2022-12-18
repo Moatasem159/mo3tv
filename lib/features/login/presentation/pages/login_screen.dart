@@ -3,71 +3,44 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_state.dart';
-import 'package:url_launcher/link.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    WebViewController ?c;
     return BlocConsumer<LoginCubit, LoginStates>(
-      listener: (context, state) {
-        if(state is GetSessionIdSuccessState)
-        {
-          showDialog(context: context, builder:(context) {
-            return  AlertDialog(
-              title: const Text("login successfully"),
-              content: const Text("Thank you for signing up in mo3Tv you can now enjoy our app in full experience"),
-              actions: [
-                TextButton(onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                }, child: const Text("ok"))
-              ],
-            );
-          },);
-        }
+      listener: (context, state)async {
+
       },
       builder: (context, state) {
         LoginCubit cubit=BlocProvider.of<LoginCubit>(context);
-        return Scaffold(
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if(state is !SuccessState||state is !GetSessionIdLoadingState)
-                Center(
-                  child: Link(
-                    target: LinkTarget.self,
-                    uri: Uri.parse(EndPoints.approveToken(cubit.token!.token!)),
-                    builder: (context, followLink) {
-                      return ElevatedButton(child:const Text("login"), onPressed: () {
-                        followLink!();
-                        Future.delayed(const Duration(seconds: 2)).then((value){
-                          cubit.success();
-                        });
 
-                      },);
-                    },
-                  ),
-                ),
-                if(state is SuccessState||state is GetSessionIdSuccessState)
-                 Center(
-                   child: ElevatedButton(
-              style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Colors.red)
-              ),
-              child: const Text("last Step"),
-              onPressed: () async {
-                BlocProvider.of<LoginCubit>(context)
-                      .getSessionId();
-
-              },
+        return SafeArea(
+          child: WillPopScope(
+            onWillPop: () async{
+              if(await c!.currentUrl()=="${EndPoints.approveToken(cubit.token!.token!)}/allow")
+              {
+                cubit.success();
+                Navigator.pop(context);
+              }
+              else{
+                Navigator.pop(context);
+              }
+              return true;
+            },
+            child: Scaffold(
+                body:WebView(
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebViewCreated: (controller) {c=controller;},
+                  onPageStarted: (url) {},
+                  gestureNavigationEnabled: true,
+                  initialUrl: EndPoints.approveToken(cubit.token!.token!),
+                )
             ),
-                 ),
-              ],
-            )
+          ),
         );
       },
     );

@@ -18,16 +18,16 @@ class TrendingTvShows extends StatelessWidget {
         if(cubit.trendingTvShows.isNotEmpty) {
           return HorizontalTvShowsList(
             tvShows: cubit.trendingTvShows,
-            title: "Trending tv shows today",
+            title: "Trending series today",
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>  const MediaSeeMore(title:"Trending tv shows today",trendingTvShows: true, ),
+                builder: (context) =>  const MediaSeeMore(title:"Trending series today",trendingTvShows: true, ),
               ));
             },
           );
         }
         if(cubit.trendingTvShows.isEmpty){
-          return const MediaHorizontalLoadingList(title: "Trending tv shows today",);
+          return const MediaHorizontalLoadingList(title: "Trending series today",);
         }
         return SliverToBoxAdapter(child: Container());
       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
@@ -32,13 +33,36 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
       },
       child: MediaIconButton(
         onTap: () {
-          if (tvShow.tvShowAccountDetails!.watchlist!) {
-            BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: false);
-            tvShow.tvShowAccountDetails!.watchlist=false;
+          if(AppStrings.sessionId!='')
+            {
+              if (tvShow.tvShowAccountDetails!.watchlist!) {
+                BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: false);
+                tvShow.tvShowAccountDetails!.watchlist=false;
 
-          } else {
-            BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: true);
-            tvShow.tvShowAccountDetails!.watchlist=true;
+              }
+              else {
+                BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: true);
+                tvShow.tvShowAccountDetails!.watchlist=true;
+              }
+            }
+          else{
+            showDialog(
+              context: context,
+              builder: (BuildContext dialogContext) {
+                return AlertDialog(
+                  content: const Text('You must login first'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('ok'),
+                      onPressed: () {
+                        Navigator.of(dialogContext)
+                            .pop(); // Dismiss alert dialog
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
           }
         },
         icon: tvShow.tvShowAccountDetails!.watchlist!?

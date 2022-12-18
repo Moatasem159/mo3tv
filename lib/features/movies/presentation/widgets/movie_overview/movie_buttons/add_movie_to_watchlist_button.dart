@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
@@ -32,14 +33,36 @@ class AddMovieToWatchlistButton extends StatelessWidget {
       },
       child: MediaIconButton(
         onTap: () {
-          if (movie.movieAccountDetails!.watchlist!) {
-            BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: false);
-            movie.movieAccountDetails!.watchlist=false;
+          if(AppStrings.sessionId!='')
+            {
+              if (movie.movieAccountDetails!.watchlist!) {
+                BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: false);
+                movie.movieAccountDetails!.watchlist=false;
 
-          } else {
-            BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: true);
-            movie.movieAccountDetails!.watchlist=true;
-          }
+              } else {
+                BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: true);
+                movie.movieAccountDetails!.watchlist=true;
+              }
+            }
+          else{
+            showDialog(
+                context: context,
+                builder: (BuildContext dialogContext) {
+                  return AlertDialog(
+                    content: const Text('You must login first'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: const Text('ok'),
+                        onPressed: () {
+                          Navigator.of(dialogContext)
+                              .pop(); // Dismiss alert dialog
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
         },
         icon: movie.movieAccountDetails!.watchlist!
             ? const Icon(

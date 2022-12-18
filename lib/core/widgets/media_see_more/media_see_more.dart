@@ -32,38 +32,42 @@ this.topRatedMovies=false,
     return SafeArea(
         child: WillPopScope(
           onWillPop: ()async{
-            BlocProvider.of<MovieCubit>(context).movieListPage=1;
             if(popularMovies)
             {
+              BlocProvider.of<MovieCubit>(context).movieListPage=1;
               BlocProvider.of<MovieCubit>(context).popularMovies.clear();
               BlocProvider.of<MovieCubit>(context).getPopularMoviesData();
             }
             if(topRatedMovies)
             {
+              BlocProvider.of<MovieCubit>(context).movieListPage=1;
               BlocProvider.of<MovieCubit>(context).topRatedMovies.clear();
               BlocProvider.of<MovieCubit>(context).getTopRatedMoviesData();
             }
             if(trendingMovies)
             {
-              BlocProvider.of<TvCubit>(context).trendingTvShows.clear();
-              BlocProvider.of<TvCubit>(context).getTrendingTvShowsData();
+              BlocProvider.of<MovieCubit>(context).movieListPage=1;
+              BlocProvider.of<MovieCubit>(context).trendingMovies.clear();
+              BlocProvider.of<MovieCubit>(context).getTrendingMoviesData();
             }
             if(popularTvShows)
             {
+              BlocProvider.of<TvCubit>(context).tvShowListPage=1;
                 BlocProvider.of<TvCubit>(context).popularTvShows.clear();
                 BlocProvider.of<TvCubit>(context).getPopularTvShowsData();
               }
             if(topRatedTvShows)
             {
+              BlocProvider.of<TvCubit>(context).tvShowListPage=1;
               BlocProvider.of<TvCubit>(context).topRatedTvShows.clear();
               BlocProvider.of<TvCubit>(context).getTopRatedTvShowsData();
             }
             if(trendingTvShows)
             {
+              BlocProvider.of<TvCubit>(context).tvShowListPage=1;
               BlocProvider.of<TvCubit>(context).trendingTvShows.clear();
               BlocProvider.of<TvCubit>(context).getTrendingTvShowsData();
             }
-
             Navigator.pop(context);
             return true;
           },
@@ -78,31 +82,37 @@ this.topRatedMovies=false,
                           BlocProvider.of<MovieCubit>(context).movieListPage=1;
                           if(popularMovies)
                             {
+                              BlocProvider.of<MovieCubit>(context).movieListPage=1;
                               BlocProvider.of<MovieCubit>(context).popularMovies.clear();
                               BlocProvider.of<MovieCubit>(context).getPopularMoviesData();
                             }
                           if(topRatedMovies)
                             {
+                              BlocProvider.of<MovieCubit>(context).movieListPage=1;
                               BlocProvider.of<MovieCubit>(context).topRatedMovies.clear();
                               BlocProvider.of<MovieCubit>(context).getTopRatedMoviesData();
                             }
                           if(trendingMovies)
                           {
-                            BlocProvider.of<TvCubit>(context).trendingTvShows.clear();
-                            BlocProvider.of<TvCubit>(context).getTrendingTvShowsData();
+                            BlocProvider.of<MovieCubit>(context).movieListPage=1;
+                            BlocProvider.of<MovieCubit>(context).trendingMovies.clear();
+                            BlocProvider.of<MovieCubit>(context).getTrendingMoviesData();
                           }
                           if(popularTvShows)
                           {
+                            BlocProvider.of<TvCubit>(context).tvShowListPage=1;
                             BlocProvider.of<TvCubit>(context).popularTvShows.clear();
                             BlocProvider.of<TvCubit>(context).getPopularTvShowsData();
                           }
                           if(topRatedTvShows)
                           {
+                            BlocProvider.of<TvCubit>(context).tvShowListPage=1;
                             BlocProvider.of<TvCubit>(context).topRatedTvShows.clear();
                             BlocProvider.of<TvCubit>(context).getTopRatedTvShowsData();
                           }
                           if(trendingTvShows)
                           {
+                            BlocProvider.of<TvCubit>(context).tvShowListPage=1;
                             BlocProvider.of<TvCubit>(context).trendingTvShows.clear();
                             BlocProvider.of<TvCubit>(context).getTrendingTvShowsData();
                           }
