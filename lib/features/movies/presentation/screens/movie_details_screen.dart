@@ -34,7 +34,7 @@ class MovieDetailsScreen extends StatelessWidget {
               },
               child: SafeArea(
                   child: Scaffold(
-                    // backgroundColor: Theme.of(context).backgroundColor,
+                    backgroundColor: Theme.of(context).backgroundColor,
                     body:NestedScrollView(
                       physics: const ClampingScrollPhysics(),
                       controller:cubit.controller ,

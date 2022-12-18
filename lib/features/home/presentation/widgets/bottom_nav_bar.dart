@@ -20,6 +20,7 @@ class BottomNavBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const Spacer(),
               GestureDetector(
                 onTap: () {
                   cubit.changeIndex(0, context);
@@ -50,7 +51,7 @@ class BottomNavBar extends StatelessWidget {
                   child: const Icon(Icons.movie_creation_outlined),
                 ),
               ),
-              const SizedBox(width: 80,),
+              const Spacer(),
               GestureDetector(
                 onTap: () {
                   cubit.changeIndex(1, context);
@@ -81,10 +82,41 @@ class BottomNavBar extends StatelessWidget {
                   child: const Icon(Icons.tv),
                 ),
               ),
-              const SizedBox(width: 80,),
+              const Spacer(),
               GestureDetector(
                 onTap: () {
                   cubit.changeIndex(2, context);
+                },
+                child: Container(
+                  width: 45,
+                  height: 40,
+                  decoration: BoxDecoration(
+                      color: cubit.search ? Colors.black54 : Colors.black12,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        if(!cubit.search)
+                          const BoxShadow(
+                            blurRadius: 5,
+                            spreadRadius: 1,
+                            blurStyle: BlurStyle.outer,
+                            color: Colors.white30,
+                          ),
+                        if(cubit.search)
+                          const BoxShadow(
+                              blurRadius: 10,
+                              spreadRadius: 1.1,
+                              blurStyle: BlurStyle.inner,
+                              color: Colors.white10
+                          )
+                      ]
+                  ),
+                  child: const Icon(Icons.search),
+                ),
+              ),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  cubit.changeIndex(3, context);
                 },
                 child: Container(
                   width: 45,
@@ -111,7 +143,8 @@ class BottomNavBar extends StatelessWidget {
                   ),
                   child: const Icon(Icons.account_circle_outlined),
                 ),
-              )
+              ),
+              const Spacer(),
             ],
           ),
         );

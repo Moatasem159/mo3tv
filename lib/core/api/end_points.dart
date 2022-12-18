@@ -38,6 +38,7 @@ class EndPoints{
 
 
 
+  static String searchUrl({required String query,required int page})=>"${baseUrl}search/multi?api_key=$apiKey&page=$page&query=$query";
 
   static  String backDropsUrl(String path) => "$baseBackDropsUrl$path";
   static  String posterUrl(String path) => "$basePosterUrl$path";

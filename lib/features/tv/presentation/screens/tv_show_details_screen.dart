@@ -33,8 +33,8 @@ class TvShowDetailsScreen extends StatelessWidget {
         },
         child: SafeArea(
             child: Scaffold(
+                backgroundColor: Theme.of(context).backgroundColor,
               body: NestedScrollView(
-                physics: const ClampingScrollPhysics(),
                 controller:cubit.controller ,
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
@@ -75,6 +75,7 @@ class TvShowDetailsScreen extends StatelessWidget {
                 },
                 body: Builder(builder: (context) {
                   return CustomScrollView(
+                    physics: const ClampingScrollPhysics(),
                     slivers: [
                       SliverOverlapInjector(handle: appBar),
                       if(cubit.isGallery)

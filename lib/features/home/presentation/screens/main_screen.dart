@@ -11,11 +11,11 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BottomNavCubit(),
-      child: const SafeArea(
+      child:  SafeArea(
         child: Scaffold(
-          // backgroundColor: Theme.of(context).backgroundColor,
-          body: ActiveScreen(),
-          bottomNavigationBar: BottomNavBar(),
+          backgroundColor: Theme.of(context).backgroundColor,
+          body: const ActiveScreen(),
+          bottomNavigationBar: const BottomNavBar(),
         ),
       ),
     );

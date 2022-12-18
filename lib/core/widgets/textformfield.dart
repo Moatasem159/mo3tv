@@ -1,50 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/utils/app_colors.dart';
 
 class MainTextFormField extends StatelessWidget {
 
-  final BuildContext context;
   final String hintText;
   final IconData ?prefixIcon;
   final TextEditingController ?controller;
   final String? Function(String ?value)? validator;
-  final bool obscure;
   final Widget? suffixIcon;
   final Color focusedErrorBorderColor = Colors.red;
-  final Color focusedBorderColor = AppColors.primaryColor;
-  final bool readOnly;
+  final Color focusedBorderColor;
   final TextInputType? inputType;
+  final ValueChanged<String>? onChange;
 
-  MainTextFormField({
+  const MainTextFormField({
     Key? key,
-    required this.readOnly,
-    required this.context,
     required this.hintText,
     this.prefixIcon,
     this.controller,
     this.validator,
-    required this.obscure,
     this.suffixIcon,
-    this.inputType}) : super(key: key);
+    required this.focusedBorderColor,
+    this.inputType, this.onChange}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
-    double radius = 10;
+    double radius = 7;
     return Padding(
       padding: const EdgeInsets.only(top: 5, right: 15, left: 15),
       child: TextFormField(
         keyboardType: inputType,
-        obscureText: obscure,
         validator: validator,
         controller: controller,
-        readOnly: readOnly,
+        onChanged: onChange,
         cursorColor: Theme.of(context).primaryColorLight,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(
-              horizontal: 15, vertical: 20),
+              horizontal: 10, vertical: 7),
           suffixIcon: suffixIcon,
-          suffixIconColor: Colors.grey.withOpacity(.5),
           focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   width: 1,
@@ -57,8 +50,11 @@ class MainTextFormField extends StatelessWidget {
                   style: BorderStyle.solid,
                   color: focusedErrorBorderColor),
               borderRadius: BorderRadius.circular(radius)),
-          labelText: hintText,
-          labelStyle: Theme.of(context).textTheme.subtitle1,
+          hintText: hintText,
+
+          hintStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+            fontSize: 11
+          ),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   width: 1,

@@ -8,7 +8,7 @@ class AppColors{
   static Color primaryColor = HexColor('#FE724C');
   static Color primaryTextLight=Colors.white;
   static Color primaryTextDark=Colors.black;
-  static Color darkBackgroundColor =  HexColor('#2D2D3A');
+  static Color darkBackgroundColor =  HexColor('#131314');
   static Color whiteBackgroundColor =  HexColor('#FFFFFF');
   static Color hint =Colors.grey;
   static Color mainAppColor = HexColor('7467FF');

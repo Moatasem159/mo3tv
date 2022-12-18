@@ -37,6 +37,11 @@ import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecas
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/search/data/datasources/search_datasource.dart';
+import 'package:mo3tv/features/search/data/repositories/search_repository_impl.dart';
+import 'package:mo3tv/features/search/domain/repositories/search_repository.dart';
+import 'package:mo3tv/features/search/domain/usecases/search_usecase.dart';
+import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
@@ -67,6 +72,7 @@ Future<void> init() async {
       getFavMoviesListUsecase: sl(),
       getMoviesWatchlistUsecase: sl(),
       getRatedMoviesListUsecase: sl()));
+  sl.registerFactory(() =>SearchCubit(searchUsecase:sl()));
 
   sl.registerFactory<MovieCubit>(() => MovieCubit(
       getNowPlayingMoviesUsecase: sl(),
@@ -164,6 +170,11 @@ Future<void> init() async {
           () => RateTvShowUseCase(sl()));
   sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(
           () => GetTvShowSeasonDetailsUsecase(sl(),));
+
+  ///search
+
+  sl.registerLazySingleton<SearchUsecase>(
+          () => SearchUsecase(sl(),));
   // Repository
 
   sl.registerLazySingleton<MovieRepository>(
@@ -172,6 +183,8 @@ Future<void> init() async {
           () => AccountRepositoryImpl(accountDataSource:sl(),networkInfo: sl()));
   sl.registerLazySingleton<TvRepository>(
           () => TvShowRepositoryImpl(tvShowRemoteDataSource:sl(),networkInfo: sl()));
+  sl.registerLazySingleton<SearchRepository>(
+          () => SearchRepositoryImpl(networkInfo: sl(), searchDataSource: sl()));
 
   //dataSource
 
@@ -181,6 +194,8 @@ Future<void> init() async {
           () => AccountDataSourceImpl(sl()));
   sl.registerLazySingleton<TvShowRemoteDataSource>(
           () => TvShowRemoteDataSourceImpl( apiConsumer: sl(),));
+  sl.registerLazySingleton<SearchDataSource>(
+          () => SearchDataSourceImpl( apiConsumer: sl(),));
 
 
   ///core
