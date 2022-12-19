@@ -48,16 +48,6 @@ class TvShowButtons extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButton(
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.zero),
-                    minimumSize: MaterialStateProperty.all(const Size(45, 45)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100))),
-                    backgroundColor:
-                    MaterialStateProperty.all(Colors.blueGrey)),
-                onPressed: () {},
-                child: const Icon(Icons.list)),
             TvShowFavButton(tvShow: tvShow),
             TvShowRatingButton(tvShow: tvShow,),
             AddTvShowToWatchlistButton(tvShow: tvShow),
