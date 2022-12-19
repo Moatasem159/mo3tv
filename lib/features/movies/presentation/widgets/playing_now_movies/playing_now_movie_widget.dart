@@ -26,74 +26,77 @@ class PlayingNowMovieWidget extends StatelessWidget {
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie: movie),));
       },
-      child: Stack(
-        children: [
-          ShaderMask(
-            shaderCallback: (rect) {
-              return const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.black,
-                  Colors.black,
-                  Colors.transparent,
-                ],
-                stops: [0, 0.3, 0.5, 1],
-              ).createShader(
-                Rect.fromLTRB(0, 0, rect.width, rect.height),
-              );
-            },
-            blendMode: BlendMode.dstIn,
-            child: Center(
-              child: CachedNetworkImage(
-                height: imageHeight,
-                width: imageWidth,
-                imageUrl: EndPoints.backDropsUrl(movie.backdropPath!),
-                fit: BoxFit.cover,
+      child: Container(
+        color: Colors.black,
+        child: Stack(
+          children: [
+            ShaderMask(
+              shaderCallback: (rect) {
+                return const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black,
+                    Colors.black,
+                    Colors.transparent,
+                  ],
+                  stops: [0, 0.3, 0.5, 1],
+                ).createShader(
+                  Rect.fromLTRB(0, 0, rect.width, rect.height),
+                );
+              },
+              blendMode: BlendMode.dstIn,
+              child: Center(
+                child: CachedNetworkImage(
+                  height: imageHeight,
+                  width: imageWidth,
+                  imageUrl: EndPoints.backDropsUrl(movie.backdropPath!),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.circle,
-                        color: Colors.redAccent,
-                        size: iconSize,
-                      ),
-                      const SizedBox(width: 4.0),
-                      Text(
-                        'Now Playing'.toUpperCase(),
-                        style: TextStyle(
-                          fontSize: playingSize,
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.circle,
+                          color: Colors.redAccent,
+                          size: iconSize,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10,right: 10,left: 10),
-                  child: Text(
-                    movie.title!,
-                    textAlign: TextAlign.center,
-                    style:  TextStyle(
-                      fontSize: titleSize,
+                        const SizedBox(width: 4.0),
+                        Text(
+                          'Now Playing'.toUpperCase(),
+                          style: TextStyle(
+                            fontSize: playingSize,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10,right: 10,left: 10),
+                    child: Text(
+                      movie.title!,
+                      textAlign: TextAlign.center,
+                      style:  TextStyle(
+                        fontSize: titleSize,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

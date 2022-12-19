@@ -25,7 +25,7 @@ class TvScreen extends StatelessWidget {
                     handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                         context),
                   ),
-                  const LoginButton(),
+                  const SliverToBoxAdapter(child: LoginButton()),
                   const TrendingTvShows(),
                   const PopularTvShows(),
                   const TopRatedTvShows(),
