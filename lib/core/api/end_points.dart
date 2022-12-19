@@ -6,7 +6,7 @@ class EndPoints{
   static const String baseBackDropsUrl = "https://image.tmdb.org/t/p/w780";
   static const String baseLogoUrl = "https://image.tmdb.org/t/p/w185";
   static const String baseHdUrl = "https://image.tmdb.org/t/p/w1280";
-
+  static String requestTokenPath="$baseUrl/authentication/token/new?api_key=$apiKey";
 
 
   static String mediaDetailsPath(int mediaId,String sessionId,String mediaType) =>
@@ -35,24 +35,36 @@ class EndPoints{
       "$baseUrl/$mediaType/$mediaId/rating?api_key=$apiKey&session_id=$sessionid";
   static String tvShowSeasonDetailsPath(int tvId,int seasonNumber) =>
       "$baseUrl/tv/$tvId/season/$seasonNumber?api_key=$apiKey";
+  static String accountPath(String sessionId) =>
+      "$baseUrl/account?api_key=$apiKey&session_id=$sessionId";
 
 
 
-  static String searchUrl({required String query,required int page})=>"${baseUrl}search/multi?api_key=$apiKey&page=$page&query=$query";
+  static String searchUrl({required String query,required int page})=>
+      "${baseUrl}search/multi?api_key=$apiKey&page=$page&query=$query";
 
-  static  String backDropsUrl(String path) => "$baseBackDropsUrl$path";
-  static  String posterUrl(String path) => "$basePosterUrl$path";
-  static  String logoUrl(String path) => "$baseLogoUrl$path";
-  static  String hdUrl(String path) => "$baseHdUrl$path";
+  static  String backDropsUrl(String path) =>
+      "$baseBackDropsUrl$path";
+  static  String posterUrl(String path) =>
+      "$basePosterUrl$path";
+  static  String logoUrl(String path) =>
+      "$baseLogoUrl$path";
+  static  String hdUrl(String path) =>
+      "$baseHdUrl$path";
 
 
- static String requestTokenPath="$baseUrl/authentication/token/new?api_key=$apiKey";
- static String approveToken(String token)=>"https://www.themoviedb.org/authenticate/$token";
- static String sessionIdPath(String token)=>"$baseUrl/authentication/session/new?api_key=$apiKey&request_token=$token";
 
- static String ratedMoviesListPath(String sessionid)=>"${baseUrl}account/{account_id}/rated/movies?api_key=$apiKey&session_id=$sessionid";
- static String favMoviesListPath(String sessionid)=>"${baseUrl}account/{account_id}/favorite/movies?api_key=$apiKey&session_id=$sessionid";
- static String moviesWatchListPath(String sessionid)=>"${baseUrl}account/{account_id}/watchlist/movies?api_key=$apiKey&session_id=$sessionid";
+ static String approveToken(String token)=>
+     "https://www.themoviedb.org/authenticate/$token";
+ static String sessionIdPath(String token)=>
+     "$baseUrl/authentication/session/new?api_key=$apiKey&request_token=$token";
+
+ static String ratedMediaListPath(String sessionid,String mediaType)=>
+     "${baseUrl}account/{account_id}/rated/$mediaType?api_key=$apiKey&session_id=$sessionid";
+ static String favMediaListPath(String sessionid,String mediaType)=>
+     "${baseUrl}account/{account_id}/favorite/$mediaType?api_key=$apiKey&session_id=$sessionid";
+ static String mediaWatchListPath(String sessionid,String mediaType)=>
+     "${baseUrl}account/{account_id}/watchlist/$mediaType?api_key=$apiKey&session_id=$sessionid";
 
 
 }

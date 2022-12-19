@@ -25,7 +25,7 @@ class MoviesScreen extends StatelessWidget {
                     handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                         context),
                   ),
-                   const LoginButton(),
+                   const SliverToBoxAdapter(child: LoginButton()),
                   const TrendingMovies(),
                   const PopularMovies(),
                   const TopRatedMovies(),

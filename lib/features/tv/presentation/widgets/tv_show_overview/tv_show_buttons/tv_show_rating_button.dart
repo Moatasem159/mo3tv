@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -75,6 +76,9 @@ class TvShowRatingButton extends StatelessWidget {
                                  .removeTvShowRate(tvId: tvShow.id!);
                              tvShow.tvShowAccountDetails!.ratedValue=0.0;
                              tvShow.tvShowAccountDetails!.watchlist = false;
+                             BlocProvider.of<AccountCubit>(context).ratedTvShows!.removeWhere((element) =>element.id==tvShow.id);
+                             BlocProvider.of<AccountCubit>(context).tvShowsWatchlist!.removeWhere((element) => element.id==tvShow.id,);
+                             BlocProvider.of<AccountCubit>(context).update();
                              Navigator.of(context).pop();
                            }),
                        TextButton(
@@ -84,6 +88,25 @@ class TvShowRatingButton extends StatelessWidget {
                              BlocProvider.of<TvCubit>(context)
                                  .rateTvShow(rate: tvShow.tvShowAccountDetails!.ratedValue, tvId: tvShow.id!);
                              tvShow.tvShowAccountDetails!.watchlist = false;
+                             if(BlocProvider.of<AccountCubit>(context)
+                                 .ratedTvShows!
+                                 .any(
+                                     (element) => element.id == tvShow.id)){
+                               BlocProvider.of<AccountCubit>(context)
+                                   .ratedTvShows!
+                                   .firstWhere(
+                                       (element) => element.id == tvShow.id)
+                                   .tvShowAccountDetails!
+                                   .ratedValue =
+                                   tvShow.tvShowAccountDetails!.ratedValue;
+                               BlocProvider.of<AccountCubit>(context).update();
+                             }
+                             else {
+                               BlocProvider.of<AccountCubit>(context)
+                                   .ratedTvShows!.add(tvShow);
+                             }
+
+
                            }
                            Navigator.of(context).pop();
                          },

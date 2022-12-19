@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -38,11 +39,15 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
               if (tvShow.tvShowAccountDetails!.watchlist!) {
                 BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: false);
                 tvShow.tvShowAccountDetails!.watchlist=false;
+                BlocProvider.of<AccountCubit>(context).tvShowsWatchlist!.removeWhere((element) => element.id==tvShow.id,);
+                BlocProvider.of<AccountCubit>(context).update();
 
               }
               else {
                 BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: true);
                 tvShow.tvShowAccountDetails!.watchlist=true;
+                BlocProvider.of<AccountCubit>(context).tvShowsWatchlist!.add(tvShow);
+                BlocProvider.of<AccountCubit>(context).update();
               }
             }
           else{

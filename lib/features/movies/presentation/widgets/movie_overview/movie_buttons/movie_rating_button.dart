@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
@@ -75,6 +76,9 @@ class MovieRatingButton extends StatelessWidget {
                                  .removeRateMovie(movieId: movie.id!);
                              movie.movieAccountDetails!.ratedValue=0.0;
                              movie.movieAccountDetails!.watchlist = false;
+                             BlocProvider.of<AccountCubit>(context).ratedMovies!.removeWhere((element) =>element.id==movie.id);
+                             BlocProvider.of<AccountCubit>(context).moviesWatchlist!.removeWhere((element) => element.id==movie.id,);
+                             BlocProvider.of<AccountCubit>(context).update();
                              Navigator.of(context).pop();
                            }),
                        TextButton(
@@ -84,7 +88,26 @@ class MovieRatingButton extends StatelessWidget {
                              BlocProvider.of<MovieCubit>(context)
                                  .rateMovie(rate: movie.movieAccountDetails!.ratedValue, movieId: movie.id!);
                              movie.movieAccountDetails!.watchlist = false;
-                           }
+                             if(  BlocProvider.of<AccountCubit>(context)
+                                 .ratedMovies!
+                                 .any(
+                                     (element) => element.id == movie.id))
+                               {
+                                 BlocProvider.of<AccountCubit>(context)
+                                     .ratedMovies!
+                                     .firstWhere(
+                                         (element) => element.id == movie.id)
+                                     .movieAccountDetails!
+                                     .ratedValue =
+                                     movie.movieAccountDetails!.ratedValue;
+                               }
+                             else{
+                               BlocProvider.of<AccountCubit>(context)
+                                   .ratedMovies!.add(movie);
+                             }
+                             BlocProvider.of<AccountCubit>(context).moviesWatchlist!.removeWhere((element) => element.id==movie.id,);
+                             BlocProvider.of<AccountCubit>(context).update();
+                            }
                            Navigator.of(context).pop();
                          },
                        ),

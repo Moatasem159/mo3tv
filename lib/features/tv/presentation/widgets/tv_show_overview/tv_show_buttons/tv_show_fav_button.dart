@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -38,10 +39,14 @@ class TvShowFavButton extends StatelessWidget {
                   if(tvShow.tvShowAccountDetails!.favorite!){
                     BlocProvider.of<TvCubit>(context).favTvShow(tvId: tvShow.id!, fav: false);
                     tvShow.tvShowAccountDetails!.favorite =false;
+                    BlocProvider.of<AccountCubit>(context).favTvShows!.removeWhere((element) => element.id==tvShow.id,);
+                    BlocProvider.of<AccountCubit>(context).update();
                   }
                   else{
                     BlocProvider.of<TvCubit>(context).favTvShow(tvId: tvShow.id!, fav: true);
                     tvShow.tvShowAccountDetails!.favorite =true;
+                    BlocProvider.of<AccountCubit>(context).favTvShows!.add(tvShow);
+                    BlocProvider.of<AccountCubit>(context).update();
                   }
                 }
               else{

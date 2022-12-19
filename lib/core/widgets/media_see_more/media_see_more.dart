@@ -28,7 +28,6 @@ this.topRatedMovies=false,
 
   @override
   Widget build(BuildContext context) {
-    ScrollController controller=ScrollController();
     return SafeArea(
         child: WillPopScope(
           onWillPop: ()async{
@@ -73,7 +72,6 @@ this.topRatedMovies=false,
           },
           child: Scaffold(
               body: CustomScrollView(
-                controller: controller,
                 slivers: [
                   SliverAppBar(
                     automaticallyImplyLeading: false,

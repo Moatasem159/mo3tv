@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
@@ -38,10 +39,14 @@ class AddMovieToWatchlistButton extends StatelessWidget {
               if (movie.movieAccountDetails!.watchlist!) {
                 BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: false);
                 movie.movieAccountDetails!.watchlist=false;
+                BlocProvider.of<AccountCubit>(context).moviesWatchlist!.removeWhere((element) => element.id==movie.id,);
+                BlocProvider.of<AccountCubit>(context).update();
 
               } else {
                 BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: true);
                 movie.movieAccountDetails!.watchlist=true;
+                BlocProvider.of<AccountCubit>(context).moviesWatchlist!.add(movie);
+                BlocProvider.of<AccountCubit>(context).update();
               }
             }
           else{
