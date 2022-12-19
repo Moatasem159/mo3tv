@@ -33,8 +33,15 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.11.0
 
-
+flutter_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: assets/images/mo3tv.png
+  adaptive_icon_background: "#000000"
+  adaptive_icon_forground: assets/images/mo3tv.png
   flutter_lints: ^2.0.1
 
 flutter:

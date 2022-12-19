@@ -18,7 +18,7 @@
         </intent>
     </queries>
     <application
-        android:label="mo3 Tv"
+        android:label="Mo3 Tv"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
