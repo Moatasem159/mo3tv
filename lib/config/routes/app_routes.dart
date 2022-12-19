@@ -3,10 +3,7 @@ import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
 import 'package:mo3tv/app/injection_container.dart';
 
 class Routes {
-
   static const String initialRoute= "/";
-  // static const String welcomeScreenRoute= "/welcomeScreen";
-  static const String mainScreenRoute= "/mainScreen";
 }
 
 
@@ -22,13 +19,6 @@ class AppRoute{
         return MaterialPageRoute(
           builder: (context) => const MainScreen(),
         );
-      // case Routes.mainScreenRoute:
-      //   return MaterialPageRoute(
-      //     builder: (context) => const MainScreen(),
-      //   );
-
-
-
       default: undefinedRoute();
     }
     return null;

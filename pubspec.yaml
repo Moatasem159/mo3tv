@@ -30,10 +30,13 @@ dependencies:
   youtube_player_iframe: ^3.1.0
   webview_flutter: any
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.11.0
+  flutter_native_splash: ^2.2.16
+  flutter_lints: ^2.0.1
 
 flutter_icons:
   android: true
@@ -42,7 +45,10 @@ flutter_icons:
   image_path: assets/images/mo3tv.png
   adaptive_icon_background: "#000000"
   adaptive_icon_forground: assets/images/mo3tv.png
-  flutter_lints: ^2.0.1
+
+flutter_native_splash:
+  image: assets/images/splash_logo.png
+  color: "#000000"
 
 flutter:
 
