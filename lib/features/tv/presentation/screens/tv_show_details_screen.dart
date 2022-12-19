@@ -74,23 +74,30 @@ class TvShowDetailsScreen extends StatelessWidget {
                   ];
                 },
                 body: Builder(builder: (context) {
-                  return CustomScrollView(
-                    physics: const ClampingScrollPhysics(),
-                    slivers: [
-                      SliverOverlapInjector(handle: appBar),
-                      if(cubit.isGallery)
-                        SliverOverlapInjector(handle: disconnectBar),
-                      const SliverToBoxAdapter(
-                        child: SizedBox(height: 15),
-                      ),
-                      BlocBuilder<TvShowBottomNavCubit,TvShowBottomNavStates>(
-                        builder: (context, state) {
-                      return BlocProvider.of<TvShowBottomNavCubit>(context)
-                              .screens[
-                          BlocProvider.of<TvShowBottomNavCubit>(context).index];
+                  return RefreshIndicator(
+                    onRefresh: () async{
+                      if(BlocProvider.of<TvCubit>(context).tvShow==TvShow()) {
+                        BlocProvider.of<TvCubit>(context).getTvShowDetailsData(tvShowId: tvShow.id!);
+                      }
                     },
-                      ),
-                    ],
+                    child: CustomScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      slivers: [
+                        SliverOverlapInjector(handle: appBar),
+                        if(cubit.isGallery)
+                          SliverOverlapInjector(handle: disconnectBar),
+                        const SliverToBoxAdapter(
+                          child: SizedBox(height: 15),
+                        ),
+                        BlocBuilder<TvShowBottomNavCubit,TvShowBottomNavStates>(
+                          builder: (context, state) {
+                        return BlocProvider.of<TvShowBottomNavCubit>(context)
+                                .screens[
+                            BlocProvider.of<TvShowBottomNavCubit>(context).index];
+                      },
+                        ),
+                      ],
+                    ),
                   );
                 }),
               ),

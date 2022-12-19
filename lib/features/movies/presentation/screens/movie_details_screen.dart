@@ -57,20 +57,27 @@ class MovieDetailsScreen extends StatelessWidget {
                       },
                       body:Builder(
                           builder: (context) {
-                            return CustomScrollView(
-                              slivers: [
-                                SliverOverlapInjector(handle: appBar),
-                                if(cubit.isGallery)
-                                  SliverOverlapInjector(handle: disconnectBar),
-                                const SliverToBoxAdapter(
-                                  child: SizedBox(height: 15),
-                                ),
-                                BlocBuilder<MovieBottomNavCubit,MovieBottomNavStates>(
-                                  builder: (context, state) {
-                                    return cubit.screens[cubit.index];
-                                  },
-                                ),
-                              ],
+                            return RefreshIndicator(
+                              onRefresh: () async{
+                                if(BlocProvider.of<MovieCubit>(context).movie==Movie()) {
+                                  BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
+                                }
+                              },
+                              child: CustomScrollView(
+                                slivers: [
+                                  SliverOverlapInjector(handle: appBar),
+                                  if(cubit.isGallery)
+                                    SliverOverlapInjector(handle: disconnectBar),
+                                  const SliverToBoxAdapter(
+                                    child: SizedBox(height: 15),
+                                  ),
+                                  BlocBuilder<MovieBottomNavCubit,MovieBottomNavStates>(
+                                    builder: (context, state) {
+                                      return cubit.screens[cubit.index];
+                                    },
+                                  ),
+                                ],
+                              ),
                             );
                           }
                       ),
