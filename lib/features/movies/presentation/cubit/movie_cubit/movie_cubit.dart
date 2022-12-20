@@ -296,7 +296,6 @@ class MovieCubit extends Cubit<MovieStates> {
     if(movieReviews!=null&&movieReviews!.isNotEmpty){
       movieReviews=null;
     }
-
     emit(ClearObjectsState());
   }
 

@@ -4,7 +4,6 @@ import 'package:mo3tv/core/widgets/textformfield.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_state.dart';
 import 'package:mo3tv/features/search/presentation/widgets/movie_search_widget.dart';
-import 'package:mo3tv/features/search/presentation/widgets/person_search_widget.dart';
 import 'package:mo3tv/features/search/presentation/widgets/tv_show_search_widget.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -78,12 +77,6 @@ class SearchScreen extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: cubit.items.length,
                         itemBuilder: (context, index){
-                        if(cubit.items[index].mediaType=="person")
-                          {
-                            return PersonSearchWidget(
-                              name: cubit.items[index].name!,
-                            );
-                          }
                         if(cubit.items[index].mediaType=="movie")
                         {
                           return MovieSearchWidget(movie: cubit.items[index]);

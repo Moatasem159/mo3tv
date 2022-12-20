@@ -19,7 +19,7 @@ class MoviePoster extends StatelessWidget {
         BlocProvider.of<MovieCubit>(context).clearObjects();
         BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie: movie),));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie: movie),));
       },
       child: ClipRRect(
         borderRadius:

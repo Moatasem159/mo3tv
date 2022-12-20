@@ -50,6 +50,8 @@ flutter_icons:
 flutter_native_splash:
   image: assets/images/splash_logo.png
   color: "#000000"
+  branding: assets/images/poweredby.png
+  branding_mode: bottom
 
 flutter:
 

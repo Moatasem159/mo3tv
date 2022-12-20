@@ -9,8 +9,9 @@ import 'package:mo3tv/app/injection_container.dart'as di;
 
 void main() async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await di.init();
+  await Future.delayed(const Duration(seconds: 2));
   Bloc.observer=AppBlocObserver();
   SharedPrefrencesConsumer sharedPrefrencesConsumer=di.sl<SharedPrefrencesConsumer>();
   if(sharedPrefrencesConsumer.getData(key: AppStrings.id)!=null) {

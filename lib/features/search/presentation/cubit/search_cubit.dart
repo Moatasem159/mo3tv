@@ -26,24 +26,10 @@ class SearchCubit extends Cubit<SearchStates> {
       }, (searchItems){
       items=[];
       for (var element in searchItems) {
-        if(element.mediaType=="movie")
-        {
-          if(element.backdropPath != "" && element.posterPath != "")
-           {
-            items.add(element);
-          }
-        }
-        if(element.mediaType=="tv")
-        {
           if(element.backdropPath != "" && element.posterPath != "")
           {
             items.add(element);
           }
-        }
-        if(element.mediaType=="person")
-        {
-            items.add(element);
-        }
       }
       return SearchSuccessState();
     }));

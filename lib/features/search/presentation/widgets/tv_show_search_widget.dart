@@ -15,6 +15,8 @@ class TvShowSearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        BlocProvider.of<TvCubit>(context).clearObjects();
+        BlocProvider.of<TvCubit>(context).tvIds.add(tvShow.id!);
         BlocProvider.of<TvCubit>(context).getTvShowDetailsData(tvShowId: tvShow.id!);
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => TvShowDetailsScreen(tvShow: TvShow(

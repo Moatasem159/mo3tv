@@ -15,7 +15,9 @@ class MovieSearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        BlocProvider.of<MovieCubit>(context).clearObjects();
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
+        BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => MovieDetailsScreen(movie:Movie(
             title: movie.originalTitle,
