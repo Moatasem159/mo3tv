@@ -39,13 +39,13 @@ class TvShowFavButton extends StatelessWidget {
                   if(tvShow.tvShowAccountDetails!.favorite!){
                     BlocProvider.of<TvCubit>(context).favTvShow(tvId: tvShow.id!, fav: false);
                     tvShow.tvShowAccountDetails!.favorite =false;
-                    BlocProvider.of<AccountCubit>(context).favTvShows!.removeWhere((element) => element.id==tvShow.id,);
+                    BlocProvider.of<AccountCubit>(context).favTvShows.removeWhere((element) => element.id==tvShow.id,);
                     BlocProvider.of<AccountCubit>(context).update();
                   }
                   else{
                     BlocProvider.of<TvCubit>(context).favTvShow(tvId: tvShow.id!, fav: true);
                     tvShow.tvShowAccountDetails!.favorite =true;
-                    BlocProvider.of<AccountCubit>(context).favTvShows!.add(tvShow);
+                    BlocProvider.of<AccountCubit>(context).favTvShows.add(tvShow);
                     BlocProvider.of<AccountCubit>(context).update();
                   }
                 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_widget.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
@@ -39,7 +40,30 @@ class PlayingNowMovies extends SliverPersistentHeaderDelegate {
       listener: (context, state) {},
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
+        if(state is GetNowPlayingMoviesLoadingState ||cubit.nowPlayingMovies == null) {
+          return PlayingNowMediaLoadingWidget(height: c, width: size.width);
+        }
+        if(cubit.nowPlayingError!){
+          return Container(
+            color: Theme.of(context).backgroundColor,
+            alignment: Alignment.center,
+            height: c,
+            width: size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Something went wrong"),
+                const SizedBox(
+                  height: 7,
+                ),
+                MainButton(onPressed: (){
+                  cubit.getNowPlayingMoviesData();
+                }, label: "try again")
+              ],
+            ),
 
+          );
+        }
         if (cubit.nowPlayingMovies != null){
           return PlayingNowMoviesList(movies: cubit.nowPlayingMovies!,
               height: c,
@@ -48,9 +72,6 @@ class PlayingNowMovies extends SliverPersistentHeaderDelegate {
               playingSize: playingSize,
               titleSize: titleSize);
         }
-        if(cubit.nowPlayingMovies == null) {
-            return PlayingNowMediaLoadingWidget(height: c, width: size.width);
-          }
         return Container();
       },
     );

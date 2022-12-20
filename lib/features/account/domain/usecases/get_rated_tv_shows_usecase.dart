@@ -6,9 +6,7 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 
 class GetRatedTvShowListUsecase extends BaseUsecase{
   final AccountRepository accountRepository;
-
   GetRatedTvShowListUsecase({required this.accountRepository});
-
   @override
   Future<Either<Failure,List<TvShow>>> call(parameters) async{
     return await accountRepository.getRatedTvShows();

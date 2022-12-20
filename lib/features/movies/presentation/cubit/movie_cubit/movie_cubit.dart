@@ -56,88 +56,152 @@ class MovieCubit extends Cubit<MovieStates> {
 
 
   List<Movie>? nowPlayingMovies;
+  bool ?nowPlayingError;
   Future<void> getNowPlayingMoviesData({int page=1}) async {
     emit(GetNowPlayingMoviesLoadingState());
     Either<Failure, List<Movie>> response =
         await getNowPlayingMoviesUsecase.call(page);
     nowPlayingMovies = [];
     emit(response.fold(
-        (failure) =>
-            GetNowPlayingMoviesErrorState(msg: _mapFailureToMsg(failure)),
+        (failure) {
+          nowPlayingError=true;
+          return GetNowPlayingMoviesErrorState(msg: _mapFailureToMsg(failure));
+        },
+
         (playingMovies) {
+        nowPlayingError=false;
       nowPlayingMovies = playingMovies;
       return GetNowPlayingMoviesSuccessState();
     }));
   }
 
-  List<Movie> popularMovies=[];
-
+  List<Movie>? popularMovies;
+  List<Movie> seeMoreListMovies=[];
+  bool ?popularMoviesError;
   int movieListPage=1;
-  Future<void> getPopularMoviesData({int page=1}) async {
-    emit(GetNowPlayingMoviesLoadingState());
+  Future<void> getPopularMoviesData({int page=1,bool seeMore=false}) async {
+    emit(GetPopularMoviesLoadingState());
     Either<Failure, List<Movie>> response =
         await popularMoviesUsecase.call(page);
-    emit(response.fold(
-        (failure) =>
-            GetNowPlayingMoviesErrorState(msg: _mapFailureToMsg(failure)),
-        (popularMovies) {
-      for (var element in popularMovies) {
-        if(element.backdropPath != "" && element.posterPath != "")
-          {
-            if(!this.popularMovies.any((e) =>e.id==element.id,))
-            {
-              this.popularMovies.add(element);
+
+    emit(response.fold((failure) {
+      popularMovies = [];
+      popularMoviesError = true;
+      return GetPopularMoviesErrorState(msg: _mapFailureToMsg(failure));
+    }, (popularMovies) {
+      popularMoviesError = false;
+      if (seeMore == false) {
+        this.popularMovies = [];
+        for (var element in popularMovies) {
+          if (element.backdropPath != "" && element.posterPath != "") {
+            if (!this.popularMovies!.any(
+                  (e) => e.id == element.id,
+                )) {
+              this.popularMovies!.add(element);
             }
           }
+        }
       }
-      return GetNowPlayingMoviesSuccessState();
+      else if (seeMore == true) {
+        for (var element in popularMovies) {
+          if (element.backdropPath != "" && element.posterPath != "") {
+            if (!seeMoreListMovies.any(
+              (e) => e.id == element.id,
+            )) {
+              seeMoreListMovies.add(element);
+            }
+          }
+        }
+      }
+      return GetPopularMoviesSuccessState();
     }));
   }
 
-  List<Movie> topRatedMovies=[];
-
-  Future<void> getTopRatedMoviesData({int page=1}) async {
+  List<Movie> ?topRatedMovies;
+  bool ?topRatedMoviesError;
+  Future<void> getTopRatedMoviesData({int page=1,bool seeMore=false}) async {
     emit(GetTopRatedMoviesLoadingState());
     Either<Failure, List<Movie>> response =
         await getTopRatedMoviesUsecase.call(page);
     emit(response.fold(
-        (failure) =>
-            GetTopRatedMoviesErrorState(msg: _mapFailureToMsg(failure)),
+        (failure) {
+          topRatedMovies=[];
+          topRatedMoviesError=true;
+          return GetTopRatedMoviesErrorState(msg: _mapFailureToMsg(failure));
+        },
         (topRatedMovies) {
-          for (var element in topRatedMovies) {
-            if(element.backdropPath != "" && element.posterPath != "")
-            {
-              if(!this.topRatedMovies.any((e) =>e.id==element.id,))
-              {
-                this.topRatedMovies.add(element);
+          topRatedMoviesError=false;
+          if (seeMore == false) {
+            this.topRatedMovies=[];
+        for (var element in topRatedMovies) {
+          if (element.backdropPath != "" && element.posterPath != "") {
+            if (!this.topRatedMovies!.any(
+                  (e) => e.id == element.id,
+                )) {
+              this.topRatedMovies!.add(element);
+            }
+          }
+        }
+      }
+          else if (seeMore == true) {
+            for (var element in topRatedMovies) {
+              if (element.backdropPath != "" && element.posterPath != "") {
+                if (!seeMoreListMovies.any(
+                      (e) => e.id == element.id,
+                )) {
+                  seeMoreListMovies.add(element);
+                }
               }
             }
           }
       return GetTopRatedMoviesSuccessState();
     }));
   }
-  List<Movie> trendingMovies=[];
 
-  Future<void> getTrendingMoviesData({int page=1}) async {
+  List<Movie>? trendingMovies;
+  bool ?trendingMoviesError;
+  Future<void> getTrendingMoviesData({int page=1,bool seeMore=false}) async {
     emit(GetTrendingMoviesLoadingState());
     Either<Failure, List<Movie>> response =
     await getTrendingMoviesUsecase.call(page);
     emit(response.fold(
-            (failure) =>
-                GetTrendingMoviesErrorState(msg: _mapFailureToMsg(failure)),
+            (failure) {
+              trendingMovies=[];
+              trendingMoviesError=true;
+              return GetTrendingMoviesErrorState(msg: _mapFailureToMsg(failure));
+            },
+
             (trendingMovies) {
-          for (var element in trendingMovies) {
+              trendingMoviesError=false;
+              if (seeMore == false) {
+                this.trendingMovies=[];
+                for (var element in trendingMovies) {
             if(element.backdropPath != "" && element.posterPath != "")
             {
-              if(!this.trendingMovies.any((e) =>e.id==element.id,))
+              if(!this.trendingMovies!.any((e) =>e.id==element.id,))
               {
-                this.trendingMovies.add(element);
+                this.trendingMovies!.add(element);
               }
             }
           }
+              }
+              else if (seeMore == true) {
+                for (var element in trendingMovies) {
+                  if (element.backdropPath != "" && element.posterPath != "") {
+                    if (!seeMoreListMovies.any(
+                          (e) => e.id == element.id,
+                    )) {
+                      seeMoreListMovies.add(element);
+                    }
+                  }
+                }
+              }
           return GetTrendingMoviesSuccessState();
         }));
   }
+
+
+
   Movie movie=Movie();
   Future<void> getMovieDetailsData({required int movieId}) async {
     emit(GetMovieDetailsLoadingState());
@@ -272,7 +336,6 @@ class MovieCubit extends Cubit<MovieStates> {
     movie=Movie();
     allRec=false;
     recPage=1;
-    // movieKeywords.clear();
     index=0;
    if(movieGallery!=null){
      if(movieGallery!.backdrops!=null)
@@ -298,29 +361,18 @@ class MovieCubit extends Cubit<MovieStates> {
     }
     emit(ClearObjectsState());
   }
-
   backToBackMovies(){
     if (moviesId.length > 1)
     {
      moviesId.removeAt(moviesId.length-1);
-
      getMovieDetailsData(movieId: moviesId[moviesId.length-1]);
-     // getMovieVideos(movieId: moviesId[moviesId.length-1]);
      getMovieRecommendations(movieId:moviesId[moviesId.length-1]);
     }
     else if(moviesId.length==1)
     {
-      // getMovieDetailsData(movieId:moviesId[0]);
-      // // getMovieVideos(movieId: moviesId[0]);
-      // getMovieRecommendations(movieId:moviesId[0]);
-
       moviesId.removeAt(0);
-
     }
-
-
   }
-
   Message ? message;
   Future<void> rateMovie({required dynamic rate,required int movieId})async{
     emit(RateMovieLoadingState());
@@ -333,12 +385,6 @@ class MovieCubit extends Cubit<MovieStates> {
       message=r;
      return RateMovieSuccessState();
     }));
-
-
-
-
-
-
   }
   Future<void> removeRateMovie({required int movieId})async{
 
@@ -359,7 +405,6 @@ class MovieCubit extends Cubit<MovieStates> {
 
 
   }
-
   Future<void> favMovie({required int movieId,required bool fav})async{
 
     emit(FavMovieLoadingState());
@@ -378,8 +423,6 @@ class MovieCubit extends Cubit<MovieStates> {
 
 
   }
-
-
   Future<void> addMovieToWatchList({required int movieId,required bool watchlist})async{
 
     emit(AddToWatchListLoadingState());
@@ -399,14 +442,12 @@ class MovieCubit extends Cubit<MovieStates> {
 
 
   }
-
   int index =0;
   List<Widget> movieGalleryList=[
     const MovieBackdrops(),
     const MoviePosters(),
     const MovieLogos(),
   ];
-
   gallery(value,id){
     emit(ChangeGalleryLoadingState());
     index=value;

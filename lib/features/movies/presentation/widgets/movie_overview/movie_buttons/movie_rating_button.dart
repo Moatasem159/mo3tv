@@ -76,8 +76,8 @@ class MovieRatingButton extends StatelessWidget {
                                  .removeRateMovie(movieId: movie.id!);
                              movie.movieAccountDetails!.ratedValue=0.0;
                              movie.movieAccountDetails!.watchlist = false;
-                             BlocProvider.of<AccountCubit>(context).ratedMovies!.removeWhere((element) =>element.id==movie.id);
-                             BlocProvider.of<AccountCubit>(context).moviesWatchlist!.removeWhere((element) => element.id==movie.id,);
+                             BlocProvider.of<AccountCubit>(context).ratedMovies.removeWhere((element) =>element.id==movie.id);
+                             BlocProvider.of<AccountCubit>(context).moviesWatchlist.removeWhere((element) => element.id==movie.id,);
                              BlocProvider.of<AccountCubit>(context).update();
                              Navigator.of(context).pop();
                            }),
@@ -89,12 +89,12 @@ class MovieRatingButton extends StatelessWidget {
                                  .rateMovie(rate: movie.movieAccountDetails!.ratedValue, movieId: movie.id!);
                              movie.movieAccountDetails!.watchlist = false;
                              if(  BlocProvider.of<AccountCubit>(context)
-                                 .ratedMovies!
+                                 .ratedMovies
                                  .any(
                                      (element) => element.id == movie.id))
                                {
                                  BlocProvider.of<AccountCubit>(context)
-                                     .ratedMovies!
+                                     .ratedMovies
                                      .firstWhere(
                                          (element) => element.id == movie.id)
                                      .movieAccountDetails!
@@ -103,9 +103,9 @@ class MovieRatingButton extends StatelessWidget {
                                }
                              else{
                                BlocProvider.of<AccountCubit>(context)
-                                   .ratedMovies!.add(movie);
+                                   .ratedMovies.add(movie);
                              }
-                             BlocProvider.of<AccountCubit>(context).moviesWatchlist!.removeWhere((element) => element.id==movie.id,);
+                             BlocProvider.of<AccountCubit>(context).moviesWatchlist.removeWhere((element) => element.id==movie.id,);
                              BlocProvider.of<AccountCubit>(context).update();
                             }
                            Navigator.of(context).pop();

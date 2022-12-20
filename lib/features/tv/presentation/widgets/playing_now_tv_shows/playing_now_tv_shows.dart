@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_widget.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -39,7 +40,30 @@ class PlayingNowTvShows extends SliverPersistentHeaderDelegate {
       listener: (context, state) {},
       builder: (context, state) {
         TvCubit cubit = BlocProvider.of<TvCubit>(context);
+        if(state is GetNowPlayingTvShowsLoadingState||cubit.nowPlayingTvShows == null) {
+          return PlayingNowMediaLoadingWidget(height: c, width: size.width);
+        }
+        if(cubit.nowPlayingError!){
+          return Container(
+            color: Theme.of(context).backgroundColor,
+            alignment: Alignment.center,
+            height: c,
+            width: size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Something went wrong"),
+                const SizedBox(
+                  height: 7,
+                ),
+                MainButton(onPressed: (){
+                  cubit.getNowPlayingTvShowsData();
+                }, label: "try again")
+              ],
+            ),
 
+          );
+        }
         if (cubit.nowPlayingTvShows != null){
           return PlayingNowTvShowsList(tvShows: cubit.nowPlayingTvShows!,
               height: c,
@@ -48,9 +72,7 @@ class PlayingNowTvShows extends SliverPersistentHeaderDelegate {
               playingSize: playingSize,
               titleSize: titleSize);
         }
-        if(cubit.nowPlayingTvShows == null) {
-            return PlayingNowMediaLoadingWidget(height: c, width: size.width);
-          }
+
         return Container();
       },
     );

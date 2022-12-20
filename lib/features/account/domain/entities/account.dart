@@ -1,6 +1,4 @@
 class Account{
-
-
   String ?avatar;
   int ?id;
   String ?iso6391;
@@ -8,7 +6,6 @@ class Account{
   String ?name;
   bool? includeAdult;
   String ?username;
-
   Account(
       {this.avatar,
       this.id,

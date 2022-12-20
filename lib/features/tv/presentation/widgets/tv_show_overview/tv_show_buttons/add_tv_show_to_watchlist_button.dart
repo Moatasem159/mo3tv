@@ -39,14 +39,14 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
               if (tvShow.tvShowAccountDetails!.watchlist!) {
                 BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: false);
                 tvShow.tvShowAccountDetails!.watchlist=false;
-                BlocProvider.of<AccountCubit>(context).tvShowsWatchlist!.removeWhere((element) => element.id==tvShow.id,);
+                BlocProvider.of<AccountCubit>(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id,);
                 BlocProvider.of<AccountCubit>(context).update();
 
               }
               else {
                 BlocProvider.of<TvCubit>(context).addTvShowToWatchList(tvId: tvShow.id!, watchlist: true);
                 tvShow.tvShowAccountDetails!.watchlist=true;
-                BlocProvider.of<AccountCubit>(context).tvShowsWatchlist!.add(tvShow);
+                BlocProvider.of<AccountCubit>(context).tvShowsWatchlist.add(tvShow);
                 BlocProvider.of<AccountCubit>(context).update();
               }
             }

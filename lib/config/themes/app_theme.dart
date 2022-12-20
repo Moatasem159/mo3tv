@@ -127,6 +127,7 @@ class AppTheme {
     ),
     fontFamily: AppStrings.fontFamily,
     primaryColor: AppColors.primaryColor,
+    primarySwatch: AppColors.primaryColor,
     primaryColorLight: AppColors.primaryTextLight,
     backgroundColor: AppColors.darkBackgroundColor,
     visualDensity: VisualDensity.adaptivePlatformDensity,

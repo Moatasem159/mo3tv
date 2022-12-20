@@ -34,38 +34,32 @@ this.topRatedMovies=false,
             if(popularMovies)
             {
               BlocProvider.of<MovieCubit>(context).movieListPage=1;
-              BlocProvider.of<MovieCubit>(context).popularMovies.clear();
-              BlocProvider.of<MovieCubit>(context).getPopularMoviesData();
+              BlocProvider.of<MovieCubit>(context).seeMoreListMovies.clear();
             }
             if(topRatedMovies)
             {
               BlocProvider.of<MovieCubit>(context).movieListPage=1;
-              BlocProvider.of<MovieCubit>(context).topRatedMovies.clear();
-              BlocProvider.of<MovieCubit>(context).getTopRatedMoviesData();
+              BlocProvider.of<MovieCubit>(context).seeMoreListMovies.clear();
             }
             if(trendingMovies)
             {
               BlocProvider.of<MovieCubit>(context).movieListPage=1;
-              BlocProvider.of<MovieCubit>(context).trendingMovies.clear();
-              BlocProvider.of<MovieCubit>(context).getTrendingMoviesData();
+              BlocProvider.of<MovieCubit>(context).seeMoreListMovies.clear();
             }
             if(popularTvShows)
             {
               BlocProvider.of<TvCubit>(context).tvShowListPage=1;
-                BlocProvider.of<TvCubit>(context).popularTvShows.clear();
-                BlocProvider.of<TvCubit>(context).getPopularTvShowsData();
+              BlocProvider.of<TvCubit>(context).seeMoreListTvShows.clear();
               }
             if(topRatedTvShows)
             {
               BlocProvider.of<TvCubit>(context).tvShowListPage=1;
-              BlocProvider.of<TvCubit>(context).topRatedTvShows.clear();
-              BlocProvider.of<TvCubit>(context).getTopRatedTvShowsData();
+              BlocProvider.of<TvCubit>(context).seeMoreListTvShows.clear();
             }
             if(trendingTvShows)
             {
               BlocProvider.of<TvCubit>(context).tvShowListPage=1;
-              BlocProvider.of<TvCubit>(context).trendingTvShows.clear();
-              BlocProvider.of<TvCubit>(context).getTrendingTvShowsData();
+              BlocProvider.of<TvCubit>(context).seeMoreListTvShows.clear();
             }
             Navigator.pop(context);
             return true;
@@ -81,38 +75,32 @@ this.topRatedMovies=false,
                           if(popularMovies)
                             {
                               BlocProvider.of<MovieCubit>(context).movieListPage=1;
-                              BlocProvider.of<MovieCubit>(context).popularMovies.clear();
-                              BlocProvider.of<MovieCubit>(context).getPopularMoviesData();
+                              BlocProvider.of<MovieCubit>(context).seeMoreListMovies.clear();
                             }
                           if(topRatedMovies)
                             {
                               BlocProvider.of<MovieCubit>(context).movieListPage=1;
-                              BlocProvider.of<MovieCubit>(context).topRatedMovies.clear();
-                              BlocProvider.of<MovieCubit>(context).getTopRatedMoviesData();
+                              BlocProvider.of<MovieCubit>(context).seeMoreListMovies.clear();
                             }
                           if(trendingMovies)
                           {
                             BlocProvider.of<MovieCubit>(context).movieListPage=1;
-                            BlocProvider.of<MovieCubit>(context).trendingMovies.clear();
-                            BlocProvider.of<MovieCubit>(context).getTrendingMoviesData();
+                            BlocProvider.of<MovieCubit>(context).seeMoreListMovies.clear();
                           }
                           if(popularTvShows)
                           {
                             BlocProvider.of<TvCubit>(context).tvShowListPage=1;
-                            BlocProvider.of<TvCubit>(context).popularTvShows.clear();
-                            BlocProvider.of<TvCubit>(context).getPopularTvShowsData();
+                            BlocProvider.of<TvCubit>(context).seeMoreListTvShows.clear();
                           }
                           if(topRatedTvShows)
                           {
                             BlocProvider.of<TvCubit>(context).tvShowListPage=1;
-                            BlocProvider.of<TvCubit>(context).topRatedTvShows.clear();
-                            BlocProvider.of<TvCubit>(context).getTopRatedTvShowsData();
+                            BlocProvider.of<TvCubit>(context).seeMoreListTvShows.clear();
                           }
                           if(trendingTvShows)
                           {
                             BlocProvider.of<TvCubit>(context).tvShowListPage=1;
-                            BlocProvider.of<TvCubit>(context).trendingTvShows.clear();
-                            BlocProvider.of<TvCubit>(context).getTrendingTvShowsData();
+                            BlocProvider.of<TvCubit>(context).seeMoreListTvShows.clear();
                           }
                           Navigator.pop(context);
                         },
@@ -129,42 +117,42 @@ this.topRatedMovies=false,
                   BlocBuilder<MovieCubit, MovieStates>(
                     builder: (context, state) {
                       MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
-                      return MoviesSeeMoreList(movies: cubit.popularMovies,);
+                      return MoviesSeeMoreList(movies: cubit.seeMoreListMovies,);
                     },
                   ),
                   if(topRatedMovies)
                   BlocBuilder<MovieCubit, MovieStates>(
                     builder: (context, state) {
                       MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
-                      return MoviesSeeMoreList(movies: cubit.topRatedMovies,);
+                      return MoviesSeeMoreList(movies: cubit.seeMoreListMovies,);
                     },
                   ),
                   if(trendingMovies)
                     BlocBuilder<MovieCubit, MovieStates>(
                       builder: (context, state) {
                         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
-                        return MoviesSeeMoreList(movies: cubit.trendingMovies,);
+                        return MoviesSeeMoreList(movies: cubit.seeMoreListMovies,);
                       },
                     ),
                   if(popularTvShows)
                   BlocBuilder<TvCubit, TvStates>(
                       builder: (context, state) {
                         TvCubit cubit = BlocProvider.of<TvCubit>(context);
-                        return TvShowsSeeMoreList(tvShows: cubit.popularTvShows);
+                        return TvShowsSeeMoreList(tvShows: cubit.seeMoreListTvShows);
                       },
                     ),
                   if(topRatedTvShows)
                   BlocBuilder<TvCubit, TvStates>(
                       builder: (context, state) {
                         TvCubit cubit = BlocProvider.of<TvCubit>(context);
-                        return TvShowsSeeMoreList(tvShows: cubit.topRatedTvShows);
+                        return TvShowsSeeMoreList(tvShows: cubit.seeMoreListTvShows);
                       },
                     ),
                   if(trendingTvShows)
                     BlocBuilder<TvCubit, TvStates>(
                       builder: (context, state) {
                         TvCubit cubit = BlocProvider.of<TvCubit>(context);
-                        return TvShowsSeeMoreList(tvShows: cubit.trendingTvShows);
+                        return TvShowsSeeMoreList(tvShows: cubit.seeMoreListTvShows);
                       },
                     ),
                   SliverToBoxAdapter(
@@ -176,31 +164,37 @@ this.topRatedMovies=false,
                             if(popularMovies){
                               BlocProvider.of<MovieCubit>(context).movieListPage++;
                               BlocProvider.of<MovieCubit>(context).getPopularMoviesData(
+                                  seeMore: true,
                                   page:BlocProvider.of<MovieCubit>(context).movieListPage);
                             }
                             if(topRatedMovies){
                               BlocProvider.of<MovieCubit>(context).movieListPage++;
                               BlocProvider.of<MovieCubit>(context).getTopRatedMoviesData(
+                                seeMore: true,
                                   page:BlocProvider.of<MovieCubit>(context).movieListPage);
                             }
                             if(trendingMovies){
                               BlocProvider.of<MovieCubit>(context).movieListPage++;
                               BlocProvider.of<MovieCubit>(context).getTrendingMoviesData(
+                                seeMore: true,
                                   page:BlocProvider.of<MovieCubit>(context).movieListPage);
                             }
                             if(popularTvShows){
                               BlocProvider.of<TvCubit>(context).tvShowListPage++;
                               BlocProvider.of<TvCubit>(context).getPopularTvShowsData(
+                                  seeMore: true,
                                   page:BlocProvider.of<TvCubit>(context).tvShowListPage);
                             }
                             if(topRatedTvShows){
                               BlocProvider.of<TvCubit>(context).tvShowListPage++;
                               BlocProvider.of<TvCubit>(context).getTopRatedTvShowsData(
+                                seeMore: true,
                                   page:BlocProvider.of<TvCubit>(context).tvShowListPage);
                             }
                             if(trendingTvShows){
                               BlocProvider.of<TvCubit>(context).tvShowListPage++;
                               BlocProvider.of<TvCubit>(context).getTrendingTvShowsData(
+                                  seeMore: true,
                                   page:BlocProvider.of<TvCubit>(context).tvShowListPage);
                             }
                           },

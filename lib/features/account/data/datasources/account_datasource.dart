@@ -20,10 +20,7 @@ Future<List<TvShowModel>> getTvShowsWatchList();
 
 class AccountDataSourceImpl extends AccountDataSource{
   ApiConsumer apiConsumer;
-
-
   AccountDataSourceImpl(this.apiConsumer);
-
   @override
   Future<List<MovieModel>> getFavouriteMovies()async {
     final res=await apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"movies"));
@@ -89,7 +86,4 @@ class AccountDataSourceImpl extends AccountDataSource{
       ),
     );
   }
-  
-  
-  
 }

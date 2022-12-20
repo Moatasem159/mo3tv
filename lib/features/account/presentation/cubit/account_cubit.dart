@@ -32,12 +32,12 @@ class AccountCubit extends Cubit<AccountStates> {
   GetFavTvShowsListUsecase getFavTvShowsListUsecase;
   GetRatedTvShowListUsecase getRatedTvShowListUsecase;
   
-  List<Movie> ?ratedMovies;
-  List<Movie> ?favMovies;
-  List<Movie> ?moviesWatchlist;
-  List<TvShow> ?ratedTvShows;
-  List<TvShow> ?favTvShows;
-  List<TvShow> ?tvShowsWatchlist;
+  List<Movie> ratedMovies=[];
+  List<Movie> favMovies=[];
+  List<Movie> moviesWatchlist=[];
+  List<TvShow> ratedTvShows=[];
+  List<TvShow> favTvShows=[];
+  List<TvShow> tvShowsWatchlist=[];
 
   
   Future<void> getLists()async {
@@ -82,7 +82,6 @@ class AccountCubit extends Cubit<AccountStates> {
   }
 
   Account ?account;
-
   Future<void> getAccountDetails()async {
     emit(GetAccountsDetailsLoadingState());
     Either<Failure, Account> res =await getAccountDetailsUsecase.call(const NoParameters());
@@ -94,7 +93,6 @@ class AccountCubit extends Cubit<AccountStates> {
       return GetAccountsDetailsSuccessState();
     }));
   }
-
 
 update(){
     emit(GetUpdateDetailsLoadingState());

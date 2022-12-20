@@ -59,13 +59,13 @@ class MediaListScreen extends StatelessWidget {
                     if(favMovies)
                     SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                          childCount: cubit.favMovies!.length,
+                          childCount: cubit.favMovies.length,
                               (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
                               child: MoviePoster(
-                                  movie: cubit.favMovies![index]),
+                                  movie: cubit.favMovies[index]),
                             );
                           },
                         ),
@@ -77,13 +77,13 @@ class MediaListScreen extends StatelessWidget {
                     if(ratedMovies)
                       SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                          childCount: cubit.ratedMovies!.length,
+                          childCount: cubit.ratedMovies.length,
                               (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
                               child: MoviePoster(
-                                  movie: cubit.ratedMovies![index]),
+                                  movie: cubit.ratedMovies[index]),
                             );
                           },
                         ),
@@ -95,13 +95,13 @@ class MediaListScreen extends StatelessWidget {
                     if(moviesWatchlist)
                       SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                          childCount: cubit.moviesWatchlist!.length,
+                          childCount: cubit.moviesWatchlist.length,
                               (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
                               child: MoviePoster(
-                                  movie: cubit.moviesWatchlist![index]),
+                                  movie: cubit.moviesWatchlist[index]),
                             );
                           },
                         ),
@@ -113,13 +113,13 @@ class MediaListScreen extends StatelessWidget {
                     if(favTv)
                     SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                          childCount: cubit.favTvShows!.length,
+                          childCount: cubit.favTvShows.length,
                               (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
                               child: TvShowPoster(
-                                  tvShow: cubit.favTvShows![index]),
+                                  tvShow: cubit.favTvShows[index]),
                             );
                           },
                         ),
@@ -131,13 +131,13 @@ class MediaListScreen extends StatelessWidget {
                     if(ratedTv)
                       SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                          childCount: cubit.ratedTvShows!.length,
+                          childCount: cubit.ratedTvShows.length,
                               (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
                               child: TvShowPoster(
-                                  tvShow: cubit.ratedTvShows![index]),
+                                  tvShow: cubit.ratedTvShows[index]),
                             );
                           },
                         ),
@@ -149,13 +149,13 @@ class MediaListScreen extends StatelessWidget {
                     if(tvWatchlist)
                       SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                          childCount: cubit.tvShowsWatchlist!.length,
+                          childCount: cubit.tvShowsWatchlist.length,
                               (context, index) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
                               child: TvShowPoster(
-                                  tvShow: cubit.tvShowsWatchlist![index]),
+                                  tvShow: cubit.tvShowsWatchlist[index]),
                             );
                           },
                         ),

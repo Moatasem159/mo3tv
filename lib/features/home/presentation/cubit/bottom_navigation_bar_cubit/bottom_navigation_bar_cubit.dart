@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/account/presentation/screens/account_screen.dart';
 import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_states.dart';
 import 'package:mo3tv/features/movies/presentation/screens/movies_screen.dart';
+import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
 import 'package:mo3tv/features/search/presentation/screens/search_screen.dart';
 import 'package:mo3tv/features/tv/presentation/screens/tv_screen.dart';
 
@@ -25,6 +26,7 @@ class BottomNavCubit extends Cubit<BottomNavStates> {
   changeIndex(int index, BuildContext context) {
     emit(ChangeBottomNavLoadingState());
     this.index=index;
+    BlocProvider.of<SearchCubit>(context).clear();
     if(index==0)
       {
         movie=true;

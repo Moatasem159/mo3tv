@@ -76,8 +76,8 @@ class TvShowRatingButton extends StatelessWidget {
                                  .removeTvShowRate(tvId: tvShow.id!);
                              tvShow.tvShowAccountDetails!.ratedValue=0.0;
                              tvShow.tvShowAccountDetails!.watchlist = false;
-                             BlocProvider.of<AccountCubit>(context).ratedTvShows!.removeWhere((element) =>element.id==tvShow.id);
-                             BlocProvider.of<AccountCubit>(context).tvShowsWatchlist!.removeWhere((element) => element.id==tvShow.id,);
+                             BlocProvider.of<AccountCubit>(context).ratedTvShows.removeWhere((element) =>element.id==tvShow.id);
+                             BlocProvider.of<AccountCubit>(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id,);
                              BlocProvider.of<AccountCubit>(context).update();
                              Navigator.of(context).pop();
                            }),
@@ -89,11 +89,11 @@ class TvShowRatingButton extends StatelessWidget {
                                  .rateTvShow(rate: tvShow.tvShowAccountDetails!.ratedValue, tvId: tvShow.id!);
                              tvShow.tvShowAccountDetails!.watchlist = false;
                              if(BlocProvider.of<AccountCubit>(context)
-                                 .ratedTvShows!
+                                 .ratedTvShows
                                  .any(
                                      (element) => element.id == tvShow.id)){
                                BlocProvider.of<AccountCubit>(context)
-                                   .ratedTvShows!
+                                   .ratedTvShows
                                    .firstWhere(
                                        (element) => element.id == tvShow.id)
                                    .tvShowAccountDetails!
@@ -103,7 +103,7 @@ class TvShowRatingButton extends StatelessWidget {
                              }
                              else {
                                BlocProvider.of<AccountCubit>(context)
-                                   .ratedTvShows!.add(tvShow);
+                                   .ratedTvShows.add(tvShow);
                              }
 
 

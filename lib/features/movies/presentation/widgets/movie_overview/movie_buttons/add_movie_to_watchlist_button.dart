@@ -39,13 +39,13 @@ class AddMovieToWatchlistButton extends StatelessWidget {
               if (movie.movieAccountDetails!.watchlist!) {
                 BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: false);
                 movie.movieAccountDetails!.watchlist=false;
-                BlocProvider.of<AccountCubit>(context).moviesWatchlist!.removeWhere((element) => element.id==movie.id,);
+                BlocProvider.of<AccountCubit>(context).moviesWatchlist.removeWhere((element) => element.id==movie.id,);
                 BlocProvider.of<AccountCubit>(context).update();
 
               } else {
                 BlocProvider.of<MovieCubit>(context).addMovieToWatchList(movieId: movie.id!, watchlist: true);
                 movie.movieAccountDetails!.watchlist=true;
-                BlocProvider.of<AccountCubit>(context).moviesWatchlist!.add(movie);
+                BlocProvider.of<AccountCubit>(context).moviesWatchlist.add(movie);
                 BlocProvider.of<AccountCubit>(context).update();
               }
             }

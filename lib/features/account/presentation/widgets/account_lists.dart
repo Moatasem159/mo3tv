@@ -15,22 +15,22 @@ class AccountLists extends StatelessWidget {
   builder: (context, state) {
     AccountCubit cubit =BlocProvider.of<AccountCubit>(context);
     if(state is GetAccountsListsSuccessState||(
-        cubit.favTvShows !=null||
-        cubit.favMovies!=null||
-        cubit.ratedMovies!=null||
-        cubit.ratedTvShows!=null||
-        cubit.moviesWatchlist!=null||
-        cubit.tvShowsWatchlist!=null
+        cubit.favTvShows.isNotEmpty||
+        cubit.favMovies.isNotEmpty||
+        cubit.ratedMovies.isNotEmpty||
+        cubit.ratedTvShows.isNotEmpty||
+        cubit.moviesWatchlist.isNotEmpty||
+        cubit.tvShowsWatchlist.isNotEmpty
     )){
       return SliverToBoxAdapter(
         child: Column(
           children: [
-            AccountListWidget(list: cubit.favMovies!, title: "Favorite Movies",favMovies: true),
-            AccountListWidget(list: cubit.moviesWatchlist!, title: "Movie Watchlist",moviesWatchlist: true,),
-            AccountListWidget(list: cubit.ratedMovies!, title: "Rated Movies",ratedMovies: true),
-            AccountListWidget(list: cubit.favTvShows!, title: "Favorite Series",favTv: true,),
-            AccountListWidget(list: cubit.tvShowsWatchlist!, title: "Series WatchList",tvWatchlist: true,),
-            AccountListWidget(list: cubit.ratedTvShows!, title: "Rated Series",ratedTv: true,)],
+            AccountListWidget(list: cubit.favMovies, title: "Favorite Movies",favMovies: true),
+            AccountListWidget(list: cubit.moviesWatchlist, title: "Movie Watchlist",moviesWatchlist: true,),
+            AccountListWidget(list: cubit.ratedMovies, title: "Rated Movies",ratedMovies: true),
+            AccountListWidget(list: cubit.favTvShows, title: "Favorite Series",favTv: true,),
+            AccountListWidget(list: cubit.tvShowsWatchlist, title: "Series WatchList",tvWatchlist: true,),
+            AccountListWidget(list: cubit.ratedTvShows, title: "Rated Series",ratedTv: true,)],
         ),
       );
     }

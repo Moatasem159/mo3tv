@@ -10,9 +10,6 @@ class AccountModel extends Account{
     super.includeAdult,
     super.username,
   });
-
-
-
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
     avatar:json["avatar"]["tmdb"]["avatar_path"]??'',
     id: json["id"],

@@ -10,7 +10,6 @@ class GetAccountsListsErrorState extends AccountStates {
 
   GetAccountsListsErrorState({required this.msg});
 }
-
 class GetAccountsDetailsLoadingState extends AccountStates {}
 class GetAccountsDetailsSuccessState extends AccountStates {}
 class GetAccountsDetailsErrorState extends AccountStates {

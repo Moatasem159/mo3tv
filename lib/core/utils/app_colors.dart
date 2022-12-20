@@ -5,7 +5,7 @@ import 'package:mo3tv/core/utils/hex_color.dart';
 
 class AppColors{
 
-  static Color primaryColor = HexColor('#FE724C');
+  static var primaryColor = Colors.red;
   static Color primaryTextLight=Colors.white;
   static Color primaryTextDark=Colors.black;
   static Color darkBackgroundColor =  HexColor('#131314');

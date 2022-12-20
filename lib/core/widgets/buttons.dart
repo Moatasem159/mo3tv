@@ -14,10 +14,10 @@ class MainButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
-            borderRadius:BorderRadius.circular(28.5),
+            borderRadius:BorderRadius.circular(10),
           )),
           backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
-          fixedSize: MaterialStateProperty.all(const Size(150, 57))
+          fixedSize: MaterialStateProperty.all(const Size(130, 40))
       ),
       onPressed:onPressed,
       child: Text(label,style: Theme.of(context).textTheme.subtitle1!.copyWith(

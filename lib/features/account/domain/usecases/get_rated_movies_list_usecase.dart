@@ -6,9 +6,7 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 
 class GetRatedMoviesListUsecase extends BaseUsecase{
   final AccountRepository accountRepository;
-
   GetRatedMoviesListUsecase({required this.accountRepository});
-
   @override
   Future<Either<Failure,List<Movie>>> call(parameters) async{
     return await accountRepository.getRatedMovies();
