@@ -29,9 +29,6 @@ class MainButton extends StatelessWidget {
   }
 }
 
-
-
-
 class MediaIconButton extends StatelessWidget {
 
   final Icon icon;
@@ -46,33 +43,8 @@ class MediaIconButton extends StatelessWidget {
             minimumSize: MaterialStateProperty.all(const Size(45, 45)),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100))),
-            backgroundColor: MaterialStateProperty.all(Colors.blueGrey)),
+            backgroundColor: MaterialStateProperty.all(Colors.blueGrey[900])),
         onPressed: onTap,
         child: icon);
-  }
-}
-
-
-class MainBackButton extends StatelessWidget {
-  final  VoidCallback? onPressed;
-
-  const MainBackButton({Key? key,this.onPressed,}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: (){
-      Navigator.of(context).pop();
-    },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
-        minimumSize: MaterialStateProperty.all(const Size(34,34)),
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          borderRadius:BorderRadius.circular(10),
-        )),
-        shadowColor: MaterialStateProperty.all(Colors.black),
-      ),
-      child: Icon(Icons.arrow_back_ios_rounded,color:Theme.of(context).iconTheme.color,size: 14,),
-    );
   }
 }

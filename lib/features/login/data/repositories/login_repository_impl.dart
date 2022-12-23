@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/login/data/data_sources/login_datasource.dart';
 import 'package:mo3tv/features/login/data/models/token_model.dart';
 import 'package:mo3tv/features/login/domain/entities/session.dart';
@@ -27,7 +28,7 @@ class LoginRepositoryImpl extends LoginRepository{
 
       }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -45,7 +46,7 @@ class LoginRepositoryImpl extends LoginRepository{
 
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 }

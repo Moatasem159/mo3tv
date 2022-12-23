@@ -60,31 +60,6 @@ class MovieModel extends Movie {
       voteCount: json["vote_count"]??0,
      videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
   );
-
-  Map<String, dynamic> toJson() => {
-      "adult": adult,
-      "backdrop_path": backdropPath,
-      "belongs_to_collection": belongsToCollection,
-      "budget": budget,
-      "genres": List<GenreModel>.from(genres!.map((x) => x.toJson())),
-      "homepage": homepage,
-      "id": id,
-      "imdb_id": imdbId,
-      "original_language": originalLanguage,
-      "original_title": originalTitle,
-      "overview": overview,
-      "popularity": popularity,
-      "poster_path": posterPath,
-      "production_companies": List<dynamic>.from(productionCompanies!.map((x) => x.toJson())),
-      "release_date": releaseDate,
-      "revenue": revenue,
-      "runtime": runtime,
-      "status": status,
-      "tagline": tagline,
-      "title": title,
-      "vote_average": voteAverage,
-      "vote_count": voteCount,
-  };
 }
 
 class ProductionCompany {
@@ -106,11 +81,4 @@ class ProductionCompany {
     name: json["name"]??'',
     originCountry: json["origin_country"]??'',
   );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "logo_path": logoPath,
-    "name": name,
-    "origin_country": originCountry,
-  };
 }

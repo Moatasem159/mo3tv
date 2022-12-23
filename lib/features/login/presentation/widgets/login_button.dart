@@ -39,41 +39,29 @@ class LoginButton extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            if(BlocProvider.of<LoginCubit>(context).token==null){
-              if(state is GetTokenLoadingState)
-              {
-                return const LinearProgressIndicator(
-                  color: Colors.red,
-                );
-              }
-              if(state is!GetTokenLoadingState)
-              {
-                return ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Colors.red)
-                  ),
-                  child: const Text("Login to enjoy full experience"),
-                  onPressed: () async {
-                    // if (state is SuccessState) {
-                    //   BlocProvider.of<LoginCubit>(context)
-                    //       .getSessionId(account: account,context: context);
-                    // }
-                    // else {
-                    //   BlocProvider.of<LoginCubit>(context).getToken();
-                    // }
-                    BlocProvider.of<LoginCubit>(context).getToken();
-                  },
-                );
-              }
+            if(state is LoginInitialState){
+              return ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Colors.red)
+                ),
+                child: const Text("Login to enjoy full experience"),
+                onPressed: () async {
+                  BlocProvider.of<LoginCubit>(context).getToken();
+                },
+              );
+            }
+            if(state is GetTokenLoadingState) {
+              return const LinearProgressIndicator(
+                color: Colors.red,
+              );
             }
             if(state is GetSessionIdLoadingState){
               return const LinearProgressIndicator(
                 color: Colors.red,
               );
             }
-            if(state is SuccessState)
-            {
+            if(state is SuccessState) {
               return ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
                 child: const Text("last Step"),

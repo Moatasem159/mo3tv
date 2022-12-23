@@ -47,7 +47,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
               left: imageMargin,
               height: c,
               child: Container(
-                width: 380,
+                width: size.width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(radius),

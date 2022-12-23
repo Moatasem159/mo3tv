@@ -1,12 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-
-
-
 class AppInterceptors extends Interceptor{
-
-
 @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
   if(kDebugMode){
@@ -15,7 +10,6 @@ class AppInterceptors extends Interceptor{
   options.headers[AppStrings.contentType]=AppStrings.applicationJson;
     super.onRequest(options, handler);
   }
-
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     if(kDebugMode){
@@ -23,7 +17,6 @@ class AppInterceptors extends Interceptor{
     }
     super.onResponse(response, handler);
   }
-
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
     if(kDebugMode){
@@ -31,5 +24,4 @@ class AppInterceptors extends Interceptor{
     }
     super.onError(err, handler);
   }
-
 }

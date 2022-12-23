@@ -5,14 +5,8 @@ import 'package:mo3tv/app/injection_container.dart';
 class Routes {
   static const String initialRoute= "/";
 }
-
-
-
 class AppRoute{
-
-
   static Route ? onGenerateRoute(RouteSettings routeSettings){
-
     switch(routeSettings.name){
       case Routes.initialRoute:
         login();
@@ -23,12 +17,9 @@ class AppRoute{
     }
     return null;
   }
-
-
   static Route<dynamic> undefinedRoute(){
     return MaterialPageRoute(builder: (context) => const Scaffold(),);
   }
-
 
 
 }

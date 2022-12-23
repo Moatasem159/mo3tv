@@ -24,12 +24,14 @@ class LoginScreen extends StatelessWidget {
               if(await c!.currentUrl()=="${EndPoints.approveToken(cubit.token!.token!)}/allow")
               {
                 cubit.success();
-                Navigator.pop(context);
+                return true;
               }
               else{
-                Navigator.pop(context);
+
+                cubit.initial();
+                return true;
               }
-              return true;
+
             },
             child: Scaffold(
                 body:WebView(

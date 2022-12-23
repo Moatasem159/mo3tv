@@ -1,5 +1,4 @@
 class EndPoints{
-
   static const String baseUrl="https://api.themoviedb.org/3/";
   static const String apiKey = "6405212758b8be6d7171cf2b7493b3d1";
   static const String basePosterUrl = "https://image.tmdb.org/t/p/w500";
@@ -7,6 +6,11 @@ class EndPoints{
   static const String baseLogoUrl = "https://image.tmdb.org/t/p/w185";
   static const String baseHdUrl = "https://image.tmdb.org/t/p/w1280";
   static String requestTokenPath="$baseUrl/authentication/token/new?api_key=$apiKey";
+
+  static String approveToken(String token)=>
+      "https://www.themoviedb.org/authenticate/$token";
+  static String sessionIdPath(String token)=>
+      "$baseUrl/authentication/session/new?api_key=$apiKey&request_token=$token";
 
 
   static String mediaDetailsPath(int mediaId,String sessionId,String mediaType) =>
@@ -35,14 +39,9 @@ class EndPoints{
       "$baseUrl/$mediaType/$mediaId/rating?api_key=$apiKey&session_id=$sessionid";
   static String tvShowSeasonDetailsPath(int tvId,int seasonNumber) =>
       "$baseUrl/tv/$tvId/season/$seasonNumber?api_key=$apiKey";
-  static String accountPath(String sessionId) =>
-      "$baseUrl/account?api_key=$apiKey&session_id=$sessionId";
-
-
 
   static String searchUrl({required String query,required int page})=>
       "${baseUrl}search/multi?api_key=$apiKey&page=$page&query=$query";
-
   static  String backDropsUrl(String path) =>
       "$baseBackDropsUrl$path";
   static  String posterUrl(String path) =>
@@ -52,19 +51,13 @@ class EndPoints{
   static  String hdUrl(String path) =>
       "$baseHdUrl$path";
 
+  static String accountPath(String sessionId) =>
+      "$baseUrl/account?api_key=$apiKey&session_id=$sessionId";
 
-
- static String approveToken(String token)=>
-     "https://www.themoviedb.org/authenticate/$token";
- static String sessionIdPath(String token)=>
-     "$baseUrl/authentication/session/new?api_key=$apiKey&request_token=$token";
-
- static String ratedMediaListPath(String sessionid,String mediaType)=>
+  static String ratedMediaListPath(String sessionid,String mediaType)=>
      "${baseUrl}account/{account_id}/rated/$mediaType?api_key=$apiKey&session_id=$sessionid";
- static String favMediaListPath(String sessionid,String mediaType)=>
+  static String favMediaListPath(String sessionid,String mediaType)=>
      "${baseUrl}account/{account_id}/favorite/$mediaType?api_key=$apiKey&session_id=$sessionid";
- static String mediaWatchListPath(String sessionid,String mediaType)=>
+  static String mediaWatchListPath(String sessionid,String mediaType)=>
      "${baseUrl}account/{account_id}/watchlist/$mediaType?api_key=$apiKey&session_id=$sessionid";
-
-
 }

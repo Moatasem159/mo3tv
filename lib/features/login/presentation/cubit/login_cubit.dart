@@ -23,7 +23,6 @@ class LoginCubit extends Cubit<LoginStates> {
   Token? token;
 
 
-  // Future<void> Function()? link;
   Future<void> getToken()async {
     emit(GetTokenLoadingState());
     Either<Failure, Token> response =
@@ -55,8 +54,8 @@ class LoginCubit extends Cubit<LoginStates> {
 
 
 
-  loading(){
-    emit(LoadingState());
+  initial(){
+    emit(LoginInitialState());
   }
   success(){
     emit(SuccessState());

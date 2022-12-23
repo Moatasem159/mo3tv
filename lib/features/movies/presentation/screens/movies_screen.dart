@@ -4,7 +4,6 @@ import 'package:mo3tv/features/movies/presentation/widgets/popular_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/top_rated_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movies_appbar_widget.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/trending_movies.dart';
-
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({Key? key}) : super(key: key);
 

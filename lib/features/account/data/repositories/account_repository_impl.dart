@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/data/datasources/account_datasource.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
@@ -25,7 +26,7 @@ class AccountRepositoryImpl extends AccountRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -41,7 +42,7 @@ class AccountRepositoryImpl extends AccountRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -57,7 +58,7 @@ class AccountRepositoryImpl extends AccountRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -73,7 +74,7 @@ class AccountRepositoryImpl extends AccountRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -89,7 +90,7 @@ class AccountRepositoryImpl extends AccountRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -105,7 +106,7 @@ class AccountRepositoryImpl extends AccountRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -121,7 +122,7 @@ class AccountRepositoryImpl extends AccountRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 }

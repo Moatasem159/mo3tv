@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/entities/image.dart';
@@ -31,7 +32,7 @@ class MoviesRepositoryImpl extends MovieRepository {
         }
       }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -48,7 +49,7 @@ class MoviesRepositoryImpl extends MovieRepository {
         }
       }
     else{
-    return left(const ServerFailure("No Internet Connections"));
+    return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -66,7 +67,7 @@ class MoviesRepositoryImpl extends MovieRepository {
        }
      }
    else{
-     return left(const ServerFailure("No Internet Connections"));
+     return left(const ServerFailure(AppStrings.noInternetConnection));
    }
 
   }
@@ -84,7 +85,7 @@ class MoviesRepositoryImpl extends MovieRepository {
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -102,7 +103,7 @@ class MoviesRepositoryImpl extends MovieRepository {
         }
       }
     else{
-     return left(const ServerFailure("No Internet Connections"));
+     return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -119,7 +120,7 @@ class MoviesRepositoryImpl extends MovieRepository {
        }
      }
    else{
-     return left(const ServerFailure("No Internet Connections"));
+     return left(const ServerFailure(AppStrings.noInternetConnection));
    }
   }
 
@@ -135,7 +136,7 @@ class MoviesRepositoryImpl extends MovieRepository {
         }
       }
     else{
-    return left(const ServerFailure("No Internet Connections"));
+    return left(const ServerFailure(AppStrings.noInternetConnection));
 
     }
   }
@@ -154,7 +155,7 @@ class MoviesRepositoryImpl extends MovieRepository {
 
       }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -171,7 +172,7 @@ class MoviesRepositoryImpl extends MovieRepository {
 
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -188,7 +189,7 @@ class MoviesRepositoryImpl extends MovieRepository {
 
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -205,7 +206,7 @@ class MoviesRepositoryImpl extends MovieRepository {
 
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -222,7 +223,7 @@ class MoviesRepositoryImpl extends MovieRepository {
 
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -239,7 +240,7 @@ class MoviesRepositoryImpl extends MovieRepository {
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 }

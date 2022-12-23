@@ -38,12 +38,3 @@ class NoInternetConnectionException extends ServerException{
   const NoInternetConnectionException([message]): super("No Internet Connection");
 }
 
-
-
-
-
-
-
-class CacheException implements Exception{
-
-}

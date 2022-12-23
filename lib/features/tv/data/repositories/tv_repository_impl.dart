@@ -6,6 +6,7 @@ import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/core/entities/review.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
@@ -31,7 +32,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -49,7 +50,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
   @override
@@ -66,7 +67,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -83,7 +84,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -101,7 +102,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -118,7 +119,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -134,7 +135,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
 
     }
   }
@@ -152,7 +153,7 @@ class TvShowRepositoryImpl extends TvRepository{
     }
     else
     {
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -168,7 +169,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -184,7 +185,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
 
   }
@@ -201,7 +202,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -217,7 +218,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -235,7 +236,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 
@@ -253,7 +254,7 @@ class TvShowRepositoryImpl extends TvRepository{
       }
     }
     else{
-      return left(const ServerFailure("No Internet Connections"));
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 }

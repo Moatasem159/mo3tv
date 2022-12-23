@@ -9,13 +9,8 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/api/status_code.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
-
-
-
-
 class DioConsumer implements ApiConsumer {
   final Dio client;
-
   DioConsumer({required this.client}) {
     (client.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
@@ -26,14 +21,12 @@ class DioConsumer implements ApiConsumer {
 
     client.options
       ..baseUrl = EndPoints.baseUrl
-      ..headers= {"lang":"en"}
       ..responseType = ResponseType.plain
       .. receiveDataWhenStatusError= true
       ..followRedirects = false
       ..validateStatus = (status) {
         return status! < StatusCode.internetServerError;
       };
-
     client.interceptors.add(di.sl<AppInterceptors>());
     if (kDebugMode) {
       client.interceptors.add(di.sl<LogInterceptor>());
@@ -41,19 +34,9 @@ class DioConsumer implements ApiConsumer {
   }
 
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters,String? token,String lang='en'}) async {
+  Future get(String path, {Map<String, dynamic>? queryParameters})async{
     try {
-      final response = await client.get(
-          path,
-          queryParameters: queryParameters,
-        options: Options(
-            headers:{
-          "lang":lang,
-          'Authorization': token,
-        }
-
-        )
-      );
+      final response = await client.get(path);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
@@ -61,21 +44,9 @@ class DioConsumer implements ApiConsumer {
   }
 
   @override
-  Future post(String path,
-      {Map<String, dynamic>? body,
-        String lang='en',
-      String? token,
-      bool formDataIsEnabled = false,
-      Map<String, dynamic>? queryParameters}) async {
-
+  Future post(String path, {Map<String, dynamic>? body, bool formDataIsEnabled = false,}) async {
     try {
       final response = await client.post(path,
-          queryParameters: queryParameters,
-          options:Options(headers: {
-            'Authorization': token,
-            "lang":lang,
-            "Content-Type":"application/json",
-          }) ,
           data: formDataIsEnabled ? FormData.fromMap(body!) : body,
       );
       return jsonDecode(response.data.toString());
@@ -84,26 +55,13 @@ class DioConsumer implements ApiConsumer {
     }
   }
 
+
   @override
-  Future put(String path,
-      {Map<String, dynamic>? body,
-        String? token,
-        String lang='en',
-        int ?id,
-        Map<String, dynamic>? queryParameters}) async {
+  Future put(String path, {Map<String, dynamic>? body,}) async {
     try {
       final response = await client.put(
         path,
-        queryParameters: queryParameters,
         data: body,
-        options: Options(
-          headers: {
-            "Content-Type":"application/json",
-            "lang":lang,
-            'Authorization': token,
-          }
-        ),
-
       );
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
@@ -112,26 +70,9 @@ class DioConsumer implements ApiConsumer {
   }
 
   @override
-  Future delete(String path,
-      {Map<String, dynamic>? body,
-        String? token,
-        String lang='en',
-        int ?id,
-        Map<String, dynamic>? queryParameters}) async {
+  Future delete(String path, {Map<String, dynamic>? body,}) async {
     try {
-      final response = await client.delete(
-        path,
-        queryParameters: queryParameters,
-        data: body,
-        options: Options(
-            headers: {
-              "Content-Type":"application/json",
-              "lang":lang,
-              'Authorization': token,
-            }
-        ),
-
-      );
+      final response = await client.delete(path, data: body,);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
