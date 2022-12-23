@@ -30,8 +30,8 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
     final iconSize = (maxIconSize * (1 - p)).clamp(mixIconSize, maxIconSize);
     final titleSize =
         (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
-    final maxTitleMargin = size.height / 4.3;
-    dynamic textMovement =190;
+    const maxTitleMargin = 174.0;
+    dynamic textMovement =195;
     final double top = maxTitleMargin + (1 - textMovement * p);
     final maxMargin = size.width / 30;
     const textLeftMovement = 50;
