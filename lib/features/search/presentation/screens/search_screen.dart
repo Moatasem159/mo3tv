@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/widgets/textformfield.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_state.dart';
-import 'package:mo3tv/features/search/presentation/widgets/movie_search_widget.dart';
-import 'package:mo3tv/features/search/presentation/widgets/tv_show_search_widget.dart';
-
+import 'package:mo3tv/features/search/presentation/widgets/search_list.dart';
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
@@ -71,23 +69,7 @@ class SearchScreen extends StatelessWidget {
                       handle: appBar,
                     ),
                     if(cubit.items.isNotEmpty)
-                    SliverToBoxAdapter(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: cubit.items.length,
-                        itemBuilder: (context, index){
-                        if(cubit.items[index].mediaType=="movie")
-                        {
-                          return MovieSearchWidget(movie: cubit.items[index]);
-                        }
-                        if(cubit.items[index].mediaType=="tv")
-                        {
-                          return  TvShowSearchWidget(tvShow: cubit.items[index],);
-                        }
-                        return Container();
-                      },),
-                    ),
+                      SearchList(items: cubit.items),
                     if(state is SearchSuccessState&&cubit.items.isEmpty)
                       const SliverToBoxAdapter(
                         child: Center(
@@ -96,10 +78,6 @@ class SearchScreen extends StatelessWidget {
                           ),
                         ),
                       )
-
-
-
-
                   ],
                 );
               }

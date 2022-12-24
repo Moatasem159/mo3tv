@@ -45,7 +45,7 @@ class TvShowSearchWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
-                  Text("${tvShow.originalName} (${tvShow.firstAirDate!.substring(0,4)})",style: const TextStyle(
+                  Text("${tvShow.originalName} ${tvShow.releaseDate==""?'':((tvShow.releaseDate!.substring(0, 4)))}",style: const TextStyle(
                       fontWeight: FontWeight.bold
                   ),),
                   const SizedBox(height: 4,),

@@ -15,7 +15,7 @@ class MovieInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${movie.title!} (${movie.releaseDate!.substring(0,4)}) ",
+            "${movie.title!} ${movie.releaseDate==""?'':((movie.releaseDate!.substring(0, 4)))}",
             maxLines: null,
             overflow: TextOverflow.visible,
             style:const TextStyle(

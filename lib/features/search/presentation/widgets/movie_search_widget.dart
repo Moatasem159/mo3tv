@@ -45,7 +45,7 @@ class MovieSearchWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
-                   Text("${movie.originalTitle} (${movie.releaseDate!.substring(0,4)})",style: const TextStyle(
+                   Text("${movie.originalTitle} ${movie.releaseDate==""?'':((movie.releaseDate!.substring(0, 4)))}",style: const TextStyle(
                       fontWeight: FontWeight.bold
                   ),),
                   const SizedBox(height: 4,),

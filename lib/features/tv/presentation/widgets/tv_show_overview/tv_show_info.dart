@@ -13,7 +13,7 @@ class TvShowInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${tvShow.originalName!} (${tvShow.firstAirDate!.substring(0,4)}) ",
+            "${tvShow.originalName!} ${tvShow.firstAirDate==""?'':((tvShow.firstAirDate!.substring(0, 4)))}",
             maxLines: null,
             overflow: TextOverflow.visible,
             style:const TextStyle(
