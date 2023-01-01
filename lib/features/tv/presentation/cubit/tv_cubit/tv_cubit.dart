@@ -268,7 +268,7 @@ class TvCubit extends Cubit<TvStates> {
   List<TvShow>? tvRecommendations=[];
   int page=1;
   bool allRec=false;
-  Future<void> getTvShowsRecommendations({int page=1,required tvId}) async {
+  Future<void> getTvShowsRecommendations({int page=1,required tvId})async{
     emit(GetTvShowRecommendationsLoadingState());
     Either<Failure, List<TvShow>> response =
     await getTvRecommendationsUseCase.call(tvId: tvId,page: page);
@@ -372,7 +372,7 @@ class TvCubit extends Cubit<TvStates> {
   ];
 
 
-  gallery(value,id){
+  gallery(value){
     emit(ChangeGalleryLoadingState());
     index=value;
     emit(ChangeGallerySuccessState());

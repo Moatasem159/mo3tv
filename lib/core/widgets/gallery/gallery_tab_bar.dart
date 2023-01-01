@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+
 
 class GalleryTabBar extends StatelessWidget {
-  final int id;
-  const GalleryTabBar({Key? key, required this.id}) : super(key: key);
+  final ValueChanged<int>? onTap;
+  const GalleryTabBar({Key? key,this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +19,7 @@ class GalleryTabBar extends StatelessWidget {
           indicatorWeight: 2,
           indicatorColor: Colors.red,
           labelPadding: const EdgeInsets.only(bottom: 5),
-          onTap: (value) {
-            BlocProvider.of<MovieCubit>(context).gallery(value,id);
-          },
+          onTap: onTap,
           tabs: const [
             Text("Backdrops"),
             Text("posters"),

@@ -7,8 +7,8 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit
 
 class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   final Movie movie;
-
-  MovieDetailsAppBar(this.movie);
+  final GestureTapCallback ? onTap;
+  MovieDetailsAppBar(this.movie,{this.onTap});
 
   final double maxSize = 200;
   final double minSize = 70;
@@ -38,61 +38,64 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
     final left = maxMargin + (textLeftMovement * p);
     final radius = 15 * p;
     final imageMargin = (minImageMargin * (p));
-    return Container(
-      color: Colors.black,
-      child: Stack(
-        children: [
-          Positioned(
-              bottom: 0,
-              left: imageMargin,
-              height: c,
-              child: Container(
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(radius),
-                        topLeft: Radius.circular(radius)),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        EndPoints.backDropsUrl(movie.backdropPath!),
-                      ),
-                    )),
-              )),
-          Positioned(
-              left: 15,
-              top: 5,
-              child: GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<MovieCubit>(context).clearObjects();
-                    BlocProvider.of<MovieCubit>(context).backToBackMovies();
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: Colors.black,
+        child: Stack(
+          children: [
+            Positioned(
+                bottom: 0,
+                left: imageMargin,
+                height: c,
+                child: Container(
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(radius),
+                          topLeft: Radius.circular(radius)),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(
+                          EndPoints.backDropsUrl(movie.backdropPath!),
+                        ),
+                      )),
+                )),
+            Positioned(
+                left: 15,
+                top: 5,
+                child: GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<MovieCubit>(context).clearObjects();
+                      BlocProvider.of<MovieCubit>(context).backToBackMovies();
 
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: iconSize,
-                  ))),
-          Positioned(
-              left: left,
-              top: top,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 300,
-                ),
-                child: FittedBox(
-                  child: Text(
-                    movie.title!,
-                    maxLines: null,
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(
-                      fontSize: titleSize,
-                      fontWeight: FontWeight.bold,
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: iconSize,
+                    ))),
+            Positioned(
+                left: left,
+                top: top,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 300,
+                  ),
+                  child: FittedBox(
+                    child: Text(
+                      movie.title!,
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(
+                        fontSize: titleSize,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-              )),
-        ],
+                )),
+          ],
+        ),
       ),
     );
     // 4.3

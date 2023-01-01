@@ -37,6 +37,8 @@ class MovieDetails extends StatelessWidget {
                         ),
                       ),
                     ),
+                errorWidget: (context, url, error) =>
+                    Image.asset("assets/images/movieplaceholder.png"),
               ),
             ),
             const SizedBox(

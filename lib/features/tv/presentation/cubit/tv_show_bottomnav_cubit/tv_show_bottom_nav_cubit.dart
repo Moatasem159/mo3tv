@@ -37,21 +37,11 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
     const TvShowsReviews(),
     const TvShowCredits(),
     const TvShowGallery(),
-
-
   ];
-  ScrollController controller=ScrollController();
-
   void changeScreen(int index,context,int tvId){
     emit(TvShowBottomNavChangingState());
-    controller.animateTo(0, duration: const Duration(milliseconds:500), curve: Curves.ease);
+
     isGallery=false;
-    // if(index==0)
-    //   {
-    //     if(BlocProvider.of<MovieCubit>(context).movie == Movie()){
-    //       BlocProvider.of<MovieCubit>(context).getMovieRecommendations(movieId: movieId);
-    //     }
-    //   }
     if(index==1)
       {
        if(BlocProvider.of<TvCubit>(context).tvRecommendations==null||BlocProvider.of<TvCubit>(context).tvRecommendations!.isEmpty){

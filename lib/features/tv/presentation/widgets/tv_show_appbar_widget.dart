@@ -7,8 +7,8 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 
 class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
   final TvShow tvShow;
-
-  TvShowDetailsAppBar(this.tvShow);
+  final GestureTapCallback ? onTap;
+  TvShowDetailsAppBar(this.tvShow, {this.onTap});
 
   final double maxSize = 200;
   final double minSize = 70;
@@ -38,61 +38,64 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
     final left = maxMargin + (textLeftMovement * p);
     final radius = 15 * p;
     final imageMargin = (minImageMargin * (p));
-    return Container(
-      color: Colors.black,
-      child: Stack(
-        children: [
-          Positioned(
-              bottom: 0,
-              left: imageMargin,
-              height: c,
-              child: Container(
-                width: size.width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(radius),
-                        topLeft: Radius.circular(radius)),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                        EndPoints.backDropsUrl(tvShow.backdropPath!),
-                      ),
-                    )),
-              )),
-          Positioned(
-              left: 15,
-              top: 5,
-              child: GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<TvCubit>(context).clearObjects();
-                    BlocProvider.of<TvCubit>(context).backToBackTvShows();
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        color: Colors.black,
+        child: Stack(
+          children: [
+            Positioned(
+                bottom: 0,
+                left: imageMargin,
+                height: c,
+                child: Container(
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(radius),
+                          topLeft: Radius.circular(radius)),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider(
+                          EndPoints.backDropsUrl(tvShow.backdropPath!),
+                        ),
+                      )),
+                )),
+            Positioned(
+                left: 15,
+                top: 5,
+                child: GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<TvCubit>(context).clearObjects();
+                      BlocProvider.of<TvCubit>(context).backToBackTvShows();
 
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: iconSize,
-                  ))),
-          Positioned(
-              left: left,
-              top: top,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 300,
-                ),
-                child: FittedBox(
-                  child: Text(
-                    tvShow.originalName!,
-                    maxLines: null,
-                    overflow: TextOverflow.visible,
-                    style: TextStyle(
-                      fontSize: titleSize,
-                      fontWeight: FontWeight.bold,
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: iconSize,
+                    ))),
+            Positioned(
+                left: left,
+                top: top,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 300,
+                  ),
+                  child: FittedBox(
+                    child: Text(
+                      tvShow.originalName!,
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      style: TextStyle(
+                        fontSize: titleSize,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-              )),
-        ],
+                )),
+          ],
+        ),
       ),
     );
     // 4.3

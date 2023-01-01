@@ -448,7 +448,7 @@ class MovieCubit extends Cubit<MovieStates> {
     const MoviePosters(),
     const MovieLogos(),
   ];
-  gallery(value,id){
+  gallery(value){
     emit(ChangeGalleryLoadingState());
     index=value;
     emit(ChangeGallerySuccessState());
