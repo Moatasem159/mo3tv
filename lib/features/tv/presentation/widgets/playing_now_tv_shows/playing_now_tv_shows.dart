@@ -10,7 +10,7 @@ import 'package:mo3tv/features/tv/presentation/widgets/playing_now_tv_shows/play
 
 
 class PlayingNowTvShows extends SliverPersistentHeaderDelegate {
-  final double maxSize = 300;
+  final double maxSize = 220;
   final double minSize = 80;
   final double maxTitleSize = 24;
   final double minTitleSize = 16;
@@ -24,8 +24,7 @@ class PlayingNowTvShows extends SliverPersistentHeaderDelegate {
 
 
   @override
-  Widget build(BuildContext context, double shrinkOffset,
-      bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     final p = shrinkOffset / maxSize;
     var size = MediaQuery
         .of(context)

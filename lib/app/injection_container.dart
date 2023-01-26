@@ -40,7 +40,12 @@ import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_useca
 import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/top_rated_movies_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/trending_movie_cubit.dart';
 import 'package:mo3tv/features/search/data/datasources/search_datasource.dart';
 import 'package:mo3tv/features/search/data/repositories/search_repository_impl.dart';
 import 'package:mo3tv/features/search/domain/repositories/search_repository.dart';
@@ -83,13 +88,9 @@ Future<void> init() async {
   sl.registerFactory(() =>SearchCubit(searchUsecase:sl()));
 
   sl.registerFactory<MovieCubit>(() => MovieCubit(
-      getNowPlayingMoviesUsecase: sl(),
       rateMovieUseCase: sl(),
-      popularMoviesUsecase: sl(),
-      getTrendingMoviesUsecase: sl(),
       getMovieGalleryUsecase: sl(),
       getMovieReviewsUsecase: sl(),
-      getTopRatedMoviesUsecase: sl(),
       deleteRateMovieUseCase: sl(),
       markMovieAsFavUsecase: sl(),
       addMovieToWatchListUseCase: sl(),
@@ -112,7 +113,12 @@ Future<void> init() async {
     deleteTvShowRateUseCase: sl(),
     rateTvShowUseCase: sl(),
   ));
-
+  sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(getNowPlayingMoviesUsecase: sl()));
+  sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(getTrendingMoviesUsecase:  sl()));
+  sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(popularMoviesUsecase:sl()));
+  sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(getTopRatedMoviesUsecase:sl()));
+  sl.registerFactory<MoreMoviesCubit>(()=>MoreMoviesCubit(
+      getTopRatedMoviesUsecase:sl(), popularMoviesUsecase: sl(), getTrendingMoviesUsecase: sl()));
   // movie useCases
   sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
           () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));

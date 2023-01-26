@@ -17,21 +17,21 @@ class PopularTvShows extends StatelessWidget {
       builder: (context, state) {
         TvCubit cubit = BlocProvider.of<TvCubit>(context);
         if(state is GetPopularTvShowsLoadingState||cubit.popularTvShows==null){
-          return const MediaHorizontalLoadingList(title: "Popular",);
+          return const MediaHorizontalLoadingList();
         }
         if(state is GetPopularTvShowsErrorState||cubit.popularTvShowError!) {
-          return MediaHorizontalError(title: "Popular",onPressed: () {
+          return MediaHorizontalError(onPressed: () {
             cubit.getPopularTvShowsData();
           },);
         }
         if(state is GetPopularTvShowsSuccessState||cubit.popularTvShows!=null) {
           return HorizontalTvShowsList(
             tvShows: cubit.popularTvShows!,
-            title: "Popular",
-            onTap: () {
+            // title: "Popular",
+            onPressed:() {
               cubit.seeMoreListTvShows.addAll(cubit.popularTvShows!);
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>  const MediaSeeMore(title:"Popular Tv Shows",popularTvShows: true, ),
+                builder: (context) =>  const MediaSeeMore(title:"Popular Tv Shows",index: 2, ),
               ));
             },
           );

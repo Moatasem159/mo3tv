@@ -40,15 +40,19 @@ class LoginButton extends StatelessWidget {
           },
           builder: (context, state) {
             if(state is LoginInitialState){
-              return ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Colors.red)
+              return Padding(
+                padding:EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width/7,
+                vertical: 5),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Colors.red)
+                  ),
+                  child: const Text("Login to enjoy full experience"),
+                  onPressed: () async {
+                    BlocProvider.of<LoginCubit>(context).getToken();
+                  },
                 ),
-                child: const Text("Login to enjoy full experience"),
-                onPressed: () async {
-                  BlocProvider.of<LoginCubit>(context).getToken();
-                },
               );
             }
             if(state is GetTokenLoadingState) {

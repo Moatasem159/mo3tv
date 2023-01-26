@@ -135,14 +135,12 @@ class TvCubit extends Cubit<TvStates> {
   bool ?topRatedTvShowError;
   Future<void> getTopRatedTvShowsData({int page=1,bool seeMore=false}) async {
     emit(GetTopRatedTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response =
-    await getTopRatedTvShowUsecase.call(page);
+    Either<Failure, List<TvShow>> response = await getTopRatedTvShowUsecase.call(page);
     emit(response.fold(
             (failure) {
               topRatedTvShows=[];
               topRatedTvShowError=true;
               return GetTopRatedTvShowsErrorState(msg: _mapFailureToMsg(failure));
-
             },
             (topRatedTvShows) {
               topRatedTvShowError=false;

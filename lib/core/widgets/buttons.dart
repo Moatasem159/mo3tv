@@ -20,7 +20,7 @@ class MainButton extends StatelessWidget {
           fixedSize: MaterialStateProperty.all(const Size(130, 40))
       ),
       onPressed:onPressed,
-      child: Text(label,style: Theme.of(context).textTheme.subtitle1!.copyWith(
+      child: Text(label,style: Theme.of(context).textTheme.titleMedium!.copyWith(
         color: Colors.white,
         fontSize: 15,
       ),),

@@ -23,10 +23,10 @@ class MoviePoster extends StatelessWidget {
       },
       child: ClipRRect(
         borderRadius:
-         BorderRadius.circular(8.0),
+         BorderRadius.circular(10),
         child: CachedNetworkImage(
-          width: 115,
-          height: 170,
+          width: 240,
+          height: 370,
           fit: BoxFit.cover,
           imageUrl: EndPoints.posterUrl(movie.posterPath!),
           placeholder: (context, url) => Shimmer.fromColors(

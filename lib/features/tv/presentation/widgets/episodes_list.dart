@@ -28,6 +28,7 @@ class EpisodesList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if(episodes[index].stillPath !=null)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: CachedNetworkImage(
@@ -72,6 +73,7 @@ class EpisodesList extends StatelessWidget {
                         const SizedBox(
                           height: 4,
                         ),
+                        if(episodes[index].runtime!=null)
                         Text(
                           "${episodes[index].runtime! ~/ 60 > 0 ? "${episodes[index].runtime! ~/ 60}h " : ''}${episodes[index].runtime! % 60==0?'':"${episodes[index].runtime! % 60}m"}",
                           style: const TextStyle(

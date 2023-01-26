@@ -38,7 +38,7 @@ class MediaListScreen extends StatelessWidget {
                 return true;
               },
               child: Scaffold(
-                backgroundColor: Theme.of(context).backgroundColor,
+                backgroundColor: Theme.of(context).colorScheme.background,
                 body: CustomScrollView(
                   slivers: [
                     SliverAppBar(

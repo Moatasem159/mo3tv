@@ -11,12 +11,15 @@ class MediaPosterLoading extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey[700]!,
       highlightColor: Colors.grey[600]!,
-      child: Container(
-        height: 170.0,
-        width: 115.0,
-        decoration: BoxDecoration(
-          color: Colors.grey,
-          borderRadius: BorderRadius.circular(8.0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Container(
+          width: 250,
+          height:350,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(25),
+          ),
         ),
       ),
     );

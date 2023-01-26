@@ -8,6 +8,8 @@ import 'package:mo3tv/features/search/presentation/cubit/search_state.dart';
 
 class SearchCubit extends Cubit<SearchStates> {
   SearchCubit({required this.searchUsecase}):super(SearchInitialStates());
+
+
   SearchUsecase searchUsecase;
 
   TextEditingController controller=TextEditingController();

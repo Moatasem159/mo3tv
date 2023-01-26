@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_widget.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_state.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/playing_now_movies/playing_now_movie_list.dart';
 
 
 
 
 class PlayingNowMovies extends SliverPersistentHeaderDelegate {
-  final double maxSize = 300;
+  final double maxSize = 220;
   final double minSize = 80;
   final double maxTitleSize = 24;
   final double minTitleSize = 16;
@@ -36,14 +36,12 @@ class PlayingNowMovies extends SliverPersistentHeaderDelegate {
     final playingSize =
     (maxPlayingSize * (1 - p)).clamp(minPlayingSize, maxPlayingSize);
     final iconSize = (maxIconSize * (1 - p)).clamp(minIconSize, maxIconSize);
-    return BlocConsumer<MovieCubit, MovieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<PlayingNowMovieCubit, PlayingNowMovieStates>(
       builder: (context, state) {
-        MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
-        if(state is GetNowPlayingMoviesLoadingState ||cubit.nowPlayingMovies == null) {
+        if(state is GetNowPlayingMoviesLoadingState) {
           return PlayingNowMediaLoadingWidget(height: c, width: size.width);
         }
-        if(cubit.nowPlayingError!){
+        if(state is GetNowPlayingMoviesErrorState){
           return Container(
             color: Theme.of(context).backgroundColor,
             alignment: Alignment.center,
@@ -57,15 +55,16 @@ class PlayingNowMovies extends SliverPersistentHeaderDelegate {
                   height: 7,
                 ),
                 MainButton(onPressed: (){
-                  cubit.getNowPlayingMoviesData();
+                  BlocProvider.of<PlayingNowMovieCubit>(context).getNowPlayingMoviesData();
                 }, label: "try again")
               ],
             ),
 
           );
         }
-        if (cubit.nowPlayingMovies != null){
-          return PlayingNowMoviesList(movies: cubit.nowPlayingMovies!,
+        if (state is GetNowPlayingMoviesSuccessState){
+          return PlayingNowMoviesList(
+              movies: state.nowPlayingMovies,
               height: c,
               width: size.width,
               iconSize: iconSize,

@@ -52,7 +52,7 @@ class MainTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius)),
           hintText: hintText,
 
-          hintStyle: Theme.of(context).textTheme.subtitle1!.copyWith(
+          hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
             fontSize: 11
           ),
           focusedBorder: OutlineInputBorder(
@@ -71,7 +71,7 @@ class MainTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(radius)),
           prefixIcon: Icon(
             prefixIcon,
-            color: Theme.of(context).textTheme.subtitle1!.color,
+            color: Theme.of(context).textTheme.titleMedium!.color,
           ),
         ),
       ),

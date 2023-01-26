@@ -9,57 +9,9 @@ abstract class MovieStates extends Equatable{
 
 class MoviesInitialState extends MovieStates{}
 class ClearObjectsState extends MovieStates{}
-class GetNowPlayingMoviesLoadingState extends MovieStates{}
-class GetNowPlayingMoviesSuccessState extends MovieStates{}
-class GetNowPlayingMoviesErrorState extends MovieStates{
 
 
-  final String msg;
 
-  GetNowPlayingMoviesErrorState({required this.msg});
-
-  @override
-  List<Object>get props=>[msg];
-}
-
-class GetPopularMoviesLoadingState extends MovieStates{}
-class GetPopularMoviesSuccessState extends MovieStates{}
-class GetPopularMoviesErrorState extends MovieStates{
-
-
-  final String msg;
-
-  GetPopularMoviesErrorState({required this.msg});
-
-  @override
-  List<Object>get props=>[msg];
-}
-
-
-class GetTopRatedMoviesLoadingState extends MovieStates{}
-class GetTopRatedMoviesSuccessState extends MovieStates{}
-class GetTopRatedMoviesErrorState extends MovieStates{
-
-
-  final String msg;
-
-  GetTopRatedMoviesErrorState({required this.msg});
-
-  @override
-  List<Object>get props=>[msg];
-}
-class GetTrendingMoviesLoadingState extends MovieStates{}
-class GetTrendingMoviesSuccessState extends MovieStates{}
-class GetTrendingMoviesErrorState extends MovieStates{
-
-
-  final String msg;
-
-  GetTrendingMoviesErrorState({required this.msg});
-
-  @override
-  List<Object>get props=>[msg];
-}
 
 class GetMovieDetailsLoadingState extends MovieStates{}
 class GetMovieDetailsSuccessState extends MovieStates{}

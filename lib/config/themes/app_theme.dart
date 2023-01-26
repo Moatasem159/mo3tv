@@ -29,25 +29,25 @@ class AppTheme {
       type: BottomNavigationBarType.fixed,
     ),
     textTheme: TextTheme(
-      headline2: TextStyle(
+      displayMedium: TextStyle(
           color: AppColors.primaryColor
       ),
-      subtitle1:  TextStyle(
+      titleMedium:  TextStyle(
           color: AppColors.primaryTextLight
       ),
-      subtitle2:  TextStyle(
+      titleSmall:  TextStyle(
           color: AppColors.primaryTextLight
       ),
-      bodyText1:  TextStyle(
+      bodyLarge:  TextStyle(
           color: AppColors.primaryTextLight
       ),
-      bodyText2:  TextStyle(
+      bodyMedium:  TextStyle(
           color: AppColors.primaryTextLight
       ),
-      caption:  TextStyle(
+      bodySmall:  TextStyle(
           color: AppColors.primaryTextLight
       ),
-      overline:  TextStyle(
+      labelSmall:  TextStyle(
           color: AppColors.primaryTextLight
       ),
 
