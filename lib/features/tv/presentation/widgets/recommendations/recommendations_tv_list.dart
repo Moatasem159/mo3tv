@@ -52,7 +52,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
           if(!BlocProvider.of<TvCubit>(context).allRec)
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(bottom: 70,left: 10,right:10,top: 10 ),
                 child: ElevatedButton(
                   child: const Text("Load more"),
                   onPressed: () {
@@ -76,7 +76,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
                         fontWeight: FontWeight.w600
                     ) ,)),
                   SizedBox(
-                    height: 10,
+                    height: 70,
                   ),
                 ],
               ) ,

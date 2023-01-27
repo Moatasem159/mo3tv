@@ -69,9 +69,8 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TvShowBottomNavCubit(),
-      child: BlocConsumer<TvShowBottomNavCubit, TvShowBottomNavStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
+      child: BlocBuilder<TvShowBottomNavCubit, TvShowBottomNavStates>(
+         builder: (context, state) {
           TvShowBottomNavCubit cubit =
               BlocProvider.of<TvShowBottomNavCubit>(context);
           return DefaultTabController(
@@ -86,61 +85,90 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
               child: SafeArea(
                   child: Scaffold(
                       backgroundColor: Theme.of(context).backgroundColor,
-                      body: NestedScrollView(
-                        controller: nestedController,
-                        headerSliverBuilder: (context, innerBoxIsScrolled) {
-                          return [
-                            SliverOverlapAbsorber(
-                              handle: appBar,
-                              sliver: SliverPersistentHeader(
-                                delegate: TvShowDetailsAppBar(
-                                  widget.tvShow,
-                                  onTap: () {
-                                    show();
-                                    nestedController.animateTo(0,
-                                        duration:
-                                            const Duration(milliseconds: 500),
-                                        curve: Curves.ease);
-                                  },
+                      body: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          NestedScrollView(
+                            controller: nestedController,
+                            headerSliverBuilder: (context, innerBoxIsScrolled) {
+                              return [
+                                SliverOverlapAbsorber(
+                                  handle: appBar,
+                                  sliver: SliverPersistentHeader(
+                                    delegate: TvShowDetailsAppBar(
+                                      widget.tvShow,
+                                      onTap: () {
+                                        show();
+                                        nestedController.animateTo(0,
+                                            duration:
+                                                const Duration(milliseconds: 500),
+                                            curve: Curves.ease);
+                                      },
+                                    ),
+                                    pinned: true,
+                                  ),
                                 ),
-                                pinned: true,
-                              ),
+                                if (cubit.isGallery)
+                                  SliverOverlapAbsorber(
+                                      handle: disconnectBar,
+                                      sliver: GalleryTabBar(
+                                        onTap: (value) {
+                                          BlocProvider.of<TvCubit>(context)
+                                              .gallery(value);
+                                        },
+                                      ))
+                              ];
+                            },
+                            body: CustomScrollView(
+                              physics: const ClampingScrollPhysics(),
+                              slivers: [
+                                SliverOverlapInjector(handle: appBar),
+                                if (cubit.isGallery)
+                                  SliverOverlapInjector(handle: disconnectBar),
+                                const SliverToBoxAdapter(
+                                  child: SizedBox(height: 15),
+                                ),
+                                cubit.screens[cubit.index]
+                              ],
                             ),
-                            if (cubit.isGallery)
-                              SliverOverlapAbsorber(
-                                  handle: disconnectBar,
-                                  sliver: GalleryTabBar(
-                                    onTap: (value) {
-                                      BlocProvider.of<TvCubit>(context)
-                                          .gallery(value);
-                                    },
-                                  ))
-                          ];
-                        },
-                        body: CustomScrollView(
-                          physics: const ClampingScrollPhysics(),
-                          slivers: [
-                            SliverOverlapInjector(handle: appBar),
-                            if (cubit.isGallery)
-                              SliverOverlapInjector(handle: disconnectBar),
-                            const SliverToBoxAdapter(
-                              child: SizedBox(height: 15),
-                            ),
-                            cubit.screens[cubit.index]
-                          ],
-                        ),
+                          ),
+                          CustomBottomNav(
+                            onTap1: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(0, context, widget.tvShow.id!);
+                            },
+                            onTap2: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(1, context, widget.tvShow.id!);
+                            },
+                            onTap3: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(2, context, widget.tvShow.id!);
+                            },
+                            onTap4: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(3, context, widget.tvShow.id!);
+                            },
+                            onTap5: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(
+                                  4, context, widget.tvShow.id!);
+                            },
+                            index: cubit.index,
+                          ),
+                        ],
                       ),
-                      bottomNavigationBar: MediaBottomNavBar(
-                        items: cubit.items,
-                        index: cubit.index,
-                        isVisible: isVisible,
-                        onTap: (value) {
-                          nestedController.animateTo(0,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.ease);
-                          cubit.changeScreen(value, context, widget.tvShow.id!);
-                        },
-                      ))),
+                     )),
             ),
           );
         },

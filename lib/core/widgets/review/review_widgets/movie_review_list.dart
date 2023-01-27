@@ -40,7 +40,7 @@ class MediaReviewsList extends StatelessWidget {
           ),
           const SliverToBoxAdapter(
             child: SizedBox(
-              height: 10,
+              height: 60,
             ),
           )
         ],

@@ -6,6 +6,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/entities/image.dart';
+import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/entities/review.dart';
@@ -75,10 +76,9 @@ class MoviesRepositoryImpl extends MovieRepository {
   @override
   Future<Either<Failure, Movie>> getMovieDetails({required int movieId}) async {
     if(await networkInfo.isConnected){
-      final result = await baseMovieRemoteDataSource.getMovieDetails(
-          movieId: movieId);
-
       try {
+        final MovieModel result = await baseMovieRemoteDataSource.getMovieDetails(movieId: movieId);
+          result.productionCompanies!.removeWhere((e) =>e.logoPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

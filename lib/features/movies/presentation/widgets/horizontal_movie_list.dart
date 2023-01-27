@@ -38,37 +38,40 @@ class HorizontalMoviesList extends StatelessWidget {
                       BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movies[index].id!);
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie: movies[index]),));
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageBuilder: (context, imageProvider) {
-                          return Container(
-                            width: 250,
-                            height:350,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              image: DecorationImage(
-                                image: imageProvider
-                              )
-                            ),
-                          );
-                        },
-                        imageUrl: EndPoints.posterUrl(movies[index].posterPath!),
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: Colors.grey[700]!,
-                          highlightColor: Colors.grey[600]!,
-                          child: Container(
-                            width: 250,
-                            height:350,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(25),
+                    child: Hero(
+                      tag: "${movies[index].id} hero",
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageBuilder: (context, imageProvider) {
+                            return Container(
+                              width: 250,
+                              height:350,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(25),
+                                image: DecorationImage(
+                                  image: imageProvider
+                                )
+                              ),
+                            );
+                          },
+                          imageUrl: EndPoints.posterUrl(movies[index].posterPath!),
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey[700]!,
+                            highlightColor: Colors.grey[600]!,
+                            child: Container(
+                              width: 250,
+                              height:350,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(25),
+                              ),
                             ),
                           ),
+                          errorWidget: (context, url, error) =>
+                              Image.asset("assets/images/movieplaceholder.png"),
                         ),
-                        errorWidget: (context, url, error) =>
-                            Image.asset("assets/images/movieplaceholder.png"),
                       ),
                     ),
                   );

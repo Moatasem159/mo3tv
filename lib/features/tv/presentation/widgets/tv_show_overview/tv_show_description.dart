@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
+import 'package:mo3tv/core/widgets/keywords_widgets/keyword_list_widget.dart';
 import 'package:mo3tv/core/widgets/play_media_trailer.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_poster.dart';
@@ -52,30 +53,7 @@ class TvShowDescription extends StatelessWidget {
           ],
         ),
         if (keywords.isNotEmpty)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Keywords:",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 7,
-              ),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.start,
-                children: keywords.map((e) {
-                  return Container(
-                      padding: const EdgeInsets.all(6),
-                      margin: const EdgeInsets.all(6),
-                      decoration: BoxDecoration(
-                          color: Colors.black38.withOpacity(.5),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Text(e.name!));
-                }).toList(),
-              ),
-            ],
-          ),
+          KeywordListWidget(keywords:keywords),
         const SizedBox(
           height: 7,
         ),

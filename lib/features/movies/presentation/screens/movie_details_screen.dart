@@ -11,9 +11,7 @@ import 'package:mo3tv/core/widgets/gallery/gallery_tab_bar.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   final Movie movie;
-
   const MovieDetailsScreen({Key? key, required this.movie}) : super(key: key);
-
   @override
   State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
 }
@@ -22,8 +20,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   ScrollController nestedController = ScrollController();
   bool isVisible = true;
   final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
-  final SliverOverlapAbsorberHandle disconnectBar =
-      SliverOverlapAbsorberHandle();
+  final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
 
   @override
   void initState() {
@@ -85,61 +82,90 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               child: SafeArea(
                 child: Scaffold(
                     backgroundColor: Theme.of(context).backgroundColor,
-                    body: NestedScrollView(
-                        controller: nestedController,
-                        physics: const ClampingScrollPhysics(),
-                        headerSliverBuilder: (context, innerBoxIsScrolled) {
-                          return [
-                            SliverOverlapAbsorber(
-                              handle: appBar,
-                              sliver: SliverPersistentHeader(
-                                delegate: MovieDetailsAppBar(
-                                  widget.movie,
-                                  onTap: () {
-                                    show();
-                                    nestedController.animateTo(0,
-                                        duration:
-                                            const Duration(milliseconds: 500),
-                                        curve: Curves.ease);
-                                  },
+                    body: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        NestedScrollView(
+                            controller: nestedController,
+                            physics: const ClampingScrollPhysics(),
+                            headerSliverBuilder: (context, innerBoxIsScrolled) {
+                              return [
+                                SliverOverlapAbsorber(
+                                  handle: appBar,
+                                  sliver: SliverPersistentHeader(
+                                    delegate: MovieDetailsAppBar(
+                                      widget.movie,
+                                      onTap: () {
+                                        show();
+                                        nestedController.animateTo(0,
+                                            duration:
+                                                const Duration(milliseconds: 500),
+                                            curve: Curves.ease);
+                                      },
+                                    ),
+                                    pinned: true,
+                                  ),
                                 ),
-                                pinned: true,
-                              ),
-                            ),
-                            if (cubit.isGallery)
-                              SliverOverlapAbsorber(
-                                handle: disconnectBar,
-                                sliver: GalleryTabBar(
-                                  onTap: (value) {
-                                    BlocProvider.of<MovieCubit>(context)
-                                        .gallery(value);
-                                  },
+                                if (cubit.isGallery)
+                                  SliverOverlapAbsorber(
+                                    handle: disconnectBar,
+                                    sliver: GalleryTabBar(
+                                      onTap: (value) {
+                                        BlocProvider.of<MovieCubit>(context)
+                                            .gallery(value);
+                                      },
+                                    ),
+                                  ),
+                              ];
+                            },
+                            body: CustomScrollView(
+                              slivers: [
+                                SliverOverlapInjector(handle: appBar),
+                                if (cubit.isGallery)
+                                  SliverOverlapInjector(handle: disconnectBar),
+                                const SliverToBoxAdapter(
+                                  child: SizedBox(height: 15),
                                 ),
-                              ),
-                          ];
-                        },
-                        body: CustomScrollView(
-                          slivers: [
-                            SliverOverlapInjector(handle: appBar),
-                            if (cubit.isGallery)
-                              SliverOverlapInjector(handle: disconnectBar),
-                            const SliverToBoxAdapter(
-                              child: SizedBox(height: 15),
-                            ),
-                            cubit.screens[cubit.index]
-                          ],
-                        )),
-                    bottomNavigationBar: MediaBottomNavBar(
-                      items: cubit.items,
-                      isVisible: isVisible,
-                      index: cubit.index,
-                      onTap: (value) {
-                        nestedController.animateTo(0,
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.ease);
-                        cubit.changeScreen(value, context, widget.movie.id!);
-                      },
-                    )),
+                                cubit.screens[cubit.index]
+                              ],
+                            )),
+                        CustomBottomNav(
+                          onTap1: () {
+                            nestedController.animateTo(0,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                            cubit.changeScreen(0, context, widget.movie.id!);
+                          },
+                          onTap2: () {
+                            nestedController.animateTo(0,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                            cubit.changeScreen(1, context, widget.movie.id!);
+                          },
+                          onTap3: () {
+                            nestedController.animateTo(0,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                            cubit.changeScreen(2, context, widget.movie.id!);
+                          },
+                          onTap4: () {
+                            nestedController.animateTo(0,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                            cubit.changeScreen(3, context, widget.movie.id!);
+                          },
+                          onTap5: () {
+                            nestedController.animateTo(0,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                            cubit.changeScreen(
+                            4, context, widget.movie.id!);
+                          },
+                          index: cubit.index,
+                        ),
+                      ],
+                    ),
+                ),
               ),
             );
           },
@@ -148,3 +174,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     );
   }
 }
+// MediaBottomNavBar(
+// items: cubit.items,
+// isVisible: isVisible,
+// index: cubit.index,
+// onTap: (value) {
+// nestedController.animateTo(0,
+// duration: const Duration(milliseconds: 500),
+// curve: Curves.ease);
+// cubit.changeScreen(value, context, widget.movie.id!);
+// },
+// ),
+
+
