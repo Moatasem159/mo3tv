@@ -4,10 +4,8 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/core/widgets/credits/media_credits_list.dart';
 import 'package:mo3tv/core/widgets/credits/media_credits_loading_list.dart';
-
 class MoviesCredits extends StatelessWidget {
   const MoviesCredits({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MovieCubit, MovieStates>(
@@ -27,7 +25,3 @@ class MoviesCredits extends StatelessWidget {
     );
   }
 }
-
-
-
-

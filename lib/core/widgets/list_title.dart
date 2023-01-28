@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 class ListTitle extends StatelessWidget {
   final String title;
-  final  VoidCallback? onPressed;
+  final VoidCallback? onPressed;
   const ListTitle({Key? key, required this.title, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(18, 20,9, 8.0),
+      margin: const EdgeInsets.fromLTRB(18, 0,9,0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 15,
               fontWeight: FontWeight.w500,
               letterSpacing: 0.15,
             ),
@@ -31,7 +31,7 @@ class ListTitle extends StatelessWidget {
                   Text('See More'),
                   Icon(
                     Icons.arrow_forward_ios,
-                    size: 16.0,
+                    size: 15,
                   )
                 ],
               ),

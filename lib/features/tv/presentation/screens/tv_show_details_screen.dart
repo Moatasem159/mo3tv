@@ -132,7 +132,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
                               ],
                             ),
                           ),
-                          CustomBottomNav(
+                          MediaBottomNan(
                             onTap1: () {
                               nestedController.animateTo(0,
                                   duration: const Duration(milliseconds: 500),

@@ -1,154 +1,53 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
-import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_states.dart';
-
-class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+class CustomBottomNav extends StatelessWidget {
+  final int index;
+  final GestureTapCallback onTap1;
+  final GestureTapCallback onTap2;
+  final GestureTapCallback onTap3;
+  final GestureTapCallback onTap4;
+  const CustomBottomNav({Key? key,
+    required this.index,
+    required this.onTap1,
+    required this.onTap2,
+    required this.onTap3,
+    required this.onTap4
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BottomNavCubit, BottomNavStates>(
-      listener: (context, state) {
-      },
-      builder: (context, state) {
-        BottomNavCubit cubit=BlocProvider.of<BottomNavCubit>(context);
-        return Container(
-          width: double.infinity,
-          height: 60,
-          color: Colors.black45,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Container(
+        clipBehavior: Clip.antiAlias,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        width: MediaQuery.of(context).size.width-90,
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white10,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX:3.5,sigmaY:3.5),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children:  [
               GestureDetector(
-                onTap: () {
-                  cubit.changeIndex(0, context);
-                },
-                child: Container(
-                  width: 45,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: cubit.movie? Colors.black54 : Colors.black12,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        if(cubit.movie)
-                          const BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 1.1,
-                              blurStyle: BlurStyle.inner,
-                              color: Colors.white10
-                          ),
-                        if(!cubit.movie)
-                          const BoxShadow(
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            blurStyle: BlurStyle.outer,
-                            color: Colors.white30,
-                          ),
-                      ]
-                  ),
-                  child: const Icon(Icons.movie_creation_outlined),
-                ),
-              ),
-              const Spacer(),
+                  onTap: onTap1,
+                  child: Icon(Icons.movie_creation_outlined,color:index==0?Colors.red:Colors.white)),
               GestureDetector(
-                onTap: () {
-                  cubit.changeIndex(1, context);
-                },
-                child: Container(
-                  width: 45,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: cubit.tv ? Colors.black54 : Colors.black12,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        if(!cubit.tv)
-                          const BoxShadow(
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            blurStyle: BlurStyle.outer,
-                            color: Colors.white30,
-                          ),
-                        if(cubit.tv)
-                          const BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 1.1,
-                              blurStyle: BlurStyle.inner,
-                              color: Colors.white10
-                          )
-                      ]
-                  ),
-                  child: const Icon(Icons.tv),
-                ),
-              ),
-              const Spacer(),
+                  onTap: onTap2,
+                  child:  Icon(Icons.tv,color:index==1?Colors.red:Colors.white)),
               GestureDetector(
-                onTap: () {
-                  cubit.changeIndex(2, context);
-                },
-                child: Container(
-                  width: 45,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: cubit.search ? Colors.black54 : Colors.black12,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        if(!cubit.search)
-                          const BoxShadow(
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            blurStyle: BlurStyle.outer,
-                            color: Colors.white30,
-                          ),
-                        if(cubit.search)
-                          const BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 1.1,
-                              blurStyle: BlurStyle.inner,
-                              color: Colors.white10
-                          )
-                      ]
-                  ),
-                  child: const Icon(Icons.search),
-                ),
-              ),
-              const Spacer(),
+                  onTap: onTap3,
+                  child:  Icon(Icons.search,color:index==2?Colors.red:Colors.white)),
               GestureDetector(
-                onTap: () {
-                  cubit.changeIndex(3, context);
-                },
-                child: Container(
-                  width: 45,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: cubit.account ? Colors.black54 : Colors.black12,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        if(!cubit.account)
-                          const BoxShadow(
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            blurStyle: BlurStyle.outer,
-                            color: Colors.white30,
-                          ),
-                        if(cubit.account)
-                          const BoxShadow(
-                              blurRadius: 10,
-                              spreadRadius: 1.1,
-                              blurStyle: BlurStyle.inner,
-                              color: Colors.white10
-                          )
-                      ]
-                  ),
-                  child: const Icon(Icons.account_circle_outlined),
-                ),
-              ),
-              const Spacer(),
+                  onTap: onTap4,
+                  child:  Icon(Icons.account_circle_outlined,color:index==3?Colors.red:Colors.white)),
             ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

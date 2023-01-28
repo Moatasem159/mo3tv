@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
-
 class MovieDetailsLoadingWidget extends StatelessWidget {
   const MovieDetailsLoadingWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -15,7 +13,6 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Shimmer.fromColors(
                     baseColor: Colors.grey[850]!,
                     highlightColor: Colors.grey[800]!,

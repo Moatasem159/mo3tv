@@ -129,7 +129,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                 cubit.screens[cubit.index]
                               ],
                             )),
-                        CustomBottomNav(
+                        MediaBottomNan(
                           onTap1: () {
                             nestedController.animateTo(0,
                                 duration: const Duration(milliseconds: 500),

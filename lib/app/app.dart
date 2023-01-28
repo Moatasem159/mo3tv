@@ -26,9 +26,9 @@ class Mo3Tv extends StatelessWidget {
             ..getNowPlayingTvShowsData()
             ..getTrendingTvShowsData()),
           BlocProvider(create: (context) => di.sl<PlayingNowMovieCubit>()..getNowPlayingMoviesData()),
-          BlocProvider(create: (context) => di.sl<PopularMovieCubit>()),
+          BlocProvider(create: (context) => di.sl<PopularMovieCubit>()..getPopularMoviesData()),
           BlocProvider(create: (context) => di.sl<TrendingMovieCubit>()..getTrendingMoviesData()),
-          BlocProvider(create: (context) => di.sl<TopRatedMoviesCubit>()),
+          BlocProvider(create: (context) => di.sl<TopRatedMoviesCubit>()..getTopRatedMoviesData()),
           BlocProvider(create: (context) => di.sl<MoreMoviesCubit>()),
           BlocProvider(create: (context) => di.sl<AccountCubit>()..getAccountDetails()..getLists()),
           BlocProvider(create: (context) => di.sl<LoginCubit>()),
