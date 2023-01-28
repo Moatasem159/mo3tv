@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/widgets/gallery/gallery_tab_bar.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -79,12 +80,12 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
               onWillPop: () async {
                 BlocProvider.of<TvCubit>(context).clearObjects();
                 BlocProvider.of<TvCubit>(context).backToBackTvShows();
-                Navigator.pop(context);
+                GoRouter.of(context).pop();
                 return true;
               },
               child: SafeArea(
                   child: Scaffold(
-                      backgroundColor: Theme.of(context).backgroundColor,
+                      backgroundColor: Theme.of(context).colorScheme.background,
                       body: Stack(
                         alignment: Alignment.bottomCenter,
                         children: [

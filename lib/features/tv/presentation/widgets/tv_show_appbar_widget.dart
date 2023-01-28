@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
@@ -68,8 +69,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                     onTap: () {
                       BlocProvider.of<TvCubit>(context).clearObjects();
                       BlocProvider.of<TvCubit>(context).backToBackTvShows();
-
-                      Navigator.pop(context);
+                      GoRouter.of(context).pop();
                     },
                     child: Icon(
                       Icons.arrow_back,

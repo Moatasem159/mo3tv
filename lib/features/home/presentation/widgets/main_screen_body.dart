@@ -25,7 +25,8 @@ class MainScreenBody extends StatelessWidget {
             },
             child: SafeArea(
               child: Scaffold(
-                backgroundColor: Theme.of(context).backgroundColor,
+                resizeToAvoidBottomInset:false,
+                backgroundColor: Theme.of(context).colorScheme.background,
                 body: Stack(
                   alignment: Alignment.bottomCenter,
                   children: [

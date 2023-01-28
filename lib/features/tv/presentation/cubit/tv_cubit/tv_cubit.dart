@@ -10,10 +10,6 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_top_rated_tv_shows_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
@@ -29,10 +25,8 @@ import 'package:mo3tv/features/tv/presentation/widgets/gallery/posters/tv_show_p
 
 class TvCubit extends Cubit<TvStates> {
   TvCubit({
-    required this.getNowPlayingTvShowsUsecase,
-    required this.getPopularTvShowsUsecase,
-    required this.getTopRatedTvShowUsecase,
-    required this.getTrendingTvShowsUsecase,
+
+
     required this.getTvShowDetailsUsecase,
     required this.getTvRecommendationsUseCase,
     required this.getTvShowsReviewsUsecase,
@@ -43,13 +37,12 @@ class TvCubit extends Cubit<TvStates> {
     required this.deleteTvShowRateUseCase,
     required this.rateTvShowUseCase,
     required this.getTvShowSeasonDetailsUsecase,
-
 }) : super(TvInitialState());
 
 
-  GetNowPlayingTvShowsUsecase getNowPlayingTvShowsUsecase;
-  GetPopularTvShowsUsecase getPopularTvShowsUsecase;
-  GetTopRatedTvShowUsecase getTopRatedTvShowUsecase;
+
+
+
   GetTvShowDetailsUsecase getTvShowDetailsUsecase;
   GetTvRecommendationsUseCase getTvRecommendationsUseCase;
   GetTvShowsReviewsUsecase getTvShowsReviewsUsecase;
@@ -59,158 +52,16 @@ class TvCubit extends Cubit<TvStates> {
   AddTvShowToWatchListUseCase addTvShowToWatchListUseCase;
   RateTvShowUseCase rateTvShowUseCase;
   DeleteTvShowRateUseCase deleteTvShowRateUseCase;
-  GetTrendingTvShowsUsecase getTrendingTvShowsUsecase;
+
   GetTvShowSeasonDetailsUsecase getTvShowSeasonDetailsUsecase;
 
 
-
-
-
-
-
-  List<TvShow>? nowPlayingTvShows;
-  bool? nowPlayingError;
-  Future<void> getNowPlayingTvShowsData({int page=1}) async {
-    emit(GetNowPlayingTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response =
-    await getNowPlayingTvShowsUsecase.call(page);
-    nowPlayingTvShows = [];
-    emit(response.fold(
-            (failure) {
-              nowPlayingError=true;
-              return GetNowPlayingTvShowsErrorState(msg: _mapFailureToMsg(failure));
-            },
-
-            (playingTvShows) {
-              nowPlayingError=false;
-              nowPlayingTvShows = playingTvShows;
-          return GetNowPlayingTvShowsSuccessState();
-        }));
-  }
-
-  List<TvShow>?popularTvShows;
-  bool ?popularTvShowError;
   List<TvShow> seeMoreListTvShows=[];
   int tvShowListPage=1;
 
-  Future<void> getPopularTvShowsData(
-      {int page = 1, bool seeMore = false}) async {
-    emit(GetPopularTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response =
-        await getPopularTvShowsUsecase.call(page);
-    emit(response.fold((failure) {
-      popularTvShows = [];
-      popularTvShowError = true;
-      return GetPopularTvShowsErrorState(msg: _mapFailureToMsg(failure));
-    }, (popularTvShows) {
-      popularTvShowError = false;
-      if (seeMore == false) {
-        this.popularTvShows = [];
-        for (var element in popularTvShows) {
-          if (element.posterPath != "" && element.backdropPath != "") {
-            if (!this.popularTvShows!.any(
-                  (e) => e.id == element.id,
-                )) {
-              this.popularTvShows!.add(element);
-            }
-          }
-        }
-      }
-      else if (seeMore == true) {
-        for (var element in popularTvShows) {
-          if (element.backdropPath != "" && element.posterPath != "") {
-            if (!seeMoreListTvShows.any(
-              (e) => e.id == element.id,
-            )) {
-              seeMoreListTvShows.add(element);
-            }
-          }
-        }
-      }
-      return GetPopularTvShowsSuccessState();
-    }));
-  }
 
-  List<TvShow> ?topRatedTvShows;
-  bool ?topRatedTvShowError;
-  Future<void> getTopRatedTvShowsData({int page=1,bool seeMore=false}) async {
-    emit(GetTopRatedTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response = await getTopRatedTvShowUsecase.call(page);
-    emit(response.fold(
-            (failure) {
-              topRatedTvShows=[];
-              topRatedTvShowError=true;
-              return GetTopRatedTvShowsErrorState(msg: _mapFailureToMsg(failure));
-            },
-            (topRatedTvShows) {
-              topRatedTvShowError=false;
-              if (seeMore == false){
-                this.topRatedTvShows = [];
-              for (var element in topRatedTvShows) {
-                if(element.backdropPath != "" && element.posterPath != "")
-                {
-                  if(!this.topRatedTvShows!.any((e) =>e.id==element.id,))
-                  {
-                    this.topRatedTvShows!.add(element);
-                  }
-                }
-              }
-              }
-              else if (seeMore == true) {
-                for (var element in topRatedTvShows) {
-                  if (element.backdropPath != "" && element.posterPath != "") {
-                    if (!seeMoreListTvShows.any(
-                          (e) => e.id == element.id,
-                    )) {
-                      seeMoreListTvShows.add(element);
-                    }
-                  }
-                }
-              }
-          return GetTopRatedTvShowsSuccessState();
-        }));
-  }
 
-  List<TvShow>? trendingTvShows;
-  bool ?trendingTvShowError;
-  Future<void> getTrendingTvShowsData({int page=1,bool seeMore=false}) async {
-    emit(GetTrendingTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response =
-    await getTrendingTvShowsUsecase.call(page);
-    emit(response.fold(
-            (failure) {
-              trendingTvShows=[];
-              trendingTvShowError=true;
-              return GetTrendingTvShowsErrorState(msg: _mapFailureToMsg(failure));
-            },
-            (trendingTvShows) {
-              trendingTvShowError=false;
-              if (seeMore == false){
-                this.trendingTvShows=[];
-                for (var element in trendingTvShows) {
-            if(element.backdropPath != "" && element.posterPath != "")
-            {
-              if(!this.trendingTvShows!.any((e) =>e.id==element.id,))
-              {
-                this.trendingTvShows!.add(element);
-              }
-            }
-          }
-              }
-              else if (seeMore == true) {
-                for (var element in trendingTvShows) {
-                  if (element.backdropPath != "" && element.posterPath != "") {
-                    if (!seeMoreListTvShows.any(
-                          (e) => e.id == element.id,
-                    )) {
-                      seeMoreListTvShows.add(element);
-                    }
-                  }
-                }
-              }
-          return GetTrendingTvShowsSuccessState();
-        }));
-  }
+
 
   TvShow tvShow= TvShow();
   Future<void> getTvShowDetailsData({required int tvShowId}) async {

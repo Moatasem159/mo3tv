@@ -41,9 +41,9 @@ class MoviesRepositoryImpl extends MovieRepository {
   Future<Either<Failure, List<Movie>>> getPopularMovies({required int page}) async {
     if(await networkInfo.isConnected)
       {
-        final result = await baseMovieRemoteDataSource.getPopularMovies(page: page);
-
         try {
+          final result = await baseMovieRemoteDataSource.getPopularMovies(page: page);
+          result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -58,10 +58,9 @@ class MoviesRepositoryImpl extends MovieRepository {
   Future<Either<Failure, List<Movie>>> getTopRatedMovies({required int page}) async {
    if(await networkInfo.isConnected)
      {
-       final result = await baseMovieRemoteDataSource.getTopRatedMovies(
-           page: page);
-
        try {
+         final result = await baseMovieRemoteDataSource.getTopRatedMovies(page: page);
+         result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
          return Right(result);
        } on ServerException catch (failure) {
          return Left(ServerFailure(failure.message!));
@@ -231,9 +230,9 @@ class MoviesRepositoryImpl extends MovieRepository {
   Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
     if(await networkInfo.isConnected)
     {
-      final result = await baseMovieRemoteDataSource.getTrendingMovies(page: page);
-
       try {
+        final result = await baseMovieRemoteDataSource.getTrendingMovies(page: page);
+        result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

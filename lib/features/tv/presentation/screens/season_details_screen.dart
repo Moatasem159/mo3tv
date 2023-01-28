@@ -20,7 +20,7 @@ class SeasonDetailsScreen extends StatelessWidget {
     final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
     return SafeArea(
         child: Scaffold(
-            backgroundColor: Theme.of(context).backgroundColor,
+            backgroundColor: Theme.of(context).colorScheme.background,
           body: WillPopScope(
             onWillPop: () async{
               BlocProvider.of<TvCubit>(context).tvShowSeason = const TvShowSeason();

@@ -19,8 +19,6 @@ class AccountScreen extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           slivers: [
             AccountLists(),
-
-
           ],
         ));
     }

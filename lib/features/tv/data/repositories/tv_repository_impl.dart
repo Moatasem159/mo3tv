@@ -22,10 +22,9 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, List<TvShow>>> getNowPlayingTvShows({required int page})async {
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getNowPlayingTvShows(
-          page: page);
-
-      try {
+      try{
+        final result = await tvShowRemoteDataSource.getNowPlayingTvShows(page: page);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

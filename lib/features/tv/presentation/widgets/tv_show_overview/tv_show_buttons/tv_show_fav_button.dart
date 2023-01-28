@@ -15,22 +15,22 @@ class TvShowFavButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<TvCubit, TvStates>(
       listener: (context, state) {
-        if(state is FavTvShowSuccessState &&state.statusCode==13)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Removed from favourites")));
-        }
-        else if(state is FavTvShowSuccessState&& state.statusCode==1)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Added to favourites")));
-        }
+        // if(state is FavTvShowSuccessState &&state.statusCode==13)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Removed from favourites")));
+        // }
+        // else if(state is FavTvShowSuccessState&& state.statusCode==1)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Added to favourites")));
+        // }
       },
       child: MediaIconButton(
             onTap:() {

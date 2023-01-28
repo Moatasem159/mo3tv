@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/widgets/media_loading/media_list_loading_item.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/screens/movie_details_screen.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_list_loading_item.dart';
 class MovieListItem extends StatelessWidget {
   final Movie movie;
   const MovieListItem({Key? key, required this.movie}) : super(key: key);
@@ -16,7 +17,7 @@ class MovieListItem extends StatelessWidget {
         BlocProvider.of<MovieCubit>(context).clearObjects();
         BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie: movie),));
+        GoRouter.of(context).pushNamed(Routes.movieRoute,extra:movie,);
       },
       child: CachedNetworkImage(
         imageBuilder: (context, imageProvider) {
@@ -34,7 +35,7 @@ class MovieListItem extends StatelessWidget {
           );
         },
         imageUrl: EndPoints.posterUrl(movie.posterPath!),
-        placeholder: (context, url) => const MovieListLoadingItem(),
+        placeholder: (context, url) => const MediaListLoadingItem(),
         errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
       ),
     );

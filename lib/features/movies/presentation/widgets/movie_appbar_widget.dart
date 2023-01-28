@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
@@ -68,8 +69,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                     onTap: () {
                       BlocProvider.of<MovieCubit>(context).clearObjects();
                       BlocProvider.of<MovieCubit>(context).backToBackMovies();
-
-                      Navigator.pop(context);
+                      GoRouter.of(context).pop();
                     },
                     child: Icon(
                       Icons.arrow_back,

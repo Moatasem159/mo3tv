@@ -68,6 +68,11 @@ import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_gallery_usecase.da
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -100,10 +105,6 @@ Future<void> init() async {
   sl.registerFactory<TvCubit>(() => TvCubit(
     getTvShowDetailsUsecase: sl(),
     getTvShowSeasonDetailsUsecase: sl(),
-    getTopRatedTvShowUsecase: sl(),
-    getTrendingTvShowsUsecase: sl(),
-    getPopularTvShowsUsecase: sl(),
-      getNowPlayingTvShowsUsecase: sl(),
     getTvRecommendationsUseCase: sl(),
     getTvShowsReviewsUsecase: sl(),
     getTvShowCreditsUsecase: sl(),
@@ -114,11 +115,21 @@ Future<void> init() async {
     rateTvShowUseCase: sl(),
   ));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(getNowPlayingMoviesUsecase: sl()));
+  sl.registerFactory<PlayingNowTvShowCubit>(()=>PlayingNowTvShowCubit(getNowPlayingTvShowsUsecase: sl()));
   sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(getTrendingMoviesUsecase:  sl()));
+  sl.registerFactory<TrendingTvShowCubit>(()=>TrendingTvShowCubit(getTrendingTvShowsUsecase:sl()));
   sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(popularMoviesUsecase:sl()));
+  sl.registerFactory<PopularTvShowCubit>(()=>PopularTvShowCubit(getPopularTvShowsUsecase:sl()));
   sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(getTopRatedMoviesUsecase:sl()));
+  sl.registerFactory<TopRatedTvShowsCubit>(()=>TopRatedTvShowsCubit(getTopRatedTvShowUsecase:sl()));
   sl.registerFactory<MoreMoviesCubit>(()=>MoreMoviesCubit(
       getTopRatedMoviesUsecase:sl(), popularMoviesUsecase: sl(), getTrendingMoviesUsecase: sl()));
+  sl.registerFactory<MoreTvShowsCubit>(()=>MoreTvShowsCubit(
+      getTrendingTvShowsUsecase:sl(), getPopularTvShowsUsecase: sl(), getTopRatedTvShowUsecase: sl()));
+
+
+
+
   // movie useCases
   sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
           () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));

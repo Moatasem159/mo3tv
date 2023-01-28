@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
+import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
@@ -36,28 +37,14 @@ class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
       }
     emit(response!.fold(
             (failure) {
-          return GetMoreMoviesErrorState(msg: _mapFailureToMsg(failure));
+          return GetMoreMoviesErrorState(msg: mapFailureToMsg(failure));
         },
             (moreMovies) {
               for (var element in moreMovies) {
-                if (element.backdropPath != "" && element.posterPath != "") {
-                  if (!this.moreMovies.any(
-                        (e) => e.id == element.id,
-                  )) {
-                    this.moreMovies.add(element);
-                  }
-                }
+                this.moreMovies.add(element);
               }
           return GetMoreMoviesSuccessState();
         }));
 
-  }
-  String _mapFailureToMsg(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return "Server Failure";
-      default:
-        return " error";
-    }
   }
 }

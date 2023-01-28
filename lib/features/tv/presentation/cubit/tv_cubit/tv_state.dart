@@ -3,47 +3,9 @@ abstract class TvStates {}
 class TvInitialState extends TvStates {}
 
 class ClearObjectsState extends TvStates{}
-class GetNowPlayingTvShowsLoadingState extends TvStates{}
-class GetNowPlayingTvShowsSuccessState extends TvStates{}
-class GetNowPlayingTvShowsErrorState extends TvStates{
 
 
-  final String msg;
 
-  GetNowPlayingTvShowsErrorState({required this.msg});
-}
-
-
-class GetPopularTvShowsLoadingState extends TvStates{}
-class GetPopularTvShowsSuccessState extends TvStates{}
-class GetPopularTvShowsErrorState extends TvStates{
-
-
-  final String msg;
-
-  GetPopularTvShowsErrorState({required this.msg});
-}
-
-
-class GetTopRatedTvShowsLoadingState extends TvStates{}
-class GetTopRatedTvShowsSuccessState extends TvStates{}
-class GetTopRatedTvShowsErrorState extends TvStates{
-
-
-  final String msg;
-
-  GetTopRatedTvShowsErrorState({required this.msg});
-}
-
-class GetTrendingTvShowsLoadingState extends TvStates{}
-class GetTrendingTvShowsSuccessState extends TvStates{}
-class GetTrendingTvShowsErrorState extends TvStates{
-
-
-  final String msg;
-
-  GetTrendingTvShowsErrorState({required this.msg});
-}
 
 class GetTvShowDetailsLoadingState extends TvStates{}
 class GetTvShowDetailsSuccessState extends TvStates{}

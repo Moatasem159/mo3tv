@@ -11,9 +11,13 @@ import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/pop
 import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/top_rated_movies_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/trending_movie_cubit.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
-
 class Mo3Tv extends StatelessWidget {
   const Mo3Tv({super.key});
 
@@ -22,21 +26,24 @@ class Mo3Tv extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => di.sl<MovieCubit>()),
-          BlocProvider(create: (context) => di.sl<TvCubit>()
-            ..getNowPlayingTvShowsData()
-            ..getTrendingTvShowsData()),
+          BlocProvider(create: (context) => di.sl<TvCubit>()),
           BlocProvider(create: (context) => di.sl<PlayingNowMovieCubit>()..getNowPlayingMoviesData()),
+          BlocProvider(create: (context) => di.sl<PlayingNowTvShowCubit>()..getNowPlayingTvShowsData()),
           BlocProvider(create: (context) => di.sl<PopularMovieCubit>()..getPopularMoviesData()),
+          BlocProvider(create: (context) => di.sl<PopularTvShowCubit>()..getPopularTvShowsData()),
           BlocProvider(create: (context) => di.sl<TrendingMovieCubit>()..getTrendingMoviesData()),
+          BlocProvider(create: (context) => di.sl<TrendingTvShowCubit>()..getTrendingTvShowsData()),
           BlocProvider(create: (context) => di.sl<TopRatedMoviesCubit>()..getTopRatedMoviesData()),
+          BlocProvider(create: (context) => di.sl<TopRatedTvShowsCubit>()..getTopRatedTvShowsData()),
           BlocProvider(create: (context) => di.sl<MoreMoviesCubit>()),
+          BlocProvider(create: (context) => di.sl<MoreTvShowsCubit>()),
           BlocProvider(create: (context) => di.sl<AccountCubit>()..getAccountDetails()..getLists()),
           BlocProvider(create: (context) => di.sl<LoginCubit>()),
           BlocProvider(create: (context) => di.sl<SearchCubit>())
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRoute.onGenerateRoute,
+      routerConfig:AppRoute.router,
       themeMode: ThemeMode.dark,
       darkTheme: AppTheme.darkTheme,
     ));

@@ -1,49 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/core/widgets/media_horizontal_list/media_horizontal_error.dart';
-import 'package:mo3tv/core/widgets/media_horizontal_list/media_horizontal_loading_list.dart';
-import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/horizontal_tv_show_list.dart';
-
-class TrendingTvShows extends StatelessWidget {
-
-  const TrendingTvShows({Key? key}) : super(key: key);
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
+import 'package:mo3tv/core/entities/see_more_parameters.dart';
+import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
+import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_state.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list.dart';
+class TrendingTvShow extends StatelessWidget {
+  const TrendingTvShow({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TvCubit, TvStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        TvCubit cubit = BlocProvider.of<TvCubit>(context);
-        if(state is GetTrendingTvShowsLoadingState||cubit.trendingTvShows==null){
-          return const MediaHorizontalLoadingList();
-        }
-        if(state is GetTrendingTvShowsErrorState||cubit.trendingTvShowError!) {
-          return MediaHorizontalError(onPressed: () {
-            cubit.getTrendingTvShowsData();
-          },);
-        }
-        if(state is GetTrendingTvShowsSuccessState||cubit.trendingTvShows!=null) {
-          return HorizontalTvShowsList(
-            tvShows: cubit.trendingTvShows!,
-            // title: "Trending series today",
+    const String title="Trending tv show today";
+    return BlocBuilder<TrendingTvShowCubit,TrendingTvShowStates>(
+      builder:(context, state) {
+        if(state is GetTrendingTvShowsSuccessState)
+        {
+          return TvShowList(tvShow:state.trendingTvSHows,
+            title:title,
             onPressed: () {
-              cubit.seeMoreListTvShows.addAll(cubit.trendingTvShows!);
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) =>  const MediaSeeMore(title:"Trending series today",index: 1, ),
-              ));
+              BlocProvider.of<MoreTvShowsCubit>(context).moreTvShows.addAll(state.trendingTvSHows);
+              GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
+                extra: SeeMoreParameters(title: title, isMovie: false, index: 1),);
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (context) =>  const MediaSeeMore(title:title,index:1,isMovie: false),
+              // ));
             },
           );
         }
-        return SliverToBoxAdapter(child: Container());
-      },
-    );
+        if(state is GetTrendingTvShowsLoadingState)
+        {
+          return const MediaLoadingList(title: title,);
+        }
+        if(state is GetTrendingTvShowsErrorState){
+          return MediaErrorList(
+            title: title,
+            onPressed:() {
+              BlocProvider.of<TrendingTvShowCubit>(context).getTrendingTvShowsData();
+            }, );
+        }
+        return  Container();
+      },);
   }
 }
-
-
-
-
-
-

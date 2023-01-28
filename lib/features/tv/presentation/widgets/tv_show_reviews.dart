@@ -5,11 +5,8 @@ import 'package:mo3tv/core/widgets/review/reviews_loading_widgets/movie_reviews_
 import 'package:mo3tv/core/widgets/review/review_widgets/movie_review_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-
-
 class TvShowsReviews extends StatelessWidget {
   const TvShowsReviews({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TvCubit, TvStates>(
@@ -30,14 +27,3 @@ class TvShowsReviews extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-

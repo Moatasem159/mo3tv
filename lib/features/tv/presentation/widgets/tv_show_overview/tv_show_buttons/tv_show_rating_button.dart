@@ -16,22 +16,22 @@ class TvShowRatingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<TvCubit, TvStates>(
       listener: (context, state) {
-        if(state is RateTvShowSuccessState)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Movie rated successfully")));
-        }
-        if(state is RemoveRateTvShowSuccessState)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Rating removed successfully")));
-        }
+        // if(state is RateTvShowSuccessState)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Movie rated successfully")));
+        // }
+        // if(state is RemoveRateTvShowSuccessState)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Rating removed successfully")));
+        // }
       },
       child: Tooltip(
         message:"Rated${tvShow.tvShowAccountDetails!.ratedValue}!" ,

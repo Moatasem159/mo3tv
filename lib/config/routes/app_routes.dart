@@ -1,25 +1,49 @@
-import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/core/entities/see_more_parameters.dart';
+import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
 import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
-import 'package:mo3tv/app/injection_container.dart';
-
+import 'package:mo3tv/features/movies/domain/entities/movie.dart';
+import 'package:mo3tv/features/movies/presentation/screens/movie_details_screen.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/tv/presentation/screens/tv_show_details_screen.dart';
 class Routes {
   static const String initialRoute= "/";
+  static const String movieRoute= "/movieRoute";
+  static const String tvShowRoute= "/tvShowRoute";
+  static const String seeMoreRoute= "/seeMoreRoute";
 }
-class AppRoute{
-  static Route ? onGenerateRoute(RouteSettings routeSettings){
-    switch(routeSettings.name){
-      case Routes.initialRoute:
-        login();
-        return MaterialPageRoute(
-          builder: (context) => const MainScreen(),
-        );
-      default: undefinedRoute();
-    }
-    return null;
-  }
-  static Route<dynamic> undefinedRoute(){
-    return MaterialPageRoute(builder: (context) => const Scaffold(),);
-  }
 
 
+
+abstract class AppRoute{
+  static final router=GoRouter(
+    routes: [
+      GoRoute(
+        path: Routes.initialRoute,
+        builder: (context, state) => const MainScreen(),
+        
+      ),
+      GoRoute(
+        name: Routes.movieRoute,
+        path: Routes.movieRoute,
+        builder: (context, state) =>  MovieDetailsScreen(
+            movie: state.extra as Movie,
+        ),
+        
+      ),
+      GoRoute(
+        name: Routes.tvShowRoute,
+        path: Routes.tvShowRoute,
+        builder: (context, state) =>  TvShowDetailsScreen(
+            tvShow:  state.extra as TvShow,
+        ),
+
+      ),
+      GoRoute(
+        name:  Routes.seeMoreRoute,
+        path: Routes.seeMoreRoute,
+        builder: (context, state) =>  MediaSeeMore(parameters:state.extra as SeeMoreParameters),
+        ),
+    ],
+  );
 }

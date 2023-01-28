@@ -15,22 +15,22 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<TvCubit, TvStates>(
       listener: (context, state) {
-        if(state is AddToWatchListSuccessState &&state.statusCode==13)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Removed from watchlist")));
-        }
-        else if(state is AddToWatchListSuccessState&& state.statusCode==1)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Added to watchlist")));
-        }
+        // if(state is AddToWatchListSuccessState &&state.statusCode==13)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Removed from watchlist")));
+        // }
+        // else if(state is AddToWatchListSuccessState&& state.statusCode==1)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Added to watchlist")));
+        // }
       },
       child: MediaIconButton(
         onTap: () {

@@ -67,9 +67,7 @@ class AppTheme {
     ),
     fontFamily: AppStrings.fontFamily,
     primaryColor: AppColors.primaryColor,
-    primarySwatch: AppColors.primaryColor,
     primaryColorLight: AppColors.primaryTextLight,
-    backgroundColor: AppColors.darkBackgroundColor,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     navigationBarTheme: NavigationBarThemeData(
       indicatorColor: Colors.red,
@@ -85,6 +83,9 @@ class AppTheme {
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.red
-    )
-  );
+  ),
+    colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: AppColors.primaryColor,
+        brightness: Brightness.dark,
+        backgroundColor: AppColors.darkBackgroundColor));
 }

@@ -15,22 +15,22 @@ class MovieFavButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<MovieCubit, MovieStates>(
       listener: (context, state) {
-        if(state is FavMovieSuccessState &&state.statusCode==13)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Removed from favourites")));
-        }
-        else if(state is FavMovieSuccessState&& state.statusCode==1)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Added to favourites")));
-        }
+        // if(state is FavMovieSuccessState &&state.statusCode==13)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Removed from favourites")));
+        // }
+        // else if(state is FavMovieSuccessState&& state.statusCode==1)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Added to favourites")));
+        // }
       },
       child: MediaIconButton(
             onTap:() {

@@ -27,8 +27,7 @@ class MediaListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AccountCubit, AccountStates>(
-      listener: (context, state) {},
+    return BlocBuilder<AccountCubit, AccountStates>(
       builder: (context, state) {
         AccountCubit cubit =BlocProvider.of<AccountCubit>(context);
         return SafeArea(

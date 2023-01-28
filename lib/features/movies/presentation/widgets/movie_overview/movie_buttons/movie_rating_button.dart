@@ -16,22 +16,22 @@ class MovieRatingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<MovieCubit, MovieStates>(
       listener: (context, state) {
-        if(state is RateMovieSuccessState)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Movie rated successfully")));
-        }
-        if(state is RemoveRateMovieSuccessState)
-        {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  duration: Duration(milliseconds: 1500),
-                  content:
-                  Text("Rating removed successfully")));
-        }
+        // if(state is RateMovieSuccessState)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Movie rated successfully")));
+        // }
+        // if(state is RemoveRateMovieSuccessState)
+        // {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       const SnackBar(
+        //           duration: Duration(milliseconds: 1500),
+        //           content:
+        //           Text("Rating removed successfully")));
+        // }
       },
       child: Tooltip(
         message:"Rated${movie.movieAccountDetails!.ratedValue}!",

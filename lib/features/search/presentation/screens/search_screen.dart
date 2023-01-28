@@ -29,7 +29,7 @@ class SearchScreen extends StatelessWidget {
                     pinned: true,
                       delegate: SearchBar(
                     searchBar: Container(
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).colorScheme.background,
                       child: Column(
                         children: [
                           MainTextFormField(
