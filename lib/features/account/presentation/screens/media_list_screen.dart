@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_state.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_poster_widget.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_poster_widget.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
 
 class MediaListScreen extends StatelessWidget {
   final String title;
@@ -63,7 +63,7 @@ class MediaListScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
-                              child: MoviePoster(
+                              child: MovieListItem(
                                   movie: cubit.favMovies[index]),
                             );
                           },
@@ -81,7 +81,7 @@ class MediaListScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
-                              child: MoviePoster(
+                              child: MovieListItem(
                                   movie: cubit.ratedMovies[index]),
                             );
                           },
@@ -99,7 +99,7 @@ class MediaListScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
-                              child: MoviePoster(
+                              child: MovieListItem(
                                   movie: cubit.moviesWatchlist[index]),
                             );
                           },
@@ -117,7 +117,7 @@ class MediaListScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
-                              child: TvShowPoster(
+                              child: TvShowListItem(
                                   tvShow: cubit.favTvShows[index]),
                             );
                           },
@@ -135,7 +135,7 @@ class MediaListScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
-                              child: TvShowPoster(
+                              child: TvShowListItem(
                                   tvShow: cubit.ratedTvShows[index]),
                             );
                           },
@@ -153,7 +153,7 @@ class MediaListScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 5),
-                              child: TvShowPoster(
+                              child: TvShowListItem(
                                   tvShow: cubit.tvShowsWatchlist[index]),
                             );
                           },

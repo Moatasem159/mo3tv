@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_poster_widget.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
 class TvShowsSeeMoreList extends StatelessWidget {
   final List<TvShow> tvShows;
   const TvShowsSeeMoreList({
@@ -15,7 +15,7 @@ class TvShowsSeeMoreList extends StatelessWidget {
                 (context,index){
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: TvShowPoster(tvShow: tvShows[index],),
+                child: TvShowListItem(tvShow: tvShows[index],),
               );
             }
         ),

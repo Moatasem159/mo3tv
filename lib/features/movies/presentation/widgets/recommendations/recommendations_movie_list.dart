@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_poster_widget.dart';
-
+import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
 class RecommendationsMoviesList extends StatelessWidget {
   final List<Movie> recommendationMovies;
-
   const RecommendationsMoviesList({Key? key, required this.recommendationMovies}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -40,7 +37,7 @@ class RecommendationsMoviesList extends StatelessWidget {
                   (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: MoviePoster(
+                  child: MovieListItem(
                       movie: recommendationMovies[index]),
                 );
               },

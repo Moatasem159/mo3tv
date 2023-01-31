@@ -39,10 +39,9 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, List<TvShow>>> getPopularTvShows({required int page})async {
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getPopularTvShows(
-          page: page);
-
       try {
+        final result = await tvShowRemoteDataSource.getPopularTvShows(page: page);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -56,10 +55,9 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, List<TvShow>>> getTopRatedTvShows({required int page})async {
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getTopRatedTvShows(
-          page: page);
-
       try {
+        final result = await tvShowRemoteDataSource.getTopRatedTvShows(page: page);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -72,11 +70,10 @@ class TvShowRepositoryImpl extends TvRepository{
 
   @override
   Future<Either<Failure, TvShow>> getTvShowDetails({required int tvShowId})async {
-    if(await networkInfo.isConnected){
-      final TvShow result = await tvShowRemoteDataSource.getTvShowDetails(
-          tvShowId: tvShowId);
-
+    if(await networkInfo.isConnected)
+    {
       try {
+        final TvShow result = await tvShowRemoteDataSource.getTvShowDetails(tvShowId: tvShowId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -91,10 +88,9 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, List<TvShow>>> getTvShowRecommendations({required int tvId, required int page})async {
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getTvShowRecommendations(
-          page: page, tvId: tvId);
-
       try {
+        final result = await tvShowRemoteDataSource.getTvShowRecommendations(page: page, tvId: tvId);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -109,9 +105,8 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, List<Review>>> getTvShowsReviews({required int tvId})async {
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getTvShowsReviews(tvId: tvId);
-
       try {
+        final result = await tvShowRemoteDataSource.getTvShowsReviews(tvId: tvId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -126,8 +121,8 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, List<CastMember>>> getTvShowCredits({required int tvId})async{
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getTvShowCredits(tvId: tvId);
       try {
+        final result = await tvShowRemoteDataSource.getTvShowCredits(tvId: tvId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -143,8 +138,8 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, Gallery>> getTvShowGallery({required int tvId}) async{
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getTvShowGallery(tvId: tvId);
       try {
+        final result = await tvShowRemoteDataSource.getTvShowGallery(tvId: tvId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -160,8 +155,8 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, Message>> markTvShowFav({required int tvId, required bool fav}) async{
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.markTvShowAsFavourite(tvId: tvId,fav: fav);
       try {
+        final result = await tvShowRemoteDataSource.markTvShowAsFavourite(tvId: tvId,fav: fav);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -176,8 +171,8 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, Message>> addTvShowToWatchlist({required int tvId, required bool watchlist})async {
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.addTvShowToWatchList(tvId: tvId,watchList: watchlist);
       try {
+        final result = await tvShowRemoteDataSource.addTvShowToWatchList(tvId: tvId,watchList: watchlist);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -193,8 +188,8 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, Message>> deleteTvShowRate({required int tvId}) async{
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.deleteTvShowRate(tvId: tvId);
       try {
+        final result = await tvShowRemoteDataSource.deleteTvShowRate(tvId: tvId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -209,8 +204,8 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, Message>> rateTvShow({required rate, required int tvId}) async{
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.rateTvShow(rate: rate,tvId: tvId);
       try {
+        final result = await tvShowRemoteDataSource.rateTvShow(rate: rate,tvId: tvId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -225,10 +220,9 @@ class TvShowRepositoryImpl extends TvRepository{
   Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page}) async{
     if(await networkInfo.isConnected)
     {
-      final result = await tvShowRemoteDataSource.getTrendingTvShows(
-          page: page);
-
       try {
+        final result = await tvShowRemoteDataSource.getTrendingTvShows(page: page);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -240,13 +234,10 @@ class TvShowRepositoryImpl extends TvRepository{
   }
 
   @override
-  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails(
-      {required int tvShowId, required int seasonNumber})async {
+  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber})async {
     if(await networkInfo.isConnected){
-      final TvShowSeason result = await tvShowRemoteDataSource.getTvShowSeasonDetails(
-          tvShowId: tvShowId, seasonNumber: seasonNumber);
-
       try {
+        final TvShowSeason result = await tvShowRemoteDataSource.getTvShowSeasonDetails(tvShowId: tvShowId, seasonNumber: seasonNumber);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

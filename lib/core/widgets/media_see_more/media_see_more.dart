@@ -30,6 +30,7 @@ class MediaSeeMore extends StatelessWidget {
             return true;
           },
           child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.background,
             body: parameters.isMovie?
             MoreMovies(title: parameters.title, index: parameters.index):
             MoreTvShows(title: parameters. title, index:parameters.index)

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/app/injection_container.dart';
 import 'package:mo3tv/core/widgets/textformfield.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_state.dart';
@@ -10,7 +11,9 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
-    return BlocConsumer<SearchCubit, SearchStates>(
+    return BlocProvider(
+  create: (context) => sl<SearchCubit>(),
+  child: BlocConsumer<SearchCubit, SearchStates>(
       listener: (context, state) {},
       builder: (context, state) {
         SearchCubit cubit=BlocProvider.of<SearchCubit>(context);
@@ -85,7 +88,8 @@ class SearchScreen extends StatelessWidget {
           )
         );
       },
-    );
+    ),
+);
   }
 }
 

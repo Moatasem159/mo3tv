@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/entities/image.dart';
+import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/entities/review.dart';
@@ -44,14 +45,13 @@ class MovieCubit extends Cubit<MovieStates> {
   DeleteRateMovieUseCase deleteRateMovieUseCase;
   MarkMovieAsFavUsecase markMovieAsFavUsecase;
   AddMovieToWatchListUseCase addMovieToWatchListUseCase;
-
   Movie movie=Movie();
   Future<void> getMovieDetailsData({required int movieId}) async {
     emit(GetMovieDetailsLoadingState());
     Either<Failure,Movie> response =
     await getMovieDetailsUseCase.call(movieId);
     emit(response.fold((failure) =>
-            GetMovieDetailsErrorState(msg: _mapFailureToMsg(failure)), (movie) {
+            GetMovieDetailsErrorState(msg: mapFailureToMsg(failure)), (movie) {
           this.movie = movie;
           for (var element in this.movie.videos!) {
             if(element.name=="Official Trailer")
@@ -75,6 +75,7 @@ class MovieCubit extends Cubit<MovieStates> {
         }));
   }
 
+
   List<Movie>? movieRecommendations=[];
   int recPage=1;
   bool allRec=false;
@@ -84,23 +85,21 @@ class MovieCubit extends Cubit<MovieStates> {
     await getMovieRecommendationsUseCase.call(movieId: movieId,page: page);
     emit(response.fold(
             (failure) =>
-            GetMovieRecommendationsErrorState(msg: _mapFailureToMsg(failure)),
+            GetMovieRecommendationsErrorState(msg: mapFailureToMsg(failure)),
             (movieRecommendations) {
-              if(movieRecommendations.isEmpty){
-                allRec=true;
-              }
-              for (var element in movieRecommendations) {
-                if (element.backdropPath != "" || element.posterPath != "") {
-                  if(!this.movieRecommendations!.any((e) =>e.id==element.id,))
-                    {
-                      this.movieRecommendations!.add(element);
-                    }
-
-                }
-              }
+          if(movieRecommendations.isEmpty){
+            allRec=true;
+          }
+          for (var element in movieRecommendations) {
+            if(!this.movieRecommendations!.any((e) =>e.id==element.id,))
+            {
+              this.movieRecommendations!.add(element);
+            }
+          }
           return GetMovieRecommendationsSuccessState();
         }));
   }
+
   List<Review>? movieReviews;
   Future<void> getMovieReviews({required movieId}) async {
     emit(GetMovieReviewsLoadingState());
@@ -109,12 +108,13 @@ class MovieCubit extends Cubit<MovieStates> {
     movieReviews = [];
     emit(response.fold(
             (failure) =>
-                GetMovieReviewsErrorState(msg: _mapFailureToMsg(failure)),
+                GetMovieReviewsErrorState(msg: mapFailureToMsg(failure)),
             (movieReviews) {
           this.movieReviews = movieReviews;
           return GetMovieReviewsSuccessState();
         }));
   }
+
 
   List<CastMember>? movieCredits= [];
   Future<void> getMovieCredits({required movieId}) async {
@@ -124,7 +124,7 @@ class MovieCubit extends Cubit<MovieStates> {
     movieReviews = [];
     emit(response.fold(
             (failure) =>
-            GetMovieCreditsErrorState(msg: _mapFailureToMsg(failure)),
+            GetMovieCreditsErrorState(msg: mapFailureToMsg(failure)),
             (movieCredits) {
               for (var element in movieCredits) {
                 if(element.profilePath!='')
@@ -135,6 +135,7 @@ class MovieCubit extends Cubit<MovieStates> {
           return GetMovieCreditsSuccessState();
         }));
   }
+
 
   Gallery? movieGallery;
   Future<void> getMovieGallery({required movieId}) async {
@@ -147,7 +148,7 @@ class MovieCubit extends Cubit<MovieStates> {
     movieGallery!.posters=[];
     emit(response.fold(
             (failure) =>
-            GetMovieGalleryErrorState(msg: _mapFailureToMsg(failure)),
+            GetMovieGalleryErrorState(msg: mapFailureToMsg(failure)),
             (movieGallery) {
               for (var element in movieGallery.backdrops!){
                 if(element.iso6391=="en")
@@ -167,15 +168,15 @@ class MovieCubit extends Cubit<MovieStates> {
                   this.movieGallery!.logos!.add(element);
                 }
               }
-
-              // this.movieGallery=movieGallery;
           return GetMovieGallerySuccessState();
         }));
   }
 
 
   List<int> moviesId=[];
-  void clearObjects(){
+
+
+  void clearObjects()async{
     movie=Movie();
     allRec=false;
     recPage=1;
@@ -216,75 +217,60 @@ class MovieCubit extends Cubit<MovieStates> {
       moviesId.removeAt(0);
     }
   }
+
+
   Message ? message;
   Future<void> rateMovie({required dynamic rate,required int movieId})async{
     emit(RateMovieLoadingState());
     Either<Failure, Message> response =
         await rateMovieUseCase.call(rate:rate, movieId: movieId);
     emit(response.fold((l){
-      return RateMovieErrorState(msg: _mapFailureToMsg(l));
+      return RateMovieErrorState(msg: mapFailureToMsg(l));
 
     }, (r){
       message=r;
      return RateMovieSuccessState();
     }));
   }
-  Future<void> removeRateMovie({required int movieId})async{
 
+  Future<void> removeRateMovie({required int movieId})async{
     emit(RemoveRateMovieLoadingState());
     Either<Failure, Message> response =
     await deleteRateMovieUseCase.call(movieId);
 
     emit(response.fold((l){
-      return RemoveRateMovieErrorState(msg: _mapFailureToMsg(l));
+      return RemoveRateMovieErrorState(msg: mapFailureToMsg(l));
       }, (r){
       message=r;
       return RemoveRateMovieSuccessState();
     }));
-
-
-
-
-
-
   }
-  Future<void> favMovie({required int movieId,required bool fav})async{
 
+  Future<void> favMovie({required int movieId,required bool fav})async{
     emit(FavMovieLoadingState());
     Either<Failure, Message> response =
     await markMovieAsFavUsecase.call(movieId: movieId,fav: fav);
     emit(response.fold((l){
-      return FavMovieErrorState(msg: _mapFailureToMsg(l));
+      return FavMovieErrorState(msg: mapFailureToMsg(l));
     }, (r){
       message=r;
       return FavMovieSuccessState(statusCode: message!.statusCode!);
     }));
-
-
-
-
-
-
   }
-  Future<void> addMovieToWatchList({required int movieId,required bool watchlist})async{
 
+  Future<void> addMovieToWatchList({required int movieId,required bool watchlist})async{
     emit(AddToWatchListLoadingState());
     Either<Failure, Message> response =
     await addMovieToWatchListUseCase.call(movieId: movieId,watchlist: watchlist);
     emit(response.fold((l){
-      return AddToWatchListErrorState(msg: _mapFailureToMsg(l));
+      return AddToWatchListErrorState(msg: mapFailureToMsg(l));
     }, (r){
       message=r;
       return AddToWatchListSuccessState(statusCode: message!.statusCode!
       );
     }));
-
-
-
-
-
-
   }
+
   int index =0;
   List<Widget> movieGalleryList=[
     const MovieBackdrops(),
@@ -295,13 +281,5 @@ class MovieCubit extends Cubit<MovieStates> {
     emit(ChangeGalleryLoadingState());
     index=value;
     emit(ChangeGallerySuccessState());
-  }
-  String _mapFailureToMsg(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return "Server Failure";
-      default:
-        return " error";
-    }
   }
 }

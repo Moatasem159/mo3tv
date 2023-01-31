@@ -18,56 +18,82 @@ class TvShowCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-              margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 3),
-              decoration: BoxDecoration(
-                  color: Colors.black26,
-                  borderRadius: BorderRadius.circular(5)
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'now playing'.toUpperCase(),
-                    style: const TextStyle(
-                      fontWeight:FontWeight.w500,
-                      fontSize: 15,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                    margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 3),
+                    decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(5)
                     ),
-                  ),
-                  const SizedBox(width: 4.0),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 3),
-                    child: Icon(
-                      Icons.circle,
-                      color: Colors.redAccent,
-                      size: 12,
-                    ),
-                  ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'now playing'.toUpperCase(),
+                          style: const TextStyle(
+                            fontWeight:FontWeight.w500,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const SizedBox(width: 4.0),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 3),
+                          child: Icon(
+                            Icons.circle,
+                            color: Colors.redAccent,
+                            size: 12,
+                          ),
+                        ),
 
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                    margin: const EdgeInsets.symmetric(horizontal: 2,vertical:3),
+                    decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Text(
+                      tvShow.name!,
+                      style:  const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
-              margin: const EdgeInsets.symmetric(horizontal: 2,vertical:3),
-              decoration: BoxDecoration(
-                  color: Colors.black26,
-                  borderRadius: BorderRadius.circular(5)
-              ),
-              child: Text(
-                tvShow.name!,
-                style:  const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 3),
+                decoration: BoxDecoration(
+                    color: Colors.black26,
+                    borderRadius: BorderRadius.circular(5)
                 ),
-              ),
-            ),
+                child: Row(
+                  children: [
+                    Text(
+                      tvShow.voteAverage.toString(),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          fontWeight: FontWeight.w700
+                      ),
+                    ),
+                    const SizedBox(width: 4,),
+                    const Icon(Icons.star_rounded,size: 15,color: Colors.yellow,)
+                  ],
+                )),
           ],
         ),
       ),

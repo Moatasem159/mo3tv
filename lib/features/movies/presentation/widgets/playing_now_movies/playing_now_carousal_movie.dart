@@ -12,7 +12,7 @@ class PlayingNowMoviesCarousal extends StatelessWidget {
       options: CarouselOptions(
         height: MediaQuery.of(context).size.height/3.5,
         viewportFraction: .89,
-        autoPlay: true,
+        autoPlay:true,
         autoPlayInterval: const Duration(seconds: 3),
       ),
       items:movies.map((e)=>PlayingNowMovieCard(movie: e,) ).toList(),

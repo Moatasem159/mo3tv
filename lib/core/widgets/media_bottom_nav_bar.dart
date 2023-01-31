@@ -76,18 +76,18 @@ class MediaBottomNan extends StatelessWidget {
             children:  [
               GestureDetector(
                   onTap: onTap1,
-                  child:Icon(Icons.info_outline,color: index==0?Colors.white:Colors.grey)),
+                  child:Icon(Icons.info_outline,color: index==0?Colors.red:Colors.white)),
               GestureDetector(
                   onTap: onTap2,
-                  child: Icon(Icons.tv_rounded,color: index==1?Colors.white:Colors.grey)),
+                  child: Icon(Icons.tv_rounded,color: index==1?Colors.red:Colors.white)),
               GestureDetector(
-                  onTap: onTap3,child: Icon(Icons.comment,color: index==2?Colors.white:Colors.grey)),
+                  onTap: onTap3,child: Icon(Icons.comment,color: index==2?Colors.red:Colors.white)),
               GestureDetector(
                   onTap: onTap4,
-                  child: Icon(FontAwesomeIcons.peopleGroup,color:index==3?Colors.white:Colors.grey)),
+                  child: Icon(FontAwesomeIcons.peopleGroup,color:index==3?Colors.red:Colors.white)),
               GestureDetector(
                   onTap: onTap5,
-                  child: Icon(FontAwesomeIcons.solidImages,color: index==4?Colors.white:Colors.grey)),
+                  child: Icon(FontAwesomeIcons.solidImages,color: index==4?Colors.red:Colors.white)),
             ],
           ),
         ),

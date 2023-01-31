@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_poster_widget.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
 
 class RecommendationsTvShowsList extends StatelessWidget {
   final List<TvShow> recommendationTvShows;
@@ -39,7 +39,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
                   (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: TvShowPoster(
+                  child: TvShowListItem(
                       tvShow:recommendationTvShows[index]),
                 );
               },
