@@ -21,59 +21,25 @@ class TvShowDetailsScreen extends StatefulWidget {
 
 class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
   final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
-  final SliverOverlapAbsorberHandle disconnectBar =
-      SliverOverlapAbsorberHandle();
+  final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
   ScrollController nestedController = ScrollController();
-
-  bool isVisible = true;
-
   @override
   void initState() {
     super.initState();
-    nestedController.addListener(listen);
   }
 
   @override
   void dispose() {
-    nestedController.removeListener(listen);
     nestedController.dispose();
     super.dispose();
   }
-
-  void listen() {
-    if (nestedController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
-      hide();
-    } else if (nestedController.position.userScrollDirection ==
-        ScrollDirection.forward) {
-      show();
-    }
-  }
-
-  void show() {
-    if (!isVisible) {
-      setState(() {
-        isVisible = true;
-      });
-    }
-  }
-
-  void hide() {
-    if (isVisible) {
-      setState(() {
-        isVisible = false;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TvShowBottomNavCubit(),
       child: BlocBuilder<TvShowBottomNavCubit, TvShowBottomNavStates>(
          builder: (context, state) {
-          TvShowBottomNavCubit cubit =
-              BlocProvider.of<TvShowBottomNavCubit>(context);
+          TvShowBottomNavCubit cubit = BlocProvider.of<TvShowBottomNavCubit>(context);
           return DefaultTabController(
             length: 3,
             child: WillPopScope(
@@ -85,6 +51,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
               },
               child: SafeArea(
                   child: Scaffold(
+                      resizeToAvoidBottomInset:false,
                       backgroundColor: Theme.of(context).colorScheme.background,
                       body: Stack(
                         alignment: Alignment.bottomCenter,
@@ -96,17 +63,17 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
                                 SliverOverlapAbsorber(
                                   handle: appBar,
                                   sliver: SliverPersistentHeader(
+                                    pinned: true,
                                     delegate: TvShowDetailsAppBar(
                                       widget.tvShow,
                                       onTap: () {
-                                        show();
                                         nestedController.animateTo(0,
                                             duration:
                                                 const Duration(milliseconds: 500),
                                             curve: Curves.ease);
                                       },
                                     ),
-                                    pinned: true,
+
                                   ),
                                 ),
                                 if (cubit.isGallery)
@@ -133,7 +100,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
                               ],
                             ),
                           ),
-                          MediaBottomNan(
+                          MediaBottomNav(
                             onTap1: () {
                               nestedController.animateTo(0,
                                   duration: const Duration(milliseconds: 500),

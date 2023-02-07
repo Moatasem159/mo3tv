@@ -4,7 +4,7 @@ class Search{
   int ?id;
   String? mediaType;
   String ?originalTitle;
-  double? popularity;
+  dynamic popularity;
   String ?posterPath;
   String ?releaseDate;
   dynamic voteAverage;

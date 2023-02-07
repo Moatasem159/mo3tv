@@ -38,7 +38,7 @@ class MediaBottomNavBar extends StatelessWidget {
 }
 
 
-class MediaBottomNan extends StatelessWidget {
+class MediaBottomNav extends StatelessWidget {
   final int index;
   final GestureTapCallback onTap1;
   final GestureTapCallback onTap2;
@@ -46,7 +46,7 @@ class MediaBottomNan extends StatelessWidget {
   final GestureTapCallback onTap4;
   final GestureTapCallback onTap5;
 
-  const MediaBottomNan
+  const MediaBottomNav
       ({Key? key,
     required this.index,
     required this.onTap1,

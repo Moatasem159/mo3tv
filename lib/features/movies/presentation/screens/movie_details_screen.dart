@@ -19,48 +19,20 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   ScrollController nestedController = ScrollController();
-  bool isVisible = true;
   final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
   final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
 
   @override
   void initState() {
     super.initState();
-    nestedController.addListener(listen);
   }
 
   @override
   void dispose() {
-    nestedController.removeListener(listen);
     nestedController.dispose();
     super.dispose();
   }
 
-  void listen() {
-    if (nestedController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
-      hide();
-    } else if (nestedController.position.userScrollDirection ==
-        ScrollDirection.forward) {
-      show();
-    }
-  }
-
-  void show() {
-    if (!isVisible) {
-      setState(() {
-        isVisible = true;
-      });
-    }
-  }
-
-  void hide() {
-    if (isVisible) {
-      setState(() {
-        isVisible = false;
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +40,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       length: 3,
       child: BlocProvider(
         create: (context) => MovieBottomNavCubit(),
-        child: BlocConsumer<MovieBottomNavCubit, MovieBottomNavStates>(
-          listener: (context, state) {},
+        child: BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
           builder: (context, state) {
-            MovieBottomNavCubit cubit =
-                BlocProvider.of<MovieBottomNavCubit>(context);
+            MovieBottomNavCubit cubit = BlocProvider.of<MovieBottomNavCubit>(context);
             return WillPopScope(
               onWillPop: () async {
                 BlocProvider.of<MovieCubit>(context).clearObjects();
@@ -82,6 +52,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               },
               child: SafeArea(
                 child: Scaffold(
+                    resizeToAvoidBottomInset:false,
                     backgroundColor: Theme.of(context).colorScheme.background,
                     body: Stack(
                       alignment: Alignment.bottomCenter,
@@ -97,7 +68,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                     delegate: MovieDetailsAppBar(
                                       widget.movie,
                                       onTap: () {
-                                        show();
                                         nestedController.animateTo(0,
                                             duration:
                                                 const Duration(milliseconds: 500),
@@ -130,7 +100,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                 cubit.screens[cubit.index]
                               ],
                             )),
-                        MediaBottomNan(
+                        MediaBottomNav(
                           onTap1: () {
                             nestedController.animateTo(0,
                                 duration: const Duration(milliseconds: 500),
@@ -175,16 +145,3 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     );
   }
 }
-// MediaBottomNavBar(
-// items: cubit.items,
-// isVisible: isVisible,
-// index: cubit.index,
-// onTap: (value) {
-// nestedController.animateTo(0,
-// duration: const Duration(milliseconds: 500),
-// curve: Curves.ease);
-// cubit.changeScreen(value, context, widget.movie.id!);
-// },
-// ),
-
-
