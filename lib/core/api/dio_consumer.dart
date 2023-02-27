@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
@@ -12,13 +12,12 @@ import 'package:mo3tv/app/injection_container.dart'as di;
 class DioConsumer implements ApiConsumer {
   final Dio client;
   DioConsumer({required this.client}) {
-    (client.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+    (client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       return client;
     };
-
     client.options
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
@@ -82,11 +81,13 @@ class DioConsumer implements ApiConsumer {
 
   dynamic _handleDioError(DioError error) {
     switch (error.type) {
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionTimeout:
       case DioErrorType.sendTimeout:
       case DioErrorType.receiveTimeout:
+      case DioErrorType.connectionError:
+      case DioErrorType.cancel:
         throw const FetchDataException();
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         switch (error.response?.statusCode) {
           case StatusCode.badRequest:
             throw const BadRequestException();
@@ -101,10 +102,10 @@ class DioConsumer implements ApiConsumer {
             throw const InternetServerErrorException();
         }
         break;
-      case DioErrorType.cancel:
-        break;
-      case DioErrorType.other:
-        throw const NoInternetConnectionException();
+      case DioErrorType.badCertificate:
+        throw const BadRequestException();
+      case DioErrorType.unknown:
+        throw const InternetServerErrorException();
     }
   }
 }

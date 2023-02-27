@@ -9,13 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^4.0.6
+  dio: ^5.0.1
   equatable: ^2.0.5
   cached_network_image: ^3.2.3
-  flutter_bloc: ^8.1.1
-  font_awesome_flutter: ^10.3.0
+  flutter_bloc: ^8.1.2
+  font_awesome_flutter: ^10.4.0
   internet_connection_checker: ^1.0.0+1
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.0.18
   carousel_slider: ^4.2.1
   get_it: ^7.2.0
   dartz: ^0.10.1
@@ -25,9 +25,9 @@ dependencies:
   intl: ^0.18.0
   percent_indicator: ^4.2.2
   flutter_rating_bar: ^4.0.1
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.2
   gallery_saver: ^2.3.2
-  go_router: ^6.0.1
+  go_router: ^6.2.0
   youtube_player_iframe: any
   webview_flutter: any
   flutter_native_splash: any
