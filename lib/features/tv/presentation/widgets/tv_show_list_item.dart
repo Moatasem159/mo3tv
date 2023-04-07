@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
@@ -14,11 +13,10 @@ class TvShowListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<TvCubit>(context).clearObjects();
-        BlocProvider.of<TvCubit>(context).tvIds.add(tvShow.id!);
-        BlocProvider.of<TvCubit>(context).getTvShowDetailsData(tvShowId: tvShow.id!);
-        GoRouter.of(context).pushNamed(Routes.tvShowRoute,
-            extra: tvShow);
+        TvCubit.get(context).clearObjects();
+        TvCubit.get(context).tvIds.add(tvShow.id!);
+        TvCubit.get(context).getTvShowDetailsData(tvShowId: tvShow.id!);
+        GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow);
       },
       child: CachedNetworkImage(
         imageBuilder: (context, imageProvider) {

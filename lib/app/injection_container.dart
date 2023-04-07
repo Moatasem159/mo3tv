@@ -75,12 +75,9 @@ import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top
 import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 final sl = GetIt.instance;
-
 Future<void> init() async {
   ///features
-
   //blocs
   sl.registerFactory(() =>AccountCubit(
       getAccountDetailsUsecase:  sl(),
@@ -91,7 +88,6 @@ Future<void> init() async {
       getTvShowsWatchlistUsecase:  sl(),
       getRatedMoviesListUsecase: sl()));
   sl.registerFactory(() =>SearchCubit(searchUsecase:sl()));
-
   sl.registerFactory<MovieCubit>(() => MovieCubit(
       rateMovieUseCase: sl(),
       getMovieGalleryUsecase: sl(),
@@ -128,8 +124,6 @@ Future<void> init() async {
       getTrendingTvShowsUsecase:sl(), getPopularTvShowsUsecase: sl(), getTopRatedTvShowUsecase: sl()));
 
 
-
-
   // movie useCases
   sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
           () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));
@@ -157,9 +151,6 @@ Future<void> init() async {
           () => MarkMovieAsFavUsecase(sl()));
   sl.registerLazySingleton<AddMovieToWatchListUseCase>(
           () => AddMovieToWatchListUseCase(sl()));
-
-
-
 
   //// tv Usecases
   sl.registerLazySingleton<GetNowPlayingTvShowsUsecase>(
@@ -232,14 +223,10 @@ Future<void> init() async {
   sl.registerLazySingleton<SearchDataSource>(
           () => SearchDataSourceImpl( apiConsumer: sl(),));
 
-
   ///core
-
   sl.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(connectionChecker: sl()));
-
   ///External
-
   final sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));

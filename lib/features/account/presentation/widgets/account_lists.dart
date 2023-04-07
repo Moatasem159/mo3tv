@@ -4,10 +4,8 @@ import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_state.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_list_loading_widget.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_list_widget.dart';
-
 class AccountLists extends StatelessWidget {
   const AccountLists({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AccountCubit, AccountStates>(
@@ -30,7 +28,9 @@ class AccountLists extends StatelessWidget {
             AccountListWidget(list: cubit.ratedMovies, title: "Rated Movies",ratedMovies: true),
             AccountListWidget(list: cubit.favTvShows, title: "Favorite Series",favTv: true,),
             AccountListWidget(list: cubit.tvShowsWatchlist, title: "Series WatchList",tvWatchlist: true,),
-            AccountListWidget(list: cubit.ratedTvShows, title: "Rated Series",ratedTv: true,)],
+            AccountListWidget(list: cubit.ratedTvShows, title: "Rated Series",ratedTv: true,),
+            const SizedBox(height: 65,)
+          ],
         ),
       );
     }

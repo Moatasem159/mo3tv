@@ -21,12 +21,9 @@ class TrendingTvShow extends StatelessWidget {
           return TvShowList(tvShow:state.trendingTvSHows,
             title:title,
             onPressed: () {
-              BlocProvider.of<MoreTvShowsCubit>(context).moreTvShows.addAll(state.trendingTvSHows);
+              MoreTvShowsCubit.get(context).moreTvShows.addAll(state.trendingTvSHows);
               GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
                 extra: SeeMoreParameters(title: title, isMovie: false, index: 1),);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) =>  const MediaSeeMore(title:title,index:1,isMovie: false),
-              // ));
             },
           );
         }
@@ -38,7 +35,7 @@ class TrendingTvShow extends StatelessWidget {
           return MediaErrorList(
             title: title,
             onPressed:() {
-              BlocProvider.of<TrendingTvShowCubit>(context).getTrendingTvShowsData();
+              TrendingTvShowCubit.get(context).getTrendingTvShowsData();
             }, );
         }
         return  Container();

@@ -8,12 +8,10 @@ import 'package:mo3tv/features/account/domain/entities/account.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-
 class AccountRepositoryImpl extends AccountRepository{
   final NetworkInfo networkInfo;
   final AccountDataSource accountDataSource;
   AccountRepositoryImpl({required this.networkInfo, required this.accountDataSource});
-
   @override
   Future<Either<Failure, List<Movie>>> getFavouriteMovies() async{
     if(await networkInfo.isConnected)

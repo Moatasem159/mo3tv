@@ -22,18 +22,10 @@ class PopularTvShow extends StatelessWidget {
             tvShow:state.popularTvShow,
             title:title,
             onPressed: () {
-              BlocProvider.of<MoreTvShowsCubit>(context)
-                  .moreTvShows
+              MoreTvShowsCubit.get(context).moreTvShows
                   .addAll(state.popularTvShow);
               GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
                 extra: SeeMoreParameters(title: title, isMovie: false, index: 2),);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) => const MediaSeeMore(
-              //     title: title,
-              //     index: 2,
-              //     isMovie: false,
-              //   ),
-              // ));
             },
           );
         }
@@ -45,7 +37,7 @@ class PopularTvShow extends StatelessWidget {
           return MediaErrorList(
             title: title,
             onPressed:() {
-              BlocProvider.of<PopularTvShowCubit>(context).getPopularTvShowsData();
+              PopularTvShowCubit.get(context).getPopularTvShowsData();
             }, );
         }
         return  Container();

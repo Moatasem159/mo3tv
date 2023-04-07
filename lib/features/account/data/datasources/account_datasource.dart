@@ -4,10 +4,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/data/models/account_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
-
-
 abstract class AccountDataSource{
-
 Future<AccountModel> getAccountDetails();
 Future<List<MovieModel>> getRatedMovies();
 Future<List<MovieModel>> getFavouriteMovies();
@@ -16,8 +13,6 @@ Future<List<TvShowModel>> getRatedTvShows();
 Future<List<TvShowModel>> getFavouriteTvShows();
 Future<List<TvShowModel>> getTvShowsWatchList();
 }
-
-
 class AccountDataSourceImpl extends AccountDataSource{
   ApiConsumer apiConsumer;
   AccountDataSourceImpl(this.apiConsumer);

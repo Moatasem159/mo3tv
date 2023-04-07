@@ -1,7 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
 import 'package:mo3tv/core/usecase/base_usecase.dart';
@@ -17,6 +15,7 @@ class LoginCubit extends Cubit<LoginStates> {
     required this.getSessionIdUsecase,
     required this.sharedPrefrencesConsumer,
 }) : super(LoginInitialState());
+  static LoginCubit get(context)=>BlocProvider.of(context);
   GetTokenUsecase getTokenUsecase;
   GetSessionIdUsecase getSessionIdUsecase;
    SharedPrefrencesConsumer sharedPrefrencesConsumer;
@@ -34,7 +33,7 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(GetTokenSuccessState());
     });
   }
-  Future<void> getSessionId({bool account=false,required BuildContext context})async {
+  Future<void> getSessionId()async {
     emit(GetSessionIdLoadingState());
     Either<Failure, Session> response =
     await getSessionIdUsecase.call(token!.token!);
@@ -44,9 +43,6 @@ class LoginCubit extends Cubit<LoginStates> {
       sharedPrefrencesConsumer.saveData(
           key: AppStrings.id, value:r.sessionId);
       AppStrings.sessionId=r.sessionId!;
-      if(account){
-        Navigator.pushNamedAndRemoveUntil(context, Routes.initialRoute, (route) => false);
-      }
       emit(GetSessionIdSuccessState());
     });
   }

@@ -66,7 +66,7 @@ class SearchScreen extends StatelessWidget {
             body: Builder(
               builder: (context) {
                 return CustomScrollView(
-                  physics: const ClampingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   slivers: [
                     SliverOverlapInjector(
                       handle: appBar,

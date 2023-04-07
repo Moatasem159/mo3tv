@@ -4,7 +4,6 @@ import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_state.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
-
 class MediaListScreen extends StatelessWidget {
   final String title;
   final bool favMovies;
@@ -13,7 +12,6 @@ class MediaListScreen extends StatelessWidget {
   final bool favTv;
   final bool ratedTv;
   final bool tvWatchlist;
-
   const MediaListScreen({
     Key? key,
     required this.title,
@@ -24,12 +22,11 @@ class MediaListScreen extends StatelessWidget {
     required this.ratedTv,
     required this.tvWatchlist,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountCubit, AccountStates>(
       builder: (context, state) {
-        AccountCubit cubit =BlocProvider.of<AccountCubit>(context);
+        AccountCubit cubit =AccountCubit.get(context);
         return SafeArea(
             child: WillPopScope(
               onWillPop: () async {

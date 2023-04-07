@@ -17,8 +17,8 @@ class MoreTvShows extends StatelessWidget {
       slivers: [
         SeeMoreAppBar(
           onPressed: () {
-            BlocProvider.of<MoreTvShowsCubit>(context).page = 1;
-            BlocProvider.of<MoreTvShowsCubit>(context).moreTvShows.clear();
+           MoreTvShowsCubit.get(context).page = 1;
+           MoreTvShowsCubit.get(context).moreTvShows.clear();
             GoRouter.of(context).pop();
           },
           title: title,
@@ -30,7 +30,7 @@ class MoreTvShows extends StatelessWidget {
         ),
         BlocBuilder<MoreTvShowsCubit, MoreTvShowsStates>(
           builder: (context, state) {
-            MoreTvShowsCubit cubit = BlocProvider.of<MoreTvShowsCubit>(context);
+            MoreTvShowsCubit cubit =  MoreTvShowsCubit.get(context);
             return TvShowsSeeMoreList(
               tvShows: cubit.moreTvShows,
             );
@@ -43,7 +43,7 @@ class MoreTvShows extends StatelessWidget {
               return const SeeMoreLoadingIndicator();
             }
             return SeeMoreButton(onPressed: () {
-              BlocProvider.of<MoreTvShowsCubit>(context)
+              MoreTvShowsCubit.get(context)
                   .seeMoreTvShows(index: index);
             },);
           },

@@ -13,7 +13,6 @@ class CustomBottomNav extends StatelessWidget {
     required this.onTap3,
     required this.onTap4
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -36,6 +36,8 @@ class TvCubit extends Cubit<TvStates> {
     required this.rateTvShowUseCase,
     required this.getTvShowSeasonDetailsUsecase,
 }) : super(TvInitialState());
+
+  static TvCubit get(context)=>BlocProvider.of(context);
   GetTvShowDetailsUsecase getTvShowDetailsUsecase;
   GetTvRecommendationsUseCase getTvRecommendationsUseCase;
   GetTvShowsReviewsUsecase getTvShowsReviewsUsecase;

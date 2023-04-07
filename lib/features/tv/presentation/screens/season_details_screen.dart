@@ -1,12 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_overview/season_overview.dart';
-
-
 class SeasonDetailsScreen extends StatelessWidget {
   final TvShowSeason season;
   final String tvShowName;
@@ -23,7 +20,7 @@ class SeasonDetailsScreen extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.background,
           body: WillPopScope(
             onWillPop: () async{
-              BlocProvider.of<TvCubit>(context).tvShowSeason = const TvShowSeason();
+              TvCubit.get(context).tvShowSeason = const TvShowSeason();
               Navigator.pop(context);
               return true;
             },
@@ -38,7 +35,7 @@ class SeasonDetailsScreen extends StatelessWidget {
                         leading: IconButton(
                           icon: const Icon(Icons.arrow_back),
                           onPressed: () {
-                            BlocProvider.of<TvCubit>(context).tvShowSeason = const TvShowSeason();
+                            TvCubit.get(context).tvShowSeason = const TvShowSeason();
                             Navigator.pop(context);
                           },
                         ),

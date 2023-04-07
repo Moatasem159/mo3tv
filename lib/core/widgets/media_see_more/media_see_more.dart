@@ -23,8 +23,8 @@ class MediaSeeMore extends StatelessWidget {
               }
             else if(!parameters.isMovie)
               {
-                BlocProvider.of<MoreTvShowsCubit>(context).page = 1;
-                BlocProvider.of<MoreTvShowsCubit>(context).moreTvShows.clear();
+                MoreTvShowsCubit.get(context).page = 1;
+                MoreTvShowsCubit.get(context).moreTvShows.clear();
               }
             GoRouter.of(context).pop();
             return true;

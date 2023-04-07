@@ -3,7 +3,6 @@ import 'package:shimmer/shimmer.dart';
 
 class AccountAppBarLoadingWidget extends StatelessWidget {
   const AccountAppBarLoadingWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(

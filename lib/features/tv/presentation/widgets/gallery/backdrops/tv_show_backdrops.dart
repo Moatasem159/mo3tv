@@ -5,17 +5,13 @@ import 'package:mo3tv/core/widgets/gallery/backdrops/backdrops_loading_list.dart
 import 'package:mo3tv/core/widgets/gallery/empty_image_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-
 class TvShowBackdrops extends StatelessWidget {
-  const TvShowBackdrops({Key? key})
-      : super(key: key);
-
+  const TvShowBackdrops({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TvCubit, TvStates>(
-      listener: (context, state) {},
+    return BlocBuilder<TvCubit, TvStates>(
       builder: (context, state) {
-        TvCubit cubit = BlocProvider.of<TvCubit>(context);
+        TvCubit cubit = TvCubit.get(context);
         if(cubit.tvShowGallery!=null&&cubit.tvShowGallery!.backdrops!=null&&cubit.tvShowGallery!.backdrops!.isEmpty)
         {
           // No Backdrops
@@ -29,7 +25,6 @@ class TvShowBackdrops extends StatelessWidget {
         {
           return const BackdropsLoadingList();
         }
-
         return Container();
       },
     );

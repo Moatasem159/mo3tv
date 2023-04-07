@@ -3,7 +3,6 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_appbar.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_lists.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_button.dart';
-
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
   @override
@@ -15,7 +14,7 @@ class AccountScreen extends StatelessWidget {
             const AccountAppBar(),
           ];
         },
-        body:  const CustomScrollView(
+        body:const CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
             AccountLists(),
@@ -24,7 +23,7 @@ class AccountScreen extends StatelessWidget {
     }
     if(AppStrings.sessionId=='')
       {
-        return const Center(child: LoginButton(account: true,));
+        return const Center(child: LoginButton());
       }
     return Container();
   }

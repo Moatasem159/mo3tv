@@ -1,16 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-
 class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
   final TvShow tvShow;
   final GestureTapCallback ? onTap;
   TvShowDetailsAppBar(this.tvShow, {this.onTap});
-
   final double maxSize = 200;
   final double minSize = 70;
   final double maxImageSize = 200;
@@ -67,8 +64,8 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                 top: 5,
                 child: GestureDetector(
                     onTap: () {
-                      BlocProvider.of<TvCubit>(context).clearObjects();
-                      BlocProvider.of<TvCubit>(context).backToBackTvShows();
+                      TvCubit.get(context).clearObjects();
+                      TvCubit.get(context).backToBackTvShows();
                       GoRouter.of(context).pop();
                     },
                     child: Icon(

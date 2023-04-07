@@ -9,11 +9,11 @@ import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_state.dart';
 class MoreTvShowsCubit extends Cubit<MoreTvShowsStates> {
   MoreTvShowsCubit(
-  {
-    required this.getTrendingTvShowsUsecase,
+  {required this.getTrendingTvShowsUsecase,
     required this.getPopularTvShowsUsecase,
     required this.getTopRatedTvShowUsecase
-}) : super(MoreTvShowsInitialState());
+}):super(MoreTvShowsInitialState());
+  static MoreTvShowsCubit get(context)=>BlocProvider.of(context);
   GetTrendingTvShowsUsecase getTrendingTvShowsUsecase;
   GetPopularTvShowsUsecase getPopularTvShowsUsecase;
   GetTopRatedTvShowUsecase getTopRatedTvShowUsecase;

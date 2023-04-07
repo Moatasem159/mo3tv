@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_state.dart';
-import 'package:mo3tv/features/login/presentation/pages/login_screen.dart';
 
 class LoginButton extends StatelessWidget {
-  final bool account;
-  const LoginButton({Key? key,
-    this.account=false
-  }) : super(key: key);
-
+  const LoginButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     if(AppStrings.sessionId.isEmpty)
@@ -27,15 +24,16 @@ class LoginButton extends StatelessWidget {
                   content: const Text("Thank you for signing up in mo3Tv you can now enjoy our app in full experience"),
                   actions: [
                     TextButton(onPressed: () {
-                      Navigator.pop(context);
+                      GoRouter.of(context).pushReplacementNamed(Routes.initialRoute);
+                      LoginCubit.get(context).close();
                     }, child: const Text("ok"))
                   ],
                 );
-              },);
+              });
+
             }
             if (state is GetTokenSuccessState) {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) => const LoginScreen(),));
+              GoRouter.of(context).pushNamed(Routes.loginRoute,extra: LoginCubit.get(context).token!);
             }
           },
           builder: (context, state) {
@@ -50,7 +48,7 @@ class LoginButton extends StatelessWidget {
                   ),
                   child: const Text("Login to enjoy full experience"),
                   onPressed: () async {
-                    BlocProvider.of<LoginCubit>(context).getToken();
+                    LoginCubit.get(context).getToken();
                   },
                 ),
               );
@@ -70,7 +68,7 @@ class LoginButton extends StatelessWidget {
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
                 child: const Text("last Step"),
                 onPressed: () async {
-                  BlocProvider.of<LoginCubit>(context).getSessionId(account: account,context: context);
+                 LoginCubit.get(context).getSessionId();
                 },
               );
             }

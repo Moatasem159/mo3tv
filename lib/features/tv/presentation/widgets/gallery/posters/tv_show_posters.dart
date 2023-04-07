@@ -5,16 +5,13 @@ import 'package:mo3tv/core/widgets/gallery/posters/media_posters_loading_list.da
 import 'package:mo3tv/core/widgets/gallery/empty_image_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-
 class TvShowPosters extends StatelessWidget {
   const TvShowPosters({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TvCubit, TvStates>(
-      listener: (context, state) {},
+    return BlocBuilder<TvCubit, TvStates>(
       builder: (context, state) {
-        TvCubit cubit = BlocProvider.of<TvCubit>(context);
+        TvCubit cubit = TvCubit.get(context);
         if(cubit.tvShowGallery!=null&&cubit.tvShowGallery!.posters!=null&&cubit.tvShowGallery!.posters!.isEmpty)
         {
           return const EmptyImageList(text:"No posters",);
@@ -28,7 +25,6 @@ class TvShowPosters extends StatelessWidget {
           return const MediaPosterLoadingList();
         }
         return Container();
-
       },
     );
   }

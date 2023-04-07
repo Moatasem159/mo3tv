@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/core/widgets/login_alert.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
@@ -11,33 +12,15 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_state
 class MovieRatingButton extends StatelessWidget {
   final Movie movie;
   const MovieRatingButton({Key? key, required this.movie}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return BlocListener<MovieCubit, MovieStates>(
-      listener: (context, state) {
-        // if(state is RateMovieSuccessState)
-        // {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //       const SnackBar(
-        //           duration: Duration(milliseconds: 1500),
-        //           content:
-        //           Text("Movie rated successfully")));
-        // }
-        // if(state is RemoveRateMovieSuccessState)
-        // {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //       const SnackBar(
-        //           duration: Duration(milliseconds: 1500),
-        //           content:
-        //           Text("Rating removed successfully")));
-        // }
-      },
-      child: Tooltip(
-        message:"Rated${movie.movieAccountDetails!.ratedValue}!",
-        child: MediaIconButton(
-          onTap: () {
-           if(AppStrings.sessionId!="")
+    return BlocBuilder<MovieCubit, MovieStates>(
+     builder: (context, state) {
+       return  Tooltip(
+         message:"Rated${movie.movieAccountDetails!.ratedValue}!",
+         child: MediaIconButton(
+           onTap: () {
+             if(AppStrings.sessionId!="")
              {
                showDialog(
                  context: context,
@@ -92,22 +75,22 @@ class MovieRatingButton extends StatelessWidget {
                                  .ratedMovies
                                  .any(
                                      (element) => element.id == movie.id))
-                               {
-                                 BlocProvider.of<AccountCubit>(context)
-                                     .ratedMovies
-                                     .firstWhere(
-                                         (element) => element.id == movie.id)
-                                     .movieAccountDetails!
-                                     .ratedValue =
-                                     movie.movieAccountDetails!.ratedValue;
-                               }
+                             {
+                               BlocProvider.of<AccountCubit>(context)
+                                   .ratedMovies
+                                   .firstWhere(
+                                       (element) => element.id == movie.id)
+                                   .movieAccountDetails!
+                                   .ratedValue =
+                                   movie.movieAccountDetails!.ratedValue;
+                             }
                              else{
                                BlocProvider.of<AccountCubit>(context)
                                    .ratedMovies.add(movie);
                              }
                              BlocProvider.of<AccountCubit>(context).moviesWatchlist.removeWhere((element) => element.id==movie.id,);
                              BlocProvider.of<AccountCubit>(context).update();
-                            }
+                           }
                            Navigator.of(context).pop();
                          },
                        ),
@@ -116,36 +99,26 @@ class MovieRatingButton extends StatelessWidget {
                  },
                );
              }
-           else{
-             showDialog(
-               context: context,
-               builder: (BuildContext dialogContext) {
-                 return AlertDialog(
-                   content: const Text('You must login first'),
-                   actions: <Widget>[
-                     TextButton(
-                       child: const Text('ok'),
-                       onPressed: () {
-                         Navigator.of(dialogContext)
-                             .pop(); // Dismiss alert dialog
-                       },
-                     ),
-                   ],
-                 );
-               },
-             );
-           }
-          },
-          icon: movie.movieAccountDetails!.ratedValue!=0.0
-              ? const Icon(
-            Icons.star,
-            color: Colors.yellow,
-          )
-              : const Icon(
-            Icons.star_border,
-          ) ,
-        ),
-      )
+             else{
+               showDialog(
+                 context: context,
+                 builder: (BuildContext dialogContext) {
+                   return const LoginAlert();
+                 },
+               );
+             }
+           },
+           icon: movie.movieAccountDetails!.ratedValue!=0.0
+               ? const Icon(
+             Icons.star,
+             color: Colors.yellow,
+           )
+               : const Icon(
+             Icons.star_border,
+           ) ,
+         ),
+       );
+     },
     );
   }
 }

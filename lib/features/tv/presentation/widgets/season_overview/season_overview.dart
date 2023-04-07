@@ -11,10 +11,9 @@ class SeasonOverview extends StatelessWidget {
   const SeasonOverview({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TvCubit, TvStates>(
-      listener: (context, state) {},
+    return BlocBuilder<TvCubit, TvStates>(
       builder: (context, state) {
-        TvCubit cubit = BlocProvider.of<TvCubit>(context);
+        TvCubit cubit = TvCubit.get(context);
         if(state is GetTvShowSeasonDetailsSuccessState ||cubit.tvShowSeason!=const TvShowSeason()) {
           return SeasonOverviewWidget(season:cubit.tvShowSeason!);
         }

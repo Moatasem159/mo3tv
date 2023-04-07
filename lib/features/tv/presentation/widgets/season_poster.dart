@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
@@ -19,7 +18,7 @@ class SeasonPoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<TvCubit>(context).getTvShowSeasonDetailsData(
+        TvCubit.get(context).getTvShowSeasonDetailsData(
             tvShowId: tvShowId,
             seasonNumber:season.seasonNumber!);
         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  SeasonDetailsScreen(

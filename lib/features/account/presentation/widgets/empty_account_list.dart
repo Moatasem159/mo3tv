@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 class EmptyAccountList extends StatelessWidget {
   final String title;
   const EmptyAccountList({Key? key, required this.title}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +9,6 @@ class EmptyAccountList extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey.withOpacity(.4),
           borderRadius: BorderRadius.circular(10),
-
       ),
       width: 400,
       height: 130,

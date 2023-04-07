@@ -10,21 +10,26 @@ class SearchList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: items.length,
-        itemBuilder: (context, index){
-          if(items[index].mediaType=="movie")
-          {
-            return MovieSearchWidget(movie: items[index]);
-          }
-          if(items[index].mediaType=="tv")
-          {
-            return  TvShowSearchWidget(tvShow:items[index],);
-          }
-          return Container();
-        },),
+      child: Column(
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: items.length,
+            itemBuilder: (context, index){
+              if(items[index].mediaType=="movie")
+              {
+                return MovieSearchWidget(movie: items[index]);
+              }
+              if(items[index].mediaType=="tv")
+              {
+                return  TvShowSearchWidget(tvShow:items[index],);
+              }
+              return Container();
+            },),
+          const SizedBox(height: 60,)
+        ],
+      ),
     );
   }
 }

@@ -43,8 +43,8 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
             length: 3,
             child: WillPopScope(
               onWillPop: () async {
-                BlocProvider.of<TvCubit>(context).clearObjects();
-                BlocProvider.of<TvCubit>(context).backToBackTvShows();
+                TvCubit.get(context).clearObjects();
+                TvCubit.get(context).backToBackTvShows();
                 GoRouter.of(context).pop();
                 return true;
               },
@@ -80,8 +80,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
                                       handle: disconnectBar,
                                       sliver: GalleryTabBar(
                                         onTap: (value) {
-                                          BlocProvider.of<TvCubit>(context)
-                                              .gallery(value);
+                                          TvCubit.get(context).gallery(value);
                                         },
                                       ))
                               ];

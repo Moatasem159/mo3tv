@@ -14,7 +14,6 @@ class BottomNavCubit extends Cubit<BottomNavStates> {
     const SearchScreen(),
     const AccountScreen(),
   ];
-
   changeIndex(int index, BuildContext context) {
     emit(ChangeBottomNavLoadingState());
     this.index=index;

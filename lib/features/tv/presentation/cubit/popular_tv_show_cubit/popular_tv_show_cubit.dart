@@ -7,6 +7,7 @@ import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.d
 import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_state.dart';
 class PopularTvShowCubit extends Cubit<PopularTvShowStates> {
   PopularTvShowCubit({required this.getPopularTvShowsUsecase,}) : super(PopularTvShowInitialState());
+  static PopularTvShowCubit get(context)=>BlocProvider.of(context);
   GetPopularTvShowsUsecase getPopularTvShowsUsecase;
   Future<void> getPopularTvShowsData({int page = 1, bool seeMore = false}) async {
     emit(GetPopularTvShowsLoadingState());

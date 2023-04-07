@@ -1,12 +1,10 @@
 import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/account/presentation/screens/media_list_screen.dart';
 import 'package:mo3tv/features/account/presentation/widgets/empty_account_list.dart';
 import 'package:shimmer/shimmer.dart';
-
 class AccountListWidget extends StatelessWidget {
   final List list;
   final String title;
@@ -26,7 +24,6 @@ class AccountListWidget extends StatelessWidget {
     this.ratedTv = false,
     this.tvWatchlist = false,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final random =  Random();

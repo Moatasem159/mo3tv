@@ -22,7 +22,7 @@ class PlayingNowTvShowsWidget extends StatelessWidget {
         if(state is GetNowPlayingTvShowsErrorState)
         {
           return PlayingNowMediaErrorCard(onPressed:() {
-            BlocProvider.of<PlayingNowTvShowCubit>(context).getNowPlayingTvShowsData();
+           PlayingNowTvShowCubit.get(context).getNowPlayingTvShowsData();
           },);
         }
         return Container();

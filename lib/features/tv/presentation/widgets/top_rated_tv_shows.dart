@@ -21,12 +21,9 @@ class TopRatedTvShow extends StatelessWidget {
             tvShow: state.topRatedTvShows,
             title:title,
             onPressed: () {
-              BlocProvider.of<MoreTvShowsCubit>(context).moreTvShows.addAll(state.topRatedTvShows,);
+              MoreTvShowsCubit.get(context).moreTvShows.addAll(state.topRatedTvShows,);
               GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
                 extra: SeeMoreParameters(title: title, isMovie: false, index: 3),);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) =>  const MediaSeeMore(title:title,index: 3,isMovie: false, ),
-              // ));
             },
           );
         }
@@ -37,7 +34,7 @@ class TopRatedTvShow extends StatelessWidget {
           return MediaErrorList(
             title: title,
             onPressed:() {
-              BlocProvider.of<TopRatedTvShowsCubit>(context).getTopRatedTvShowsData();
+              TopRatedTvShowsCubit.get(context).getTopRatedTvShowsData();
             }, );
         }
         return  Container();

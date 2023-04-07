@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
-
 class RecommendationsTvShowsList extends StatelessWidget {
   final List<TvShow> recommendationTvShows;
   const RecommendationsTvShowsList({Key? key, required this.recommendationTvShows}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -49,22 +46,22 @@ class RecommendationsTvShowsList extends StatelessWidget {
                 crossAxisCount: 3,
                 mainAxisSpacing: 7),
           ),
-          if(!BlocProvider.of<TvCubit>(context).allRec)
+          if(!TvCubit.get(context).allRec)
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 70,left: 10,right:10,top: 10 ),
                 child: ElevatedButton(
                   child: const Text("Load more"),
                   onPressed: () {
-                    BlocProvider.of<TvCubit>(context).page++;
-                    BlocProvider.of<TvCubit>(context).getTvShowsRecommendations(
-                        tvId:BlocProvider.of<TvCubit>(context).tvShow.id,
-                        page:BlocProvider.of<TvCubit>(context).page );
+                    TvCubit.get(context).page++;
+                    TvCubit.get(context).getTvShowsRecommendations(
+                        tvId:TvCubit.get(context).tvShow.id,
+                        page:TvCubit.get(context).page );
                   },
                 ),
               ),
             ),
-          if(BlocProvider.of<TvCubit>(context).allRec)
+          if(TvCubit.get(context).allRec)
             SliverToBoxAdapter(
               child:Column(
                 children: const [

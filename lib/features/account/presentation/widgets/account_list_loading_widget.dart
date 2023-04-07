@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
 class AccountLoadingListWidget extends StatelessWidget {
   const AccountLoadingListWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

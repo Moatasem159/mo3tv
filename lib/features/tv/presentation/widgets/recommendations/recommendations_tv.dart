@@ -10,10 +10,9 @@ class RecommendationsTvShows extends StatelessWidget {
   const RecommendationsTvShows({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TvCubit, TvStates>(
-      listener: (context, state) {},
+    return BlocBuilder<TvCubit, TvStates>(
       builder: (context, state) {
-        TvCubit cubit = BlocProvider.of<TvCubit>(context);
+        TvCubit cubit = TvCubit.get(context);
         if (cubit.tvRecommendations != null && cubit.tvRecommendations!.isNotEmpty) {
           return RecommendationsTvShowsList(recommendationTvShows: cubit.tvRecommendations!);
         }
