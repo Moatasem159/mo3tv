@@ -1,9 +1,7 @@
 name: mo3tv
 description: A new Flutter project.
-
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.7.1+1
-
 environment:
   sdk: '>=2.19.5 <3.0.0'
 dependencies:
@@ -54,16 +52,10 @@ flutter_native_splash:
   color: "#000000"
   branding: assets/images/poweredby.png
   branding_mode: bottom
-
 flutter:
-
-
   uses-material-design: true
-
-
   assets:
     - assets/images/movieplaceholder.png
-
   fonts:
   - family: Montserrat
     fonts:
