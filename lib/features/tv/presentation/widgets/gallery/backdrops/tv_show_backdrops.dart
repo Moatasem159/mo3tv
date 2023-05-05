@@ -14,7 +14,6 @@ class TvShowBackdrops extends StatelessWidget {
         TvCubit cubit = TvCubit.get(context);
         if(cubit.tvShowGallery!=null&&cubit.tvShowGallery!.backdrops!=null&&cubit.tvShowGallery!.backdrops!.isEmpty)
         {
-          // No Backdrops
           return const EmptyImageList(text:"No Backdrops",);
         }
         if(cubit.tvShowGallery!=null&&cubit.tvShowGallery!.backdrops!=null)

@@ -8,12 +8,9 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_appbar_widget.dart';
-
 class TvShowDetailsScreen extends StatefulWidget {
   final TvShow tvShow;
-
   const TvShowDetailsScreen({Key? key, required this.tvShow}) : super(key: key);
-
   @override
   State<TvShowDetailsScreen> createState() => _TvShowDetailsScreenState();
 }

@@ -1,66 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
 class SeasonOverviewLoadingWidget extends StatelessWidget {
   const SeasonOverviewLoadingWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Column(
         children: [
-          const SizedBox(height: 10,),
-          Shimmer.fromColors(
-            baseColor: Colors.grey[700]!,
-            highlightColor: Colors.grey[600]!,
-            child: Container(
-              height:25,
-              width: 335,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey
-              ),
-            ),
-          ),
-          const SizedBox(height: 10,),
-          Shimmer.fromColors(
-            baseColor: Colors.grey[700]!,
-            highlightColor: Colors.grey[600]!,
-            child: Container(
-              height:25,
-              width: 335,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey
-              ),
-            ),
-          ),
-          const SizedBox(height: 10,),
-          Shimmer.fromColors(
-            baseColor: Colors.grey[700]!,
-            highlightColor: Colors.grey[600]!,
-            child: Container(
-              height:25,
-              width: 335,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey
-              ),
-            ),
-          ),
-          const SizedBox(height: 10,),
-          Shimmer.fromColors(
-            baseColor: Colors.grey[700]!,
-            highlightColor: Colors.grey[600]!,
-            child: Container(
-              height:25,
-              width: 335,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey
-              ),
-            ),
-          ),
+          const SizedBox(height:10),
           Shimmer.fromColors(
             baseColor: Colors.grey[700]!,
             highlightColor: Colors.grey[600]!,
@@ -154,9 +101,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  const SizedBox(height:5),
                   Column(
                     children: [
                       Shimmer.fromColors(
@@ -171,7 +116,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(height:10),
                       Shimmer.fromColors(
                         baseColor: Colors.grey[700]!,
                         highlightColor: Colors.grey[600]!,
@@ -184,7 +129,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(height:10),
                       Shimmer.fromColors(
                         baseColor: Colors.grey[700]!,
                         highlightColor: Colors.grey[600]!,

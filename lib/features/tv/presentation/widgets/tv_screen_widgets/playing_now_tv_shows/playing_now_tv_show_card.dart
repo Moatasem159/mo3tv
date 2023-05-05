@@ -6,8 +6,7 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_card.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/playing_now_tv_shows/tv_show_card.dart';
-
+import 'package:mo3tv/features/tv/presentation/widgets/tv_screen_widgets/playing_now_tv_shows/tv_show_playing_now_card_widget.dart';
 class PlayingNowTvShowCard extends StatelessWidget {
   final TvShow tvShow;
   const PlayingNowTvShowCard({Key? key, required this.tvShow}) : super(key: key);
@@ -23,7 +22,7 @@ class PlayingNowTvShowCard extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: EndPoints.backDropsUrl(tvShow.backdropPath!),
         imageBuilder: (context, imageProvider) {
-          return TvShowCard(
+          return TvShowPlayingNowCardWidget(
             tvShow:  tvShow,
             image: imageProvider,
           );

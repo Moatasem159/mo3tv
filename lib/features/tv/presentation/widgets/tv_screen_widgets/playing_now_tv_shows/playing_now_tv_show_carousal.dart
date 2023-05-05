@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/playing_now_tv_shows/playing_now_tv_show_card.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_screen_widgets/playing_now_tv_shows/playing_now_tv_show_card.dart';
 class PlayingNowTvShowCarousal extends StatelessWidget {
   final List<TvShow> tvShows;
   const PlayingNowTvShowCarousal({Key? key, required this.tvShows}) : super(key: key);

@@ -18,7 +18,6 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
   final double mixIconSize = 20;
   final double maxImageMargin = 0;
   final double minImageMargin = 60;
-
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -97,13 +96,10 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
     );
     // 4.3
   }
-
   @override
   double get maxExtent => maxSize;
-
   @override
   double get minExtent => minSize;
-
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
 }

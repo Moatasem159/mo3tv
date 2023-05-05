@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/season_overview/season_overview_loading_widget.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/season_overview/season_overview_widget.dart';
-
-
+import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_overview/season_overview_loading_widget.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_overview/season_overview_widget.dart';
 class SeasonOverview extends StatelessWidget {
   const SeasonOverview({Key? key}) : super(key: key);
   @override

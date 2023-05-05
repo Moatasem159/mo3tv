@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-class TvShowCard extends StatelessWidget {
+class TvShowPlayingNowCardWidget extends StatelessWidget {
   final ImageProvider image;
   final TvShow tvShow;
-  const TvShowCard({Key? key, required this.image, required this.tvShow}) : super(key: key);
+  const TvShowPlayingNowCardWidget({Key? key, required this.image, required this.tvShow}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(

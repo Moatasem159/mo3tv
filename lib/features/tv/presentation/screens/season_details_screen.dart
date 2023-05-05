@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/season_overview/season_overview.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_overview/season_overview.dart';
 class SeasonDetailsScreen extends StatelessWidget {
   final TvShowSeason season;
   final String tvShowName;
 
-  const SeasonDetailsScreen(
-      {Key? key, required this.season, required this.tvShowName})
-      : super(key: key);
+  const SeasonDetailsScreen({
+    Key? key,
+    required this.season,
+    required this.tvShowName,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,27 +43,30 @@ class SeasonDetailsScreen extends StatelessWidget {
                         ),
                         pinned: true,
                         expandedHeight: 540,
-                        flexibleSpace: ShaderMask(
-                          shaderCallback: (rect) {
-                            return const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.black,
-                                Colors.black,
-                                Colors.transparent,
-                              ],
-                              stops: [0, 0.3, 0.5, 1],
-                            ).createShader(
-                              Rect.fromLTRB(0, 0, rect.width, rect.height),
-                            );
-                          },
-                          blendMode: BlendMode.dstATop,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: EndPoints.backDropsUrl(
-                                season.posterPath!),
+                        flexibleSpace: Hero(
+                          tag: "hero${season.posterPath!}",
+                          child: ShaderMask(
+                            shaderCallback: (rect) {
+                              return const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black,
+                                  Colors.black,
+                                  Colors.transparent,
+                                ],
+                                stops: [0, 0.3, 0.5, 1],
+                              ).createShader(
+                                Rect.fromLTRB(0, 0, rect.width, rect.height),
+                              );
+                            },
+                            blendMode: BlendMode.dstATop,
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: EndPoints.backDropsUrl(
+                                  season.posterPath!),
+                            ),
                           ),
                         ),
                         bottom: PreferredSize(

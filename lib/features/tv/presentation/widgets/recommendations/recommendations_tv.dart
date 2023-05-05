@@ -5,7 +5,6 @@ import 'package:mo3tv/core/widgets/recommendations_media_loading_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv_list.dart';
-
 class RecommendationsTvShows extends StatelessWidget {
   const RecommendationsTvShows({Key? key}) : super(key: key);
   @override
@@ -32,10 +31,3 @@ class RecommendationsTvShows extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-

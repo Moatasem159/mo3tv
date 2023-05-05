@@ -11,7 +11,6 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
 class TvShowRatingButton extends StatelessWidget {
   final TvShow tvShow;
   const TvShowRatingButton({Key? key, required this.tvShow}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvCubit, TvStates>(
@@ -105,14 +104,10 @@ class TvShowRatingButton extends StatelessWidget {
                 );
               }
             },
-            icon: tvShow.tvShowAccountDetails!.ratedValue!=0.0
-                ?
-            const Icon(
+            icon: tvShow.tvShowAccountDetails!.ratedValue!=0.0 ? const Icon(
               Icons.star,
               color: Colors.yellow,
-            )
-                :
-            const Icon(
+            ) : const Icon(
               Icons.star_border,
             ) ,
           ),

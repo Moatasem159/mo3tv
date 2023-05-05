@@ -3,7 +3,6 @@ import 'package:mo3tv/core/widgets/genres_widget.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/network_list_widget.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_details_body.dart';
-
 class TvShowDetails extends StatelessWidget {
   final TvShow tvShow;
   const TvShowDetails({Key? key, required this.tvShow}) : super(key: key);
@@ -26,5 +25,3 @@ class TvShowDetails extends StatelessWidget {
     );
   }
 }
-
-

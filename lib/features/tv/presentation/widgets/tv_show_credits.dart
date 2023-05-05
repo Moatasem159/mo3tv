@@ -5,10 +5,8 @@ import 'package:mo3tv/core/widgets/credits/media_credits_list.dart';
 import 'package:mo3tv/core/widgets/credits/media_credits_loading_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-
 class TvShowCredits extends StatelessWidget {
   const TvShowCredits({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvCubit, TvStates>(
@@ -27,7 +25,3 @@ class TvShowCredits extends StatelessWidget {
     );
   }
 }
-
-
-
-

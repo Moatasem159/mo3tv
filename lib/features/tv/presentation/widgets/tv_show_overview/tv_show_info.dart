@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-
 class TvShowInfo extends StatelessWidget {
   final TvShow tvShow;
-
   const TvShowInfo({Key? key, required this.tvShow}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -96,7 +93,6 @@ class TvShowInfo extends StatelessWidget {
               );
             }).toList(),
           ),
-
         ],
       ),
     );
