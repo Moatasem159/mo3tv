@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-
 class MovieInfo extends StatelessWidget {
   final Movie movie;
-
   const MovieInfo({Key? key, required this.movie}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     NumberFormat myFormat = NumberFormat.decimalPattern('en_us');
@@ -26,10 +24,8 @@ class MovieInfo extends StatelessWidget {
           if (movie.tagline != "")
           Column(
               children: [
-                const SizedBox(
-                  height: 5,
-                ),
-                SizedBox(
+              5.ph,
+              SizedBox(
                   width: 140,
                   child: Text(
                     movie.tagline!,
@@ -41,48 +37,29 @@ class MovieInfo extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
-          const SizedBox(
-            height: 5,
-          ),
-          const Text("Status",style:TextStyle(
-          fontWeight: FontWeight.bold
-          ),),
-          const SizedBox(
-            height: 4,
-          ),
+          5.ph,
+          const Text("Status",style:TextStyle(fontWeight: FontWeight.bold)),
+          4.ph,
           Text(movie.status!),
-          const SizedBox(
-            height: 7,
-          ),
+          7.ph,
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Budget",style:TextStyle(
-                    fontWeight: FontWeight.bold
-                )),
+                const Text("Budget",style:TextStyle(fontWeight: FontWeight.bold)),
                 if (movie.budget != 0)
-                const SizedBox(
-                  height: 5,
-                ),
+                  5.ph,
                 Text(movie.budget!=0?"\$ ${myFormat.format(movie.budget)}":"------"),
               ],
             ),
-          const SizedBox(
-            height: 7,
-          ),
+          7.ph,
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Revenue",style:TextStyle(
-                    fontWeight: FontWeight.bold
-                )),
+                const Text("Revenue",style:TextStyle(fontWeight: FontWeight.bold)),
                 if (movie.revenue != 0)
-                const SizedBox(
-                  height: 5,
-                ),
+                  5.ph,
                 Text(movie.revenue!=0?"\$ ${myFormat.format(movie.revenue)}":"------"),
               ],
             ),

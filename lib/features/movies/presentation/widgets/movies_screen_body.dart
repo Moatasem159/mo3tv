@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/playing_now_movies/playing_now_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/popular_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/top_rated_movies.dart';
@@ -10,14 +11,14 @@ class MoviesScreenBody extends StatelessWidget {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
-        children:const[
-          SizedBox(height: 30,),
-          PlayingNowMovies(),
-          SizedBox(height: 15,),
-          TrendingMovies(),
-          PopularMovies(),
-          TopRatedMovies(),
-          SizedBox(height:65,),
+        children:[
+          30.ph,
+          const PlayingNowMovies(),
+          15.ph,
+          const TrendingMovies(),
+          const PopularMovies(),
+          const TopRatedMovies(),
+          65.ph,
         ],
       ),
     );

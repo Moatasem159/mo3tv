@@ -22,11 +22,8 @@ class TrendingMovies extends StatelessWidget {
             onPressed: () {
               BlocProvider.of<MoreMoviesCubit>(context).moreMovies.addAll(state.trendingMovies);
               GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
-                  extra: SeeMoreParameters(title: title, isMovie: true, index: 1),);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) =>  const MediaSeeMore(title:title,index:1,isMovie: true,),
-              // ));
-            },
+                  extra: SeeMoreParameters(title: title, isMovie: true, index: 1));
+              },
           );
         }
         if(state is GetTrendingMoviesLoadingState){

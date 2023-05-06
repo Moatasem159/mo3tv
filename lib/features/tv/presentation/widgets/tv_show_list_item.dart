@@ -19,21 +19,19 @@ class TvShowListItem extends StatelessWidget {
         GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow);
       },
       child: CachedNetworkImage(
-        imageBuilder: (context, imageProvider) {
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            width: 140,
-            height:200,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                )
-            ),
-          );
-        },
         imageUrl: EndPoints.posterUrl(tvShow.posterPath!),
+        imageBuilder: (context, imageProvider) =>Container(
+          margin: const EdgeInsets.symmetric(horizontal: 5),
+          width: 140,
+          height:200,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
+              )
+          ),
+        ),
         placeholder: (context, url) => const MediaListLoadingItem(),
         errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
       ),

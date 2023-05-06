@@ -19,7 +19,7 @@ class TvShowOverview extends StatelessWidget {
             cubit.tvShow ==  TvShow()) {
           return const MovieDetailsLoadingWidget();
         }
-        return const SizedBox();
+        return Container();
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_state.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_list_loading_widget.dart';
@@ -52,7 +53,7 @@ class AccountLists extends StatelessWidget {
                     title: "Rated Series",
                     ratedTv: true,
                   ),
-                  const SizedBox(height: 65)
+                  65.ph,
                 ],
               ),
             );

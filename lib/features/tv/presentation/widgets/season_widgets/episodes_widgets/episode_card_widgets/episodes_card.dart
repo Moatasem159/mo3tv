@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/episode.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/episodes_widgets/episode_card_widgets/episode_details.dart';
 class EpisodeCard extends StatelessWidget {
@@ -17,11 +18,8 @@ class EpisodeCard extends StatelessWidget {
       child: Column(
         children: [
           EpisodeDetails(episode: episode),
-          const SizedBox(height:5),
-          Text(
-            episode.overview!,
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          )
+          5.ph,
+          Text(episode.overview!,style: const TextStyle(fontWeight: FontWeight.w500))
         ],
       ),
     );

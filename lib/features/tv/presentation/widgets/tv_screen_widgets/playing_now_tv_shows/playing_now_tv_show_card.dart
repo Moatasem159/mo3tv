@@ -21,12 +21,10 @@ class PlayingNowTvShowCard extends StatelessWidget {
       },
       child: CachedNetworkImage(
         imageUrl: EndPoints.backDropsUrl(tvShow.backdropPath!),
-        imageBuilder: (context, imageProvider) {
-          return TvShowPlayingNowCardWidget(
-            tvShow:  tvShow,
-            image: imageProvider,
-          );
-        },
+        imageBuilder: (context, imageProvider)=>TvShowPlayingNowCardWidget(
+          tvShow:  tvShow,
+          image: imageProvider,
+        ),
         placeholder:(context, url) => const PlayingNowMediaLoadingCard(),
       ),
     );

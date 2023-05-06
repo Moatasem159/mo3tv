@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 class MovieCard extends StatelessWidget {
   final ImageProvider image;
@@ -11,10 +12,7 @@ class MovieCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width-50,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: image
-          )
+          image: DecorationImage(fit: BoxFit.cover, image: image)
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
@@ -44,7 +42,7 @@ class MovieCard extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(width: 4.0),
+                        4.pw,
                         const Padding(
                           padding: EdgeInsets.only(top: 2),
                           child: Icon(
@@ -91,10 +89,11 @@ class MovieCard extends StatelessWidget {
                         fontWeight: FontWeight.w700
                       ),
                     ),
-                    const SizedBox(width: 4,),
+                    4.pw,
                     const Icon(Icons.star_rounded,size: 15,color: Colors.yellow,)
                   ],
-                )),
+                ),
+            ),
           ],
         ),
       ),

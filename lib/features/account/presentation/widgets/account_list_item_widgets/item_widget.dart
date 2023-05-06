@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 class ItemWidget extends StatelessWidget {
   final String title;
   final List list;
@@ -52,7 +53,7 @@ class ItemWidget extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       fontSize: 18
                   ),),
-                  const SizedBox(height: 5),
+                  5.ph,
                   if(list.length>1)
                     Text("${list.length} items",style: const TextStyle(
                         fontWeight: FontWeight.w600,

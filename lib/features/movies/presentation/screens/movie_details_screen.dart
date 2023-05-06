@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
@@ -93,9 +94,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                 SliverOverlapInjector(handle: appBar),
                                 if (cubit.isGallery)
                                   SliverOverlapInjector(handle: disconnectBar),
-                                const SliverToBoxAdapter(
-                                  child: SizedBox(height: 15),
-                                ),
+                                SliverToBoxAdapter(child: 15.ph),
                                 cubit.screens[cubit.index]
                               ],
                             )),

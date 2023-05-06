@@ -10,9 +10,7 @@ class EpisodesList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: episodes.length,
       shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return EpisodeCard(episode: episodes[index]);
-      },
+      itemBuilder: (context, index) =>EpisodeCard(episode: episodes[index])
     );
   }
 }

@@ -5,13 +5,11 @@ import 'package:mo3tv/core/widgets/recommendations_media_loading_list.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movie_list.dart';
-
 class RecommendationsMovies extends StatelessWidget {
   const RecommendationsMovies({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MovieCubit, MovieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
         if (cubit.movieRecommendations != null && cubit.movieRecommendations!.isNotEmpty) {
@@ -28,15 +26,8 @@ class RecommendationsMovies extends StatelessWidget {
             icon: Icons.movie_filter_outlined,
           );
         }
-        return SliverToBoxAdapter(child: Container());
+        return const SliverToBoxAdapter();
       },
     );
   }
 }
-
-
-
-
-
-
-

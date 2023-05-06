@@ -5,14 +5,11 @@ import 'package:mo3tv/core/widgets/gallery/posters/media_posters_loading_list.da
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/core/widgets/gallery/empty_image_list.dart';
-
 class MoviePosters extends StatelessWidget {
   const MoviePosters({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MovieCubit, MovieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
         if(cubit.movieGallery!=null&&cubit.movieGallery!.posters!=null&&cubit.movieGallery!.posters!.isEmpty)

@@ -12,8 +12,7 @@ class MovieBackdrops extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MovieCubit, MovieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
         if(cubit.movieGallery!=null&&cubit.movieGallery!.backdrops!=null&&cubit.movieGallery!.backdrops!.isEmpty)

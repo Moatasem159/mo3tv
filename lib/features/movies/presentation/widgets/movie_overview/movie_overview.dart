@@ -5,11 +5,8 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_details_loading_widget.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_overview_body.dart';
-
-
 class MovieOverview extends StatelessWidget {
   const MovieOverview({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieCubit, MovieStates>(
@@ -22,18 +19,8 @@ class MovieOverview extends StatelessWidget {
             cubit.movie == Movie()) {
           return const MovieDetailsLoadingWidget();
         }
-        return const SizedBox();
+        return Container();
       },
     );
   }
 }
-
-
-
-
-
-
-
-
-
-

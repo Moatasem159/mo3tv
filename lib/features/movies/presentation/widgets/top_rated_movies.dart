@@ -23,10 +23,7 @@ class TopRatedMovies extends StatelessWidget {
             onPressed: () {
               BlocProvider.of<MoreMoviesCubit>(context).moreMovies.addAll(state.topRatedMovies,);
               GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
-                extra: SeeMoreParameters(title: title, isMovie: true, index: 3),);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) =>  const MediaSeeMore(title:title,index: 3,isMovie: true, ),
-              // ));
+                extra: SeeMoreParameters(title: title, isMovie: true, index: 3));
             },
           );
         }

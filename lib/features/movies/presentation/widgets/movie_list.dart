@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/list_title.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
@@ -13,11 +14,8 @@ class MoviesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListTitle(
-            title: title,
-          onPressed: onPressed,
-        ),
-        const SizedBox(height:10,),
+        ListTitle(title: title,onPressed: onPressed),
+        10.ph,
         SizedBox(
           height: 200,
           child: ListView.builder(
@@ -29,7 +27,7 @@ class MoviesList extends StatelessWidget {
               return MovieListItem(movie: movies[index],);
             }, ),
         ),
-        const SizedBox(height:10,),
+        10.ph,
       ],
     );
   }

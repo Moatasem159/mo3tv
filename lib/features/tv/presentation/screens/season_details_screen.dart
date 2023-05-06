@@ -1,19 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_overview/season_overview.dart';
 class SeasonDetailsScreen extends StatelessWidget {
   final TvShowSeason season;
   final String tvShowName;
-
   const SeasonDetailsScreen({
     Key? key,
     required this.season,
     required this.tvShowName,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
@@ -83,9 +82,7 @@ class SeasonDetailsScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
+                                    5.ph,
                                     Text(
                                       season.name!,
                                       style: const TextStyle(
@@ -93,9 +90,7 @@ class SeasonDetailsScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
+                                    5.ph,
                                     Text(
                                       "(${season.airDate!.substring(0, 4)})",
                                       style: const TextStyle(

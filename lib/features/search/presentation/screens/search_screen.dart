@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/textformfield.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_state.dart';
 import 'package:mo3tv/features/search/presentation/widgets/search_list.dart';
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
     return BlocProvider(
   create: (context) => sl<SearchCubit>(),
-  child: BlocConsumer<SearchCubit, SearchStates>(
-      listener: (context, state) {},
+  child: BlocBuilder<SearchCubit, SearchStates>(
       builder: (context, state) {
         SearchCubit cubit=BlocProvider.of<SearchCubit>(context);
         return GestureDetector(
@@ -54,9 +53,7 @@ class SearchScreen extends StatelessWidget {
                               },
                                 child: const Icon(Icons.clear, color: Colors.white)),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
+                          5.ph
                         ],
                       ),
                     ),

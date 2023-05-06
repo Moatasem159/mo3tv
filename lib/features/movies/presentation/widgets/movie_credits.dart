@@ -8,8 +8,7 @@ class MoviesCredits extends StatelessWidget {
   const MoviesCredits({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MovieCubit, MovieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
         if (cubit.movieCredits!.isNotEmpty) {
@@ -18,9 +17,7 @@ class MoviesCredits extends StatelessWidget {
         if (state is GetMovieRecommendationsLoadingState || cubit.movieCredits!.isEmpty) {
           return const MediaCreditsLoadingList();
         }
-        return SliverToBoxAdapter(
-          child: Container(),
-        );
+        return const SliverToBoxAdapter();
       },
     );
   }

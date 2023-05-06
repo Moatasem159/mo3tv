@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 class TvShowPlayingNowCardWidget extends StatelessWidget {
   final ImageProvider image;
@@ -44,7 +45,7 @@ class TvShowPlayingNowCardWidget extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        const SizedBox(width: 4.0),
+                        4.pw,
                         const Padding(
                           padding: EdgeInsets.only(top: 3),
                           child: Icon(
@@ -90,7 +91,7 @@ class TvShowPlayingNowCardWidget extends StatelessWidget {
                           fontWeight: FontWeight.w700
                       ),
                     ),
-                    const SizedBox(width: 4,),
+                    4.pw,
                     const Icon(Icons.star_rounded,size: 15,color: Colors.yellow,)
                   ],
                 )),

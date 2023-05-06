@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 class TvShowInfo extends StatelessWidget {
   final TvShow tvShow;
@@ -18,9 +19,7 @@ class TvShowInfo extends StatelessWidget {
               fontWeight: FontWeight.bold
             ),
           ),
-          const SizedBox(
-            height: 6,
-          ),
+         6.ph,
           if (tvShow.tagline != "")
             Column(
               children: [
@@ -36,9 +35,7 @@ class TvShowInfo extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+               5.ph
               ],
             ),
           if(tvShow.seasons!.isEmpty&&tvShow.numberOfSeasons==1)
@@ -57,38 +54,28 @@ class TvShowInfo extends StatelessWidget {
             Text("${tvShow.seasons!.length} Season",style:const TextStyle(
                 fontWeight: FontWeight.bold
             ),),
-          const SizedBox(
-            height: 5,
-          ),
+         5.ph,
           const Text("Status",style: TextStyle(
             fontWeight: FontWeight.bold
           ),),
-          const SizedBox(
-            height: 4,
-          ),
+          4.ph,
           Text(tvShow.status!),
-          const SizedBox(
-            height: 6,
-          ),
+         6.ph,
           const Text("Type",style:  TextStyle(
               fontWeight: FontWeight.bold
           ),),
-          const SizedBox(
-            height: 4,
-          ),
+          4.ph,
           Text(tvShow.type!),
-          const SizedBox(height: 7,),
+          7.ph,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:tvShow.createdBy!.map((e){
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(e.name!,style: const TextStyle(
-                    fontWeight: FontWeight.bold
-                  ),),
+                  Text(e.name!,style: const TextStyle(fontWeight: FontWeight.bold)),
                   const Text("Creator"),
-                  const SizedBox( height: 7,)
+                 7.ph
                 ],
               );
             }).toList(),

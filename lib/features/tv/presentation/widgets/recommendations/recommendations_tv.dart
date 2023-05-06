@@ -26,7 +26,7 @@ class RecommendationsTvShows extends StatelessWidget {
             icon: Icons.tv_off,
           );
         }
-        return SliverToBoxAdapter(child: Container());
+        return const SliverToBoxAdapter();
       },
     );
   }

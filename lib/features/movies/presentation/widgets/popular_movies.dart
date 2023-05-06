@@ -26,13 +26,6 @@ class PopularMovies extends StatelessWidget {
                   .addAll(state.popularMovies);
               GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
                 extra: SeeMoreParameters(title: title, isMovie: true, index: 2),);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) => const MediaSeeMore(
-              //     title: title,
-              //     index: 2,
-              //     isMovie: true,
-              //   ),
-              // ));
             },
           );
         }

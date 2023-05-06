@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/episode.dart';
 class EpisodeInfo extends StatelessWidget {
   final Episode episode;
@@ -16,7 +17,7 @@ class EpisodeInfo extends StatelessWidget {
               style: const TextStyle(
                   fontWeight: FontWeight.bold),
             ),
-          const SizedBox(height:4),
+          4.ph,
           FittedBox(
               child: Text(
                 "${episode.name}",
@@ -25,12 +26,12 @@ class EpisodeInfo extends StatelessWidget {
                     overflow: TextOverflow.visible),
                 maxLines: null,
               )),
-          const SizedBox(height:4),
+          4.ph,
           Text(
               "${episode.airDate}",
               style: const TextStyle(
                   fontWeight: FontWeight.w600)),
-          const SizedBox(height: 4),
+          4.ph,
           if(episode.runtime!=null)
             Text(
               "${episode.runtime! ~/ 60 > 0 ? "${episode.runtime! ~/ 60}h " : ''}${episode.runtime! % 60==0?'':"${episode.runtime! % 60}m"}",

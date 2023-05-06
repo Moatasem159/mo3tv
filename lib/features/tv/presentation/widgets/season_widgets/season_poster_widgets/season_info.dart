@@ -15,10 +15,7 @@ class SeasonInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            season.name!,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
+          Text(season.name!, style: const TextStyle(fontWeight: FontWeight.bold)),
           Text(
             season.airDate!=''?
             "${season.airDate!.substring(0,4)} | ${season.episodeCount} Episodes":

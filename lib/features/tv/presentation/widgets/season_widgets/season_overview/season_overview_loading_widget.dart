@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:shimmer/shimmer.dart';
 class SeasonOverviewLoadingWidget extends StatelessWidget {
   const SeasonOverviewLoadingWidget({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Column(
         children: [
-          const SizedBox(height:10),
+         10.ph,
           Shimmer.fromColors(
             baseColor: Colors.grey[700]!,
             highlightColor: Colors.grey[600]!,
@@ -33,9 +34,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                           color: Colors.grey,
                         ),
                       ),
-                      const SizedBox(
-                        width: 7,
-                      ),
+                     7.pw,
                       Column(
                         crossAxisAlignment:
                         CrossAxisAlignment.start,
@@ -52,9 +51,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
+                         4.ph,
                           Shimmer.fromColors(
                             baseColor: Colors.grey[700]!,
                             highlightColor: Colors.grey[600]!,
@@ -67,9 +64,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
+                          4.ph,
                           Shimmer.fromColors(
                             baseColor: Colors.grey[700]!,
                             highlightColor: Colors.grey[600]!,
@@ -82,9 +77,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
+                          4.ph,
                           Shimmer.fromColors(
                             baseColor: Colors.grey[700]!,
                             highlightColor: Colors.grey[600]!,
@@ -101,7 +94,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(height:5),
+                  5.ph,
                   Column(
                     children: [
                       Shimmer.fromColors(
@@ -116,7 +109,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height:10),
+                      10.ph,
                       Shimmer.fromColors(
                         baseColor: Colors.grey[700]!,
                         highlightColor: Colors.grey[600]!,
@@ -129,7 +122,7 @@ class SeasonOverviewLoadingWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height:10),
+                      10.ph,
                       Shimmer.fromColors(
                         baseColor: Colors.grey[700]!,
                         highlightColor: Colors.grey[600]!,

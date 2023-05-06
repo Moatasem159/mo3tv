@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
@@ -42,19 +43,19 @@ class TvShowSearchWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
-                  Text("${tvShow.originalName} ${tvShow.releaseDate==""?'':((tvShow.releaseDate!.substring(0, 4)))}",style: const TextStyle(
+                  Text("${tvShow.originalName} ${tvShow.releaseDate==""?'':((tvShow.releaseDate!.substring(0,4)))}",style: const TextStyle(
                       fontWeight: FontWeight.bold
                   ),),
-                  const SizedBox(height: 4,),
+                  4.ph,
                   if(tvShow.voteAverage!=0)
                   Row(
                     children:  [
                       const Icon(Icons.star,color: Colors.yellow,),
-                      const SizedBox(width: 5,),
+                      5.pw,
                       Text("${tvShow.voteAverage!}")
                     ],
                   ),
-                  const SizedBox(height:7,),
+                 7.ph,
                   const Text("in Tv shows"),
                 ],
               ),

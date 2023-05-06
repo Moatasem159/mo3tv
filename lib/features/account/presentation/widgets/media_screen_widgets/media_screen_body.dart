@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_state.dart';
 import 'package:mo3tv/features/account/presentation/widgets/media_screen_widgets/media_screen_appbar.dart';
@@ -31,7 +32,7 @@ class MediaScreenBody extends StatelessWidget {
         return CustomScrollView(
           slivers: [
             MediaScreenAppBar(title: title),
-            const SliverToBoxAdapter(child: SizedBox(height: 7)),
+            SliverToBoxAdapter(child: 7.ph),
             if(favMovies)
               MovieList(movieList: cubit.favMovies),
             if(ratedMovies)
@@ -44,7 +45,7 @@ class MediaScreenBody extends StatelessWidget {
               TvList(tvList: cubit.ratedTvShows),
             if(tvWatchlist)
               TvList(tvList: cubit.tvShowsWatchlist),
-            const SliverToBoxAdapter(child: SizedBox(height: 10))
+              SliverToBoxAdapter(child: 10.ph)
           ],
         );
       },

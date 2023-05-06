@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 class MovieDetailsLoadingWidget extends StatelessWidget {
@@ -22,9 +23,7 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                       height: 300,
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
+                  5.pw,
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,9 +38,7 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                             )),
                         Column(
                           children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
+                           15.ph,
                             Shimmer.fromColors(
                               baseColor: Colors.grey[850]!,
                               highlightColor: Colors.grey[800]!,
@@ -50,14 +47,10 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                                 width: 140,
                                 height: 30,),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
+                           10.ph
                           ],
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
+                       5.ph,
                         Shimmer.fromColors(
                           baseColor: Colors.grey[850]!,
                           highlightColor: Colors.grey[800]!,
@@ -66,9 +59,7 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                             width: 140,
                             height: 30,),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        10.ph,
                         Shimmer.fromColors(
                           baseColor: Colors.grey[850]!,
                           highlightColor: Colors.grey[800]!,
@@ -77,9 +68,7 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                             width: 140,
                             height: 30,),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        10.ph,
                         Shimmer.fromColors(
                           baseColor: Colors.grey[850]!,
                           highlightColor: Colors.grey[800]!,
@@ -88,9 +77,7 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                             width: 140,
                             height: 30,),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        10.ph,
                         Shimmer.fromColors(
                           baseColor: Colors.grey[850]!,
                           highlightColor: Colors.grey[800]!,
@@ -117,13 +104,12 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                           CircularPercentIndicator(
                               radius: 21,
                               lineWidth: 3),
-                          const SizedBox(width: 5,),
+                         5.pw,
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
                               Text("User"),
-
                               Text("Score"),
                             ],
                           )
@@ -191,12 +177,9 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                         ),
                         onPressed: (){}, child:const Icon(Icons.list) ),
                   ),
-
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              10.ph,
               Shimmer.fromColors(
                 baseColor: Colors.grey[850]!,
                 highlightColor: Colors.grey[800]!,
@@ -205,9 +188,7 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                   width: 320,
                   height: 20,),
               ),
-              const SizedBox(
-                height: 7,
-              ),
+              7.ph,
               Shimmer.fromColors(
                 baseColor: Colors.grey[850]!,
                 highlightColor: Colors.grey[800]!,
@@ -216,9 +197,7 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                   width: 320,
                   height: 20,),
               ),
-              const SizedBox(
-                height: 7,
-              ),
+              7.ph,
               Shimmer.fromColors(
                 baseColor: Colors.grey[850]!,
                 highlightColor: Colors.grey[800]!,
@@ -227,9 +206,9 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                   width: 320,
                   height: 20,),
               ),
-
             ],
           ),
-        ));
+        ),
+    );
   }
 }

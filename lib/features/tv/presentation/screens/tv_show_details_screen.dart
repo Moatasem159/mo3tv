@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/gallery/gallery_tab_bar.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -88,9 +89,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
                                 SliverOverlapInjector(handle: appBar),
                                 if (cubit.isGallery)
                                   SliverOverlapInjector(handle: disconnectBar),
-                                const SliverToBoxAdapter(
-                                  child: SizedBox(height: 15),
-                                ),
+                                SliverToBoxAdapter(child: 15.ph),
                                 cubit.screens[cubit.index]
                               ],
                             ),

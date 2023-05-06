@@ -21,7 +21,7 @@ class TvShowsReviews extends StatelessWidget {
         if (state is GetTvShowReviewsSuccessState && cubit.tvShowsReviews != null && cubit.tvShowsReviews!.isEmpty) {
           return const ReviewEmptyWidget(msg: "No reviews on this series",);
         }
-        return SliverToBoxAdapter(child: Container());
+        return const SliverToBoxAdapter();
       },
     );
   }

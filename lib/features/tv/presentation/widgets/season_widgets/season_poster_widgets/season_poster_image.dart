@@ -28,8 +28,7 @@ class SeasonPosterImage extends StatelessWidget {
               ),
             ),
           ),
-          errorWidget: (context, url, error) =>
-              Image.asset("assets/images/movieplaceholder.png"),
+          errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
         ),
       ),
     );

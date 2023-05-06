@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
@@ -24,9 +25,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
                         fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                )
+              10.ph
               ],
             ),
           ),
@@ -64,17 +63,10 @@ class RecommendationsTvShowsList extends StatelessWidget {
           if(TvCubit.get(context).allRec)
             SliverToBoxAdapter(
               child:Column(
-                children: const [
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Center(child: Text("No more movies",
-                    style:TextStyle(
-                        fontWeight: FontWeight.w600
-                    ) ,)),
-                  SizedBox(
-                    height: 70,
-                  ),
+                children:  [
+                  8.ph,
+                  const Center(child: Text("No more movies",style:TextStyle(fontWeight: FontWeight.w600))),
+                 70.ph
                 ],
               ) ,
             ),

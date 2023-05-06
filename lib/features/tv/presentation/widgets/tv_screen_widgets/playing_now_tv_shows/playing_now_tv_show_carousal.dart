@@ -14,7 +14,7 @@ class PlayingNowTvShowCarousal extends StatelessWidget {
         autoPlay: true,
         autoPlayInterval: const Duration(seconds: 3),
       ),
-      items:tvShows.map((e)=>PlayingNowTvShowCard(tvShow: e,) ).toList(),
+      items:tvShows.map((e)=>PlayingNowTvShowCard(tvShow: e)).toList(),
     );
   }
 }

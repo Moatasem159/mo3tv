@@ -18,9 +18,7 @@ class TvShowCredits extends StatelessWidget {
         if (state is GetMovieRecommendationsLoadingState || cubit.tvShowCredits!.isEmpty) {
           return const MediaCreditsLoadingList();
         }
-        return SliverToBoxAdapter(
-          child: Container(),
-        );
+        return const SliverToBoxAdapter();
       },
     );
   }

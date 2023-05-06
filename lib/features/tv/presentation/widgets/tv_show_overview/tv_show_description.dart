@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/keywords_widgets/keyword_list_widget.dart';
 import 'package:mo3tv/core/widgets/play_media_trailer.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -14,10 +15,7 @@ class TvShowDescription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (tvShow.trailer!=null)
-        PlayMediaTrailer(
-            url: tvShow.trailer!.key!,
-            title: tvShow.trailer!.name!,
-          ),
+        PlayMediaTrailer(url: tvShow.trailer!.key!, title: tvShow.trailer!.name!),
         Text(
           tvShow.overview!,
           style: const TextStyle(
@@ -26,16 +24,13 @@ class TvShowDescription extends StatelessWidget {
             letterSpacing: 1.1,
           ),
         ),
-        const SizedBox(height:10),
+        10.ph,
         if(tvShow.seasons!.isNotEmpty)
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Seasons:",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height:7),
+            const Text("Seasons:",style: TextStyle(fontWeight: FontWeight.bold),),
+            7.ph,
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.start,
               children: tvShow.seasons!.map((e) {
@@ -50,7 +45,7 @@ class TvShowDescription extends StatelessWidget {
         ),
         if (keywords.isNotEmpty)
         KeywordListWidget(keywords:keywords),
-        const SizedBox(height:7),
+        7.ph,
       ],
     );
   }

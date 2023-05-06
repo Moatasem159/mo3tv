@@ -9,8 +9,7 @@ class MainScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BottomNavCubit(),
-      child: BlocConsumer<BottomNavCubit, BottomNavStates>(
-        listener: (context, state) {},
+      child: BlocBuilder<BottomNavCubit, BottomNavStates>(
         builder: (context, state) {
           BottomNavCubit cubit=BlocProvider.of<BottomNavCubit>(context);
           return WillPopScope(

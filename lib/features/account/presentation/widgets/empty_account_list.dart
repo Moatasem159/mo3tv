@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 class EmptyAccountList extends StatelessWidget {
   final String title;
   const EmptyAccountList({Key? key, required this.title}) : super(key: key);
@@ -17,9 +18,9 @@ class EmptyAccountList extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(title,style: const TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(height:10),
+          10.ph,
           const Text("0 items",style: TextStyle(fontWeight: FontWeight.w500)),
-          const SizedBox(height:10),
+          10.ph,
           const Text("Try add some",style: TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),

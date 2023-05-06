@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/episodes_widgets/episodes_list.dart';
 class SeasonOverviewWidget extends StatelessWidget {
@@ -9,7 +10,7 @@ class SeasonOverviewWidget extends StatelessWidget {
     return  SliverToBoxAdapter(
       child: Column(
         children: [
-          const SizedBox(height:10),
+          10.ph,
           if (season.overview != "")
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -21,7 +22,7 @@ class SeasonOverviewWidget extends StatelessWidget {
                     height: 1.4),
               ),
             ),
-           EpisodesList(episodes: season.episodes!,)
+           EpisodesList(episodes: season.episodes!)
         ],
       ),
     );

@@ -19,9 +19,7 @@ class SeasonOverview extends StatelessWidget {
         {
           return const SeasonOverviewLoadingWidget();
         }
-        return SliverToBoxAdapter(
-          child: Container(),
-        );
+        return const SliverToBoxAdapter();
       },
     );
   }

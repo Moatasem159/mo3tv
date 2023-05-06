@@ -11,8 +11,7 @@ class MovieLogos extends StatelessWidget {
   const MovieLogos({Key? key}): super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MovieCubit, MovieStates>(
-      listener: (context, state) {},
+    return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
         MovieCubit cubit = BlocProvider.of<MovieCubit>(context);
         if(cubit.movieGallery!=null&&cubit.movieGallery!.logos!=null&&cubit.movieGallery!.logos!.isEmpty)
