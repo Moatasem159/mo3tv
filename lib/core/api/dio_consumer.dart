@@ -10,15 +10,15 @@ import 'package:mo3tv/core/api/status_code.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
 class DioConsumer implements ApiConsumer {
-  final Dio client;
-  DioConsumer({required this.client}) {
-    (client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+  final Dio _client;
+  DioConsumer(this._client) {
+    (_client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
       return client;
     };
-    client.options
+    _client.options
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
       .. receiveDataWhenStatusError= true
@@ -26,16 +26,16 @@ class DioConsumer implements ApiConsumer {
       ..validateStatus = (status) {
         return status! < StatusCode.internetServerError;
       };
-    client.interceptors.add(di.sl<AppInterceptors>());
+    _client.interceptors.add(di.sl<AppInterceptors>());
     if (kDebugMode) {
-      client.interceptors.add(di.sl<LogInterceptor>());
+      _client.interceptors.add(di.sl<LogInterceptor>());
     }
   }
 
   @override
   Future get(String path, {Map<String, dynamic>? queryParameters})async{
     try {
-      final response = await client.get(path);
+      final response = await _client.get(path);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);
@@ -45,7 +45,7 @@ class DioConsumer implements ApiConsumer {
   @override
   Future post(String path, {Map<String, dynamic>? body, bool formDataIsEnabled = false,}) async {
     try {
-      final response = await client.post(path,
+      final response = await _client.post(path,
           data: formDataIsEnabled ? FormData.fromMap(body!) : body,
       );
       return jsonDecode(response.data.toString());
@@ -58,7 +58,7 @@ class DioConsumer implements ApiConsumer {
   @override
   Future put(String path, {Map<String, dynamic>? body,}) async {
     try {
-      final response = await client.put(
+      final response = await _client.put(
         path,
         data: body,
       );
@@ -71,7 +71,7 @@ class DioConsumer implements ApiConsumer {
   @override
   Future delete(String path, {Map<String, dynamic>? body,}) async {
     try {
-      final response = await client.delete(path, data: body,);
+      final response = await _client.delete(path, data: body,);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       _handleDioError(error);

@@ -1,5 +1,4 @@
 import 'package:mo3tv/features/logout/domain/entities/log_out_entity.dart';
-
 class LogOutModel extends LogOut{
   LogOutModel({required super.success, required super.statusCode, required super.statusMessage});
   factory LogOutModel.fromJson(Map<String, dynamic> json) => LogOutModel(
@@ -7,7 +6,6 @@ class LogOutModel extends LogOut{
     statusCode: json["status_code"]??0,
     statusMessage: json["status_message"]??'',
   );
-
   Map<String, dynamic> toJson() => {
     "success": success,
     "status_code": statusCode,

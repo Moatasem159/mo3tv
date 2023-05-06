@@ -9,9 +9,7 @@ class LogOutDataSourceImpl extends LogOutDataSource{
   LogOutDataSourceImpl(this._apiConsumer);
   @override
   Future<LogOutModel> logOut({required String sessionId})async {
-    final res=await _apiConsumer.delete(EndPoints.logOutPath,body: {
-      "session_id":sessionId
-    });
+    final res=await _apiConsumer.delete(EndPoints.logOutPath,body:{"session_id":sessionId});
     return LogOutModel.fromJson(res);
   }
 }

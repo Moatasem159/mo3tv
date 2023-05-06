@@ -25,5 +25,4 @@ class LogOutRepositoryImpl extends LogOutRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
 }

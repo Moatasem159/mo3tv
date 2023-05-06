@@ -84,8 +84,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   ///features
   //blocs
-  sl.registerFactory(() =>AccountCubit(sl(), sl(), sl(), sl(), sl(), sl(),sl()));
-  sl.registerFactory(() =>LogOutCubit(logOutUsecase: sl()));
+
   sl.registerFactory(() =>SearchCubit(searchUsecase:sl()));
   sl.registerFactory<MovieCubit>(() => MovieCubit(
       rateMovieUseCase: sl(),
@@ -186,49 +185,61 @@ Future<void> init() async {
   sl.registerLazySingleton<SearchUsecase>(
           () => SearchUsecase(sl(),));
   ///account usecases
-  sl.registerLazySingleton<GetFavMoviesListUsecase>(() => GetFavMoviesListUsecase(sl()));
-  sl.registerLazySingleton<GetRatedMoviesListUsecase>(() => GetRatedMoviesListUsecase(sl()));
-  sl.registerLazySingleton<GetMoviesWatchlistUsecase>(() => GetMoviesWatchlistUsecase(sl()));
-  sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
-  sl.registerLazySingleton<GetTvShowsWatchlistUsecase>(() => GetTvShowsWatchlistUsecase(sl()));
-  sl.registerLazySingleton<GetFavTvShowsListUsecase>(() => GetFavTvShowsListUsecase(sl()));
-  sl.registerLazySingleton<GetRatedTvShowListUsecase>(() => GetRatedTvShowListUsecase(sl()));
+
 
   ///logOut usecase
-  sl.registerLazySingleton<LogOutUsecase>(()=>LogOutUsecase(sl()));
+
   // Repository
 
   sl.registerLazySingleton<MovieRepository>(
       () => MoviesRepositoryImpl(baseMovieRemoteDataSource: sl(),networkInfo: sl()));
-  sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl()));
+
   sl.registerLazySingleton<TvRepository>(
           () => TvShowRepositoryImpl(tvShowRemoteDataSource:sl(),networkInfo: sl()));
   sl.registerLazySingleton<SearchRepository>(
           () => SearchRepositoryImpl(networkInfo: sl(), searchDataSource: sl()));
-  sl.registerLazySingleton<LogOutRepository>(
-          () => LogOutRepositoryImpl(sl(),sl()));
+
 
   //dataSource
 
   sl.registerLazySingleton<MovieRemoteDataSource>(
       () => MovieRemoteDataSourceImpl(apiConsumer: sl()));
-  sl.registerLazySingleton<AccountDataSource>(
-          () => AccountDataSourceImpl(sl()));
+
   sl.registerLazySingleton<TvShowRemoteDataSource>(
           () => TvShowRemoteDataSourceImpl( apiConsumer: sl(),));
-  sl.registerLazySingleton<SearchDataSource>(
-          () => SearchDataSourceImpl(apiConsumer:sl(),));
-  sl.registerLazySingleton<LogOutDataSource>(() => LogOutDataSourceImpl(sl()));
+  sl.registerLazySingleton<SearchDataSource>(() => SearchDataSourceImpl(apiConsumer:sl(),));
 
-  ///core
-  sl.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImpl(connectionChecker: sl()));
-  ///External
+
+  account();
+  logout();
+  await external();
+}
+
+login(){
+  if (!GetIt.I.isRegistered<GetTokenUsecase>())
+    {
+      sl.registerFactory<LoginCubit>(() =>LoginCubit(sl(),sl(),sl()));
+      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl()),);
+      sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
+      sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
+      sl.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImpl(sl()));
+    }
+}
+
+logout(){
+  sl.registerFactory(() =>LogOutCubit(sl(),sl()));
+  sl.registerLazySingleton<LogOutUsecase>(()=>LogOutUsecase(sl()));
+  sl.registerLazySingleton<LogOutRepository>(() => LogOutRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<LogOutDataSource>(() => LogOutDataSourceImpl(sl()));
+}
+
+Future external()async{
   final sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
-  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl()));
   sl.registerLazySingleton(() => Dio());
-  sl.registerLazySingleton<SharedPrefrencesConsumer>(() => SharedPrefrencesManager(sharedPreferences: sl()));
+  sl.registerLazySingleton<SharedPrefrencesConsumer>(() => SharedPrefrencesManager(sl()));
   sl.registerLazySingleton(() => InternetConnectionChecker());
   sl.registerLazySingleton(() => AppInterceptors());
   sl.registerLazySingleton(() => LogInterceptor(
@@ -241,13 +252,19 @@ Future<void> init() async {
       ));
 }
 
-login(){
-  if (!GetIt.I.isRegistered<GetTokenUsecase>())
-    {
-      sl.registerFactory<LoginCubit>(() =>LoginCubit(sl(),sl(),sl()));
-      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl()),);
-      sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
-      sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
-      sl.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImpl(sl()));
-    }
+account(){
+  sl.registerFactory(() =>AccountCubit(sl(), sl(), sl(), sl(), sl(), sl(),sl()));
+  sl.registerLazySingleton<GetFavMoviesListUsecase>(() => GetFavMoviesListUsecase(sl()));
+  sl.registerLazySingleton<GetRatedMoviesListUsecase>(() => GetRatedMoviesListUsecase(sl()));
+  sl.registerLazySingleton<GetMoviesWatchlistUsecase>(() => GetMoviesWatchlistUsecase(sl()));
+  sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowsWatchlistUsecase>(() => GetTvShowsWatchlistUsecase(sl()));
+  sl.registerLazySingleton<GetFavTvShowsListUsecase>(() => GetFavTvShowsListUsecase(sl()));
+  sl.registerLazySingleton<GetRatedTvShowListUsecase>(() => GetRatedTvShowListUsecase(sl()));
+  sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<AccountDataSource>(() => AccountDataSourceImpl(sl()));
+}
+
+search(){
+
 }
