@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
 class AccountAppBarLoadingWidget extends StatelessWidget {
   const AccountAppBarLoadingWidget({Key? key}) : super(key: key);
   @override

@@ -16,15 +16,11 @@ class EmptyAccountList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(title,style: const TextStyle(
-              fontWeight: FontWeight.bold
-          ),),
-          const SizedBox(height: 10,),
-          const Text("0 items",style: TextStyle(
-            fontWeight: FontWeight.w500
-          ),),
-          const SizedBox(height: 10,),
-          const Text("Try add some",style: TextStyle(fontWeight: FontWeight.w500),),
+          Text(title,style: const TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height:10),
+          const Text("0 items",style: TextStyle(fontWeight: FontWeight.w500)),
+          const SizedBox(height:10),
+          const Text("Try add some",style: TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),
     );

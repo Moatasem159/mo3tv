@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/config/themes/app_theme.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_cubit.dart';

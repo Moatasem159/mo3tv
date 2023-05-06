@@ -51,4 +51,3 @@ class AccountAppBarWidget extends StatelessWidget {
     );
   }
 }
-

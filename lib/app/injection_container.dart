@@ -17,11 +17,11 @@ import 'package:mo3tv/features/account/domain/usecases/get_movies_watchlist_usec
 import 'package:mo3tv/features/account/domain/usecases/get_rated_movies_list_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_rated_tv_shows_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_tv_shows_watchlist_usecase.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
 import 'package:mo3tv/features/logout/data/repositories/log_out_repository_impl.dart';
 import 'package:mo3tv/features/logout/domain/repositories/log_out_repository.dart';
 import 'package:mo3tv/features/logout/domain/usecases/log_out_usecase.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
 import 'package:mo3tv/features/login/data/data_sources/login_datasource.dart';
 import 'package:mo3tv/features/login/data/repositories/login_repository_impl.dart';
 import 'package:mo3tv/features/login/domain/repositories/login_repository.dart';
@@ -84,14 +84,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   ///features
   //blocs
-  sl.registerFactory(() =>AccountCubit(
-      getAccountDetailsUsecase:  sl(),
-      getFavMoviesListUsecase: sl(),
-      getMoviesWatchlistUsecase: sl(),
-      getFavTvShowsListUsecase: sl(),
-      getRatedTvShowListUsecase: sl(),
-      getTvShowsWatchlistUsecase:  sl(),
-      getRatedMoviesListUsecase: sl()));
+  sl.registerFactory(() =>AccountCubit(sl(), sl(), sl(), sl(), sl(), sl(),sl()));
   sl.registerFactory(() =>LogOutCubit(logOutUsecase: sl()));
   sl.registerFactory(() =>SearchCubit(searchUsecase:sl()));
   sl.registerFactory<MovieCubit>(() => MovieCubit(
@@ -193,20 +186,13 @@ Future<void> init() async {
   sl.registerLazySingleton<SearchUsecase>(
           () => SearchUsecase(sl(),));
   ///account usecases
-  sl.registerLazySingleton<GetFavMoviesListUsecase>(
-          () => GetFavMoviesListUsecase(accountRepository: sl(),));
-  sl.registerLazySingleton<GetRatedMoviesListUsecase>(
-          () => GetRatedMoviesListUsecase(accountRepository: sl(),));
-  sl.registerLazySingleton<GetMoviesWatchlistUsecase>(
-          () => GetMoviesWatchlistUsecase(accountRepository: sl(),));
-  sl.registerLazySingleton<GetAccountDetailsUsecase>(
-          () => GetAccountDetailsUsecase(accountRepository: sl(),));
-  sl.registerLazySingleton<GetTvShowsWatchlistUsecase>(
-          () => GetTvShowsWatchlistUsecase(accountRepository: sl(),));
-  sl.registerLazySingleton<GetFavTvShowsListUsecase>(
-          () => GetFavTvShowsListUsecase(accountRepository: sl(),));
-  sl.registerLazySingleton<GetRatedTvShowListUsecase>(
-          () => GetRatedTvShowListUsecase(accountRepository: sl(),));
+  sl.registerLazySingleton<GetFavMoviesListUsecase>(() => GetFavMoviesListUsecase(sl()));
+  sl.registerLazySingleton<GetRatedMoviesListUsecase>(() => GetRatedMoviesListUsecase(sl()));
+  sl.registerLazySingleton<GetMoviesWatchlistUsecase>(() => GetMoviesWatchlistUsecase(sl()));
+  sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowsWatchlistUsecase>(() => GetTvShowsWatchlistUsecase(sl()));
+  sl.registerLazySingleton<GetFavTvShowsListUsecase>(() => GetFavTvShowsListUsecase(sl()));
+  sl.registerLazySingleton<GetRatedTvShowListUsecase>(() => GetRatedTvShowListUsecase(sl()));
 
   ///logOut usecase
   sl.registerLazySingleton<LogOutUsecase>(()=>LogOutUsecase(sl()));

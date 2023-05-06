@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/core/widgets/login_alert.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';

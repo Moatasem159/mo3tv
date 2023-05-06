@@ -13,7 +13,7 @@ class AccountRepositoryImpl extends AccountRepository{
   final AccountDataSource _accountDataSource;
   AccountRepositoryImpl(this._networkInfo,this._accountDataSource);
   @override
-  Future<Either<Failure, List<Movie>>> getFavouriteMovies() async{
+  Future<Either<Failure,List<Movie>>> getFavouriteMovies()async{
     if(await _networkInfo.isConnected)
     {
       final result = await _accountDataSource.getFavouriteMovies();
@@ -23,12 +23,13 @@ class AccountRepositoryImpl extends AccountRepository{
         return Left(ServerFailure(failure.message!));
       }
     }
-    else{
+    else
+    {
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
   @override
-  Future<Either<Failure, List<Movie>>> getMovieWatchList() async{
+  Future<Either<Failure,List<Movie>>> getMovieWatchList()async{
     if(await _networkInfo.isConnected)
     {
       final result = await _accountDataSource.getMovieWatchList();
@@ -43,7 +44,7 @@ class AccountRepositoryImpl extends AccountRepository{
     }
   }
   @override
-  Future<Either<Failure, List<Movie>>> getRatedMovies()async {
+  Future<Either<Failure,List<Movie>>> getRatedMovies()async {
     if(await _networkInfo.isConnected)
     {
       final result = await _accountDataSource.getRatedMovies();
@@ -58,7 +59,7 @@ class AccountRepositoryImpl extends AccountRepository{
     }
   }
   @override
-  Future<Either<Failure, Account>> getAccountDetails() async{
+  Future<Either<Failure,Account>> getAccountDetails()async{
     if(await _networkInfo.isConnected)
     {
       final result = await _accountDataSource.getAccountDetails();
@@ -73,7 +74,7 @@ class AccountRepositoryImpl extends AccountRepository{
     }
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getFavouriteTvShows()async {
+  Future<Either<Failure,List<TvShow>>> getFavouriteTvShows()async {
     if(await _networkInfo.isConnected)
     {
       final result = await _accountDataSource.getFavouriteTvShows();
@@ -88,7 +89,7 @@ class AccountRepositoryImpl extends AccountRepository{
     }
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getRatedTvShows() async{
+  Future<Either<Failure,List<TvShow>>> getRatedTvShows()async{
     if(await _networkInfo.isConnected)
     {
       final result = await _accountDataSource.getRatedTvShows();
@@ -103,7 +104,7 @@ class AccountRepositoryImpl extends AccountRepository{
     }
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getTvShowsWatchList()async {
+  Future<Either<Failure,List<TvShow>>> getTvShowsWatchList()async {
     if(await _networkInfo.isConnected)
     {
       final result = await _accountDataSource.getTvShowsWatchList();

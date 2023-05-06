@@ -1,5 +1,4 @@
 import 'package:mo3tv/features/account/domain/entities/account.dart';
-
 class AccountModel extends Account{
   AccountModel({
     super.avatar,
