@@ -9,31 +9,25 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/m
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.dart';
 import 'package:mo3tv/core/widgets/gallery/gallery_tab_bar.dart';
-
 class MovieDetailsScreen extends StatefulWidget {
   final Movie movie;
   const MovieDetailsScreen({Key? key, required this.movie}) : super(key: key);
   @override
   State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
 }
-
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   ScrollController nestedController = ScrollController();
   final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
   final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
-
   @override
   void initState() {
     super.initState();
   }
-
   @override
   void dispose() {
     nestedController.dispose();
     super.dispose();
   }
-
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -97,7 +91,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                 SliverToBoxAdapter(child: 15.ph),
                                 cubit.screens[cubit.index]
                               ],
-                            )),
+                            )
+                        ),
                         MediaBottomNav(
                           onTap1: () {
                             nestedController.animateTo(0,

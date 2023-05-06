@@ -18,9 +18,11 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                     baseColor: Colors.grey[850]!,
                     highlightColor: Colors.grey[800]!,
                     child: Container(
-                      color: Colors.grey,
                       width: 200,
                       height: 300,
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
                   5.pw,
