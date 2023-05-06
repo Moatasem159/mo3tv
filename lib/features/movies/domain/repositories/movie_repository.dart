@@ -5,8 +5,6 @@ import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/entities/review.dart';
-
-
 abstract class MovieRepository{
 Future<Either<Failure,List<Movie>>> getNowPlayingMovies({required int page});
 Future<Either<Failure,List<Movie>>> getPopularMovies({required int page});

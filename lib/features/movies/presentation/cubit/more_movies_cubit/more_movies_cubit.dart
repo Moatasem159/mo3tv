@@ -9,13 +9,13 @@ import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecas
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_state.dart';
 
 class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
-  MoreMoviesCubit({
-    required this.popularMoviesUsecase,
-    required this.getTopRatedMoviesUsecase,
-    required this.getTrendingMoviesUsecase}) : super(MoreMoviesInitialState());
-  GetPopularMoviesUsecase popularMoviesUsecase;
-  GetTrendingMoviesUsecase getTrendingMoviesUsecase;
-  GetTopRatedMoviesUsecase getTopRatedMoviesUsecase;
+  MoreMoviesCubit(
+     this._popularMoviesUsecase,
+     this._getTopRatedMoviesUsecase,
+     this._getTrendingMoviesUsecase) : super(MoreMoviesInitialState());
+  final GetPopularMoviesUsecase _popularMoviesUsecase;
+  final GetTrendingMoviesUsecase _getTrendingMoviesUsecase;
+  final GetTopRatedMoviesUsecase _getTopRatedMoviesUsecase;
   List<Movie> moreMovies=[];
   int page=1;
 
@@ -25,15 +25,15 @@ class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
     page++;
     if(index==1)
       {
-         response = await getTrendingMoviesUsecase.call(page);
+         response = await _getTrendingMoviesUsecase.call(page: page);
       }
     else if(index==2)
       {
-        response = await popularMoviesUsecase.call(page);
+        response = await _popularMoviesUsecase.call(page: page);
       }
     else if(index ==3)
       {
-        response = await getTopRatedMoviesUsecase.call(page);
+        response = await _getTopRatedMoviesUsecase.call(page: page);
       }
     emit(response!.fold(
             (failure) {
@@ -45,6 +45,5 @@ class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
               }
           return GetMoreMoviesSuccessState();
         }));
-
   }
 }

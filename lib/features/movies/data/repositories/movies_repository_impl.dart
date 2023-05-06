@@ -10,20 +10,17 @@ import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/entities/review.dart';
-import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
-
+import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
 class MoviesRepositoryImpl extends MovieRepository {
-  final MovieRemoteDataSource baseMovieRemoteDataSource;
-  final NetworkInfo networkInfo;
-
-  MoviesRepositoryImpl( {required this.networkInfo,required this.baseMovieRemoteDataSource});
-
+  MoviesRepositoryImpl(this._networkInfo,this._movieRemoteDataSource);
+  final MovieRemoteDataSource _movieRemoteDataSource;
+  final NetworkInfo _networkInfo;
   @override
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies({required int page}) async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
       {
         try {
-          final result = await baseMovieRemoteDataSource.getNowPlayingMovies(page: page);
+          final result = await _movieRemoteDataSource.getNowPlayingMovies(page: page);
           result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {
@@ -37,10 +34,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getPopularMovies({required int page}) async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
       {
         try {
-          final result = await baseMovieRemoteDataSource.getPopularMovies(page: page);
+          final result = await _movieRemoteDataSource.getPopularMovies(page: page);
           result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {
@@ -54,10 +51,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getTopRatedMovies({required int page}) async {
-   if(await networkInfo.isConnected)
+   if(await _networkInfo.isConnected)
      {
        try {
-         final result = await baseMovieRemoteDataSource.getTopRatedMovies(page: page);
+         final result = await _movieRemoteDataSource.getTopRatedMovies(page: page);
          result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
          return Right(result);
        } on ServerException catch (failure) {
@@ -71,9 +68,9 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, Movie>> getMovieDetails({required int movieId}) async {
-    if(await networkInfo.isConnected){
+    if(await _networkInfo.isConnected){
       try {
-        final MovieModel result = await baseMovieRemoteDataSource.getMovieDetails(movieId: movieId);
+        final MovieModel result = await _movieRemoteDataSource.getMovieDetails(movieId: movieId);
           result.productionCompanies!.removeWhere((e) =>e.logoPath=='');
         return Right(result);
       } on ServerException catch (failure) {
@@ -87,10 +84,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getMovieRecommendations({required int movieId, required int page}) async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
       {
         try {
-          final result = await baseMovieRemoteDataSource.getMovieRecommendations(page: page, movieId: movieId);
+          final result = await _movieRemoteDataSource.getMovieRecommendations(page: page, movieId: movieId);
           result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {
@@ -104,10 +101,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, List<Review>>> getMovieReviews({required int movieId}) async{
-   if(await networkInfo.isConnected)
+   if(await _networkInfo.isConnected)
      {
        try {
-         final result = await baseMovieRemoteDataSource.getMovieReviews(movieId: movieId);
+         final result = await _movieRemoteDataSource.getMovieReviews(movieId: movieId);
          return Right(result);
        } on ServerException catch (failure) {
          return Left(ServerFailure(failure.message!));
@@ -120,10 +117,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, List<CastMember>>> getMovieCredits({required int movieId}) async{
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
       {
         try {
-          final result = await baseMovieRemoteDataSource.getMovieCredits(movieId: movieId);
+          final result = await _movieRemoteDataSource.getMovieCredits(movieId: movieId);
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -136,10 +133,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, Gallery>> getMovieGallery({required int movieId}) async{
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
       {
         try {
-          final result = await baseMovieRemoteDataSource.getMovieGallery(movieId: movieId);
+          final result = await _movieRemoteDataSource.getMovieGallery(movieId: movieId);
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -152,10 +149,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, Message>> deleteMovieRate({required int movieId})async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
       try {
-        final result = await baseMovieRemoteDataSource.deleteMovieRate(movieId: movieId);
+        final result = await _movieRemoteDataSource.deleteMovieRate(movieId: movieId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -168,10 +165,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, Message>> rateMovie({required rate,required int movieId})async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
       try {
-        final result = await baseMovieRemoteDataSource.rateMovie(rate: rate,movieId: movieId);
+        final result = await _movieRemoteDataSource.rateMovie(rate: rate,movieId: movieId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -184,10 +181,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, Message>> markMovieFav({required int movieId, required bool fav})async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
       try {
-        final result = await baseMovieRemoteDataSource.markMovieAsFavourite(movieId: movieId,fav: fav);
+        final result = await _movieRemoteDataSource.markMovieAsFavourite(movieId: movieId,fav: fav);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -200,10 +197,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, Message>> addMovieToWatchlist({required int movieId, required bool watchlist}) async{
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
       try {
-        final result = await baseMovieRemoteDataSource.addMovieToWatchList(movieId: movieId,watchList: watchlist);
+        final result = await _movieRemoteDataSource.addMovieToWatchList(movieId: movieId,watchList: watchlist);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -216,10 +213,10 @@ class MoviesRepositoryImpl extends MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
       try {
-        final result = await baseMovieRemoteDataSource.getTrendingMovies(page: page);
+        final result = await _movieRemoteDataSource.getTrendingMovies(page: page);
         result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {

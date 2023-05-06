@@ -30,8 +30,8 @@ import 'package:mo3tv/features/login/domain/usecases/get_token_usecase.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
-import 'package:mo3tv/features/movies/data/repositories/movies_repository.dart';
-import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
+import 'package:mo3tv/features/movies/data/repositories/movies_repository_impl.dart';
+import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
@@ -86,16 +86,7 @@ Future<void> init() async {
   //blocs
 
 
-  sl.registerFactory<MovieCubit>(() => MovieCubit(
-      rateMovieUseCase: sl(),
-      getMovieGalleryUsecase: sl(),
-      getMovieReviewsUsecase: sl(),
-      deleteRateMovieUseCase: sl(),
-      markMovieAsFavUsecase: sl(),
-      addMovieToWatchListUseCase: sl(),
-      getMovieCreditsUsecase: sl(),
-      getMovieRecommendationsUseCase: sl(),
-      getMovieDetailsUseCase: sl()));
+  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(),sl()));
   sl.registerFactory<TvCubit>(() => TvCubit(
     getTvShowDetailsUsecase: sl(),
     getTvShowSeasonDetailsUsecase: sl(),
@@ -108,23 +99,22 @@ Future<void> init() async {
     deleteTvShowRateUseCase: sl(),
     rateTvShowUseCase: sl(),
   ));
-  sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(getNowPlayingMoviesUsecase: sl()));
+  sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
   sl.registerFactory<PlayingNowTvShowCubit>(()=>PlayingNowTvShowCubit(getNowPlayingTvShowsUsecase: sl()));
-  sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(getTrendingMoviesUsecase:  sl()));
+  sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(sl()));
   sl.registerFactory<TrendingTvShowCubit>(()=>TrendingTvShowCubit(getTrendingTvShowsUsecase:sl()));
-  sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(popularMoviesUsecase:sl()));
+  sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(sl()));
   sl.registerFactory<PopularTvShowCubit>(()=>PopularTvShowCubit(getPopularTvShowsUsecase:sl()));
-  sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(getTopRatedMoviesUsecase:sl()));
+  sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(sl()));
   sl.registerFactory<TopRatedTvShowsCubit>(()=>TopRatedTvShowsCubit(getTopRatedTvShowUsecase:sl()));
-  sl.registerFactory<MoreMoviesCubit>(()=>MoreMoviesCubit(
-      getTopRatedMoviesUsecase:sl(), popularMoviesUsecase: sl(), getTrendingMoviesUsecase: sl()));
+  sl.registerFactory<MoreMoviesCubit>(()=>MoreMoviesCubit(sl(),sl(),sl()));
   sl.registerFactory<MoreTvShowsCubit>(()=>MoreTvShowsCubit(
       getTrendingTvShowsUsecase:sl(), getPopularTvShowsUsecase: sl(), getTopRatedTvShowUsecase: sl()));
 
 
   // movie useCases
   sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
-          () => GetNowPlayingMoviesUsecase(baseMovieRepository: sl()));
+          () => GetNowPlayingMoviesUsecase(sl()));
   sl.registerLazySingleton<GetPopularMoviesUsecase>(
       () => GetPopularMoviesUsecase(sl()));
   sl.registerLazySingleton<GetTrendingMoviesUsecase>(
@@ -132,9 +122,9 @@ Future<void> init() async {
   sl.registerLazySingleton<GetTopRatedMoviesUsecase>(
       () => GetTopRatedMoviesUsecase(sl()));
   sl.registerLazySingleton<GetMovieDetailsUseCase>(
-          () => GetMovieDetailsUseCase( baseMovieRepository: sl(),));
+          () => GetMovieDetailsUseCase(sl()));
   sl.registerLazySingleton<GetMovieRecommendationsUseCase>(
-          () => GetMovieRecommendationsUseCase( baseMovieRepository: sl(),));
+          () => GetMovieRecommendationsUseCase(sl()));
   sl.registerLazySingleton<GetMovieReviewsUsecase>(
           () => GetMovieReviewsUsecase(sl()));
   sl.registerLazySingleton<GetMovieCreditsUsecase>(
@@ -190,8 +180,7 @@ Future<void> init() async {
 
   // Repository
 
-  sl.registerLazySingleton<MovieRepository>(
-      () => MoviesRepositoryImpl(baseMovieRemoteDataSource: sl(),networkInfo: sl()));
+  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
 
   sl.registerLazySingleton<TvRepository>(
           () => TvShowRepositoryImpl(tvShowRemoteDataSource:sl(),networkInfo: sl()));
@@ -200,7 +189,7 @@ Future<void> init() async {
 
   //dataSource
 
-  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
   sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(apiConsumer:sl()));
 
   account();

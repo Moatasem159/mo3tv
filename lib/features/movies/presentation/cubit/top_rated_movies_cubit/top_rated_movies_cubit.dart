@@ -6,12 +6,12 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/top_rated_movies_state.dart';
 class TopRatedMoviesCubit extends Cubit<TopRatedMoviesStates> {
-  TopRatedMoviesCubit({ required this.getTopRatedMoviesUsecase}) : super(TopRatedMoviesInitialState());
-  GetTopRatedMoviesUsecase getTopRatedMoviesUsecase;
+  TopRatedMoviesCubit(this._getTopRatedMoviesUsecase) : super(TopRatedMoviesInitialState());
+  final GetTopRatedMoviesUsecase _getTopRatedMoviesUsecase;
   Future<void> getTopRatedMoviesData({int page=1,bool seeMore=false}) async {
     emit(GetTopRatedMoviesLoadingState());
     Either<Failure, List<Movie>> response =
-    await getTopRatedMoviesUsecase.call(page);
+    await _getTopRatedMoviesUsecase.call(page: page);
     emit(response.fold(
             (failure) {
           return GetTopRatedMoviesErrorState(msg: mapFailureToMsg(failure));

@@ -9,13 +9,10 @@ import 'package:mo3tv/features/movies/presentation/widgets/gallery/movie_gallery
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_reviews.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_overview.dart';
-
 class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   MovieBottomNavCubit() : super(MovieBottomNavInitialState());
-
   int index=0;
   bool isGallery=false;
-
   List<Widget> items=const [
     NavigationDestination(icon: Icon(Icons.info_outline), label: "Overview",),
     NavigationDestination(icon: Icon(Icons.movie_outlined), label: "Movies",),
@@ -30,7 +27,6 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
     ), label: "Gallery"),
 
   ];
-
   List<Widget> screens=[
     const MovieOverview(),
     const RecommendationsMovies(),
@@ -38,7 +34,6 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
     const MoviesCredits(),
     const MovieGallery(),
   ];
-
   void changeScreen(int index,context,int movieId){
     emit(MovieBottomNavChangingState());
     isGallery=false;

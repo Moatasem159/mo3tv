@@ -1,10 +1,8 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:mo3tv/core/entities/video.dart';
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
-
 //ignore: must_be_immutable
 class Movie extends Equatable{
   final bool ?adult;

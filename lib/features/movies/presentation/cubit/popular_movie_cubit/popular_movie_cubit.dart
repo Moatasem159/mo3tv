@@ -6,12 +6,12 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_state.dart';
 class PopularMovieCubit extends Cubit<PopularMovieStates> {
-  PopularMovieCubit({required this.popularMoviesUsecase,}) : super(PopularMovieInitialState());
-  GetPopularMoviesUsecase popularMoviesUsecase;
+  PopularMovieCubit(this._popularMoviesUsecase) : super(PopularMovieInitialState());
+  final GetPopularMoviesUsecase _popularMoviesUsecase;
   Future<void> getPopularMoviesData({int page=1,bool seeMore=false}) async {
     emit(GetPopularMoviesLoadingState());
     Either<Failure, List<Movie>> response =
-    await popularMoviesUsecase.call(page);
+    await _popularMoviesUsecase.call(page: page);
     emit(response.fold((failure) {
       return GetPopularMoviesErrorState(msg: mapFailureToMsg(failure));
     }, (popularMovies) {

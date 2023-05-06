@@ -1,14 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:mo3tv/core/error/failure.dart';
-import 'package:mo3tv/core/usecase/base_usecase.dart';
 import 'package:mo3tv/core/entities/review.dart';
-import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
-
-class GetMovieReviewsUsecase extends BaseUsecase{
-  final MovieRepository baseMovieRepository;
-  GetMovieReviewsUsecase(this.baseMovieRepository);
-  @override
-  Future<Either<Failure, List<Review>>> call(parameters) async{
-    return await baseMovieRepository.getMovieReviews(movieId: parameters);
+import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
+class GetMovieReviewsUsecase{
+  final MovieRepository _movieRepository;
+  GetMovieReviewsUsecase(this._movieRepository);
+  Future<Either<Failure, List<Review>>> call({required int movieId}) async{
+    return await _movieRepository.getMovieReviews(movieId: movieId);
   }
 }
