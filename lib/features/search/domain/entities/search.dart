@@ -12,7 +12,6 @@ class Search{
   String? firstAirDate;
   String? name;
   String ?originalName;
-
   Search(
       {this.adult,
       this.backdropPath,

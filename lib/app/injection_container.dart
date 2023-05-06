@@ -85,7 +85,7 @@ Future<void> init() async {
   ///features
   //blocs
 
-  sl.registerFactory(() =>SearchCubit(searchUsecase:sl()));
+
   sl.registerFactory<MovieCubit>(() => MovieCubit(
       rateMovieUseCase: sl(),
       getMovieGalleryUsecase: sl(),
@@ -182,8 +182,7 @@ Future<void> init() async {
 
   ///search
 
-  sl.registerLazySingleton<SearchUsecase>(
-          () => SearchUsecase(sl(),));
+
   ///account usecases
 
 
@@ -196,21 +195,16 @@ Future<void> init() async {
 
   sl.registerLazySingleton<TvRepository>(
           () => TvShowRepositoryImpl(tvShowRemoteDataSource:sl(),networkInfo: sl()));
-  sl.registerLazySingleton<SearchRepository>(
-          () => SearchRepositoryImpl(networkInfo: sl(), searchDataSource: sl()));
+
 
 
   //dataSource
 
-  sl.registerLazySingleton<MovieRemoteDataSource>(
-      () => MovieRemoteDataSourceImpl(apiConsumer: sl()));
-
-  sl.registerLazySingleton<TvShowRemoteDataSource>(
-          () => TvShowRemoteDataSourceImpl( apiConsumer: sl(),));
-  sl.registerLazySingleton<SearchDataSource>(() => SearchDataSourceImpl(apiConsumer:sl(),));
-
+  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(apiConsumer: sl()));
+  sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(apiConsumer:sl()));
 
   account();
+  search();
   logout();
   await external();
 }
@@ -266,5 +260,8 @@ account(){
 }
 
 search(){
-
+  sl.registerFactory(() =>SearchCubit(sl()));
+  sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<SearchUsecase>(() => SearchUsecase(sl()));
+  sl.registerLazySingleton<SearchDataSource>(() => SearchDataSourceImpl(sl()));
 }

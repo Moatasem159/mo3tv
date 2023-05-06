@@ -1,5 +1,4 @@
 import 'package:mo3tv/features/search/domain/entities/search.dart';
-
 class SearchModel extends Search{
   SearchModel(
       {super.adult,
