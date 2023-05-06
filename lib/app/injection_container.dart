@@ -18,11 +18,11 @@ import 'package:mo3tv/features/account/domain/usecases/get_rated_movies_list_use
 import 'package:mo3tv/features/account/domain/usecases/get_rated_tv_shows_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_tv_shows_watchlist_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/login/data/datasources/login_datasource.dart';
 import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
 import 'package:mo3tv/features/logout/data/repositories/log_out_repository_impl.dart';
 import 'package:mo3tv/features/logout/domain/repositories/log_out_repository.dart';
 import 'package:mo3tv/features/logout/domain/usecases/log_out_usecase.dart';
-import 'package:mo3tv/features/login/data/data_sources/login_datasource.dart';
 import 'package:mo3tv/features/login/data/repositories/login_repository_impl.dart';
 import 'package:mo3tv/features/login/domain/repositories/login_repository.dart';
 import 'package:mo3tv/features/login/domain/usecases/get_sessionid_usecase.dart';
@@ -244,13 +244,10 @@ Future<void> init() async {
 login(){
   if (!GetIt.I.isRegistered<GetTokenUsecase>())
     {
-      sl.registerFactory<LoginCubit>(() =>LoginCubit(getTokenUsecase: sl(),getSessionIdUsecase: sl(),sharedPrefrencesConsumer: sl()),);
-      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(networkInfo: sl(), loginDataSource: sl()),);
-      sl.registerLazySingleton<GetTokenUsecase>(
-              () => GetTokenUsecase(loginRepository: sl()));
-      sl.registerLazySingleton<GetSessionIdUsecase>(
-              () => GetSessionIdUsecase(loginRepository: sl()));
-      sl.registerLazySingleton<LoginDataSource>(
-              () => LoginDataSourceImpl(sl()));
+      sl.registerFactory<LoginCubit>(() =>LoginCubit(sl(),sl(),sl()));
+      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl()),);
+      sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
+      sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
+      sl.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImpl(sl()));
     }
 }
