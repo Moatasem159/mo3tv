@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
-
 class KeywordWidget extends StatelessWidget {
   final Keyword keyword;
   const KeywordWidget({Key? key, required this.keyword}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(

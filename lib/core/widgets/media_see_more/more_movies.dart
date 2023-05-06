@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/media_see_more/movies_see_more_list.dart';
 import 'package:mo3tv/core/widgets/media_see_more/see_more_app_bar.dart';
 import 'package:mo3tv/core/widgets/media_see_more/see_more_button.dart';
@@ -25,11 +26,7 @@ class MoreMovies extends StatelessWidget {
           },
           title: title,
         ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 7,
-          ),
-        ),
+         SliverToBoxAdapter(child: 7.ph),
         BlocBuilder<MoreMoviesCubit, MoreMoviesStates>(
           builder: (context, state) {
             MoreMoviesCubit cubit = BlocProvider.of<MoreMoviesCubit>(context);

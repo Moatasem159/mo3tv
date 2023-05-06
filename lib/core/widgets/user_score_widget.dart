@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
 class UserScoreWidget extends StatelessWidget {
   final num vote;
   const UserScoreWidget({Key? key, required this.vote}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,9 +20,7 @@ class UserScoreWidget extends StatelessWidget {
             ),
             progressColor: Colors.green,
           ),
-          const SizedBox(
-            width: 5,
-          ),
+          5.pw,
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,

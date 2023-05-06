@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 class ListTitle extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
   const ListTitle({Key? key, required this.title, this.onPressed}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,10 +27,7 @@ class ListTitle extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: const [
                   Text('See More'),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                  )
+                  Icon(Icons.arrow_forward_ios, size: 15)
                 ],
               ),
             ),

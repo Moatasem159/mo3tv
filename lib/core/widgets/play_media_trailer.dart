@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/video_widget/video_dialog.dart';
 
 class PlayMediaTrailer extends StatelessWidget {
@@ -26,10 +27,10 @@ class PlayMediaTrailer extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(Icons.play_arrow),
-            SizedBox(width: 5,),
-            Text("Play Trailer",style: TextStyle(fontWeight: FontWeight.bold),)
+          children:  [
+            const Icon(Icons.play_arrow),
+            5.pw,
+            const Text("Play Trailer",style: TextStyle(fontWeight: FontWeight.bold),)
           ],
         ),
       ),

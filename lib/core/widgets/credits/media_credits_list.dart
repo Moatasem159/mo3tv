@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/cast.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/credits/cast_widget.dart';
-
 class MediaCreditsList extends StatelessWidget {
   final List<CastMember> mediaCredits;
   const MediaCreditsList({Key? key, required this.mediaCredits}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -21,13 +20,10 @@ class MediaCreditsList extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 11),
                   child: Text(
                     "Cast : ${mediaCredits.length}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                )
+                10.ph
               ],
             ),
           ),
@@ -45,11 +41,7 @@ class MediaCreditsList extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 5),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 72,
-            ),
-          )
+           SliverToBoxAdapter(child: 72.ph)
         ],
       ),
     );

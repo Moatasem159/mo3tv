@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/image.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/gallery/gallery_image.dart';
-
 class MediaPostersList extends StatelessWidget {
   final List<ImageEntity> posters;
   const MediaPostersList ({Key? key, required this.posters}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -24,9 +23,7 @@ class MediaPostersList extends StatelessWidget {
                       fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              )
+              10.ph
             ],
           ),
         ),
@@ -44,11 +41,7 @@ class MediaPostersList extends StatelessWidget {
               mainAxisSpacing: 7,
               crossAxisSpacing: 5),
         ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 70,
-          ),
-        ),
+         SliverToBoxAdapter(child: 70.ph),
       ],
     );
   }

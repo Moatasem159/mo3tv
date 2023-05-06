@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/image.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/gallery/gallery_image.dart';
-
-
 class BackdropsList extends StatelessWidget {
   final   List<ImageEntity> backdrops;
   const BackdropsList({Key? key, required this.backdrops}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -25,9 +23,7 @@ class BackdropsList extends StatelessWidget {
                       fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              )
+           10.ph
             ],
           ),
         ),
@@ -44,11 +40,7 @@ class BackdropsList extends StatelessWidget {
               mainAxisSpacing: 0,
               crossAxisSpacing: 7),
         ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 70,
-          ),
-        ),
+        SliverToBoxAdapter(child: 70.ph),
       ],
     );
   }

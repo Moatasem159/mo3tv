@@ -3,11 +3,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/entities/review.dart';
-
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 class ReviewWidget extends StatelessWidget {
   final Review review;
   const ReviewWidget({Key? key, required this.review}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     List<Color>colors=[Colors.red,Colors.blue,Colors.yellow,Colors.teal,Colors.blueGrey,Colors.orange,Colors.indigo,];
@@ -55,9 +54,7 @@ class ReviewWidget extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(
-                width: 5,
-              ),
+              5.pw,
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +68,7 @@ class ReviewWidget extends StatelessWidget {
                         style:const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),),
-                      const SizedBox(width: 5,),
+                      5.pw,
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.black87,
@@ -89,7 +86,7 @@ class ReviewWidget extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(height: 5,),
+                  5.ph,
                   Text("Written By ${review.authorDetails!.name! == '' ?
                   review.authorDetails!.username :
                   review.authorDetails!.name} on ${
@@ -101,7 +98,7 @@ class ReviewWidget extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 7,),
+          7.ph,
           Wrap(
             direction: Axis.horizontal,
             children: [
@@ -113,5 +110,3 @@ class ReviewWidget extends StatelessWidget {
     );
   }
 }
-
-

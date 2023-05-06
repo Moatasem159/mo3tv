@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/image.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/gallery/gallery_image.dart';
-
 class MediaLogosList extends StatelessWidget {
   final List<ImageEntity> logos;
   const MediaLogosList({Key? key, required this.logos}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -24,9 +23,7 @@ class MediaLogosList extends StatelessWidget {
                       fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              )
+             10.ph
             ],
           ),
         ),
@@ -44,11 +41,7 @@ class MediaLogosList extends StatelessWidget {
               mainAxisSpacing: 10,
               crossAxisSpacing: 7),
         ),
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 65
-          ),
-        ),
+        SliverToBoxAdapter(child: 65.ph),
       ],
     );
   }

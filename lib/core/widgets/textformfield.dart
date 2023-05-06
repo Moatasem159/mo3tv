@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 class MainTextFormField extends StatelessWidget {
-
   final String hintText;
   final IconData ?prefixIcon;
   final TextEditingController ?controller;
@@ -11,7 +9,6 @@ class MainTextFormField extends StatelessWidget {
   final Color focusedBorderColor;
   final TextInputType? inputType;
   final ValueChanged<String>? onChange;
-
   const MainTextFormField({
     Key? key,
     required this.hintText,
@@ -21,8 +18,6 @@ class MainTextFormField extends StatelessWidget {
     this.suffixIcon,
     required this.focusedBorderColor,
     this.inputType, this.onChange}) : super(key: key);
-
-
   @override
   Widget build(BuildContext context) {
     double radius = 7;

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:shimmer/shimmer.dart';
-
 class ReviewLoadingWidget extends StatelessWidget {
-
   const ReviewLoadingWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
@@ -38,9 +36,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                         color: Colors.grey
                     ),),
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
+               5.pw,
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +55,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 5,),
+                        5.pw,
                         Container(
                           height: 20,
                           width: 30,
@@ -72,7 +68,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(height: 5,),
+                    5.ph,
                     Shimmer.fromColors(
                       baseColor: Colors.grey[700]!,
                       highlightColor: Colors.grey[600]!,
@@ -89,7 +85,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 7,),
+          7.ph,
             Shimmer.fromColors(
               baseColor: Colors.grey[700]!,
               highlightColor: Colors.grey[600]!,
@@ -102,7 +98,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10,),
+          10.ph,
             Shimmer.fromColors(
               baseColor: Colors.grey[700]!,
               highlightColor: Colors.grey[600]!,
@@ -115,7 +111,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10,),
+            10.ph,
             Shimmer.fromColors(
               baseColor: Colors.grey[700]!,
               highlightColor: Colors.grey[600]!,
@@ -128,7 +124,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10,),
+            10.ph,
             Shimmer.fromColors(
               baseColor: Colors.grey[700]!,
               highlightColor: Colors.grey[600]!,

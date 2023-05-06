@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 
 class GenresWidget extends StatelessWidget {
   final List<Keyword> genres;
@@ -24,7 +25,7 @@ class GenresWidget extends StatelessWidget {
                   if(e.id==genres.last.id&&runTime!=0)
                     Wrap(
                       children: [
-                        const SizedBox(width:5 ,),
+                        5.pw,
                         const Padding(
                           padding: EdgeInsets.only(top: 7),
                           child: CircleAvatar(
@@ -32,7 +33,7 @@ class GenresWidget extends StatelessWidget {
                             backgroundColor: Colors.white,
                           ),
                         ),
-                        const SizedBox(width:5 ,),
+                        5.pw,
                         if(isTvShow)
                         Text("${runTime}m",
                           style:const TextStyle(fontWeight: FontWeight.bold) ,),

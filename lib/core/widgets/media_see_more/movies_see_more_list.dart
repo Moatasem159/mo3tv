@@ -20,6 +20,7 @@ class MoviesSeeMoreList extends StatelessWidget {
             crossAxisCount: 3,
             mainAxisExtent: 165,
             mainAxisSpacing: 7
-        ),);
+        ),
+    );
   }
 }

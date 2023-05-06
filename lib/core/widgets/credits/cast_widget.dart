@@ -2,11 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/entities/cast.dart';
-
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 class CastMemberWidget extends StatelessWidget {
   final CastMember member;
   const CastMemberWidget({Key? key, required this.member}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -42,15 +41,12 @@ class CastMemberWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       )),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+               5.ph,
                 if(member.character!='')
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 5),
-                  child: FittedBox(
-                      child: Text(member.character!)),
+                  child: FittedBox(child: Text(member.character!)),
                 )
               ],
             ),

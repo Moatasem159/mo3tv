@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/utils/app_colors.dart';
-
-
-
 class MainButton extends StatelessWidget {
-
   final  VoidCallback? onPressed;
   final String label;
   const MainButton({Key? key, required this.onPressed, required this.label}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -30,11 +25,9 @@ class MainButton extends StatelessWidget {
 }
 
 class MediaIconButton extends StatelessWidget {
-
   final Icon icon;
   final VoidCallback onTap;
   const MediaIconButton({Key? key, required this.icon, required this.onTap}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
