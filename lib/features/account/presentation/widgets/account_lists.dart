@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_state.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_state.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_list_loading_widget.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_list_widget.dart';
 class AccountLists extends StatelessWidget {
@@ -10,16 +10,20 @@ class AccountLists extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AccountCubit, AccountStates>(
   listener: (context, state) {},
-  builder: (context, state) {
+  builder: (context, state){
     AccountCubit cubit =BlocProvider.of<AccountCubit>(context);
+    if(state is ClearState){
+      return const SliverToBoxAdapter();
+    }
+    if(state is !ClearState)
+    {
     if(state is GetAccountsListsSuccessState||(
         cubit.favTvShows.isNotEmpty||
         cubit.favMovies.isNotEmpty||
         cubit.ratedMovies.isNotEmpty||
         cubit.ratedTvShows.isNotEmpty||
         cubit.moviesWatchlist.isNotEmpty||
-        cubit.tvShowsWatchlist.isNotEmpty
-    )){
+        cubit.tvShowsWatchlist.isNotEmpty)){
       return SliverToBoxAdapter(
         child: Column(
           children: [
@@ -38,9 +42,10 @@ class AccountLists extends StatelessWidget {
       {
         return const AccountLoadingListWidget();
       }
+  }
     return const SliverToBoxAdapter();
+    },
 
-  },
 );
   }
 }

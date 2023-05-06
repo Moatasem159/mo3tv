@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_state.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_state.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
 class MediaListScreen extends StatelessWidget {

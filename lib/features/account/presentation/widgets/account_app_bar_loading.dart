@@ -7,10 +7,9 @@ class AccountAppBarLoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
         pinned: true,
-        leadingWidth:60,
-        toolbarHeight: 70,
-        titleSpacing: 4,
-        elevation: 10,
+      leadingWidth:60,
+      toolbarHeight:60,
+      titleSpacing:0,
         title: Shimmer.fromColors(
             baseColor: Colors.grey[700]!,
             highlightColor: Colors.grey[600]!,

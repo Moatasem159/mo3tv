@@ -17,13 +17,18 @@ import 'package:mo3tv/features/account/domain/usecases/get_movies_watchlist_usec
 import 'package:mo3tv/features/account/domain/usecases/get_rated_movies_list_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_rated_tv_shows_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_tv_shows_watchlist_usecase.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
+import 'package:mo3tv/features/logout/data/repositories/log_out_repository_impl.dart';
+import 'package:mo3tv/features/logout/domain/repositories/log_out_repository.dart';
+import 'package:mo3tv/features/logout/domain/usecases/log_out_usecase.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
 import 'package:mo3tv/features/login/data/data_sources/login_datasource.dart';
 import 'package:mo3tv/features/login/data/repositories/login_repository_impl.dart';
 import 'package:mo3tv/features/login/domain/repositories/login_repository.dart';
 import 'package:mo3tv/features/login/domain/usecases/get_sessionid_usecase.dart';
 import 'package:mo3tv/features/login/domain/usecases/get_token_usecase.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
+import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/features/movies/data/repositories/movies_repository.dart';
 import 'package:mo3tv/features/movies/domain/repositories/base_movie_repository.dart';
@@ -87,6 +92,7 @@ Future<void> init() async {
       getRatedTvShowListUsecase: sl(),
       getTvShowsWatchlistUsecase:  sl(),
       getRatedMoviesListUsecase: sl()));
+  sl.registerFactory(() =>LogOutCubit(logOutUsecase: sl()));
   sl.registerFactory(() =>SearchCubit(searchUsecase:sl()));
   sl.registerFactory<MovieCubit>(() => MovieCubit(
       rateMovieUseCase: sl(),
@@ -201,16 +207,20 @@ Future<void> init() async {
           () => GetFavTvShowsListUsecase(accountRepository: sl(),));
   sl.registerLazySingleton<GetRatedTvShowListUsecase>(
           () => GetRatedTvShowListUsecase(accountRepository: sl(),));
+
+  ///logOut usecase
+  sl.registerLazySingleton<LogOutUsecase>(()=>LogOutUsecase(sl()));
   // Repository
 
   sl.registerLazySingleton<MovieRepository>(
       () => MoviesRepositoryImpl(baseMovieRemoteDataSource: sl(),networkInfo: sl()));
-  sl.registerLazySingleton<AccountRepository>(
-          () => AccountRepositoryImpl(accountDataSource:sl(),networkInfo: sl()));
+  sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<TvRepository>(
           () => TvShowRepositoryImpl(tvShowRemoteDataSource:sl(),networkInfo: sl()));
   sl.registerLazySingleton<SearchRepository>(
           () => SearchRepositoryImpl(networkInfo: sl(), searchDataSource: sl()));
+  sl.registerLazySingleton<LogOutRepository>(
+          () => LogOutRepositoryImpl(sl(),sl()));
 
   //dataSource
 
@@ -221,7 +231,8 @@ Future<void> init() async {
   sl.registerLazySingleton<TvShowRemoteDataSource>(
           () => TvShowRemoteDataSourceImpl( apiConsumer: sl(),));
   sl.registerLazySingleton<SearchDataSource>(
-          () => SearchDataSourceImpl( apiConsumer: sl(),));
+          () => SearchDataSourceImpl(apiConsumer:sl(),));
+  sl.registerLazySingleton<LogOutDataSource>(() => LogOutDataSourceImpl(sl()));
 
   ///core
   sl.registerLazySingleton<NetworkInfo>(

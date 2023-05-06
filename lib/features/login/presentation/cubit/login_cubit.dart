@@ -20,8 +20,6 @@ class LoginCubit extends Cubit<LoginStates> {
   GetSessionIdUsecase getSessionIdUsecase;
    SharedPrefrencesConsumer sharedPrefrencesConsumer;
   Token? token;
-
-
   Future<void> getToken()async {
     emit(GetTokenLoadingState());
     Either<Failure, Token> response =

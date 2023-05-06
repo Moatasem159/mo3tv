@@ -12,5 +12,5 @@ class GetAccountsDetailsErrorState extends AccountStates {
   final String msg;
   GetAccountsDetailsErrorState({required this.msg});
 }
-class GetUpdateDetailsLoadingState extends AccountStates {}
 class GetUpdateDetailsSuccessState extends AccountStates {}
+class ClearState extends AccountStates {}

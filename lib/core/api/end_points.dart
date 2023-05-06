@@ -11,7 +11,7 @@ class EndPoints{
       "https://www.themoviedb.org/authenticate/$token";
   static String sessionIdPath(String token)=>
       "$baseUrl/authentication/session/new?api_key=$apiKey&request_token=$token";
-
+  static String logOutPath= "$baseUrl/authentication/session?api_key=$apiKey";
 
   static String mediaDetailsPath(int mediaId,String sessionId,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId?api_key=$apiKey&session_id=$sessionId&append_to_response=keywords,account_states,videos";

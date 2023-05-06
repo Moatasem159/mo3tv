@@ -12,13 +12,14 @@ Future<List<MovieModel>> getMovieWatchList();
 Future<List<TvShowModel>> getRatedTvShows();
 Future<List<TvShowModel>> getFavouriteTvShows();
 Future<List<TvShowModel>> getTvShowsWatchList();
+
 }
 class AccountDataSourceImpl extends AccountDataSource{
-  ApiConsumer apiConsumer;
-  AccountDataSourceImpl(this.apiConsumer);
+  final ApiConsumer _apiConsumer;
+  AccountDataSourceImpl(this._apiConsumer);
   @override
   Future<List<MovieModel>> getFavouriteMovies()async {
-    final res=await apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"movies"));
+    final res=await _apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"movies"));
     return List<MovieModel>.from(
       (res['results'] as List).map(
             (x) => MovieModel.fromJson(x),
@@ -28,7 +29,7 @@ class AccountDataSourceImpl extends AccountDataSource{
 
   @override
   Future<List<MovieModel>> getMovieWatchList()async {
-    final res=await apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"movies"));
+    final res=await _apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"movies"));
     return List<MovieModel>.from(
       (res['results'] as List).map(
             (x) => MovieModel.fromJson(x),
@@ -38,7 +39,7 @@ class AccountDataSourceImpl extends AccountDataSource{
 
   @override
   Future<List<MovieModel>> getRatedMovies()async {
-    final res=await apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"movies"));
+    final res=await _apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"movies"));
     return List<MovieModel>.from(
       (res['results'] as List).map(
             (x) => MovieModel.fromJson(x),
@@ -48,13 +49,13 @@ class AccountDataSourceImpl extends AccountDataSource{
 
   @override
   Future<AccountModel> getAccountDetails() async{
-    final res=await apiConsumer.get(EndPoints.accountPath(AppStrings.sessionId));
+    final res=await _apiConsumer.get(EndPoints.accountPath(AppStrings.sessionId));
     return AccountModel.fromJson(res);
   }
 
   @override
   Future<List<TvShowModel>> getFavouriteTvShows() async{
-    final res=await apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"tv"));
+    final res=await _apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"tv"));
     return List<TvShowModel>.from(
       (res['results'] as List).map(
             (x) => TvShowModel.fromJson(x),
@@ -64,7 +65,7 @@ class AccountDataSourceImpl extends AccountDataSource{
 
   @override
   Future<List<TvShowModel>> getRatedTvShows() async{
-    final res=await apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"tv"));
+    final res=await _apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"tv"));
     return List<TvShowModel>.from(
       (res['results'] as List).map(
             (x) => TvShowModel.fromJson(x),
@@ -74,11 +75,13 @@ class AccountDataSourceImpl extends AccountDataSource{
 
   @override
   Future<List<TvShowModel>> getTvShowsWatchList()async {
-    final res=await apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"tv"));
+    final res=await _apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"tv"));
     return List<TvShowModel>.from(
       (res['results'] as List).map(
             (x) => TvShowModel.fromJson(x),
       ),
     );
   }
+
+
 }

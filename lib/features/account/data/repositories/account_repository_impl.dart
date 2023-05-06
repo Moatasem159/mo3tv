@@ -9,14 +9,14 @@ import 'package:mo3tv/features/account/domain/repositories/account_repository.da
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 class AccountRepositoryImpl extends AccountRepository{
-  final NetworkInfo networkInfo;
-  final AccountDataSource accountDataSource;
-  AccountRepositoryImpl({required this.networkInfo, required this.accountDataSource});
+  final NetworkInfo _networkInfo;
+  final AccountDataSource _accountDataSource;
+  AccountRepositoryImpl(this._networkInfo,this._accountDataSource);
   @override
   Future<Either<Failure, List<Movie>>> getFavouriteMovies() async{
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
-      final result = await accountDataSource.getFavouriteMovies();
+      final result = await _accountDataSource.getFavouriteMovies();
       try {
         return Right(result);
       } on ServerException catch (failure) {
@@ -27,12 +27,11 @@ class AccountRepositoryImpl extends AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, List<Movie>>> getMovieWatchList() async{
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
-      final result = await accountDataSource.getMovieWatchList();
+      final result = await _accountDataSource.getMovieWatchList();
       try {
         return Right(result);
       } on ServerException catch (failure) {
@@ -43,12 +42,11 @@ class AccountRepositoryImpl extends AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, List<Movie>>> getRatedMovies()async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
-      final result = await accountDataSource.getRatedMovies();
+      final result = await _accountDataSource.getRatedMovies();
       try {
         return Right(result);
       } on ServerException catch (failure) {
@@ -59,12 +57,11 @@ class AccountRepositoryImpl extends AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, Account>> getAccountDetails() async{
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
-      final result = await accountDataSource.getAccountDetails();
+      final result = await _accountDataSource.getAccountDetails();
       try {
         return Right(result);
       } on ServerException catch (failure) {
@@ -75,12 +72,11 @@ class AccountRepositoryImpl extends AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, List<TvShow>>> getFavouriteTvShows()async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
-      final result = await accountDataSource.getFavouriteTvShows();
+      final result = await _accountDataSource.getFavouriteTvShows();
       try {
         return Right(result);
       } on ServerException catch (failure) {
@@ -91,12 +87,11 @@ class AccountRepositoryImpl extends AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, List<TvShow>>> getRatedTvShows() async{
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
-      final result = await accountDataSource.getRatedTvShows();
+      final result = await _accountDataSource.getRatedTvShows();
       try {
         return Right(result);
       } on ServerException catch (failure) {
@@ -107,12 +102,11 @@ class AccountRepositoryImpl extends AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, List<TvShow>>> getTvShowsWatchList()async {
-    if(await networkInfo.isConnected)
+    if(await _networkInfo.isConnected)
     {
-      final result = await accountDataSource.getTvShowsWatchList();
+      final result = await _accountDataSource.getTvShowsWatchList();
       try {
         return Right(result);
       } on ServerException catch (failure) {

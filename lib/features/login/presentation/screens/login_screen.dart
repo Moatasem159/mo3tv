@@ -17,23 +17,11 @@ class _LoginScreenState extends State<LoginScreen> {
   WebViewController controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..setBackgroundColor(const Color(0x00000000))
-    ..setNavigationDelegate(
-      NavigationDelegate(
-        onProgress: (int progress) {
-          CircularProgressIndicator(
-            value: progress.toDouble(),
-            color: Colors.red,
-          );
-        },
-        onPageStarted: (String url) {},
-        onPageFinished: (String url) {},
-        onWebResourceError: (WebResourceError error) {},
-      ),
-    );
+    ..clearCache()..clearLocalStorage();
   @override
   void initState() {
     super.initState();
-    controller.loadRequest(Uri.parse(EndPoints.approveToken(widget.token.token!),));
+    controller.loadRequest(Uri.parse(EndPoints.approveToken(widget.token.token!)));
   }
   @override
   Widget build(BuildContext context) {
@@ -49,11 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 return true;
               }
               else{
-
                 cubit.initial();
                 return true;
               }
-
             },
             child: Scaffold(
                 body:WebViewWidget(controller: controller)

@@ -7,23 +7,24 @@ class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if(AppStrings.sessionId!='') {
+    if(AppStrings.sessionId!='')
+    {
       return NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
+        headerSliverBuilder:(context, innerBoxIsScrolled)
+        {
           return [
             const AccountAppBar(),
           ];
         },
         body:const CustomScrollView(
           physics: BouncingScrollPhysics(),
-          slivers: [
-            AccountLists(),
-          ],
-        ));
+          slivers: [AccountLists()],
+        )
+      );
     }
     if(AppStrings.sessionId=='')
       {
-        return const Center(child: LoginButton());
+       return const LoginButton();
       }
     return Container();
   }

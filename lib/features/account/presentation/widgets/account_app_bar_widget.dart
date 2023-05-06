@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
+import 'package:mo3tv/features/logout/presentation/widgets/log_out_button.dart';
 class AccountAppBarWidget extends StatelessWidget {
   final Account account;
   const AccountAppBarWidget({Key? key, required this.account}) : super(key: key);
@@ -9,16 +11,20 @@ class AccountAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
         pinned: true,
-        elevation: 10,
         leadingWidth:60,
-        toolbarHeight: 70,
-        titleSpacing: 4,
+        toolbarHeight:60,
+        titleSpacing:0,
+        titleTextStyle: const TextStyle(
+          fontFamily: AppStrings.fontFamily,
+          fontSize:14,
+          overflow: TextOverflow.ellipsis
+        ),
         title:Text(account.name==""?account.username!:account.name!),
         leading: CachedNetworkImage(
           imageUrl: EndPoints.logoUrl(account.avatar!),
           imageBuilder: (context, imageProvider) {
             return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 6),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration:BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(image: imageProvider)
@@ -27,7 +33,7 @@ class AccountAppBarWidget extends StatelessWidget {
           },
           errorWidget: (context, url, error) {
             return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 6),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: const BoxDecoration(
                 color: Colors.red,
                 shape: BoxShape.circle,
@@ -38,7 +44,11 @@ class AccountAppBarWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold
                 ),)),
             );
-          },)
+          },),
+        actions:const[
+          LogoutButton(),
+        ],
     );
   }
 }
+
