@@ -19,6 +19,7 @@ class DioConsumer implements ApiConsumer {
       return client;
     };
     _client.options
+      ..connectTimeout=const Duration(seconds: 10)
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
       .. receiveDataWhenStatusError= true

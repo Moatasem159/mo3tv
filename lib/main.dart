@@ -17,7 +17,7 @@ void main() async{
   if(sharedPrefrencesConsumer.getData(key: AppStrings.id)!=null){
     AppStrings.sessionId=sharedPrefrencesConsumer.getData(key: AppStrings.id);
   }
-  if(AppStrings.sessionId=="") {
+  if(AppStrings.sessionId==""){
     login();
   }
   runApp(const Mo3Tv());
