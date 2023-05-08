@@ -6,13 +6,11 @@ class EndPoints{
   static const String baseLogoUrl = "https://image.tmdb.org/t/p/w185";
   static const String baseHdUrl = "https://image.tmdb.org/t/p/w1280";
   static String requestTokenPath="$baseUrl/authentication/token/new?api_key=$apiKey";
-
   static String approveToken(String token)=>
       "https://www.themoviedb.org/authenticate/$token";
   static String sessionIdPath(String token)=>
       "$baseUrl/authentication/session/new?api_key=$apiKey&request_token=$token";
   static String logOutPath= "$baseUrl/authentication/session?api_key=$apiKey";
-
   static String mediaDetailsPath(int mediaId,String sessionId,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId?api_key=$apiKey&session_id=$sessionId&append_to_response=keywords,account_states,videos";
   static String nowPlayingMediaPath({required int page,required String mediaType,required nowPlaying}) =>

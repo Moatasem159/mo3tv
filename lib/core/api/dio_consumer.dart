@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/api/handling_errors.dart';
 import 'package:mo3tv/core/api/status_code.dart';
-import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
 class DioConsumer implements ApiConsumer {
   final Dio _client;
@@ -31,17 +31,15 @@ class DioConsumer implements ApiConsumer {
       _client.interceptors.add(di.sl<LogInterceptor>());
     }
   }
-
   @override
   Future get(String path, {Map<String, dynamic>? queryParameters})async{
     try {
       final response = await _client.get(path);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
-      _handleDioError(error);
+      HandlingErrors.handleDioError(error);
     }
   }
-
   @override
   Future post(String path, {Map<String, dynamic>? body, bool formDataIsEnabled = false,}) async {
     try {
@@ -50,11 +48,9 @@ class DioConsumer implements ApiConsumer {
       );
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
-      _handleDioError(error);
+      HandlingErrors.handleDioError(error);
     }
   }
-
-
   @override
   Future put(String path, {Map<String, dynamic>? body,}) async {
     try {
@@ -64,48 +60,16 @@ class DioConsumer implements ApiConsumer {
       );
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
-      _handleDioError(error);
+      HandlingErrors.handleDioError(error);
     }
   }
-
   @override
   Future delete(String path, {Map<String, dynamic>? body,}) async {
     try {
       final response = await _client.delete(path, data: body,);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
-      _handleDioError(error);
-    }
-  }
-
-
-  dynamic _handleDioError(DioError error) {
-    switch (error.type) {
-      case DioErrorType.connectionTimeout:
-      case DioErrorType.sendTimeout:
-      case DioErrorType.receiveTimeout:
-      case DioErrorType.connectionError:
-      case DioErrorType.cancel:
-        throw const FetchDataException();
-      case DioErrorType.badResponse:
-        switch (error.response?.statusCode) {
-          case StatusCode.badRequest:
-            throw const BadRequestException();
-          case StatusCode.unauthorized:
-          case StatusCode.forbidden:
-            throw const UnauthorizedException();
-          case StatusCode.notFound:
-            throw const NotFoundException();
-          case StatusCode.conflict:
-            throw const ConflictException();
-          case StatusCode.internetServerError:
-            throw const InternetServerErrorException();
-        }
-        break;
-      case DioErrorType.badCertificate:
-        throw const BadRequestException();
-      case DioErrorType.unknown:
-        throw const InternetServerErrorException();
+     HandlingErrors.handleDioError(error);
     }
   }
 }
