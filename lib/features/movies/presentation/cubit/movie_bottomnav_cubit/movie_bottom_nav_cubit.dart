@@ -9,7 +9,8 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/m
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_credits.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movies.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_reviews.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_overview.dart';
 class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   MovieBottomNavCubit() : super(MovieBottomNavInitialState());
@@ -32,7 +33,7 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   List<Widget> screens=[
     const MovieOverview(),
     const RecommendationsMovies(),
-    const MoviesReviews(),
+    const MediaReviews(),
     const MoviesCredits(),
     const MediaGalleryScreen(),
   ];
@@ -53,8 +54,8 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
       }
     if(index==2)
     {
-      if(BlocProvider.of<MovieCubit>(context).movieReviews==null||BlocProvider.of<MovieCubit>(context).movieReviews!.isEmpty){
-        BlocProvider.of<MovieCubit>(context).getMovieReviews(movieId: movieId);
+      if(ReviewsCubit.get(context).isInitial()){
+       ReviewsCubit.get(context).getMovieReviews(mediaId: movieId, mediaType: AppStrings.movie);
       }
     }
     if(index==3)

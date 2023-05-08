@@ -5,13 +5,11 @@ import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
-import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
@@ -24,11 +22,9 @@ class MovieCubit extends Cubit<MovieStates> {
         this._addMovieToWatchListUseCase,
         this._deleteRateMovieUseCase,
         this._getMovieCreditsUsecase,
-        this._getMovieReviewsUsecase
       ) : super(MoviesInitialState());
   final GetMovieDetailsUseCase _getMovieDetailsUseCase;
   final GetMovieRecommendationsUseCase _getMovieRecommendationsUseCase;
-  final GetMovieReviewsUsecase _getMovieReviewsUsecase;
   final GetMovieCreditsUsecase _getMovieCreditsUsecase;
   final RateMovieUseCase _rateMovieUseCase;
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
@@ -89,20 +85,7 @@ class MovieCubit extends Cubit<MovieStates> {
         }));
   }
 
-  List<Review>? movieReviews;
-  Future<void> getMovieReviews({required movieId}) async {
-    emit(GetMovieReviewsLoadingState());
-    Either<Failure, List<Review>> response =
-    await _getMovieReviewsUsecase.call(movieId: movieId);
-    movieReviews = [];
-    emit(response.fold(
-            (failure) =>
-                GetMovieReviewsErrorState(msg: mapFailureToMsg(failure)),
-            (movieReviews) {
-          this.movieReviews = movieReviews;
-          return GetMovieReviewsSuccessState();
-        }));
-  }
+
 
 
   List<CastMember>? movieCredits= [];
@@ -110,7 +93,7 @@ class MovieCubit extends Cubit<MovieStates> {
     emit(GetMovieCreditsLoadingState());
     Either<Failure, List<CastMember>> response =
     await _getMovieCreditsUsecase.call(movieId);
-    movieReviews = [];
+    movieCredits = [];
     emit(response.fold(
             (failure) =>
             GetMovieCreditsErrorState(msg: mapFailureToMsg(failure)),
@@ -134,9 +117,6 @@ class MovieCubit extends Cubit<MovieStates> {
         movieRecommendations!.clear();
       }
     movieCredits!.clear();
-    if(movieReviews!=null&&movieReviews!.isNotEmpty){
-      movieReviews=null;
-    }
     emit(ClearObjectsState());
   }
   backToBackMovies(){

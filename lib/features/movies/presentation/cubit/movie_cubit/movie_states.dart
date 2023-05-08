@@ -21,25 +21,11 @@ class GetMovieRecommendationsErrorState extends MovieStates{
   @override
   List<Object>get props=>[msg];
 }
-class GetMovieReviewsLoadingState extends MovieStates{}
-class GetMovieReviewsSuccessState extends MovieStates{}
-class GetMovieReviewsErrorState extends MovieStates{
-  final String msg;
-
-  GetMovieReviewsErrorState({required this.msg});
-
-  @override
-  List<Object>get props=>[msg];
-}
 class GetMovieCreditsLoadingState extends MovieStates{}
 class GetMovieCreditsSuccessState extends MovieStates{}
 class GetMovieCreditsErrorState extends MovieStates{
-
-
   final String msg;
-
   GetMovieCreditsErrorState({required this.msg});
-
   @override
   List<Object>get props=>[msg];
 }

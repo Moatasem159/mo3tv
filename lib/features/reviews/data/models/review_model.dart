@@ -1,5 +1,4 @@
-import 'package:mo3tv/core/entities/review.dart';
-
+import 'package:mo3tv/features/reviews/domain/entities/review.dart';
 class ReviewModel extends Review {
   ReviewModel(
       {super.author,
@@ -9,7 +8,6 @@ class ReviewModel extends Review {
       super.id,
       super.updatedAt,
       super.url});
-
   factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
         author: json["author"] ?? '',
         authorDetails:
@@ -21,10 +19,8 @@ class ReviewModel extends Review {
         url: json["url"] ?? '',
       );
 }
-
 class AuthorModel extends AuthorDetails {
   AuthorModel({super.name, super.username, super.avatarPath, super.rating});
-
   factory AuthorModel.fromJson(Map<String, dynamic> json) => AuthorModel(
         name: json["name"] ?? '',
         username: json["username"] ?? '',

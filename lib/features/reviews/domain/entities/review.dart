@@ -1,5 +1,4 @@
 class Review{
-
   String? author;
   AuthorDetails? authorDetails;
   String? content;
@@ -7,7 +6,6 @@ class Review{
   String ?id;
   String? updatedAt;
   String ?url;
-
   Review(
       {this.author,
       this.authorDetails,
@@ -17,7 +15,6 @@ class Review{
       this.updatedAt,
       this.url});
 }
-
 class AuthorDetails{
   String ?name;
   String ?username;

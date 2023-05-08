@@ -3,7 +3,6 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/models/cast_model.dart';
-import 'package:mo3tv/core/models/review_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 abstract class TvShowRemoteDataSource {
@@ -14,7 +13,6 @@ abstract class TvShowRemoteDataSource {
   Future<TvShowModel> getTvShowDetails({required int tvShowId});
   Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});
   Future<List<TvShowModel>> getTvShowRecommendations({required int page,required int tvId});
-  Future<List<ReviewModel>> getTvShowsReviews({required int tvId});
   Future<List<CastMemberModel>> getTvShowCredits({required int tvId});
   Future<MessageModel> markTvShowAsFavourite({required int tvId,required bool fav});
   Future<MessageModel> addTvShowToWatchList({required int tvId,required bool watchList});
@@ -49,11 +47,6 @@ class TvShowRemoteDataSourceImpl extends TvShowRemoteDataSource{
   Future<List<TvShowModel>> getTvShowRecommendations({required int page, required int tvId})async {
     final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(tvId, page,AppStrings.tv));
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
-  }
-  @override
-  Future<List<ReviewModel>> getTvShowsReviews({required int tvId})async {
-    final response = await _apiConsumer.get(EndPoints.mediaReviewsPath(tvId,AppStrings.tv));
-    return List<ReviewModel>.from((response['results'] as List).map((x) => ReviewModel.fromJson(x)));
   }
   @override
   Future<List<CastMemberModel>> getTvShowCredits({required int tvId})async {

@@ -6,6 +6,7 @@ import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_cubit.dart';
@@ -45,6 +46,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
               onWillPop: () async {
                 TvCubit.get(context).clearObjects();
                 GalleryCubit.get(context).initial(context);
+                ReviewsCubit.get(context).initial();
                 TvCubit.get(context).backToBackTvShows();
                 GoRouter.of(context).pop();
                 return true;

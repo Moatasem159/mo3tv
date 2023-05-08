@@ -3,14 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/entities/cast.dart';
-import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
@@ -21,7 +19,6 @@ class TvCubit extends Cubit<TvStates> {
   TvCubit(
      this._getTvShowDetailsUsecase,
      this._getTvRecommendationsUseCase,
-     this._getTvShowsReviewsUsecase,
      this._getTvShowCreditsUsecase,
      this._markTvShowAsFavUsecase,
      this._addTvShowToWatchListUseCase,
@@ -32,7 +29,6 @@ class TvCubit extends Cubit<TvStates> {
   static TvCubit get(context)=>BlocProvider.of(context);
   final GetTvShowDetailsUsecase _getTvShowDetailsUsecase;
   final GetTvRecommendationsUseCase _getTvRecommendationsUseCase;
-  final GetTvShowsReviewsUsecase _getTvShowsReviewsUsecase;
   final GetTvShowCreditsUsecase _getTvShowCreditsUsecase;
   final MarkTvShowAsFavUsecase _markTvShowAsFavUsecase;
   final AddTvShowToWatchListUseCase _addTvShowToWatchListUseCase;
@@ -110,20 +106,6 @@ class TvCubit extends Cubit<TvStates> {
             }
           }
           return GetTvShowRecommendationsSuccessState();
-        }));
-  }
-  List<Review>? tvShowsReviews;
-  Future<void> getTvShowsReviews({required tvId}) async {
-    emit(GetTvShowReviewsLoadingState());
-    Either<Failure, List<Review>> response =
-    await _getTvShowsReviewsUsecase.call(tvId: tvId);
-    tvShowsReviews = [];
-    emit(response.fold(
-            (failure) =>
-              GetTvShowReviewsErrorState(msg: mapFailureToMsg(failure)),
-            (tvShowsReviews) {
-          this.tvShowsReviews = tvShowsReviews;
-          return GetTvShowReviewsSuccessState();
         }));
   }
   List<CastMember>? tvShowCredits= [];
@@ -210,10 +192,6 @@ class TvCubit extends Cubit<TvStates> {
       tvRecommendations!.clear();
     }
     tvShowCredits!.clear();
-    if(tvShowsReviews!=null&&tvShowsReviews!.isNotEmpty){
-      tvShowsReviews=null;
-    }
-
     emit(ClearObjectsState());
   }
   backToBackTvShows(){

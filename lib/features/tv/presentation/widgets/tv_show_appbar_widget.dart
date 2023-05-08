@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
@@ -66,6 +67,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                     onTap: () {
                       TvCubit.get(context).clearObjects();
                       GalleryCubit.get(context).initial(context);
+                      ReviewsCubit.get(context).initial();
                       TvCubit.get(context).backToBackTvShows();
                       GoRouter.of(context).pop();
                     },

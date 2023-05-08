@@ -11,6 +11,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/m
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 class MovieDetailsScreen extends StatefulWidget {
   final Movie movie;
   const MovieDetailsScreen({Key? key, required this.movie}) : super(key: key);
@@ -43,6 +44,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               onWillPop: () async {
                 BlocProvider.of<MovieCubit>(context).clearObjects();
                 GalleryCubit.get(context).initial(context);
+                ReviewsCubit.get(context).initial();
                 BlocProvider.of<MovieCubit>(context).backToBackMovies();
                 GoRouter.of(context).pop();
                 return true;
