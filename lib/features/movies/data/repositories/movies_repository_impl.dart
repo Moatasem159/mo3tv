@@ -5,7 +5,6 @@ import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/core/entities/cast.dart';
-import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
@@ -128,22 +127,6 @@ class MoviesRepositoryImpl extends MovieRepository {
       }
     else{
     return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-
-  @override
-  Future<Either<Failure, Gallery>> getMovieGallery({required int movieId}) async{
-    if(await _networkInfo.isConnected)
-      {
-        try {
-          final result = await _movieRemoteDataSource.getMovieGallery(movieId: movieId);
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
-      }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
 

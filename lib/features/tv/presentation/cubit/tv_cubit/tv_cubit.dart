@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/entities/cast.dart';
-import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -15,21 +13,16 @@ import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_gallery_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/gallery/backdrops/tv_show_backdrops.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/gallery/logos/tv_show_logos.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/gallery/posters/tv_show_posters.dart';
 class TvCubit extends Cubit<TvStates> {
   TvCubit({
     required this.getTvShowDetailsUsecase,
     required this.getTvRecommendationsUseCase,
     required this.getTvShowsReviewsUsecase,
     required this.getTvShowCreditsUsecase,
-    required this.getTvShowGalleryUsecase,
     required this.markTvShowAsFavUsecase,
     required this.addTvShowToWatchListUseCase,
     required this.deleteTvShowRateUseCase,
@@ -42,7 +35,6 @@ class TvCubit extends Cubit<TvStates> {
   GetTvRecommendationsUseCase getTvRecommendationsUseCase;
   GetTvShowsReviewsUsecase getTvShowsReviewsUsecase;
   GetTvShowCreditsUsecase getTvShowCreditsUsecase;
-  GetTvShowGalleryUsecase getTvShowGalleryUsecase;
   MarkTvShowAsFavUsecase markTvShowAsFavUsecase;
   AddTvShowToWatchListUseCase addTvShowToWatchListUseCase;
   RateTvShowUseCase rateTvShowUseCase;
@@ -158,58 +150,6 @@ class TvCubit extends Cubit<TvStates> {
           return GetTvShowCreditsSuccessState();
         }));
   }
-
-
-  Gallery? tvShowGallery;
-  Future<void> getTvShowGallery({required tvId}) async {
-    emit(GetTvShowGalleryLoadingState());
-    Either<Failure, Gallery> response =
-    await getTvShowGalleryUsecase.call(tvId);
-    tvShowGallery=Gallery();
-    tvShowGallery!.backdrops=[];
-    tvShowGallery!.logos=[];
-    tvShowGallery!.posters=[];
-    emit(response.fold((failure) =>
-                GetTvShowGalleryErrorState(msg: mapFailureToMsg(failure)),
-            (tvShowGallery) {
-          for (var element in tvShowGallery.backdrops!){
-            if(element.iso6391=="en")
-            {
-              this.tvShowGallery!.backdrops!.add(element);
-            }
-          }
-          for (var element in tvShowGallery.posters!){
-            if(element.iso6391=="en")
-            {
-              this.tvShowGallery!.posters!.add(element);
-            }
-          }
-          for (var element in tvShowGallery.logos!){
-            if(element.iso6391=="en"&&element.filePath!.substring(29,31)!="svg")
-            {
-              this.tvShowGallery!.logos!.add(element);
-            }
-          }
-          return GetTvShowGallerySuccessState();
-        }));
-  }
-
-
-  int index =0;
-  List<Widget> tvShowGalleryList=[
-    const TvShowBackdrops(),
-    const TvShowPosters(),
-    const TvShowLogos(),
-  ];
-
-
-  gallery(value){
-    emit(ChangeGalleryLoadingState());
-    index=value;
-    emit(ChangeGallerySuccessState());
-  }
-
-
   Future<void> favTvShow({required int tvId,required bool fav})async{
     emit(FavTvShowLoadingState());
     Either<Failure, Message> response =
@@ -275,29 +215,10 @@ class TvCubit extends Cubit<TvStates> {
     tvShow= TvShow();
     allRec=false;
     page=1;
-    index=0;
+    // index=0;
     if(tvRecommendations!=null&&tvRecommendations!.isNotEmpty)
     {
       tvRecommendations!.clear();
-    }
-    // if(movieVideos!=null)
-    // {
-    //   movieVideos=null;
-    // }
-
-    if(tvShowGallery!=null){
-      if(tvShowGallery!.backdrops!=null)
-      {
-        tvShowGallery!.backdrops=null;
-      }
-      if(tvShowGallery!.posters!=null)
-      {
-        tvShowGallery!.posters=null;
-      }
-      if(tvShowGallery!.logos!=null)
-      {
-        tvShowGallery!.logos=null;
-      }
     }
     tvShowCredits!.clear();
     if(tvShowsReviews!=null&&tvShowsReviews!.isNotEmpty){

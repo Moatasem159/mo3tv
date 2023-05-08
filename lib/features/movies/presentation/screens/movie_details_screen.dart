@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.dart';
-import 'package:mo3tv/core/widgets/gallery/gallery_tab_bar.dart';
+import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 class MovieDetailsScreen extends StatefulWidget {
   final Movie movie;
   const MovieDetailsScreen({Key? key, required this.movie}) : super(key: key);
@@ -40,6 +42,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
             return WillPopScope(
               onWillPop: () async {
                 BlocProvider.of<MovieCubit>(context).clearObjects();
+                GalleryCubit.get(context).initial(context);
                 BlocProvider.of<MovieCubit>(context).backToBackMovies();
                 GoRouter.of(context).pop();
                 return true;
@@ -76,8 +79,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                     handle: disconnectBar,
                                     sliver: GalleryTabBar(
                                       onTap: (value) {
-                                        BlocProvider.of<MovieCubit>(context)
-                                            .gallery(value);
+                                        GalleryNavigatorCubit.get(context).gallery(value);
                                       },
                                     ),
                                   ),

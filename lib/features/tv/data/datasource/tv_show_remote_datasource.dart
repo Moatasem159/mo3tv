@@ -3,11 +3,9 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/models/cast_model.dart';
-import 'package:mo3tv/core/models/gallery_model.dart';
 import 'package:mo3tv/core/models/review_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
-
 abstract class TvShowRemoteDataSource {
   Future<List<TvShowModel>> getNowPlayingTvShows({required int page});
   Future<List<TvShowModel>> getPopularTvShows({required int page});
@@ -18,12 +16,10 @@ abstract class TvShowRemoteDataSource {
   Future<List<TvShowModel>> getTvShowRecommendations({required int page,required int tvId});
   Future<List<ReviewModel>> getTvShowsReviews({required int tvId});
   Future<List<CastMemberModel>> getTvShowCredits({required int tvId});
-  Future<GalleryModel> getTvShowGallery({required int tvId});
   Future<MessageModel> markTvShowAsFavourite({required int tvId,required bool fav});
   Future<MessageModel> addTvShowToWatchList({required int tvId,required bool watchList});
   Future<MessageModel> rateTvShow({required dynamic rate,required int tvId});
   Future<MessageModel> deleteTvShowRate({required int tvId});
-
 }
 
 class TvShowRemoteDataSourceImpl extends TvShowRemoteDataSource{
@@ -98,13 +94,6 @@ class TvShowRemoteDataSourceImpl extends TvShowRemoteDataSource{
       ),
     );
   }
-
-  @override
-  Future<GalleryModel> getTvShowGallery({required int tvId})async {
-    final response = await apiConsumer.get(EndPoints.mediaGalleryPath(tvId,AppStrings.tv));
-    return GalleryModel.fromJson(response);
-  }
-
   @override
   Future<MessageModel> markTvShowAsFavourite({required int tvId, required bool fav}) async{
     final response = await apiConsumer.post(EndPoints.favMediaPath(AppStrings.sessionId),

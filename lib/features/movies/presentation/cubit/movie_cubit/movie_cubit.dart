@@ -1,9 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/entities/cast.dart';
-import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
@@ -12,20 +10,14 @@ import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_use
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_gallery_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/backdrops/movie_backdrops.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/logos/movie_logos.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/posters/movie_posters.dart';
-
 class MovieCubit extends Cubit<MovieStates> {
   MovieCubit(
         this._getMovieDetailsUseCase,
-        this._getMovieGalleryUsecase,
         this._getMovieRecommendationsUseCase,
         this._rateMovieUseCase,
         this._markMovieAsFavUsecase,
@@ -34,13 +26,10 @@ class MovieCubit extends Cubit<MovieStates> {
         this._getMovieCreditsUsecase,
         this._getMovieReviewsUsecase
       ) : super(MoviesInitialState());
-
-
   final GetMovieDetailsUseCase _getMovieDetailsUseCase;
   final GetMovieRecommendationsUseCase _getMovieRecommendationsUseCase;
   final GetMovieReviewsUsecase _getMovieReviewsUsecase;
   final GetMovieCreditsUsecase _getMovieCreditsUsecase;
-  final GetMovieGalleryUsecase _getMovieGalleryUsecase;
   final RateMovieUseCase _rateMovieUseCase;
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
   final MarkMovieAsFavUsecase _markMovieAsFavUsecase;
@@ -135,66 +124,11 @@ class MovieCubit extends Cubit<MovieStates> {
           return GetMovieCreditsSuccessState();
         }));
   }
-
-
-  Gallery? movieGallery;
-  Future<void> getMovieGallery({required movieId}) async {
-    emit(GetMovieGalleryLoadingState());
-    Either<Failure, Gallery> response =
-    await _getMovieGalleryUsecase.call(movieId);
-    movieGallery=Gallery();
-    movieGallery!.backdrops=[];
-    movieGallery!.logos=[];
-    movieGallery!.posters=[];
-    emit(response.fold(
-            (failure) =>
-            GetMovieGalleryErrorState(msg: mapFailureToMsg(failure)),
-            (movieGallery) {
-              for (var element in movieGallery.backdrops!){
-                if(element.iso6391=="en")
-                  {
-                    this.movieGallery!.backdrops!.add(element);
-                  }
-              }
-              for (var element in movieGallery.posters!){
-                if(element.iso6391=="en")
-                {
-                  this.movieGallery!.posters!.add(element);
-                }
-              }
-              for (var element in movieGallery.logos!){
-                if(element.iso6391=="en")
-                {
-                  this.movieGallery!.logos!.add(element);
-                }
-              }
-          return GetMovieGallerySuccessState();
-        }));
-  }
-
-
   List<int> moviesId=[];
-
-
   void clearObjects()async{
     movie=Movie();
     allRec=false;
     recPage=1;
-    index=0;
-   if(movieGallery!=null){
-     if(movieGallery!.backdrops!=null)
-       {
-         movieGallery!.backdrops=null;
-       }
-     if(movieGallery!.posters!=null)
-     {
-       movieGallery!.posters=null;
-     }
-     if(movieGallery!.logos!=null)
-     {
-       movieGallery!.logos=null;
-     }
-   }
     if(movieRecommendations!=null&&movieRecommendations!.isNotEmpty)
       {
         movieRecommendations!.clear();
@@ -269,17 +203,5 @@ class MovieCubit extends Cubit<MovieStates> {
       return AddToWatchListSuccessState(statusCode: message!.statusCode!
       );
     }));
-  }
-
-  int index =0;
-  List<Widget> movieGalleryList=[
-    const MovieBackdrops(),
-    const MoviePosters(),
-    const MovieLogos(),
-  ];
-  gallery(value){
-    emit(ChangeGalleryLoadingState());
-    index=value;
-    emit(ChangeGallerySuccessState());
   }
 }

@@ -31,14 +31,6 @@ class GetTvShowCreditsErrorState extends TvStates{
   final String msg;
   GetTvShowCreditsErrorState({required this.msg});
 }
-class GetTvShowGalleryLoadingState extends TvStates{}
-class GetTvShowGallerySuccessState extends TvStates{}
-class GetTvShowGalleryErrorState extends TvStates{
-  final String msg;
-  GetTvShowGalleryErrorState({required this.msg});
-}
-class ChangeGallerySuccessState extends TvStates{}
-class ChangeGalleryLoadingState extends TvStates{}
 class FavTvShowLoadingState extends TvStates{}
 class FavTvShowSuccessState extends TvStates{
   final int statusCode;

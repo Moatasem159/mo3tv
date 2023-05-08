@@ -18,6 +18,12 @@ import 'package:mo3tv/features/account/domain/usecases/get_rated_movies_list_use
 import 'package:mo3tv/features/account/domain/usecases/get_rated_tv_shows_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_tv_shows_watchlist_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/gallery/data/datasources/gallery_datasource.dart';
+import 'package:mo3tv/features/gallery/data/repositories/gallery_repository_impl.dart';
+import 'package:mo3tv/features/gallery/domain/repositories/gallery_repository.dart';
+import 'package:mo3tv/features/gallery/domain/usecases/get_media_gallery_usecase.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/login/data/datasources/login_datasource.dart';
 import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
 import 'package:mo3tv/features/logout/data/repositories/log_out_repository_impl.dart';
@@ -36,7 +42,6 @@ import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_use
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_gallery_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_reviews_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
@@ -69,7 +74,6 @@ import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_reviews_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_gallery_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
@@ -86,14 +90,13 @@ Future<void> init() async {
   //blocs
 
 
-  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl(),sl()));
+  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
   sl.registerFactory<TvCubit>(() => TvCubit(
     getTvShowDetailsUsecase: sl(),
     getTvShowSeasonDetailsUsecase: sl(),
     getTvRecommendationsUseCase: sl(),
     getTvShowsReviewsUsecase: sl(),
     getTvShowCreditsUsecase: sl(),
-    getTvShowGalleryUsecase: sl(),
     markTvShowAsFavUsecase: sl(),
     addTvShowToWatchListUseCase: sl(),
     deleteTvShowRateUseCase: sl(),
@@ -129,8 +132,6 @@ Future<void> init() async {
           () => GetMovieReviewsUsecase(sl()));
   sl.registerLazySingleton<GetMovieCreditsUsecase>(
           () => GetMovieCreditsUsecase(sl()));
-  sl.registerLazySingleton<GetMovieGalleryUsecase>(
-          () => GetMovieGalleryUsecase(sl()));
   sl.registerLazySingleton<RateMovieUseCase>(
           () => RateMovieUseCase(sl()));
   sl.registerLazySingleton<DeleteRateMovieUseCase>(
@@ -157,8 +158,6 @@ Future<void> init() async {
           () => GetTvShowsReviewsUsecase(sl()));
   sl.registerLazySingleton<GetTvShowCreditsUsecase>(
           () => GetTvShowCreditsUsecase(sl()));
-  sl.registerLazySingleton<GetTvShowGalleryUsecase>(
-          () => GetTvShowGalleryUsecase(sl()));
   sl.registerLazySingleton<MarkTvShowAsFavUsecase>(
           () => MarkTvShowAsFavUsecase(sl()));
   sl.registerLazySingleton<AddTvShowToWatchListUseCase>(
@@ -193,6 +192,7 @@ Future<void> init() async {
   sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(apiConsumer:sl()));
 
   account();
+  gallery();
   search();
   logout();
   await external();
@@ -253,4 +253,12 @@ search(){
   sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<SearchUsecase>(() => SearchUsecase(sl()));
   sl.registerLazySingleton<SearchDataSource>(() => SearchDataSourceImpl(sl()));
+}
+
+gallery(){
+  sl.registerFactory(() =>GalleryCubit(sl()));
+  sl.registerFactory(() =>GalleryNavigatorCubit());
+  sl.registerLazySingleton<GetMediaGalleryUsecase>(() => GetMediaGalleryUsecase(sl()));
+  sl.registerLazySingleton<GalleryRepository>(() => GalleryRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<GalleryDataSource>(() => GalleryDataSourceImpl(sl()));
 }

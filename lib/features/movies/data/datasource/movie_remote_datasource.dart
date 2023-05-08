@@ -2,11 +2,9 @@ import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/models/cast_model.dart';
-import 'package:mo3tv/core/models/gallery_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/models/review_model.dart';
-
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies({required int page});
   Future<List<MovieModel>> getPopularMovies({required int page});
@@ -17,7 +15,6 @@ abstract class MovieRemoteDataSource {
   Future<MessageModel> deleteMovieRate({required int movieId});
   Future<List<MovieModel>> getTopRatedMovies({required int page});
   Future<MovieModel> getMovieDetails({required int movieId});
-  Future<GalleryModel> getMovieGallery({required int movieId});
   Future<List<ReviewModel>> getMovieReviews({required int movieId});
   Future<List<CastMemberModel>> getMovieCredits({required int movieId});
   Future<List<MovieModel>> getMovieRecommendations({required int page,required int movieId});
@@ -98,14 +95,6 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
       ),
     );
   }
-
-  @override
-  Future<GalleryModel> getMovieGallery({required int movieId}) async{
-    final response = await _apiConsumer.get(EndPoints.mediaGalleryPath(movieId,AppStrings.movie));
-
-    return GalleryModel.fromJson(response);
-  }
-
   @override
   Future<MessageModel> deleteMovieRate({required int movieId}) async{
     final response = await _apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,AppStrings.movie));

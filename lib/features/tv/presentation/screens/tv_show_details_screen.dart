@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/widgets/gallery/gallery_tab_bar.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
@@ -42,6 +44,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
             child: WillPopScope(
               onWillPop: () async {
                 TvCubit.get(context).clearObjects();
+                GalleryCubit.get(context).initial(context);
                 TvCubit.get(context).backToBackTvShows();
                 GoRouter.of(context).pop();
                 return true;
@@ -78,7 +81,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
                                       handle: disconnectBar,
                                       sliver: GalleryTabBar(
                                         onTap: (value) {
-                                          TvCubit.get(context).gallery(value);
+                                          GalleryNavigatorCubit.get(context).gallery(value);
                                         },
                                       ))
                               ];

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/screens/media_gallery_screen.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_credits.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/gallery/movie_gallery.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_reviews.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_overview.dart';
@@ -32,7 +34,7 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
     const RecommendationsMovies(),
     const MoviesReviews(),
     const MoviesCredits(),
-    const MovieGallery(),
+    const MediaGalleryScreen(),
   ];
   void changeScreen(int index,context,int movieId){
     emit(MovieBottomNavChangingState());
@@ -64,9 +66,10 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
     if(index==4)
       {
         isGallery=true;
-        if(BlocProvider.of<MovieCubit>(context).movieGallery==null||BlocProvider.of<MovieCubit>(context).movieGallery!.backdrops==null){
-          BlocProvider.of<MovieCubit>(context).getMovieGallery(movieId: movieId);
-        }
+       if(GalleryCubit.get(context).isInitial())
+         {
+           GalleryCubit.get(context).getMediaGallery(mediaId:movieId,mediaType:AppStrings.movie);
+         }
       }
     this.index=index;
     emit(MovieBottomNavDoneState());

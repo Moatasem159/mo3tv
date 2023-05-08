@@ -4,19 +4,15 @@ import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/entities/cast.dart';
-import 'package:mo3tv/core/entities/image.dart';
 import 'package:mo3tv/core/entities/review.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
-
 class TvShowRepositoryImpl extends TvRepository{
-
   final TvShowRemoteDataSource tvShowRemoteDataSource;
   final NetworkInfo networkInfo;
-
   TvShowRepositoryImpl({required this.tvShowRemoteDataSource,required this.networkInfo});
   @override
   Future<Either<Failure, List<TvShow>>> getNowPlayingTvShows({required int page})async {
@@ -133,24 +129,6 @@ class TvShowRepositoryImpl extends TvRepository{
 
     }
   }
-
-  @override
-  Future<Either<Failure, Gallery>> getTvShowGallery({required int tvId}) async{
-    if(await networkInfo.isConnected)
-    {
-      try {
-        final result = await tvShowRemoteDataSource.getTvShowGallery(tvId: tvId);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else
-    {
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-
   @override
   Future<Either<Failure, Message>> markTvShowFav({required int tvId, required bool fav}) async{
     if(await networkInfo.isConnected)
