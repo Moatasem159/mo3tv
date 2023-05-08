@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:mo3tv/features/tv/domain/entities/episode.dart';
-
 class TvShowSeason extends Equatable{
-
   final String? airDate;
   final int ?episodeCount;
   final int ?id;
@@ -11,7 +9,6 @@ class TvShowSeason extends Equatable{
   final String ?overview;
   final String ?posterPath;
   final int ?seasonNumber;
-
   const TvShowSeason(
       {this.airDate,
       this.episodeCount,
@@ -21,13 +18,6 @@ class TvShowSeason extends Equatable{
       this.posterPath,
       this.episodes,
       this.seasonNumber});
-
-
-
-
-
-
-
   @override
   List<Object?> get props =>[
     airDate,
@@ -39,5 +29,4 @@ class TvShowSeason extends Equatable{
     posterPath,
     seasonNumber,
   ];
-
 }

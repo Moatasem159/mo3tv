@@ -1,8 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:mo3tv/core/entities/cast.dart';
-
 class Episode extends Equatable{
-
   final String? airDate;
   final int ?episodeNumber;
   final int?id;
@@ -31,8 +29,6 @@ class Episode extends Equatable{
       this.voteCount,
       this.crew,
       this.guestStars});
-
-
   @override
   List<Object?> get props =>[
     airDate,

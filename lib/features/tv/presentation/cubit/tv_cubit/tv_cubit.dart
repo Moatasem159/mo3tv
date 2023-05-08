@@ -18,33 +18,32 @@ import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.da
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
 class TvCubit extends Cubit<TvStates> {
-  TvCubit({
-    required this.getTvShowDetailsUsecase,
-    required this.getTvRecommendationsUseCase,
-    required this.getTvShowsReviewsUsecase,
-    required this.getTvShowCreditsUsecase,
-    required this.markTvShowAsFavUsecase,
-    required this.addTvShowToWatchListUseCase,
-    required this.deleteTvShowRateUseCase,
-    required this.rateTvShowUseCase,
-    required this.getTvShowSeasonDetailsUsecase,
-}) : super(TvInitialState());
-
+  TvCubit(
+     this._getTvShowDetailsUsecase,
+     this._getTvRecommendationsUseCase,
+     this._getTvShowsReviewsUsecase,
+     this._getTvShowCreditsUsecase,
+     this._markTvShowAsFavUsecase,
+     this._addTvShowToWatchListUseCase,
+     this._deleteTvShowRateUseCase,
+     this._rateTvShowUseCase,
+     this._getTvShowSeasonDetailsUsecase,
+      ) : super(TvInitialState());
   static TvCubit get(context)=>BlocProvider.of(context);
-  GetTvShowDetailsUsecase getTvShowDetailsUsecase;
-  GetTvRecommendationsUseCase getTvRecommendationsUseCase;
-  GetTvShowsReviewsUsecase getTvShowsReviewsUsecase;
-  GetTvShowCreditsUsecase getTvShowCreditsUsecase;
-  MarkTvShowAsFavUsecase markTvShowAsFavUsecase;
-  AddTvShowToWatchListUseCase addTvShowToWatchListUseCase;
-  RateTvShowUseCase rateTvShowUseCase;
-  DeleteTvShowRateUseCase deleteTvShowRateUseCase;
-  GetTvShowSeasonDetailsUsecase getTvShowSeasonDetailsUsecase;
+  final GetTvShowDetailsUsecase _getTvShowDetailsUsecase;
+  final GetTvRecommendationsUseCase _getTvRecommendationsUseCase;
+  final GetTvShowsReviewsUsecase _getTvShowsReviewsUsecase;
+  final GetTvShowCreditsUsecase _getTvShowCreditsUsecase;
+  final MarkTvShowAsFavUsecase _markTvShowAsFavUsecase;
+  final AddTvShowToWatchListUseCase _addTvShowToWatchListUseCase;
+  final RateTvShowUseCase _rateTvShowUseCase;
+  final DeleteTvShowRateUseCase _deleteTvShowRateUseCase;
+  final GetTvShowSeasonDetailsUsecase _getTvShowSeasonDetailsUsecase;
   TvShow tvShow= TvShow();
   Future<void> getTvShowDetailsData({required int tvShowId}) async {
     emit(GetTvShowDetailsLoadingState());
     Either<Failure,TvShow> response =
-    await getTvShowDetailsUsecase.call(tvShowId);
+    await _getTvShowDetailsUsecase.call(tvId: tvShowId);
     emit(response.fold((failure) =>
             GetTvShowDetailsErrorState(msg: mapFailureToMsg(failure)),
             (tvShow) {
@@ -90,14 +89,13 @@ class TvCubit extends Cubit<TvStates> {
           return GetTvShowDetailsSuccessState();
         }));
   }
-
   List<TvShow>? tvRecommendations=[];
   int page=1;
   bool allRec=false;
   Future<void> getTvShowsRecommendations({int page=1,required tvId})async{
     emit(GetTvShowRecommendationsLoadingState());
     Either<Failure, List<TvShow>> response =
-    await getTvRecommendationsUseCase.call(tvId: tvId,page: page);
+    await _getTvRecommendationsUseCase.call(tvId: tvId,page: page);
     emit(response.fold(
             (failure) =>
                 GetTvShowRecommendationsErrorState(msg: mapFailureToMsg(failure)),
@@ -114,13 +112,11 @@ class TvCubit extends Cubit<TvStates> {
           return GetTvShowRecommendationsSuccessState();
         }));
   }
-
-
   List<Review>? tvShowsReviews;
   Future<void> getTvShowsReviews({required tvId}) async {
     emit(GetTvShowReviewsLoadingState());
     Either<Failure, List<Review>> response =
-    await getTvShowsReviewsUsecase.call(tvId);
+    await _getTvShowsReviewsUsecase.call(tvId: tvId);
     tvShowsReviews = [];
     emit(response.fold(
             (failure) =>
@@ -130,12 +126,11 @@ class TvCubit extends Cubit<TvStates> {
           return GetTvShowReviewsSuccessState();
         }));
   }
-
   List<CastMember>? tvShowCredits= [];
   Future<void> getTvShowCredits({required tvId}) async {
     emit(GetTvShowCreditsLoadingState());
     Either<Failure, List<CastMember>> response =
-    await getTvShowCreditsUsecase.call(tvId);
+    await _getTvShowCreditsUsecase.call(tvId: tvId);
     tvShowCredits = [];
     emit(response.fold(
             (failure) =>
@@ -153,18 +148,17 @@ class TvCubit extends Cubit<TvStates> {
   Future<void> favTvShow({required int tvId,required bool fav})async{
     emit(FavTvShowLoadingState());
     Either<Failure, Message> response =
-    await markTvShowAsFavUsecase.call(tvId: tvId,fav: fav);
+    await _markTvShowAsFavUsecase.call(tvId: tvId,fav: fav);
     emit(response.fold((l){
       return FavTvShowErrorState(msg: mapFailureToMsg(l));
     }, (r){
       return FavTvShowSuccessState(statusCode: r.statusCode!);
     }));
   }
-
   Future<void> addTvShowToWatchList({required int tvId,required bool watchlist})async{
     emit(AddToWatchListLoadingState());
     Either<Failure, Message> response =
-    await addTvShowToWatchListUseCase.call(tvId: tvId,watchlist: watchlist);
+    await _addTvShowToWatchListUseCase.call(tvId: tvId,watchlist: watchlist);
     emit(response.fold((l){
       return AddToWatchListErrorState(msg: mapFailureToMsg(l));
     }, (r){
@@ -172,24 +166,20 @@ class TvCubit extends Cubit<TvStates> {
       );
     }));
   }
-
-
   Future<void> rateTvShow({required dynamic rate,required int tvId})async{
     emit(RateTvShowLoadingState());
     Either<Failure, Message> response =
-    await rateTvShowUseCase.call(rate:rate, tvId: tvId);
+    await _rateTvShowUseCase.call(rate:rate, tvId: tvId);
     emit(response.fold((l){
       return RateTvShowErrorState(msg: mapFailureToMsg(l));
     }, (r){
       return RateTvShowSuccessState();
     }));
   }
-
-
   Future<void> removeTvShowRate({required int tvId})async{
     emit(RemoveRateTvShowLoadingState());
     Either<Failure, Message> response =
-    await deleteTvShowRateUseCase.call(tvId);
+    await _deleteTvShowRateUseCase.call(tvId: tvId);
     emit(response.fold((l){
       return RemoveRateTvShowErrorState(msg: mapFailureToMsg(l));
     }, (r){
@@ -200,7 +190,7 @@ class TvCubit extends Cubit<TvStates> {
   Future<void> getTvShowSeasonDetailsData({required int tvShowId,required int seasonNumber}) async {
     emit(GetTvShowSeasonDetailsLoadingState());
     Either<Failure,TvShowSeason> response =
-    await getTvShowSeasonDetailsUsecase.call(seasonNumber: seasonNumber,tvId: tvShowId);
+    await _getTvShowSeasonDetailsUsecase.call(seasonNumber: seasonNumber,tvId: tvShowId);
     tvShowSeason=const TvShowSeason();
     emit(response.fold((failure) =>
         GetTvShowSeasonDetailsErrorState(msg:mapFailureToMsg(failure)),
@@ -209,7 +199,6 @@ class TvCubit extends Cubit<TvStates> {
           return GetTvShowSeasonDetailsSuccessState();
         }));
   }
-
   List<int> tvIds=[];
   void clearObjects(){
     tvShow= TvShow();
@@ -227,8 +216,6 @@ class TvCubit extends Cubit<TvStates> {
 
     emit(ClearObjectsState());
   }
-
-
   backToBackTvShows(){
     if (tvIds.length > 1)
     {

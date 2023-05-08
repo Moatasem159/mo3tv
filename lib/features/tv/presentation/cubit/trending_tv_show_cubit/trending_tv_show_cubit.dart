@@ -6,15 +6,13 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_state.dart';
 class TrendingTvShowCubit extends Cubit<TrendingTvShowStates> {
-  TrendingTvShowCubit({
-    required this.getTrendingTvShowsUsecase,
-  }) : super(TrendingTvShowInitialState());
+  TrendingTvShowCubit(this._getTrendingTvShowsUsecase) : super(TrendingTvShowInitialState());
   static TrendingTvShowCubit get(context)=>BlocProvider.of(context);
-  GetTrendingTvShowsUsecase getTrendingTvShowsUsecase;
+  final GetTrendingTvShowsUsecase _getTrendingTvShowsUsecase;
   Future<void> getTrendingTvShowsData({int page=1,bool seeMore=false}) async {
     emit(GetTrendingTvShowsLoadingState());
     Either<Failure, List<TvShow>> response =
-    await getTrendingTvShowsUsecase.call(page);
+    await _getTrendingTvShowsUsecase.call(page: page);
     emit(response.fold(
             (failure) {
           return GetTrendingTvShowsErrorState(msg: mapFailureToMsg(failure));
@@ -22,5 +20,4 @@ class TrendingTvShowCubit extends Cubit<TrendingTvShowStates> {
           return GetTrendingTvShowsSuccessState(trendingTvShows);
         }));
   }
-
 }

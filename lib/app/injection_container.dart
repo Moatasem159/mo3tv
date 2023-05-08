@@ -86,118 +86,14 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> init() async {
-  ///features
-  //blocs
-
-
-  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(), sl(), sl(), sl(), sl(), sl(), sl(), sl()));
-  sl.registerFactory<TvCubit>(() => TvCubit(
-    getTvShowDetailsUsecase: sl(),
-    getTvShowSeasonDetailsUsecase: sl(),
-    getTvRecommendationsUseCase: sl(),
-    getTvShowsReviewsUsecase: sl(),
-    getTvShowCreditsUsecase: sl(),
-    markTvShowAsFavUsecase: sl(),
-    addTvShowToWatchListUseCase: sl(),
-    deleteTvShowRateUseCase: sl(),
-    rateTvShowUseCase: sl(),
-  ));
-  sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
-  sl.registerFactory<PlayingNowTvShowCubit>(()=>PlayingNowTvShowCubit(getNowPlayingTvShowsUsecase: sl()));
-  sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(sl()));
-  sl.registerFactory<TrendingTvShowCubit>(()=>TrendingTvShowCubit(getTrendingTvShowsUsecase:sl()));
-  sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(sl()));
-  sl.registerFactory<PopularTvShowCubit>(()=>PopularTvShowCubit(getPopularTvShowsUsecase:sl()));
-  sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(sl()));
-  sl.registerFactory<TopRatedTvShowsCubit>(()=>TopRatedTvShowsCubit(getTopRatedTvShowUsecase:sl()));
-  sl.registerFactory<MoreMoviesCubit>(()=>MoreMoviesCubit(sl(),sl(),sl()));
-  sl.registerFactory<MoreTvShowsCubit>(()=>MoreTvShowsCubit(
-      getTrendingTvShowsUsecase:sl(), getPopularTvShowsUsecase: sl(), getTopRatedTvShowUsecase: sl()));
-
-
-  // movie useCases
-  sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(
-          () => GetNowPlayingMoviesUsecase(sl()));
-  sl.registerLazySingleton<GetPopularMoviesUsecase>(
-      () => GetPopularMoviesUsecase(sl()));
-  sl.registerLazySingleton<GetTrendingMoviesUsecase>(
-          () => GetTrendingMoviesUsecase(sl()));
-  sl.registerLazySingleton<GetTopRatedMoviesUsecase>(
-      () => GetTopRatedMoviesUsecase(sl()));
-  sl.registerLazySingleton<GetMovieDetailsUseCase>(
-          () => GetMovieDetailsUseCase(sl()));
-  sl.registerLazySingleton<GetMovieRecommendationsUseCase>(
-          () => GetMovieRecommendationsUseCase(sl()));
-  sl.registerLazySingleton<GetMovieReviewsUsecase>(
-          () => GetMovieReviewsUsecase(sl()));
-  sl.registerLazySingleton<GetMovieCreditsUsecase>(
-          () => GetMovieCreditsUsecase(sl()));
-  sl.registerLazySingleton<RateMovieUseCase>(
-          () => RateMovieUseCase(sl()));
-  sl.registerLazySingleton<DeleteRateMovieUseCase>(
-          () => DeleteRateMovieUseCase(sl()));
-  sl.registerLazySingleton<MarkMovieAsFavUsecase>(
-          () => MarkMovieAsFavUsecase(sl()));
-  sl.registerLazySingleton<AddMovieToWatchListUseCase>(
-          () => AddMovieToWatchListUseCase(sl()));
-
-  //// tv Usecases
-  sl.registerLazySingleton<GetNowPlayingTvShowsUsecase>(
-          () => GetNowPlayingTvShowsUsecase(tvRepository: sl(),));
-  sl.registerLazySingleton<GetPopularTvShowsUsecase>(
-          () => GetPopularTvShowsUsecase(tvRepository: sl(),));
-  sl.registerLazySingleton<GetTrendingTvShowsUsecase>(
-          () => GetTrendingTvShowsUsecase(tvRepository: sl(),));
-  sl.registerLazySingleton<GetTopRatedTvShowUsecase>(
-          () => GetTopRatedTvShowUsecase(tvRepository: sl(),));
-  sl.registerLazySingleton<GetTvShowDetailsUsecase>(
-          () => GetTvShowDetailsUsecase(tvRepository: sl(),));
-  sl.registerLazySingleton<GetTvRecommendationsUseCase>(
-          () => GetTvRecommendationsUseCase(tvRepository: sl(),));
-  sl.registerLazySingleton<GetTvShowsReviewsUsecase>(
-          () => GetTvShowsReviewsUsecase(sl()));
-  sl.registerLazySingleton<GetTvShowCreditsUsecase>(
-          () => GetTvShowCreditsUsecase(sl()));
-  sl.registerLazySingleton<MarkTvShowAsFavUsecase>(
-          () => MarkTvShowAsFavUsecase(sl()));
-  sl.registerLazySingleton<AddTvShowToWatchListUseCase>(
-          () => AddTvShowToWatchListUseCase(sl()));
-  sl.registerLazySingleton<DeleteTvShowRateUseCase>(
-          () => DeleteTvShowRateUseCase(sl()));
-  sl.registerLazySingleton<RateTvShowUseCase>(
-          () => RateTvShowUseCase(sl()));
-  sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(
-          () => GetTvShowSeasonDetailsUsecase(sl(),));
-
-  ///search
-
-
-  ///account usecases
-
-
-  ///logOut usecase
-
-  // Repository
-
-  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
-
-  sl.registerLazySingleton<TvRepository>(
-          () => TvShowRepositoryImpl(tvShowRemoteDataSource:sl(),networkInfo: sl()));
-
-
-
-  //dataSource
-
-  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
-  sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(apiConsumer:sl()));
-
+  movie();
+  tv();
   account();
   gallery();
   search();
   logout();
   await external();
 }
-
 login(){
   if (!GetIt.I.isRegistered<GetTokenUsecase>())
     {
@@ -208,14 +104,12 @@ login(){
       sl.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImpl(sl()));
     }
 }
-
 logout(){
   sl.registerFactory(() =>LogOutCubit(sl(),sl()));
   sl.registerLazySingleton<LogOutUsecase>(()=>LogOutUsecase(sl()));
   sl.registerLazySingleton<LogOutRepository>(() => LogOutRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<LogOutDataSource>(() => LogOutDataSourceImpl(sl()));
 }
-
 Future external()async{
   final sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
@@ -234,7 +128,6 @@ Future external()async{
         error: true,
       ));
 }
-
 account(){
   sl.registerFactory(() =>AccountCubit(sl(), sl(), sl(), sl(), sl(), sl(),sl()));
   sl.registerLazySingleton<GetFavMoviesListUsecase>(() => GetFavMoviesListUsecase(sl()));
@@ -247,18 +140,69 @@ account(){
   sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<AccountDataSource>(() => AccountDataSourceImpl(sl()));
 }
-
 search(){
   sl.registerFactory(() =>SearchCubit(sl()));
   sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<SearchUsecase>(() => SearchUsecase(sl()));
   sl.registerLazySingleton<SearchDataSource>(() => SearchDataSourceImpl(sl()));
 }
-
 gallery(){
   sl.registerFactory(() =>GalleryCubit(sl()));
   sl.registerFactory(() =>GalleryNavigatorCubit());
   sl.registerLazySingleton<GetMediaGalleryUsecase>(() => GetMediaGalleryUsecase(sl()));
   sl.registerLazySingleton<GalleryRepository>(() => GalleryRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<GalleryDataSource>(() => GalleryDataSourceImpl(sl()));
+}
+movie(){
+  ///cubits
+  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
+  sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(sl()));
+  sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(sl()));
+  sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(sl()));
+  sl.registerFactory<MoreMoviesCubit>(()=>MoreMoviesCubit(sl(),sl(),sl()));
+  ///usecases
+  sl.registerLazySingleton<GetNowPlayingMoviesUsecase>(() => GetNowPlayingMoviesUsecase(sl()));
+  sl.registerLazySingleton<GetPopularMoviesUsecase>(() => GetPopularMoviesUsecase(sl()));
+  sl.registerLazySingleton<GetTrendingMoviesUsecase>(() => GetTrendingMoviesUsecase(sl()));
+  sl.registerLazySingleton<GetTopRatedMoviesUsecase>(() => GetTopRatedMoviesUsecase(sl()));
+  sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl()));
+  sl.registerLazySingleton<GetMovieRecommendationsUseCase>(() => GetMovieRecommendationsUseCase(sl()));
+  sl.registerLazySingleton<GetMovieReviewsUsecase>(() => GetMovieReviewsUsecase(sl()));
+  sl.registerLazySingleton<GetMovieCreditsUsecase>(() => GetMovieCreditsUsecase(sl()));
+  sl.registerLazySingleton<RateMovieUseCase>(() => RateMovieUseCase(sl()));
+  sl.registerLazySingleton<DeleteRateMovieUseCase>(() => DeleteRateMovieUseCase(sl()));
+  sl.registerLazySingleton<MarkMovieAsFavUsecase>(() => MarkMovieAsFavUsecase(sl()));
+  sl.registerLazySingleton<AddMovieToWatchListUseCase>(() => AddMovieToWatchListUseCase(sl()));
+  ///repository
+  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
+  ///date source
+  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
+}
+tv(){
+  ///cubits
+  sl.registerFactory<TvCubit>(() => TvCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<PlayingNowTvShowCubit>(()=>PlayingNowTvShowCubit(sl()));
+  sl.registerFactory<TrendingTvShowCubit>(()=>TrendingTvShowCubit(sl()));
+  sl.registerFactory<PopularTvShowCubit>(()=>PopularTvShowCubit(sl()));
+  sl.registerFactory<TopRatedTvShowsCubit>(()=>TopRatedTvShowsCubit(sl()));
+  sl.registerFactory<MoreTvShowsCubit>(()=>MoreTvShowsCubit(sl(),sl(),sl()));
+  ///usecases
+  sl.registerLazySingleton<GetNowPlayingTvShowsUsecase>(() => GetNowPlayingTvShowsUsecase(sl()));
+  sl.registerLazySingleton<GetPopularTvShowsUsecase>(() => GetPopularTvShowsUsecase(sl()));
+  sl.registerLazySingleton<GetTrendingTvShowsUsecase>(() => GetTrendingTvShowsUsecase(sl()));
+  sl.registerLazySingleton<GetTopRatedTvShowUsecase>(() => GetTopRatedTvShowUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowDetailsUsecase>(() => GetTvShowDetailsUsecase(sl()));
+  sl.registerLazySingleton<GetTvRecommendationsUseCase>(() => GetTvRecommendationsUseCase(sl()));
+  sl.registerLazySingleton<GetTvShowsReviewsUsecase>(() => GetTvShowsReviewsUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowCreditsUsecase>(() => GetTvShowCreditsUsecase(sl()));
+  sl.registerLazySingleton<MarkTvShowAsFavUsecase>(() => MarkTvShowAsFavUsecase(sl()));
+  sl.registerLazySingleton<AddTvShowToWatchListUseCase>(() => AddTvShowToWatchListUseCase(sl()));
+  sl.registerLazySingleton<DeleteTvShowRateUseCase>(() => DeleteTvShowRateUseCase(sl()));
+  sl.registerLazySingleton<RateTvShowUseCase>(() => RateTvShowUseCase(sl()));
+  sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(() => GetTvShowSeasonDetailsUsecase(sl()));
+  ///repository
+  sl.registerLazySingleton<TvRepository>(() => TvShowRepositoryImpl(sl(),sl()));
+  ///data source
+  sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(sl()));
 }

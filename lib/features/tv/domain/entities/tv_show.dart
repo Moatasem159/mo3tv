@@ -69,7 +69,6 @@ class TvShow extends Equatable{
         this.trailer,
         this.videos,
       this.voteCount});
-
   @override
   List<Object?> get props => [
     adult,

@@ -9,14 +9,14 @@ import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_state.dart';
 class MoreTvShowsCubit extends Cubit<MoreTvShowsStates> {
   MoreTvShowsCubit(
-  {required this.getTrendingTvShowsUsecase,
-    required this.getPopularTvShowsUsecase,
-    required this.getTopRatedTvShowUsecase
-}):super(MoreTvShowsInitialState());
+   this._getTrendingTvShowsUsecase,
+    this._getPopularTvShowsUsecase,
+    this._getTopRatedTvShowUsecase
+):super(MoreTvShowsInitialState());
   static MoreTvShowsCubit get(context)=>BlocProvider.of(context);
-  GetTrendingTvShowsUsecase getTrendingTvShowsUsecase;
-  GetPopularTvShowsUsecase getPopularTvShowsUsecase;
-  GetTopRatedTvShowUsecase getTopRatedTvShowUsecase;
+  final GetTrendingTvShowsUsecase _getTrendingTvShowsUsecase;
+  final GetPopularTvShowsUsecase _getPopularTvShowsUsecase;
+  final GetTopRatedTvShowUsecase _getTopRatedTvShowUsecase;
   List<TvShow> moreTvShows=[];
   int page=1;
   seeMoreTvShows({required int index})async{
@@ -25,15 +25,15 @@ class MoreTvShowsCubit extends Cubit<MoreTvShowsStates> {
     page++;
     if(index==1)
     {
-      response = await getTrendingTvShowsUsecase.call(page);
+      response = await _getTrendingTvShowsUsecase.call(page: page);
     }
     else if(index==2)
     {
-      response = await getPopularTvShowsUsecase.call(page);
+      response = await _getPopularTvShowsUsecase.call(page: page);
     }
     else if(index ==3)
     {
-      response = await getTopRatedTvShowUsecase.call(page);
+      response = await _getTopRatedTvShowUsecase.call(page: page);
     }
     emit(response!.fold(
             (failure) {

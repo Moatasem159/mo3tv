@@ -72,7 +72,6 @@ class TvShowModel extends TvShow {
     videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
   );
 }
-
 class CreatedBy {
   CreatedBy({
     this.id,
@@ -104,7 +103,6 @@ class CreatedBy {
     "profile_path": profilePath,
   };
 }
-
 class Network {
   Network({
     this.id,
@@ -132,7 +130,6 @@ class Network {
     "origin_country": originCountry,
   };
 }
-
 class LastEpisodeToAir {
   LastEpisodeToAir({
     this.airDate,
@@ -192,4 +189,3 @@ class LastEpisodeToAir {
     "vote_count": voteCount,
   };
 }
-
