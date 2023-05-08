@@ -18,6 +18,11 @@ import 'package:mo3tv/features/account/domain/usecases/get_rated_movies_list_use
 import 'package:mo3tv/features/account/domain/usecases/get_rated_tv_shows_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_tv_shows_watchlist_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart';
+import 'package:mo3tv/features/credits/data/repositories/credits_repository_impl.dart';
+import 'package:mo3tv/features/credits/domain/repositories/credits_repository.dart';
+import 'package:mo3tv/features/credits/domain/usecases/get_media_credits_usecase.dart';
+import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/data/datasources/gallery_datasource.dart';
 import 'package:mo3tv/features/gallery/data/repositories/gallery_repository_impl.dart';
 import 'package:mo3tv/features/gallery/domain/repositories/gallery_repository.dart';
@@ -40,7 +45,6 @@ import 'package:mo3tv/features/movies/data/repositories/movies_repository_impl.d
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
@@ -75,7 +79,6 @@ import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.d
 import 'package:mo3tv/features/tv/domain/usecases/get_top_rated_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_credits_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
@@ -94,6 +97,7 @@ Future<void> init() async {
   account();
   gallery();
   reviews();
+  credits();
   search();
   logout();
   await external();
@@ -159,7 +163,7 @@ gallery(){
 }
 movie(){
   ///cubits
-  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(),sl(),sl(),sl(),sl(),sl()));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
   sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(sl()));
   sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(sl()));
@@ -172,7 +176,6 @@ movie(){
   sl.registerLazySingleton<GetTopRatedMoviesUsecase>(() => GetTopRatedMoviesUsecase(sl()));
   sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl()));
   sl.registerLazySingleton<GetMovieRecommendationsUseCase>(() => GetMovieRecommendationsUseCase(sl()));
-  sl.registerLazySingleton<GetMovieCreditsUsecase>(() => GetMovieCreditsUsecase(sl()));
   sl.registerLazySingleton<RateMovieUseCase>(() => RateMovieUseCase(sl()));
   sl.registerLazySingleton<DeleteRateMovieUseCase>(() => DeleteRateMovieUseCase(sl()));
   sl.registerLazySingleton<MarkMovieAsFavUsecase>(() => MarkMovieAsFavUsecase(sl()));
@@ -184,7 +187,7 @@ movie(){
 }
 tv(){
   ///cubits
-  sl.registerFactory<TvCubit>(() => TvCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<TvCubit>(() => TvCubit(sl(),sl(),sl(),sl(),sl(),sl(),sl()));
   sl.registerFactory<PlayingNowTvShowCubit>(()=>PlayingNowTvShowCubit(sl()));
   sl.registerFactory<TrendingTvShowCubit>(()=>TrendingTvShowCubit(sl()));
   sl.registerFactory<PopularTvShowCubit>(()=>PopularTvShowCubit(sl()));
@@ -197,7 +200,6 @@ tv(){
   sl.registerLazySingleton<GetTopRatedTvShowUsecase>(() => GetTopRatedTvShowUsecase(sl()));
   sl.registerLazySingleton<GetTvShowDetailsUsecase>(() => GetTvShowDetailsUsecase(sl()));
   sl.registerLazySingleton<GetTvRecommendationsUseCase>(() => GetTvRecommendationsUseCase(sl()));
-  sl.registerLazySingleton<GetTvShowCreditsUsecase>(() => GetTvShowCreditsUsecase(sl()));
   sl.registerLazySingleton<MarkTvShowAsFavUsecase>(() => MarkTvShowAsFavUsecase(sl()));
   sl.registerLazySingleton<AddTvShowToWatchListUseCase>(() => AddTvShowToWatchListUseCase(sl()));
   sl.registerLazySingleton<DeleteTvShowRateUseCase>(() => DeleteTvShowRateUseCase(sl()));
@@ -214,4 +216,10 @@ reviews(){
   sl.registerLazySingleton<GetMediaReviewsUsecase>(() => GetMediaReviewsUsecase(sl()));
   sl.registerLazySingleton<ReviewsRepository>(() => ReviewsRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<ReviewsDataSource>(() => ReviewsDataSourceImpl(sl()));
+}
+credits(){
+  sl.registerFactory(() =>CreditsCubit(sl()));
+  sl.registerLazySingleton<GetMediaCreditsUsecase>(() => GetMediaCreditsUsecase(sl()));
+  sl.registerLazySingleton<CreditsRepository>(() => CreditsRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<CreditsDataSource>(() => CreditsDataSourceImpl(sl()));
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
@@ -47,6 +48,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
                 TvCubit.get(context).clearObjects();
                 GalleryCubit.get(context).initial(context);
                 ReviewsCubit.get(context).initial();
+                CreditsCubit.get(context).initial();
                 TvCubit.get(context).backToBackTvShows();
                 GoRouter.of(context).pop();
                 return true;

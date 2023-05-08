@@ -13,7 +13,7 @@ abstract class AccountDataSource {
   Future<List<TvShowModel>> getFavouriteTvShows();
   Future<List<TvShowModel>> getTvShowsWatchList();
 }
-class AccountDataSourceImpl extends AccountDataSource{
+class AccountDataSourceImpl implements AccountDataSource{
   final ApiConsumer _apiConsumer;
   AccountDataSourceImpl(this._apiConsumer);
   @override

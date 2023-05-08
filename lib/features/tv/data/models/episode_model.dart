@@ -1,4 +1,4 @@
-import 'package:mo3tv/core/models/cast_model.dart';
+import 'package:mo3tv/features/credits/data/models/cast_model.dart';
 import 'package:mo3tv/features/tv/domain/entities/episode.dart';
 class EpisodeModel extends Episode{
   const EpisodeModel({

@@ -5,7 +5,7 @@ import 'package:mo3tv/features/search/data/models/search_model.dart';
 abstract class SearchDataSource{
   Future<List<SearchModel>> search({required String word,required int page});
 }
-class SearchDataSourceImpl extends SearchDataSource{
+class SearchDataSourceImpl implements SearchDataSource{
   final ApiConsumer _apiConsumer;
   SearchDataSourceImpl(this._apiConsumer);
   @override

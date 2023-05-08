@@ -4,7 +4,7 @@ import 'package:mo3tv/features/logout/data/models/log_out_model.dart';
 abstract class LogOutDataSource{
   Future<LogOutModel> logOut({required String sessionId});
 }
-class LogOutDataSourceImpl extends LogOutDataSource{
+class LogOutDataSourceImpl implements LogOutDataSource{
   final ApiConsumer _apiConsumer;
   LogOutDataSourceImpl(this._apiConsumer);
   @override

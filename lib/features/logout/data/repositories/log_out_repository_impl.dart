@@ -6,7 +6,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
 import 'package:mo3tv/features/logout/data/models/log_out_model.dart';
 import 'package:mo3tv/features/logout/domain/repositories/log_out_repository.dart';
-class LogOutRepositoryImpl extends LogOutRepository{
+class LogOutRepositoryImpl implements LogOutRepository{
   final NetworkInfo _networkInfo;
   final LogOutDataSource _logOutDataSource;
   LogOutRepositoryImpl(this._networkInfo, this._logOutDataSource);

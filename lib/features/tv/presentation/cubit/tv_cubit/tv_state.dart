@@ -25,12 +25,6 @@ class GetTvShowReviewsErrorState extends TvStates{
   final String msg;
   GetTvShowReviewsErrorState({required this.msg});
 }
-class GetTvShowCreditsLoadingState extends TvStates{}
-class GetTvShowCreditsSuccessState extends TvStates{}
-class GetTvShowCreditsErrorState extends TvStates{
-  final String msg;
-  GetTvShowCreditsErrorState({required this.msg});
-}
 class FavTvShowLoadingState extends TvStates{}
 class FavTvShowSuccessState extends TvStates{
   final int statusCode;

@@ -7,7 +7,7 @@ import 'package:mo3tv/features/login/data/datasources/login_datasource.dart';
 import 'package:mo3tv/features/login/data/models/token_model.dart';
 import 'package:mo3tv/features/login/domain/entities/session.dart';
 import 'package:mo3tv/features/login/domain/repositories/login_repository.dart';
-class LoginRepositoryImpl extends LoginRepository{
+class LoginRepositoryImpl implements LoginRepository{
   final NetworkInfo _networkInfo;
   final LoginDataSource _loginDataSource;
   LoginRepositoryImpl(this._networkInfo,this._loginDataSource);

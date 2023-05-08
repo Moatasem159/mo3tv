@@ -3,13 +3,12 @@ import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
-import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
-class TvShowRepositoryImpl extends TvRepository{
+class TvShowRepositoryImpl implements TvRepository{
   final TvShowRemoteDataSource _tvShowRemoteDataSource;
   final NetworkInfo _networkInfo;
   TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo);
@@ -90,22 +89,6 @@ class TvShowRepositoryImpl extends TvRepository{
     }
     else{
       return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-  @override
-  Future<Either<Failure, List<CastMember>>> getTvShowCredits({required int tvId})async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getTvShowCredits(tvId: tvId);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-
     }
   }
   @override

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
+import 'package:mo3tv/features/credits/presentation/screens/media_credits_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/media_gallery_screen.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_credits.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_overview.dart';
 class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
@@ -33,7 +34,7 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
     const TvShowOverview(),
     const RecommendationsTvShows(),
     const MediaReviews(),
-    const TvShowCredits(),
+    const MediaCredits(),
     const MediaGalleryScreen(),
   ];
   void changeScreen(int index,context,int tvId){
@@ -53,8 +54,9 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
     }
     if(index==3)
     {
-      if(TvCubit.get(context).tvShowCredits!.isEmpty){
-        TvCubit.get(context).getTvShowCredits(tvId: tvId);
+      if(CreditsCubit.get(context).isInitial())
+      {
+        CreditsCubit.get(context).getMovieCredits(mediaId:tvId,mediaType:AppStrings.tv);
       }
     }
     if(index==4)

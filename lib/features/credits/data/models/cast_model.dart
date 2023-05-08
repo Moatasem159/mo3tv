@@ -1,5 +1,4 @@
-import 'package:mo3tv/core/entities/cast.dart';
-
+import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 class CastMemberModel extends CastMember {
   const CastMemberModel({
     super.id,

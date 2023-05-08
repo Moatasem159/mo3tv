@@ -6,7 +6,7 @@ abstract class LoginDataSource{
   Future<SessionModel> getSessionId({required String token});
   Future<TokenModel> getTokenRequest();
 }
-class LoginDataSourceImpl extends LoginDataSource{
+class LoginDataSourceImpl implements LoginDataSource{
    final ApiConsumer _apiConsumer;
   LoginDataSourceImpl(this._apiConsumer);
   @override

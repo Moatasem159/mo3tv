@@ -1,7 +1,6 @@
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/models/cast_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 abstract class MovieRemoteDataSource {
@@ -14,10 +13,9 @@ abstract class MovieRemoteDataSource {
   Future<MessageModel> deleteMovieRate({required int movieId});
   Future<List<MovieModel>> getTopRatedMovies({required int page});
   Future<MovieModel> getMovieDetails({required int movieId});
-  Future<List<CastMemberModel>> getMovieCredits({required int movieId});
   Future<List<MovieModel>> getMovieRecommendations({required int page,required int movieId});
 }
-class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
+class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   final ApiConsumer _apiConsumer;
   MovieRemoteDataSourceImpl(this._apiConsumer);
   /// Now Playing Movies
@@ -69,17 +67,6 @@ class MovieRemoteDataSourceImpl extends MovieRemoteDataSource {
     return List<MovieModel>.from(
       (response['results'] as List).map(
             (x) => MovieModel.fromJson(x),
-      ),
-    );
-  }
-
-
-  @override
-  Future<List<CastMemberModel>> getMovieCredits({required int movieId})async {
-    final response = await _apiConsumer.get(EndPoints.mediaCreditsPath(movieId,AppStrings.movie));
-    return List<CastMemberModel>.from(
-      (response['cast'] as List).map(
-            (x) => CastMemberModel.fromJson(x),
       ),
     );
   }

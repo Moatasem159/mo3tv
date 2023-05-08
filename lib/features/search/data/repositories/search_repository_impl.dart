@@ -6,7 +6,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/search/data/datasources/search_datasource.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/domain/repositories/search_repository.dart';
-class SearchRepositoryImpl extends SearchRepository{
+class SearchRepositoryImpl implements SearchRepository{
   final NetworkInfo _networkInfo;
   final SearchDataSource _searchDataSource;
   SearchRepositoryImpl(this._networkInfo,this._searchDataSource);

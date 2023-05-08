@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/buttons.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_state.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/empty_image_list.dart';
@@ -23,6 +24,14 @@ class MediaLogos extends StatelessWidget {
           {
             return const MediaLogosLoadingList();
           }
+        if(state is GetMediaGalleryErrorState)
+        {
+          return ErrorButton(onTap:(){
+            GalleryCubit.get(context).getMediaGallery(
+                mediaId: GalleryCubit.get(context).mediaId,
+                mediaType: GalleryCubit.get(context).mediaType);
+          });
+        }
         return Container();
       },
     );

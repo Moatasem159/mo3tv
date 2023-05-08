@@ -2,7 +2,6 @@ import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/models/cast_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 abstract class TvShowRemoteDataSource {
@@ -13,13 +12,12 @@ abstract class TvShowRemoteDataSource {
   Future<TvShowModel> getTvShowDetails({required int tvShowId});
   Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});
   Future<List<TvShowModel>> getTvShowRecommendations({required int page,required int tvId});
-  Future<List<CastMemberModel>> getTvShowCredits({required int tvId});
   Future<MessageModel> markTvShowAsFavourite({required int tvId,required bool fav});
   Future<MessageModel> addTvShowToWatchList({required int tvId,required bool watchList});
   Future<MessageModel> rateTvShow({required dynamic rate,required int tvId});
   Future<MessageModel> deleteTvShowRate({required int tvId});
 }
-class TvShowRemoteDataSourceImpl extends TvShowRemoteDataSource{
+class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
   final ApiConsumer _apiConsumer;
   TvShowRemoteDataSourceImpl(this._apiConsumer);
   @override
@@ -47,11 +45,6 @@ class TvShowRemoteDataSourceImpl extends TvShowRemoteDataSource{
   Future<List<TvShowModel>> getTvShowRecommendations({required int page, required int tvId})async {
     final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(tvId, page,AppStrings.tv));
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
-  }
-  @override
-  Future<List<CastMemberModel>> getTvShowCredits({required int tvId})async {
-    final response = await _apiConsumer.get(EndPoints.mediaCreditsPath(tvId,AppStrings.tv));
-    return List<CastMemberModel>.from((response['cast'] as List).map((x) => CastMemberModel.fromJson(x)));
   }
   @override
   Future<MessageModel> markTvShowAsFavourite({required int tvId, required bool fav}) async{

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/media_gallery_screen.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_credits.dart';
+import 'package:mo3tv/features/credits/presentation/screens/media_credits_screen.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movies.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
@@ -34,7 +35,7 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
     const MovieOverview(),
     const RecommendationsMovies(),
     const MediaReviews(),
-    const MoviesCredits(),
+    const MediaCredits(),
     const MediaGalleryScreen(),
   ];
   void changeScreen(int index,context,int movieId){
@@ -60,8 +61,9 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
     }
     if(index==3)
     {
-      if(BlocProvider.of<MovieCubit>(context).movieCredits!.isEmpty){
-        BlocProvider.of<MovieCubit>(context).getMovieCredits(movieId: movieId);
+      if(CreditsCubit.get(context).isInitial())
+      {
+        CreditsCubit.get(context).getMovieCredits(mediaId:movieId,mediaType:AppStrings.movie);
       }
     }
     if(index==4)

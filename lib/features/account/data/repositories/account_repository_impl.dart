@@ -8,7 +8,7 @@ import 'package:mo3tv/features/account/domain/entities/account.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-class AccountRepositoryImpl extends AccountRepository{
+class AccountRepositoryImpl implements AccountRepository{
   final NetworkInfo _networkInfo;
   final AccountDataSource _accountDataSource;
   AccountRepositoryImpl(this._networkInfo,this._accountDataSource);

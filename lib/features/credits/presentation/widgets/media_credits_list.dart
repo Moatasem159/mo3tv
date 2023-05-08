@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/entities/cast.dart';
+import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/widgets/credits/cast_widget.dart';
+import 'package:mo3tv/features/credits/presentation/widgets/cast_widget.dart';
 class MediaCreditsList extends StatelessWidget {
   final List<CastMember> mediaCredits;
   const MediaCreditsList({Key? key, required this.mediaCredits}) : super(key: key);

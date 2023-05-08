@@ -1,13 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
-import 'package:mo3tv/core/entities/cast.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_credits_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
@@ -21,11 +19,9 @@ class MovieCubit extends Cubit<MovieStates> {
         this._markMovieAsFavUsecase,
         this._addMovieToWatchListUseCase,
         this._deleteRateMovieUseCase,
-        this._getMovieCreditsUsecase,
       ) : super(MoviesInitialState());
   final GetMovieDetailsUseCase _getMovieDetailsUseCase;
   final GetMovieRecommendationsUseCase _getMovieRecommendationsUseCase;
-  final GetMovieCreditsUsecase _getMovieCreditsUsecase;
   final RateMovieUseCase _rateMovieUseCase;
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
   final MarkMovieAsFavUsecase _markMovieAsFavUsecase;
@@ -59,8 +55,6 @@ class MovieCubit extends Cubit<MovieStates> {
       return GetMovieDetailsSuccessState();
         }));
   }
-
-
   List<Movie>? movieRecommendations=[];
   int recPage=1;
   bool allRec=false;
@@ -84,29 +78,6 @@ class MovieCubit extends Cubit<MovieStates> {
           return GetMovieRecommendationsSuccessState();
         }));
   }
-
-
-
-
-  List<CastMember>? movieCredits= [];
-  Future<void> getMovieCredits({required movieId}) async {
-    emit(GetMovieCreditsLoadingState());
-    Either<Failure, List<CastMember>> response =
-    await _getMovieCreditsUsecase.call(movieId);
-    movieCredits = [];
-    emit(response.fold(
-            (failure) =>
-            GetMovieCreditsErrorState(msg: mapFailureToMsg(failure)),
-            (movieCredits) {
-              for (var element in movieCredits) {
-                if(element.profilePath!='')
-                  {
-                    this.movieCredits!.add(element);
-                  }
-              }
-          return GetMovieCreditsSuccessState();
-        }));
-  }
   List<int> moviesId=[];
   void clearObjects()async{
     movie=Movie();
@@ -116,7 +87,6 @@ class MovieCubit extends Cubit<MovieStates> {
       {
         movieRecommendations!.clear();
       }
-    movieCredits!.clear();
     emit(ClearObjectsState());
   }
   backToBackMovies(){

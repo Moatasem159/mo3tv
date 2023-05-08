@@ -10,8 +10,12 @@ class GalleryCubit extends Cubit<GalleryStates> {
   GalleryCubit(this._getMediaGalleryUsecase) : super(GalleryInitialState());
   static GalleryCubit get(context)=>BlocProvider.of(context);
   final GetMediaGalleryUsecase _getMediaGalleryUsecase;
+  int ?mediaId;
+  String ?mediaType;
   Future<void> getMediaGallery({required mediaId,required mediaType}) async {
     emit(GetMediaGalleryLoadingState());
+    this.mediaId=mediaId;
+    this.mediaType=mediaType;
     Gallery gallery=Gallery(
       backdrops: [],
       logos: [],
