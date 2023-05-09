@@ -7,6 +7,7 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_card.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/playing_now_movies/movie_card.dart';
 
 class PlayingNowMovieCard extends StatelessWidget {
@@ -17,6 +18,7 @@ class PlayingNowMovieCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         BlocProvider.of<MovieCubit>(context).clearObjects();
+        RecommendationsMovieCubit.get(context).add(movie.id);
         BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
         GoRouter.of(context).pushNamed(Routes.movieRoute,

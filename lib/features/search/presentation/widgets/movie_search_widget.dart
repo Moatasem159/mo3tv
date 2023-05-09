@@ -5,6 +5,7 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/screens/movie_details_screen.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 class MovieSearchWidget extends StatelessWidget {
@@ -15,6 +16,7 @@ class MovieSearchWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         BlocProvider.of<MovieCubit>(context).clearObjects();
+        RecommendationsMovieCubit.get(context).add(movie.id);
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
         BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
         Navigator.of(context).push(MaterialPageRoute(

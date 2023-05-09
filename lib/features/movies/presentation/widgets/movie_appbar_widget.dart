@@ -7,6 +7,7 @@ import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 
 class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
@@ -74,6 +75,8 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                       GalleryCubit.get(context).initial(context);
                       ReviewsCubit.get(context).initial();
                       CreditsCubit.get(context).initial();
+                      // RecommendationsMovieCubit.get(context).initial();
+                      RecommendationsMovieCubit.get(context).getList();
                       BlocProvider.of<MovieCubit>(context).backToBackMovies();
                       GoRouter.of(context).pop();
                     },

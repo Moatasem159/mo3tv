@@ -7,6 +7,7 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_list_loading_item.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 class MovieListItem extends StatelessWidget {
   final Movie movie;
   const MovieListItem({Key? key, required this.movie}) : super(key: key);
@@ -15,6 +16,7 @@ class MovieListItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         BlocProvider.of<MovieCubit>(context).clearObjects();
+        RecommendationsMovieCubit.get(context).add(movie.id);
         BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
         BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
         GoRouter.of(context).pushNamed(Routes.movieRoute,extra:movie,);

@@ -13,7 +13,7 @@ abstract class MovieRemoteDataSource {
   Future<MessageModel> deleteMovieRate({required int movieId});
   Future<List<MovieModel>> getTopRatedMovies({required int page});
   Future<MovieModel> getMovieDetails({required int movieId});
-  Future<List<MovieModel>> getMovieRecommendations({required int page,required int movieId});
+  Future<List<MovieModel>> getMovieRecommendations({required int movieId});
 }
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   final ApiConsumer _apiConsumer;
@@ -62,8 +62,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   }
 
   @override
-  Future<List<MovieModel>> getMovieRecommendations({required int page, required int movieId})async {
-    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(movieId, page,AppStrings.movie));
+  Future<List<MovieModel>> getMovieRecommendations({required int movieId})async {
+    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(movieId,1,AppStrings.movie));
     return List<MovieModel>.from(
       (response['results'] as List).map(
             (x) => MovieModel.fromJson(x),

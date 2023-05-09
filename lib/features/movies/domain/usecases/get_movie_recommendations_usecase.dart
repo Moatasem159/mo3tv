@@ -5,7 +5,7 @@ import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart'
 class GetMovieRecommendationsUseCase{
   final MovieRepository _movieRepository;
   GetMovieRecommendationsUseCase(this._movieRepository);
-  Future<Either<Failure, List<Movie>>> call({required int movieId,required int page}) async {
-    return await _movieRepository.getMovieRecommendations(movieId: movieId, page: page);
+  Future<Either<Failure, List<Movie>>> call({required int movieId}) async {
+    return await _movieRepository.getMovieRecommendations(movieId: movieId);
   }
 }

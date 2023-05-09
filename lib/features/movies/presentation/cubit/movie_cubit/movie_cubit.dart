@@ -7,21 +7,18 @@ import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 class MovieCubit extends Cubit<MovieStates> {
   MovieCubit(
         this._getMovieDetailsUseCase,
-        this._getMovieRecommendationsUseCase,
         this._rateMovieUseCase,
         this._markMovieAsFavUsecase,
         this._addMovieToWatchListUseCase,
         this._deleteRateMovieUseCase,
       ) : super(MoviesInitialState());
   final GetMovieDetailsUseCase _getMovieDetailsUseCase;
-  final GetMovieRecommendationsUseCase _getMovieRecommendationsUseCase;
   final RateMovieUseCase _rateMovieUseCase;
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
   final MarkMovieAsFavUsecase _markMovieAsFavUsecase;
@@ -55,38 +52,9 @@ class MovieCubit extends Cubit<MovieStates> {
       return GetMovieDetailsSuccessState();
         }));
   }
-  List<Movie>? movieRecommendations=[];
-  int recPage=1;
-  bool allRec=false;
-  Future<void> getMovieRecommendations({int page=1,required movieId}) async {
-    emit(GetMovieRecommendationsLoadingState());
-    Either<Failure, List<Movie>> response =
-    await _getMovieRecommendationsUseCase.call(movieId: movieId,page: page);
-    emit(response.fold(
-            (failure) =>
-            GetMovieRecommendationsErrorState(msg: mapFailureToMsg(failure)),
-            (movieRecommendations) {
-          if(movieRecommendations.isEmpty){
-            allRec=true;
-          }
-          for (var element in movieRecommendations) {
-            if(!this.movieRecommendations!.any((e) =>e.id==element.id,))
-            {
-              this.movieRecommendations!.add(element);
-            }
-          }
-          return GetMovieRecommendationsSuccessState();
-        }));
-  }
   List<int> moviesId=[];
   void clearObjects()async{
     movie=Movie();
-    allRec=false;
-    recPage=1;
-    if(movieRecommendations!=null&&movieRecommendations!.isNotEmpty)
-      {
-        movieRecommendations!.clear();
-      }
     emit(ClearObjectsState());
   }
   backToBackMovies(){
@@ -94,15 +62,13 @@ class MovieCubit extends Cubit<MovieStates> {
     {
      moviesId.removeAt(moviesId.length-1);
      getMovieDetailsData(movieId: moviesId[moviesId.length-1]);
-     getMovieRecommendations(movieId:moviesId[moviesId.length-1]);
+     // getMovieRecommendations(movieId:moviesId[moviesId.length-1]);
     }
     else if(moviesId.length==1)
     {
       moviesId.removeAt(0);
     }
   }
-
-
   Message ? message;
   Future<void> rateMovie({required dynamic rate,required int movieId})async{
     emit(RateMovieLoadingState());

@@ -10,6 +10,7 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
@@ -47,6 +48,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 GalleryCubit.get(context).initial(context);
                 ReviewsCubit.get(context).initial();
                 CreditsCubit.get(context).initial();
+                RecommendationsMovieCubit.get(context).getList();
                 BlocProvider.of<MovieCubit>(context).backToBackMovies();
                 GoRouter.of(context).pop();
                 return true;

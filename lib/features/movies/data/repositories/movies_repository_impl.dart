@@ -80,11 +80,11 @@ class MoviesRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, List<Movie>>> getMovieRecommendations({required int movieId, required int page}) async {
+  Future<Either<Failure, List<Movie>>> getMovieRecommendations({required int movieId}) async {
     if(await _networkInfo.isConnected)
       {
         try {
-          final result = await _movieRemoteDataSource.getMovieRecommendations(page: page, movieId: movieId);
+          final result = await _movieRemoteDataSource.getMovieRecommendations(movieId: movieId);
           result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {

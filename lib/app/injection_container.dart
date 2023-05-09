@@ -58,6 +58,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/top_rated_movies_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/trending_movie_cubit.dart';
 import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart';
@@ -165,8 +166,9 @@ gallery(){
 }
 movie(){
   ///cubits
-  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(),sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<MovieCubit>(() => MovieCubit(sl(),sl(),sl(),sl(),sl()));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
+  sl.registerFactory<RecommendationsMovieCubit>(()=>RecommendationsMovieCubit(sl()));
   sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(sl()));
   sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(sl()));
   sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(sl()));
