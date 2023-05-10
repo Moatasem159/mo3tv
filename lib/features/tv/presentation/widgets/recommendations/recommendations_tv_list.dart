@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
 class RecommendationsTvShowsList extends StatelessWidget {
   final List<TvShow> recommendationTvShows;
-  const RecommendationsTvShowsList({Key? key, required this.recommendationTvShows}) : super(key: key);
+  final int tvId;
+  const RecommendationsTvShowsList({Key? key, required this.recommendationTvShows, required this.tvId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -17,13 +19,38 @@ class RecommendationsTvShowsList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 11),
-                  child: Text(
-                    "Recommendations :${recommendationTvShows.length}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 11),
+                      child: Text(
+                        "Recommendations :${recommendationTvShows.length}",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                    ),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(
+                            Routes.similarTvShowsRoute,
+                            extra: recommendationTvShows,
+                            queryParameters: {'tvId': tvId.toString()});
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          children: const [
+                            Text("See More", style: TextStyle(fontSize: 15)),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              size: 15,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               10.ph
               ],
@@ -45,31 +72,9 @@ class RecommendationsTvShowsList extends StatelessWidget {
                 crossAxisCount: 3,
                 mainAxisSpacing: 7),
           ),
-          if(!TvCubit.get(context).allRec)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 70,left: 10,right:10,top: 10 ),
-                child: ElevatedButton(
-                  child: const Text("Load more"),
-                  onPressed: () {
-                    TvCubit.get(context).page++;
-                    TvCubit.get(context).getTvShowsRecommendations(
-                        tvId:TvCubit.get(context).tvShow.id,
-                        page:TvCubit.get(context).page );
-                  },
-                ),
-              ),
-            ),
-          if(TvCubit.get(context).allRec)
-            SliverToBoxAdapter(
-              child:Column(
-                children:  [
-                  8.ph,
-                  const Center(child: Text("No more movies",style:TextStyle(fontWeight: FontWeight.w600))),
-                 70.ph
-                ],
-              ) ,
-            ),
+          SliverToBoxAdapter(
+            child: 75.ph,
+          )
         ],
       ),
     );

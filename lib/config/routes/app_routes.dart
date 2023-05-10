@@ -10,12 +10,14 @@ import 'package:mo3tv/features/movies/presentation/screens/similar_movies_screen
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/screens/season_details_screen.dart';
+import 'package:mo3tv/features/tv/presentation/screens/similar_tv_shows_screen.dart';
 import 'package:mo3tv/features/tv/presentation/screens/tv_show_details_screen.dart';
 class Routes {
   static const String initialRoute= "/";
   static const String loginRoute= "/loginRoute";
   static const String movieDetailsRoute= "/movieDetailsRoute";
   static const String similarMoviesRoute= "/similarMoviesRoute";
+  static const String similarTvShowsRoute= "/similarTvShowsRoute";
   static const String tvShowRoute= "/tvShowRoute";
   static const String seeMoreRoute= "/seeMoreRoute";
   static const String seasonRoute= "/seasonRoute";
@@ -68,6 +70,13 @@ abstract class AppRoute{
         builder: (context, state) =>  SimilarMoviesScreen(
           recommendations: state.extra as List<Movie>,
           movieId:int.parse(state.queryParameters["movieId"]!)
+        )),
+      GoRoute(
+        name:  Routes.similarTvShowsRoute,
+        path: Routes.similarTvShowsRoute,
+        builder: (context, state) =>  SimilarTvShowsScreen(
+          recommendations: state.extra as List<TvShow>,
+          tvId:int.parse(state.queryParameters["tvId"]!)
         )),
     ],
   );

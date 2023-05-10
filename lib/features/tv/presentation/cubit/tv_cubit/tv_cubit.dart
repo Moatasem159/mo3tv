@@ -7,7 +7,6 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
@@ -16,7 +15,6 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
 class TvCubit extends Cubit<TvStates> {
   TvCubit(
      this._getTvShowDetailsUsecase,
-     this._getTvRecommendationsUseCase,
      this._markTvShowAsFavUsecase,
      this._addTvShowToWatchListUseCase,
      this._deleteTvShowRateUseCase,
@@ -25,7 +23,6 @@ class TvCubit extends Cubit<TvStates> {
       ) : super(TvInitialState());
   static TvCubit get(context)=>BlocProvider.of(context);
   final GetTvShowDetailsUsecase _getTvShowDetailsUsecase;
-  final GetTvRecommendationsUseCase _getTvRecommendationsUseCase;
   final MarkTvShowAsFavUsecase _markTvShowAsFavUsecase;
   final AddTvShowToWatchListUseCase _addTvShowToWatchListUseCase;
   final RateTvShowUseCase _rateTvShowUseCase;
@@ -81,29 +78,6 @@ class TvCubit extends Cubit<TvStates> {
           return GetTvShowDetailsSuccessState();
         }));
   }
-  List<TvShow>? tvRecommendations=[];
-  int page=1;
-  bool allRec=false;
-  Future<void> getTvShowsRecommendations({int page=1,required tvId})async{
-    emit(GetTvShowRecommendationsLoadingState());
-    Either<Failure, List<TvShow>> response =
-    await _getTvRecommendationsUseCase.call(tvId: tvId,page: page);
-    emit(response.fold(
-            (failure) =>
-                GetTvShowRecommendationsErrorState(msg: mapFailureToMsg(failure)),
-            (tvRecommendations) {
-              if(tvRecommendations.isEmpty){
-                allRec=true;
-              }
-          for (var element in tvRecommendations) {
-            if(!this.tvRecommendations!.any((e) =>e.id==element.id,))
-            {
-              this.tvRecommendations!.add(element);
-            }
-          }
-          return GetTvShowRecommendationsSuccessState();
-        }));
-  }
   Future<void> favTvShow({required int tvId,required bool fav})async{
     emit(FavTvShowLoadingState());
     Either<Failure, Message> response =
@@ -157,36 +131,5 @@ class TvCubit extends Cubit<TvStates> {
           this.tvShowSeason = tvShowSeason;
           return GetTvShowSeasonDetailsSuccessState();
         }));
-  }
-  List<int> tvIds=[];
-  void clearObjects(){
-    tvShow= TvShow();
-    allRec=false;
-    page=1;
-    // index=0;
-    if(tvRecommendations!=null&&tvRecommendations!.isNotEmpty)
-    {
-      tvRecommendations!.clear();
-    }
-    emit(ClearObjectsState());
-  }
-  backToBackTvShows(){
-    if (tvIds.length > 1)
-    {
-      tvIds.removeAt(tvIds.length-1);
-
-      getTvShowDetailsData(tvShowId:tvIds[tvIds.length-1]);
-      // getMovieVideos(movieId: moviesId[moviesId.length-1]);
-      getTvShowsRecommendations(tvId:tvIds[tvIds.length-1]);
-    }
-    else if(tvIds.length==1)
-    {
-      // getMovieDetailsData(movieId:moviesId[0]);
-      // // getMovieVideos(movieId: moviesId[0]);
-      // getMovieRecommendations(movieId:moviesId[0]);
-      tvIds.removeAt(0);
-    }
-
-
   }
 }

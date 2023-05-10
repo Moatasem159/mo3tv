@@ -1,28 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
-import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/screens/tv_show_details_screen.dart';
 class TvShowSearchWidget extends StatelessWidget {
   final Search tvShow;
   const TvShowSearchWidget({Key? key, required this.tvShow}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        TvCubit.get(context).clearObjects();
-        TvCubit.get(context).tvIds.add(tvShow.id!);
-        TvCubit.get(context).getTvShowDetailsData(tvShowId: tvShow.id!);
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => TvShowDetailsScreen(tvShow: TvShow(
-            backdropPath: tvShow.backdropPath,
-            originalName: tvShow.originalName,
-            id: tvShow.id
-          )),));
-      },
+      onTap:()=>GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow),
       child: Container(
         width:20,
         padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),

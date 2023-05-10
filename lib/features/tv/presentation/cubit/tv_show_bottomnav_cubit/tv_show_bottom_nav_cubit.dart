@@ -3,15 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
-import 'package:mo3tv/features/credits/presentation/screens/media_credits_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
-import 'package:mo3tv/features/gallery/presentation/screens/media_gallery_screen.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
-import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/recommendations_tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_overview.dart';
 class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
   TvShowBottomNavCubit() : super(TvShowBottomNavInitialState());
   int index=0;
@@ -30,20 +25,13 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
     ), label: "Gallery"),
 
   ];
-  List<Widget> screens=[
-    const TvShowOverview(),
-    const RecommendationsTvShows(),
-    const MediaReviews(),
-    const MediaCredits(),
-    const MediaGalleryScreen(),
-  ];
   void changeScreen(int index,context,int tvId){
     emit(TvShowBottomNavChangingState());
     isGallery=false;
     if(index==1)
       {
-       if(TvCubit.get(context).tvRecommendations==null||TvCubit.get(context).tvRecommendations!.isEmpty){
-         TvCubit.get(context).getTvShowsRecommendations(tvId: tvId);
+       if(RecommendationsTvCubit.get(context).isInitial()){
+         RecommendationsTvCubit.get(context).getTvShowsRecommendations(tvId: tvId);
        }
       }
     if(index==2)

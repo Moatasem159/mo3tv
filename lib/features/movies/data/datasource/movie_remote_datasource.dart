@@ -49,7 +49,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getMovieRecommendations({required int movieId})async {
-    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(movieId,1,AppStrings.movie));
+    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(movieId,AppStrings.movie));
     return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override

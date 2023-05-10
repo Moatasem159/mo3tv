@@ -8,7 +8,6 @@ class RecommendationsMoviesList extends StatelessWidget {
   final List<Movie> recommendationMovies;
   final int movieId;
   const RecommendationsMoviesList({Key? key, required this.recommendationMovies, required this.movieId}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

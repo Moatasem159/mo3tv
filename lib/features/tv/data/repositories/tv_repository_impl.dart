@@ -76,11 +76,11 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getTvShowRecommendations({required int tvId, required int page})async {
+  Future<Either<Failure, List<TvShow>>> getTvShowRecommendations({required int tvId})async {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _tvShowRemoteDataSource.getTvShowRecommendations(page: page, tvId: tvId);
+        final result = await _tvShowRemoteDataSource.getTvShowRecommendations(tvId: tvId);
         result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
@@ -173,6 +173,23 @@ class TvShowRepositoryImpl implements TvRepository{
     if(await _networkInfo.isConnected){
       try {
         final TvShowSeason result = await _tvShowRemoteDataSource.getTvShowSeasonDetails(tvShowId: tvShowId, seasonNumber: seasonNumber);
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TvShow>>> getSimilarTvShows({required int tvId, required int page}) async{
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _tvShowRemoteDataSource.getSimilarTvShows(tvId: tvId,page: page);
+        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

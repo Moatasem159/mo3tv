@@ -21,7 +21,8 @@ class DioConsumer implements ApiConsumer {
     };
     _client.interceptors.add(DioCacheInterceptor(options:CacheHelper.customCacheHelper));
     _client.options
-      ..connectTimeout=const Duration(seconds: 10)
+      ..connectTimeout=const Duration(seconds: 15)
+      ..receiveTimeout=const Duration(seconds: 15)
       ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
       .. receiveDataWhenStatusError= true

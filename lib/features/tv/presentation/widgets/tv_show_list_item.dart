@@ -5,19 +5,13 @@ import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_list_loading_item.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 class TvShowListItem extends StatelessWidget {
   final TvShow tvShow;
   const TvShowListItem({Key? key, required this.tvShow}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        TvCubit.get(context).clearObjects();
-        TvCubit.get(context).tvIds.add(tvShow.id!);
-        TvCubit.get(context).getTvShowDetailsData(tvShowId: tvShow.id!);
-        GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow);
-      },
+      onTap:()=>GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow),
       child: CachedNetworkImage(
         imageUrl: EndPoints.posterUrl(tvShow.posterPath!),
         imageBuilder: (context, imageProvider) =>Container(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/core/widgets/empty_recommendations_media_widget.dart';
 import 'package:mo3tv/core/widgets/recommendations_media_loading_list.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
@@ -25,6 +26,13 @@ class RecommendationsMovies extends StatelessWidget {
               }
               if (state is GetMovieRecommendationsSuccessState) {
                 return RecommendationsMoviesList(recommendationMovies:state.recMovies,movieId:movieId);
+              }
+              if(state is GetMovieRecommendationsErrorState){
+                return SliverToBoxAdapter(
+                  child: ErrorButton(onTap: (){
+                    RecommendationsMovieCubit.get(context).getMovieRecommendations(movieId:movieId);
+                  }),
+                );
               }
               return const SliverToBoxAdapter();
             },

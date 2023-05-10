@@ -11,7 +11,8 @@ abstract class TvShowRemoteDataSource {
   Future<List<TvShowModel>> getTopRatedTvShows({required int page});
   Future<TvShowModel> getTvShowDetails({required int tvShowId});
   Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});
-  Future<List<TvShowModel>> getTvShowRecommendations({required int page,required int tvId});
+  Future<List<TvShowModel>> getTvShowRecommendations({required int tvId});
+  Future<List<TvShowModel>> getSimilarTvShows({required int tvId,required int page});
   Future<MessageModel> markTvShowAsFavourite({required int tvId,required bool fav});
   Future<MessageModel> addTvShowToWatchList({required int tvId,required bool watchList});
   Future<MessageModel> rateTvShow({required dynamic rate,required int tvId});
@@ -42,8 +43,8 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
     return TvShowModel.fromJson(response);
   }
   @override
-  Future<List<TvShowModel>> getTvShowRecommendations({required int page, required int tvId})async {
-    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(tvId, page,AppStrings.tv));
+  Future<List<TvShowModel>> getTvShowRecommendations({required int tvId})async {
+    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(tvId,AppStrings.tv));
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
@@ -88,5 +89,10 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
   Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber}) async{
     final response = await _apiConsumer.get(EndPoints.tvShowSeasonDetailsPath(tvShowId,seasonNumber));
     return TvShowSeasonModel.fromJson(response);
+  }
+  @override
+  Future<List<TvShowModel>> getSimilarTvShows({required int tvId, required int page})async {
+    final response = await _apiConsumer.get(EndPoints.similarMediaPath(tvId,page,AppStrings.tv));
+    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
 }

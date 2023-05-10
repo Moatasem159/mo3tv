@@ -55,6 +55,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => MovieBottomNavCubit()),
+          BlocProvider(create: (context) => di.sl<GalleryNavigatorCubit>()),
           BlocProvider(create: (context) => di.sl<MovieCubit>()),
           BlocProvider(create: (context) => di.sl<RecommendationsMovieCubit>()),
           BlocProvider(create: (context) => di.sl<GalleryCubit>()),
