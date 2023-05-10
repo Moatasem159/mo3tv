@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_state.dart';
 import 'package:mo3tv/features/credits/presentation/widgets/media_credits_list.dart';

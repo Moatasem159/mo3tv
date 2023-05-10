@@ -23,6 +23,7 @@ class MovieCubit extends Cubit<MovieStates> {
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
   final MarkMovieAsFavUsecase _markMovieAsFavUsecase;
   final AddMovieToWatchListUseCase _addMovieToWatchListUseCase;
+  static MovieCubit get(context)=>BlocProvider.of(context);
   Movie movie=Movie();
   Future<void> getMovieDetailsData({required int movieId}) async {
     emit(GetMovieDetailsLoadingState());
@@ -51,23 +52,6 @@ class MovieCubit extends Cubit<MovieStates> {
           this.movie.videos!.clear();
       return GetMovieDetailsSuccessState();
         }));
-  }
-  List<int> moviesId=[];
-  void clearObjects()async{
-    movie=Movie();
-    emit(ClearObjectsState());
-  }
-  backToBackMovies(){
-    if (moviesId.length > 1)
-    {
-     moviesId.removeAt(moviesId.length-1);
-     getMovieDetailsData(movieId: moviesId[moviesId.length-1]);
-     // getMovieRecommendations(movieId:moviesId[moviesId.length-1]);
-    }
-    else if(moviesId.length==1)
-    {
-      moviesId.removeAt(0);
-    }
   }
   Message ? message;
   Future<void> rateMovie({required dynamic rate,required int movieId})async{

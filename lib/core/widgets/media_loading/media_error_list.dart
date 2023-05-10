@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/core/widgets/list_title.dart';
 class MediaErrorList extends StatelessWidget {
   final String title;
@@ -16,9 +16,7 @@ class MediaErrorList extends StatelessWidget {
         children: [
           ListTitle(title: title),
           15.ph,
-          const Text("Something went wrong"),
-          7.ph,
-          MainButton(onPressed:onPressed, label: "try again")
+          ErrorButton(onTap: onPressed)
         ],
       ),
     );

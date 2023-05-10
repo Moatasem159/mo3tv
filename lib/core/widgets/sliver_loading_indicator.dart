@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-class SeeMoreLoadingIndicator extends StatelessWidget {
-  const SeeMoreLoadingIndicator({Key? key}) : super(key: key);
+class SliverLoadingIndicator extends StatelessWidget {
+  const SliverLoadingIndicator({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -14,7 +14,7 @@ class SeeMoreLoadingIndicator extends StatelessWidget {
               height: 35,
               width: 35,
               child: CircularProgressIndicator(
-                strokeWidth: 1.5,
+                strokeWidth: 1.1,
               ),
             ),
             5.ph,

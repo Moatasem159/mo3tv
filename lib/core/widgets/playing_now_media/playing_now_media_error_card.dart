@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/widgets/buttons.dart';
+import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 class PlayingNowMediaErrorCard extends StatelessWidget {
   final  VoidCallback onPressed;
   const PlayingNowMediaErrorCard({Key? key,required this.onPressed}) : super(key: key);
@@ -14,14 +13,7 @@ class PlayingNowMediaErrorCard extends StatelessWidget {
           color:Colors.grey[700],
           borderRadius: BorderRadius.circular(15),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Something went wrong"),
-            7.ph,
-            MainButton(onPressed:onPressed, label: "try again")
-          ],
-        ),
+        child:ErrorButton(onTap: onPressed)
       ),
     );
   }

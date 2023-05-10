@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
 class RecommendationsMoviesList extends StatelessWidget {
   final List<Movie> recommendationMovies;
-  const RecommendationsMoviesList({Key? key, required this.recommendationMovies}) : super(key: key);
+  final int movieId;
+  const RecommendationsMoviesList({Key? key, required this.recommendationMovies, required this.movieId}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -28,42 +32,47 @@ class RecommendationsMoviesList extends StatelessWidget {
                     ),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(
+                            Routes.similarMoviesRoute,
+                            extra: recommendationMovies,
+                            queryParameters: {'movieId': movieId.toString()});
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
                           children: const [
-                            Text("See More",style: TextStyle(
-                              fontSize: 15
-                            )),
-                            Icon(Icons.arrow_forward_ios_outlined,size: 15,)
+                            Text("See More", style: TextStyle(fontSize: 15)),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              size: 15,
+                            )
                           ],
                         ),
                       ),
                     )
                   ],
                 ),
-              15.ph
+                15.ph
               ],
             ),
           ),
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
               childCount: recommendationMovies.length,
-                  (context, index) {
+              (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: MovieListItem(
-                      movie: recommendationMovies[index]),
+                  child: MovieListItem(movie: recommendationMovies[index]),
                 );
               },
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: .69,
-                crossAxisCount: 3,
-                mainAxisSpacing: 7),
+                childAspectRatio: .69, crossAxisCount: 3, mainAxisSpacing: 7),
           ),
-          SliverToBoxAdapter(child: 75.ph,)
+          SliverToBoxAdapter(
+            child: 75.ph,
+          )
         ],
       ),
     );

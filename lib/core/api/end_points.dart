@@ -23,6 +23,8 @@ class EndPoints{
       "$baseUrl/$mediaType/top_rated?api_key=$apiKey&page=$page";
   static String recommendationMediaPath(int mediaId,int page,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId/recommendations?api_key=$apiKey&page=$page";
+  static String similarMediaPath(int mediaId,int page,String mediaType) =>
+      "$baseUrl/$mediaType/$mediaId/similar?api_key=$apiKey&page=$page";
   static String mediaReviewsPath(int mediaId,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId/reviews?api_key=$apiKey";
   static String mediaCreditsPath(int mediaId,String mediaType) =>

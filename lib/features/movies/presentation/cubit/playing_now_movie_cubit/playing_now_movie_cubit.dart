@@ -11,6 +11,7 @@ class PlayingNowMovieCubit extends Cubit<PlayingNowMovieStates> {
       : super(PlayingNowMovieInitialState());
 
   final GetNowPlayingMoviesUsecase _getNowPlayingMoviesUsecase;
+  static PlayingNowMovieCubit get(context)=>BlocProvider.of(context);
   Future<void> getNowPlayingMoviesData({int page=1}) async {
     emit(GetNowPlayingMoviesLoadingState());
     Either<Failure,List<Movie>> response =

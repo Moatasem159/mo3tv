@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/widgets/media_see_more/see_more_app_bar.dart';
-import 'package:mo3tv/core/widgets/media_see_more/see_more_button.dart';
-import 'package:mo3tv/core/widgets/media_see_more/see_more_loading_indicator.dart';
+import 'package:mo3tv/core/widgets/custom_app_bar.dart';
+import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
+import 'package:mo3tv/core/widgets/sliver_loading_indicator.dart';
 import 'package:mo3tv/core/widgets/media_see_more/tv_show_see_more_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_state.dart';
@@ -16,7 +16,7 @@ class MoreTvShows extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SeeMoreAppBar(
+        CustomAppBar(
           onPressed: () {
            MoreTvShowsCubit.get(context).page = 1;
            MoreTvShowsCubit.get(context).moreTvShows.clear();
@@ -37,7 +37,7 @@ class MoreTvShows extends StatelessWidget {
           builder: (context, state) {
             if(state is GetMoreTvShowsLoadingState)
             {
-              return const SeeMoreLoadingIndicator();
+              return const SliverLoadingIndicator();
             }
             return SeeMoreButton(onPressed: () {
               MoreTvShowsCubit.get(context)

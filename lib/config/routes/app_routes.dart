@@ -6,6 +6,7 @@ import 'package:mo3tv/features/login/domain/entities/token.dart';
 import 'package:mo3tv/features/login/presentation/screens/login_screen.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/screens/movie_details_screen.dart';
+import 'package:mo3tv/features/movies/presentation/screens/similar_movies_screen.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/screens/season_details_screen.dart';
@@ -13,7 +14,8 @@ import 'package:mo3tv/features/tv/presentation/screens/tv_show_details_screen.da
 class Routes {
   static const String initialRoute= "/";
   static const String loginRoute= "/loginRoute";
-  static const String movieRoute= "/movieRoute";
+  static const String movieDetailsRoute= "/movieDetailsRoute";
+  static const String similarMoviesRoute= "/similarMoviesRoute";
   static const String tvShowRoute= "/tvShowRoute";
   static const String seeMoreRoute= "/seeMoreRoute";
   static const String seasonRoute= "/seasonRoute";
@@ -37,13 +39,9 @@ abstract class AppRoute{
         
       ),
       GoRoute(
-        name: Routes.movieRoute,
-        path: Routes.movieRoute,
-        builder: (context, state) =>  MovieDetailsScreen(
-          movie: state.extra as Movie,
-        ),
-
-      ),
+        name: Routes.movieDetailsRoute,
+        path: Routes.movieDetailsRoute,
+        builder: (context, state) =>  MovieDetailsScreen(movie: state.extra as Movie)),
       GoRoute(
         name: Routes.tvShowRoute,
         path: Routes.tvShowRoute,
@@ -64,6 +62,13 @@ abstract class AppRoute{
             season:state.extra as TvShowSeason,
             tvShowName:state.queryParameters["tvShowName"]! ),
         ),
+      GoRoute(
+        name:  Routes.similarMoviesRoute,
+        path: Routes.similarMoviesRoute,
+        builder: (context, state) =>  SimilarMoviesScreen(
+          recommendations: state.extra as List<Movie>,
+          movieId:int.parse(state.queryParameters["movieId"]!)
+        )),
     ],
   );
 }

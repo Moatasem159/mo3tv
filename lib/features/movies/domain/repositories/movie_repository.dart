@@ -13,4 +13,5 @@ Future<Either<Failure,Message>> markMovieFav({required int movieId,required bool
 Future<Either<Failure,Message>> addMovieToWatchlist({required int movieId,required bool watchlist});
 Future<Either<Failure,Message>> deleteMovieRate({required int movieId});
 Future<Either<Failure,List<Movie>>> getMovieRecommendations({required int movieId});
+Future<Either<Failure,List<Movie>>> getSimilarMovies({required int movieId,required int page});
 }

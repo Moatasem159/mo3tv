@@ -50,6 +50,7 @@ import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_now_playing_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/get_similar_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
@@ -59,6 +60,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit
 import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/top_rated_movies_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/trending_movie_cubit.dart';
 import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart';
@@ -169,6 +171,7 @@ movie(){
   sl.registerFactory<MovieCubit>(() => MovieCubit(sl(),sl(),sl(),sl(),sl()));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
   sl.registerFactory<RecommendationsMovieCubit>(()=>RecommendationsMovieCubit(sl()));
+  sl.registerFactory<SimilarMovieCubit>(()=>SimilarMovieCubit(sl()));
   sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(sl()));
   sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(sl()));
   sl.registerFactory<TopRatedMoviesCubit>(()=>TopRatedMoviesCubit(sl()));
@@ -180,6 +183,7 @@ movie(){
   sl.registerLazySingleton<GetTopRatedMoviesUsecase>(() => GetTopRatedMoviesUsecase(sl()));
   sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl()));
   sl.registerLazySingleton<GetMovieRecommendationsUseCase>(() => GetMovieRecommendationsUseCase(sl()));
+  sl.registerLazySingleton<GetSimilarMovieUseCase>(() => GetSimilarMovieUseCase(sl()));
   sl.registerLazySingleton<RateMovieUseCase>(() => RateMovieUseCase(sl()));
   sl.registerLazySingleton<DeleteRateMovieUseCase>(() => DeleteRateMovieUseCase(sl()));
   sl.registerLazySingleton<MarkMovieAsFavUsecase>(() => MarkMovieAsFavUsecase(sl()));

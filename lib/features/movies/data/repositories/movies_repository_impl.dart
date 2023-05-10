@@ -175,4 +175,21 @@ class MoviesRepositoryImpl implements MovieRepository {
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Movie>>> getSimilarMovies({required int movieId, required int page}) async{
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page);
+        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
 }

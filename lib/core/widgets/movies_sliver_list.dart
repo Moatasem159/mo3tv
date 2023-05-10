@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
-class MoviesSeeMoreList extends StatelessWidget {
+class MoviesSliverList extends StatelessWidget {
  final List<Movie> movies;
-  const MoviesSeeMoreList({Key? key,required this.movies,}) : super(key: key);
+  const MoviesSliverList({Key? key,required this.movies,}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverGrid(

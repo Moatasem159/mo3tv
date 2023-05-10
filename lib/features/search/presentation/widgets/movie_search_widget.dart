@@ -1,12 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/screens/movie_details_screen.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 class MovieSearchWidget extends StatelessWidget {
   final Search movie;
@@ -14,18 +11,7 @@ class MovieSearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        BlocProvider.of<MovieCubit>(context).clearObjects();
-        RecommendationsMovieCubit.get(context).add(movie.id);
-        BlocProvider.of<MovieCubit>(context).getMovieDetailsData(movieId: movie.id!);
-        BlocProvider.of<MovieCubit>(context).moviesId.add(movie.id!);
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => MovieDetailsScreen(movie:Movie(
-            title: movie.originalTitle,
-            id: movie.id,
-            backdropPath: movie.backdropPath,
-          ) ),));
-      },
+      onTap: ()=> GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:movie),
       child: Container(
         width:20,
         padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),

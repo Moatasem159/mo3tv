@@ -10,10 +10,7 @@ class PlayingNowMovieLoadingCard extends StatelessWidget {
       child: Container(
         height: MediaQuery.of(context).size.height/3.5,
         width: MediaQuery.of(context).size.width-50,
-        decoration: BoxDecoration(
-          color:Colors.grey,
-            borderRadius: BorderRadius.circular(15),
-        ),
+        decoration: BoxDecoration(color:Colors.grey, borderRadius: BorderRadius.circular(15)),
       ),
     );
   }

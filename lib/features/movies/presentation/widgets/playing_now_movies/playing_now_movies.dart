@@ -11,21 +11,17 @@ class PlayingNowMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlayingNowMovieCubit, PlayingNowMovieStates>(
       builder: (context, state) {
+        if(state is GetNowPlayingMoviesLoadingState)
+        {
+          return const PlayingNowMediaLoadingCarousal();
+        }
         if(state is GetNowPlayingMoviesSuccessState)
         {
-          return PlayingNowMoviesCarousal(movies: state.nowPlayingMovies,);
+          return PlayingNowMoviesCarousal(movies: state.nowPlayingMovies);
         }
-        if(state is GetNowPlayingMoviesLoadingState)
-          {
-            return const PlayingNowMediaLoadingCarousal();
-          }
         if(state is GetNowPlayingMoviesErrorState)
           {
-            return PlayingNowMediaErrorCard(
-              onPressed:() {
-                BlocProvider.of<PlayingNowMovieCubit>(context).getNowPlayingMoviesData();
-              },
-            );
+            return PlayingNowMediaErrorCard(onPressed:() => PlayingNowMovieCubit.get(context).getNowPlayingMoviesData());
           }
         return Container();
       },
