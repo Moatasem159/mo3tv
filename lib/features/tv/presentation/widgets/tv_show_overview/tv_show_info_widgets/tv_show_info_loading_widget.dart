@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/widgets/info_loading_widget.dart';
-class MovieInfoLoadingWidget extends StatelessWidget {
-  const MovieInfoLoadingWidget({super.key});
+class TvShowInfoLoadingWidget extends StatelessWidget {
+  const TvShowInfoLoadingWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Expanded(

@@ -13,8 +13,8 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   final double minImageSize = 70;
   final double maxTitleSize = 20;
   final double minTitleSize = 15;
-  final double maxIconSize = 30;
-  final double mixIconSize = 20;
+  final double maxIconSize = 20;
+  final double mixIconSize =15;
   final double maxImageMargin = 0;
   final double minImageMargin = 60;
 
@@ -65,9 +65,18 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                     onTap: () {
                       GoRouter.of(context).pop();
                     },
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: iconSize,
+                    child:Container(
+                      width: iconSize,
+                      height:iconSize,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black12,
+
+                      ),
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: iconSize,
+                      ),
                     ))),
             Positioned(
                 left: left,

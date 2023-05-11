@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/loading_button.dart';
+import 'package:mo3tv/core/widgets/buttons/loading_button.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 class ButtonsLoadingWidget extends StatelessWidget {
@@ -34,7 +34,6 @@ class ButtonsLoadingWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const LoadingButton(),
             const LoadingButton(),
             const LoadingButton(),
             const LoadingButton(),

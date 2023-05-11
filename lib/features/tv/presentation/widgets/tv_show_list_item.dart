@@ -12,22 +12,25 @@ class TvShowListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap:()=>GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow),
-      child: CachedNetworkImage(
-        imageUrl: EndPoints.posterUrl(tvShow.posterPath!),
-        imageBuilder: (context, imageProvider) =>Container(
-          margin: const EdgeInsets.symmetric(horizontal: 5),
+      child: Hero(
+        tag: tvShow,
+        child: CachedNetworkImage(
           width: 140,
           height:200,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: imageProvider,
-                fit: BoxFit.cover,
-              )
+          imageUrl: EndPoints.posterUrl(tvShow.posterPath!),
+          imageBuilder: (context, imageProvider) =>Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                )
+            ),
           ),
+          placeholder: (context, url) => const MediaListLoadingItem(),
+          errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
         ),
-        placeholder: (context, url) => const MediaListLoadingItem(),
-        errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
       ),
     );
   }

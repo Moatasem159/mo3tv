@@ -35,8 +35,8 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
   @override
   void initState() {
     screens=[
-      const TvShowOverview(),
-       RecommendationsTvShows(tvId: widget.tvShow.id!),
+      TvShowOverview(tvShow: widget.tvShow),
+      RecommendationsTvShows(tvId: widget.tvShow.id!),
       const MediaReviews(),
       const MediaCredits(),
       const MediaGalleryScreen(),
