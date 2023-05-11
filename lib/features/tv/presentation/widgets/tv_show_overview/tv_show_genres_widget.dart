@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/widgets/genres_widget.dart';
+import 'package:mo3tv/core/widgets/keywords_widgets/genres_widget.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';

@@ -28,7 +28,7 @@ class MovieCubit extends Cubit<MovieStates> {
   Future<void> getMovieDetailsData({required int movieId}) async {
     emit(GetMovieDetailsLoadingState());
     Either<Failure,Movie> response =
-    await _getMovieDetailsUseCase.call(movieId);
+    await _getMovieDetailsUseCase.call(movieId: movieId);
     emit(response.fold((failure) =>
             GetMovieDetailsErrorState(msg: mapFailureToMsg(failure)), (movie) {
           this.movie = movie;
@@ -70,7 +70,7 @@ class MovieCubit extends Cubit<MovieStates> {
   Future<void> removeRateMovie({required int movieId})async{
     emit(RemoveRateMovieLoadingState());
     Either<Failure, Message> response =
-    await _deleteRateMovieUseCase.call(movieId);
+    await _deleteRateMovieUseCase.call(movieId: movieId);
 
     emit(response.fold((l){
       return RemoveRateMovieErrorState(msg: mapFailureToMsg(l));

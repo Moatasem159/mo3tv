@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
-import 'package:mo3tv/core/widgets/sliver_loading_indicator.dart';
-import 'package:mo3tv/core/widgets/tv_show_sliver_list.dart';
+import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_sliver_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_state.dart';
 class MoreTvShows extends StatelessWidget {

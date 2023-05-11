@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/core/widgets/empty_recommendations_media_widget.dart';
-import 'package:mo3tv/core/widgets/recommendations_media_loading_list.dart';
+import 'package:mo3tv/core/widgets/media_loading/recommendations_media_loading_list.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_state.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movie_list.dart';

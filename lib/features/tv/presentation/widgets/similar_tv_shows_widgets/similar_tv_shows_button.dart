@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
-import 'package:mo3tv/core/widgets/sliver_loading_indicator.dart';
+import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/similar_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/similar_tv_show_state.dart';
 class SimilarTvShowButton extends StatelessWidget {
