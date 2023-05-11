@@ -6,7 +6,7 @@ class ListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(18, 0,9,0),
+      margin: const EdgeInsets.symmetric(horizontal: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -18,11 +18,12 @@ class ListTitle extends StatelessWidget {
               letterSpacing: 0.15,
             ),
           ),
+          if(onPressed!=null)
           InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: onPressed,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(0),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: const [

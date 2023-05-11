@@ -35,7 +35,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   void initState() {
     screens = [
-      const MovieOverview(),
+      MovieOverview(movie: widget.movie),
       RecommendationsMovies(movieId: widget.movie.id!),
       const MediaReviews(),
       const MediaCredits(),

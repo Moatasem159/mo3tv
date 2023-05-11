@@ -181,32 +181,36 @@ class MovieDetailsLoadingWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              10.ph,
-              Shimmer.fromColors(
-                baseColor: Colors.grey[850]!,
-                highlightColor: Colors.grey[800]!,
-                child: Container(
-                  color: Colors.grey,
-                  width: 320,
-                  height: 20,),
-              ),
-              7.ph,
-              Shimmer.fromColors(
-                baseColor: Colors.grey[850]!,
-                highlightColor: Colors.grey[800]!,
-                child: Container(
-                  color: Colors.grey,
-                  width: 320,
-                  height: 20,),
-              ),
-              7.ph,
-              Shimmer.fromColors(
-                baseColor: Colors.grey[850]!,
-                highlightColor: Colors.grey[800]!,
-                child: Container(
-                  color: Colors.grey,
-                  width: 320,
-                  height: 20,),
+              Column(
+                children: [
+                  10.ph,
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[850]!,
+                    highlightColor: Colors.grey[800]!,
+                    child: Container(
+                      color: Colors.grey,
+                      width: 320,
+                      height: 20,),
+                  ),
+                  7.ph,
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[850]!,
+                    highlightColor: Colors.grey[800]!,
+                    child: Container(
+                      color: Colors.grey,
+                      width: 320,
+                      height: 20,),
+                  ),
+                  7.ph,
+                  Shimmer.fromColors(
+                    baseColor: Colors.grey[850]!,
+                    highlightColor: Colors.grey[800]!,
+                    child: Container(
+                      color: Colors.grey,
+                      width: 320,
+                      height: 20,),
+                  ),
+                ],
               ),
             ],
           ),

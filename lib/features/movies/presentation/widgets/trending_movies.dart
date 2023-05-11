@@ -17,7 +17,8 @@ class TrendingMovies extends StatelessWidget {
     return BlocBuilder<TrendingMovieCubit,TrendingMovieStates>(
       builder:(context, state) {
         if(state is GetTrendingMoviesSuccessState){
-          return MoviesList(movies:state.trendingMovies,
+          return MoviesList(
+            movies:state.trendingMovies,
             title:title,
             onPressed: () {
               BlocProvider.of<MoreMoviesCubit>(context).moreMovies.addAll(state.trendingMovies);
@@ -27,7 +28,7 @@ class TrendingMovies extends StatelessWidget {
           );
         }
         if(state is GetTrendingMoviesLoadingState){
-          return const MediaLoadingList(title: title,);
+          return const MediaLoadingList(title: title);
         }
         if(state is GetTrendingMoviesErrorState){
           return MediaErrorList(

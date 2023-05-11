@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item/movie_list_item.dart';
 class MoviesSliverList extends StatelessWidget {
  final List<Movie> movies;
   const MoviesSliverList({Key? key,required this.movies,}) : super(key: key);

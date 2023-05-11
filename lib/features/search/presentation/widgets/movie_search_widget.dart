@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 class MovieSearchWidget extends StatelessWidget {
   final Search movie;
@@ -11,7 +12,15 @@ class MovieSearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=> GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:movie),
+      onTap: (){
+        Movie m=Movie(
+          id: movie.id,
+          title: movie.originalTitle,
+          posterPath: movie.posterPath,
+          backdropPath: movie.backdropPath,
+        );
+        GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:m);
+      } ,
       child: Container(
         width:20,
         padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),

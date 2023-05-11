@@ -14,15 +14,11 @@ class MediaLoadingList extends StatelessWidget {
         SizedBox(
           height: 200,
           child: ListView.builder(
+            itemCount: 10,
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            itemCount: 5,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return const MediaListLoadingItem();
-            },
-          ),
-        ),
+            itemBuilder: (context, index) =>const MediaListLoadingItem())),
         10.ph
       ],
     );
