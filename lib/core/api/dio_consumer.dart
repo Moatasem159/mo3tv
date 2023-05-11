@@ -19,7 +19,6 @@ class DioConsumer implements ApiConsumer {
           (X509Certificate cert, String host, int port) => true;
       return client;
     };
-    _client.interceptors.add(DioCacheInterceptor(options:CacheHelper.customCacheHelper));
     _client.options
       ..connectTimeout=const Duration(seconds: 15)
       ..receiveTimeout=const Duration(seconds: 15)
@@ -36,8 +35,11 @@ class DioConsumer implements ApiConsumer {
     }
   }
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters})async{
+  Future get(String path, {Map<String, dynamic>? queryParameters,bool cache=true})async{
     try {
+      if(cache) {
+        _client.interceptors.add(DioCacheInterceptor(options:CacheHelper.customCacheHelper));
+      }
       final response = await _client.get(path);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {

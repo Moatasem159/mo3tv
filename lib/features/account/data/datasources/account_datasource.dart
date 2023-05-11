@@ -18,37 +18,38 @@ class AccountDataSourceImpl implements AccountDataSource{
   AccountDataSourceImpl(this._apiConsumer);
   @override
   Future<List<MovieModel>> getFavouriteMovies()async {
-    final res=await _apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"movies"));
+    final res=await _apiConsumer.get(
+      EndPoints.favMediaListPath(AppStrings.sessionId,"movies"),cache: false);
     return List<MovieModel>.from((res['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override
   Future<List<MovieModel>> getMovieWatchList()async {
-    final res=await _apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"movies"));
+    final res=await _apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"movies",),cache: false);
     return List<MovieModel>.from((res['results'] as List).map((x)=>MovieModel.fromJson(x)));
   }
   @override
   Future<List<MovieModel>> getRatedMovies()async {
-    final res=await _apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"movies"));
+    final res=await _apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"movies"),cache: false);
     return List<MovieModel>.from((res['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override
   Future<AccountModel> getAccountDetails() async{
-    final res=await _apiConsumer.get(EndPoints.accountPath(AppStrings.sessionId));
+    final res=await _apiConsumer.get(EndPoints.accountPath(AppStrings.sessionId),cache: false);
     return AccountModel.fromJson(res);
   }
   @override
   Future<List<TvShowModel>> getFavouriteTvShows() async{
-    final res=await _apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"tv"));
+    final res=await _apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"tv"),cache: false);
     return List<TvShowModel>.from((res['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
   Future<List<TvShowModel>> getRatedTvShows() async{
-    final res=await _apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"tv"));
+    final res=await _apiConsumer.get(EndPoints.ratedMediaListPath(AppStrings.sessionId,"tv"),cache: false);
     return List<TvShowModel>.from((res['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
   Future<List<TvShowModel>> getTvShowsWatchList()async {
-    final res=await _apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"tv"));
+    final res=await _apiConsumer.get(EndPoints.mediaWatchListPath(AppStrings.sessionId,"tv"),cache: false);
     return List<TvShowModel>.from((res['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
 }
