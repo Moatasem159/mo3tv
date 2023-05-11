@@ -92,6 +92,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv
 import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/recommendations_tv_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/season_cubit/season_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/similar_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
@@ -198,7 +199,8 @@ movie(){
 }
 tv(){
   ///cubits
-  sl.registerFactory<TvCubit>(() => TvCubit(sl(),sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<TvCubit>(() => TvCubit(sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<SeasonCubit>(() => SeasonCubit(sl()));
   sl.registerFactory<RecommendationsTvCubit>(() => RecommendationsTvCubit(sl()));
   sl.registerFactory<SimilarTvShowCubit>(() => SimilarTvShowCubit(sl()));
   sl.registerFactory<PlayingNowTvShowCubit>(()=>PlayingNowTvShowCubit(sl()));

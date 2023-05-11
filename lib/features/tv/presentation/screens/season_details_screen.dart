@@ -1,109 +1,38 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/app/injection_container.dart' as di;
+import 'package:mo3tv/core/utils/app_colors.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/season_cubit/season_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_overview/season_overview.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_screen_appbar.dart';
 class SeasonDetailsScreen extends StatelessWidget {
   final TvShowSeason season;
   final String tvShowName;
-  const SeasonDetailsScreen({
-    Key? key,
-    required this.season,
-    required this.tvShowName,
-  }) : super(key: key);
+  final int tvShowId;
+  const SeasonDetailsScreen(
+      {Key? key,
+      required this.season,
+      required this.tvShowName,
+      required this.tvShowId})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
-    return SafeArea(
-        child: Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
-          body: WillPopScope(
-            onWillPop: () async{
-              TvCubit.get(context).tvShowSeason = const TvShowSeason();
-              Navigator.pop(context);
-              return true;
-            },
-            child: NestedScrollView(
+    return BlocProvider(
+      create: (context) => di.sl<SeasonCubit>(),
+      child: Builder(
+        builder: (context) {
+          SeasonCubit.get(context)
+              .getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: season.seasonNumber!);
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: AppColors.darkBackgroundColor,
+              body: NestedScrollView(
                 physics: const NeverScrollableScrollPhysics(),
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
-                    SliverOverlapAbsorber(
-                      handle: appBar,
-                      sliver: SliverAppBar(
-                        automaticallyImplyLeading: false,
-                        leading: IconButton(
-                          icon: const Icon(Icons.arrow_back),
-                          onPressed: () {
-                            TvCubit.get(context).tvShowSeason = const TvShowSeason();
-                            Navigator.pop(context);
-                          },
-                        ),
-                        pinned: true,
-                        expandedHeight: 540,
-                        flexibleSpace: Hero(
-                          tag: "hero${season.posterPath!}",
-                          child: ShaderMask(
-                            shaderCallback: (rect) {
-                              return const LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.transparent,
-                                  Colors.black,
-                                  Colors.black,
-                                  Colors.transparent,
-                                ],
-                                stops: [0, 0.3, 0.5, 1],
-                              ).createShader(
-                                Rect.fromLTRB(0, 0, rect.width, rect.height),
-                              );
-                            },
-                            blendMode: BlendMode.dstATop,
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: EndPoints.backDropsUrl(
-                                  season.posterPath!),
-                            ),
-                          ),
-                        ),
-                        bottom: PreferredSize(
-                            preferredSize: const Size(0, 70),
-                            child: FittedBox(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      tvShowName,
-                                      style: const TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                    5.ph,
-                                    Text(
-                                      season.name!,
-                                      style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    5.ph,
-                                    Text(
-                                      "(${season.airDate!.substring(0, 4)})",
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )),
-                      ),
-                    )
+                    SeasonScreenAppBar(appBar: appBar, season: season, tvShowName: tvShowName)
                   ];
                 },
                 body: CustomScrollView(
@@ -111,8 +40,12 @@ class SeasonDetailsScreen extends StatelessWidget {
                     SliverOverlapInjector(handle: appBar),
                     const SeasonOverview(),
                   ],
-                )),
-          )
-        ));
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

@@ -4,11 +4,9 @@ import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -18,16 +16,13 @@ class TvCubit extends Cubit<TvStates> {
      this._markTvShowAsFavUsecase,
      this._addTvShowToWatchListUseCase,
      this._deleteTvShowRateUseCase,
-     this._rateTvShowUseCase,
-     this._getTvShowSeasonDetailsUsecase,
-      ) : super(TvInitialState());
+     this._rateTvShowUseCase) : super(TvInitialState());
   static TvCubit get(context)=>BlocProvider.of(context);
   final GetTvShowDetailsUsecase _getTvShowDetailsUsecase;
   final MarkTvShowAsFavUsecase _markTvShowAsFavUsecase;
   final AddTvShowToWatchListUseCase _addTvShowToWatchListUseCase;
   final RateTvShowUseCase _rateTvShowUseCase;
   final DeleteTvShowRateUseCase _deleteTvShowRateUseCase;
-  final GetTvShowSeasonDetailsUsecase _getTvShowSeasonDetailsUsecase;
   TvShow tvShow= TvShow();
   Future<void> getTvShowDetailsData({required int tvShowId}) async {
     emit(GetTvShowDetailsLoadingState());
@@ -118,18 +113,5 @@ class TvCubit extends Cubit<TvStates> {
     }, (r){
       return RemoveRateTvShowSuccessState();
     }));
-  }
-  TvShowSeason ?tvShowSeason=const TvShowSeason();
-  Future<void> getTvShowSeasonDetailsData({required int tvShowId,required int seasonNumber}) async {
-    emit(GetTvShowSeasonDetailsLoadingState());
-    Either<Failure,TvShowSeason> response =
-    await _getTvShowSeasonDetailsUsecase.call(seasonNumber: seasonNumber,tvId: tvShowId);
-    tvShowSeason=const TvShowSeason();
-    emit(response.fold((failure) =>
-        GetTvShowSeasonDetailsErrorState(msg:mapFailureToMsg(failure)),
-            (tvShowSeason) {
-          this.tvShowSeason = tvShowSeason;
-          return GetTvShowSeasonDetailsSuccessState();
-        }));
   }
 }

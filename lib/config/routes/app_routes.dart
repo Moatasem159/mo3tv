@@ -62,7 +62,9 @@ abstract class AppRoute{
         path: Routes.seasonRoute,
         builder: (context, state) =>  SeasonDetailsScreen(
             season:state.extra as TvShowSeason,
-            tvShowName:state.queryParameters["tvShowName"]! ),
+            tvShowName:state.queryParameters["tvShowName"]!,
+            tvShowId:int.parse(state.queryParameters["tvShowId"]!) ,
+        ),
         ),
       GoRoute(
         name:  Routes.similarMoviesRoute,

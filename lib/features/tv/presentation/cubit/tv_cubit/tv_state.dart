@@ -7,19 +7,6 @@ class GetTvShowDetailsErrorState extends TvStates{
   final String msg;
   GetTvShowDetailsErrorState({required this.msg});
 }
-class GetTvShowSeasonDetailsLoadingState extends TvStates{}
-class GetTvShowSeasonDetailsSuccessState extends TvStates{}
-class GetTvShowSeasonDetailsErrorState extends TvStates{
-  final String msg;
-  GetTvShowSeasonDetailsErrorState({required this.msg});
-}
-
-class GetTvShowReviewsLoadingState extends TvStates{}
-class GetTvShowReviewsSuccessState extends TvStates{}
-class GetTvShowReviewsErrorState extends TvStates{
-  final String msg;
-  GetTvShowReviewsErrorState({required this.msg});
-}
 class FavTvShowLoadingState extends TvStates{}
 class FavTvShowSuccessState extends TvStates{
   final int statusCode;

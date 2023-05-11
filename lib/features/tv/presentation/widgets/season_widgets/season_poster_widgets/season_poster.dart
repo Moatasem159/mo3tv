@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_poster_widgets/season_info.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_poster_widgets/season_poster_image.dart';
 class SeasonPoster extends StatelessWidget {
@@ -16,12 +15,13 @@ class SeasonPoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        TvCubit.get(context).getTvShowSeasonDetailsData(
-            tvShowId: tvShowId, seasonNumber: season.seasonNumber!);
         GoRouter.of(context).pushNamed(
           Routes.seasonRoute,
           extra: season,
-          queryParameters: {"tvShowName": tvShowName},
+          queryParameters: {
+            "tvShowName": tvShowName,
+            "tvShowId":tvShowId.toString(),
+          },
         );
       },
       child: Padding(
