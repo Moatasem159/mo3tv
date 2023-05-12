@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
-import 'package:mo3tv/core/api/cache_helper.dart';
 import 'package:mo3tv/core/api/dio_consumer.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/shared/shared_prefrences.dart';
@@ -131,7 +130,6 @@ logout(){
 }
 Future external()async{
   final sharedPreference = await SharedPreferences.getInstance();
-  await CacheHelper.init();
   sl.registerLazySingleton(() => sharedPreference);
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl()));

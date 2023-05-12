@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
-import 'package:mo3tv/core/api/cache_helper.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/api/handling_errors.dart';
 import 'package:mo3tv/core/api/status_code.dart';
@@ -35,12 +33,9 @@ class DioConsumer implements ApiConsumer {
     }
   }
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters,bool cache=true})async{
+  Future<dynamic> get(String path, {Map<String, dynamic>? queryParameters, bool cache = true}) async {
     try {
-      if(cache) {
-        _client.interceptors.add(DioCacheInterceptor(options:CacheHelper.customCacheHelper));
-      }
-      final response = await _client.get(path);
+      final response = await _client.get(path, queryParameters: queryParameters);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       HandlingErrors.handleDioError(error);
