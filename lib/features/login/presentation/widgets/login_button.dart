@@ -7,7 +7,6 @@ import 'package:mo3tv/features/login/presentation/cubit/login_state.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_button_widget.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_dialog.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_loading_indicator.dart';
-import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 class LoginButton extends StatelessWidget {
   const LoginButton({Key? key}) : super(key: key);
   @override
@@ -18,7 +17,6 @@ class LoginButton extends StatelessWidget {
           if(state is GetSessionIdSuccessState)
           {
             showDialog(context: context, builder:(context) => const LoginDialog());
-            LogOutCubit.get(context).isLoggedOut=true;
           }
           if (state is GetTokenSuccessState)
           {

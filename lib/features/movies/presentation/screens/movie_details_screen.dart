@@ -10,9 +10,12 @@ import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/media_gallery_screen.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/add_fav_movie_cubit/add_fav_movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/add_watch_list_cubit/watch_list_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/rate_movie_cubit/rate_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
@@ -57,6 +60,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           BlocProvider(create: (context) => MovieBottomNavCubit()),
           BlocProvider(create: (context) => di.sl<GalleryNavigatorCubit>()),
           BlocProvider(create: (context) => di.sl<MovieCubit>()),
+          BlocProvider(create: (context) => di.sl<AddFavMovieCubit>()),
+          BlocProvider(create: (context) => di.sl<RateMovieCubit>()),
+          BlocProvider(create: (context) => di.sl<WatchListMovieCubit>()),
           BlocProvider(create: (context) => di.sl<RecommendationsMovieCubit>()),
           BlocProvider(create: (context) => di.sl<GalleryCubit>()),
           BlocProvider(create: (context) => di.sl<ReviewsCubit>()),
@@ -64,7 +70,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         ],
         child: Builder(
           builder: (context) {
-            MovieCubit.get(context).getMovieDetailsData(movieId: widget.movie.id!);
+            if(!MovieCubit.get(context).isSuccess()){
+              MovieCubit.get(context).getMovieDetailsData(movieId: widget.movie.id!);
+            }
             return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
               builder: (context, state) {
                 MovieBottomNavCubit cubit = BlocProvider.of<MovieBottomNavCubit>(context);

@@ -50,31 +50,37 @@ class AccountCubit extends Cubit<AccountStates> {
       favMovies.fold((l){
         emit(GetAccountsListsErrorState( msg: mapFailureToMsg(l)));
       },(r){
+        this.favMovies.clear();
         this.favMovies=r;
       });
       ratedMovies.fold((l){
         emit(GetAccountsListsErrorState( msg: mapFailureToMsg(l)));
       }, (r){
+        this.ratedMovies.clear();
         this.ratedMovies=r;
       });
       moviesWatchlist.fold((l){
         emit(GetAccountsListsErrorState( msg: mapFailureToMsg(l)));
       },(r){
+        this.moviesWatchlist.clear();
         this.moviesWatchlist=r;
       });
       favTvShows.fold((l){
         emit(GetAccountsListsErrorState( msg: mapFailureToMsg(l)));
       },(r){
+        this.favTvShows.clear();
         this.favTvShows=r;
       });
       ratedTvShows.fold((l){
         emit(GetAccountsListsErrorState( msg: mapFailureToMsg(l)));
       },(r){
+        this.ratedTvShows.clear();
         this.ratedTvShows=r;
       });
       tvShowsWatchlist.fold((l){
         emit(GetAccountsListsErrorState( msg: mapFailureToMsg(l)));
       },(r){
+        this.tvShowsWatchlist.clear();
         this.tvShowsWatchlist=r;
       });
       emit(GetAccountsListsSuccessState());

@@ -11,7 +11,6 @@ class LogOutCubit extends Cubit<LogOutStates> {
   static LogOutCubit get(context)=>BlocProvider.of(context);
   final LogOutUsecase _logOutUsecase;
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
-  bool isLoggedOut=false;
   Future<void> logOut()async{
     emit(LogOutLoadingState());
     Either<Failure, LogOut> res =await _logOutUsecase.call(sessionId: AppStrings.sessionId);
@@ -21,7 +20,6 @@ class LogOutCubit extends Cubit<LogOutStates> {
       if(r.success==true)
       {
         AppStrings.sessionId='';
-        isLoggedOut=true;
         _sharedPrefrencesConsumer.clear(key: AppStrings.id);
         return LogOutSuccessState();
       }

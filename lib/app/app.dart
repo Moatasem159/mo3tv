@@ -32,7 +32,7 @@ class Mo3Tv extends StatelessWidget {
           BlocProvider(create: (context) => di.sl<TopRatedTvShowsCubit>()..getTopRatedTvShowsData()),
           BlocProvider(create: (context) => di.sl<MoreMoviesCubit>()),
           BlocProvider(create: (context) => di.sl<MoreTvShowsCubit>()),
-          BlocProvider(create: (context) => di.sl<AccountCubit>()..getAccountDetails()..getLists()),
+          BlocProvider(create: (context) => di.sl<AccountCubit>()),
           BlocProvider(create: (context) => di.sl<LoginCubit>()),
           BlocProvider(create: (context) => di.sl<LogOutCubit>()),
         ],
