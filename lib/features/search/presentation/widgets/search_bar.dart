@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-class SearchBar extends SliverPersistentHeaderDelegate{
+class CustomSearchBar extends SliverPersistentHeaderDelegate{
   final Widget searchBar;
 
-  SearchBar({required this.searchBar});
+  CustomSearchBar({required this.searchBar});
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return searchBar;

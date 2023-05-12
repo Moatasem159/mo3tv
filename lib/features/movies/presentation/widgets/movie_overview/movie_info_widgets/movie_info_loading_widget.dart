@@ -4,10 +4,10 @@ class MovieInfoLoadingWidget extends StatelessWidget {
   const MovieInfoLoadingWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return const Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           InfoLoadingWidget(),
           InfoLoadingWidget(),
           InfoLoadingWidget(),

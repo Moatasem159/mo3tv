@@ -21,10 +21,10 @@ class UserScoreWidget extends StatelessWidget {
             progressColor: Colors.green,
           ),
           5.pw,
-          Column(
+          const Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text("User"),
               Text("Score"),
             ],

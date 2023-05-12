@@ -4,10 +4,10 @@ class TvShowInfoLoadingWidget extends StatelessWidget {
   const TvShowInfoLoadingWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return const Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           InfoLoadingWidget(),
           InfoLoadingWidget(),
           InfoLoadingWidget(),

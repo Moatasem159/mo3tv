@@ -37,10 +37,10 @@ class RecommendationsTvShowsList extends StatelessWidget {
                             extra: recommendationTvShows,
                             queryParameters: {'tvId': tvId.toString()});
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Row(
-                          children: const [
+                          children: [
                             Text("See More", style: TextStyle(fontSize: 15)),
                             Icon(
                               Icons.arrow_forward_ios_outlined,

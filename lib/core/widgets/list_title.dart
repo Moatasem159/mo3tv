@@ -22,11 +22,11 @@ class ListTitle extends StatelessWidget {
           InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: onPressed,
-            child: Padding(
-              padding: const EdgeInsets.all(0),
+            child: const Padding(
+              padding: EdgeInsets.all(0),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   Text('See More'),
                   Icon(Icons.arrow_forward_ios, size: 15)
                 ],

@@ -29,7 +29,7 @@ class SearchScreen extends StatelessWidget {
                         handle: appBar,
                         sliver: SliverPersistentHeader(
                             pinned: true,
-                            delegate: SearchBar(
+                            delegate: CustomSearchBar(
                               searchBar: Container(
                                 color: Theme.of(context).colorScheme.background,
                                 child: Column(

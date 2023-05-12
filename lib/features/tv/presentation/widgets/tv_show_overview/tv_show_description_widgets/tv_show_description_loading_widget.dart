@@ -4,8 +4,8 @@ class TvShowDescriptionLoadingWidget extends StatelessWidget {
   const TvShowDescriptionLoadingWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         DescriptionLoading(),
         DescriptionLoading(),
         DescriptionLoading(),

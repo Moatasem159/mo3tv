@@ -22,10 +22,10 @@ class ButtonsLoadingWidget extends StatelessWidget {
                   children: [
                     CircularPercentIndicator(radius: 21, lineWidth: 3),
                     5.pw,
-                    Column(
+                    const Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text("User"),
                         Text("Score"),
                       ],
