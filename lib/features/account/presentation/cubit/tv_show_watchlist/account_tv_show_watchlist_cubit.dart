@@ -16,17 +16,16 @@ class AccountTvShowWatchlistCubit extends Cubit<AccountTvShowWatchlistStates> {
       tvShowsWatchlist.fold((l){
         emit(GetAccountsTvShowWatchlistErrorState( msg: mapFailureToMsg(l)));
       },(r){
+        this.tvShowsWatchlist.clear();
         this.tvShowsWatchlist=r;
         emit(GetAccountsTvShowWatchlistSuccessState());
       });
   }
-  bool isSuccess(){
-    return state is GetAccountsTvShowWatchlistSuccessState;
-  }
+
   initial(){
     emit(AccountTvShowWatchlistInitialState());
   }
-  success(){
-    emit(GetAccountsTvShowWatchlistSuccessState());
+  update(){
+    emit(UpdateState());
   }
 }

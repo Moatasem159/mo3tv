@@ -23,11 +23,13 @@ class TvShowFavButton extends StatelessWidget {
                 cubit.favTvShow(tvId: tvShow.id!, fav: false);
                 tvShow.tvShowAccountDetails!.favorite =false;
                 AccountFavTvShowCubit.get(context).favTvShows.removeWhere((element) => element.id==tvShow.id);
+                AccountFavTvShowCubit.get(context).update();
               }
               else{
                 cubit.favTvShow(tvId: tvShow.id!, fav: true);
                 tvShow.tvShowAccountDetails!.favorite =true;
                 AccountFavTvShowCubit.get(context).favTvShows.add(tvShow);
+                AccountFavTvShowCubit.get(context).update();
               }
             }
             else{

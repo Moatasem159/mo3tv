@@ -16,17 +16,15 @@ class AccountFavTvShowCubit extends Cubit<AccountFavTvShowStates> {
     favTvShows.fold((l){
       emit(GetAccountsFavoriteTvShowListErrorState( msg: mapFailureToMsg(l)));
     },(r){
+      this.favTvShows.clear();
       this.favTvShows=r;
       emit(GetAccountsFavoriteTvShowListSuccessState());
     });
   }
-  bool isSuccess(){
-    return state is GetAccountsFavoriteTvShowListSuccessState;
-  }
   initial(){
     emit(AccountFavTvShowInitialState());
   }
-  success(){
-    emit(GetAccountsFavoriteTvShowListSuccessState());
+  update(){
+    emit(UpdateState());
   }
 }

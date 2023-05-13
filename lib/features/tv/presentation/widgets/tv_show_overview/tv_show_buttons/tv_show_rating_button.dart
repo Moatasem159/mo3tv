@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
 import 'package:mo3tv/features/account/presentation/cubit/rated_tv_show_cubit/account_rated_tv_shows_cubit.dart';
@@ -41,9 +42,9 @@ class TvShowRatingButton extends StatelessWidget {
                         itemCount: 10,
                         glowColor: Colors.yellow,
                         ratingWidget: RatingWidget(
-                          full: const Icon(Icons.star, color: Colors.yellow),
-                          empty: const Icon(Icons.star_border),
-                          half: const Icon(Icons.star_half_outlined,
+                          full: const Icon(Icons.star_rate_rounded, color: Colors.yellow),
+                          empty: const Icon(Icons.star_border_rounded),
+                          half: const Icon(Icons.star_half_rounded,
                               color: Colors.yellow),
                         ),
                         onRatingUpdate: (double value) {
@@ -56,13 +57,20 @@ class TvShowRatingButton extends StatelessWidget {
                             iconSize: 25,
                             icon: const Icon(Icons.remove_circle_outline),
                             onPressed: () {
-                              BlocProvider.of<TvCubit>(context)
-                                  .removeTvShowRate(tvId: tvShow.id!);
-                              tvShow.tvShowAccountDetails!.ratedValue=0.0;
-                              tvShow.tvShowAccountDetails!.watchlist = false;
-                              AccountRatedTvShowsCubit.get(context).ratedTvShows.removeWhere((element) =>element.id==tvShow.id);
-                              AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id);
-                              Navigator.of(context).pop();
+                              if(tvShow.tvShowAccountDetails!.ratedValue==0.0)
+                                {
+                                  GoRouter.of(context).pop();
+                                }
+                              else{
+                                cubit.removeTvShowRate(tvId: tvShow.id!);
+                                tvShow.tvShowAccountDetails!.ratedValue=0.0;
+                                tvShow.tvShowAccountDetails!.watchlist = false;
+                                AccountRatedTvShowsCubit.get(context).ratedTvShows.removeWhere((element) =>element.id==tvShow.id);
+                                AccountRatedTvShowsCubit.get(context).update();
+                                AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id);
+                                AccountTvShowWatchlistCubit.get(context).update();
+                                GoRouter.of(context).pop();
+                              }
                             }),
                         TextButton(
                           child: const Text('Rate'),
@@ -78,11 +86,14 @@ class TvShowRatingButton extends StatelessWidget {
                                     .tvShowAccountDetails!
                                     .ratedValue =
                                     tvShow.tvShowAccountDetails!.ratedValue;
+                                AccountRatedTvShowsCubit.get(context).update();
                               }
                               else {
                                 AccountRatedTvShowsCubit.get(context).ratedTvShows.add(tvShow);
+                                AccountRatedTvShowsCubit.get(context).update();
                               }
                               AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id);
+                              AccountTvShowWatchlistCubit.get(context).update();
                             }
                             Navigator.of(context).pop();
                           },
@@ -102,11 +113,13 @@ class TvShowRatingButton extends StatelessWidget {
               }
             },
             icon: tvShow.tvShowAccountDetails!.ratedValue!=0.0 ? const Icon(
-              Icons.star,
+              Icons.star_rate_rounded,
               color: Colors.yellow,
+              size: 30,
             ) : const Icon(
-              Icons.star_border,
-            ) ,
+              Icons.star_border_rounded,
+              size: 30,
+            ),
           ),
         );
       },

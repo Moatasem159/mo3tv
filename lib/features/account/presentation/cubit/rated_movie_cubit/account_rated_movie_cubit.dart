@@ -16,17 +16,15 @@ class AccountRatedMovieCubit extends Cubit<AccountRatedMovieStates> {
     ratedMovies.fold((l){
       emit(GetAccountsRatedMoviesListErrorState( msg: mapFailureToMsg(l)));
     }, (r){
+      this.ratedMovies.clear();
       this.ratedMovies=r;
       emit(GetAccountsRatedMoviesListSuccessState());
     });
   }
-  bool isSuccess(){
-    return state is GetAccountsRatedMoviesListSuccessState;
-  }
   initial(){
     emit(AccountRatedMovieInitialState());
   }
-  success(){
-    emit(GetAccountsRatedMoviesListSuccessState());
+  update(){
+    emit(UpdateState());
   }
 }

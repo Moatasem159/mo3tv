@@ -9,24 +9,22 @@ class AccountFavMovieCubit extends Cubit<AccountFavMovieStates> {
   AccountFavMovieCubit(this._getFavMoviesListUsecase) : super(AccountFavMovieInitialState());
   final GetFavMoviesListUsecase _getFavMoviesListUsecase;
   static AccountFavMovieCubit get(context)=>BlocProvider.of(context);
-  List<Movie> favMovies=[];
+  List<Movie> fav=[];
   Future<void> getAccountFavoriteMovies()async{
     emit(GetAccountsFavoriteMoviesListLoadingState());
     Either<Failure, List<Movie>> favMovies =await _getFavMoviesListUsecase.call();
     favMovies.fold((l){
       emit(GetAccountsFavoriteMoviesListErrorState( msg: mapFailureToMsg(l)));
     },(r){
-      this.favMovies=r;
+      fav.clear();
+      fav=r;
       emit(GetAccountsFavoriteMoviesListSuccessState());
     });
-  }
-  bool isSuccess(){
-    return state is GetAccountsFavoriteMoviesListSuccessState;
   }
   initial(){
     emit(AccountFavMovieInitialState());
   }
-  success(){
-    emit(GetAccountsFavoriteMoviesListSuccessState());
+  update(){
+    emit(UpdateState());
   }
 }

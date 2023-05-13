@@ -16,17 +16,15 @@ class AccountRatedTvShowsCubit extends Cubit<AccountRatedTvShowsStates> {
     ratedTvShows.fold((l){
       emit(GetAccountsRatedTvShowListErrorState( msg: mapFailureToMsg(l)));
     },(r){
+      this.ratedTvShows.clear();
       this.ratedTvShows=r;
       emit(GetAccountsRatedTvShowListSuccessState());
     });
   }
-  bool isSuccess(){
-    return state is GetAccountsRatedTvShowListSuccessState;
-  }
   initial(){
     emit(AccountRatedTvShowsInitialState());
   }
-  success(){
-    emit(GetAccountsRatedTvShowListSuccessState());
+  update(){
+    emit(UpdateState());
   }
 }

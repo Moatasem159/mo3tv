@@ -6,3 +6,4 @@ class GetAccountsMovieWatchlistErrorState extends AccountMovieWatchlistStates {
   final String msg;
   GetAccountsMovieWatchlistErrorState({required this.msg});
 }
+class UpdateState extends AccountMovieWatchlistStates {}

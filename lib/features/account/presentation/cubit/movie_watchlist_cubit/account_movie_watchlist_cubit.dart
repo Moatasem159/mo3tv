@@ -16,17 +16,15 @@ class AccountMovieWatchlistCubit extends Cubit<AccountMovieWatchlistStates> {
     moviesWatchlist.fold((l){
       emit(GetAccountsMovieWatchlistErrorState( msg: mapFailureToMsg(l)));
     },(r){
+      this.moviesWatchlist.clear();
       this.moviesWatchlist=r;
       emit(GetAccountsMovieWatchlistSuccessState());
     });
   }
-  bool isSuccess(){
-    return state is GetAccountsMovieWatchlistSuccessState;
-  }
   initial(){
     emit(MovieWatchlistInitialState());
   }
-  success(){
-    emit(GetAccountsMovieWatchlistSuccessState());
+  update(){
+    emit(UpdateState());
   }
 }

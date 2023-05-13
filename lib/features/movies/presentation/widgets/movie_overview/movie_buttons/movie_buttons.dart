@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 import 'package:mo3tv/core/widgets/buttons/buttons_loading_widget.dart';
@@ -11,6 +12,7 @@ class MovieButtons extends StatelessWidget {
     return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
         if (state is GetMovieDetailsSuccessState) {
+          MovieButtonsCubit.get(context).movie=state.movie;
           return MovieButtonsWidget(movie: state.movie);
         }
         if (state is GetMovieDetailsLoadingState) {

@@ -6,3 +6,4 @@ class GetAccountsFavoriteTvShowListErrorState extends AccountFavTvShowStates {
   final String msg;
   GetAccountsFavoriteTvShowListErrorState({required this.msg});
 }
+class UpdateState extends AccountFavTvShowStates {}

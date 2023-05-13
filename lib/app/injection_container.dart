@@ -60,13 +60,11 @@ import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_useca
 import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/add_fav_movie_cubit/add_fav_movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/add_watch_list_cubit/watch_list_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/rate_movie_cubit/rate_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/top_rated_movies_cubit.dart';
@@ -186,9 +184,9 @@ gallery(){
 movie(){
   ///cubits
   sl.registerFactory<MovieCubit>(() => MovieCubit(sl()));
-  sl.registerFactory<AddFavMovieCubit>(() => AddFavMovieCubit(sl()));
-  sl.registerFactory<RateMovieCubit>(() => RateMovieCubit(sl(),sl()));
-  sl.registerFactory<WatchListMovieCubit>(() => WatchListMovieCubit(sl()));
+  // sl.registerFactory<AddFavMovieCubit>(() => AddFavMovieCubit(sl()));
+  sl.registerFactory<MovieButtonsCubit>(() => MovieButtonsCubit(sl(),sl(),sl(),sl()));
+  // sl.registerFactory<WatchListMovieCubit>(() => WatchListMovieCubit(sl()));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
   sl.registerFactory<RecommendationsMovieCubit>(()=>RecommendationsMovieCubit(sl()));
   sl.registerFactory<SimilarMovieCubit>(()=>SimilarMovieCubit(sl()));

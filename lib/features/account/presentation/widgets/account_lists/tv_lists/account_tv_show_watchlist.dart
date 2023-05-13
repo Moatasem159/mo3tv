@@ -12,9 +12,7 @@ class AccountTvShowsWatchlist extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
         builder: (context) {
-          if(!AccountTvShowWatchlistCubit.get(context).isSuccess()) {
-            AccountTvShowWatchlistCubit.get(context).getAccountTvShowWatchlist();
-          }
+          AccountTvShowWatchlistCubit.get(context).getAccountTvShowWatchlist();
           return BlocBuilder<AccountTvShowWatchlistCubit,
               AccountTvShowWatchlistStates>(
             builder: (context, state) {
@@ -23,11 +21,11 @@ class AccountTvShowsWatchlist extends StatelessWidget {
                 {
                   return const SliverMediaLoadingList();
                 }
-              if(state is GetAccountsTvShowWatchlistSuccessState&&cubit.tvShowsWatchlist.isEmpty)
+              if(cubit.tvShowsWatchlist.isEmpty)
               {
                 return const EmptyAccountList(type: "tv shows");
               }
-              if(state is GetAccountsTvShowWatchlistSuccessState)
+              if(cubit.tvShowsWatchlist.isNotEmpty)
                 {
                   return TvList(tvList: cubit.tvShowsWatchlist);
                 }

@@ -6,3 +6,4 @@ class GetAccountsRatedTvShowListErrorState extends AccountRatedTvShowsStates {
   final String msg;
   GetAccountsRatedTvShowListErrorState({required this.msg});
 }
+class UpdateState extends AccountRatedTvShowsStates {}

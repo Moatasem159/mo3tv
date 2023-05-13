@@ -12,9 +12,7 @@ class AccountFavMoviesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
         builder: (context) {
-          if(!AccountFavMovieCubit.get(context).isSuccess()) {
-            AccountFavMovieCubit.get(context).getAccountFavoriteMovies();
-          }
+          AccountFavMovieCubit.get(context).getAccountFavoriteMovies();
           return BlocBuilder<AccountFavMovieCubit, AccountFavMovieStates>(
             builder: (context, state) {
               AccountFavMovieCubit cubit = AccountFavMovieCubit.get(context);
@@ -22,13 +20,13 @@ class AccountFavMoviesList extends StatelessWidget {
               {
                 return const SliverMediaLoadingList();
               }
-              if(state is GetAccountsFavoriteMoviesListSuccessState&&cubit.favMovies.isEmpty)
+              if(cubit.fav.isEmpty)
               {
                 return const EmptyAccountList(type:"movies");
               }
-              if(state is GetAccountsFavoriteMoviesListSuccessState)
+              if(cubit.fav.isNotEmpty)
               {
-                return MoviesList(movieList: cubit.favMovies);
+                return MoviesList(movieList: cubit.fav);
               }
               if(state is GetAccountsFavoriteMoviesListErrorState)
               {

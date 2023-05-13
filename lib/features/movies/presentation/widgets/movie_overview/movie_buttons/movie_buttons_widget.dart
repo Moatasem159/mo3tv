@@ -17,9 +17,9 @@ class MovieButtonsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             UserScoreWidget(vote: movie.voteAverage),
-            MovieFavButton(movie: movie),
-            MovieRatingButton(movie: movie),
-            AddMovieToWatchlistButton(movie:movie),
+            const MovieFavButton(),
+            const MovieRatingButton(),
+            const AddMovieToWatchlistButton(),
           ],
         ),
       ],

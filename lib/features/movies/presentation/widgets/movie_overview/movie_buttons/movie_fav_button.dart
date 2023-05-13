@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
-import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/add_fav_movie_cubit/add_fav_movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/add_fav_movie_cubit/add_fav_movie_state.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_state.dart';
 class MovieFavButton extends StatelessWidget {
-  final Movie movie;
-  const MovieFavButton({Key? key, required this.movie}) : super(key: key);
+  const MovieFavButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddFavMovieCubit, AddFavMovieStates>(
+    return BlocBuilder<MovieButtonsCubit, MovieButtonsStates>(
       builder: (context, state) {
+        MovieButtonsCubit cubit=MovieButtonsCubit.get(context);
         return MediaIconButton(
-          onTap:() =>AddFavMovieCubit.get(context).markFav(movie, context),
+          onTap:() =>MovieButtonsCubit.get(context).markFav(cubit.movie!, context),
           icon: Icon(
-              Icons.favorite,
-              color:movie.movieAccountDetails!.favorite!?Colors.red:Colors.white
+              Icons.favorite_rounded,
+              color:cubit.movie!.movieAccountDetails!.favorite!?Colors.red:Colors.white
           ),
         );
       },

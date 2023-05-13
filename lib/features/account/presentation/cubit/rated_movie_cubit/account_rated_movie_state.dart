@@ -6,3 +6,4 @@ class GetAccountsRatedMoviesListErrorState extends AccountRatedMovieStates {
   final String msg;
   GetAccountsRatedMoviesListErrorState({required this.msg});
 }
+class UpdateState extends AccountRatedMovieStates {}

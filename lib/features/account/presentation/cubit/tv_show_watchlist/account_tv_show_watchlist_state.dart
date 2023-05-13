@@ -6,3 +6,4 @@ class GetAccountsTvShowWatchlistErrorState extends AccountTvShowWatchlistStates 
   final String msg;
   GetAccountsTvShowWatchlistErrorState({required this.msg});
 }
+class UpdateState extends AccountTvShowWatchlistStates {}

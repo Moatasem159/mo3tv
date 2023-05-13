@@ -23,11 +23,13 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
                 cubit.addTvShowToWatchList(tvId: tvShow.id!, watchlist: false);
                 tvShow.tvShowAccountDetails!.watchlist=false;
                 AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id);
+                AccountTvShowWatchlistCubit.get(context).update();
               }
               else {
                 cubit.addTvShowToWatchList(tvId: tvShow.id!, watchlist: true);
                 tvShow.tvShowAccountDetails!.watchlist=true;
                 AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.add(tvShow);
+                AccountTvShowWatchlistCubit.get(context).update();
               }
             }
             else{

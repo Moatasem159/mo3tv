@@ -12,9 +12,7 @@ class AccountRatedMoviesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
         builder: (context) {
-          if(!AccountRatedMovieCubit.get(context).isSuccess()) {
-            AccountRatedMovieCubit.get(context).getAccountRatedMovieList();
-          }
+          AccountRatedMovieCubit.get(context).getAccountRatedMovieList();
           return BlocBuilder<AccountRatedMovieCubit, AccountRatedMovieStates>(
             builder: (context, state) {
               AccountRatedMovieCubit cubit = AccountRatedMovieCubit.get(context);
@@ -22,11 +20,11 @@ class AccountRatedMoviesList extends StatelessWidget {
                 {
                   return const SliverMediaLoadingList();
                 }
-              if(state is GetAccountsRatedMoviesListSuccessState&&cubit.ratedMovies.isEmpty)
+              if(cubit.ratedMovies.isEmpty)
               {
                 return const EmptyAccountList(type:"movies");
               }
-              if(state is GetAccountsRatedMoviesListSuccessState)
+              if(cubit.ratedMovies.isNotEmpty)
                 {
                   return MoviesList(movieList: cubit.ratedMovies);
                 }

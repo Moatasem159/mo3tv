@@ -6,3 +6,4 @@ class GetAccountsFavoriteMoviesListErrorState extends AccountFavMovieStates {
   final String msg;
   GetAccountsFavoriteMoviesListErrorState({required this.msg});
 }
+class UpdateState extends AccountFavMovieStates {}

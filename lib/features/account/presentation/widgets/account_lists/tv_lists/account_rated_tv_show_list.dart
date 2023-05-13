@@ -11,9 +11,7 @@ class AccountRatedTvShowsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
-      if (!AccountRatedTvShowsCubit.get(context).isSuccess()) {
-        AccountRatedTvShowsCubit.get(context).getAccountRatedTvShows();
-      }
+      AccountRatedTvShowsCubit.get(context).getAccountRatedTvShows();
       return BlocBuilder<AccountRatedTvShowsCubit, AccountRatedTvShowsStates>(
         builder: (context, state) {
           AccountRatedTvShowsCubit cubit =
@@ -21,11 +19,11 @@ class AccountRatedTvShowsList extends StatelessWidget {
           if (state is GetAccountsRatedTvShowListLoadingState) {
             return const SliverMediaLoadingList();
           }
-          if(state is GetAccountsRatedTvShowListSuccessState&&cubit.ratedTvShows.isEmpty)
+          if(cubit.ratedTvShows.isEmpty)
           {
             return const EmptyAccountList(type: "tv shows");
           }
-          if (state is GetAccountsRatedTvShowListSuccessState) {
+          if (cubit.ratedTvShows.isNotEmpty) {
             return TvList(tvList: cubit.ratedTvShows);
           }
           if (state is GetAccountsRatedTvShowListErrorState) {
