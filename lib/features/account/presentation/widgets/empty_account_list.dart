@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 class EmptyAccountList extends StatelessWidget {
-  final String title;
-  const EmptyAccountList({Key? key, required this.title}) : super(key: key);
+  final String type;
+  const EmptyAccountList({Key? key, required this.type}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(.4),
-          borderRadius: BorderRadius.circular(10),
-      ),
-      width: 400,
-      height: 130,
+    return SliverToBoxAdapter(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(title,style: const TextStyle(fontWeight: FontWeight.bold)),
+          const Icon(Icons.sentiment_dissatisfied_rounded,size: 150),
           10.ph,
-          const Text("0 items",style: TextStyle(fontWeight: FontWeight.w500)),
+           Text("No $type",style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 20)),
           10.ph,
-          const Text("Try add some",style: TextStyle(fontWeight: FontWeight.w500)),
+          const Text("Try add some",style: TextStyle()),
         ],
       ),
     );

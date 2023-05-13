@@ -18,8 +18,7 @@ class AccountDataSourceImpl implements AccountDataSource{
   AccountDataSourceImpl(this._apiConsumer);
   @override
   Future<List<MovieModel>> getFavouriteMovies()async {
-    final res=await _apiConsumer.get(
-      EndPoints.favMediaListPath(AppStrings.sessionId,"movies"));
+    final res=await _apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"movies"));
     return List<MovieModel>.from((res['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override

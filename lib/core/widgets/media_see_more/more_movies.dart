@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movies_sliver_list.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
 import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
@@ -28,8 +28,8 @@ class MoreMovies extends StatelessWidget {
         BlocBuilder<MoreMoviesCubit, MoreMoviesStates>(
           builder: (context, state) {
             MoreMoviesCubit cubit = BlocProvider.of<MoreMoviesCubit>(context);
-            return MoviesSliverList(
-              movies: cubit.moreMovies,
+            return MoviesList(
+              movieList: cubit.moreMovies,
             );
           },
         ),

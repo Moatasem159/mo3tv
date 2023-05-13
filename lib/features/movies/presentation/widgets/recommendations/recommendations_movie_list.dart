@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item/movie_list_item.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
 class RecommendationsMoviesList extends StatelessWidget {
   final List<Movie> recommendationMovies;
   final int movieId;
@@ -56,19 +56,7 @@ class RecommendationsMoviesList extends StatelessWidget {
               ],
             ),
           ),
-          SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              childCount: recommendationMovies.length,
-              (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: MovieListItem(movie: recommendationMovies[index]),
-                );
-              },
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: .69, crossAxisCount: 3, mainAxisSpacing: 7),
-          ),
+          MoviesList(movieList: recommendationMovies),
           SliverToBoxAdapter(
             child: 75.ph,
           )

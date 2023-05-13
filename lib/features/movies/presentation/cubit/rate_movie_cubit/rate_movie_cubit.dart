@@ -5,7 +5,8 @@ import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/movie_watchlist_cubit/account_movie_watchlist_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/rated_movie_cubit/account_rated_movie_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
@@ -49,9 +50,8 @@ class RateMovieCubit extends Cubit<RateMovieStates> {
                      rateMovie(movieId: movie.id!, rate: 0.0);
                      movie.movieAccountDetails!.ratedValue=0.0;
                      movie.movieAccountDetails!.watchlist = false;
-                     AccountCubit.get(context).ratedMovies.removeWhere((element) =>element.id==movie.id);
-                     AccountCubit.get(context).moviesWatchlist.removeWhere((element) => element.id==movie.id,);
-                     AccountCubit.get(context).update();
+                     AccountRatedMovieCubit.get(context).ratedMovies.removeWhere((element) =>element.id==movie.id);
+                     AccountMovieWatchlistCubit.get(context).moviesWatchlist.removeWhere((element) => element.id==movie.id);
                      Navigator.of(context).pop();
                    }),
                TextButton(
@@ -60,17 +60,16 @@ class RateMovieCubit extends Cubit<RateMovieStates> {
                    if (movie.movieAccountDetails!.ratedValue != 0.0) {
                     rateMovie(rate: movie.movieAccountDetails!.ratedValue, movieId: movie.id!);
                      movie.movieAccountDetails!.watchlist = false;
-                     if(AccountCubit.get(context).ratedMovies.any((element) => element.id == movie.id))
+                     if(AccountRatedMovieCubit.get(context).ratedMovies.any((element) => element.id == movie.id))
                      {
-                       AccountCubit.get(context).ratedMovies.firstWhere((element) => element.id == movie.id)
+                       AccountRatedMovieCubit.get(context).ratedMovies.firstWhere((element) => element.id == movie.id)
                            .movieAccountDetails!.ratedValue =
                            movie.movieAccountDetails!.ratedValue;
                      }
                      else{
-                       AccountCubit.get(context).ratedMovies.add(movie);
+                       AccountRatedMovieCubit.get(context).ratedMovies.add(movie);
                      }
-                     AccountCubit.get(context).moviesWatchlist.removeWhere((element) => element.id==movie.id,);
-                     AccountCubit.get(context).update();
+                    AccountMovieWatchlistCubit.get(context).moviesWatchlist.removeWhere((element) => element.id==movie.id,);
                    }
                    Navigator.of(context).pop();
                  },

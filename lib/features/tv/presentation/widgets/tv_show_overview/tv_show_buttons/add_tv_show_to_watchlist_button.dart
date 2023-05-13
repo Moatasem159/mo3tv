@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/features/account/presentation/cubit/tv_show_watchlist/account_tv_show_watchlist_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -22,15 +22,12 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
               if (tvShow.tvShowAccountDetails!.watchlist!) {
                 cubit.addTvShowToWatchList(tvId: tvShow.id!, watchlist: false);
                 tvShow.tvShowAccountDetails!.watchlist=false;
-                AccountCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id,);
-                AccountCubit.get(context).update();
-
+                AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id);
               }
               else {
                 cubit.addTvShowToWatchList(tvId: tvShow.id!, watchlist: true);
                 tvShow.tvShowAccountDetails!.watchlist=true;
-                AccountCubit.get(context).tvShowsWatchlist.add(tvShow);
-                AccountCubit.get(context).update();
+                AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.add(tvShow);
               }
             }
             else{

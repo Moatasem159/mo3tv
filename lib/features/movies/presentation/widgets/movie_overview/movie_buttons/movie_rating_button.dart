@@ -36,11 +36,11 @@ class MovieRatingButton extends StatelessWidget {
             )),
             icon: movie.movieAccountDetails!.ratedValue != 0.0
                 ? const Icon(
-                    Icons.star,
+                    Icons.star_rate_rounded,
                     color: Colors.yellow,
                   )
                 : const Icon(
-                    Icons.star_border,
+                    Icons.star_border_rounded,
                   ),
           ),
         );

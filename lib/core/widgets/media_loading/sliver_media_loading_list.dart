@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-class RecommendationsMediaLoadingList extends StatelessWidget {
-  const RecommendationsMediaLoadingList({Key? key}) : super(key: key);
+class SliverMediaLoadingList extends StatelessWidget {
+  const SliverMediaLoadingList({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
       delegate:
-      SliverChildBuilderDelegate(childCount: 10, (context, index) {
+      SliverChildBuilderDelegate(childCount: 7, (context, index) {
         return  Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Shimmer.fromColors(
@@ -24,7 +24,7 @@ class RecommendationsMediaLoadingList extends StatelessWidget {
         );
       }),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: .65, crossAxisCount: 3, mainAxisSpacing: 7),
+          childAspectRatio: .69, crossAxisCount: 3, mainAxisSpacing: 7),
     );
   }
 }

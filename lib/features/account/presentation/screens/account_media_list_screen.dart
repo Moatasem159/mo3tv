@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/features/account/presentation/widgets/media_screen_widgets/media_screen_body.dart';
-class MediaListScreen extends StatelessWidget {
+import 'package:mo3tv/features/account/presentation/widgets/media_screen_body.dart';
+class AccountMediaListsScreen extends StatelessWidget {
   final String title;
   final bool favMovies;
   final bool ratedMovies;
@@ -8,15 +8,15 @@ class MediaListScreen extends StatelessWidget {
   final bool favTv;
   final bool ratedTv;
   final bool tvWatchlist;
-  const MediaListScreen({
+  const AccountMediaListsScreen({
     Key? key,
     required this.title,
-    required this.favMovies,
-    required this.ratedMovies,
-    required this.moviesWatchlist,
-    required this.favTv,
-    required this.ratedTv,
-    required this.tvWatchlist,
+    this.favMovies=false,
+    this.ratedMovies=false,
+    this.moviesWatchlist=false,
+    this.favTv=false,
+    this.ratedTv=false,
+    this.tvWatchlist=false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
 class AppInterceptors extends Interceptor{
 @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
   if(kDebugMode){
     print('REQUEST[${options.method}] => PATH: ${options.path}');
   }
-  options.headers[AppStrings.contentType]=AppStrings.applicationJson;
+  options.headers["Content-type"]="application/json";
     super.onRequest(options, handler);
   }
   @override

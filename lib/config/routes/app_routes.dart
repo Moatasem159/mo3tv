@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
+import 'package:mo3tv/features/account/presentation/screens/account_media_list_screen.dart';
 import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
 import 'package:mo3tv/features/login/domain/entities/token.dart';
 import 'package:mo3tv/features/login/presentation/screens/login_screen.dart';
@@ -21,6 +22,7 @@ class Routes {
   static const String tvShowRoute= "/tvShowRoute";
   static const String seeMoreRoute= "/seeMoreRoute";
   static const String seasonRoute= "/seasonRoute";
+  static const String accountMediaLists= "/accountMediaLists";
 }
 
 
@@ -79,6 +81,18 @@ abstract class AppRoute{
         builder: (context, state) =>  SimilarTvShowsScreen(
           recommendations: state.extra as List<TvShow>,
           tvId:int.parse(state.queryParameters["tvId"]!)
+        )),
+      GoRoute(
+        name:  Routes.accountMediaLists,
+        path: Routes.accountMediaLists,
+        builder: (context, state) =>  AccountMediaListsScreen(
+          title: state.queryParameters["title"]!,
+          favMovies:state.queryParameters["favMovies"]=="true"?true:false,
+          favTv:state.queryParameters["favTv"]=="true"?true:false,
+          moviesWatchlist:state.queryParameters["moviesWatchlist"]=="true"?true:false,
+          ratedMovies:state.queryParameters["ratedMovies"]=="true"?true:false,
+          ratedTv:state.queryParameters["ratedTv"]=="true"?true:false,
+          tvWatchlist:state.queryParameters["tvWatchlist"]=="true"?true:false,
         )),
     ],
   );

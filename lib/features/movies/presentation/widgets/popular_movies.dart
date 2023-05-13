@@ -8,7 +8,7 @@ import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_state.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/horizontal_movie_list.dart';
 class PopularMovies extends StatelessWidget {
   const PopularMovies({Key? key}) : super(key: key);
   @override
@@ -17,7 +17,7 @@ class PopularMovies extends StatelessWidget {
     return BlocBuilder<PopularMovieCubit,PopularMovieStates>(
       builder:(context, state) {
         if(state is GetPopularMoviesSuccessState){
-          return MoviesList(
+          return HorizontalMoviesList(
             movies: state.popularMovies,
             title:title,
             onPressed: () {

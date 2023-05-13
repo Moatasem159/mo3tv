@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/features/account/presentation/cubit/rated_tv_show_cubit/account_rated_tv_shows_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/tv_show_watchlist/account_tv_show_watchlist_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -59,9 +60,8 @@ class TvShowRatingButton extends StatelessWidget {
                                   .removeTvShowRate(tvId: tvShow.id!);
                               tvShow.tvShowAccountDetails!.ratedValue=0.0;
                               tvShow.tvShowAccountDetails!.watchlist = false;
-                              AccountCubit.get(context).ratedTvShows.removeWhere((element) =>element.id==tvShow.id);
-                              AccountCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id,);
-                              AccountCubit.get(context).update();
+                              AccountRatedTvShowsCubit.get(context).ratedTvShows.removeWhere((element) =>element.id==tvShow.id);
+                              AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id);
                               Navigator.of(context).pop();
                             }),
                         TextButton(
@@ -70,22 +70,19 @@ class TvShowRatingButton extends StatelessWidget {
                             if (tvShow.tvShowAccountDetails!.ratedValue != 0.0) {
                               cubit.rateTvShow(rate: tvShow.tvShowAccountDetails!.ratedValue, tvId: tvShow.id!);
                               tvShow.tvShowAccountDetails!.watchlist = false;
-                              if(AccountCubit.get(context).ratedTvShows.any((element) => element.id == tvShow.id)){
-                                AccountCubit.get(context)
+                              if(AccountRatedTvShowsCubit.get(context).ratedTvShows.any((element) => element.id == tvShow.id)){
+                                AccountRatedTvShowsCubit.get(context)
                                     .ratedTvShows
                                     .firstWhere(
                                         (element) => element.id == tvShow.id)
                                     .tvShowAccountDetails!
                                     .ratedValue =
                                     tvShow.tvShowAccountDetails!.ratedValue;
-                                AccountCubit.get(context).update();
                               }
                               else {
-                                AccountCubit.get(context)
-                                    .ratedTvShows.add(tvShow);
+                                AccountRatedTvShowsCubit.get(context).ratedTvShows.add(tvShow);
                               }
-
-
+                              AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow.id);
                             }
                             Navigator.of(context).pop();
                           },

@@ -8,7 +8,7 @@ import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_state.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_screen_widgets/tv_show_list.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_screen_widgets/horizontal_tv_show_list.dart';
 class PopularTvShow extends StatelessWidget {
   const PopularTvShow({Key? key}) : super(key: key);
   @override
@@ -18,7 +18,7 @@ class PopularTvShow extends StatelessWidget {
       builder:(context, state) {
         if(state is GetPopularTvShowsSuccessState)
         {
-          return TvShowList(
+          return HorizontalTvShowList(
             tvShow:state.popularTvShow,
             title:title,
             onPressed: () {

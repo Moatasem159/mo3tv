@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/features/account/presentation/cubit/fav_tv_show_cubit/account_fav_tv_show_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
@@ -22,14 +22,12 @@ class TvShowFavButton extends StatelessWidget {
               if(tvShow.tvShowAccountDetails!.favorite!){
                 cubit.favTvShow(tvId: tvShow.id!, fav: false);
                 tvShow.tvShowAccountDetails!.favorite =false;
-                AccountCubit.get(context).favTvShows.removeWhere((element) => element.id==tvShow.id,);
-                AccountCubit.get(context).update();
+                AccountFavTvShowCubit.get(context).favTvShows.removeWhere((element) => element.id==tvShow.id);
               }
               else{
                 cubit.favTvShow(tvId: tvShow.id!, fav: true);
                 tvShow.tvShowAccountDetails!.favorite =true;
-                AccountCubit.get(context).favTvShows.add(tvShow);
-                AccountCubit.get(context).update();
+                AccountFavTvShowCubit.get(context).favTvShows.add(tvShow);
               }
             }
             else{

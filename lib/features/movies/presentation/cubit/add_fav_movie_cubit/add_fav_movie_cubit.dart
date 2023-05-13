@@ -5,7 +5,7 @@ import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/fav_movie_cubit/account_fav_movie_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
@@ -27,14 +27,12 @@ class AddFavMovieCubit extends Cubit<AddFavMovieStates> {
       if(movie.movieAccountDetails!.favorite!){
         favMovie(movieId: movie.id!,fav: false);
         movie.movieAccountDetails!.favorite =false;
-        AccountCubit.get(context).favMovies.removeWhere((element) => element.id==movie.id,);
-        AccountCubit.get(context).update();
+        AccountFavMovieCubit.get(context).favMovies.removeWhere((element) => element.id==movie.id);
       }
       else{
        favMovie(movieId: movie.id!,fav: true);
         movie.movieAccountDetails!.favorite =true;
-       AccountCubit.get(context).favMovies.add(movie);
-       AccountCubit.get(context).update();
+       AccountFavMovieCubit.get(context).favMovies.add(movie);
       }
     }
     else{

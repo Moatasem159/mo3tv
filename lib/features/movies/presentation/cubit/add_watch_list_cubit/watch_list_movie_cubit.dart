@@ -5,7 +5,7 @@ import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/movie_watchlist_cubit/account_movie_watchlist_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
@@ -30,13 +30,11 @@ class WatchListMovieCubit extends Cubit<WatchListMovieStates> {
       if (movie.movieAccountDetails!.watchlist!) {
         addMovieToWatchList(movieId: movie.id!, watchlist: false);
         movie.movieAccountDetails!.watchlist=false;
-        AccountCubit.get(context).moviesWatchlist.removeWhere((element) => element.id==movie.id);
-        AccountCubit.get(context).update();
+        AccountMovieWatchlistCubit.get(context).moviesWatchlist.removeWhere((element) => element.id==movie.id);
       } else {
        addMovieToWatchList(movieId: movie.id!, watchlist: true);
         movie.movieAccountDetails!.watchlist=true;
-       AccountCubit.get(context).moviesWatchlist.add(movie);
-       AccountCubit.get(context).update();
+       AccountMovieWatchlistCubit.get(context).moviesWatchlist.add(movie);
       }
     }
     else{

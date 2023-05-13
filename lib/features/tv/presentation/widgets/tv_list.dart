@@ -15,7 +15,7 @@ class TvList extends StatelessWidget {
         },
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: .65,
+          childAspectRatio: .69,
           crossAxisCount: 3,
           mainAxisSpacing: 7),
     );

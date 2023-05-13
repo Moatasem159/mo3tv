@@ -17,7 +17,13 @@ import 'package:mo3tv/features/account/domain/usecases/get_movies_watchlist_usec
 import 'package:mo3tv/features/account/domain/usecases/get_rated_movies_list_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_rated_tv_shows_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_tv_shows_watchlist_usecase.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/fav_movie_cubit/account_fav_movie_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/fav_tv_show_cubit/account_fav_tv_show_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/movie_watchlist_cubit/account_movie_watchlist_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/rated_movie_cubit/account_rated_movie_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/rated_tv_show_cubit/account_rated_tv_shows_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/tv_show_watchlist/account_tv_show_watchlist_cubit.dart';
 import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart';
 import 'package:mo3tv/features/credits/data/repositories/credits_repository_impl.dart';
 import 'package:mo3tv/features/credits/domain/repositories/credits_repository.dart';
@@ -147,7 +153,13 @@ Future external()async{
       ));
 }
 account(){
-  sl.registerFactory(() =>AccountCubit(sl(), sl(), sl(), sl(), sl(), sl(),sl()));
+  sl.registerFactory(() =>AccountCubit(sl()));
+  sl.registerFactory(() =>AccountFavMovieCubit(sl()));
+  sl.registerFactory(() =>AccountRatedMovieCubit(sl()));
+  sl.registerFactory(() =>AccountMovieWatchlistCubit(sl()));
+  sl.registerFactory(() =>AccountFavTvShowCubit(sl()));
+  sl.registerFactory(() =>AccountRatedTvShowsCubit(sl()));
+  sl.registerFactory(() =>AccountTvShowWatchlistCubit(sl()));
   sl.registerLazySingleton<GetFavMoviesListUsecase>(() => GetFavMoviesListUsecase(sl()));
   sl.registerLazySingleton<GetRatedMoviesListUsecase>(() => GetRatedMoviesListUsecase(sl()));
   sl.registerLazySingleton<GetMoviesWatchlistUsecase>(() => GetMoviesWatchlistUsecase(sl()));
