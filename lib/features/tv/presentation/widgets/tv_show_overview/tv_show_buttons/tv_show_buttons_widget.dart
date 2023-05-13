@@ -17,9 +17,9 @@ class TvShowButtonsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             UserScoreWidget(vote:tvShow.voteAverage),
-            TvShowFavButton(tvShow: tvShow),
-            TvShowRatingButton(tvShow: tvShow,),
-            AddTvShowToWatchlistButton(tvShow: tvShow),
+            const TvShowFavButton( ),
+            const TvShowRatingButton(),
+            const AddTvShowToWatchlistButton(),
           ],
         ),
       ],

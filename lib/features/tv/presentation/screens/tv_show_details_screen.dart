@@ -17,6 +17,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/re
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_appbar_widget.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_overview.dart';
@@ -56,6 +57,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
         BlocProvider(create: (context) => TvShowBottomNavCubit()),
         BlocProvider(create: (context) => di.sl<GalleryNavigatorCubit>()),
         BlocProvider(create: (context) => di.sl<TvCubit>()),
+        BlocProvider(create: (context) => di.sl<TvShowButtonsCubit>()),
         BlocProvider(create: (context) => di.sl<RecommendationsTvCubit>()),
         BlocProvider(create: (context) => di.sl<GalleryCubit>()),
         BlocProvider(create: (context) => di.sl<ReviewsCubit>()),

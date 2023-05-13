@@ -103,6 +103,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/simi
 import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -213,7 +214,8 @@ movie(){
 }
 tv(){
   ///cubits
-  sl.registerFactory<TvCubit>(() => TvCubit(sl(),sl(),sl(),sl(),sl()));
+  sl.registerFactory<TvCubit>(() => TvCubit(sl()));
+  sl.registerFactory<TvShowButtonsCubit>(() => TvShowButtonsCubit(sl(),sl(),sl(),sl()));
   sl.registerFactory<SeasonCubit>(() => SeasonCubit(sl()));
   sl.registerFactory<RecommendationsTvCubit>(() => RecommendationsTvCubit(sl()));
   sl.registerFactory<SimilarTvShowCubit>(() => SimilarTvShowCubit(sl()));
