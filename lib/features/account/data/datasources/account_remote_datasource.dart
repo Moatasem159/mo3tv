@@ -4,8 +4,8 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/data/models/account_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
-abstract class AccountDataSource {
-  Future<AccountModel> getAccountDetails();
+abstract class AccountRemoteDataSource {
+  Future<AccountModel> getAccountDetails({required String sessionId});
   Future<List<MovieModel>> getRatedMovies();
   Future<List<MovieModel>> getFavouriteMovies();
   Future<List<MovieModel>> getMovieWatchList();
@@ -13,9 +13,9 @@ abstract class AccountDataSource {
   Future<List<TvShowModel>> getFavouriteTvShows();
   Future<List<TvShowModel>> getTvShowsWatchList();
 }
-class AccountDataSourceImpl implements AccountDataSource{
+class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
-  AccountDataSourceImpl(this._apiConsumer);
+  AccountRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<List<MovieModel>> getFavouriteMovies()async {
     final res=await _apiConsumer.get(EndPoints.favMediaListPath(AppStrings.sessionId,"movies"));
@@ -32,8 +32,8 @@ class AccountDataSourceImpl implements AccountDataSource{
     return List<MovieModel>.from((res['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override
-  Future<AccountModel> getAccountDetails() async{
-    final res=await _apiConsumer.get(EndPoints.accountPath(AppStrings.sessionId));
+  Future<AccountModel> getAccountDetails({required String sessionId}) async{
+    final res=await _apiConsumer.get(EndPoints.accountPath(sessionId));
     return AccountModel.fromJson(res);
   }
   @override

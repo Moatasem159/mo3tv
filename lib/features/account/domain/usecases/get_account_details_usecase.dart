@@ -5,7 +5,7 @@ import 'package:mo3tv/features/account/domain/repositories/account_repository.da
 class GetAccountDetailsUsecase{
   final AccountRepository _accountRepository;
   GetAccountDetailsUsecase(this._accountRepository);
-  Future<Either<Failure,Account>> call()async{
-    return await _accountRepository.getAccountDetails();
+  Future<Either<Failure,Account>> call({required String sessionId})async{
+    return await _accountRepository.getAccountDetails(sessionId: sessionId);
   }
 }

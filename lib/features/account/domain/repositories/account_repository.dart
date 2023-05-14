@@ -4,7 +4,7 @@ import 'package:mo3tv/features/account/domain/entities/account.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 abstract class AccountRepository{
-  Future<Either<Failure,Account>> getAccountDetails();
+  Future<Either<Failure,Account>> getAccountDetails({required String sessionId});
   Future<Either<Failure,List<Movie>>> getFavouriteMovies();
   Future<Either<Failure,List<Movie>>> getMovieWatchList();
   Future<Either<Failure,List<Movie>>> getRatedMovies();

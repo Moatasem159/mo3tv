@@ -7,7 +7,8 @@ import 'package:mo3tv/core/api/dio_consumer.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/shared/shared_prefrences.dart';
 import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
-import 'package:mo3tv/features/account/data/datasources/account_datasource.dart';
+import 'package:mo3tv/features/account/data/datasources/account_local_datasource.dart';
+import 'package:mo3tv/features/account/data/datasources/account_remote_datasource.dart';
 import 'package:mo3tv/features/account/data/repositories/account_repository_impl.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_details_usecase.dart';
@@ -166,8 +167,9 @@ account(){
   sl.registerLazySingleton<GetTvShowsWatchlistUsecase>(() => GetTvShowsWatchlistUsecase(sl()));
   sl.registerLazySingleton<GetFavTvShowsListUsecase>(() => GetFavTvShowsListUsecase(sl()));
   sl.registerLazySingleton<GetRatedTvShowListUsecase>(() => GetRatedTvShowListUsecase(sl()));
-  sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl()));
-  sl.registerLazySingleton<AccountDataSource>(() => AccountDataSourceImpl(sl()));
+  sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl(),sl()));
+  sl.registerLazySingleton<AccountRemoteDataSource>(() => AccountRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<AccountLocalDataSource>(() => AccountLocalDatasourceImpl(sl()));
 }
 search(){
   sl.registerFactory(() =>SearchCubit(sl()));
