@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
 import 'package:mo3tv/features/account/presentation/screens/account_media_list_screen.dart';
+import 'package:mo3tv/features/gallery/presentation/screens/image_screen.dart';
 import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
 import 'package:mo3tv/features/login/domain/entities/token.dart';
 import 'package:mo3tv/features/login/presentation/screens/login_screen.dart';
@@ -23,6 +24,7 @@ class Routes {
   static const String seeMoreRoute= "/seeMoreRoute";
   static const String seasonRoute= "/seasonRoute";
   static const String accountMediaLists= "/accountMediaLists";
+  static const String imageScreenRoute= "/imageScreenRoute";
 }
 
 
@@ -94,6 +96,13 @@ abstract class AppRoute{
           ratedTv:state.queryParameters["ratedTv"]=="true"?true:false,
           tvWatchlist:state.queryParameters["tvWatchlist"]=="true"?true:false,
         )),
+      GoRoute(
+        name:  Routes.imageScreenRoute,
+        path: Routes.imageScreenRoute,
+        builder: (context, state) =>  ImageScreen(
+          image: state.queryParameters["image"]!,
+        )),
+
     ],
   );
 }
