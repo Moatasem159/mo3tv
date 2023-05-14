@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
 import 'package:mo3tv/features/logout/presentation/widgets/log_out_button.dart';
 class AccountAppBarWidget extends StatelessWidget {
@@ -14,11 +13,6 @@ class AccountAppBarWidget extends StatelessWidget {
         leadingWidth:60,
         toolbarHeight:60,
         titleSpacing:0,
-        titleTextStyle: const TextStyle(
-          fontFamily: AppStrings.fontFamily,
-          fontSize:14,
-          overflow: TextOverflow.ellipsis
-        ),
         title:Text(account.name==""?account.username!:account.name!),
         leading: CachedNetworkImage(
           imageUrl: EndPoints.logoUrl(account.avatar!),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/utils/app_colors.dart';
 class MainButton extends StatelessWidget {
   final  VoidCallback? onPressed;
   final String label;
@@ -11,7 +10,6 @@ class MainButton extends StatelessWidget {
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius:BorderRadius.circular(10),
           )),
-          backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
           fixedSize: MaterialStateProperty.all(const Size(130, 40))
       ),
       onPressed:onPressed,

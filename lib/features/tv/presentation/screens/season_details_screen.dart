@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
-import 'package:mo3tv/core/utils/app_colors.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/season_cubit/season_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_overview/season_overview.dart';
@@ -27,7 +26,7 @@ class SeasonDetailsScreen extends StatelessWidget {
               .getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: season.seasonNumber!);
           return SafeArea(
             child: Scaffold(
-              backgroundColor: AppColors.darkBackgroundColor,
+              backgroundColor: Theme.of(context).colorScheme.background,
               body: NestedScrollView(
                 physics: const NeverScrollableScrollPhysics(),
                 headerSliverBuilder: (context, innerBoxIsScrolled) {

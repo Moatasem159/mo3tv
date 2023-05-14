@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mo3tv/core/utils/app_colors.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-
-
-
-
 class AppTheme {
   const AppTheme._();
   static final darkTheme = ThemeData(
-    appBarTheme:  AppBarTheme(
+    fontFamily: AppStrings.fontFamily,
+    primaryColor: AppColors.primaryColor,
+    primaryColorLight: AppColors.primaryTextLight,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSwatch(
+      primarySwatch: AppColors.primaryColor,
+      brightness: Brightness.dark,
+      backgroundColor: AppColors.darkBackgroundColor,
+    ),
+    appBarTheme:AppBarTheme(
       backgroundColor: AppColors.darkBackgroundColor,
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.black,
@@ -18,19 +24,17 @@ class AppTheme {
       iconTheme: const IconThemeData(
           color: Colors.white
       ),
-      elevation: 5,),
-    bottomNavigationBarTheme:  BottomNavigationBarThemeData(
-      elevation: 5,
-      showUnselectedLabels: false,
-      showSelectedLabels: false,
-      unselectedItemColor: Colors.grey.withOpacity(.8),
-      backgroundColor: AppColors.darkBackgroundColor,
-      selectedItemColor: AppColors.primaryColor,
-      type: BottomNavigationBarType.fixed,
+      elevation: 0,
+      titleSpacing: 0,
+      titleTextStyle: const TextStyle(
+        fontFamily: AppStrings.fontFamily,
+        fontSize: 14,
+        overflow: TextOverflow.ellipsis
+      ),
     ),
     textTheme: TextTheme(
       displayMedium: TextStyle(
-          color: AppColors.primaryColor
+          color: AppColors.primaryTextLight
       ),
       titleMedium:  TextStyle(
           color: AppColors.primaryTextLight
@@ -50,10 +54,7 @@ class AppTheme {
       labelSmall:  TextStyle(
           color: AppColors.primaryTextLight
       ),
-
-
     ),
-    brightness: Brightness.dark,
     iconTheme: const IconThemeData(
       color: Colors.white
     ),
@@ -62,17 +63,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.red)
-      )
-    ),
-    fontFamily: AppStrings.fontFamily,
-    primaryColor: AppColors.primaryColor,
-    primaryColorLight: AppColors.primaryTextLight,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-    navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: Colors.red,
-      indicatorShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
+        backgroundColor: MaterialStateProperty.all(AppColors.primaryColor)
       )
     ),
     snackBarTheme: SnackBarThemeData(
@@ -81,11 +72,5 @@ class AppTheme {
         fontFamily: AppStrings.fontFamily,
       )
     ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Colors.red
-  ),
-    colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: AppColors.primaryColor,
-        brightness: Brightness.dark,
-        backgroundColor: AppColors.darkBackgroundColor));
+   );
 }

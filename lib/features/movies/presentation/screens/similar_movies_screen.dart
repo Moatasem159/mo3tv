@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/utils/app_colors.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/similar_movies_widgets/similar_movies_screen_body.dart';
 class SimilarMoviesScreen extends StatelessWidget {
@@ -10,7 +9,7 @@ class SimilarMoviesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.darkBackgroundColor,
+        backgroundColor:Theme.of(context).colorScheme.background,
         body: SimilarMoviesScreenBody(recommendations: recommendations, movieId: movieId),
       ),
     );

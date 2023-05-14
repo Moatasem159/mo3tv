@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/utils/app_colors.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/similar_tv_shows_widgets/similar_tv_shows_screen_body.dart';
 class SimilarTvShowsScreen extends StatelessWidget {
@@ -10,7 +9,7 @@ class SimilarTvShowsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppColors.darkBackgroundColor,
+        backgroundColor:Theme.of(context).colorScheme.background,
         body: SimilarTvShowsScreenBody(recommendations: recommendations, tvId: tvId),
       ),
     );
