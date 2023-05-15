@@ -24,9 +24,9 @@ class BackdropsLoadingList extends StatelessWidget {
             },
           ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 1.5,
+              childAspectRatio: 1.6,
               crossAxisCount: 2,
-              mainAxisSpacing: 10,
+              mainAxisSpacing: 0,
               crossAxisSpacing: 7),
         ),
       ],
