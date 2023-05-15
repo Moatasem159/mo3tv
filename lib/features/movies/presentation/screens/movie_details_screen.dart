@@ -50,116 +50,128 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => MovieBottomNavCubit()),
-          BlocProvider(create: (context) => di.sl<GalleryNavigatorCubit>()),
-          BlocProvider(create: (context) => di.sl<MovieCubit>()),
-          BlocProvider(create: (context) => di.sl<MovieButtonsCubit>()),
-          BlocProvider(create: (context) => di.sl<RecommendationsMovieCubit>()),
-          BlocProvider(create: (context) => di.sl<GalleryCubit>()),
-          BlocProvider(create: (context) => di.sl<ReviewsCubit>()),
-          BlocProvider(create: (context) => di.sl<CreditsCubit>()),
-        ],
-        child: Builder(
-          builder: (context) {
-            if(!MovieCubit.get(context).isSuccess()){
-              MovieCubit.get(context).getMovieDetailsData(movieId: widget.movie.id!);
-            }
-            return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
-              builder: (context, state) {
-                MovieBottomNavCubit cubit = BlocProvider.of<MovieBottomNavCubit>(context);
-                return SafeArea(
-                  child: Scaffold(
-                    resizeToAvoidBottomInset: false,
-                    backgroundColor:Theme.of(context).colorScheme.background,
-                    body: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        NestedScrollView(
-                          controller: nestedController,
-                          physics: const ClampingScrollPhysics(),
-                          headerSliverBuilder: (context, innerBoxIsScrolled) {
-                            return [
-                              SliverOverlapAbsorber(
-                                handle: appBar,
-                                sliver: SliverPersistentHeader(
-                                  delegate: MovieDetailsAppBar(
-                                    widget.movie,
-                                    onTap: () {
-                                      nestedController.animateTo(0,
-                                          duration:
-                                              const Duration(milliseconds: 500),
-                                          curve: Curves.ease);
-                                    },
-                                  ),
-                                  pinned: true,
-                                ),
-                              ),
-                              if (cubit.isGallery)
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => MovieBottomNavCubit()),
+        BlocProvider(create: (context) => di.sl<GalleryNavigatorCubit>()),
+        BlocProvider(create: (context) => di.sl<MovieCubit>()),
+        BlocProvider(create: (context) => di.sl<MovieButtonsCubit>()),
+        BlocProvider(create: (context) => di.sl<RecommendationsMovieCubit>()),
+        BlocProvider(create: (context) => di.sl<GalleryCubit>()),
+        BlocProvider(create: (context) => di.sl<ReviewsCubit>()),
+        BlocProvider(create: (context) => di.sl<CreditsCubit>()),
+      ],
+      child: Builder(
+        builder: (context) {
+          if(!MovieCubit.get(context).isSuccess()){
+            MovieCubit.get(context).getMovieDetailsData(movieId: widget.movie.id!);
+          }
+          return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
+            builder: (context, state) {
+              MovieBottomNavCubit cubit = MovieBottomNavCubit.get(context);
+              return WillPopScope(
+                onWillPop: () async{
+                  if(cubit.index!=0)
+                    {
+                      cubit.changeScreen(0, context, widget.movie.id!);
+                      return false;
+                    }
+                  else{
+                    return true;
+                  }
+                },
+                child: DefaultTabController(
+                  length: 3,
+                  child: SafeArea(
+                    child: Scaffold(
+                      resizeToAvoidBottomInset: false,
+                      backgroundColor:Theme.of(context).colorScheme.background,
+                      body: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          NestedScrollView(
+                            controller: nestedController,
+                            physics: const ClampingScrollPhysics(),
+                            headerSliverBuilder: (context, innerBoxIsScrolled) {
+                              return [
                                 SliverOverlapAbsorber(
-                                  handle: disconnectBar,
-                                  sliver: GalleryTabBar(
-                                    onTap: (value) {
-                                      GalleryNavigatorCubit.get(context).gallery(value);
-                                    },
+                                  handle: appBar,
+                                  sliver: SliverPersistentHeader(
+                                    delegate: MovieDetailsAppBar(
+                                      widget.movie,
+                                      onTap: () {
+                                        nestedController.animateTo(0,
+                                            duration:
+                                                const Duration(milliseconds: 500),
+                                            curve: Curves.ease);
+                                      },
+                                    ),
+                                    pinned: true,
                                   ),
                                 ),
-                            ];
-                          },
-                          body: CustomScrollView(
-                            slivers: [
-                              SliverOverlapInjector(handle: appBar),
-                              if (cubit.isGallery)
-                                SliverOverlapInjector(handle: disconnectBar),
-                              SliverToBoxAdapter(child: 15.ph),
-                              screens[cubit.index],
-                            ],
+                                if (cubit.isGallery)
+                                  SliverOverlapAbsorber(
+                                    handle: disconnectBar,
+                                    sliver: GalleryTabBar(
+                                      onTap: (value) {
+                                        GalleryNavigatorCubit.get(context).gallery(value);
+                                      },
+                                    ),
+                                  ),
+                              ];
+                            },
+                            body: CustomScrollView(
+                              slivers: [
+                                SliverOverlapInjector(handle: appBar),
+                                if (cubit.isGallery)
+                                  SliverOverlapInjector(handle: disconnectBar),
+                                SliverToBoxAdapter(child: 15.ph),
+                                screens[cubit.index],
+                              ],
+                            ),
                           ),
-                        ),
-                        MediaBottomNav(
-                          index: cubit.index,
-                          onTap1: () {
-                            nestedController.animateTo(0,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.ease);
-                            cubit.changeScreen(0, context, widget.movie.id!);
-                          },
-                          onTap2: () {
-                            nestedController.animateTo(0,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.ease);
-                            cubit.changeScreen(1, context, widget.movie.id!);
-                          },
-                          onTap3: () {
-                            nestedController.animateTo(0,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.ease);
-                            cubit.changeScreen(2, context, widget.movie.id!);
-                          },
-                          onTap4: () {
-                            nestedController.animateTo(0,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.ease);
-                            cubit.changeScreen(3, context, widget.movie.id!);
-                          },
-                          onTap5: () {
-                            nestedController.animateTo(0,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.ease);
-                            cubit.changeScreen(4, context, widget.movie.id!);
-                          },
-                        ),
-                      ],
+                          MediaBottomNav(
+                            index: cubit.index,
+                            onTap1: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(0, context, widget.movie.id!);
+                            },
+                            onTap2: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(1, context, widget.movie.id!);
+                            },
+                            onTap3: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(2, context, widget.movie.id!);
+                            },
+                            onTap4: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(3, context, widget.movie.id!);
+                            },
+                            onTap5: () {
+                              nestedController.animateTo(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                              cubit.changeScreen(4, context, widget.movie.id!);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                );
-              },
-            );
-          },
-        ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

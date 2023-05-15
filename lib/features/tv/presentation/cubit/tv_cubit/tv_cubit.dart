@@ -9,55 +9,56 @@ class TvCubit extends Cubit<TvStates> {
   TvCubit(this._getTvShowDetailsUsecase) : super(TvInitialState());
   static TvCubit get(context)=>BlocProvider.of(context);
   final GetTvShowDetailsUsecase _getTvShowDetailsUsecase;
-  TvShow tvShow= TvShow();
   Future<void> getTvShowDetailsData({required int tvShowId}) async {
+    TvShow tvShow= TvShow();
     emit(GetTvShowDetailsLoadingState());
     Either<Failure,TvShow> response =
     await _getTvShowDetailsUsecase.call(tvId: tvShowId);
-    emit(response.fold((failure) =>
-            GetTvShowDetailsErrorState(msg: mapFailureToMsg(failure)),
-            (tvShow) {
-              this.tvShow = tvShow;
-              if(this.tvShow.seasons!.first.seasonNumber==0)
+    emit(response.fold((failure)=>GetTvShowDetailsErrorState(msg: mapFailureToMsg(failure)),
+            (tvShowData) {
+                  tvShow = tvShowData;
+              if(tvShow.seasons!.first.seasonNumber==0)
               {
-                this.tvShow.seasons!.removeAt(0);
+                tvShow.seasons!.removeAt(0);
               }
-              if(this.tvShow.seasons!.last.episodeCount==0||this.tvShow.seasons!.last.airDate==null)
+              if(tvShow.seasons!.last.episodeCount==0||tvShow.seasons!.last.airDate==null)
               {
-                  this.tvShow.seasons!.removeLast();
+                tvShow.seasons!.removeLast();
                 }
-              for (var element in this.tvShow.seasons!){
+              for (var element in tvShow.seasons!){
                 if(element.posterPath=='')
                   {
-                    this.tvShow.seasons!.clear();
+                    tvShow.seasons!.clear();
                     break;
                   }
               }
-              for (var element in this.tvShow.videos!) {
+              for (var element in tvShow.videos!) {
                 if(element.name=="Final Trailer")
                 {
-                  this.tvShow.trailer =element;
+                  tvShow.trailer =element;
                   break;
                 }
                 else if(element.name=="Official Trailer")
                 {
-                    this.tvShow.trailer =element;
+                   tvShow.trailer =element;
                     break;
                   }
                 else if(element.name=="Series Trailer")
                 {
-                  this.tvShow.trailer =element;
+                  tvShow.trailer =element;
                   break;
                 }
                 else if(element.type=="Trailer")
                 {
-                  this.tvShow.trailer =element;
+                  tvShow.trailer =element;
                   break;
                 }
               }
-              this.tvShow.videos!.clear();
-          return GetTvShowDetailsSuccessState();
+              tvShow.videos!.clear();
+          return GetTvShowDetailsSuccessState(tvShow);
         }));
   }
-
+  bool isSuccess(){
+    return state is GetTvShowDetailsSuccessState;
+  }
 }

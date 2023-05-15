@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_cubit.dart';
 class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
   final TvShow tvShow;
   final GestureTapCallback ? onTap;
@@ -62,7 +63,13 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                 top:10,
                 child: GestureDetector(
                     onTap: () {
-                      GoRouter.of(context).pop();
+                      if(TvShowBottomNavCubit.get(context).index!=0)
+                        {
+                          TvShowBottomNavCubit.get(context).changeScreen(0, context, tvShow.id!);
+                        }
+                      else{
+                        GoRouter.of(context).pop();
+                      }
                     },
                     child: Container(
                       width: iconSize,

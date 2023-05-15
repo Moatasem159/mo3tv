@@ -11,7 +11,6 @@ class EpisodeDetails extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if(episode.stillPath !=null)
           EpisodeImage(image:episode.stillPath!),
        7.pw,
         EpisodeInfo(episode: episode)

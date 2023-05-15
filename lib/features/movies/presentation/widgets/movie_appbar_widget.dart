@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
 class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   final Movie movie;
   final GestureTapCallback ? onTap;
@@ -63,7 +64,13 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                 top: 5,
                 child: GestureDetector(
                     onTap: () {
-                      GoRouter.of(context).pop();
+                      if(MovieBottomNavCubit.get(context).index!=0)
+                        {
+                          MovieBottomNavCubit.get(context).changeScreen(0, context, movie.id!);
+                        }
+                      else{
+                        GoRouter.of(context).pop();
+                      }
                     },
                     child:Container(
                       width: iconSize,

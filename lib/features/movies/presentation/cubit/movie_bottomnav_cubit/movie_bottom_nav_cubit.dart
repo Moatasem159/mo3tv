@@ -9,6 +9,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_c
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   MovieBottomNavCubit() : super(MovieBottomNavInitialState());
+  static MovieBottomNavCubit get(context)=>BlocProvider.of(context);
   int index=0;
   bool isGallery=false;
   List<Widget> items=const [

@@ -9,20 +9,23 @@ import 'package:shimmer/shimmer.dart';
 class GalleryImage extends StatelessWidget {
   final ImageEntity image;
   const GalleryImage({Key? key, required this.image}) : super(key: key);
+  String getFileExtension(String fileName) {
+    return ".${fileName.split('.').last}";
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap:()=>GoRouter.of(context).pushNamed(Routes.imageScreenRoute,queryParameters:{"image":image.filePath}),
       child: Hero(
         tag: image.filePath!,
-        child: CachedNetworkImage(
+        child: getFileExtension(image.filePath!)==".svg"?
+        SvgPicture.network(EndPoints.backDropsUrl(image.filePath!)):CachedNetworkImage(
             imageUrl: EndPoints.posterUrl(image.filePath!),
             placeholder: (context, url) => Shimmer.fromColors(
               baseColor: Colors.grey[700]!,
               highlightColor: Colors.grey[600]!,
               child: Container(color: Colors.black),
-            ),
-          errorWidget:(context,url,error)=>SvgPicture.network(EndPoints.backDropsUrl(image.filePath!))),
+            )),
       ),
     );
   }

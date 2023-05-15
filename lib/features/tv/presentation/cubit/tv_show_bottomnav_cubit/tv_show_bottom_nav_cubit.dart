@@ -9,6 +9,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/re
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
 class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
   TvShowBottomNavCubit() : super(TvShowBottomNavInitialState());
+  static TvShowBottomNavCubit get(context)=>BlocProvider.of(context);
   int index=0;
   bool isGallery=false;
   List<Widget> items=const [

@@ -8,7 +8,7 @@ class NetworkListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Column(
       children: [
-        const Text("Network",style: TextStyle(fontWeight: FontWeight.bold)),
+        const Text("Networks",style: TextStyle(fontWeight: FontWeight.bold)),
         Wrap(
           alignment: WrapAlignment.center,
           children: networks.map((e)=> NetworkWidget(network: e)).toList(),

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 
@@ -17,6 +18,9 @@ class ImageScreen extends StatelessWidget {
           content: Text("Downloaded successfully")));
     });
   }
+  String getFileExtension(String fileName) {
+    return ".${fileName.split('.').last}";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +37,11 @@ class ImageScreen extends StatelessWidget {
           tag: image,
           child: InteractiveViewer(
             child: Center(
-              child: CachedNetworkImage(
-                  fit: BoxFit.contain, imageUrl: EndPoints.hdUrl(image)),
+              child: getFileExtension(image)==".svg"?
+              SvgPicture.network(EndPoints.backDropsUrl(image)):
+              CachedNetworkImage(
+                  fit: BoxFit.contain,
+                  imageUrl: EndPoints.hdUrl(image)),
             ),
           ),
         ),
