@@ -75,11 +75,17 @@ import 'package:mo3tv/features/reviews/data/repositories/reviews_repository_impl
 import 'package:mo3tv/features/reviews/domain/repositories/reviews_repository.dart';
 import 'package:mo3tv/features/reviews/domain/usecases/get_media_reviews_usecase.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
-import 'package:mo3tv/features/search/data/datasources/search_datasource.dart';
+import 'package:mo3tv/features/search/data/datasources/search_local_data_source.dart';
+import 'package:mo3tv/features/search/data/datasources/search_remote_datasource.dart';
 import 'package:mo3tv/features/search/data/repositories/search_repository_impl.dart';
 import 'package:mo3tv/features/search/domain/repositories/search_repository.dart';
+import 'package:mo3tv/features/search/domain/usecases/clear_one_search_usecase.dart';
+import 'package:mo3tv/features/search/domain/usecases/clear_search_list_usecase.dart';
+import 'package:mo3tv/features/search/domain/usecases/get_search_list_usecase.dart';
+import 'package:mo3tv/features/search/domain/usecases/save_search_usecase.dart';
 import 'package:mo3tv/features/search/domain/usecases/search_usecase.dart';
-import 'package:mo3tv/features/search/presentation/cubit/search_cubit.dart';
+import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_bloc.dart';
+import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
@@ -172,10 +178,16 @@ account(){
   sl.registerLazySingleton<AccountLocalDataSource>(() => AccountLocalDatasourceImpl(sl()));
 }
 search(){
-  sl.registerFactory(() =>SearchCubit(sl()));
-  sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl(),sl()));
+  sl.registerFactory(() =>SearchBloc(sl()));
+  sl.registerFactory(() =>SearchListCubit(sl(),sl(),sl(),sl()));
+  sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl(),sl(),sl()));
   sl.registerLazySingleton<SearchUsecase>(() => SearchUsecase(sl()));
-  sl.registerLazySingleton<SearchDataSource>(() => SearchDataSourceImpl(sl()));
+  sl.registerLazySingleton<SaveSearchUsecase>(() => SaveSearchUsecase(sl()));
+  sl.registerLazySingleton<ClearSearchListUsecase>(() => ClearSearchListUsecase(sl()));
+  sl.registerLazySingleton<ClearOneSearchUsecase>(() => ClearOneSearchUsecase(sl()));
+  sl.registerLazySingleton<GetSearchListUsecase>(() => GetSearchListUsecase(sl()));
+  sl.registerLazySingleton<SearchRemoteDataSource>(() => SearchRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<SearchLocalDataSource>(() => SearchLocalDataSourceImpl(sl()));
 }
 gallery(){
   sl.registerFactory(() =>GalleryCubit(sl()));
@@ -187,9 +199,7 @@ gallery(){
 movie(){
   ///cubits
   sl.registerFactory<MovieCubit>(() => MovieCubit(sl()));
-  // sl.registerFactory<AddFavMovieCubit>(() => AddFavMovieCubit(sl()));
   sl.registerFactory<MovieButtonsCubit>(() => MovieButtonsCubit(sl(),sl(),sl(),sl()));
-  // sl.registerFactory<WatchListMovieCubit>(() => WatchListMovieCubit(sl()));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
   sl.registerFactory<RecommendationsMovieCubit>(()=>RecommendationsMovieCubit(sl()));
   sl.registerFactory<SimilarMovieCubit>(()=>SimilarMovieCubit(sl()));

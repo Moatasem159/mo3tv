@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:mo3tv/features/search/domain/entities/search.dart';
+// ignore: must_be_immutable
 class SearchModel extends Search{
   SearchModel(
       {super.adult,
@@ -30,4 +33,38 @@ class SearchModel extends Search{
         name: json["name"] ?? '',
         originalName: json["original_name"] ?? '',
       );
+  static SearchModel fromJsonString(String jsonString) {
+        Map<String, dynamic> json = jsonDecode(jsonString);
+        return SearchModel.fromJson(json);
+  }
+
+  static String toJsonString(SearchModel searchModel) {
+        Map<String, dynamic> json = searchToJson(searchModel);
+        return jsonEncode(json);
+  }
+
+  static Map<String, dynamic> searchToJson(SearchModel searchModel) => {
+        "adult": searchModel.adult,
+        "backdrop_path": searchModel.backdropPath,
+        "id": searchModel.id,
+        "media_type": searchModel.mediaType,
+        "original_title": searchModel.originalTitle,
+        "popularity": searchModel.popularity,
+        "poster_path": searchModel.posterPath,
+        "release_date": searchModel.releaseDate,
+        "vote_average": searchModel.voteAverage,
+        "vote_count": searchModel.voteCount,
+        "first_air_date": searchModel.firstAirDate,
+        "name": searchModel.name,
+        "original_name": searchModel.originalName,
+  };
+  static String encode(List<SearchModel> search) =>  json.encode(
+      search
+          .map<Map<String, dynamic>>((item) => SearchModel.searchToJson(item))
+          .toList());
+
+  static List<SearchModel> decode(String search) =>
+      (json.decode(search) as List<dynamic>)
+          .map<SearchModel>((item) => SearchModel.fromJson(item))
+          .toList();
 }

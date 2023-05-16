@@ -1,17 +1,21 @@
-class Search{
+import 'package:equatable/equatable.dart';
+
+// ignore: must_be_immutable
+class Search extends Equatable {
   bool? adult;
-  String ?backdropPath;
-  int ?id;
+  String? backdropPath;
+  int? id;
   String? mediaType;
-  String ?originalTitle;
+  String? originalTitle;
   dynamic popularity;
-  String ?posterPath;
-  String ?releaseDate;
+  String? posterPath;
+  String? releaseDate;
   dynamic voteAverage;
   dynamic voteCount;
   String? firstAirDate;
   String? name;
-  String ?originalName;
+  String? originalName;
+
   Search(
       {this.adult,
       this.backdropPath,
@@ -26,4 +30,21 @@ class Search{
       this.firstAirDate,
       this.name,
       this.originalName});
+
+  @override
+  List<Object?> get props => [
+        adult,
+        backdropPath,
+        id,
+        originalName,
+        mediaType,
+        originalTitle,
+        popularity,
+        posterPath,
+        voteAverage,
+        voteCount,
+        name,
+        originalName,
+        firstAirDate,
+      ];
 }

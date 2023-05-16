@@ -93,7 +93,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                   ),
                   child: FittedBox(
                     child: Text(
-                      tvShow.originalName!,
+                      tvShow.name!,
                       maxLines: null,
                       overflow: TextOverflow.visible,
                       style: TextStyle(

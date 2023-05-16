@@ -30,3 +30,15 @@ class InternetServerErrorException extends ServerException{
 class NoInternetConnectionException extends ServerException{
   const NoInternetConnectionException([message]): super("No Internet Connection");
 }
+
+
+class CacheException extends Equatable implements Exception{
+  final String? message;
+  const CacheException([this.message]);
+  @override
+  List<Object?> get props => [message];
+  @override
+  String toString() {
+    return "$message";
+  }
+}

@@ -5,47 +5,94 @@ import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
+import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:shimmer/shimmer.dart';
 class TvShowSearchWidget extends StatelessWidget {
   final Search tvShow;
   const TvShowSearchWidget({Key? key, required this.tvShow}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow),
+      onTap:(){
+        SearchListCubit.get(context).saveSearch(search: tvShow);
+        TvShow tv=TvShow(
+          id: tvShow.id,
+          originalName :tvShow.originalName,
+          name: tvShow.name,
+          posterPath: tvShow.posterPath,
+          backdropPath: tvShow.backdropPath,
+        );
+        GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tv);
+      },
       child: Container(
-        width:20,
         padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-        margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.black26,
         ),
-        height: 140,
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children:  [
             CachedNetworkImage(
               width: 120,
-              height:140,
+              height:180,
               imageUrl: EndPoints.posterUrl(tvShow.posterPath!),
+              imageBuilder: (context, imageProvider) {
+                return Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover
+                      )
+                  ),
+                );
+              },
+              placeholder: (context, url) => Shimmer.fromColors(
+                baseColor: Colors.grey[850]!,
+                highlightColor: Colors.grey[800]!,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(15)),
+                ),
+              ),
             ),
+            10.pw,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
-                  Text("${tvShow.originalName} ${tvShow.releaseDate==""?'':((tvShow.releaseDate!.substring(0,4)))}",style: const TextStyle(
+                  Text("${tvShow.originalName} ${tvShow.releaseDate==""?'':((tvShow.releaseDate!.substring(0,4)))}",
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold
-                  ),),
+                  ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   4.ph,
                   if(tvShow.voteAverage!=0)
                   Row(
                     children:  [
                       const Icon(Icons.star,color: Colors.yellow,),
                       5.pw,
-                      Text("${tvShow.voteAverage!}")
+                      Text("${tvShow.voteAverage!.toStringAsFixed(1)}",style: const TextStyle(
+                          fontWeight: FontWeight.w500
+                      ),)
                     ],
                   ),
                  7.ph,
-                  const Text("in Tv shows"),
+                  Row(
+                    children: [
+                      const Text("IN Tv",style: TextStyle(
+                          fontWeight: FontWeight.bold
+                      ),),
+                      5.pw,
+                      const Icon(Icons.tv_rounded,size: 18,)
+                    ],
+                  ),
                 ],
               ),
             )

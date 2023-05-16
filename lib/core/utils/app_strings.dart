@@ -3,6 +3,7 @@ class AppStrings {
   static String sessionId='';
   static String id="SessionId";
   static String account="account";
+  static String search="search";
   static const String movie="movie";
   static const String tv="tv";
   static const String movieCover="assets/images/movie_cover.jpg";

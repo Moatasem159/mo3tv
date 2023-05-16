@@ -26,7 +26,7 @@ class SearchList extends StatelessWidget {
               }
               return Container();
             },),
-         60.ph
+         65.ph
         ],
       ),
     );
