@@ -7,7 +7,6 @@ import 'package:mo3tv/features/movies/domain/usecases/get_popular_movies_usecase
 import 'package:mo3tv/features/movies/domain/usecases/get_top_rated_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_state.dart';
-
 class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
   MoreMoviesCubit(
      this._popularMoviesUsecase,
@@ -16,9 +15,9 @@ class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
   final GetPopularMoviesUsecase _popularMoviesUsecase;
   final GetTrendingMoviesUsecase _getTrendingMoviesUsecase;
   final GetTopRatedMoviesUsecase _getTopRatedMoviesUsecase;
+  static MoreMoviesCubit get(context)=>BlocProvider.of(context);
   List<Movie> moreMovies=[];
   int page=1;
-
   seeMoreMovies({required int index})async{
     emit(GetMoreMoviesLoadingState());
     Either<Failure, List<Movie>>? response;

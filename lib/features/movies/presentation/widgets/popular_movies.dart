@@ -5,7 +5,6 @@ import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_state.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/horizontal_movie_list.dart';
@@ -21,16 +20,13 @@ class PopularMovies extends StatelessWidget {
             movies: state.popularMovies,
             title:title,
             onPressed: () {
-              BlocProvider.of<MoreMoviesCubit>(context)
-                  .moreMovies
-                  .addAll(state.popularMovies);
               GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
-                extra: SeeMoreParameters(title: title, isMovie: true, index: 2),);
+                extra: SeeMoreParameters(title: title, isMovie: true, index: 2,media: state.popularMovies));
             },
           );
         }
         if(state is GetPopularMoviesLoadingState){
-          return const MediaLoadingList(title: title,);
+          return const MediaLoadingList(title: title);
         }
         if(state is GetPopularMoviesErrorState){
           return MediaErrorList(

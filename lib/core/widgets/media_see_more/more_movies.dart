@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
@@ -10,27 +11,28 @@ import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_state.dart';
 class MoreMovies extends StatelessWidget {
   final String title;
+  final List media;
   final int index;
-  const MoreMovies({Key? key, required this.title, required this.index}) : super(key: key);
+  const MoreMovies({Key? key, required this.title, required this.index, required this.media}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         CustomAppBar(
+          title: title,
           onPressed: () {
-            BlocProvider.of<MoreMoviesCubit>(context).page = 1;
-            BlocProvider.of<MoreMoviesCubit>(context).moreMovies.clear();
             GoRouter.of(context).pop();
           },
-          title: title,
         ),
-         SliverToBoxAdapter(child: 7.ph),
+        SliverToBoxAdapter(child: 7.ph),
         BlocBuilder<MoreMoviesCubit, MoreMoviesStates>(
           builder: (context, state) {
-            MoreMoviesCubit cubit = BlocProvider.of<MoreMoviesCubit>(context);
-            return MoviesList(
-              movieList: cubit.moreMovies,
-            );
+            MoreMoviesCubit cubit = MoreMoviesCubit.get(context);
+            if(cubit.moreMovies.isEmpty)
+              {
+                cubit.moreMovies.addAll(media as List<Movie>);
+              }
+            return MoviesList(movieList: cubit.moreMovies);
           },
         ),
         BlocBuilder<MoreMoviesCubit, MoreMoviesStates>(
@@ -40,9 +42,8 @@ class MoreMovies extends StatelessWidget {
               return const SliverLoadingIndicator();
             }
             return SeeMoreButton(onPressed: () {
-              BlocProvider.of<MoreMoviesCubit>(context)
-                  .seeMoreMovies(index: index);
-            },);
+              BlocProvider.of<MoreMoviesCubit>(context).seeMoreMovies(index: index);
+            });
           },
         ),
       ],

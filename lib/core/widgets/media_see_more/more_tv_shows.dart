@@ -5,32 +5,34 @@ import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
 import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_state.dart';
 class MoreTvShows extends StatelessWidget {
   final String title;
   final int index;
-  const MoreTvShows({Key? key, required this.title, required this.index}) : super(key: key);
+  final List media;
+  const MoreTvShows({Key? key, required this.title, required this.index, required this.media}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         CustomAppBar(
+          title: title,
           onPressed: () {
-           MoreTvShowsCubit.get(context).page = 1;
-           MoreTvShowsCubit.get(context).moreTvShows.clear();
             GoRouter.of(context).pop();
           },
-          title: title,
         ),
-         SliverToBoxAdapter(child: 7.ph),
+        SliverToBoxAdapter(child: 7.ph),
         BlocBuilder<MoreTvShowsCubit, MoreTvShowsStates>(
           builder: (context, state) {
             MoreTvShowsCubit cubit =  MoreTvShowsCubit.get(context);
-            return TvList(
-              tvList: cubit.moreTvShows,
-            );
+            if(cubit.moreTvShows.isEmpty)
+            {
+              cubit.moreTvShows.addAll(media as List<TvShow>);
+            }
+            return TvList(tvList: cubit.moreTvShows);
           },
         ),
         BlocBuilder<MoreTvShowsCubit, MoreTvShowsStates>(
