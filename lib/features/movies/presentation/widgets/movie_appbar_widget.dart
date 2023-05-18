@@ -4,10 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/play_button/play_button.dart';
+
 class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   final Movie movie;
-  final GestureTapCallback ? onTap;
-  MovieDetailsAppBar(this.movie,{this.onTap});
+  final GestureTapCallback? onTap;
+
+  MovieDetailsAppBar(this.movie, {this.onTap});
+
   final double maxSize = 200;
   final double minSize = 70;
   final double maxImageSize = 200;
@@ -15,7 +19,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   final double maxTitleSize = 20;
   final double minTitleSize = 15;
   final double maxIconSize = 20;
-  final double mixIconSize =15;
+  final double mixIconSize = 15;
   final double maxImageMargin = 0;
   final double minImageMargin = 60;
 
@@ -29,7 +33,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
     final titleSize =
         (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
     const maxTitleMargin = 174.0;
-    dynamic textMovement =195;
+    dynamic textMovement = 195;
     final double top = maxTitleMargin + (1 - textMovement * p);
     final maxMargin = size.width / 30;
     const textLeftMovement = 50;
@@ -41,6 +45,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
       child: Container(
         color: Colors.black,
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
             Positioned(
                 bottom: 0,
@@ -64,21 +69,19 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                 top: 5,
                 child: GestureDetector(
                     onTap: () {
-                      if(MovieBottomNavCubit.get(context).index!=0)
-                        {
-                          MovieBottomNavCubit.get(context).changeScreen(0, context, movie.id!);
-                        }
-                      else{
+                      if (MovieBottomNavCubit.get(context).index != 0) {
+                        MovieBottomNavCubit.get(context)
+                            .changeScreen(0, context, movie.id!);
+                      } else {
                         GoRouter.of(context).pop();
                       }
                     },
-                    child:Container(
+                    child: Container(
                       width: iconSize,
-                      height:iconSize,
+                      height: iconSize,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.black12,
-
                       ),
                       child: Icon(
                         Icons.arrow_back,
@@ -90,7 +93,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                 top: top,
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(
-                    maxWidth: 300,
+                    maxWidth: 260,
                   ),
                   child: FittedBox(
                     child: Text(
@@ -104,6 +107,10 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                     ),
                   ),
                 )),
+            Positioned(
+                top: maxSize - shrinkOffset-46/2,
+                right: 25,
+                child: PlayButton(shrinkOffset: shrinkOffset))
           ],
         ),
       ),
@@ -120,3 +127,5 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
 }
+
+

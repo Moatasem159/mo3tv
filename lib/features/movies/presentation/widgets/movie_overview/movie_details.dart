@@ -8,12 +8,17 @@ class MovieDetails extends StatelessWidget {
   const MovieDetails({Key? key, required this.movie}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        MoviePosterWidget(movie: movie),
-        5.pw,
-        const MovieInfo()
+        7.ph,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MoviePosterWidget(movie: movie),
+            5.pw,
+            const MovieInfo()
+          ],
+        ),
       ],
     );
   }
