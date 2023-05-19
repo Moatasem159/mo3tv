@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/presentation/widgets/movie_search_widget.dart';
 import 'package:mo3tv/features/search/presentation/widgets/tv_show_search_widget.dart';
@@ -26,7 +25,6 @@ class SearchList extends StatelessWidget {
               }
               return Container();
             },),
-         65.ph
         ],
       ),
     );

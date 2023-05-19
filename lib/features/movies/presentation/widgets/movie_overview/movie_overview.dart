@@ -21,7 +21,7 @@ class MovieOverview extends StatelessWidget {
             const MovieGenresWidget(),
             const MovieButtons(),
             const MovieDescription(),
-            80.ph,
+            10.ph
           ],
         ),
       ),

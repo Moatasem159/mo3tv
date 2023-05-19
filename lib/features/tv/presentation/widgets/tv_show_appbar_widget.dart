@@ -4,29 +4,28 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_cubit.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_play_button.dart';
 class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
   final TvShow tvShow;
-  final GestureTapCallback ? onTap;
-  TvShowDetailsAppBar(this.tvShow, {this.onTap});
+  final GestureTapCallback onTap;
+  TvShowDetailsAppBar(this.tvShow,{required this.onTap});
   final double maxSize = 200;
   final double minSize = 70;
-  final double maxImageSize = 200;
-  final double minImageSize = 70;
-  final double maxTitleSize = 20;
-  final double minTitleSize = 15;
-  final double maxIconSize = 20;
-  final double mixIconSize = 15;
-  final double maxImageMargin = 0;
-  final double minImageMargin = 60;
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    const double maxImageSize = 200;
+    const double minImageSize = 70;
+    const double maxTitleSize = 20;
+    const double minTitleSize = 15;
+    const double maxIconSize = 20;
+    const double mixIconSize = 15;
+    const double minImageMargin = 60;
     final p = shrinkOffset / maxSize;
     var size = MediaQuery.of(context).size;
     final c = (maxImageSize * (1 - p)).clamp(minImageSize, maxImageSize);
     final iconSize = (maxIconSize * (1 - p)).clamp(mixIconSize, maxIconSize);
-    final titleSize =
-        (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
+    final titleSize = (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
     const maxTitleMargin = 174.0;
     dynamic textMovement = 195;
     final double top = maxTitleMargin + (1 - textMovement * p);
@@ -40,6 +39,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
       child: Container(
         color: Colors.black,
         child: Stack(
+          clipBehavior: Clip.none,
           children: [
             Positioned(
                 bottom: 0,
@@ -88,9 +88,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                 left: left,
                 top: top,
                 child: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 300,
-                  ),
+                  constraints: const BoxConstraints(maxWidth: 300),
                   child: FittedBox(
                     child: Text(
                       tvShow.name!,
@@ -102,7 +100,12 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                       ),
                     ),
                   ),
-                )),
+                ),
+            ),
+            Positioned(
+                top: maxSize - shrinkOffset-46/2,
+                right: 25,
+                child: TvShowPlayButton(shrinkOffset: shrinkOffset))
           ],
         ),
       ),

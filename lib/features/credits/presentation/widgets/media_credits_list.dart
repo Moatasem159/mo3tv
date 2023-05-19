@@ -41,7 +41,7 @@ class MediaCreditsList extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 5),
           ),
-           SliverToBoxAdapter(child: 72.ph)
+           SliverToBoxAdapter(child: 10.ph)
         ],
       ),
     );

@@ -24,28 +24,22 @@ class MainScreenBody extends StatelessWidget {
             },
             child: SafeArea(
               child: Scaffold(
-                resizeToAvoidBottomInset:false,
                 backgroundColor: Theme.of(context).colorScheme.background,
-                body: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    cubit.screens[cubit.index],
-                    CustomBottomNav(
-                      index: cubit.index,
-                      onTap1: () {
-                        cubit.changeIndex(0, context);
-                      },
-                      onTap2: () {
-                        cubit.changeIndex(1, context);
-                      },
-                      onTap3: () {
-                        cubit.changeIndex(2, context);
-                      },
-                      onTap4: () {
-                        cubit.changeIndex(3, context);
-                      },
-                    ),
-                  ],
+                body:cubit.screens[cubit.index],
+                bottomNavigationBar:CustomBottomNav(
+                  index: cubit.index,
+                  onTap1: () {
+                    cubit.changeIndex(0, context);
+                  },
+                  onTap2: () {
+                    cubit.changeIndex(1, context);
+                  },
+                  onTap3: () {
+                    cubit.changeIndex(2, context);
+                  },
+                  onTap4: () {
+                    cubit.changeIndex(3, context);
+                  },
                 ),
               ),
             ),

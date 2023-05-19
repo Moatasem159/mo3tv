@@ -64,7 +64,6 @@ class _BackdropsListState extends State<BackdropsList> {
             ],
           ),
         ),
-        SliverToBoxAdapter(child: 70.ph)
       ],
     );
   }

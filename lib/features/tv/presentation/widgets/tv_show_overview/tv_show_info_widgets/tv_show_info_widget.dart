@@ -6,22 +6,45 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_info_widgets/tv_show_name.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_info_widgets/tv_show_tagline.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_info_widgets/type_widget.dart';
-class TvShowInfoWidget extends StatelessWidget {
+class TvShowInfoWidget extends StatefulWidget {
   final TvShow tvShow;
   const TvShowInfoWidget({super.key,required this.tvShow});
+
+  @override
+  State<TvShowInfoWidget> createState() => _TvShowInfoWidgetState();
+}
+
+class _TvShowInfoWidgetState extends State<TvShowInfoWidget> with SingleTickerProviderStateMixin {
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 700));
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(_fadeController);
+    _fadeController.forward();
+  }
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TvShowName(name:tvShow.originalName!,firstAirDate: tvShow.firstAirDate!),
-          TvShowTagline(tagline: tvShow.tagline!),
-          SeasonNumberWidget(tvShow: tvShow),
-          StatusWidget(status:  tvShow.status!),
-          TypeWidget(type:tvShow.type!),
-          CreatorWidget(tvShow: tvShow),
-        ],
+      child: FadeTransition(
+        opacity: _fadeAnimation,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TvShowName(name:widget.tvShow.originalName!,firstAirDate: widget.tvShow.firstAirDate!),
+            TvShowTagline(tagline: widget.tvShow.tagline!),
+            SeasonNumberWidget(tvShow: widget.tvShow),
+            StatusWidget(status:  widget.tvShow.status!),
+            TypeWidget(type:widget.tvShow.type!),
+            CreatorWidget(tvShow: widget.tvShow),
+          ],
+        ),
       ),
     );
   }

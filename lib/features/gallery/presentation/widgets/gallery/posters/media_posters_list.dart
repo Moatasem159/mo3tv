@@ -65,7 +65,7 @@ class _MediaPostersListState extends State<MediaPostersList> {
               ],
             ),
           ),
-        SliverToBoxAdapter(child: 70.ph)
+
       ],
     );
   }

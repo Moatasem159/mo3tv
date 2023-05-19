@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class MediaBottomNav extends StatelessWidget {
@@ -20,39 +19,28 @@ class MediaBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Container(
-        clipBehavior: Clip.antiAlias,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        width: MediaQuery.of(context).size.width-30,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.white10,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX:3.5,sigmaY:3.5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children:  [
-              GestureDetector(
-                  onTap: onTap1,
-                  child:Icon(Icons.info_outline,color: index==0?Colors.red:Colors.white)),
-              GestureDetector(
-                  onTap: onTap2,
-                  child: Icon(Icons.tv_rounded,color: index==1?Colors.red:Colors.white)),
-              GestureDetector(
-                  onTap: onTap3,child: Icon(Icons.comment,color: index==2?Colors.red:Colors.white)),
-              GestureDetector(
-                  onTap: onTap4,
-                  child: Icon(FontAwesomeIcons.peopleGroup,color:index==3?Colors.red:Colors.white)),
-              GestureDetector(
-                  onTap: onTap5,
-                  child: Icon(FontAwesomeIcons.solidImages,color: index==4?Colors.red:Colors.white)),
-            ],
-          ),
-        ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      height: 50,
+      color:Theme.of(context).colorScheme.background,
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children:  [
+          GestureDetector(
+              onTap: onTap1,
+              child:Icon(Icons.info_outline,color: index==0?Colors.red:Colors.white)),
+          GestureDetector(
+              onTap: onTap2,
+              child: Icon(Icons.tv_rounded,color: index==1?Colors.red:Colors.white)),
+          GestureDetector(
+              onTap: onTap3,child: Icon(Icons.comment,color: index==2?Colors.red:Colors.white)),
+          GestureDetector(
+              onTap: onTap4,
+              child: Icon(FontAwesomeIcons.peopleGroup,color:index==3?Colors.red:Colors.white)),
+          GestureDetector(
+              onTap: onTap5,
+              child: Icon(FontAwesomeIcons.solidImages,color: index==4?Colors.red:Colors.white)),
+        ],
       ),
     );
   }

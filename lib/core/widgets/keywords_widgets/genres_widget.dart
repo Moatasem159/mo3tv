@@ -2,50 +2,72 @@ import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 
-class GenresWidget extends StatelessWidget {
+class GenresWidget extends StatefulWidget {
   final List<Keyword> genres;
   final num runTime;
   final bool isTvShow;
   const GenresWidget({Key? key, required this.genres, required this.runTime, required this.isTvShow}) : super(key: key);
 
   @override
+  State<GenresWidget> createState() => _GenresWidgetState();
+}
+
+class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderStateMixin{
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 700));
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(_fadeController);
+    _fadeController.forward();
+  }
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Wrap(
-          runSpacing: 5,
-          spacing: 7,
-          children: genres.map((e){
-            return Wrap(
-                children: [
-                  Text(genres.last.id !=e.id?
-                  "${e.name},": "${e.name}",style:const TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),),
-                  if(e.id==genres.last.id&&runTime!=0)
-                    Wrap(
-                      children: [
-                        5.pw,
-                        const Padding(
-                          padding: EdgeInsets.only(top: 7),
-                          child: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: Colors.white,
+    return FadeTransition(
+      opacity: _fadeAnimation,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Wrap(
+            runSpacing: 5,
+            spacing: 7,
+            children: widget.genres.map((e){
+              return Wrap(
+                  children: [
+                    Text(widget.genres.last.id !=e.id?
+                    "${e.name},": "${e.name}",style:const TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),),
+                    if(e.id==widget.genres.last.id&&widget.runTime!=0)
+                      Wrap(
+                        children: [
+                          5.pw,
+                          const Padding(
+                            padding: EdgeInsets.only(top: 7),
+                            child: CircleAvatar(
+                              radius: 3,
+                              backgroundColor: Colors.white,
+                            ),
                           ),
-                        ),
-                        5.pw,
-                        if(isTvShow)
-                        Text("${runTime}m",
-                          style:const TextStyle(fontWeight: FontWeight.bold) ,),
-                        if(!isTvShow)
-                        Text("${runTime ~/ 60}h ${runTime % 60}m",
-                            style:const TextStyle(
-                            fontWeight: FontWeight.bold
-                        ),),
-                      ],)
-                ]
-            );
-          }).toList()
+                          5.pw,
+                          if(widget.isTvShow)
+                          Text("${widget.runTime}m",
+                            style:const TextStyle(fontWeight: FontWeight.bold) ,),
+                          if(!widget.isTvShow)
+                          Text("${widget.runTime ~/ 60}h ${widget.runTime % 60}m",
+                              style:const TextStyle(
+                              fontWeight: FontWeight.bold
+                          ),),
+                        ],)
+                  ]
+              );
+            }).toList()
+        ),
       ),
     );
   }

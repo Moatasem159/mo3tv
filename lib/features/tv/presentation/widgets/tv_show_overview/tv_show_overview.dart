@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/network_widgets/tv_show_networks.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_buttons/tv_show_buttons.dart';
@@ -20,10 +19,9 @@ class TvShowOverview extends StatelessWidget {
           children: [
             TvShowDetails(tvShow: tvShow),
             const TvShowGenresWidget(),
-            const TvShowNetworks(),
             const TvShowButtons(),
+            const TvShowNetworks(),
             const TvShowDescription(),
-            60.ph
           ],
         ),
       ),

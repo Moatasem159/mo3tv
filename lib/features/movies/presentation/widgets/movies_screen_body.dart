@@ -12,13 +12,12 @@ class MoviesScreenBody extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children:[
-          30.ph,
+          20.ph,
           const PlayingNowMovies(),
-          15.ph,
+          10.ph,
           const TrendingMovies(),
           const PopularMovies(),
           const TopRatedMovies(),
-          65.ph,
         ],
       ),
     );

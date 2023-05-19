@@ -29,8 +29,7 @@ class MovieDetailsScreen extends StatefulWidget {
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   ScrollController nestedController = ScrollController();
   final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
-  final SliverOverlapAbsorberHandle disconnectBar =
-      SliverOverlapAbsorberHandle();
+  final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
   late List<Widget> screens;
   @override
   void initState() {
@@ -84,86 +83,80 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   length: 3,
                   child: SafeArea(
                     child: Scaffold(
-                      resizeToAvoidBottomInset: false,
                       backgroundColor:Theme.of(context).colorScheme.background,
-                      body: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          NestedScrollView(
-                            controller: nestedController,
-                            physics: const ClampingScrollPhysics(),
-                            headerSliverBuilder: (context, innerBoxIsScrolled) {
-                              return [
-                                SliverOverlapAbsorber(
-                                  handle: appBar,
-                                  sliver: SliverPersistentHeader(
-                                    delegate: MovieDetailsAppBar(
-                                      widget.movie,
-                                      onTap: () {
-                                        nestedController.animateTo(0,
-                                            duration:
-                                                const Duration(milliseconds: 500),
-                                            curve: Curves.ease);
-                                      },
-                                    ),
-                                    pinned: true,
-                                  ),
+                      body: NestedScrollView(
+                        controller: nestedController,
+                        physics: const ClampingScrollPhysics(),
+                        headerSliverBuilder: (context, innerBoxIsScrolled) {
+                          return [
+                            SliverOverlapAbsorber(
+                              handle: appBar,
+                              sliver: SliverPersistentHeader(
+                                delegate: MovieDetailsAppBar(
+                                  widget.movie,
+                                  onTap: () {
+                                    nestedController.animateTo(0,
+                                        duration:
+                                            const Duration(milliseconds: 500),
+                                        curve: Curves.ease);
+                                  },
                                 ),
-                                if (cubit.isGallery)
-                                  SliverOverlapAbsorber(
-                                    handle: disconnectBar,
-                                    sliver: GalleryTabBar(
-                                      onTap: (value) {
-                                        GalleryNavigatorCubit.get(context).gallery(value);
-                                      },
-                                    ),
-                                  ),
-                              ];
-                            },
-                            body: CustomScrollView(
-                              slivers: [
-                                SliverOverlapInjector(handle: appBar),
-                                if (cubit.isGallery)
-                                  SliverOverlapInjector(handle: disconnectBar),
-                                SliverToBoxAdapter(child: 15.ph),
-                                screens[cubit.index],
-                              ],
+                                pinned: true,
+                              ),
                             ),
-                          ),
-                          MediaBottomNav(
-                            index: cubit.index,
-                            onTap1: () {
-                              nestedController.animateTo(0,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease);
-                              cubit.changeScreen(0, context, widget.movie.id!);
-                            },
-                            onTap2: () {
-                              nestedController.animateTo(0,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease);
-                              cubit.changeScreen(1, context, widget.movie.id!);
-                            },
-                            onTap3: () {
-                              nestedController.animateTo(0,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease);
-                              cubit.changeScreen(2, context, widget.movie.id!);
-                            },
-                            onTap4: () {
-                              nestedController.animateTo(0,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease);
-                              cubit.changeScreen(3, context, widget.movie.id!);
-                            },
-                            onTap5: () {
-                              nestedController.animateTo(0,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.ease);
-                              cubit.changeScreen(4, context, widget.movie.id!);
-                            },
-                          ),
-                        ],
+                            if (cubit.isGallery)
+                              SliverOverlapAbsorber(
+                                handle: disconnectBar,
+                                sliver: GalleryTabBar(
+                                  onTap: (value) {
+                                    GalleryNavigatorCubit.get(context).gallery(value);
+                                  },
+                                ),
+                              ),
+                          ];
+                        },
+                        body: CustomScrollView(
+                          slivers: [
+                            SliverOverlapInjector(handle: appBar),
+                            if (cubit.isGallery)
+                              SliverOverlapInjector(handle: disconnectBar),
+                            SliverToBoxAdapter(child: 15.ph),
+                            screens[cubit.index],
+                          ],
+                        ),
+                      ),
+                      bottomNavigationBar:MediaBottomNav(
+                        index: cubit.index,
+                        onTap1: () {
+                          nestedController.animateTo(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                          cubit.changeScreen(0, context, widget.movie.id!);
+                        },
+                        onTap2: () {
+                          nestedController.animateTo(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                          cubit.changeScreen(1, context, widget.movie.id!);
+                        },
+                        onTap3: () {
+                          nestedController.animateTo(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                          cubit.changeScreen(2, context, widget.movie.id!);
+                        },
+                        onTap4: () {
+                          nestedController.animateTo(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                          cubit.changeScreen(3, context, widget.movie.id!);
+                        },
+                        onTap5: () {
+                          nestedController.animateTo(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                          cubit.changeScreen(4, context, widget.movie.id!);
+                        },
                       ),
                     ),
                   ),

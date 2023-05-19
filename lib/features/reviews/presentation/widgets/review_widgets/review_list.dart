@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/reviews/domain/entities/review.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/review_widget.dart';
 class MediaReviewsList extends StatelessWidget {
   final List<Review> reviews ;
@@ -35,7 +34,7 @@ class MediaReviewsList extends StatelessWidget {
               ],
             ),
           ),
-          SliverToBoxAdapter(child: 60.ph)
+
         ],
       ),
     );

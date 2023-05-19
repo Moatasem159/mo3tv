@@ -57,9 +57,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
             ),
           ),
           TvList(tvList: recommendationTvShows),
-          SliverToBoxAdapter(
-            child: 75.ph,
-          )
+          SliverToBoxAdapter(child: 10.ph)
         ],
       ),
     );

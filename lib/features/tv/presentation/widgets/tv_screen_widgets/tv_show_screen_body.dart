@@ -12,13 +12,12 @@ class TvScreenBody extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children:[
-          30.ph,
+          20.ph,
           const PlayingNowTvShowsWidget(),
-          15.ph,
+          10.ph,
           const TrendingTvShow(),
           const PopularTvShow(),
           const TopRatedTvShow(),
-          65.ph
         ],
       ),
     );

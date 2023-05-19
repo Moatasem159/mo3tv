@@ -66,7 +66,6 @@ class _MediaLogosListState extends State<MediaLogosList> {
               ],
             ),
           ),
-        SliverToBoxAdapter(child: 70.ph),
       ],
     );
   }

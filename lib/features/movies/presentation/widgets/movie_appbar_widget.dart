@@ -4,42 +4,35 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/play_button/play_button.dart';
-
+import 'package:mo3tv/features/movies/presentation/widgets/movie_play_button.dart';
 class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   final Movie movie;
-  final GestureTapCallback? onTap;
-
-  MovieDetailsAppBar(this.movie, {this.onTap});
-
+  final GestureTapCallback onTap;
+  MovieDetailsAppBar(this.movie, {required this.onTap});
   final double maxSize = 200;
   final double minSize = 70;
-  final double maxImageSize = 200;
-  final double minImageSize = 70;
-  final double maxTitleSize = 20;
-  final double minTitleSize = 15;
-  final double maxIconSize = 20;
-  final double mixIconSize = 15;
-  final double maxImageMargin = 0;
-  final double minImageMargin = 60;
-
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent){
+   const double maxImageSize = 200;
+    const double minImageSize = 70;
+    const double maxTitleSize = 20;
+    const double minTitleSize = 15;
+    const double maxIconSize = 20;
+    const double mixIconSize = 15;
+    const double minImageMargin = 60;
     final p = shrinkOffset / maxSize;
-    var size = MediaQuery.of(context).size;
-    final c = (maxImageSize * (1 - p)).clamp(minImageSize, maxImageSize);
-    final iconSize = (maxIconSize * (1 - p)).clamp(mixIconSize, maxIconSize);
-    final titleSize =
-        (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
-    const maxTitleMargin = 174.0;
-    dynamic textMovement = 195;
-    final double top = maxTitleMargin + (1 - textMovement * p);
-    final maxMargin = size.width / 30;
-    const textLeftMovement = 50;
-    final left = maxMargin + (textLeftMovement * p);
-    final radius = 15 * p;
+    var screenSize = MediaQuery.of(context).size;
+    final imageHeight = (maxImageSize * (1 - p)).clamp(minImageSize, maxImageSize);
     final imageMargin = (minImageMargin * (p));
+    final imageRadius = 15 * p;
+    final iconSize = (maxIconSize * (1 - p)).clamp(mixIconSize, maxIconSize);
+    final titleSize = (maxTitleSize * (1 - p)).clamp(minTitleSize, maxTitleSize);
+    const maxTitleMargin = 174.0;
+    const textTopMovement = 195;
+    const textLeftMovement = 50;
+    final maxMargin = screenSize.width / 30;
+    final textTop = maxTitleMargin + (1 - textTopMovement * p);
+    final textLeft = maxMargin + (textLeftMovement * p);
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -50,13 +43,13 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
             Positioned(
                 bottom: 0,
                 left: imageMargin,
-                height: c,
+                height: imageHeight,
                 child: Container(
-                  width: size.width,
+                  width: screenSize.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(radius),
-                          topLeft: Radius.circular(radius)),
+                          bottomLeft: Radius.circular(imageRadius),
+                          topLeft: Radius.circular(imageRadius)),
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
@@ -89,8 +82,8 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                       ),
                     ))),
             Positioned(
-                left: left,
-                top: top,
+                left: textLeft,
+                top: textTop,
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(
                     maxWidth: 260,
@@ -110,22 +103,16 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
             Positioned(
                 top: maxSize - shrinkOffset-46/2,
                 right: 25,
-                child: PlayButton(shrinkOffset: shrinkOffset))
+                child: MoviePlayButton(shrinkOffset: shrinkOffset))
           ],
         ),
       ),
     );
-    // 4.3
   }
-
   @override
   double get maxExtent => maxSize;
-
   @override
   double get minExtent => minSize;
-
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => false;
 }
-
-
