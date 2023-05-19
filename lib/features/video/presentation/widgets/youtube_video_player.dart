@@ -16,7 +16,7 @@ class _YoutubePlayerVideoState extends State<YoutubePlayerVideo> {
       videoId: YoutubePlayerController.convertUrlToId(widget.url)!,
       params:const YoutubePlayerParams(
         color: "red",
-        showVideoAnnotations: false,
+        showVideoAnnotations: false
       ),
       autoPlay: false,
     );
@@ -33,21 +33,12 @@ class _YoutubePlayerVideoState extends State<YoutubePlayerVideo> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: Colors.white)
-      ),
-      child: YoutubePlayerControllerProvider(
-          controller: controller,
-          child:SizedBox(
-            height: 500,
-            child: YoutubePlayer(
+    return Center(
+      child: SizedBox(
+        child: YoutubePlayer(
         controller:controller,
       ),
-          )),
+      ),
     );
   }
 }

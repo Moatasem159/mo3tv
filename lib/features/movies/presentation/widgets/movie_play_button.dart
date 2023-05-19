@@ -4,7 +4,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/m
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
-import 'package:mo3tv/core/widgets/video_widget/play_button_widget.dart';
+import 'package:mo3tv/features/video/presentation/widgets/play_button_widget.dart';
 class MoviePlayButton extends StatelessWidget {
   final double shrinkOffset;
   const MoviePlayButton({super.key, required this.shrinkOffset});

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/widgets/video_widget/video_dialog.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 class PlayButtonWidget extends StatefulWidget {
   final String url;
   final String name;
@@ -31,15 +32,11 @@ class _PlayButtonWidgetState extends State<PlayButtonWidget> with SingleTickerPr
         opacity: (1 - widget.shrinkOffset / 130),
         child: GestureDetector(
           onTap: () {
-            showDialog(
-              context: context,
-              builder: (_) {
-                return VideoDialog(
-                  url: widget.url,
-                  title:widget.name,
-                );
-              },
-            );
+            GoRouter.of(context).pushNamed(Routes.trailerScreenRoute,queryParameters:
+            {
+              "url":widget.url,
+              "title":widget.name
+            });
           },
           child: Container(
             width: 45,

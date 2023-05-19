@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/core/widgets/video_widget/play_button_widget.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
+import 'package:mo3tv/features/video/presentation/widgets/play_button_widget.dart';
 class TvShowPlayButton extends StatelessWidget {
   final double shrinkOffset;
   const TvShowPlayButton({super.key, required this.shrinkOffset});

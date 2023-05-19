@@ -14,6 +14,7 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/screens/season_details_screen.dart';
 import 'package:mo3tv/features/tv/presentation/screens/similar_tv_shows_screen.dart';
 import 'package:mo3tv/features/tv/presentation/screens/tv_show_details_screen.dart';
+import 'package:mo3tv/features/video/presentation/screens/trailer_screen.dart';
 class Routes {
   static const String initialRoute= "/";
   static const String loginRoute= "/loginRoute";
@@ -25,6 +26,7 @@ class Routes {
   static const String seasonRoute= "/seasonRoute";
   static const String accountMediaLists= "/accountMediaLists";
   static const String imageScreenRoute= "/imageScreenRoute";
+  static const String trailerScreenRoute= "/trailerScreenRoute";
 }
 
 
@@ -101,6 +103,13 @@ abstract class AppRoute{
         path: Routes.imageScreenRoute,
         builder: (context, state) =>  ImageScreen(
           image: state.queryParameters["image"]!,
+        )),
+      GoRoute(
+        name:  Routes.trailerScreenRoute,
+        path: Routes.trailerScreenRoute,
+        builder: (context, state) =>  TrailerScreen(
+          title:state.queryParameters["title"]!,
+          url:state.queryParameters["url"]!,
         )),
 
     ],
