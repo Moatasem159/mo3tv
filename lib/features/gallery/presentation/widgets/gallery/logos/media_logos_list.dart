@@ -12,6 +12,20 @@ class MediaLogosList extends StatefulWidget {
   State<MediaLogosList> createState() => _MediaLogosListState();
 }
 class _MediaLogosListState extends State<MediaLogosList> {
+  late List<ImageEntity>_logos;
+  String getFileExtension(String fileName) {
+    return ".${fileName.split('.').last}";
+  }
+  @override
+  void initState() {
+    super.initState();
+    _logos=[];
+    for (var element in widget.logos) {
+      if(getFileExtension(element.filePath!)!=".svg"){
+        _logos.add(element);
+      }
+    }
+  }
   int _page = 0;
   final int _perPage = 4;
   @override
@@ -20,7 +34,7 @@ class _MediaLogosListState extends State<MediaLogosList> {
       shrinkWrap: true,
       physics: const ScrollPhysics(),
       slivers: [
-        ImageListTitle(length: widget.logos.length,title: "Logos"),
+        ImageListTitle(length:_logos.length,title: "Logos"),
         SliverGrid(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 1.5,
@@ -28,16 +42,16 @@ class _MediaLogosListState extends State<MediaLogosList> {
               mainAxisSpacing: 10,
               crossAxisSpacing: 7),
           delegate: SliverChildBuilderDelegate(
-            childCount:widget.logos.length>4? pagination(widget.logos,_page,_perPage).length:widget.logos.length,
+            childCount:_logos.length>4? pagination(_logos,_page,_perPage).length:_logos.length,
                 (context, index) {
-                  return GalleryImage(image:widget.logos.length>4? pagination(widget.logos,_page,_perPage)[index]:
-                  widget.logos[index]);
+                  return GalleryImage(image:_logos.length>4? pagination(_logos,_page,_perPage)[index]:
+                  _logos[index]);
           }
 
         ),
         ),
         SliverToBoxAdapter(child: 20.ph),
-        if(widget.logos.length>4)
+        if(_logos.length>4)
         SliverToBoxAdapter(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +66,9 @@ class _MediaLogosListState extends State<MediaLogosList> {
                         });
                     },
                     label: "prev"),
-                if(((_page * _perPage) + _perPage)<widget.logos.length&&_page>0)
+                if(((_page * _perPage) + _perPage)<_logos.length&&_page>0)
                 100.pw,
-                if(((_page * _perPage) + _perPage)<widget.logos.length)
+                if(((_page * _perPage) + _perPage)<_logos.length)
                 MainButton(
                     size: const Size(70,35),
                     radius: 5,

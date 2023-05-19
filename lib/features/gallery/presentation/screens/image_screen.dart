@@ -1,14 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:mo3tv/core/api/end_points.dart';
-
 class ImageScreen extends StatelessWidget {
   final String image;
-
   const ImageScreen({Key? key, required this.image}) : super(key: key);
-
   save(context) async {
     await GallerySaver.saveImage(EndPoints.hdUrl(image),
             toDcim: true, albumName: "Mo3tv")
@@ -18,31 +14,24 @@ class ImageScreen extends StatelessWidget {
           content: Text("Downloaded successfully")));
     });
   }
-  String getFileExtension(String fileName) {
-    return ".${fileName.split('.').last}";
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor:  Theme.of(context).colorScheme.background,
           elevation: 0,
-          title: IconButton(
+          title:IconButton(
               icon: const Icon(Icons.download), onPressed: () => save(context)),
         ),
-        backgroundColor: Colors.black26,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: Hero(
           tag: image,
           child: InteractiveViewer(
             child: Center(
-              child: getFileExtension(image)==".svg"?
-              SvgPicture.network(EndPoints.backDropsUrl(image)):
-              CachedNetworkImage(
+              child: CachedNetworkImage(
                   fit: BoxFit.contain,
-                  imageUrl: EndPoints.hdUrl(image)),
-            ),
+                  imageUrl: EndPoints.hdUrl(image))),
           ),
         ),
       ),
