@@ -28,7 +28,22 @@ class MoviesRepositoryImpl implements MovieRepository {
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
+  @override
+  Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _movieRemoteDataSource.getTrendingMovies(page: page);
+        result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
   @override
   Future<Either<Failure, List<Movie>>> getPopularMovies({required int page}) async {
     if(await _networkInfo.isConnected)
@@ -45,7 +60,6 @@ class MoviesRepositoryImpl implements MovieRepository {
     return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, List<Movie>>> getTopRatedMovies({required int page}) async {
    if(await _networkInfo.isConnected)
@@ -62,7 +76,6 @@ class MoviesRepositoryImpl implements MovieRepository {
      return left(const ServerFailure(AppStrings.noInternetConnection));
    }
   }
-
   @override
   Future<Either<Failure, Movie>> getMovieDetails({required int movieId}) async {
     if(await _networkInfo.isConnected){
@@ -78,7 +91,6 @@ class MoviesRepositoryImpl implements MovieRepository {
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, List<Movie>>> getMovieRecommendations({required int movieId}) async {
     if(await _networkInfo.isConnected)
@@ -96,6 +108,22 @@ class MoviesRepositoryImpl implements MovieRepository {
     }
   }
   @override
+  Future<Either<Failure, List<Movie>>> getSimilarMovies({required int movieId, required int page}) async{
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page);
+        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
+  @override
   Future<Either<Failure, Message>> deleteMovieRate({required int movieId})async {
     if(await _networkInfo.isConnected)
     {
@@ -110,7 +138,6 @@ class MoviesRepositoryImpl implements MovieRepository {
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
   Future<Either<Failure, Message>> rateMovie({required rate,required int movieId})async {
     if(await _networkInfo.isConnected)
@@ -126,63 +153,12 @@ class MoviesRepositoryImpl implements MovieRepository {
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
-
   @override
-  Future<Either<Failure, Message>> markMovieFav({required int movieId, required bool fav})async {
+  Future<Either<Failure, Message>> markMovie({required int movieId, required bool mark,required String markType})async {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _movieRemoteDataSource.markMovieAsFavourite(movieId: movieId,fav: fav);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-
-  @override
-  Future<Either<Failure, Message>> addMovieToWatchlist({required int movieId, required bool watchlist}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _movieRemoteDataSource.addMovieToWatchList(movieId: movieId,watchList: watchlist);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _movieRemoteDataSource.getTrendingMovies(page: page);
-        result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Movie>>> getSimilarMovies({required int movieId, required int page}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page);
-        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
+        final result = await _movieRemoteDataSource.markMovie(movieId: movieId,mark: mark,markType:markType);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

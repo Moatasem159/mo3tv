@@ -13,8 +13,7 @@ abstract class TvShowRemoteDataSource {
   Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});
   Future<List<TvShowModel>> getTvShowRecommendations({required int tvId});
   Future<List<TvShowModel>> getSimilarTvShows({required int tvId,required int page});
-  Future<MessageModel> markTvShowAsFavourite({required int tvId,required bool fav});
-  Future<MessageModel> addTvShowToWatchList({required int tvId,required bool watchList});
+  Future<MessageModel> markTvShow({required int tvId,required bool mark,required String markType});
   Future<MessageModel> rateTvShow({required dynamic rate,required int tvId});
   Future<MessageModel> deleteTvShowRate({required int tvId});
 }
@@ -25,6 +24,11 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
   Future<List<TvShowModel>> getNowPlayingTvShows({required int page}) async{
     final response = await _apiConsumer.get(EndPoints.nowPlayingMediaPath(
         page: page, mediaType: AppStrings.tv, nowPlaying: "on_the_air"));
+    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
+  }
+  @override
+  Future<List<TvShowModel>> getTrendingTvShows({required int page}) async{
+    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(page: page,mediaType: "tv"));
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
@@ -48,22 +52,22 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
-  Future<MessageModel> markTvShowAsFavourite({required int tvId, required bool fav}) async{
-    final response = await _apiConsumer.post(EndPoints.favMediaPath(AppStrings.sessionId),
-        body:{
-          "media_type":AppStrings.tv,
-          "media_id": tvId,
-          "favorite": fav
-        });
-    return MessageModel.fromJson(response);
+  Future<List<TvShowModel>> getSimilarTvShows({required int tvId, required int page})async {
+    final response = await _apiConsumer.get(EndPoints.similarMediaPath(tvId,page,AppStrings.tv));
+    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
-  Future<MessageModel> addTvShowToWatchList({required int tvId, required bool watchList})async {
-    final response = await _apiConsumer.post(EndPoints.addMediaToWatchListPath(AppStrings.sessionId),
+  Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber}) async{
+    final response = await _apiConsumer.get(EndPoints.tvShowSeasonDetailsPath(tvShowId,seasonNumber));
+    return TvShowSeasonModel.fromJson(response);
+  }
+  @override
+  Future<MessageModel> markTvShow({required int tvId, required bool mark,required String markType}) async{
+    final response = await _apiConsumer.post(EndPoints.markMediaPath(AppStrings.sessionId,markType),
         body:{
           "media_type":AppStrings.tv,
           "media_id": tvId,
-          "watchlist": watchList
+          markType: mark
         });
     return MessageModel.fromJson(response);
   }
@@ -79,20 +83,5 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
           "value":rate,
         });
     return MessageModel.fromJson(response);
-  }
-  @override
-  Future<List<TvShowModel>> getTrendingTvShows({required int page}) async{
-    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(page: page,mediaType: "tv"));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
-  }
-  @override
-  Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber}) async{
-    final response = await _apiConsumer.get(EndPoints.tvShowSeasonDetailsPath(tvShowId,seasonNumber));
-    return TvShowSeasonModel.fromJson(response);
-  }
-  @override
-  Future<List<TvShowModel>> getSimilarTvShows({required int tvId, required int page})async {
-    final response = await _apiConsumer.get(EndPoints.similarMediaPath(tvId,page,AppStrings.tv));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
 }

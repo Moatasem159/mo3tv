@@ -7,7 +7,6 @@ import 'package:mo3tv/features/account/presentation/cubit/fav_tv_show_cubit/acco
 import 'package:mo3tv/features/account/presentation/cubit/rated_tv_show_cubit/account_rated_tv_shows_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/tv_show_watchlist/account_tv_show_watchlist_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
@@ -15,11 +14,9 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_sh
 class TvShowButtonsCubit extends Cubit<TvShowButtonsStates> {
   TvShowButtonsCubit(
       this._markTvShowAsFavUsecase,
-      this._addTvShowToWatchListUseCase,
       this._deleteTvShowRateUseCase,
       this._rateTvShowUseCase) : super(TvShowButtonsInitialState());
-  final MarkTvShowAsFavUsecase _markTvShowAsFavUsecase;
-  final AddTvShowToWatchListUseCase _addTvShowToWatchListUseCase;
+  final MarkTvShowUsecase _markTvShowAsFavUsecase;
   final RateTvShowUseCase _rateTvShowUseCase;
   final DeleteTvShowRateUseCase _deleteTvShowRateUseCase;
   static TvShowButtonsCubit get(context)=>BlocProvider.of(context);
@@ -27,7 +24,7 @@ class TvShowButtonsCubit extends Cubit<TvShowButtonsStates> {
   Future<void> favTvShow({required int tvId,required bool fav})async{
     emit(FavTvShowLoadingState());
     Either<Failure, Message> response =
-    await _markTvShowAsFavUsecase.call(tvId: tvId,fav: fav);
+    await _markTvShowAsFavUsecase.call(tvId: tvId,mark: fav,markType: "favorite");
     emit(response.fold((l){
       return FavTvShowErrorState(msg: mapFailureToMsg(l));
     }, (r){
@@ -37,7 +34,7 @@ class TvShowButtonsCubit extends Cubit<TvShowButtonsStates> {
   Future<void> addTvShowToWatchList({required int tvId,required bool watchlist})async{
     emit(AddToWatchListLoadingState());
     Either<Failure, Message> response =
-    await _addTvShowToWatchListUseCase.call(tvId: tvId,watchlist: watchlist);
+    await _markTvShowAsFavUsecase.call(tvId: tvId,mark: watchlist,markType: "watchlist");
     emit(response.fold((l){
       return AddToWatchListErrorState(msg: mapFailureToMsg(l));
     }, (r){
@@ -61,7 +58,6 @@ class TvShowButtonsCubit extends Cubit<TvShowButtonsStates> {
       return RateTvShowSuccessState(r.statusCode!);
     }));
   }
-
   markFav(context){
     if(tvShow!.tvShowAccountDetails!.favorite!){
       favTvShow(tvId: tvShow!.id!, fav: false);

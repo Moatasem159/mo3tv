@@ -46,7 +46,6 @@ import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/features/movies/data/repositories/movies_repository_impl.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
-import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
@@ -85,7 +84,6 @@ import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/searc
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
-import 'package:mo3tv/features/tv/domain/usecases/add_tv_show_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_now_playing_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_popular_tv_shows_usecase.dart';
@@ -191,7 +189,7 @@ gallery(){
 movie(){
   ///cubits
   sl.registerFactory<MovieCubit>(() => MovieCubit(sl()));
-  sl.registerFactory<MovieButtonsCubit>(() => MovieButtonsCubit(sl(),sl(),sl(),sl()));
+  sl.registerFactory<MovieButtonsCubit>(() => MovieButtonsCubit(sl(),sl(),sl()));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
   sl.registerFactory<RecommendationsMovieCubit>(()=>RecommendationsMovieCubit(sl()));
   sl.registerFactory<SimilarMovieCubit>(()=>SimilarMovieCubit(sl()));
@@ -209,8 +207,7 @@ movie(){
   sl.registerLazySingleton<GetSimilarMovieUseCase>(() => GetSimilarMovieUseCase(sl()));
   sl.registerLazySingleton<RateMovieUseCase>(() => RateMovieUseCase(sl()));
   sl.registerLazySingleton<DeleteRateMovieUseCase>(() => DeleteRateMovieUseCase(sl()));
-  sl.registerLazySingleton<MarkMovieAsFavUsecase>(() => MarkMovieAsFavUsecase(sl()));
-  sl.registerLazySingleton<AddMovieToWatchListUseCase>(() => AddMovieToWatchListUseCase(sl()));
+  sl.registerLazySingleton<MarkMovieUsecase>(() => MarkMovieUsecase(sl()));
   ///repository
   sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
   ///date source
@@ -219,7 +216,7 @@ movie(){
 tv(){
   ///cubits
   sl.registerFactory<TvCubit>(() => TvCubit(sl()));
-  sl.registerFactory<TvShowButtonsCubit>(() => TvShowButtonsCubit(sl(),sl(),sl(),sl()));
+  sl.registerFactory<TvShowButtonsCubit>(() => TvShowButtonsCubit(sl(),sl(),sl()));
   sl.registerFactory<SeasonCubit>(() => SeasonCubit(sl()));
   sl.registerFactory<RecommendationsTvCubit>(() => RecommendationsTvCubit(sl()));
   sl.registerFactory<SimilarTvShowCubit>(() => SimilarTvShowCubit(sl()));
@@ -236,8 +233,7 @@ tv(){
   sl.registerLazySingleton<GetTvShowDetailsUsecase>(() => GetTvShowDetailsUsecase(sl()));
   sl.registerLazySingleton<GetSimilarTvShowsUseCase>(() => GetSimilarTvShowsUseCase(sl()));
   sl.registerLazySingleton<GetTvRecommendationsUseCase>(() => GetTvRecommendationsUseCase(sl()));
-  sl.registerLazySingleton<MarkTvShowAsFavUsecase>(() => MarkTvShowAsFavUsecase(sl()));
-  sl.registerLazySingleton<AddTvShowToWatchListUseCase>(() => AddTvShowToWatchListUseCase(sl()));
+  sl.registerLazySingleton<MarkTvShowUsecase>(() => MarkTvShowUsecase(sl()));
   sl.registerLazySingleton<DeleteTvShowRateUseCase>(() => DeleteTvShowRateUseCase(sl()));
   sl.registerLazySingleton<RateTvShowUseCase>(() => RateTvShowUseCase(sl()));
   sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(() => GetTvShowSeasonDetailsUsecase(sl()));

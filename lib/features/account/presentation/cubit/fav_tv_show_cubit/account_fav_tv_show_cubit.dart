@@ -14,7 +14,7 @@ class AccountFavTvShowCubit extends Cubit<AccountFavTvShowStates> {
     emit(GetAccountsFavoriteTvShowListLoadingState());
     Either<Failure, List> favTvShows =await _getFavTvShowsListUsecase.call(listType: "favorite",mediaType: "tv");
     favTvShows.fold((l){
-      emit(GetAccountsFavoriteTvShowListErrorState( msg: mapFailureToMsg(l)));
+      emit(GetAccountsFavoriteTvShowListErrorState(msg: mapFailureToMsg(l)));
     },(r){
       this.favTvShows.clear();
       this.favTvShows=r as List<TvShow>;

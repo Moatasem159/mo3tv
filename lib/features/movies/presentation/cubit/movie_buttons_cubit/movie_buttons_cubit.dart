@@ -7,19 +7,17 @@ import 'package:mo3tv/features/account/presentation/cubit/fav_movie_cubit/accoun
 import 'package:mo3tv/features/account/presentation/cubit/movie_watchlist_cubit/account_movie_watchlist_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/rated_movie_cubit/account_rated_movie_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/domain/usecases/add_movie_to_watchlist_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_state.dart';
 class MovieButtonsCubit extends Cubit<MovieButtonsStates> {
   MovieButtonsCubit(this._deleteRateMovieUseCase, this._rateMovieUseCase,
-      this._markMovieAsFavUsecase, this._addMovieToWatchListUseCase)
+      this._markMovieUsecase)
       : super(RateMovieInitialState());
   final RateMovieUseCase _rateMovieUseCase;
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
-  final MarkMovieAsFavUsecase _markMovieAsFavUsecase;
-  final AddMovieToWatchListUseCase _addMovieToWatchListUseCase;
+  final MarkMovieUsecase _markMovieUsecase;
   static MovieButtonsCubit get(context)=>BlocProvider.of(context);
   Movie ?movie;
   Future<void> rateMovie({required dynamic rate,required int movieId})async{
@@ -64,11 +62,10 @@ class MovieButtonsCubit extends Cubit<MovieButtonsStates> {
         AccountMovieWatchlistCubit.get(context).update();
       }
    }
-
   Future<void> favMovie({required int movieId, required bool fav}) async {
     emit(FavMovieLoadingState());
     Either<Failure, Message> response =
-    await _markMovieAsFavUsecase.call(movieId: movieId, fav: fav);
+    await _markMovieUsecase.call(movieId: movieId, mark: fav,markType: "favorite");
     emit(response.fold((l) => FavMovieErrorState(msg: mapFailureToMsg(l)),
             (r) => FavMovieSuccessState(statusCode: r.statusCode!)));
   }
@@ -86,18 +83,13 @@ class MovieButtonsCubit extends Cubit<MovieButtonsStates> {
       AccountFavMovieCubit.get(context).update();
     }
   }
-
-
-  Future<void> addMovieToWatchList(
-      {required int movieId, required bool watchlist}) async {
+  Future<void> addMovieToWatchList({required int movieId, required bool watchlist}) async {
     emit(AddToWatchListLoadingState());
-    Either<Failure, Message> response = await _addMovieToWatchListUseCase.call(
-        movieId: movieId, watchlist: watchlist);
+    Either<Failure, Message> response = await _markMovieUsecase.call(
+        movieId: movieId, mark:  watchlist,markType: "watchlist");
     emit(response.fold((l) => AddToWatchListErrorState(msg: mapFailureToMsg(l)),
             (r) => AddToWatchListSuccessState(statusCode: r.statusCode!)));
   }
-
-
   addToWatchlist(context){
     if (movie!.movieAccountDetails!.watchlist!) {
       movie!.movieAccountDetails!.watchlist=false;

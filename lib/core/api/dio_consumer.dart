@@ -33,7 +33,7 @@ class DioConsumer implements ApiConsumer {
     }
   }
   @override
-  Future<dynamic> get(String path, {Map<String, dynamic>? queryParameters, bool cache = true}) async {
+  Future<dynamic> get(String path, {Map<String, dynamic>? queryParameters}) async {
     try {
       final response = await _client.get(path, queryParameters: queryParameters);
       return jsonDecode(response.data.toString());
@@ -42,32 +42,27 @@ class DioConsumer implements ApiConsumer {
     }
   }
   @override
-  Future post(String path, {Map<String, dynamic>? body, bool formDataIsEnabled = false,}) async {
+  Future post(String path, {Map<String, dynamic>? body,bool formDataIsEnabled = false}) async {
     try {
-      final response = await _client.post(path,
-          data: formDataIsEnabled ? FormData.fromMap(body!) : body,
-      );
+      final response = await _client.post(path, data: formDataIsEnabled ? FormData.fromMap(body!) : body);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       HandlingErrors.handleDioError(error);
     }
   }
   @override
-  Future put(String path, {Map<String, dynamic>? body,}) async {
+  Future put(String path, {Map<String, dynamic>? body}) async {
     try {
-      final response = await _client.put(
-        path,
-        data: body,
-      );
+      final response = await _client.put(path,data: body);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
       HandlingErrors.handleDioError(error);
     }
   }
   @override
-  Future delete(String path, {Map<String, dynamic>? body,}) async {
+  Future delete(String path, {Map<String, dynamic>? body}) async {
     try {
-      final response = await _client.delete(path, data: body,);
+      final response = await _client.delete(path, data: body);
       return jsonDecode(response.data.toString());
     } on DioError catch (error) {
      HandlingErrors.handleDioError(error);

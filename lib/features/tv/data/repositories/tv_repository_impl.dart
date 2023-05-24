@@ -29,6 +29,22 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
+  Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page}) async{
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
+  @override
   Future<Either<Failure, List<TvShow>>> getPopularTvShows({required int page})async {
     if(await _networkInfo.isConnected)
     {
@@ -76,6 +92,20 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
+  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber})async {
+    if(await _networkInfo.isConnected){
+      try {
+        final TvShowSeason result = await _tvShowRemoteDataSource.getTvShowSeasonDetails(tvShowId: tvShowId, seasonNumber: seasonNumber);
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
+  @override
   Future<Either<Failure, List<TvShow>>> getTvShowRecommendations({required int tvId})async {
     if(await _networkInfo.isConnected)
     {
@@ -92,11 +122,12 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, Message>> markTvShowFav({required int tvId, required bool fav}) async{
+  Future<Either<Failure, List<TvShow>>> getSimilarTvShows({required int tvId, required int page}) async{
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _tvShowRemoteDataSource.markTvShowAsFavourite(tvId: tvId,fav: fav);
+        final result = await _tvShowRemoteDataSource.getSimilarTvShows(tvId: tvId,page: page);
+        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -107,11 +138,11 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, Message>> addTvShowToWatchlist({required int tvId, required bool watchlist})async {
+  Future<Either<Failure, Message>> markTvShow({required int tvId, required bool mark,required String markType}) async{
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _tvShowRemoteDataSource.addTvShowToWatchList(tvId: tvId,watchList: watchlist);
+        final result = await _tvShowRemoteDataSource.markTvShow(tvId: tvId,mark: mark,markType:markType);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -120,7 +151,6 @@ class TvShowRepositoryImpl implements TvRepository{
     else{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
-
   }
   @override
   Future<Either<Failure, Message>> deleteTvShowRate({required int tvId}) async{
@@ -143,53 +173,6 @@ class TvShowRepositoryImpl implements TvRepository{
     {
       try {
         final result = await _tvShowRemoteDataSource.rateTvShow(rate: rate,tvId: tvId);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-  @override
-  Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page);
-        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-  @override
-  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber})async {
-    if(await _networkInfo.isConnected){
-      try {
-        final TvShowSeason result = await _tvShowRemoteDataSource.getTvShowSeasonDetails(tvShowId: tvShowId, seasonNumber: seasonNumber);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<TvShow>>> getSimilarTvShows({required int tvId, required int page}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getSimilarTvShows(tvId: tvId,page: page);
-        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

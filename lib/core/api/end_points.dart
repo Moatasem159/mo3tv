@@ -31,15 +31,12 @@ class EndPoints{
       "$baseUrl/$mediaType/$mediaId/credits?api_key=$apiKey";
   static String mediaGalleryPath(int movieId,String mediaType) =>
       "$baseUrl/$mediaType/$movieId/images?api_key=$apiKey";
-  static String favMediaPath(String sessionid)=>
-      "${baseUrl}account/{account_id}/favorite?api_key=$apiKey&session_id=$sessionid";
-  static String addMediaToWatchListPath(String sessionid)=>
-      "${baseUrl}account/{account_id}/watchlist?api_key=$apiKey&session_id=$sessionid";
+  static String markMediaPath(String sessionid,String markType)=>
+      "${baseUrl}account/{account_id}/$markType?api_key=$apiKey&session_id=$sessionid";
   static String rateMediaPath(String sessionid,int mediaId,String mediaType)=>
       "$baseUrl/$mediaType/$mediaId/rating?api_key=$apiKey&session_id=$sessionid";
   static String tvShowSeasonDetailsPath(int tvId,int seasonNumber) =>
       "$baseUrl/tv/$tvId/season/$seasonNumber?api_key=$apiKey";
-
   static String searchUrl({required String query,required int page})=>
       "${baseUrl}search/multi?api_key=$apiKey&page=$page&query=$query";
   static  String backDropsUrl(String path) =>
