@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
 import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/similar_tv_show_cubit.dart';
@@ -21,9 +22,7 @@ class SimilarTvShowButton extends StatelessWidget {
             child: Column(
               children: [
                 10.ph,
-                const Center(
-                    child: Text("No more Tv shows",
-                        style: TextStyle(fontWeight: FontWeight.w600))),
+                 Center(child: Text("No more Tv shows",style: AppTextStyles.get14BoldText())),
                 20.ph
               ],
             ),

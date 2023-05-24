@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/episodes_widgets/episodes_list.dart';
 class SeasonOverviewWidget extends StatelessWidget {
@@ -14,14 +15,7 @@ class SeasonOverviewWidget extends StatelessWidget {
           if (season.overview != "")
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                season.overview!,
-                style: const TextStyle(
-                    wordSpacing: 2,
-                    fontWeight: FontWeight.w600,
-                    height: 1.4),
-              ),
-            ),
+              child: Text(season.overview!,style: AppTextStyles.get14NormalText())),
            EpisodesList(episodes: season.episodes!)
         ],
       ),

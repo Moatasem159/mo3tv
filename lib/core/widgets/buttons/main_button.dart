@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class MainButton extends StatelessWidget {
   final  VoidCallback? onPressed;
   final String label;
@@ -16,10 +17,8 @@ class MainButton extends StatelessWidget {
           fixedSize: MaterialStateProperty.all(size)
       ),
       onPressed:onPressed,
-      child: Text(label,style: Theme.of(context).textTheme.titleMedium!.copyWith(
-        color: Colors.white,
-        fontSize: 15,
-      ),),
+      child: Text(label,
+        style: AppTextStyles.get14NormalText()),
     );
 
   }

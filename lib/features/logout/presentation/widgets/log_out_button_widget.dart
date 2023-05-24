@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 class LogOutButtonWidget extends StatelessWidget {
   const LogOutButtonWidget({super.key});
@@ -13,19 +14,19 @@ class LogOutButtonWidget extends StatelessWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("are you sure you want logout ?"),
+              title:  Text("are you sure you want logout ?",style: AppTextStyles.get14NormalText()),
               actions: [
                 TextButton(
                     onPressed: () {
                       GoRouter.of(context).pop();
                       LogOutCubit.get(context).logOut();
                     },
-                    child: const Text("yes")),
+                    child:  Text("yes",style: AppTextStyles.get14NormalText())),
                 TextButton(
                     onPressed: () {
                       GoRouter.of(context).pop();
                     },
-                    child: const Text("no"))
+                    child: Text("no",style: AppTextStyles.get14NormalText()))
               ],
             );
           },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/credits/presentation/widgets/cast_widget.dart';
@@ -18,12 +19,8 @@ class MediaCreditsList extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 11),
-                  child: Text(
-                    "Cast : ${mediaCredits.length}",
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                ),
-                10.ph
+                  child: Text("Cast : ${mediaCredits.length}",style: AppTextStyles.get18BoldText())),
+                5.ph
               ],
             ),
           ),

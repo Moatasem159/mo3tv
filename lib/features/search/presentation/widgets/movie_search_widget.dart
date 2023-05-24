@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
@@ -65,31 +66,28 @@ class MovieSearchWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
                    Text("${movie.originalTitle} ${movie.releaseDate==""?'':((movie.releaseDate!.substring(0,4)))}",
-                     style: const TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+                     style: AppTextStyles.get14BoldText(),
                      maxLines: 3,
                      overflow: TextOverflow.ellipsis,
                    ),
-                  4.ph,
+                  7.ph,
                   if(movie.voteAverage!=0)
                   Row(
                     children:  [
                       const Icon(Icons.star,color: Colors.yellow,),
                       5.pw,
-                      Text("${movie.voteAverage!.toStringAsFixed(1)}",style: const TextStyle(
-                        fontWeight: FontWeight.w500
-                      ),)
+                      Text("${movie.voteAverage!.toStringAsFixed(1)}",style: AppTextStyles.get14BoldText(),)
                     ],
                   ),
                   7.ph,
                    Row(
                     children: [
-                      const Text("IN MOVIES",style: TextStyle(
-                        fontWeight: FontWeight.bold
-                      ),),
+                      Text("IN MOVIES",style:AppTextStyles.get14BoldText()),
                       5.pw,
-                      const Icon(Icons.movie_filter_rounded,size: 18,)
+                      const Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Icon(Icons.movie_filter_rounded,size: 18),
+                      )
                     ],
                   ),
                 ],

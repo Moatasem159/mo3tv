@@ -21,4 +21,3 @@ class MovieDescription extends StatelessWidget {
     );
   }
 }
-

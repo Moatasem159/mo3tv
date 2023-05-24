@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class GenresWidget extends StatefulWidget {
   final List<Keyword> genres;
   final num runTime;
   final bool isTvShow;
   const GenresWidget({Key? key, required this.genres, required this.runTime, required this.isTvShow}) : super(key: key);
-
   @override
   State<GenresWidget> createState() => _GenresWidgetState();
 }
-
 class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderStateMixin{
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
@@ -40,29 +38,21 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
               return Wrap(
                   children: [
                     Text(widget.genres.last.id !=e.id?
-                    "${e.name},": "${e.name}",style:const TextStyle(
-                        fontWeight: FontWeight.bold
-                    ),),
+                    "${e.name},": "${e.name}",style:AppTextStyles.get14BoldText()),
                     if(e.id==widget.genres.last.id&&widget.runTime!=0)
                       Wrap(
                         children: [
                           5.pw,
                           const Padding(
-                            padding: EdgeInsets.only(top: 7),
-                            child: CircleAvatar(
-                              radius: 3,
-                              backgroundColor: Colors.white,
-                            ),
-                          ),
+                            padding: EdgeInsets.only(top: 10),
+                            child: CircleAvatar(radius: 3,backgroundColor: Colors.white)),
                           5.pw,
                           if(widget.isTvShow)
                           Text("${widget.runTime}m",
-                            style:const TextStyle(fontWeight: FontWeight.bold) ,),
+                            style:AppTextStyles.get14BoldText()),
                           if(!widget.isTvShow)
                           Text("${widget.runTime ~/ 60}h ${widget.runTime % 60}m",
-                              style:const TextStyle(
-                              fontWeight: FontWeight.bold
-                          ),),
+                              style:AppTextStyles.get14BoldText()),
                         ],)
                   ]
               );

@@ -5,14 +5,14 @@ import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/episodes_w
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/episodes_widgets/episode_card_widgets/episode_info.dart';
 class EpisodeDetails extends StatelessWidget {
   final Episode episode;
-  const EpisodeDetails({super.key,required this.episode});
+  const EpisodeDetails({super.key, required this.episode});
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-          EpisodeImage(image:episode.stillPath!),
-       7.pw,
+        EpisodeImage(image: episode.stillPath!),
+        7.pw,
         EpisodeInfo(episode: episode)
       ],
     );

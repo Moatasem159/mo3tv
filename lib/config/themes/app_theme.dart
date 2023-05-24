@@ -32,29 +32,6 @@ class AppTheme {
         overflow: TextOverflow.ellipsis
       ),
     ),
-    textTheme: TextTheme(
-      displayMedium: TextStyle(
-          color: AppColors.primaryTextLight
-      ),
-      titleMedium:  TextStyle(
-          color: AppColors.primaryTextLight
-      ),
-      titleSmall:  TextStyle(
-          color: AppColors.primaryTextLight
-      ),
-      bodyLarge:  TextStyle(
-          color: AppColors.primaryTextLight
-      ),
-      bodyMedium:  TextStyle(
-          color: AppColors.primaryTextLight
-      ),
-      bodySmall:  TextStyle(
-          color: AppColors.primaryTextLight
-      ),
-      labelSmall:  TextStyle(
-          color: AppColors.primaryTextLight
-      ),
-    ),
     iconTheme: const IconThemeData(
       color: Colors.white
     ),

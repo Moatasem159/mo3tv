@@ -24,7 +24,7 @@ class HorizontalTvShowList extends StatelessWidget {
             itemCount: tvShow.length,
             scrollDirection: Axis.horizontal,
             itemBuilder:(context, index) {
-              return TvShowListItem(tvShow:tvShow[index],);
+              return TvShowListItem(tvShow:tvShow[index]);
             }, ),
         ),
         10.ph

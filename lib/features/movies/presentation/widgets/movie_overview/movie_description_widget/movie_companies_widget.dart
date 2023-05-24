@@ -11,9 +11,7 @@ class MovieProductionCompaniesWidget extends StatelessWidget {
       return Column(
         children: [
           7.ph,
-          ProductionCompanyListWidget(
-            productionCompanies: productionCompanies,
-          ),
+          ProductionCompanyListWidget(productionCompanies: productionCompanies),
         ],
       );
     }

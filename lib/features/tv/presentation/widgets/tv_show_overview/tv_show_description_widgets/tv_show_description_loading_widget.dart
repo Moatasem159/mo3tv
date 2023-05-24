@@ -10,8 +10,6 @@ class TvShowDescriptionLoadingWidget extends StatelessWidget {
         DescriptionLoading(),
         DescriptionLoading(),
         DescriptionLoading(),
-        DescriptionLoading(),
-        DescriptionLoading(),
       ],
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class TypeWidget extends StatelessWidget {
   final String type;
   const TypeWidget({super.key,required this.type});
@@ -9,13 +8,8 @@ class TypeWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Type",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        4.ph,
-        Text(type),
-        7.ph,
+        Text("Type",style: AppTextStyles.get14BoldText()),
+        Text(type,style: AppTextStyles.get14NormalText()),
       ],
     );
   }

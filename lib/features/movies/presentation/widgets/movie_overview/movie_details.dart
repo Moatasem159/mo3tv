@@ -10,7 +10,7 @@ class MovieDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        7.ph,
+        5.ph,
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

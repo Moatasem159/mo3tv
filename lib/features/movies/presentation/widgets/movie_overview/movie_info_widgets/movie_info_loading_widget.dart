@@ -13,9 +13,6 @@ class MovieInfoLoadingWidget extends StatelessWidget {
           InfoLoadingWidget(),
           InfoLoadingWidget(),
           InfoLoadingWidget(),
-          InfoLoadingWidget(),
-          InfoLoadingWidget(),
-          InfoLoadingWidget(),
         ],
       ),
     );

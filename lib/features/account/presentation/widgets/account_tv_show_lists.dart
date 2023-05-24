@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_list_widget.dart';
 
 class AccountTvShowLists extends StatelessWidget {
@@ -12,14 +13,9 @@ class AccountTvShowLists extends StatelessWidget {
        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           10.ph,
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text("Tv shows Lists",style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 22
-            )),
-          ),
-          10.ph,
+           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text("Tv shows Lists",style: AppTextStyles.get25BoldText())),
           SizedBox(
             height: 170,
             child: ListView(

@@ -4,7 +4,7 @@ import 'package:mo3tv/core/functions/pagination.dart';
 import 'package:mo3tv/core/widgets/buttons/main_button.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_image.dart';
 import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
-import 'package:mo3tv/features/gallery/presentation/widgets/imgae_list_title.dart';
+import 'package:mo3tv/features/gallery/presentation/widgets/image_list_title.dart';
 class MediaPostersList extends StatefulWidget {
   final List<ImageEntity> posters;
   const MediaPostersList ({Key? key, required this.posters}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class ReviewEmptyWidget extends StatelessWidget {
   final String msg;
   const ReviewEmptyWidget({Key? key, required this.msg}) : super(key: key);
@@ -9,8 +9,7 @@ class ReviewEmptyWidget extends StatelessWidget {
         child: Column(
           children:  [
             const Icon(Icons.comments_disabled_outlined, size: 70),
-            10.ph,
-            Text(msg, style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600))
+            Text(msg, style: AppTextStyles.get25BoldText())
           ],
         ),
     );

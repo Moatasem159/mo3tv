@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class BudgetWidget extends StatelessWidget {
   final num budget;
   const BudgetWidget({super.key, required this.budget});
@@ -10,13 +10,9 @@ class BudgetWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Budget",
-            style: TextStyle(fontWeight: FontWeight.bold)),
-        if (budget != 0) 5.ph,
-        Text(budget != 0
-            ? "\$ ${myFormat.format(budget)}"
-            : "------"),
-        7.ph,
+        Text("Budget", style: AppTextStyles.get14BoldText()),
+        Text(budget != 0 ? "\$ ${myFormat.format(budget)}" : "------",
+            style: AppTextStyles.get14NormalText()),
       ],
     );
   }

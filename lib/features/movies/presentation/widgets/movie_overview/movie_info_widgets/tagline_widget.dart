@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class TaglineWidget extends StatelessWidget {
   final String tagline;
   const TaglineWidget({super.key,required this.tagline});
@@ -8,15 +8,10 @@ class TaglineWidget extends StatelessWidget {
     if (tagline != "") {
       return Column(
         children: [
-          5.ph,
           Text(tagline,
             maxLines: null,
             overflow: TextOverflow.visible,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[600],
-            ),
-          ),
+            style: AppTextStyles.get14BoldText(color: Colors.grey[600]!)),
         ],
       );
     }

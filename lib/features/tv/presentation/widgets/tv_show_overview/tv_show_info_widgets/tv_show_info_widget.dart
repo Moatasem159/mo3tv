@@ -9,11 +9,9 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_
 class TvShowInfoWidget extends StatefulWidget {
   final TvShow tvShow;
   const TvShowInfoWidget({super.key,required this.tvShow});
-
   @override
   State<TvShowInfoWidget> createState() => _TvShowInfoWidgetState();
 }
-
 class _TvShowInfoWidgetState extends State<TvShowInfoWidget> with SingleTickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;

@@ -12,10 +12,6 @@ class TvShowInfoLoadingWidget extends StatelessWidget {
           InfoLoadingWidget(),
           InfoLoadingWidget(),
           InfoLoadingWidget(),
-          InfoLoadingWidget(),
-          InfoLoadingWidget(),
-          InfoLoadingWidget(),
-          InfoLoadingWidget(),
         ],
       ),
     );

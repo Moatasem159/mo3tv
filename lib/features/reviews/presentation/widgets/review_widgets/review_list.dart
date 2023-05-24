@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/reviews/domain/entities/review.dart';
 import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/review_widget.dart';
 class MediaReviewsList extends StatelessWidget {
@@ -17,12 +18,7 @@ class MediaReviewsList extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 11),
-                  child: Text(
-                    "Reviews : ${reviews.length}",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                ),
+                  child: Text("Reviews : ${reviews.length}",style: AppTextStyles.get18BoldText()),),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
@@ -34,7 +30,6 @@ class MediaReviewsList extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );

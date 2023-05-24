@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 class CreatorWidget extends StatelessWidget {
   final TvShow tvShow;
@@ -12,11 +12,8 @@ class CreatorWidget extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(e.name!,
-                style:
-                const TextStyle(fontWeight: FontWeight.bold)),
-            const Text("Creator"),
-            7.ph
+            Text(e.name!,style: AppTextStyles.get14BoldText()),
+            Text("Creator",style: AppTextStyles.get14NormalText()),
           ],
         );
       }).toList(),

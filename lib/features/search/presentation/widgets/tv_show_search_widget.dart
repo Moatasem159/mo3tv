@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -66,9 +67,7 @@ class TvShowSearchWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children:  [
                   Text("${tvShow.originalName} ${tvShow.releaseDate==""?'':((tvShow.releaseDate!.substring(0,4)))}",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold
-                  ),
+                    style:  AppTextStyles.get14BoldText(),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -78,19 +77,18 @@ class TvShowSearchWidget extends StatelessWidget {
                     children:  [
                       const Icon(Icons.star,color: Colors.yellow,),
                       5.pw,
-                      Text("${tvShow.voteAverage!.toStringAsFixed(1)}",style: const TextStyle(
-                          fontWeight: FontWeight.w500
-                      ),)
+                      Text("${tvShow.voteAverage!.toStringAsFixed(1)}",style: AppTextStyles.get14BoldText())
                     ],
                   ),
                  7.ph,
                   Row(
                     children: [
-                      const Text("IN Tv",style: TextStyle(
-                          fontWeight: FontWeight.bold
-                      ),),
+                      Text("IN TV",style: AppTextStyles.get14BoldText()),
                       5.pw,
-                      const Icon(Icons.tv_rounded,size: 18,)
+                      const Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Icon(Icons.tv_rounded,size: 18,),
+                      )
                     ],
                   ),
                 ],

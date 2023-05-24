@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class AccountListWidget extends StatefulWidget{
   final String image;
   final IconData icon;
@@ -100,10 +101,7 @@ class _AccountListWidgetState extends State<AccountListWidget> {
                   Icon(widget.icon,color: widget.iconColor),
                   10.ph,
                   FittedBox(
-                    child: Text(widget.title,style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold
-                    ),),
+                    child: Text(widget.title,style: AppTextStyles.get14BoldText(),),
                   )
                 ],
               ),

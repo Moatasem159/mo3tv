@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
 class RecommendationsMoviesList extends StatelessWidget {
@@ -19,45 +20,39 @@ class RecommendationsMoviesList extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 11),
-                      child: Text(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 11),
+                  child: Row(
+                    children: [
+                      Text(
                         "Recommendations :${recommendationMovies.length}",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ),
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).pushNamed(
-                            Routes.similarMoviesRoute,
-                            extra: recommendationMovies,
-                            queryParameters: {'movieId': movieId.toString()});
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
+                          style:AppTextStyles.get14BoldText()),
+                      const Spacer(),
+                      GestureDetector(
+                        onTap: () {
+                          GoRouter.of(context).pushNamed(
+                              Routes.similarMoviesRoute,
+                              extra: recommendationMovies,
+                              queryParameters: {'movieId': movieId.toString()});
+                        },
+                        child:  Row(
                           children: [
-                            Text("See More", style: TextStyle(fontSize: 15)),
-                            Icon(
-                              Icons.arrow_forward_ios_outlined,
-                              size: 15,
-                            )
+                            Text("See More", style: AppTextStyles.get14NormalText()),
+                            const Padding(
+                              padding: EdgeInsets.only(top: 3),
+                              child: Icon(Icons.arrow_forward_ios_outlined, size: 14))
                           ],
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
-                15.ph
+                10.ph
               ],
             ),
           ),
           MoviesList(movieList: recommendationMovies),
-          SliverToBoxAdapter(child: 10.ph)
+          SliverToBoxAdapter(child: 7.ph)
         ],
       ),
     );

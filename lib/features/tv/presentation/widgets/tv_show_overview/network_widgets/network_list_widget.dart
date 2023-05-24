@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/network_widgets/network_widget.dart';
 class NetworkListWidget extends StatelessWidget {
@@ -8,7 +9,7 @@ class NetworkListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Column(
       children: [
-        const Text("Networks",style: TextStyle(fontWeight: FontWeight.bold)),
+        Text("Networks",style:AppTextStyles.get14BoldText()),
         Wrap(
           alignment: WrapAlignment.center,
           children: networks.map((e)=> NetworkWidget(network: e)).toList(),

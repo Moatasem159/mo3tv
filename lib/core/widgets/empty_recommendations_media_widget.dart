@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class RecommendationsMediaEmptyWidget extends StatelessWidget {
   final IconData icon;
   final String msg;
@@ -10,8 +10,7 @@ class RecommendationsMediaEmptyWidget extends StatelessWidget {
         child: Column(
           children:  [
             Icon(icon,size: 70),
-            10.ph,
-            Text(msg,style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600))
+            Text(msg,style: AppTextStyles.get25BoldText())
           ],
         ),
     );

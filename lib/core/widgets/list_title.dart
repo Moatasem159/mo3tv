@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class ListTitle extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
@@ -10,27 +11,19 @@ class ListTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              letterSpacing: 0.15,
-            ),
-          ),
+          Text(title,style:AppTextStyles.get14BoldText()),
           if(onPressed!=null)
-          InkWell(
-            borderRadius: BorderRadius.circular(10),
+          GestureDetector(
             onTap: onPressed,
-            child: const Padding(
-              padding: EdgeInsets.all(0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('See More'),
-                  Icon(Icons.arrow_forward_ios, size: 15)
-                ],
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('See more',style: AppTextStyles.get14NormalText()),
+                const Padding(
+                  padding: EdgeInsets.only(top: 3),
+                  child: Icon(Icons.arrow_forward_ios, size: 15),
+                )
+              ],
             ),
           ),
         ],

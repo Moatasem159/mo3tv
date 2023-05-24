@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 class ProductionCompanyWidget extends StatelessWidget {
   final ProductionCompany company;
@@ -23,7 +24,7 @@ class ProductionCompanyWidget extends StatelessWidget {
                 Image.asset("assets/images/movieplaceholder.png"),
           ),
         5.ph,
-          FittedBox(child: Text(company.name)),
+          FittedBox(child: Text(company.name,style: AppTextStyles.get14NormalText(),)),
         ],
       ),
     );

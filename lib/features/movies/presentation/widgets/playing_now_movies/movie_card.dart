@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 class MovieCard extends StatelessWidget {
   final ImageProvider image;
@@ -27,48 +28,32 @@ class MovieCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
                     margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 3),
-                    decoration: BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.circular(5)
-                    ),
+                    decoration: BoxDecoration(color: Colors.black26,borderRadius: BorderRadius.circular(5)),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          'now playing'.toUpperCase(),
-                          style: const TextStyle(
-                            fontWeight:FontWeight.w500,
-                            fontSize: 15,
-                          ),
-                        ),
+                        Text('NOW PLAYING', style: AppTextStyles.get14BoldText()),
                         4.pw,
                         const Padding(
-                          padding: EdgeInsets.only(top: 2),
+                          padding: EdgeInsets.only(top: 3),
                           child: Icon(
                             Icons.circle,
                             color: Colors.redAccent,
                             size: 12,
                           ),
                         ),
-
                       ],
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
                     margin: const EdgeInsets.symmetric(horizontal: 2,vertical:3),
-                    decoration: BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.circular(5)
-                    ),
+                    decoration: BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.circular(5)),
                     child: Text(
                       movie.title!,
                       maxLines: null,
-                      style:const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                      style: AppTextStyles.get18BoldText()
                     ),
                   ),
                 ],
@@ -77,20 +62,16 @@ class MovieCard extends StatelessWidget {
             Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 2),
                 margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 3),
-                decoration: BoxDecoration(
-                    color: Colors.black26,
-                    borderRadius: BorderRadius.circular(5)
-                ),
+                decoration: BoxDecoration(color: Colors.black26,borderRadius: BorderRadius.circular(5)),
                 child: Row(
                   children: [
                     Text(
                       movie.voteAverage.toString(),
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.w700
-                      ),
-                    ),
+                      style:AppTextStyles.get14BoldText()),
                     4.pw,
-                    const Icon(Icons.star_rounded,size: 15,color: Colors.yellow,)
+                    const Padding(
+                      padding: EdgeInsets.only(top: 3),
+                      child: Icon(Icons.star_rounded,size: 15,color: Colors.yellow,))
                   ],
                 ),
             ),
