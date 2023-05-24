@@ -5,5 +5,3 @@ class AppColors{
   static Color primaryTextLight=Colors.white;
   static Color darkBackgroundColor =  HexColor('#131314');
 }
-
-

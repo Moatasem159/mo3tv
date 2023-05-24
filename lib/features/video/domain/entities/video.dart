@@ -6,7 +6,6 @@ class Video {
   bool? official;
   String? publishedAt;
   String? id;
-
   Video(
       {this.name,
       this.key,

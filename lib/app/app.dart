@@ -44,11 +44,12 @@ class Mo3Tv extends StatelessWidget {
           BlocProvider(create: (context) => di.sl<LoginCubit>()),
           BlocProvider(create: (context) => di.sl<LogOutCubit>()),
         ],
-        child: MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig:AppRoute.router,
-      themeMode: ThemeMode.dark,
-      darkTheme: AppTheme.darkTheme,
-    ));
+      child:MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: AppRoute.router,
+        themeMode: ThemeMode.dark,
+        darkTheme: AppTheme.darkTheme,
+      ),
+    );
   }
 }

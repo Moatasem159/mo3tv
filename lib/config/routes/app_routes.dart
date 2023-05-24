@@ -28,24 +28,17 @@ class Routes {
   static const String imageScreenRoute= "/imageScreenRoute";
   static const String trailerScreenRoute= "/trailerScreenRoute";
 }
-
-
-
 abstract class AppRoute{
   static final router=GoRouter(
     routes: [
       GoRoute(
         path: Routes.initialRoute,
         name:Routes.initialRoute,
-        builder: (context, state) => const MainScreen(),
-        
-      ),
+        builder: (context, state) => const MainScreen()),
       GoRoute(
         name: Routes.loginRoute,
         path: Routes.loginRoute,
-        builder: (context, state) =>  LoginScreen(token:state.extra as Token)
-        
-      ),
+        builder: (context, state) =>  LoginScreen(token:state.extra as Token)),
       GoRoute(
         name: Routes.movieDetailsRoute,
         path: Routes.movieDetailsRoute,
@@ -53,39 +46,31 @@ abstract class AppRoute{
       GoRoute(
         name: Routes.tvShowRoute,
         path: Routes.tvShowRoute,
-        builder: (context, state) =>  TvShowDetailsScreen(
-            tvShow:  state.extra as TvShow,
-        ),
-
+        builder: (context, state) =>  TvShowDetailsScreen(tvShow:  state.extra as TvShow),
       ),
       GoRoute(
         name:  Routes.seeMoreRoute,
         path: Routes.seeMoreRoute,
-        builder: (context, state) =>  MediaSeeMore(parameters:state.extra as SeeMoreParameters),
-        ),
+        builder: (context, state) =>MediaSeeMore(parameters:state.extra as SeeMoreParameters)),
       GoRoute(
         name:  Routes.seasonRoute,
         path: Routes.seasonRoute,
         builder: (context, state) =>  SeasonDetailsScreen(
             season:state.extra as TvShowSeason,
             tvShowName:state.queryParameters["tvShowName"]!,
-            tvShowId:int.parse(state.queryParameters["tvShowId"]!) ,
-        ),
-        ),
+            tvShowId:int.parse(state.queryParameters["tvShowId"]!))),
       GoRoute(
         name:  Routes.similarMoviesRoute,
         path: Routes.similarMoviesRoute,
         builder: (context, state) =>  SimilarMoviesScreen(
           recommendations: state.extra as List<Movie>,
-          movieId:int.parse(state.queryParameters["movieId"]!)
-        )),
+          movieId:int.parse(state.queryParameters["movieId"]!))),
       GoRoute(
         name:  Routes.similarTvShowsRoute,
         path: Routes.similarTvShowsRoute,
         builder: (context, state) =>  SimilarTvShowsScreen(
           recommendations: state.extra as List<TvShow>,
-          tvId:int.parse(state.queryParameters["tvId"]!)
-        )),
+          tvId:int.parse(state.queryParameters["tvId"]!))),
       GoRoute(
         name:  Routes.accountMediaLists,
         path: Routes.accountMediaLists,
@@ -96,22 +81,17 @@ abstract class AppRoute{
           moviesWatchlist:state.queryParameters["moviesWatchlist"]=="true"?true:false,
           ratedMovies:state.queryParameters["ratedMovies"]=="true"?true:false,
           ratedTv:state.queryParameters["ratedTv"]=="true"?true:false,
-          tvWatchlist:state.queryParameters["tvWatchlist"]=="true"?true:false,
-        )),
+          tvWatchlist:state.queryParameters["tvWatchlist"]=="true"?true:false)),
       GoRoute(
         name:  Routes.imageScreenRoute,
         path: Routes.imageScreenRoute,
-        builder: (context, state) =>  ImageScreen(
-          image: state.queryParameters["image"]!,
-        )),
+        builder: (context, state) =>  ImageScreen(image: state.queryParameters["image"]!)),
       GoRoute(
         name:  Routes.trailerScreenRoute,
         path: Routes.trailerScreenRoute,
         builder: (context, state) =>  TrailerScreen(
           title:state.queryParameters["title"]!,
-          url:state.queryParameters["url"]!,
-        )),
-
+          url:state.queryParameters["url"]!)),
     ],
   );
 }

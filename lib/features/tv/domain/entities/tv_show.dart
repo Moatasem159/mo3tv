@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:mo3tv/core/entities/video.dart';
+import 'package:mo3tv/features/video/domain/entities/video.dart';
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';

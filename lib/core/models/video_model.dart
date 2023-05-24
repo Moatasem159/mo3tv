@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:mo3tv/core/entities/video.dart';
+import 'package:mo3tv/features/video/domain/entities/video.dart';
 
 VideoModel videoFromJson(String str) => VideoModel.fromJson(json.decode(str));
 

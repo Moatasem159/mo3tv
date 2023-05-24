@@ -1,4 +1,3 @@
-
 import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefrencesManager extends SharedPrefrencesConsumer{
