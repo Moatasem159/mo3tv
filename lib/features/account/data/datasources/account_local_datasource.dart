@@ -5,8 +5,6 @@ abstract class AccountLocalDataSource{
   Future<bool> saveUser({required  accountModel});
   Future getUser();
 }
-
-
 class AccountLocalDatasourceImpl implements AccountLocalDataSource{
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
   AccountLocalDatasourceImpl(this._sharedPrefrencesConsumer);

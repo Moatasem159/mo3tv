@@ -50,14 +50,8 @@ class EndPoints{
       "$baseLogoUrl$path";
   static  String hdUrl(String path) =>
       "$baseHdUrl$path";
-
   static String accountPath(String sessionId) =>
       "$baseUrl/account?api_key=$apiKey&session_id=$sessionId";
-
-  static String ratedMediaListPath(String sessionid,String mediaType)=>
-     "${baseUrl}account/{account_id}/rated/$mediaType?api_key=$apiKey&session_id=$sessionid";
-  static String favMediaListPath(String sessionid,String mediaType)=>
-     "${baseUrl}account/{account_id}/favorite/$mediaType?api_key=$apiKey&session_id=$sessionid";
-  static String mediaWatchListPath(String sessionid,String mediaType)=>
-     "${baseUrl}account/{account_id}/watchlist/$mediaType?api_key=$apiKey&session_id=$sessionid";
+  static String accountMediaListPath(String sessionid,String mediaType,String listType)=>
+     "${baseUrl}account/{account_id}/$listType/$mediaType?api_key=$apiKey&session_id=$sessionid";
 }
