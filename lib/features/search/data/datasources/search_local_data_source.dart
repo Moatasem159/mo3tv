@@ -40,7 +40,7 @@ class SearchLocalDataSourceImpl implements SearchLocalDataSource{
   }
   @override
   Future<bool> clearSearch() async{
-    final res=await _sharedPrefrencesConsumer.clear(key: AppStrings.search);
+    final res=await _sharedPrefrencesConsumer.remove(key: AppStrings.search);
     return res;
   }
   @override

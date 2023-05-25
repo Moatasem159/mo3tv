@@ -20,8 +20,7 @@ class LogOutCubit extends Cubit<LogOutStates> {
       if(r.success==true)
       {
         AppStrings.sessionId='';
-        _sharedPrefrencesConsumer.clear(key: AppStrings.id);
-        _sharedPrefrencesConsumer.clear(key: AppStrings.account);
+       _sharedPrefrencesConsumer.clearSharedPrefrences();
         return LogOutSuccessState();
       }
       else{

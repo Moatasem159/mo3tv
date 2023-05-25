@@ -15,8 +15,11 @@ class SharedPrefrencesManager extends SharedPrefrencesConsumer{
     return _sharedPreferences.get(key);
   }
   @override
-  dynamic clear({required String key})
-  {
-    return _sharedPreferences.remove(key);
+  dynamic remove({required String key}) async {
+    return await _sharedPreferences.remove(key);
+  }
+  @override
+  Future<bool> clearSharedPrefrences()async{
+    return await _sharedPreferences.clear();
   }
 }
