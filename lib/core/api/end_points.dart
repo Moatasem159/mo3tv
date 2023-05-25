@@ -49,6 +49,6 @@ class EndPoints{
       "$baseHdUrl$path";
   static String accountPath(String sessionId) =>
       "$baseUrl/account?api_key=$apiKey&session_id=$sessionId";
-  static String accountMediaListPath(String sessionid,String mediaType,String listType)=>
-     "${baseUrl}account/{account_id}/$listType/$mediaType?api_key=$apiKey&session_id=$sessionid";
+  static String accountMediaListPath(String sessionid,String mediaType,String listType,page)=>
+     "${baseUrl}account/{account_id}/$listType/$mediaType?api_key=$apiKey&session_id=$sessionid&page=$page";
 }

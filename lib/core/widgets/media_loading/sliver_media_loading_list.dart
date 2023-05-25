@@ -6,7 +6,7 @@ class SliverMediaLoadingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverGrid(
       delegate:
-      SliverChildBuilderDelegate(childCount: 6, (context, index) {
+      SliverChildBuilderDelegate(childCount: 12, (context, index) {
         return  Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
           child: Shimmer.fromColors(

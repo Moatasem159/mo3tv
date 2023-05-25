@@ -10,7 +10,6 @@ class AccountModel extends Account {
     super.includeAdult,
     super.username,
   });
-
   factory AccountModel.fromJson(Map<String, dynamic> json) => AccountModel(
     avatar: json["avatar"]!=null?json["avatar"]["tmdb"]["avatar_path"]??'':json["avatar_path"]??'',
     id: json["id"],
@@ -20,17 +19,14 @@ class AccountModel extends Account {
     includeAdult: json["include_adult"],
     username: json["username"] ?? '',
   );
-
   static AccountModel fromJsonString(String jsonString) {
     Map<String, dynamic> json = jsonDecode(jsonString);
     return AccountModel.fromJson(json);
   }
-
   static String toJsonString(AccountModel accountModel) {
     Map<String, dynamic> json = accountToJson(accountModel);
     return jsonEncode(json);
   }
-
   static Map<String, dynamic> accountToJson(AccountModel accountModel) => {
     "name": accountModel.name,
     "avatar_path": accountModel.avatar,

@@ -6,6 +6,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/data/datasources/account_local_datasource.dart';
 import 'package:mo3tv/features/account/data/datasources/account_remote_datasource.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
+import 'package:mo3tv/features/account/domain/entities/account_list_entity.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
 class AccountRepositoryImpl implements AccountRepository{
   final NetworkInfo _networkInfo;
@@ -36,11 +37,11 @@ class AccountRepositoryImpl implements AccountRepository{
     }
   }
   @override
-  Future<Either<Failure,List>> getAccountList({required String listType,required String mediaType})async {
+  Future<Either<Failure,AccountListEntity>> getAccountList({required String listType,required String mediaType,required int page})async {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _accountDataSource.getAccountList(listType: listType,mediaType: mediaType);
+        final result = await _accountDataSource.getAccountList(listType: listType,mediaType: mediaType,page: page);
         if(mediaType=="movies")
           {
             return Right(result);

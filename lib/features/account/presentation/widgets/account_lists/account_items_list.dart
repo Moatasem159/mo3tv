@@ -22,6 +22,10 @@ class AccountList extends StatelessWidget {
         {
           return const SliverMediaLoadingList();
         }
+        if(cubit.list.isEmpty&&cubit.totalResult>1)
+          {
+            return const SliverToBoxAdapter();
+          }
         if(cubit.list.isEmpty)
         {
           if(mediaType=="movies")
