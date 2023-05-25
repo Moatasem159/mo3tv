@@ -3,14 +3,15 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item/movie_list_item.dart';
 class MoviesList extends StatelessWidget {
   final List<Movie> movieList;
-  const MoviesList({super.key, required this.movieList});
+  final String listType;
+  const MoviesList({super.key, required this.movieList,this.listType=''});
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
         childCount: movieList.length,
             (context, index) {
-          return MovieListItem(movie: movieList[index]);
+          return MovieListItem(movie: movieList[index],listType:listType);
         },
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

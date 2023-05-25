@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
-import 'package:mo3tv/features/account/presentation/cubit/fav_tv_show_cubit/account_fav_tv_show_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/rated_tv_show_cubit/account_rated_tv_shows_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/tv_show_watchlist/account_tv_show_watchlist_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
@@ -58,65 +56,50 @@ class TvShowButtonsCubit extends Cubit<TvShowButtonsStates> {
       return RateTvShowSuccessState(r.statusCode!);
     }));
   }
-  markFav(context){
+  markFav(context,listType){
     if(tvShow!.tvShowAccountDetails!.favorite!){
       favTvShow(tvId: tvShow!.id!, fav: false);
       tvShow!.tvShowAccountDetails!.favorite =false;
-      AccountFavTvShowCubit.get(context).favTvShows.removeWhere((element) => element.id==tvShow!.id);
-      AccountFavTvShowCubit.get(context).update();
+      if(listType=="favorite"){
+        AccountListsCubit.get(context).list.removeWhere((element) => element.id == tvShow!.id);
+        AccountListsCubit.get(context).update();
+      }
     }
     else{
       favTvShow(tvId: tvShow!.id!, fav: true);
       tvShow!.tvShowAccountDetails!.favorite =true;
-      AccountFavTvShowCubit.get(context).favTvShows.add(tvShow!);
-      AccountFavTvShowCubit.get(context).update();
     }
   }
-  addToWatchlist(context){
+  addToWatchlist(context,listType){
     if (tvShow!.tvShowAccountDetails!.watchlist!) {
       addTvShowToWatchList(tvId: tvShow!.id!, watchlist: false);
       tvShow!.tvShowAccountDetails!.watchlist=false;
-      AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow!.id);
-      AccountTvShowWatchlistCubit.get(context).update();
+     if(listType=="watchlist")
+       {
+         AccountListsCubit.get(context).list.removeWhere((element) => element.id==tvShow!.id);
+         AccountListsCubit.get(context).update();
+       }
     }
     else {
       addTvShowToWatchList(tvId: tvShow!.id!, watchlist: true);
       tvShow!.tvShowAccountDetails!.watchlist=true;
-      AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.add(tvShow!);
-      AccountTvShowWatchlistCubit.get(context).update();
     }
   }
-  rate(rate,context){
+  rate(rate,context,listType){
     if(rate==0.0)
       {
         rateTvShow(tvId: tvShow!.id!,rate: rate);
         tvShow!.tvShowAccountDetails!.ratedValue=0.0;
         tvShow!.tvShowAccountDetails!.watchlist = false;
-        AccountRatedTvShowsCubit.get(context).ratedTvShows.removeWhere((element) =>element.id==tvShow!.id);
-        AccountRatedTvShowsCubit.get(context).update();
-        AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow!.id);
-        AccountTvShowWatchlistCubit.get(context).update();
+        if(listType=='rated'){
+        AccountListsCubit.get(context).list.removeWhere((element) => element.id == tvShow!.id);
+        AccountListsCubit.get(context).update();
       }
+    }
     else if(rate>0.0)
       {
         rateTvShow(rate: rate, tvId: tvShow!.id!);
         tvShow!.tvShowAccountDetails!.watchlist = false;
-        if(AccountRatedTvShowsCubit.get(context).ratedTvShows.any((element) => element.id == tvShow!.id)){
-          AccountRatedTvShowsCubit.get(context)
-              .ratedTvShows
-              .firstWhere(
-                  (element) => element.id == tvShow!.id)
-              .tvShowAccountDetails!
-              .ratedValue =
-              tvShow!.tvShowAccountDetails!.ratedValue;
-          AccountRatedTvShowsCubit.get(context).update();
-        }
-        else {
-          AccountRatedTvShowsCubit.get(context).ratedTvShows.add(tvShow!);
-          AccountRatedTvShowsCubit.get(context).update();
-        }
-        AccountTvShowWatchlistCubit.get(context).tvShowsWatchlist.removeWhere((element) => element.id==tvShow!.id);
-        AccountTvShowWatchlistCubit.get(context).update();
       }
   }
 }

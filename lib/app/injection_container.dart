@@ -12,15 +12,9 @@ import 'package:mo3tv/features/account/data/datasources/account_remote_datasourc
 import 'package:mo3tv/features/account/data/repositories/account_repository_impl.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_details_usecase.dart';
-import 'package:mo3tv/features/account/domain/usecases/get_account_movies_list_usecase.dart';
-import 'package:mo3tv/features/account/domain/usecases/get_account_tv_shows_list_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_account_lists_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/fav_movie_cubit/account_fav_movie_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/fav_tv_show_cubit/account_fav_tv_show_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/movie_watchlist_cubit/account_movie_watchlist_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/rated_movie_cubit/account_rated_movie_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/rated_tv_show_cubit/account_rated_tv_shows_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/tv_show_watchlist/account_tv_show_watchlist_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart';
 import 'package:mo3tv/features/credits/data/repositories/credits_repository_impl.dart';
 import 'package:mo3tv/features/credits/domain/repositories/credits_repository.dart';
@@ -154,15 +148,9 @@ Future external()async{
 }
 account(){
   sl.registerFactory(() =>AccountCubit(sl()));
-  sl.registerFactory(() =>AccountFavMovieCubit(sl()));
-  sl.registerFactory(() =>AccountRatedMovieCubit(sl()));
-  sl.registerFactory(() =>AccountMovieWatchlistCubit(sl()));
-  sl.registerFactory(() =>AccountFavTvShowCubit(sl()));
-  sl.registerFactory(() =>AccountRatedTvShowsCubit(sl()));
-  sl.registerFactory(() =>AccountTvShowWatchlistCubit(sl()));
-  sl.registerLazySingleton<GetAccountMoviesListUsecase>(() => GetAccountMoviesListUsecase(sl()));
+  sl.registerFactory(() =>AccountListsCubit(sl()));
+  sl.registerLazySingleton<GetAccountListsUsecase>(() => GetAccountListsUsecase(sl()));
   sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
-  sl.registerLazySingleton<GetAccountTvShowListUsecase>(() => GetAccountTvShowListUsecase(sl()));
   sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl(),sl()));
   sl.registerLazySingleton<AccountRemoteDataSource>(() => AccountRemoteDataSourceImpl(sl()));
   sl.registerLazySingleton<AccountLocalDataSource>(() => AccountLocalDatasourceImpl(sl()));

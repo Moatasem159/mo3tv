@@ -8,11 +8,15 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item/movie_image_builder.dart';
 class MovieListItem extends StatelessWidget {
   final Movie movie;
-  const MovieListItem({Key? key, required this.movie}) : super(key: key);
+  final String listType;
+  const MovieListItem({Key? key, required this.movie,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=> GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:movie),
+      onTap: ()=> GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:movie,queryParameters:
+      {
+        "listType":listType
+      }),
       child: Hero(
         tag:movie,
         child: CachedNetworkImage(

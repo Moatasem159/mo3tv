@@ -7,7 +7,8 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_genres_widget.dart';
 class TvShowOverview extends StatelessWidget {
   final TvShow tvShow;
-  const TvShowOverview({Key? key, required this.tvShow}) : super(key: key);
+  final String listType;
+  const TvShowOverview({Key? key, required this.tvShow, this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -19,7 +20,7 @@ class TvShowOverview extends StatelessWidget {
           children: [
             TvShowDetails(tvShow: tvShow),
             const TvShowGenresWidget(),
-            const TvShowButtons(),
+            TvShowButtons(listType:listType),
             const TvShowNetworks(),
             const TvShowDescription(),
           ],

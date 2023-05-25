@@ -6,7 +6,8 @@ import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_state.dart';
 class TvShowFavButton extends StatelessWidget {
-  const TvShowFavButton({Key? key}) : super(key: key);
+  final String listType;
+  const TvShowFavButton({Key? key,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvShowButtonsCubit, TvShowButtonsStates>(
@@ -16,7 +17,7 @@ class TvShowFavButton extends StatelessWidget {
           onTap:() {
             if(AppStrings.sessionId!='')
             {
-             cubit.markFav(context);
+             cubit.markFav(context,listType);
             }
             else{
               showDialog(

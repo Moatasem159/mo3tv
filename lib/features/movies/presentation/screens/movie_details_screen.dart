@@ -22,7 +22,8 @@ import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews
 import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
 class MovieDetailsScreen extends StatefulWidget {
   final Movie movie;
-  const MovieDetailsScreen({super.key, required this.movie});
+  final String listType;
+  const MovieDetailsScreen({super.key, required this.movie,this.listType=''});
   @override
   State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
 }
@@ -34,7 +35,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   @override
   void initState() {
     screens = [
-      MovieOverview(movie: widget.movie),
+      MovieOverview(movie: widget.movie,listType: widget.listType),
       RecommendationsMovies(movieId: widget.movie.id!),
       const MediaReviews(),
       const MediaCredits(),

@@ -42,11 +42,15 @@ abstract class AppRoute{
       GoRoute(
         name: Routes.movieDetailsRoute,
         path: Routes.movieDetailsRoute,
-        builder: (context, state) =>  MovieDetailsScreen(movie: state.extra as Movie)),
+        builder: (context, state) =>  MovieDetailsScreen(
+          listType: state.queryParameters["listType"]??'',
+            movie: state.extra as Movie)),
       GoRoute(
         name: Routes.tvShowRoute,
         path: Routes.tvShowRoute,
-        builder: (context, state) =>  TvShowDetailsScreen(tvShow:  state.extra as TvShow),
+        builder: (context, state) =>  TvShowDetailsScreen(
+            listType: state.queryParameters["listType"]??'',
+            tvShow:  state.extra as TvShow),
       ),
       GoRoute(
         name:  Routes.seeMoreRoute,
@@ -76,12 +80,9 @@ abstract class AppRoute{
         path: Routes.accountMediaLists,
         builder: (context, state) =>  AccountMediaListsScreen(
           title: state.queryParameters["title"]!,
-          favMovies:state.queryParameters["favMovies"]=="true"?true:false,
-          favTv:state.queryParameters["favTv"]=="true"?true:false,
-          moviesWatchlist:state.queryParameters["moviesWatchlist"]=="true"?true:false,
-          ratedMovies:state.queryParameters["ratedMovies"]=="true"?true:false,
-          ratedTv:state.queryParameters["ratedTv"]=="true"?true:false,
-          tvWatchlist:state.queryParameters["tvWatchlist"]=="true"?true:false)),
+          listType: state.queryParameters['listType']!,
+          mediaType: state.queryParameters["mediaType"]!,
+        )),
       GoRoute(
         name:  Routes.imageScreenRoute,
         path: Routes.imageScreenRoute,

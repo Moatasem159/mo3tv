@@ -22,7 +22,8 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_appbar_widget.dar
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_overview.dart';
 class TvShowDetailsScreen extends StatefulWidget {
   final TvShow tvShow;
-  const TvShowDetailsScreen({Key? key, required this.tvShow}) : super(key: key);
+  final String listType;
+  const TvShowDetailsScreen({Key? key, required this.tvShow,this.listType=''}) : super(key: key);
   @override
   State<TvShowDetailsScreen> createState() => _TvShowDetailsScreenState();
 }
@@ -35,7 +36,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
   @override
   void initState() {
     screens=[
-      TvShowOverview(tvShow: widget.tvShow),
+      TvShowOverview(tvShow: widget.tvShow,listType:widget.listType),
       RecommendationsTvShows(tvId: widget.tvShow.id!),
       const MediaReviews(),
       const MediaCredits(),

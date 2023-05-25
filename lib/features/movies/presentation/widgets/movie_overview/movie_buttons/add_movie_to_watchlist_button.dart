@@ -6,7 +6,8 @@ import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_state.dart';
 class AddMovieToWatchlistButton extends StatelessWidget {
-  const AddMovieToWatchlistButton({Key? key}) : super(key: key);
+  final String listType;
+  const AddMovieToWatchlistButton({Key? key,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieButtonsCubit,MovieButtonsStates>(
@@ -16,7 +17,7 @@ class AddMovieToWatchlistButton extends StatelessWidget {
           onTap: (){
             if(AppStrings.sessionId!='')
             {
-              cubit.addToWatchlist(context);
+              cubit.addToWatchlist(context,listType);
             }
             else{
               showDialog(

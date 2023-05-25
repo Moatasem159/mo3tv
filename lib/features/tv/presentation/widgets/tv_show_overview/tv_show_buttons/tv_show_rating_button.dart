@@ -8,7 +8,8 @@ import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_state.dart';
 class TvShowRatingButton extends StatelessWidget {
-  const TvShowRatingButton({Key? key}) : super(key: key);
+  final String listType;
+  const TvShowRatingButton({Key? key, this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvShowButtonsCubit, TvShowButtonsStates>(
@@ -53,13 +54,13 @@ class TvShowRatingButton extends StatelessWidget {
                             iconSize: 25,
                             icon: const Icon(Icons.remove_circle_outline),
                             onPressed: () {
-                              cubit.rate(0.0, context);
+                              cubit.rate(0.0, context,listType);
                               GoRouter.of(context).pop();
                             }),
                         TextButton(
                           child: const Text('Rate'),
                           onPressed: () {
-                            cubit.rate(cubit.tvShow!.tvShowAccountDetails!.ratedValue, context);
+                            cubit.rate(cubit.tvShow!.tvShowAccountDetails!.ratedValue, context,listType);
                             Navigator.of(context).pop();
                           },
                         ),

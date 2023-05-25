@@ -7,7 +7,8 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_genres_widget.dart';
 class MovieOverview extends StatelessWidget {
   final Movie movie;
-  const MovieOverview({Key? key, required this.movie}) : super(key: key);
+  final String listType;
+  const MovieOverview({Key? key, required this.movie,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -19,7 +20,7 @@ class MovieOverview extends StatelessWidget {
           children: [
             MovieDetails(movie: movie),
             const MovieGenresWidget(),
-            const MovieButtons(),
+            MovieButtons(listType: listType),
             const MovieDescription(),
             10.ph
           ],

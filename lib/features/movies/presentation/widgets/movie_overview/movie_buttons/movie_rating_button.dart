@@ -8,7 +8,8 @@ import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_state.dart';
 class MovieRatingButton extends StatelessWidget {
-  const MovieRatingButton({Key? key}) : super(key: key);
+  final String listType;
+  const MovieRatingButton({Key? key,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieButtonsCubit, MovieButtonsStates>(
@@ -53,14 +54,14 @@ class MovieRatingButton extends StatelessWidget {
                           iconSize: 25,
                           icon: const Icon(Icons.remove_circle_outline),
                           onPressed: (){
-                            cubit.rate(0.0, context);
+                            cubit.rate(0.0, context,listType);
                             GoRouter.of(context).pop();
                           },
                         ),
                         TextButton(
                           child: const Text('Rate'),
                           onPressed: (){
-                            cubit.rate(cubit.movie!.movieAccountDetails!.ratedValue,context);
+                            cubit.rate(cubit.movie!.movieAccountDetails!.ratedValue,context,listType);
                             GoRouter.of(context).pop();
                           },
                         ),

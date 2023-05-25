@@ -7,8 +7,8 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/movie_rating_button.dart';
 class MovieButtonsWidget extends StatefulWidget {
   final Movie movie;
-  const MovieButtonsWidget({super.key,required this.movie,});
-
+  final String listType;
+  const MovieButtonsWidget({super.key,required this.movie, this.listType=''});
   @override
   State<MovieButtonsWidget> createState() => _MovieButtonsWidgetState();
 }
@@ -39,9 +39,9 @@ class _MovieButtonsWidgetState extends State<MovieButtonsWidget> with SingleTick
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               UserScoreWidget(vote: widget.movie.voteAverage),
-              const MovieFavButton(),
-              const MovieRatingButton(),
-              const AddMovieToWatchlistButton(),
+              MovieFavButton(listType: widget.listType),
+              MovieRatingButton(listType: widget.listType),
+              AddMovieToWatchlistButton(listType: widget.listType),
             ],
           ),
         ],

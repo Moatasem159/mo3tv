@@ -7,8 +7,8 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_buttons/tv_show_rating_button.dart';
 class TvShowButtonsWidget extends StatefulWidget {
   final TvShow tvShow;
-  const TvShowButtonsWidget({super.key,required this.tvShow});
-
+  final  String listType;
+  const TvShowButtonsWidget({super.key,required this.tvShow,this.listType=''});
   @override
   State<TvShowButtonsWidget> createState() => _TvShowButtonsWidgetState();
 }
@@ -39,9 +39,9 @@ class _TvShowButtonsWidgetState extends State<TvShowButtonsWidget> with SingleTi
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               UserScoreWidget(vote:widget.tvShow.voteAverage),
-              const TvShowFavButton(),
-              const TvShowRatingButton(),
-              const AddTvShowToWatchlistButton(),
+              TvShowFavButton(listType:widget.listType),
+              TvShowRatingButton(listType:widget.listType),
+              AddTvShowToWatchlistButton(listType:widget.listType),
             ],
           ),
         ],

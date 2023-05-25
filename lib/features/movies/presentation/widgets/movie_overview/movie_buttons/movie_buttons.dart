@@ -6,14 +6,15 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_state
 import 'package:mo3tv/core/widgets/buttons/buttons_loading_widget.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/movie_buttons_widget.dart';
 class MovieButtons extends StatelessWidget {
-  const MovieButtons({Key? key}) : super(key: key);
+  final String listType;
+  const MovieButtons({Key? key,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieCubit, MovieStates>(
       builder: (context, state) {
         if (state is GetMovieDetailsSuccessState) {
           MovieButtonsCubit.get(context).movie=state.movie;
-          return MovieButtonsWidget(movie: state.movie);
+          return MovieButtonsWidget(movie: state.movie,listType: listType);
         }
         if (state is GetMovieDetailsLoadingState) {
           return  const ButtonsLoadingWidget();
