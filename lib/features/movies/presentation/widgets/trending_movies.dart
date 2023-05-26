@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mo3tv/app/injection_container.dart'as di;
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
@@ -14,39 +13,36 @@ class TrendingMovies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String title="Trending movies today";
-    return BlocProvider(
-      create: (context) => di.sl<TrendingMovieCubit>()..getTrendingMoviesData(),
-      child: BlocBuilder<TrendingMovieCubit, TrendingMovieStates>(
-        builder: (context, state) {
-          if (state is GetTrendingMoviesSuccessState) {
-            return HorizontalMoviesList(
-              movies: state.trendingMovies,
-              title: title,
-              onPressed: () {
-                GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
-                    extra: SeeMoreParameters(
-                        title: title,
-                        isMovie: true,
-                        index: 1,
-                        media: state.trendingMovies));
-              },
-            );
-          }
-          if (state is GetTrendingMoviesLoadingState) {
-            return const MediaLoadingList(title: title);
-          }
-          if (state is GetTrendingMoviesErrorState) {
-            return MediaErrorList(
-              title: title,
-              onPressed: () {
-                BlocProvider.of<TrendingMovieCubit>(context)
-                    .getTrendingMoviesData();
-              },
-            );
-          }
-          return Container();
-        },
-      ),
+    return BlocBuilder<TrendingMovieCubit, TrendingMovieStates>(
+      builder: (context, state) {
+        if (state is GetTrendingMoviesSuccessState) {
+          return HorizontalMoviesList(
+            movies: state.trendingMovies,
+            title: title,
+            onPressed: () {
+              GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
+                  extra: SeeMoreParameters(
+                      title: title,
+                      isMovie: true,
+                      index: 1,
+                      media: state.trendingMovies));
+            },
+          );
+        }
+        if (state is GetTrendingMoviesLoadingState) {
+          return const MediaLoadingList(title: title);
+        }
+        if (state is GetTrendingMoviesErrorState) {
+          return MediaErrorList(
+            title: title,
+            onPressed: () {
+              BlocProvider.of<TrendingMovieCubit>(context)
+                  .getTrendingMoviesData();
+            },
+          );
+        }
+        return Container();
+      },
     );
   }
 }
