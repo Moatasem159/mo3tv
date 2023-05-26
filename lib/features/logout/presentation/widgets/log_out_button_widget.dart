@@ -19,25 +19,21 @@ class LogOutButtonWidget extends StatelessWidget {
                 TextButton(
                     onPressed: () {
                       GoRouter.of(context).pop();
+                    },
+                    child: Text("cancel",style: AppTextStyles.get14NormalText())),
+                TextButton(
+                    onPressed: () {
+                      GoRouter.of(context).pop();
                       LogOutCubit.get(context).logOut();
                     },
                     child:  Text("log out",style: AppTextStyles.get14NormalText(
                       color: Colors.red,
-                    ))),
-                TextButton(
-                    onPressed: () {
-                      GoRouter.of(context).pop();
-                    },
-                    child: Text("cancel",style: AppTextStyles.get14NormalText()))
+                    )))
               ],
             );
           },
         );
       },
-      icon: const Icon(
-        Icons.login_outlined,
-        color: Colors.red,
-      ),
-    );
+      icon: const Icon(Icons.login_outlined,color: Colors.red));
   }
 }
