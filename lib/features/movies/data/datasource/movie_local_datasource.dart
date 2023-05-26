@@ -11,15 +11,15 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   @override
   Future<bool> saveMovieList({required List<Movie> movies,required String listType}) async{
     final String decodedMovies=MovieModel.encode(movies as List<MovieModel>);
-    await _sharedPrefrencesConsumer.saveData(key: "${listType}time",value: DateTime.now().toIso8601String());
-    final res=await _sharedPrefrencesConsumer.saveData(key:listType, value: decodedMovies);
+    await _sharedPrefrencesConsumer.saveData(key: "movie${listType}time",value: DateTime.now().toIso8601String());
+    final res=await _sharedPrefrencesConsumer.saveData(key:"movie$listType", value: decodedMovies);
     return res;
   }
   @override
   Future<List<Movie>> getCachedMoviesList({required String listType})async{
     late List<Movie> movies;
-    final String movieString = await _sharedPrefrencesConsumer.getData(key:listType)??'';
-    final String time = await _sharedPrefrencesConsumer.getData(key: "${listType}time")??'';
+    final String movieString = await _sharedPrefrencesConsumer.getData(key:"movie$listType")??'';
+    final String time = await _sharedPrefrencesConsumer.getData(key:"movie${listType}time")??'';
     if(movieString.isNotEmpty)
     {
       if(DateTime.now().difference(DateTime.parse(time)).inHours>5)
