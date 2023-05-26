@@ -75,7 +75,7 @@ class MovieModel extends Movie {
      "release_date":movieModel.releaseDate};
 
    static String encode(List<MovieModel> movies) =>  json.encode(
-       movies.map<Map<String, dynamic>>((agent) => MovieModel.movieToJson(agent)).toList());
+       movies.map<Map<String, dynamic>>((movie) => MovieModel.movieToJson(movie)).toList());
 
    static List<MovieModel> decode(String movies) =>
        (json.decode(movies) as List<dynamic>)
