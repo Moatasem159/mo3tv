@@ -24,7 +24,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
     {
       if(DateTime.now().difference(DateTime.parse(time)).inHours>5)
       {
-        await _sharedPrefrencesConsumer.remove(key:listType);
+        await _sharedPrefrencesConsumer.remove(key:"movie$listType");
         movies=[];
         return movies;
       }
