@@ -13,14 +13,10 @@ class EndPoints{
   static String logOutPath= "$baseUrl/authentication/session?api_key=$apiKey";
   static String mediaDetailsPath(int mediaId,String sessionId,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId?api_key=$apiKey&session_id=$sessionId&append_to_response=keywords,account_states,videos";
-  static String nowPlayingMediaPath({required int page,required String mediaType,required nowPlaying}) =>
-      "$baseUrl/$mediaType/$nowPlaying?api_key=$apiKey&page=$page";
   static String trendingMediaPath ({required int page,required String mediaType})=>
       "$baseUrl/trending/$mediaType/day?api_key=$apiKey&page=$page";
-  static String popularMediaPath ({required int page,required String mediaType})=>
-      "$baseUrl/$mediaType/popular?api_key=$apiKey&page=$page";
-  static  String topRatedMediaPath({required int page,required String mediaType}) =>
-      "$baseUrl/$mediaType/top_rated?api_key=$apiKey&page=$page";
+  static String mediaListsPath(String mediaType,String listType,int page) =>
+      "$baseUrl/$mediaType/$listType?api_key=$apiKey&page=$page";
   static String recommendationMediaPath(int mediaId,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId/recommendations?api_key=$apiKey&page=1";
   static String similarMediaPath(int mediaId,int page,String mediaType) =>

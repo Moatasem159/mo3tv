@@ -4,13 +4,11 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 abstract class MovieRemoteDataSource {
-  Future<List<MovieModel>> getNowPlayingMovies({required int page});
-  Future<List<MovieModel>> getPopularMovies({required int page});
+  Future<List<MovieModel>> getMoviesList({required int page,required String listType});
   Future<List<MovieModel>> getTrendingMovies({required int page});
   Future<MessageModel> rateMovie({required dynamic rate,required int movieId});
   Future<MessageModel> markMovie({required int movieId,required bool mark,required String markType});
   Future<MessageModel> deleteMovieRate({required int movieId});
-  Future<List<MovieModel>> getTopRatedMovies({required int page});
   Future<MovieModel> getMovieDetails({required int movieId});
   Future<List<MovieModel>> getMovieRecommendations({required int movieId});
   Future<List<MovieModel>> getSimilarMovies({required int movieId,required int page});
@@ -19,24 +17,13 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   final ApiConsumer _apiConsumer;
   MovieRemoteDataSourceImpl(this._apiConsumer);
   @override
-  Future<List<MovieModel>> getNowPlayingMovies({required int page}) async {
-    final response = await _apiConsumer.get(EndPoints.nowPlayingMediaPath(
-        page: page, mediaType: AppStrings.movie, nowPlaying: "now_playing"));
+  Future<List<MovieModel>> getMoviesList({required int page,required String listType}) async {
+    final response = await _apiConsumer.get(EndPoints.mediaListsPath(AppStrings.movie,listType,page));
     return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override
   Future<List<MovieModel>> getTrendingMovies({required int page}) async{
     final response = await _apiConsumer.get(EndPoints.trendingMediaPath(page:page,mediaType:AppStrings.movie));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
-  }
-  @override
-  Future<List<MovieModel>> getPopularMovies({required int page}) async {
-    final response = await _apiConsumer.get(EndPoints.popularMediaPath(page:page,mediaType:AppStrings.movie));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
-  }
-  @override
-  Future<List<MovieModel>> getTopRatedMovies({required int page}) async {
-    final response = await _apiConsumer.get(EndPoints.topRatedMediaPath(page:page,mediaType:AppStrings.movie));
     return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override

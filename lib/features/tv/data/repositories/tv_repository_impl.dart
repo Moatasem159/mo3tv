@@ -13,11 +13,11 @@ class TvShowRepositoryImpl implements TvRepository{
   final NetworkInfo _networkInfo;
   TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo);
   @override
-  Future<Either<Failure, List<TvShow>>> getNowPlayingTvShows({required int page})async {
+  Future<Either<Failure, List<TvShow>>> getNowPlayingTvShows({required int page,required String listType})async {
     if(await _networkInfo.isConnected)
     {
       try{
-        final result = await _tvShowRemoteDataSource.getNowPlayingTvShows(page: page);
+        final result = await _tvShowRemoteDataSource.getTvShowsList(page: page,listType: listType);
         result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
@@ -34,38 +34,6 @@ class TvShowRepositoryImpl implements TvRepository{
     {
       try {
         final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page);
-        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-  @override
-  Future<Either<Failure, List<TvShow>>> getPopularTvShows({required int page})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getPopularTvShows(page: page);
-        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-  @override
-  Future<Either<Failure, List<TvShow>>> getTopRatedTvShows({required int page})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getTopRatedTvShows(page: page);
         result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {

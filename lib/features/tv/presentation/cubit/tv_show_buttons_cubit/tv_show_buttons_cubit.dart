@@ -6,7 +6,7 @@ import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_as_fav_usecase.dart';
+import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_state.dart';
 class TvShowButtonsCubit extends Cubit<TvShowButtonsStates> {

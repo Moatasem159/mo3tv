@@ -8,15 +8,11 @@ import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/tr
 class TrendingMovieCubit extends Cubit<TrendingMovieStates> {
   TrendingMovieCubit(this._getTrendingMoviesUsecase) : super(TrendingMovieInitialState());
   final GetTrendingMoviesUsecase _getTrendingMoviesUsecase;
-  Future<void> getTrendingMoviesData({int page=1,bool seeMore=false}) async {
+  Future<void> getTrendingMoviesData() async {
     emit(GetTrendingMoviesLoadingState());
-    Either<Failure,List<Movie>> response =
-    await _getTrendingMoviesUsecase.call(page: page);
+    Either<Failure,List<Movie>> response = await _getTrendingMoviesUsecase.call();
     emit(response.fold(
-            (failure) {
-          return GetTrendingMoviesErrorState(msg: mapFailureToMsg(failure));
-        },(trendingMovies) {
-          return GetTrendingMoviesSuccessState(trendingMovies:trendingMovies);
-        }));
+        (failure) =>GetTrendingMoviesErrorState(msg: mapFailureToMsg(failure)),
+        (trendingMovies) =>GetTrendingMoviesSuccessState(trendingMovies:trendingMovies)));
   }
 }

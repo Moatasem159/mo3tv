@@ -6,7 +6,7 @@ import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/mark_movie_as_fav_usecase.dart';
+import 'package:mo3tv/features/movies/domain/usecases/mark_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_state.dart';
 class MovieButtonsCubit extends Cubit<MovieButtonsStates> {

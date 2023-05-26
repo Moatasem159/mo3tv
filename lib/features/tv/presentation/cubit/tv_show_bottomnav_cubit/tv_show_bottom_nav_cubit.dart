@@ -24,7 +24,6 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
       padding: EdgeInsets.only(right: 7),
       child: Icon(FontAwesomeIcons.solidImages),
     ), label: "Gallery"),
-
   ];
   void changeScreen(int index,context,int tvId){
     emit(TvShowBottomNavChangingState());

@@ -13,11 +13,11 @@ class MoviesRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource _movieRemoteDataSource;
   final NetworkInfo _networkInfo;
   @override
-  Future<Either<Failure, List<Movie>>> getNowPlayingMovies({required int page}) async {
+  Future<Either<Failure, List<Movie>>> getMoviesList({required int page,required String listType}) async {
     if(await _networkInfo.isConnected)
       {
         try {
-          final result = await _movieRemoteDataSource.getNowPlayingMovies(page: page);
+          final result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType);
           result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {
@@ -43,38 +43,6 @@ class MoviesRepositoryImpl implements MovieRepository {
     else{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
-  }
-  @override
-  Future<Either<Failure, List<Movie>>> getPopularMovies({required int page}) async {
-    if(await _networkInfo.isConnected)
-      {
-        try {
-          final result = await _movieRemoteDataSource.getPopularMovies(page: page);
-          result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
-      }
-    else{
-    return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
-  }
-  @override
-  Future<Either<Failure, List<Movie>>> getTopRatedMovies({required int page}) async {
-   if(await _networkInfo.isConnected)
-     {
-       try {
-         final result = await _movieRemoteDataSource.getTopRatedMovies(page: page);
-         result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
-         return Right(result);
-       } on ServerException catch (failure) {
-         return Left(ServerFailure(failure.message!));
-       }
-     }
-   else{
-     return left(const ServerFailure(AppStrings.noInternetConnection));
-   }
   }
   @override
   Future<Either<Failure, Movie>> getMovieDetails({required int movieId}) async {

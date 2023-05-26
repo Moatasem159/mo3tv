@@ -5,10 +5,8 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 abstract class TvShowRemoteDataSource {
-  Future<List<TvShowModel>> getNowPlayingTvShows({required int page});
-  Future<List<TvShowModel>> getPopularTvShows({required int page});
+  Future<List<TvShowModel>> getTvShowsList({required int page,required String listType});
   Future<List<TvShowModel>> getTrendingTvShows({required int page});
-  Future<List<TvShowModel>> getTopRatedTvShows({required int page});
   Future<TvShowModel> getTvShowDetails({required int tvShowId});
   Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});
   Future<List<TvShowModel>> getTvShowRecommendations({required int tvId});
@@ -21,24 +19,13 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
   final ApiConsumer _apiConsumer;
   TvShowRemoteDataSourceImpl(this._apiConsumer);
   @override
-  Future<List<TvShowModel>> getNowPlayingTvShows({required int page}) async{
-    final response = await _apiConsumer.get(EndPoints.nowPlayingMediaPath(
-        page: page, mediaType: AppStrings.tv, nowPlaying: "on_the_air"));
+  Future<List<TvShowModel>> getTvShowsList({required int page,required String listType}) async{
+    final response = await _apiConsumer.get(EndPoints.mediaListsPath(AppStrings.tv,listType,page));
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
   Future<List<TvShowModel>> getTrendingTvShows({required int page}) async{
     final response = await _apiConsumer.get(EndPoints.trendingMediaPath(page: page,mediaType: "tv"));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
-  }
-  @override
-  Future<List<TvShowModel>> getPopularTvShows({required int page})async {
-    final response = await _apiConsumer.get(EndPoints.popularMediaPath(page: page,mediaType: AppStrings.tv));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
-  }
-  @override
-  Future<List<TvShowModel>> getTopRatedTvShows({required int page})async{
-    final response = await _apiConsumer.get(EndPoints.topRatedMediaPath(page: page,mediaType: AppStrings.tv));
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
   }
   @override
