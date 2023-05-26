@@ -22,7 +22,7 @@ class AccountList extends StatelessWidget {
         {
           return const SliverMediaLoadingList();
         }
-        if(cubit.list.isEmpty&&cubit.totalResult>1)
+        if(cubit.list.isEmpty&&cubit.totalPage>1)
           {
             return const SliverToBoxAdapter();
           }
