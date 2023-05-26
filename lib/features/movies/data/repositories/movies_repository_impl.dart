@@ -3,25 +3,35 @@ import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/features/movies/data/datasource/movie_local_datasource.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
 class MoviesRepositoryImpl implements MovieRepository {
-  MoviesRepositoryImpl(this._networkInfo,this._movieRemoteDataSource);
+  MoviesRepositoryImpl(this._networkInfo,this._movieRemoteDataSource,this._movieLocalDataSource);
   final MovieRemoteDataSource _movieRemoteDataSource;
+  final MovieLocalDataSource _movieLocalDataSource;
   final NetworkInfo _networkInfo;
   @override
   Future<Either<Failure, List<Movie>>> getMoviesList({required int page,required String listType}) async {
     if(await _networkInfo.isConnected)
       {
-        try {
-          final result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType);
-          result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
+        List<Movie> cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: listType);
+        if(cachedMovies.isNotEmpty)
+          {
+            return right(cachedMovies);
+          }
+        else{
+          try {
+            final result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType);
+            result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
+            await _movieLocalDataSource.saveMovieList(movies: result, listType: listType);
+            return Right(result);
+          } on ServerException catch (failure) {
+            return Left(ServerFailure(failure.message!));
+          }
         }
       }
     else{
@@ -32,12 +42,20 @@ class MoviesRepositoryImpl implements MovieRepository {
   Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
     if(await _networkInfo.isConnected)
     {
-      try {
-        final result = await _movieRemoteDataSource.getTrendingMovies(page: page);
-        result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
+      List<Movie> cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: "trending");
+      if(cachedMovies.isNotEmpty)
+      {
+        return right(cachedMovies);
+      }
+      else{
+        try {
+          final result = await _movieRemoteDataSource.getTrendingMovies(page: page);
+          result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
+          await _movieLocalDataSource.saveMovieList(movies: result, listType: "trending");
+          return Right(result);
+        } on ServerException catch (failure) {
+          return Left(ServerFailure(failure.message!));
+        }
       }
     }
     else{

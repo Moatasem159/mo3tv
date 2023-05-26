@@ -5,16 +5,12 @@ class MovieImageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 140,
+      width: 120,
       height:200,
       margin: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-            image: image,
-            fit: BoxFit.cover,
-          )
-      ),
+          image: DecorationImage(image: image,fit: BoxFit.cover)),
     );
   }
 }

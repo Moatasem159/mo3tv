@@ -20,8 +20,6 @@ class MovieListItem extends StatelessWidget {
       child: Hero(
         tag:movie,
         child: CachedNetworkImage(
-          width: 140,
-          height:200,
           imageUrl: EndPoints.posterUrl(movie.posterPath!),
           imageBuilder: (context, imageProvider)=>MovieImageBuilder(image: imageProvider),
           placeholder: (context, url) => const MediaListLoadingItem(),

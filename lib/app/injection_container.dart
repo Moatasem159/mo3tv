@@ -37,6 +37,7 @@ import 'package:mo3tv/features/login/domain/usecases/get_sessionid_usecase.dart'
 import 'package:mo3tv/features/login/domain/usecases/get_token_usecase.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
+import 'package:mo3tv/features/movies/data/datasource/movie_local_datasource.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/features/movies/data/repositories/movies_repository_impl.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
@@ -191,9 +192,10 @@ movie(){
   sl.registerLazySingleton<DeleteRateMovieUseCase>(() => DeleteRateMovieUseCase(sl()));
   sl.registerLazySingleton<MarkMovieUsecase>(() => MarkMovieUsecase(sl()));
   ///repository
-  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl(),sl()));
   ///date source
   sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<MovieLocalDataSource>(() => MovieLocalDataSourceImpl(sl()));
 }
 tv(){
   ///cubits

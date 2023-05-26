@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/core/models/video_model.dart';
@@ -58,8 +60,27 @@ class MovieModel extends Movie {
       title: json["title"]??'',
       voteAverage: json["vote_average"]??0,
       voteCount: json["vote_count"]??0,
-     videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
+      videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
   );
+   static Map<String, dynamic> movieToJson(MovieModel movieModel) => {
+     "backdrop_path":movieModel.backdropPath,
+     "poster_path":movieModel.posterPath,
+     'id':movieModel.id,
+     'imdb_id':movieModel.imdbId,
+     "original_title":movieModel.originalTitle,
+     "title":movieModel.title,
+     "vote_average":movieModel.voteAverage,
+     "vote_count":movieModel.voteCount,
+     "popularity":movieModel.popularity,
+     "release_date":movieModel.releaseDate};
+
+   static String encode(List<MovieModel> movies) =>  json.encode(
+       movies.map<Map<String, dynamic>>((agent) => MovieModel.movieToJson(agent)).toList());
+
+   static List<MovieModel> decode(String movies) =>
+       (json.decode(movies) as List<dynamic>)
+           .map<MovieModel>((movie) => MovieModel.fromJson(movie))
+           .toList();
 }
 
 class ProductionCompany {

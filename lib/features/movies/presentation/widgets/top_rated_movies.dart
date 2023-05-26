@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/app/injection_container.dart'as di;
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
@@ -13,8 +14,10 @@ class TopRatedMovies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String title="Top rated movies";
-    return BlocBuilder<TopRatedMoviesCubit,TopRatedMoviesStates>(
-      builder:(context, state) {
+    return BlocProvider(
+      create: (context) => di.sl<TopRatedMoviesCubit>()..getTopRatedMoviesData(),
+      child: BlocBuilder<TopRatedMoviesCubit, TopRatedMoviesStates>(
+        builder:(context, state) {
         if(state is GetTopRatedMoviesSuccessState){
           return HorizontalMoviesList(
             movies: state.topRatedMovies,
@@ -36,6 +39,7 @@ class TopRatedMovies extends StatelessWidget {
             }, );
         }
         return Container();
-      },);
+      },),
+);
   }
 }

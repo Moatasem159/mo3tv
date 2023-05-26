@@ -8,13 +8,10 @@ class MediaListLoadingItem extends StatelessWidget {
       baseColor: Colors.grey[850]!,
       highlightColor: Colors.grey[700]!,
       child: Container(
-        width: 140,
+        width: 120,
         height:200,
         margin: const EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.grey
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.grey),
       ),
     );
   }
