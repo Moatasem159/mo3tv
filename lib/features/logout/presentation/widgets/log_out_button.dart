@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_state.dart';
@@ -21,7 +20,6 @@ class LogoutButton extends StatelessWidget {
               showDialog(context: context, builder:(context) => const LogOutDialog());
               login();
               LoginCubit.get(context).initial();
-              AccountCubit.get(context).initial();
             }
         },
         builder: (context, state) {

@@ -14,19 +14,21 @@ class LogOutButtonWidget extends StatelessWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title:  Text("are you sure you want logout ?",style: AppTextStyles.get14NormalText()),
+              title:  Text("log out of your account?",style: AppTextStyles.get14NormalText()),
               actions: [
                 TextButton(
                     onPressed: () {
                       GoRouter.of(context).pop();
                       LogOutCubit.get(context).logOut();
                     },
-                    child:  Text("yes",style: AppTextStyles.get14NormalText())),
+                    child:  Text("log out",style: AppTextStyles.get14NormalText(
+                      color: Colors.red,
+                    ))),
                 TextButton(
                     onPressed: () {
                       GoRouter.of(context).pop();
                     },
-                    child: Text("no",style: AppTextStyles.get14NormalText()))
+                    child: Text("cancel",style: AppTextStyles.get14NormalText()))
               ],
             );
           },
