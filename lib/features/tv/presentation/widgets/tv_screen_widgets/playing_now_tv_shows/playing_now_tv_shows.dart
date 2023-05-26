@@ -5,8 +5,8 @@ import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_c
 import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_state.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_screen_widgets/playing_now_tv_shows/playing_now_tv_show_carousal.dart';
-class PlayingNowTvShowsWidget extends StatelessWidget {
-  const PlayingNowTvShowsWidget({Key? key}) : super(key: key);
+class PlayingNowTvShows extends StatelessWidget {
+  const PlayingNowTvShows({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlayingNowTvShowCubit, PlayingNowTvShowStates>(

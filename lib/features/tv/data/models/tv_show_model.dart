@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/core/models/video_model.dart';
@@ -71,6 +73,23 @@ class TvShowModel extends TvShow {
     voteCount: json["vote_count"]??0,
     videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
   );
+   static Map<String, dynamic> tvShowToJson(TvShowModel tvShowModel) => {
+     "backdrop_path":tvShowModel.backdropPath,
+     "poster_path":tvShowModel.posterPath,
+     'id':tvShowModel.id,
+     "original_name":tvShowModel.originalName,
+     "name":tvShowModel.name,
+     "vote_average":tvShowModel.voteAverage,
+     "vote_count":tvShowModel.voteCount,
+     "popularity":tvShowModel.popularity,
+     "last_air_date":tvShowModel.lastAirDate,
+     "first_air_date":tvShowModel.firstAirDate
+   };
+   static String encode(List<TvShowModel> tvShows) =>  json.encode(
+       tvShows.map<Map<String, dynamic>>((tvShow) => TvShowModel.tvShowToJson(tvShow)).toList());
+   static List<TvShowModel> decode(String tvShows) =>
+       (json.decode(tvShows) as List<dynamic>)
+           .map<TvShowModel>((tvShow) => TvShowModel.fromJson(tvShow)).toList();
 }
 class CreatedBy {
   CreatedBy({

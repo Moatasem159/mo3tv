@@ -4,7 +4,7 @@ import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 abstract class TvRepository{
-  Future<Either<Failure,List<TvShow>>> getNowPlayingTvShows({required int page,required String listType});
+  Future<Either<Failure,List<TvShow>>> getTvShowsList({required int page,required String listType});
   Future<Either<Failure,List<TvShow>>> getTrendingTvShows({required int page});
   Future<Either<Failure,TvShow>> getTvShowDetails({required int tvShowId});
   Future<Either<Failure,TvShowSeason>> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber});

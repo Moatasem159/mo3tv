@@ -6,6 +6,6 @@ class GetTvShowsListUsecase{
   final TvRepository _tvRepository;
   GetTvShowsListUsecase(this._tvRepository);
   Future<Either<Failure,List<TvShow>>> call({int page=1,required String listType}) async{
-    return await _tvRepository.getNowPlayingTvShows(page: page,listType: listType);
+    return await _tvRepository.getTvShowsList(page: page,listType: listType);
   }
 }

@@ -17,19 +17,14 @@ class TvShowListItem extends StatelessWidget {
       child: Hero(
         tag: tvShow,
         child: CachedNetworkImage(
-          width: 140,
-          height:200,
           imageUrl: EndPoints.posterUrl(tvShow.posterPath!),
           imageBuilder: (context, imageProvider) =>Container(
+            width: 120,
+            height:200,
             margin: const EdgeInsets.symmetric(horizontal: 5),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
-                )
-            ),
-          ),
+                image: DecorationImage(image: imageProvider,fit: BoxFit.cover))),
           placeholder: (context, url) => const MediaListLoadingItem(),
           errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
         ),

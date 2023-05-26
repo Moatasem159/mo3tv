@@ -74,6 +74,7 @@ import 'package:mo3tv/features/search/domain/usecases/save_search_usecase.dart';
 import 'package:mo3tv/features/search/domain/usecases/search_usecase.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_bloc.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
+import 'package:mo3tv/features/tv/data/datasource/tv_show_local_datasource.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
@@ -220,9 +221,10 @@ tv(){
   sl.registerLazySingleton<RateTvShowUseCase>(() => RateTvShowUseCase(sl()));
   sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(() => GetTvShowSeasonDetailsUsecase(sl()));
   ///repository
-  sl.registerLazySingleton<TvRepository>(() => TvShowRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<TvRepository>(() => TvShowRepositoryImpl(sl(),sl(),sl()));
   ///data source
   sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<TvShowLocalDataSource>(()=>TvShowLocalDataSourceImpl(sl()));
 }
 
 reviews(){

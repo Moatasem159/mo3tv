@@ -13,7 +13,7 @@ class TvScreenBody extends StatelessWidget {
       child: Column(
         children:[
           20.ph,
-          const PlayingNowTvShowsWidget(),
+          const PlayingNowTvShows(),
           10.ph,
           const TrendingTvShow(),
           const PopularTvShow(),
