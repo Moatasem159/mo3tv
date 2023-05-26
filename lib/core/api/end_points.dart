@@ -35,13 +35,13 @@ class EndPoints{
       "$baseUrl/tv/$tvId/season/$seasonNumber?api_key=$apiKey";
   static String searchUrl({required String query,required int page})=>
       "${baseUrl}search/multi?api_key=$apiKey&page=$page&query=$query";
-  static  String backDropsUrl(String path) =>
+  static String backDropsUrl(String path) =>
       "$baseBackDropsUrl$path";
-  static  String posterUrl(String path) =>
+  static String posterUrl(String path) =>
       "$basePosterUrl$path";
-  static  String logoUrl(String path) =>
+  static String logoUrl(String path) =>
       "$baseLogoUrl$path";
-  static  String hdUrl(String path) =>
+  static String hdUrl(String path) =>
       "$baseHdUrl$path";
   static String accountPath(String sessionId) =>
       "$baseUrl/account?api_key=$apiKey&session_id=$sessionId";
