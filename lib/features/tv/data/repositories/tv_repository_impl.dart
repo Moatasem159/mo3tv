@@ -16,9 +16,13 @@ class TvShowRepositoryImpl implements TvRepository{
   TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo,this._tvShowLocalDataSource);
   @override
   Future<Either<Failure, List<TvShow>>> getTvShowsList({required int page,required String listType})async {
+    List<TvShow> cachedTvShows=[];
     if(await _networkInfo.isConnected)
     {
-      List<TvShow> cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: listType);
+      if(page==1)
+        {
+          cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: listType);
+        }
       if(cachedTvShows.isNotEmpty)
       {
         return right(cachedTvShows);
@@ -40,9 +44,12 @@ class TvShowRepositoryImpl implements TvRepository{
   }
   @override
   Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page}) async{
+    List<TvShow> cachedTvShows=[];
     if(await _networkInfo.isConnected)
     {
-      List<TvShow> cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: "trending");
+      if(page==1){
+        cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: "trending");
+      }
       if(cachedTvShows.isNotEmpty)
       {
         return right(cachedTvShows);

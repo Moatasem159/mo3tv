@@ -16,9 +16,13 @@ class MoviesRepositoryImpl implements MovieRepository {
   final NetworkInfo _networkInfo;
   @override
   Future<Either<Failure, List<Movie>>> getMoviesList({required int page,required String listType}) async {
+    List<Movie> cachedMovies=[];
     if(await _networkInfo.isConnected)
       {
-        List<Movie> cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: listType);
+        if(page==1)
+          {
+            cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: listType);
+          }
         if(cachedMovies.isNotEmpty)
           {
             return right(cachedMovies);
@@ -40,9 +44,12 @@ class MoviesRepositoryImpl implements MovieRepository {
   }
   @override
   Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
+    List<Movie> cachedMovies=[];
     if(await _networkInfo.isConnected)
     {
-      List<Movie> cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: "trending");
+      if(page==1){
+        cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: "trending");
+      }
       if(cachedMovies.isNotEmpty)
       {
         return right(cachedMovies);
