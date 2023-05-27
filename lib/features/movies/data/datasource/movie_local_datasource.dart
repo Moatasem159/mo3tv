@@ -22,7 +22,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
     final String time = await _sharedPrefrencesConsumer.getData(key:"movie${listType}time")??'';
     if(movieString.isNotEmpty)
     {
-      if(DateTime.now().difference(DateTime.parse(time)).inHours>5)
+      if(DateTime.now().difference(DateTime.parse(time)).inHours>=5)
       {
         movies=[];
         return movies;
