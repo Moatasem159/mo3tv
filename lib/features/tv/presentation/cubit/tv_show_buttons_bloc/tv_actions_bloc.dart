@@ -24,8 +24,10 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
   }
   static TvActionsBloc get(context)=>BlocProvider.of(context);
   TvShow ?tvShow;
+  double initialRating=0;
   Future<void> rateTvShow(emit,rate)async{
     emit(ActionLoadingState());
+    bool watchList= tvShow!.tvShowAccountDetails!.watchlist!;
     Either<Failure, Message> response;
     if(rate>0){
       tvShow!.tvShowAccountDetails!.watchlist = false;
@@ -33,11 +35,15 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     }
     else{
       tvShow!.tvShowAccountDetails!.ratedValue=0.0;
-      tvShow!.tvShowAccountDetails!.watchlist = false;
+      tvShow!.tvShowAccountDetails!.watchlist = watchList;
       response=await _deleteTvShowRateUseCase.call(tvId: tvShow!.id!);
     }
     emit(response.fold(
-        (l)=>ActionErrorState(),
+        (l){
+          tvShow!.tvShowAccountDetails!.ratedValue=initialRating;
+          tvShow!.tvShowAccountDetails!.watchlist=true;
+          return ActionErrorState(where: "rate");
+        },
         (r)=>ActionSuccessState()));
   }
   Future<void> favTvShow(emit,bool fav)async{
@@ -45,7 +51,10 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     Either<Failure, Message> response =
     await _markTvShowAsFavUsecase.call(tvId: tvShow!.id!,mark: fav,markType: "favorite");
     emit(response.fold(
-        (l)=> ActionErrorState(),
+        (l){
+          tvShow!.tvShowAccountDetails!.favorite=!tvShow!.tvShowAccountDetails!.favorite!;
+          return ActionErrorState(where: "fav");
+        },
         (r)=> ActionSuccessState()));
   }
   Future<void> addTvShowToWatchList(emit,bool watchlist)async{
@@ -53,7 +62,10 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     Either<Failure, Message> response =
     await _markTvShowAsFavUsecase.call(tvId: tvShow!.id!,mark: watchlist,markType: "watchlist");
     emit(response.fold(
-        (l)=>ActionErrorState(),
+        (l){
+          tvShow!.tvShowAccountDetails!.watchlist=!tvShow!.tvShowAccountDetails!.watchlist!;
+          return ActionErrorState(where: "watchList");
+        },
         (r)=>ActionSuccessState()));
   }
 }

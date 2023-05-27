@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/core/widgets/toast/custom_toast.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_bloc.dart';
@@ -12,7 +13,13 @@ class TvShowFavButton extends StatelessWidget {
   const TvShowFavButton({Key? key,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TvActionsBloc, TvShowActionsStates>(
+    return BlocConsumer<TvActionsBloc, TvShowActionsStates>(
+      listener: (context, state) {
+        if(state is ActionErrorState&&state.where=="fav")
+        {
+          CustomToast.showToast(context);
+        }
+      },
       builder: (context, state) {
         TvActionsBloc bloc=TvActionsBloc.get(context);
         return MediaIconButton(
@@ -31,6 +38,10 @@ class TvShowFavButton extends StatelessWidget {
                 }
               else{
                 bloc.tvShow!.tvShowAccountDetails!.favorite=true;
+                if(listType=="favorite"){
+                  AccountListsCubit.get(context).list.add(bloc.tvShow!);
+                  AccountListsCubit.get(context).update();
+                }
                 bloc.add(FavTvShowEvent(true));
               }
             }

@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/core/widgets/toast/custom_toast.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
@@ -14,7 +15,13 @@ class MovieRatingButton extends StatelessWidget {
   const MovieRatingButton({Key? key,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieActionsBloc, MovieActionsStates>(
+    return BlocConsumer<MovieActionsBloc, MovieActionsStates>(
+      listener: (context, state) {
+        if(state is ActionErrorState&&state.where=="rate")
+        {
+          CustomToast.showToast(context);
+        }
+      },
       builder: (context, state) {
         MovieActionsBloc bloc=MovieActionsBloc.get(context);
         return Tooltip(
@@ -69,6 +76,10 @@ class MovieRatingButton extends StatelessWidget {
                           child: const Text('Rate'),
                           onPressed: (){
                             bloc.add(RateMovieEvent(bloc.movie!.movieAccountDetails!.ratedValue));
+                            if(listType=="rated") {
+                              AccountListsCubit.get(context).list.add(bloc.movie!);
+                              AccountListsCubit.get(context).update();
+                            }
                             GoRouter.of(context).pop();
                           },
                         ),

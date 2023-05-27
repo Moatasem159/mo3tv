@@ -22,6 +22,7 @@ class TvShowOverview extends StatelessWidget {
       }
     if(state is GetTvShowDetailsSuccessState)
       {
+        TvActionsBloc.get(context).initialRating=state.tvShow.tvShowAccountDetails!.ratedValue;
         TvActionsBloc.get(context).tvShow=state.tvShow;
         return TvShowOverviewSuccessBody(listType: listType,tvShow: state.tvShow);
       }

@@ -8,18 +8,18 @@ abstract class AppTextStyles{
       color:color,
       fontFamily: AppStrings.fontFamily);
   }
-  static TextStyle get14NormalText({Color color=Colors.white}){
+  static TextStyle get14NormalText({Color color=Colors.white,double height=1.5}){
     return TextStyle(
       fontSize: 14,
-      height: 1.5,
+      height: height,
       fontWeight: FontWeight.normal,
       color:color,
       fontFamily: AppStrings.fontFamily);
   }
-  static TextStyle get14BoldText({Color color=Colors.white}){
+  static TextStyle get14BoldText({Color color=Colors.white,double height=1.5}){
     return TextStyle(
       fontSize: 14,
-      height: 1.5,
+      height: height,
       fontWeight: FontWeight.bold,
       overflow: TextOverflow.visible,
       color:color,

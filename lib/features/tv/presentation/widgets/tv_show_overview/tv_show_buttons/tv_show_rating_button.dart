@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/core/widgets/toast/custom_toast.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_bloc.dart';
@@ -14,7 +15,13 @@ class TvShowRatingButton extends StatelessWidget {
   const TvShowRatingButton({Key? key, this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TvActionsBloc, TvShowActionsStates>(
+    return BlocConsumer<TvActionsBloc,TvShowActionsStates>(
+      listener: (context, state) {
+        if(state is ActionErrorState&&state.where=="rate")
+        {
+          CustomToast.showToast(context);
+        }
+      },
       builder: (context, state) {
         TvActionsBloc bloc=TvActionsBloc.get(context);
         return Tooltip(
@@ -67,6 +74,10 @@ class TvShowRatingButton extends StatelessWidget {
                           child: const Text('Rate'),
                           onPressed: () {
                             bloc.add(RateTvShowEvent(bloc.tvShow!.tvShowAccountDetails!.ratedValue));
+                            if(listType=='rated'){
+                              AccountListsCubit.get(context).list.add(bloc.tvShow!);
+                              AccountListsCubit.get(context).update();
+                            }
                             GoRouter.of(context).pop();
                           },
                         ),

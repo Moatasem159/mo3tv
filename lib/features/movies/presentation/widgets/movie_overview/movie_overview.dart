@@ -21,6 +21,7 @@ class MovieOverview extends StatelessWidget {
               Lottie.asset("assets/icons/movie_loading.json",height: 80)));
         }
         if(state is GetMovieDetailsSuccessState){
+          MovieActionsBloc.get(context).initialRate= state.movie.movieAccountDetails!.ratedValue??0;
           MovieActionsBloc.get(context).movie=state.movie;
           return MovieOverViewSuccessBody(listType: listType,movie: state.movie);
         }

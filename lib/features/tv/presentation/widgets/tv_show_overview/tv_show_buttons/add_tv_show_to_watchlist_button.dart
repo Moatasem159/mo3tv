@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/core/widgets/toast/custom_toast.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_bloc.dart';
@@ -12,13 +13,18 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
   const AddTvShowToWatchlistButton({Key? key, this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TvActionsBloc,TvShowActionsStates>(
+    return BlocConsumer<TvActionsBloc,TvShowActionsStates>(
+      listener: (context, state) {
+        if(state is ActionErrorState&&state.where=="watchList")
+        {
+          CustomToast.showToast(context);
+        }
+      },
       builder: (context, state) {
         TvActionsBloc bloc=TvActionsBloc.get(context);
         return MediaIconButton(
           onTap: () {
-              if(AppStrings.sessionId!='')
-               {
+            if(AppStrings.sessionId!=''){
               if(bloc.tvShow!.tvShowAccountDetails!.watchlist==true)
                 {
                   bloc.tvShow!.tvShowAccountDetails!.watchlist=false;
@@ -32,6 +38,11 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
                 }
               else{
                 bloc.tvShow!.tvShowAccountDetails!.watchlist=true;
+                if(listType=="watchlist")
+                {
+                  AccountListsCubit.get(context).list.add(bloc.tvShow!);
+                  AccountListsCubit.get(context).update();
+                }
                 bloc.add(WatchListTvShowEvent(true));
               }
             }

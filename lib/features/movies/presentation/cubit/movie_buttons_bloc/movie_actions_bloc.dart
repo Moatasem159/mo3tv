@@ -24,8 +24,10 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   }
   static MovieActionsBloc get(context)=>BlocProvider.of(context);
   Movie ?movie;
+  double initialRate=0;
   Future<void> rateMovie(emit,double rate)async{
     emit(ActionLoadingState());
+    bool watchList= movie!.movieAccountDetails!.watchlist!;
     Either<Failure, Message> response;
     if(rate>0) {
       movie!.movieAccountDetails!.watchlist = false;
@@ -37,7 +39,11 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
       response =await _deleteRateMovieUseCase.call(movieId: movie!.id!);
     }
     emit(response.fold(
-            (l)=>ActionErrorState(),
+            (l){
+              movie!.movieAccountDetails!.ratedValue=initialRate;
+              movie!.movieAccountDetails!.watchlist=watchList;
+              return ActionErrorState(where: "rate");
+            },
             (r)=> ActionSuccessState()));
   }
   Future<void> favMovie(emit, bool fav)async{
@@ -45,7 +51,10 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     Either<Failure, Message> response =
     await _markMovieUsecase.call(movieId: movie!.id!, mark: fav,markType: "favorite");
     emit(response.fold(
-        (l) => ActionErrorState(),
+        (l){
+          movie!.movieAccountDetails!.favorite= !movie!.movieAccountDetails!.favorite!;
+          return ActionErrorState(where: "fav");
+        },
         (r) => ActionSuccessState()));
   }
   Future<void> addMovieToWatchList(emit, bool add) async {
@@ -53,7 +62,10 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     Either<Failure, Message> response =
     await _markMovieUsecase.call(movieId: movie!.id!, mark:add,markType: "watchlist");
     emit(response.fold(
-            (l) => ActionErrorState(),
+            (l){
+              movie!.movieAccountDetails!.watchlist= !movie!.movieAccountDetails!.watchlist!;
+              return ActionErrorState(where: "watchList");
+            },
             (r) => ActionSuccessState()));
   }
 }

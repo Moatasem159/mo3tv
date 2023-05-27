@@ -1,10 +1,10 @@
 class Message {
   Message({
-    this.success,
-    this.statusCode,
-    this.statusMessage,
+    required this.success,
+   required this.statusCode,
+    required this.statusMessage,
   });
-  bool? success;
-  int? statusCode;
-  String? statusMessage;
+  bool success;
+  int statusCode;
+  String statusMessage;
 }
