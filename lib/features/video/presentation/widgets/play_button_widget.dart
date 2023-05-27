@@ -32,11 +32,13 @@ class _PlayButtonWidgetState extends State<PlayButtonWidget> with SingleTickerPr
         opacity: (1 - widget.shrinkOffset / 130),
         child: GestureDetector(
           onTap: () {
-            GoRouter.of(context).pushNamed(Routes.trailerScreenRoute,queryParameters:
+            if(1 - widget.shrinkOffset / 130>0) {
+              GoRouter.of(context).pushNamed(Routes.trailerScreenRoute,queryParameters:
             {
               "url":widget.url,
               "title":widget.name
             });
+            }
           },
           child: Container(
             width: 45,

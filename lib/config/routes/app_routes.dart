@@ -1,5 +1,8 @@
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/animations_route/scale_from_center.dart';
 import 'package:mo3tv/config/routes/animations_route/slide_from_down_to_up.dart';
+import 'package:mo3tv/config/routes/animations_route/slide_from_left_to_right.dart';
+import 'package:mo3tv/config/routes/animations_route/slide_from_right_to_left.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
 import 'package:mo3tv/features/account/presentation/screens/account_media_list_screen.dart';
@@ -55,7 +58,7 @@ abstract class AppRoute{
       GoRoute(
         name:  Routes.seeMoreRoute,
         path: Routes.seeMoreRoute,
-        builder: (context, state) =>MediaSeeMore(parameters:state.extra as SeeMoreParameters)),
+        pageBuilder: (context, state) => SlideFromRightToLeft(child: MediaSeeMore(parameters:state.extra as SeeMoreParameters))),
       GoRoute(
         name:  Routes.seasonRoute,
         path: Routes.seasonRoute,
@@ -66,23 +69,23 @@ abstract class AppRoute{
       GoRoute(
         name:  Routes.similarMoviesRoute,
         path: Routes.similarMoviesRoute,
-        builder: (context, state) =>  SimilarMoviesScreen(
-          recommendations: state.extra as List<Movie>,
-          movieId:int.parse(state.queryParameters["movieId"]!))),
+        pageBuilder: (context, state) => SlideFromRightToLeft(child: SimilarMoviesScreen(
+            recommendations: state.extra as List<Movie>,
+            movieId:int.parse(state.queryParameters["movieId"]!)))),
       GoRoute(
         name:  Routes.similarTvShowsRoute,
         path: Routes.similarTvShowsRoute,
-        builder: (context, state) =>  SimilarTvShowsScreen(
-          recommendations: state.extra as List<TvShow>,
-          tvId:int.parse(state.queryParameters["tvId"]!))),
+        pageBuilder: (context, state) => SlideFromRightToLeft(child: SimilarTvShowsScreen(
+            recommendations: state.extra as List<TvShow>,
+            tvId:int.parse(state.queryParameters["tvId"]!)))),
       GoRoute(
         name:  Routes.accountMediaLists,
         path: Routes.accountMediaLists,
-        builder: (context, state) =>  AccountMediaListsScreen(
+        pageBuilder: (context, state) => SlideFromLeftToRight(child: AccountMediaListsScreen(
           title: state.queryParameters["title"]!,
           listType: state.queryParameters['listType']!,
           mediaType: state.queryParameters["mediaType"]!,
-        )),
+        ))),
       GoRoute(
         name:  Routes.imageScreenRoute,
         path: Routes.imageScreenRoute,
@@ -90,9 +93,9 @@ abstract class AppRoute{
       GoRoute(
         name:  Routes.trailerScreenRoute,
         path: Routes.trailerScreenRoute,
-        builder: (context, state) =>  TrailerScreen(
-          title:state.queryParameters["title"]!,
-          url:state.queryParameters["url"]!)),
+        pageBuilder: (context, state) => ScaleFromCenter(child: TrailerScreen(
+            title:state.queryParameters["title"]!,
+            url:state.queryParameters["url"]!)),),
     ],
   );
 }
