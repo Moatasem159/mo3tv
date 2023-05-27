@@ -15,8 +15,6 @@ class MovieOverViewSuccessBody extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             MovieDetailsWidget(movie:movie),
             GenresWidget(genres:movie.genres!,runTime: movie.runtime),

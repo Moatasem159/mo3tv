@@ -20,19 +20,22 @@ class SearchScreen extends StatelessWidget {
       ],
       child: BlocBuilder<SearchBloc, SearchStates>(
         builder: (context, state) {
-          return CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            slivers: [
-               const SearchBarWidget(),
-              if(state is SearchInitialState)
-                const RecentlySearch(),
-              if(state is SearchLoadingState)
-               const SearchLoadingWidget(),
-              if (state is SearchSuccessEmptyState)
-               const SearchEmptyWidget(),
-              if (state is SearchSuccessState)
-               SearchList(items: state.items)
-            ],
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              slivers: [
+                 const SearchBarWidget(),
+                if(state is SearchInitialState)
+                  const RecentlySearch(),
+                if(state is SearchLoadingState)
+                 const SearchLoadingWidget(),
+                if (state is SearchSuccessEmptyState)
+                 const SearchEmptyWidget(),
+                if (state is SearchSuccessState)
+                 SearchList(items: state.items)
+              ],
+            ),
           );
         },
       ),

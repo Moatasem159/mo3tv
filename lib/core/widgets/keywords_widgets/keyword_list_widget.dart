@@ -7,17 +7,21 @@ class KeywordListWidget extends StatelessWidget {
   const KeywordListWidget({Key? key, required this.keywords}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-       Padding(
-         padding: const EdgeInsets.symmetric(horizontal: 10),
-         child: Text("Keywords:",style:AppTextStyles.get14BoldText())),
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.start,
-          children: keywords.map((e)=>KeywordWidget(keyword: e)).toList(),
-        ),
-      ],
-    );
+    if(keywords.isNotEmpty)
+      {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text("Keywords:",style:AppTextStyles.get14BoldText())),
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
+              children: keywords.map((e)=>KeywordWidget(keyword: e)).toList(),
+            ),
+          ],
+        );
+      }
+    return Container();
   }
 }

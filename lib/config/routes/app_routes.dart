@@ -45,15 +45,13 @@ abstract class AppRoute{
         path: Routes.movieDetailsRoute,
         pageBuilder: (context, state) =>SlideFromDownToUp(child: MovieDetailsScreen(
             listType: state.queryParameters["listType"]??'',
-            movie: state.extra as Movie))
-      ),
+            movie: state.extra as Movie))),
       GoRoute(
         name: Routes.tvShowRoute,
         path: Routes.tvShowRoute,
-        builder: (context, state) =>  TvShowDetailsScreen(
-            listType: state.queryParameters["listType"]??'',
-            tvShow:  state.extra as TvShow),
-      ),
+       pageBuilder: (context, state) => SlideFromDownToUp(child: TvShowDetailsScreen(
+           listType: state.queryParameters["listType"]??'',
+           tvShow:  state.extra as TvShow))),
       GoRoute(
         name:  Routes.seeMoreRoute,
         path: Routes.seeMoreRoute,

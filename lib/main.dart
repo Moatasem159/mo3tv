@@ -11,7 +11,6 @@ void main()async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await di.init();
-  await Future.delayed(const Duration(seconds: 1));
   Bloc.observer=AppBlocObserver();
   SharedPrefrencesConsumer sharedPrefrencesConsumer=di.sl<SharedPrefrencesConsumer>();
   if(sharedPrefrencesConsumer.getData(key: AppStrings.id)!=null){

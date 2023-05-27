@@ -7,14 +7,21 @@ class NetworkListWidget extends StatelessWidget {
   const NetworkListWidget({Key? key, required this.networks}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      children: [
-        Text("Networks",style:AppTextStyles.get14BoldText()),
-        Wrap(
-          alignment: WrapAlignment.center,
-          children: networks.map((e)=> NetworkWidget(network: e)).toList(),
-        ),
-      ],
+    if(networks.isNotEmpty) {
+      return Align(
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+
+          Text("Networks",style:AppTextStyles.get14BoldText()),
+          Wrap(
+            alignment: WrapAlignment.center,
+            children: networks.map((e)=> NetworkWidget(network: e)).toList(),
+          ),
+        ],
+      ),
     );
+    }
+    return Container();
   }
 }
