@@ -2,22 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_cubit/tv_show_buttons_state.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_bloc.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_events.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_show_actions_state.dart';
 class TvShowFavButton extends StatelessWidget {
   final String listType;
   const TvShowFavButton({Key? key,this.listType=''}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TvShowButtonsCubit, TvShowButtonsStates>(
+    return BlocBuilder<TvActionsBloc, TvShowActionsStates>(
       builder: (context, state) {
-        TvShowButtonsCubit cubit=TvShowButtonsCubit.get(context);
+        TvActionsBloc bloc=TvActionsBloc.get(context);
         return MediaIconButton(
           onTap:() {
             if(AppStrings.sessionId!='')
             {
-             cubit.markFav(context,listType);
+              if(bloc.tvShow!.tvShowAccountDetails!.favorite==true)
+                {
+                  bloc.tvShow!.tvShowAccountDetails!.favorite=false;
+                  if(listType=="favorite"){
+                    AccountListsCubit.get(context).list
+                    .removeWhere((element) => element.id == bloc.tvShow!.id);
+                    AccountListsCubit.get(context).update();
+                  }
+                  bloc.add(FavTvShowEvent(false));
+                }
+              else{
+                bloc.tvShow!.tvShowAccountDetails!.favorite=true;
+                bloc.add(FavTvShowEvent(true));
+              }
             }
             else{
               showDialog(
@@ -28,11 +43,8 @@ class TvShowFavButton extends StatelessWidget {
               );
             }
           },
-          icon:Icon(
-              Icons.favorite_rounded,
-              color: cubit.tvShow!.tvShowAccountDetails!.favorite!?Colors.red:Colors.white
-          ),
-        );
+          icon:Icon(Icons.favorite_rounded,
+              color: bloc.tvShow!.tvShowAccountDetails!.favorite!?Colors.red:Colors.white));
       },
     );
   }

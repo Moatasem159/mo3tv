@@ -6,7 +6,7 @@ import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/ac
 import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_events.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_buttons_state.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_state.dart';
 class AddMovieToWatchlistButton extends StatelessWidget {
   final String listType;
   const AddMovieToWatchlistButton({Key? key,this.listType=''}) : super(key: key);
