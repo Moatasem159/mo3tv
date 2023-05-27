@@ -50,7 +50,7 @@ import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecas
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_actions_bloc.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';

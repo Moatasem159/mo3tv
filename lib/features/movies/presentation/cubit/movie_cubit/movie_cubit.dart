@@ -6,7 +6,7 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 class MovieCubit extends Cubit<MovieStates> {
-  MovieCubit(this._getMovieDetailsUseCase,) : super(MoviesInitialState());
+  MovieCubit(this._getMovieDetailsUseCase) : super(MoviesInitialState());
   final GetMovieDetailsUseCase _getMovieDetailsUseCase;
   static MovieCubit get(context)=>BlocProvider.of(context);
   Future<void> getMovieDetailsData({required int movieId}) async {

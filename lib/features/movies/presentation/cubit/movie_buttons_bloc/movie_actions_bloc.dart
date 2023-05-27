@@ -6,8 +6,8 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_actions_events.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_cubit/movie_buttons_state.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_events.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_buttons_state.dart';
 import 'package:rxdart/transformers.dart';
 class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   final RateMovieUseCase _rateMovieUseCase;
