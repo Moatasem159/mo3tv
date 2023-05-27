@@ -25,6 +25,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   gallery_saver: ^2.3.2
   go_router: ^7.1.1
+  lottie: ^2.3.2
   youtube_player_iframe: any
   webview_flutter: any
   flutter_native_splash: any
@@ -53,6 +54,7 @@ flutter:
     - assets/images/movieplaceholder.png
     - assets/images/movie_cover.jpg
     - assets/images/tv_cover.jpg
+    - assets/icons/movie_loading.json
   fonts:
   - family: Montserrat
     fonts:

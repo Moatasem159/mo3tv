@@ -17,7 +17,7 @@ class UserScoreWidget extends StatelessWidget {
             percent: vote / 10,
             center: Text(
               "${((vote) * 10).toInt() % 10000}%",
-              style:AppTextStyles.get14NormalText()
+              style:AppTextStyles.get10NormalText()
             ),
             progressColor: Colors.green,
           ),

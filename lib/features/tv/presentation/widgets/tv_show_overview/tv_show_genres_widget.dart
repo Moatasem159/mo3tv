@@ -16,7 +16,6 @@ class TvShowGenresWidget extends StatelessWidget {
               5.ph,
               if (state.tvShow.genres!.isNotEmpty)
                 GenresWidget(genres: state.tvShow.genres!,
-                    isTvShow: true,
                     runTime: state.tvShow.episodeRunTime!.isNotEmpty ? state
                         .tvShow
                         .episodeRunTime![0] : 0),

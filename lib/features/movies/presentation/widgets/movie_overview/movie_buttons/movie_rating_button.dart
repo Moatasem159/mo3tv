@@ -88,8 +88,7 @@ class MovieRatingButton extends StatelessWidget {
             },
             icon: bloc.movie!.movieAccountDetails!.ratedValue != 0.0
                 ? const Icon(Icons.star_rate_rounded,color: Colors.yellow,size: 30)
-                : const Icon(Icons.star_border_rounded,size: 30)),
-        );
+                : const Icon(Icons.star_border_rounded,size: 30)));
       },
     );
   }

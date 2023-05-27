@@ -12,25 +12,27 @@ class MovieInfoWidget extends StatefulWidget {
   State<MovieInfoWidget> createState() => _MovieInfoWidgetState();
 }
 class _MovieInfoWidgetState extends State<MovieInfoWidget> with SingleTickerProviderStateMixin {
-  late AnimationController _fadeController;
-  late Animation<double> _fadeAnimation;
+  late AnimationController _slideController;
+  late Animation<Offset> _slideTransition;
+  late CurvedAnimation _curveAnimations;
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 700));
-    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(_fadeController);
-    _fadeController.forward();
+    _slideController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1500));
+    _curveAnimations=CurvedAnimation(parent: _slideController, curve: Curves.fastLinearToSlowEaseIn);
+    _slideTransition = Tween<Offset>(begin: const Offset(0,2), end: Offset.zero).animate(_curveAnimations);
+    _slideController.forward();
   }
   @override
   void dispose() {
-    _fadeController.dispose();
+    _slideController.dispose();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: FadeTransition(
-        opacity: _fadeAnimation,
+      child: SlideTransition(
+        position: _slideTransition,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -5,30 +5,31 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 class GenresWidget extends StatefulWidget {
   final List<Keyword> genres;
   final num runTime;
-  final bool isTvShow;
-  const GenresWidget({Key? key, required this.genres, required this.runTime, required this.isTvShow}) : super(key: key);
+  const GenresWidget({Key? key, required this.genres, required this.runTime}) : super(key: key);
   @override
   State<GenresWidget> createState() => _GenresWidgetState();
 }
 class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderStateMixin{
-  late AnimationController _fadeController;
-  late Animation<double> _fadeAnimation;
+  late AnimationController _slideController;
+  late Animation<Offset> _slideTransition;
+  late CurvedAnimation _curveAnimations;
   @override
   void initState() {
     super.initState();
-    _fadeController = AnimationController(vsync: this, duration: const Duration(milliseconds: 700));
-    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(_fadeController);
-    _fadeController.forward();
+    _slideController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1800));
+    _curveAnimations=CurvedAnimation(parent: _slideController, curve: Curves.fastLinearToSlowEaseIn);
+    _slideTransition = Tween<Offset>(begin: const Offset(0,10), end: Offset.zero).animate(_curveAnimations);
+    _slideController.forward();
   }
   @override
   void dispose() {
-    _fadeController.dispose();
+    _slideController.dispose();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _fadeAnimation,
+    return SlideTransition(
+      position:  _slideTransition,
       child: Align(
         alignment: Alignment.centerLeft,
         child: Wrap(
@@ -47,11 +48,8 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
                             padding: EdgeInsets.only(top: 10),
                             child: CircleAvatar(radius: 3,backgroundColor: Colors.white)),
                           5.pw,
-                          if(widget.isTvShow)
-                          Text("${widget.runTime}m",
-                            style:AppTextStyles.get14BoldText()),
-                          if(!widget.isTvShow)
-                          Text("${widget.runTime ~/ 60}h ${widget.runTime % 60}m",
+                          Text("${widget.runTime ~/ 60==0?'':'${widget.runTime ~/ 60}h'}"
+                              " ${widget.runTime % 60==0?"":"${widget.runTime % 60}m"}",
                               style:AppTextStyles.get14BoldText()),
                         ],)
                   ]

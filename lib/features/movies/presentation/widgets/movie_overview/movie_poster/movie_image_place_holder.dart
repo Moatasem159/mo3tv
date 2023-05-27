@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
 class MovieImagePlaceHolder extends StatelessWidget {
   const MovieImagePlaceHolder({super.key});
   @override
@@ -9,8 +8,8 @@ class MovieImagePlaceHolder extends StatelessWidget {
       baseColor: Colors.grey[850]!,
       highlightColor: Colors.grey[800]!,
       child: Container(
-        height: 300,
-        width: 200,
+        height: 280,
+        width: 180,
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(8.0),

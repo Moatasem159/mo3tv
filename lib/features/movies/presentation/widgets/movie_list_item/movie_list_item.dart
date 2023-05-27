@@ -17,15 +17,10 @@ class MovieListItem extends StatelessWidget {
       {
         "listType":listType
       }),
-      child: Hero(
-        tag:movie,
-        child: CachedNetworkImage(
-          imageUrl: EndPoints.posterUrl(movie.posterPath!),
-          imageBuilder: (context, imageProvider)=>MovieImageBuilder(image: imageProvider),
-          placeholder: (context, url) => const MediaListLoadingItem(),
-          errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
-        ),
-      ),
-    );
+      child: CachedNetworkImage(
+        imageUrl: EndPoints.posterUrl(movie.posterPath!),
+        imageBuilder: (context, imageProvider)=>MovieImageBuilder(image: imageProvider),
+        placeholder: (context, url) => const MediaListLoadingItem(),
+        errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png")));
   }
 }
