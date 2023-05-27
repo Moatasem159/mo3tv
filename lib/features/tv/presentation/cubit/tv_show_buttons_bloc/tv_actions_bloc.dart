@@ -35,13 +35,13 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     }
     else{
       tvShow!.tvShowAccountDetails!.ratedValue=0.0;
-      tvShow!.tvShowAccountDetails!.watchlist = watchList;
+      tvShow!.tvShowAccountDetails!.watchlist = false;
       response=await _deleteTvShowRateUseCase.call(tvId: tvShow!.id!);
     }
     emit(response.fold(
         (l){
           tvShow!.tvShowAccountDetails!.ratedValue=initialRating;
-          tvShow!.tvShowAccountDetails!.watchlist=true;
+          tvShow!.tvShowAccountDetails!.watchlist=watchList;
           return ActionErrorState(where: "rate");
         },
         (r)=>ActionSuccessState()));
