@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/routes/animations_route/slide_from_down_to_up.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
 import 'package:mo3tv/features/account/presentation/screens/account_media_list_screen.dart';
@@ -42,9 +43,10 @@ abstract class AppRoute{
       GoRoute(
         name: Routes.movieDetailsRoute,
         path: Routes.movieDetailsRoute,
-        builder: (context, state) =>  MovieDetailsScreen(
-          listType: state.queryParameters["listType"]??'',
-            movie: state.extra as Movie)),
+        pageBuilder: (context, state) =>SlideFromDownToUp(child: MovieDetailsScreen(
+            listType: state.queryParameters["listType"]??'',
+            movie: state.extra as Movie))
+      ),
       GoRoute(
         name: Routes.tvShowRoute,
         path: Routes.tvShowRoute,
