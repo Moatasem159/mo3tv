@@ -16,6 +16,7 @@ class TvShowSearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap:(){
+        FocusManager.instance.primaryFocus!.unfocus();
         SearchListCubit.get(context).saveSearch(search: tvShow);
         TvShow tv=TvShow(
           id: tvShow.id,

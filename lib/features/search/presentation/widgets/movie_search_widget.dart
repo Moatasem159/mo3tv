@@ -16,6 +16,7 @@ class MovieSearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        FocusManager.instance.primaryFocus!.unfocus();
         SearchListCubit.get(context).saveSearch(search: movie);
         Movie m=Movie(
           id: movie.id,

@@ -29,6 +29,7 @@ class RecentlySearchItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        FocusManager.instance.primaryFocus!.unfocus();
         if(search.mediaType=="movie") {
           Movie m=Movie(
             id: search.id,

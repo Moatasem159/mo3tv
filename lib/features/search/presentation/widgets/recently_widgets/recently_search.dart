@@ -8,7 +8,8 @@ class RecentlySearch extends StatelessWidget {
   const RecentlySearch({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchListCubit,SearchListStates>(builder: (context, state) {
+    return BlocBuilder<SearchListCubit,SearchListStates>(
+      builder: (context, state) {
       if (SearchListCubit.get(context).recently.isNotEmpty) {
       return SliverToBoxAdapter(
         child: Padding(

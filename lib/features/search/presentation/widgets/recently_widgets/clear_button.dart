@@ -5,10 +5,16 @@ class ClearButton extends StatelessWidget {
   const ClearButton({super.key});
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        SearchListCubit.get(context).clearSearch();
-      },
-        child:  Text("clear",style: AppTextStyles.get14NormalText(color: Theme.of(context).primaryColor)));
+    return Row(
+      children: [
+        Text("Recent",style: AppTextStyles.get14BoldText()),
+        const Spacer(),
+        GestureDetector(
+          onTap: () {
+            SearchListCubit.get(context).clearSearch();
+          },
+            child:  Text("clear",style: AppTextStyles.get14NormalText(color: Theme.of(context).primaryColor))),
+      ],
+    );
   }
 }

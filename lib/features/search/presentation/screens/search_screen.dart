@@ -21,7 +21,7 @@ class SearchScreen extends StatelessWidget {
       child: BlocBuilder<SearchBloc, SearchStates>(
         builder: (context, state) {
           return GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () =>  FocusManager.instance.primaryFocus!.unfocus(),
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
