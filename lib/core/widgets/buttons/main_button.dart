@@ -20,6 +20,5 @@ class MainButton extends StatelessWidget {
       child: Text(label,
         style: AppTextStyles.get14NormalText()),
     );
-
   }
 }

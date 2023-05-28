@@ -15,9 +15,7 @@ class PlayingNowMovieCard extends StatelessWidget {
       onTap:()=>GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra: movie),
       child:CachedNetworkImage(
         imageUrl: EndPoints.backDropsUrl(movie.backdropPath!),
-        imageBuilder: (context, imageProvider) =>MovieCard(movie: movie, image: imageProvider),
-        placeholder:(context, url) => const PlayingNowMediaLoadingCard(),
-      ),
-    );
+        imageBuilder: (context, imageProvider) =>MovieCard(movie: movie,image: imageProvider),
+        placeholder:(context, url) => const PlayingNowMediaLoadingCard()));
   }
 }

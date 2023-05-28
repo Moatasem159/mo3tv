@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/textformfield.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_bloc.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_events.dart';
@@ -25,11 +27,11 @@ class SearchBarWidget extends StatelessWidget {
                 10.ph,
                 MainTextFormField(
                   controller: cubit.controller,
-                  hintText: 'search for a movie, tv show, person...',
+                  hintText: AppStrings.searchDialog.tr(context)!,
                   focusedBorderColor: Colors.white,
                   prefixIcon: Icons.search,
                   onChange: (query) {
-                    cubit.add(SearchEvent(query));
+                    cubit.add(SearchEvent(query,AppLocalizations.of(context)!.getLang()));
                     if (query.isEmpty) {
                       SearchListCubit.get(context).getSearchList();
                     }

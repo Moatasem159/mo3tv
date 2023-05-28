@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
@@ -84,7 +86,7 @@ class TvShowSearchWidget extends StatelessWidget {
                  7.ph,
                   Row(
                     children: [
-                      Text("IN TV",style: AppTextStyles.get14BoldText()),
+                      Text(AppStrings.inTv.tr(context)!,style: AppTextStyles.get14BoldText()),
                       5.pw,
                       const Padding(
                         padding: EdgeInsets.only(top: 4),

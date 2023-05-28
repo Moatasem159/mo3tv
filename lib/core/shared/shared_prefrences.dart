@@ -22,4 +22,8 @@ class SharedPrefrencesManager extends SharedPrefrencesConsumer{
   Future<bool> clearSharedPrefrences()async{
     return await _sharedPreferences.clear();
   }
+   @override
+   bool containsKey({required String key}){
+     return _sharedPreferences.containsKey(key);
+   }
 }

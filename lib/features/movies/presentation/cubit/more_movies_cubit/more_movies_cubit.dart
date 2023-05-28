@@ -13,21 +13,21 @@ class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
   static MoreMoviesCubit get(context)=>BlocProvider.of(context);
   List<Movie> moreMovies=[];
   int page=1;
-  seeMoreMovies({required int index})async{
+  seeMoreMovies({required int index,required String lang})async{
     emit(GetMoreMoviesLoadingState());
     Either<Failure, List<Movie>>? response;
     page++;
     if(index==1)
       {
-         response = await _getTrendingMoviesUsecase.call(page: page);
+         response = await _getTrendingMoviesUsecase.call(page: page,lang: lang);
       }
     else if(index==2)
       {
-        response = await _getMoviesListUsecase.call(page: page,listType: "popular");
+        response = await _getMoviesListUsecase.call(page: page,listType: "popular",lang: lang);
       }
     else if(index ==3)
       {
-        response = await _getMoviesListUsecase.call(page: page,listType: "top_rated");
+        response = await _getMoviesListUsecase.call(page: page,listType: "top_rated",lang: lang);
       }
     emit(response!.fold(
             (failure) {

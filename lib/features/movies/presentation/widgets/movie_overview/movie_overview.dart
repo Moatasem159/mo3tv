@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
@@ -18,7 +20,7 @@ class MovieOverview extends StatelessWidget {
         if (state is GetMovieDetailsLoadingState){
           return SliverToBoxAdapter(
               child: Center(child:
-              Lottie.asset("assets/icons/movie_loading.json",height: 80)));
+              Lottie.asset(AppAssets.movieLoading,height: 80)));
         }
         if(state is GetMovieDetailsSuccessState){
           MovieActionsBloc.get(context).initialRate= state.movie.movieAccountDetails!.ratedValue??0;
@@ -26,7 +28,8 @@ class MovieOverview extends StatelessWidget {
           return MovieOverViewSuccessBody(listType: listType,movie: state.movie);
         }
         if(state is GetMovieDetailsErrorState) {
-            return SliverToBoxAdapter(child: ErrorButton(onTap: () => MovieCubit.get(context).getMovieDetailsData(movieId: movie.id!)));
+            return SliverToBoxAdapter(child: ErrorButton(onTap: () =>
+                MovieCubit.get(context).getMovieDetailsData(movieId: movie.id!,lang: AppLocalizations.of(context)!.getLang())));
           }
          return const SliverToBoxAdapter();
       },

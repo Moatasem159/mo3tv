@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-
 class TvShowImagePlaceHolder extends StatelessWidget {
   const TvShowImagePlaceHolder({super.key});
   @override
@@ -11,11 +10,6 @@ class TvShowImagePlaceHolder extends StatelessWidget {
       child: Container(
         height: 300,
         width: 200,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-      ),
-    );
+        decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(8.0))));
   }
 }

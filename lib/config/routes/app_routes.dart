@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/animations_route/scale_from_center.dart';
 import 'package:mo3tv/config/routes/animations_route/slide_from_down_to_up.dart';
 import 'package:mo3tv/config/routes/animations_route/slide_from_left_to_right.dart';
@@ -13,6 +14,8 @@ import 'package:mo3tv/features/login/presentation/screens/login_screen.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/screens/movie_details_screen.dart';
 import 'package:mo3tv/features/movies/presentation/screens/similar_movies_screen.dart';
+import 'package:mo3tv/features/settings/presentation/screens/language_screen.dart';
+import 'package:mo3tv/features/settings/presentation/screens/settings_screen.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/screens/season_details_screen.dart';
@@ -31,6 +34,8 @@ class Routes {
   static const String accountMediaLists= "/accountMediaLists";
   static const String imageScreenRoute= "/imageScreenRoute";
   static const String trailerScreenRoute= "/trailerScreenRoute";
+  static const String settingsRoute = "/settingsRoute";
+  static const String languageRoute = "/languageRoute";
 }
 abstract class AppRoute{
   static final router=GoRouter(
@@ -58,7 +63,10 @@ abstract class AppRoute{
       GoRoute(
         name:  Routes.seeMoreRoute,
         path: Routes.seeMoreRoute,
-        pageBuilder: (context, state) => SlideFromRightToLeft(child: MediaSeeMore(parameters:state.extra as SeeMoreParameters))),
+        pageBuilder: (context, state) =>
+        AppLocalizations.of(context)!.isEnLocale?
+            SlideFromRightToLeft(child: MediaSeeMore(parameters:state.extra as SeeMoreParameters)):
+        SlideFromLeftToRight(child: MediaSeeMore(parameters:state.extra as SeeMoreParameters))),
       GoRoute(
         name:  Routes.seasonRoute,
         path: Routes.seasonRoute,
@@ -69,19 +77,36 @@ abstract class AppRoute{
       GoRoute(
         name:  Routes.similarMoviesRoute,
         path: Routes.similarMoviesRoute,
-        pageBuilder: (context, state) => SlideFromRightToLeft(child: SimilarMoviesScreen(
+        pageBuilder: (context, state) =>
+        AppLocalizations.of(context)!.isEnLocale?
+            SlideFromRightToLeft(child: SimilarMoviesScreen(
+            recommendations: state.extra as List<Movie>,
+            movieId:int.parse(state.queryParameters["movieId"]!))):
+        SlideFromLeftToRight(child: SimilarMoviesScreen(
             recommendations: state.extra as List<Movie>,
             movieId:int.parse(state.queryParameters["movieId"]!)))),
       GoRoute(
         name:  Routes.similarTvShowsRoute,
         path: Routes.similarTvShowsRoute,
-        pageBuilder: (context, state) => SlideFromRightToLeft(child: SimilarTvShowsScreen(
+        pageBuilder: (context, state) =>
+        AppLocalizations.of(context)!.isEnLocale?
+            SlideFromRightToLeft(child: SimilarTvShowsScreen(
+            recommendations: state.extra as List<TvShow>,
+            tvId:int.parse(state.queryParameters["tvId"]!))):
+        SlideFromLeftToRight(child: SimilarTvShowsScreen(
             recommendations: state.extra as List<TvShow>,
             tvId:int.parse(state.queryParameters["tvId"]!)))),
       GoRoute(
         name:  Routes.accountMediaLists,
         path: Routes.accountMediaLists,
-        pageBuilder: (context, state) => SlideFromLeftToRight(child: AccountMediaListsScreen(
+        pageBuilder: (context, state) =>
+        AppLocalizations.of(context)!.isEnLocale?
+            SlideFromLeftToRight(child: AccountMediaListsScreen(
+          title: state.queryParameters["title"]!,
+          listType: state.queryParameters['listType']!,
+          mediaType: state.queryParameters["mediaType"]!,
+        )):
+        SlideFromRightToLeft(child: AccountMediaListsScreen(
           title: state.queryParameters["title"]!,
           listType: state.queryParameters['listType']!,
           mediaType: state.queryParameters["mediaType"]!,
@@ -96,6 +121,16 @@ abstract class AppRoute{
         pageBuilder: (context, state) => ScaleFromCenter(child: TrailerScreen(
             title:state.queryParameters["title"]!,
             url:state.queryParameters["url"]!)),),
+      GoRoute(
+        name: Routes.settingsRoute,
+        path: Routes.settingsRoute,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        name: Routes.languageRoute,
+        path: Routes.languageRoute,
+        builder: (context, state) => const LanguageScreen(),
+      ),
     ],
   );
 }

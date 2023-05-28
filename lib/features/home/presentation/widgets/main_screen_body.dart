@@ -28,18 +28,11 @@ class MainScreenBody extends StatelessWidget {
                 body:cubit.screens[cubit.index],
                 bottomNavigationBar:CustomBottomNav(
                   index: cubit.index,
-                  onTap1: () {
-                    cubit.changeIndex(0, context);
-                  },
-                  onTap2: () {
-                    cubit.changeIndex(1, context);
-                  },
-                  onTap3: () {
-                    cubit.changeIndex(2, context);
-                  },
-                  onTap4: () {
-                    cubit.changeIndex(3, context);
-                  },
+                  onTap1: () =>cubit.changeIndex(0, context),
+                  onTap2: () =>cubit.changeIndex(1, context),
+                  onTap3: () =>cubit.changeIndex(2, context),
+                  onTap4: () =>cubit.changeIndex(3, context),
+                  onTap5: () =>cubit.changeIndex(4, context)
                 ),
               ),
             ),

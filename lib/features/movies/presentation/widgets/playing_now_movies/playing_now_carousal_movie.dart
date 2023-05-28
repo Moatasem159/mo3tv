@@ -13,7 +13,6 @@ class PlayingNowMoviesCarousal extends StatelessWidget {
         viewportFraction: .89,
         autoPlay:true,
         autoPlayInterval: const Duration(seconds: 3)),
-      items:movies.map((e)=>PlayingNowMovieCard(movie: e,) ).toList(),
-    );
+      items:movies.map((movie)=>PlayingNowMovieCard(movie:movie)).toList());
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/season_cubit/season_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_overview/season_overview.dart';
@@ -23,7 +24,7 @@ class SeasonDetailsScreen extends StatelessWidget {
       child: Builder(
         builder: (context) {
           SeasonCubit.get(context)
-              .getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: season.seasonNumber!);
+              .getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: season.seasonNumber!,lang: AppLocalizations.of(context)!.getLang());
           return SafeArea(
             child: Scaffold(
               backgroundColor: Theme.of(context).colorScheme.background,
@@ -37,7 +38,7 @@ class SeasonDetailsScreen extends StatelessWidget {
                 body: CustomScrollView(
                   slivers: [
                     SliverOverlapInjector(handle: appBar),
-                    const SeasonOverview(),
+                     SeasonOverview(seasonNumber: season.seasonNumber!,tvShowId: tvShowId),
                   ],
                 ),
               ),

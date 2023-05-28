@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
@@ -77,7 +78,8 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                         color: Colors.black12,
                       ),
                       child: Icon(
-                        Icons.arrow_back,
+                       AppLocalizations.of(context)!.isEnLocale?
+                       Icons.arrow_back:Icons.arrow_forward,
                         size: iconSize,
                       ),
                     ))),
@@ -90,7 +92,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                   ),
                   child: FittedBox(
                     child: Text(
-                      movie.title!,
+                      movie.originalTitle!,
                       maxLines: null,
                       overflow: TextOverflow.visible,
                       style: TextStyle(

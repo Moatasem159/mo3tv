@@ -10,11 +10,6 @@ class MovieImagePlaceHolder extends StatelessWidget {
       child: Container(
         height: 280,
         width: 180,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-      ),
-    );
+        decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(8.0))));
   }
 }

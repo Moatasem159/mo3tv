@@ -7,9 +7,6 @@ class LogOutLoadingIndicator extends StatelessWidget {
       width: 30,
       margin: const EdgeInsets.all(15),
       height: 30,
-      child: const CircularProgressIndicator(
-        strokeWidth: 1,
-      ),
-    );
+      child: const CircularProgressIndicator(strokeWidth: 1));
   }
 }

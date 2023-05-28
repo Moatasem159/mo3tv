@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_info_widgets/budget_widget.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_info_widgets/revenue_widget.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_info_widgets/status_widget.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_info_widgets/tagline_widget.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_info_widgets/title_widget.dart';
@@ -39,8 +38,7 @@ class _MovieInfoWidgetState extends State<MovieInfoWidget> with SingleTickerProv
             TitleWidget(title: widget.movie.title!,releaseDate: widget.movie.releaseDate!),
             TaglineWidget(tagline: widget.movie.tagline!),
             StatusWidget(status: widget.movie.status!),
-            BudgetWidget(budget: widget.movie.budget),
-            RevenueWidget(revenue: widget.movie.revenue),
+            BudgetWidget(budget: widget.movie.budget,revenue: widget.movie.revenue),
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class TvShowPosterBuilder extends StatelessWidget {
   final ImageProvider poster;
   const TvShowPosterBuilder({super.key, required this.poster});
@@ -10,10 +9,6 @@ class TvShowPosterBuilder extends StatelessWidget {
         width: 200,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
-              image: poster,
-              fit: BoxFit.cover,
-            )
-        ));
+            image: DecorationImage(image: poster,fit: BoxFit.cover)));
   }
 }

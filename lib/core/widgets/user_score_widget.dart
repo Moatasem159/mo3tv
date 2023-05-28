@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 class UserScoreWidget extends StatelessWidget {
@@ -26,8 +28,8 @@ class UserScoreWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("User",style:AppTextStyles.get14NormalText()),
-              Text("Score",style:AppTextStyles.get14NormalText()),
+              Text(AppStrings.user.tr(context)!,style:AppTextStyles.get14NormalText()),
+              Text(AppStrings.score.tr(context)!,style:AppTextStyles.get14NormalText()),
             ],
           )
         ],

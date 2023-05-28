@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/tv/domain/entities/episode.dart';
 class EpisodeInfo extends StatelessWidget {
@@ -12,7 +14,7 @@ class EpisodeInfo extends StatelessWidget {
         CrossAxisAlignment.start,
         children: [
           if (episode.name != "Episode ${episode.episodeNumber}")
-            Text("Episode ${episode.episodeNumber}",style: AppTextStyles.get14BoldText(),),
+            Text("${AppStrings.episode.tr(context)!} ${episode.episodeNumber}",style: AppTextStyles.get14BoldText(),),
           FittedBox(
               child: Text("${episode.name}", style: AppTextStyles.get14BoldText(),maxLines: null)),
           Text("${episode.airDate}", style:AppTextStyles.get14BoldText()),

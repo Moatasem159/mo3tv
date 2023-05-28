@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/core/widgets/media_loading/sliver_media_loading_list.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
@@ -30,11 +32,11 @@ class AccountList extends StatelessWidget {
         {
           if(mediaType=="movies")
           {
-            return const EmptyAccountList(type:"movies");
+            return const EmptyAccountList(type:AppStrings.noMovies);
           }
           else if(mediaType =="tv")
             {
-              return const EmptyAccountList(type:"tv shows");
+              return const EmptyAccountList(type:AppStrings.noTvShows);
             }
         }
         if(cubit.list.isNotEmpty)
@@ -50,7 +52,8 @@ class AccountList extends StatelessWidget {
         }
         if(state is GetAccountListsErrorState)
         {
-          return SliverToBoxAdapter(child: ErrorButton(onTap: () => cubit.getAccountList(mediaType:mediaType,listType: listType)));
+          return SliverToBoxAdapter(child: ErrorButton(onTap: () =>
+              cubit.getAccountList(mediaType:mediaType,listType: listType,lang:AppLocalizations.of(context)!.getLang())));
         }
         return const SliverToBoxAdapter();
       },

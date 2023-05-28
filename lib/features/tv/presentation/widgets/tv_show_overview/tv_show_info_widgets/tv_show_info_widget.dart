@@ -37,7 +37,7 @@ class _TvShowInfoWidgetState extends State<TvShowInfoWidget> with SingleTickerPr
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TvShowName(name:widget.tvShow.originalName!,firstAirDate: widget.tvShow.firstAirDate!),
+            TvShowName(name:widget.tvShow.name!,firstAirDate: widget.tvShow.firstAirDate!),
             TvShowTagline(tagline: widget.tvShow.tagline!),
             SeasonNumberWidget(tvShow: widget.tvShow),
             StatusWidget(status:  widget.tvShow.status!),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_list_loading_item.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 class TvShowListItem extends StatelessWidget {
@@ -24,7 +25,7 @@ class TvShowListItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(image: imageProvider,fit: BoxFit.cover))),
         placeholder: (context, url) => const MediaListLoadingItem(),
-        errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png"),
+        errorWidget: (context, url, error) => Image.asset(AppAssets.errorCover),
       ),
     );
   }

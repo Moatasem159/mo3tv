@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:shimmer/shimmer.dart';
 class EpisodeImage extends StatelessWidget {
   final String image;
@@ -37,7 +38,7 @@ class EpisodeImage extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
               image: const DecorationImage(
-                image: AssetImage("assets/images/movieplaceholder.png")
+                image: AssetImage(AppAssets.errorCover)
               )
             ),
           );

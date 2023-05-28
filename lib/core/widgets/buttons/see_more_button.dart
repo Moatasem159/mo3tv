@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class SeeMoreButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -10,7 +12,7 @@ class SeeMoreButton extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
             onPressed: onPressed,
-            child:Text("Load more",style: AppTextStyles.get14BoldText())
+            child:Text(AppStrings.loadMore.tr(context)!,style: AppTextStyles.get14BoldText())
         ),
       ),
     );

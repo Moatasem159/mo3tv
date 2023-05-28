@@ -9,9 +9,9 @@ class PlayingNowMovieCubit extends Cubit<PlayingNowMovieStates> {
   PlayingNowMovieCubit(this._getNowPlayingMoviesUsecase) : super(PlayingNowMovieInitialState());
   final GetMoviesListUsecase _getNowPlayingMoviesUsecase;
   static PlayingNowMovieCubit get(context)=>BlocProvider.of(context);
-  Future<void> getNowPlayingMoviesData() async {
+  Future<void> getNowPlayingMoviesData({required String lang}) async {
     emit(GetNowPlayingMoviesLoadingState());
-    Either<Failure,List<Movie>> response =await _getNowPlayingMoviesUsecase.call(listType: "now_playing");
+    Either<Failure,List<Movie>> response =await _getNowPlayingMoviesUsecase.call(listType: "now_playing",lang: lang);
     emit(response.fold(
         (failure)=>GetNowPlayingMoviesErrorState(msg: mapFailureToMsg(failure)),
         (playingMovies)=>GetNowPlayingMoviesSuccessState(nowPlayingMovies:playingMovies)));

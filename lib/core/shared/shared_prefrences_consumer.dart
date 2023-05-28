@@ -3,4 +3,5 @@ abstract class SharedPrefrencesConsumer {
    getData({required String key});
    dynamic remove({required String key});
    Future<bool> clearSharedPrefrences();
+   bool containsKey({required String key});
 }

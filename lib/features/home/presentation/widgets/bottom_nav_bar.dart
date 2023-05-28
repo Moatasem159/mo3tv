@@ -5,12 +5,14 @@ class CustomBottomNav extends StatelessWidget {
   final GestureTapCallback onTap2;
   final GestureTapCallback onTap3;
   final GestureTapCallback onTap4;
+  final GestureTapCallback onTap5;
   const CustomBottomNav({Key? key,
     required this.index,
     required this.onTap1,
     required this.onTap2,
     required this.onTap3,
-    required this.onTap4
+    required this.onTap4,
+    required this.onTap5
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,9 @@ class CustomBottomNav extends StatelessWidget {
           GestureDetector(
               onTap: onTap4,
               child:  Icon(Icons.account_circle_outlined,color:index==3?Colors.red:Colors.white)),
+          GestureDetector(
+              onTap: onTap5,
+              child:  Icon(Icons.settings_rounded,color:index==4?Colors.red:Colors.white)),
         ],
       ),
     );

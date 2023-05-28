@@ -14,10 +14,9 @@ class SearchRepositoryImpl implements SearchRepository{
   final SearchLocalDataSource _searchLocalDataSource;
   SearchRepositoryImpl(this._networkInfo,this._searchDataSource, this._searchLocalDataSource);
   @override
-  Future<Either<Failure, List<Search>>> search({required int page, required String word}) async {
+  Future<Either<Failure, List<Search>>> search({required int page, required String word,required String lang}) async {
     if (await _networkInfo.isConnected) {
-      final result = await _searchDataSource.search(
-          page: page, word: word);
+      final result = await _searchDataSource.search(page: page, word: word,lang: lang);
       try {
         return Right(result);
       } on ServerException catch (failure) {

@@ -8,9 +8,9 @@ import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/pop
 class PopularMovieCubit extends Cubit<PopularMovieStates> {
   PopularMovieCubit(this._popularMoviesUsecase) : super(PopularMovieInitialState());
   final GetMoviesListUsecase _popularMoviesUsecase;
-  Future<void> getPopularMoviesData() async {
+  Future<void> getPopularMoviesData({required String lang}) async {
     emit(GetPopularMoviesLoadingState());
-    Either<Failure, List<Movie>> response=await _popularMoviesUsecase.call(listType: "popular");
+    Either<Failure, List<Movie>> response=await _popularMoviesUsecase.call(listType: "popular",lang: lang);
     emit(response.fold(
         (failure)=>GetPopularMoviesErrorState(msg: mapFailureToMsg(failure)),
         (popularMovies)=>GetPopularMoviesSuccessState(popularMovies)));

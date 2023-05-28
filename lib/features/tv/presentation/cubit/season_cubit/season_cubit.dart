@@ -10,10 +10,10 @@ class SeasonCubit extends Cubit<SeasonStates> {
   static SeasonCubit get(context) => BlocProvider.of(context);
   final GetTvShowSeasonDetailsUsecase _getTvShowSeasonDetailsUsecase;
   Future<void> getTvShowSeasonDetailsData(
-      {required int tvShowId, required int seasonNumber}) async {
+      {required int tvShowId, required int seasonNumber,required String lang}) async {
     emit(GetSeasonDetailsLoadingState());
     Either<Failure, TvShowSeason> response =
-        await _getTvShowSeasonDetailsUsecase.call(seasonNumber: seasonNumber, tvId: tvShowId);
+        await _getTvShowSeasonDetailsUsecase.call(seasonNumber: seasonNumber, tvId: tvShowId,lang: lang);
     emit(response.fold(
         (failure) => GetSeasonDetailsErrorState(msg: mapFailureToMsg(failure)),
         (tvShowSeason) {

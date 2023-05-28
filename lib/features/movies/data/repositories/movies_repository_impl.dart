@@ -15,13 +15,13 @@ class MoviesRepositoryImpl implements MovieRepository {
   final MovieLocalDataSource _movieLocalDataSource;
   final NetworkInfo _networkInfo;
   @override
-  Future<Either<Failure, List<Movie>>> getMoviesList({required int page,required String listType}) async {
+  Future<Either<Failure, List<Movie>>> getMoviesList({required int page,required String listType,required String lang}) async {
     List<Movie> cachedMovies=[];
     if(await _networkInfo.isConnected)
       {
         if(page==1)
           {
-            cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: listType);
+            cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: listType,currantLang: lang);
           }
         if(cachedMovies.isNotEmpty)
           {
@@ -29,9 +29,9 @@ class MoviesRepositoryImpl implements MovieRepository {
           }
         else{
           try {
-            final result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType);
+            final result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType,lang: lang);
             result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-            await _movieLocalDataSource.saveMovieList(movies: result, listType: listType);
+            await _movieLocalDataSource.saveMovieList(movies: result, listType: listType,lang: lang);
             return Right(result);
           } on ServerException catch (failure) {
             return Left(ServerFailure(failure.message!));
@@ -43,12 +43,12 @@ class MoviesRepositoryImpl implements MovieRepository {
     }
   }
   @override
-  Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page})async {
+  Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page,required String lang})async {
     List<Movie> cachedMovies=[];
     if(await _networkInfo.isConnected)
     {
       if(page==1){
-        cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: "trending");
+        cachedMovies=await _movieLocalDataSource.getCachedMoviesList(listType: "trending",currantLang: lang);
       }
       if(cachedMovies.isNotEmpty)
       {
@@ -56,9 +56,9 @@ class MoviesRepositoryImpl implements MovieRepository {
       }
       else{
         try {
-          final result = await _movieRemoteDataSource.getTrendingMovies(page: page);
+          final result = await _movieRemoteDataSource.getTrendingMovies(page: page,lang: lang);
           result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
-          await _movieLocalDataSource.saveMovieList(movies: result, listType: "trending");
+          await _movieLocalDataSource.saveMovieList(movies: result, listType: "trending",lang: lang);
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -70,10 +70,10 @@ class MoviesRepositoryImpl implements MovieRepository {
     }
   }
   @override
-  Future<Either<Failure, Movie>> getMovieDetails({required int movieId}) async {
+  Future<Either<Failure, Movie>> getMovieDetails({required int movieId,required String lang}) async {
     if(await _networkInfo.isConnected){
       try {
-        final MovieModel result = await _movieRemoteDataSource.getMovieDetails(movieId: movieId);
+        final MovieModel result = await _movieRemoteDataSource.getMovieDetails(movieId: movieId,lang: lang);
           result.productionCompanies!.removeWhere((e) =>e.logoPath=='');
         return Right(result);
       } on ServerException catch (failure) {
@@ -85,11 +85,11 @@ class MoviesRepositoryImpl implements MovieRepository {
     }
   }
   @override
-  Future<Either<Failure, List<Movie>>> getMovieRecommendations({required int movieId}) async {
+  Future<Either<Failure, List<Movie>>> getMovieRecommendations({required int movieId,required String lang}) async {
     if(await _networkInfo.isConnected)
       {
         try {
-          final result = await _movieRemoteDataSource.getMovieRecommendations(movieId: movieId);
+          final result = await _movieRemoteDataSource.getMovieRecommendations(movieId: movieId,lang: lang);
           result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {
@@ -101,11 +101,11 @@ class MoviesRepositoryImpl implements MovieRepository {
     }
   }
   @override
-  Future<Either<Failure, List<Movie>>> getSimilarMovies({required int movieId, required int page}) async{
+  Future<Either<Failure, List<Movie>>> getSimilarMovies({required int movieId, required int page,required String lang}) async{
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page);
+        final result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page,lang: lang);
         result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {

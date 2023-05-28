@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
@@ -25,8 +27,8 @@ class RecommendationsMoviesList extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "Recommendations :${recommendationMovies.length}",
-                          style:AppTextStyles.get14BoldText()),
+                        "${AppStrings.recommendations.tr(context)!} :${recommendationMovies.length}",
+                          style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()),
                       const Spacer(),
                       GestureDetector(
                         onTap: () {
@@ -37,7 +39,7 @@ class RecommendationsMoviesList extends StatelessWidget {
                         },
                         child:  Row(
                           children: [
-                            Text("See More", style: AppTextStyles.get14NormalText()),
+                            Text(AppStrings.seeMore.tr(context)!, style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()),
                             const Padding(
                               padding: EdgeInsets.only(top: 3),
                               child: Icon(Icons.arrow_forward_ios_outlined, size: 14))

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
@@ -64,7 +65,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
       child: Builder(
         builder: (context) {
           if(!MovieCubit.get(context).isSuccess()){
-            MovieCubit.get(context).getMovieDetailsData(movieId: widget.movie.id!);
+            MovieCubit.get(context).getMovieDetailsData(movieId: widget.movie.id!,lang: AppLocalizations.of(context)!.getLang());
           }
           return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
             builder: (context, state) {

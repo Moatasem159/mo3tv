@@ -9,10 +9,10 @@ class TrendingTvShowCubit extends Cubit<TrendingTvShowStates> {
   TrendingTvShowCubit(this._getTrendingTvShowsUsecase) : super(TrendingTvShowInitialState());
   static TrendingTvShowCubit get(context)=>BlocProvider.of(context);
   final GetTrendingTvShowsUsecase _getTrendingTvShowsUsecase;
-  Future<void> getTrendingTvShowsData() async {
+  Future<void> getTrendingTvShowsData({required String lang}) async {
     emit(GetTrendingTvShowsLoadingState());
     Either<Failure, List<TvShow>> response =
-    await _getTrendingTvShowsUsecase.call();
+    await _getTrendingTvShowsUsecase.call(lang: lang);
     emit(response.fold(
         (failure) =>GetTrendingTvShowsErrorState(msg: mapFailureToMsg(failure)),
         (trendingTvShows) =>GetTrendingTvShowsSuccessState(trendingTvShows)));

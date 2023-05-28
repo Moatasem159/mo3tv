@@ -9,11 +9,11 @@ class TvCubit extends Cubit<TvStates> {
   TvCubit(this._getTvShowDetailsUsecase) : super(TvInitialState());
   static TvCubit get(context)=>BlocProvider.of(context);
   final GetTvShowDetailsUsecase _getTvShowDetailsUsecase;
-  Future<void> getTvShowDetailsData({required int tvShowId}) async {
+  Future<void> getTvShowDetailsData({required int tvShowId,required String lang}) async {
     TvShow tvShow= TvShow();
     emit(GetTvShowDetailsLoadingState());
     Either<Failure,TvShow> response =
-    await _getTvShowDetailsUsecase.call(tvId: tvShowId);
+    await _getTvShowDetailsUsecase.call(tvId: tvShowId,lang: lang);
     emit(response.fold((failure)=>GetTvShowDetailsErrorState(msg: mapFailureToMsg(failure)),
             (tvShowData) {
                   tvShow = tvShowData;

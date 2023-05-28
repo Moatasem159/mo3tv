@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class EmptyAccountList extends StatelessWidget {
   final String type;
@@ -13,9 +15,9 @@ class EmptyAccountList extends StatelessWidget {
         children: [
           const Icon(Icons.sentiment_dissatisfied_rounded,size: 150),
           10.ph,
-           Text("No $type",style: AppTextStyles.get18BoldText()),
+           Text(type.tr(context)!,style: AppTextStyles.get18BoldText()),
           10.ph,
-           Text("Try add some",style: AppTextStyles.get14NormalText()),
+           Text(AppStrings.tryAddSome.tr(context)!,style: AppTextStyles.get14NormalText()),
         ],
       ),
     );

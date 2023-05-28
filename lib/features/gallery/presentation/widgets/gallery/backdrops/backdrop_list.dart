@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/functions/pagination.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/main_button.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_image.dart';
 import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
@@ -20,7 +22,7 @@ class _BackdropsListState extends State<BackdropsList> {
       shrinkWrap: true,
       physics: const ScrollPhysics(),
       slivers: [
-        ImageListTitle(length: widget.backdrops.length,title: "Backdrops"),
+        ImageListTitle(length: widget.backdrops.length,title: AppStrings.backdrops),
         SliverGrid(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 1.6,
@@ -49,7 +51,7 @@ class _BackdropsListState extends State<BackdropsList> {
                       _page -= 1;
                     });
                   },
-                  label: "prev"),
+                  label: AppStrings.previous.tr(context)!),
               if(((_page * _perPage) + _perPage)<widget.backdrops.length&&_page>0)
               100.pw,
               if(((_page * _perPage) + _perPage)<widget.backdrops.length)
@@ -60,7 +62,7 @@ class _BackdropsListState extends State<BackdropsList> {
                         setState(() {
                           _page += 1;
                         });
-                  }, label: "next"),
+                  }, label: AppStrings.next.tr(context)!),
             ],
           ),
         ),

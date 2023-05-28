@@ -9,9 +9,9 @@ class PlayingNowTvShowCubit extends Cubit<PlayingNowTvShowStates> {
   PlayingNowTvShowCubit(this._getNowPlayingTvShowsUsecase) : super(PlayingNowTvShowInitialState());
   static PlayingNowTvShowCubit get(context)=>BlocProvider.of(context);
   final GetTvShowsListUsecase _getNowPlayingTvShowsUsecase;
-  Future<void> getNowPlayingTvShowsData() async {
+  Future<void> getNowPlayingTvShowsData({required String lang}) async {
     emit(GetNowPlayingTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response = await _getNowPlayingTvShowsUsecase.call(listType: "on_the_air");
+    Either<Failure, List<TvShow>> response = await _getNowPlayingTvShowsUsecase.call(listType: "on_the_air",lang: lang);
     emit(response.fold(
         (failure) =>GetNowPlayingTvShowsErrorState(msg: mapFailureToMsg(failure)),
         (playingTvShows) =>GetNowPlayingTvShowsSuccessState(playingTvShows)));

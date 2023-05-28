@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_list_loading_item.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item/movie_image_builder.dart';
@@ -21,6 +22,6 @@ class MovieListItem extends StatelessWidget {
         imageUrl: EndPoints.posterUrl(movie.posterPath!),
         imageBuilder: (context, imageProvider)=>MovieImageBuilder(image: imageProvider),
         placeholder: (context, url) => const MediaListLoadingItem(),
-        errorWidget: (context, url, error) => Image.asset("assets/images/movieplaceholder.png")));
+        errorWidget: (context, url, error) => Image.asset(AppAssets.errorCover)));
   }
 }

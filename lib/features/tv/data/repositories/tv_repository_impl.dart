@@ -15,13 +15,13 @@ class TvShowRepositoryImpl implements TvRepository{
   final NetworkInfo _networkInfo;
   TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo,this._tvShowLocalDataSource);
   @override
-  Future<Either<Failure, List<TvShow>>> getTvShowsList({required int page,required String listType})async {
+  Future<Either<Failure, List<TvShow>>> getTvShowsList({required int page,required String listType,required String lang})async {
     List<TvShow> cachedTvShows=[];
     if(await _networkInfo.isConnected)
     {
       if(page==1)
         {
-          cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: listType);
+          cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: listType,currantLang: lang);
         }
       if(cachedTvShows.isNotEmpty)
       {
@@ -29,9 +29,9 @@ class TvShowRepositoryImpl implements TvRepository{
       }
       else{
         try{
-          final result = await _tvShowRemoteDataSource.getTvShowsList(page: page,listType: listType);
+          final result = await _tvShowRemoteDataSource.getTvShowsList(page: page,listType: listType,lang: lang);
           result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-          await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: listType);
+          await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: listType,lang: lang);
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -43,12 +43,12 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page}) async{
+  Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page,required String lang}) async{
     List<TvShow> cachedTvShows=[];
     if(await _networkInfo.isConnected)
     {
       if(page==1){
-        cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: "trending");
+        cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: "trending",currantLang: lang);
       }
       if(cachedTvShows.isNotEmpty)
       {
@@ -56,9 +56,9 @@ class TvShowRepositoryImpl implements TvRepository{
       }
       else{
         try {
-          final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page);
+          final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page,lang: lang);
           result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-          await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: "trending");
+          await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: "trending",lang: lang);
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -70,11 +70,11 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, TvShow>> getTvShowDetails({required int tvShowId})async {
+  Future<Either<Failure, TvShow>> getTvShowDetails({required int tvShowId,required String lang})async {
     if(await _networkInfo.isConnected)
     {
       try {
-        final TvShow result = await _tvShowRemoteDataSource.getTvShowDetails(tvShowId: tvShowId);
+        final TvShow result = await _tvShowRemoteDataSource.getTvShowDetails(tvShowId: tvShowId,lang: lang);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -85,10 +85,13 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber})async {
+  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails(
+      {required int tvShowId, required int seasonNumber,required String lang})async {
     if(await _networkInfo.isConnected){
       try {
-        final TvShowSeason result = await _tvShowRemoteDataSource.getTvShowSeasonDetails(tvShowId: tvShowId, seasonNumber: seasonNumber);
+        final TvShowSeason result =
+        await _tvShowRemoteDataSource
+        .getTvShowSeasonDetails(tvShowId: tvShowId, seasonNumber: seasonNumber,lang: lang);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -99,11 +102,11 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getTvShowRecommendations({required int tvId})async {
+  Future<Either<Failure, List<TvShow>>> getTvShowRecommendations({required int tvId,required String lang})async {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _tvShowRemoteDataSource.getTvShowRecommendations(tvId: tvId);
+        final result = await _tvShowRemoteDataSource.getTvShowRecommendations(tvId: tvId,lang: lang);
         result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
@@ -115,11 +118,11 @@ class TvShowRepositoryImpl implements TvRepository{
     }
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getSimilarTvShows({required int tvId, required int page}) async{
+  Future<Either<Failure, List<TvShow>>> getSimilarTvShows({required int tvId, required int page,required String lang}) async{
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _tvShowRemoteDataSource.getSimilarTvShows(tvId: tvId,page: page);
+        final result = await _tvShowRemoteDataSource.getSimilarTvShows(tvId: tvId,page: page,lang: lang);
         result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {

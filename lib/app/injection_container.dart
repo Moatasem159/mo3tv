@@ -74,6 +74,12 @@ import 'package:mo3tv/features/search/domain/usecases/save_search_usecase.dart';
 import 'package:mo3tv/features/search/domain/usecases/search_usecase.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_bloc.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
+import 'package:mo3tv/features/settings/data/datasources/lang_local_datasource.dart';
+import 'package:mo3tv/features/settings/data/repositories/lang_repository_impl.dart';
+import 'package:mo3tv/features/settings/domain/repositories/lang_repository.dart';
+import 'package:mo3tv/features/settings/domain/usecases/change_lang_usecase.dart';
+import 'package:mo3tv/features/settings/domain/usecases/get_saved_lang.dart';
+import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_cubit.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_local_datasource.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
@@ -100,6 +106,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_act
 import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> init() async {
+  lang();
   movie();
   tv();
   account();
@@ -238,4 +245,11 @@ credits(){
   sl.registerLazySingleton<GetMediaCreditsUsecase>(() => GetMediaCreditsUsecase(sl()));
   sl.registerLazySingleton<CreditsRepository>(() => CreditsRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<CreditsDataSource>(() => CreditsDataSourceImpl(sl()));
+}
+lang()async {
+  sl.registerFactory(() =>LocaleCubit(sl(),sl()));
+  sl.registerLazySingleton<ChangeLangUseCase>(() => ChangeLangUseCase(sl()));
+  sl.registerLazySingleton<GetSavedLangUseCase>(() => GetSavedLangUseCase(sl()));
+  sl.registerLazySingleton<LangRepository>(() => LangRepositoryImpl(sl()));
+  sl.registerLazySingleton<LangLocalDataSource>(() => LangLocaleDataSourceImpl(sl()));
 }

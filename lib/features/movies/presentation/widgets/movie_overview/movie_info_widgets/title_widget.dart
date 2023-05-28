@@ -10,6 +10,6 @@ class TitleWidget extends StatelessWidget {
         "$title ${releaseDate == "" ? '' : ((releaseDate.substring(0, 4)))}",
         maxLines: null,
         overflow: TextOverflow.visible,
-        style:AppTextStyles.get14BoldText());
+        style:AppTextStyles.get14BoldText(height: 0));
   }
 }

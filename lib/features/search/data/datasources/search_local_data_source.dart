@@ -1,5 +1,4 @@
 import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/search/data/models/search_model.dart';
 abstract class SearchLocalDataSource{
   Future<bool> saveSearch(SearchModel searchModel);
@@ -12,7 +11,7 @@ class SearchLocalDataSourceImpl implements SearchLocalDataSource{
   SearchLocalDataSourceImpl(this._sharedPrefrencesConsumer);
   @override
   Future<bool> saveSearch(SearchModel searchModel) async{
-    final json=await _sharedPrefrencesConsumer.getData(key: AppStrings.search);
+    final json=await _sharedPrefrencesConsumer.getData(key: "search");
     late List<SearchModel> searchList;
     if(json!=null) {
       searchList=SearchModel.decode(json);
@@ -23,12 +22,12 @@ class SearchLocalDataSourceImpl implements SearchLocalDataSource{
     if(!searchList.contains(searchModel)) {
       searchList.add(searchModel);
     }
-    final res=await _sharedPrefrencesConsumer.saveData(key: AppStrings.search, value: SearchModel.encode(searchList));
+    final res=await _sharedPrefrencesConsumer.saveData(key: "search", value: SearchModel.encode(searchList));
     return res;
   }
   @override
   Future<List<SearchModel>> getSearch() async{
-    final json=await _sharedPrefrencesConsumer.getData(key: AppStrings.search);
+    final json=await _sharedPrefrencesConsumer.getData(key: "search");
     late List<SearchModel> searchList;
     if(json!=null) {
       searchList=SearchModel.decode(json);
@@ -40,15 +39,15 @@ class SearchLocalDataSourceImpl implements SearchLocalDataSource{
   }
   @override
   Future<bool> clearSearch() async{
-    final res=await _sharedPrefrencesConsumer.remove(key: AppStrings.search);
+    final res=await _sharedPrefrencesConsumer.remove(key:"search");
     return res;
   }
   @override
   Future<bool> clearOneSearch(SearchModel searchModel)async {
-    final json=await _sharedPrefrencesConsumer.getData(key: AppStrings.search);
+    final json=await _sharedPrefrencesConsumer.getData(key: "search");
     late List<SearchModel> searchList=SearchModel.decode(json);
     searchList.remove(searchModel);
-    final res=await _sharedPrefrencesConsumer.saveData(key: AppStrings.search, value: SearchModel.encode(searchList));
+    final res=await _sharedPrefrencesConsumer.saveData(key: "search", value: SearchModel.encode(searchList));
     return res;
   }
 }

@@ -5,7 +5,7 @@ import 'package:mo3tv/features/account/domain/repositories/account_repository.da
 class GetAccountListsUsecase{
   final AccountRepository _accountRepository;
   GetAccountListsUsecase(this._accountRepository);
-  Future<Either<Failure,AccountListEntity>> call({required String listType,required String mediaType,required int page}) async{
-    return await _accountRepository.getAccountList(mediaType: mediaType,listType: listType,page: page);
+  Future<Either<Failure,AccountListEntity>> call({required String listType,required String mediaType,required int page,required String lang}) async{
+    return await _accountRepository.getAccountList(mediaType: mediaType,listType: listType,page: page,lang: lang);
   }
 }

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 class ProductionCompanyWidget extends StatelessWidget {
@@ -18,13 +19,10 @@ class ProductionCompanyWidget extends StatelessWidget {
           CachedNetworkImage(
             width: 90,
             height: 70,
-            imageUrl: EndPoints.logoUrl(
-                company.logoPath),
-            errorWidget: (context, url, error) =>
-                Image.asset("assets/images/movieplaceholder.png"),
-          ),
-        5.ph,
-          FittedBox(child: Text(company.name,style: AppTextStyles.get14NormalText(),)),
+            imageUrl: EndPoints.logoUrl(company.logoPath),
+            errorWidget: (context, url, error)=>Image.asset(AppAssets.errorCover)),
+           5.ph,
+          FittedBox(child: Text(company.name,style: AppTextStyles.get14NormalText())),
         ],
       ),
     );

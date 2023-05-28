@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_cubit.dart';
@@ -80,7 +81,8 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
 
                       ),
                       child: Icon(
-                        Icons.arrow_back,
+                        AppLocalizations.of(context)!.isEnLocale?
+                        Icons.arrow_back:Icons.arrow_forward,
                         size: iconSize,
                       ),
                     ))),
@@ -91,7 +93,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                   constraints: const BoxConstraints(maxWidth: 300),
                   child: FittedBox(
                     child: Text(
-                      tvShow.name!,
+                      tvShow.originalName!,
                       maxLines: null,
                       overflow: TextOverflow.visible,
                       style: TextStyle(

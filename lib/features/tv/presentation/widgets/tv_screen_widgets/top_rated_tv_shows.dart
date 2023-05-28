@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_cubit.dart';
@@ -12,7 +14,7 @@ class TopRatedTvShow extends StatelessWidget {
   const TopRatedTvShow({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    const String title="Top rated tv shows";
+    const String title=AppStrings.topRaredTvShows;
     return BlocBuilder<TopRatedTvShowsCubit,TopRatedTvShowsStates>(
       builder:(context, state) {
         if(state is GetTopRatedTvShowsSuccessState){
@@ -32,7 +34,7 @@ class TopRatedTvShow extends StatelessWidget {
           return MediaErrorList(
             title: title,
             onPressed:() {
-              TopRatedTvShowsCubit.get(context).getTopRatedTvShowsData();
+              TopRatedTvShowsCubit.get(context).getTopRatedTvShowsData(lang: AppLocalizations.of(context)!.getLang());
             }, );
         }
         return  Container();

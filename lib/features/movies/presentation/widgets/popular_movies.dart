@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
@@ -12,7 +14,7 @@ class PopularMovies extends StatelessWidget {
   const PopularMovies({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    const String title="Popular movies";
+    const String title=AppStrings.popularMovies;
     return BlocBuilder<PopularMovieCubit,PopularMovieStates>(
         builder:(context, state) {
           if(state is GetPopularMoviesSuccessState){
@@ -32,7 +34,7 @@ class PopularMovies extends StatelessWidget {
             return MediaErrorList(
               title: title,
               onPressed:() {
-                BlocProvider.of<PopularMovieCubit>(context).getPopularMoviesData();
+                BlocProvider.of<PopularMovieCubit>(context).getPopularMoviesData(lang: AppLocalizations.of(context)!.getLang());
               }, );
           }
           return  Container();

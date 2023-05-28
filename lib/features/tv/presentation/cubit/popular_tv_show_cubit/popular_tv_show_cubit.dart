@@ -9,9 +9,9 @@ class PopularTvShowCubit extends Cubit<PopularTvShowStates> {
   PopularTvShowCubit(this._getPopularTvShowsUsecase) : super(PopularTvShowInitialState());
   static PopularTvShowCubit get(context)=>BlocProvider.of(context);
   final GetTvShowsListUsecase _getPopularTvShowsUsecase;
-  Future<void> getPopularTvShowsData() async {
+  Future<void> getPopularTvShowsData({required String lang}) async {
     emit(GetPopularTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response = await _getPopularTvShowsUsecase.call(listType: "popular");
+    Either<Failure, List<TvShow>> response = await _getPopularTvShowsUsecase.call(listType: "popular",lang: lang);
     emit(response.fold(
         (failure) =>GetPopularTvShowsErrorState(msg: mapFailureToMsg(failure)),
         (popularTvShows) =>GetPopularTvShowsSuccessState(popularTvShows)));

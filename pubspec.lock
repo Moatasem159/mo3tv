@@ -238,6 +238,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_localizations:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_native_splash:
     dependency: "direct main"
     description:
@@ -348,10 +353,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.18.0"
   js:
     dependency: transitive
     description:
@@ -552,6 +557,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.5"
+  restart_app:
+    dependency: "direct main"
+    description:
+      name: restart_app
+      sha256: baab21e882b7d33666653e5bcc067da673bf654ab0f25de334c039b5288652a8
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   rxdart:
     dependency: "direct main"
     description:

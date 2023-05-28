@@ -12,10 +12,10 @@ class SimilarTvShowCubit extends Cubit<SimilarTvShowStates> {
   List<TvShow> tvShows=[];
   bool allMovies=false;
   int page=0;
-  Future<void> getSimilarTvShows({required int tvId}) async {
+  Future<void> getSimilarTvShows({required int tvId,required String lang}) async {
     emit(GetSimilarTvShowLoadingState());
     page++;
-    Either<Failure, List<TvShow>> response = await _getSimilarTvShowsUseCase.call(tvId: tvId,page: page);
+    Either<Failure, List<TvShow>> response = await _getSimilarTvShowsUseCase.call(tvId: tvId,page: page,lang: lang);
     emit(response.fold((failure) => GetSimilarTvShowErrorState(msg: mapFailureToMsg(failure)),
             (similarMovies) {
           if(similarMovies.isEmpty)

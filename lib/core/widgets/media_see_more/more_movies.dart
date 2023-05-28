@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
@@ -42,7 +43,7 @@ class MoreMovies extends StatelessWidget {
               return const SliverLoadingIndicator();
             }
             return SeeMoreButton(onPressed: () {
-              BlocProvider.of<MoreMoviesCubit>(context).seeMoreMovies(index: index);
+              BlocProvider.of<MoreMoviesCubit>(context).seeMoreMovies(index: index,lang: AppLocalizations.of(context)!.getLang());
             });
           },
         ),

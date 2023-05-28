@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class OverViewWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class OverViewWidget extends StatelessWidget {
       child: Column(
         children: [
           10.ph,
-          Text(overview,style: AppTextStyles.get14NormalText()),
+          Text(overview,style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14NormalText():AppTextStyles.get18NormalText()),
           5.ph,
         ],
       ),

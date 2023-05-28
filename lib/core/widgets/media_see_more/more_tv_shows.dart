@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
@@ -43,7 +44,7 @@ class MoreTvShows extends StatelessWidget {
             }
             return SeeMoreButton(onPressed: () {
               MoreTvShowsCubit.get(context)
-                  .seeMoreTvShows(index: index);
+                  .seeMoreTvShows(index: index,lang: AppLocalizations.of(context)!.getLang());
             },);
           },
         ),

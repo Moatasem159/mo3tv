@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_cubit.dart';
@@ -12,7 +14,7 @@ class PopularTvShow extends StatelessWidget {
   const PopularTvShow({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    const String title="Popular tv shows";
+    const String title=AppStrings.popularTvShows;
     return BlocBuilder<PopularTvShowCubit,PopularTvShowStates>(
       builder:(context, state) {
         if(state is GetPopularTvShowsSuccessState)
@@ -34,7 +36,7 @@ class PopularTvShow extends StatelessWidget {
           return MediaErrorList(
             title: title,
             onPressed:() {
-              PopularTvShowCubit.get(context).getPopularTvShowsData();
+              PopularTvShowCubit.get(context).getPopularTvShowsData(lang: AppLocalizations.of(context)!.getLang());
             }, );
         }
         return  Container();

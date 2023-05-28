@@ -37,11 +37,11 @@ class AccountRepositoryImpl implements AccountRepository{
     }
   }
   @override
-  Future<Either<Failure,AccountListEntity>> getAccountList({required String listType,required String mediaType,required int page})async {
+  Future<Either<Failure,AccountListEntity>> getAccountList({required String listType,required String mediaType,required int page,required String lang})async {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _accountDataSource.getAccountList(listType: listType,mediaType: mediaType,page: page);
+        final result = await _accountDataSource.getAccountList(listType: listType,mediaType: mediaType,page: page,lang: lang);
         if(mediaType=="movies")
           {
             return Right(result);

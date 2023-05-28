@@ -10,7 +10,7 @@ import 'package:rxdart/rxdart.dart';
 class SearchBloc extends Bloc<SearchEvents, SearchStates> {
   SearchBloc(this._searchUsecase) : super(SearchInitialState()) {
     on<SearchEvent>(
-      (event, emit) => search(emit,word: event.query),
+      (event, emit) => search(emit,word: event.query,lang:event.lang),
       transformer: (eventsStream, mapper) => eventsStream
           .debounceTime(const Duration(milliseconds: 300))
           .distinct()
@@ -21,13 +21,13 @@ class SearchBloc extends Bloc<SearchEvents, SearchStates> {
   static SearchBloc get(context)=>BlocProvider.of(context);
   final SearchUsecase _searchUsecase;
   TextEditingController controller=TextEditingController();
- search(emit,{int page=1,required String word})async{
+ search(emit,{int page=1,required String word,required String lang})async{
    if(controller.text.isNotEmpty)
    {
      emit(SearchLoadingState());
      List<Search> items=[];
      Either<Failure,List<Search>> response =
-     await _searchUsecase.call(page: page,word: word);
+     await _searchUsecase.call(page: page,word: word,lang: lang);
      emit(response.fold((l){
        return SearchErrorState();
      }, (searchItems){

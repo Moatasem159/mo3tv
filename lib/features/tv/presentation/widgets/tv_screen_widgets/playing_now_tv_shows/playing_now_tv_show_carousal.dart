@@ -12,9 +12,7 @@ class PlayingNowTvShowCarousal extends StatelessWidget {
         height: MediaQuery.of(context).size.height/3.5,
         viewportFraction: .89,
         autoPlay: true,
-        autoPlayInterval: const Duration(seconds: 3),
-      ),
-      items:tvShows.map((e)=>PlayingNowTvShowCard(tvShow: e)).toList(),
-    );
+        autoPlayInterval: const Duration(seconds: 3)),
+      items:tvShows.map((tvShow)=>PlayingNowTvShowCard(tvShow: tvShow)).toList());
   }
 }

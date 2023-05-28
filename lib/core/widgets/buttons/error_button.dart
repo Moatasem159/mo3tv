@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/core/widgets/buttons/main_button.dart';
 class ErrorButton extends StatelessWidget {
@@ -10,8 +12,8 @@ class ErrorButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text("Something went wrong",style: AppTextStyles.get14NormalText()),
-        MainButton(onPressed:onTap, label: "try again")
+        Text(AppStrings.somethingWentWrong.tr(context)!,style: AppTextStyles.get14NormalText()),
+        MainButton(onPressed:onTap, label: AppStrings.tryAgain.tr(context)!)
       ],
     );
   }

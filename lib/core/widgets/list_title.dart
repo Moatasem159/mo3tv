@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class ListTitle extends StatelessWidget {
   final String title;
@@ -11,14 +13,14 @@ class ListTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title,style:AppTextStyles.get14BoldText()),
+          Text(title.tr(context)!,style:AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()),
           if(onPressed!=null)
           GestureDetector(
             onTap: onPressed,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('See more',style: AppTextStyles.get14NormalText()),
+                Text(AppStrings.seeMore.tr(context)!,style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()),
                 const Padding(
                   padding: EdgeInsets.only(top: 3),
                   child: Icon(Icons.arrow_forward_ios, size: 15),

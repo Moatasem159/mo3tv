@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class CustomAppBar extends StatelessWidget {
   final VoidCallback onPressed;
@@ -12,7 +13,7 @@ class CustomAppBar extends StatelessWidget {
       toolbarHeight: 50,
       leading:IconButton(onPressed: onPressed,
           icon: const Icon(Icons.arrow_back,size: 20)),
-      title: Text(title,style: AppTextStyles.get14BoldText(),),
+      title: Text(title.tr(context)!,style: AppTextStyles.get14BoldText()),
       snap: true,
       floating: true,
       stretch: true,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_state.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_button_widget.dart';
@@ -11,7 +12,8 @@ class LoginButton extends StatelessWidget {
   const LoginButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
       child: BlocConsumer<LoginCubit,LoginStates>(
         listener:(context,state){
           if(state is GetSessionIdSuccessState)
@@ -29,8 +31,7 @@ class LoginButton extends StatelessWidget {
               onTap: () async {
                 LoginCubit.get(context).getToken();
               },
-              title:"Login to enjoy full experience",
-            );
+              title:AppStrings.loginToEnjoyFullExperience);
           }
           if(state is GetTokenLoadingState) {
             return const LoginLoadingIndicator();
@@ -43,7 +44,7 @@ class LoginButton extends StatelessWidget {
               onTap: () async {
                 LoginCubit.get(context).getSessionId();
               },
-              title:"last Step",
+              title:AppStrings.lastStep,
             );
           }
           return Container();

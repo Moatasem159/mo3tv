@@ -8,9 +8,9 @@ import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/
 class TopRatedMoviesCubit extends Cubit<TopRatedMoviesStates> {
   TopRatedMoviesCubit(this._getTopRatedMoviesUsecase) : super(TopRatedMoviesInitialState());
   final GetMoviesListUsecase _getTopRatedMoviesUsecase;
-  Future<void> getTopRatedMoviesData() async {
+  Future<void> getTopRatedMoviesData({required String lang}) async {
     emit(GetTopRatedMoviesLoadingState());
-    Either<Failure, List<Movie>> response = await _getTopRatedMoviesUsecase.call(listType: "top_rated");
+    Either<Failure, List<Movie>> response = await _getTopRatedMoviesUsecase.call(listType: "top_rated",lang: lang);
     emit(response.fold(
       (failure) => GetTopRatedMoviesErrorState(msg: mapFailureToMsg(failure)),
       (topRatedMovies) => GetTopRatedMoviesSuccessState(topRatedMovies)));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class LoginButtonWidget extends StatelessWidget {
   final String title;
@@ -9,7 +10,7 @@ class LoginButtonWidget extends StatelessWidget {
     return  ElevatedButton(
       style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
       onPressed: onTap,
-      child:Text(title,style: AppTextStyles.get14NormalText()),
+      child:Text(title.tr(context)!,style: AppTextStyles.get14NormalText()),
     );
   }
 }

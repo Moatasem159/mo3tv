@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class RecommendationsMediaEmptyWidget extends StatelessWidget {
   final IconData icon;
@@ -10,7 +11,7 @@ class RecommendationsMediaEmptyWidget extends StatelessWidget {
         child: Column(
           children:  [
             Icon(icon,size: 70),
-            Text(msg,style: AppTextStyles.get25BoldText())
+            Text(msg.tr(context)!,style: AppTextStyles.get25BoldText())
           ],
         ),
     );

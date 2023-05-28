@@ -5,7 +5,7 @@ import 'package:mo3tv/features/account/data/models/account_list_model.dart';
 import 'package:mo3tv/features/account/data/models/account_model.dart';
 abstract class AccountRemoteDataSource {
   Future<AccountModel> getAccountDetails({required String sessionId});
-  Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page});
+  Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page,required String lang});
 }
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
@@ -16,8 +16,8 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
     return AccountModel.fromJson(res);
   }
   @override
-  Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page})async {
-    final res=await _apiConsumer.get(EndPoints.accountMediaListPath(AppStrings.sessionId,mediaType,listType,page));
+  Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page,required String lang})async {
+    final res=await _apiConsumer.get(EndPoints.accountMediaListPath(AppStrings.sessionId,mediaType,listType,page,lang));
     if(mediaType=='movies')
       {
         return AccountListModel.movieListFromJson(res);

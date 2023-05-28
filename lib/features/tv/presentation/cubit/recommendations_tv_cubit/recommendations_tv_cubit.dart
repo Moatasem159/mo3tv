@@ -9,10 +9,10 @@ class RecommendationsTvCubit extends Cubit<RecommendationsTvStates> {
   RecommendationsTvCubit(this._getTvRecommendationsUseCase) : super(RecommendationsTvInitialState());
   final GetTvRecommendationsUseCase _getTvRecommendationsUseCase;
   static RecommendationsTvCubit get(context)=>BlocProvider.of(context);
-  Future<void> getTvShowsRecommendations({required tvId})async{
+  Future<void> getTvShowsRecommendations({required tvId,required String lang})async{
     emit(GetTvShowRecommendationsLoadingState());
     Either<Failure, List<TvShow>> response =
-    await _getTvRecommendationsUseCase.call(tvId: tvId);
+    await _getTvRecommendationsUseCase.call(tvId: tvId,lang: lang);
     List<TvShow>? tvRecommendations=[];
     emit(response.fold((failure) => GetTvShowRecommendationsErrorState(msg: mapFailureToMsg(failure)),
             (recommendations) {
@@ -25,7 +25,7 @@ class RecommendationsTvCubit extends Cubit<RecommendationsTvStates> {
           return GetTvShowRecommendationsSuccessState(tvRecommendations);
         }));
   }
-  bool isInitial(){
-    return state is RecommendationsTvInitialState;
+  bool isSuccess(){
+    return state is GetTvShowRecommendationsSuccessState;
   }
 }

@@ -12,10 +12,10 @@ class SimilarMovieCubit extends Cubit<SimilarMovieStates> {
   List<Movie> movies=[];
   bool allMovies=false;
   int page=0;
-  Future<void> getSimilarMovies({required int movieId}) async {
+  Future<void> getSimilarMovies({required int movieId,required String lang}) async {
     emit(GetSimilarMoviesLoadingState());
     page++;
-    Either<Failure, List<Movie>> response = await _getSimilarMovieUseCase.call(movieId: movieId,page: page);
+    Either<Failure, List<Movie>> response = await _getSimilarMovieUseCase.call(movieId: movieId,page: page,lang: lang);
     emit(response.fold((failure) => GetSimilarMoviesErrorState(msg: mapFailureToMsg(failure)),
             (similarMovies) {
       if(similarMovies.isEmpty)

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/credits/presentation/screens/media_credits_screen.dart';
@@ -65,7 +66,7 @@ class _TvShowDetailsScreenState extends State<TvShowDetailsScreen> {
       child: Builder(
         builder: (context) {
           if(!TvCubit.get(context).isSuccess()){
-            TvCubit.get(context).getTvShowDetailsData(tvShowId: widget.tvShow.id!);
+            TvCubit.get(context).getTvShowDetailsData(tvShowId: widget.tvShow.id!,lang: AppLocalizations.of(context)!.getLang());
           }
           return BlocBuilder<TvShowBottomNavCubit, TvShowBottomNavStates>(
              builder: (context, state) {

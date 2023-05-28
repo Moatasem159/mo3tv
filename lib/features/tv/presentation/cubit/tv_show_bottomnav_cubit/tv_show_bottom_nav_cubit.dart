@@ -5,7 +5,6 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/recommendations_tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
 class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
   TvShowBottomNavCubit() : super(TvShowBottomNavInitialState());
@@ -28,12 +27,6 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
   void changeScreen(int index,context,int tvId){
     emit(TvShowBottomNavChangingState());
     isGallery=false;
-    if(index==1)
-      {
-       if(RecommendationsTvCubit.get(context).isInitial()){
-         RecommendationsTvCubit.get(context).getTvShowsRecommendations(tvId: tvId);
-       }
-      }
     if(index==2)
     {
       if(ReviewsCubit.get(context).isInitial()){

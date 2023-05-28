@@ -9,11 +9,11 @@ class MovieCubit extends Cubit<MovieStates> {
   MovieCubit(this._getMovieDetailsUseCase) : super(MoviesInitialState());
   final GetMovieDetailsUseCase _getMovieDetailsUseCase;
   static MovieCubit get(context)=>BlocProvider.of(context);
-  Future<void> getMovieDetailsData({required int movieId}) async {
+  Future<void> getMovieDetailsData({required int movieId,required String lang}) async {
     emit(GetMovieDetailsLoadingState());
     Movie movie;
     Either<Failure,Movie> response =
-    await _getMovieDetailsUseCase.call(movieId: movieId);
+    await _getMovieDetailsUseCase.call(movieId: movieId,lang: lang);
     emit(response.fold((failure) =>GetMovieDetailsErrorState(msg: mapFailureToMsg(failure))
         ,(movieData) {
           movie = movieData;

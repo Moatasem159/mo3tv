@@ -5,7 +5,6 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
 class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   MovieBottomNavCubit() : super(MovieBottomNavInitialState());
@@ -30,12 +29,6 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   void changeScreen(int index,context,int movieId){
     emit(MovieBottomNavChangingState());
     isGallery=false;
-    if(index==1)
-      {
-       if(RecommendationsMovieCubit.get(context).isInitial()){
-         RecommendationsMovieCubit.get(context).getMovieRecommendations(movieId: movieId);
-       }
-      }
     if(index==2)
     {
       if(ReviewsCubit.get(context).isInitial()){

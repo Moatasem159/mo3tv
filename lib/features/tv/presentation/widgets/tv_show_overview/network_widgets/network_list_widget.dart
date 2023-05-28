@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/network_widgets/network_widget.dart';
@@ -12,12 +14,10 @@ class NetworkListWidget extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-
-          Text("Networks",style:AppTextStyles.get14BoldText()),
+          Text(AppStrings.networks.tr(context)!,style:AppTextStyles.get14BoldText()),
           Wrap(
             alignment: WrapAlignment.center,
-            children: networks.map((e)=> NetworkWidget(network: e)).toList(),
-          ),
+            children: networks.map((e)=> NetworkWidget(network: e)).toList()),
         ],
       ),
     );

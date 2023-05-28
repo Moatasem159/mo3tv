@@ -9,9 +9,9 @@ class TopRatedTvShowsCubit extends Cubit<TopRatedTvShowsStates> {
   TopRatedTvShowsCubit(this._getTopRatedTvShowUsecase) : super(TopRatedTvShowInitialState());
   static TopRatedTvShowsCubit get(context)=>BlocProvider.of(context);
   final GetTvShowsListUsecase _getTopRatedTvShowUsecase;
-  Future<void> getTopRatedTvShowsData() async {
+  Future<void> getTopRatedTvShowsData({required String lang}) async {
     emit(GetTopRatedTvShowsLoadingState());
-    Either<Failure, List<TvShow>> response = await _getTopRatedTvShowUsecase.call(listType: "top_rated");
+    Either<Failure, List<TvShow>> response = await _getTopRatedTvShowUsecase.call(listType: "top_rated",lang: lang);
     emit(response.fold(
             (failure) =>GetTopRatedTvShowsErrorState(msg: mapFailureToMsg(failure)),
             (topRatedTvShows) =>GetTopRatedTvShowsSuccessState(topRatedTvShows)));

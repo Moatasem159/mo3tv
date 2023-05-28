@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
+import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
 class AccountListWidget extends StatefulWidget{
   final String image;
   final IconData icon;
@@ -37,12 +40,19 @@ class _AccountListWidgetState extends State<AccountListWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {GoRouter.of(context).pushNamed(Routes.accountMediaLists,
-        queryParameters: {
-          "title":widget.title,
-          "mediaType":widget.mediaType,
-          "listType":widget.listType});
-      AccountListsCubit.get(context).getAccountList(mediaType: widget.mediaType,listType:widget.listType);
+      onTap: () {
+        if(AppStrings.sessionId!='')
+          {
+            GoRouter.of(context).pushNamed(Routes.accountMediaLists,
+                queryParameters: {
+                  "title":widget.title,
+                  "mediaType":widget.mediaType,
+                  "listType":widget.listType});
+            AccountListsCubit.get(context).getAccountList(mediaType: widget.mediaType,listType:widget.listType,lang: AppLocalizations.of(context)!.getLang());
+          }
+        else{
+          showDialog(context: context, builder:(context) => const LoginAlert());
+        }
         },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -82,7 +92,7 @@ class _AccountListWidgetState extends State<AccountListWidget> {
                 children: [
                   Icon(widget.icon,color: widget.iconColor),
                   10.ph,
-                  FittedBox(child: Text(widget.title,style: AppTextStyles.get14BoldText()))
+                  FittedBox(child: Text(widget.title.tr(context)!,style:AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()))
                 ],
               ),
             ),

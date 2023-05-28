@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
@@ -31,7 +32,7 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
     return SlideTransition(
       position:  _slideTransition,
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: AppLocalizations.of(context)!.isEnLocale?Alignment.centerLeft:Alignment.centerRight,
         child: Wrap(
             runSpacing: 5,
             spacing: 7,
@@ -39,7 +40,9 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
               return Wrap(
                   children: [
                     Text(widget.genres.last.id !=e.id?
-                    "${e.name},": "${e.name}",style:AppTextStyles.get14BoldText()),
+                    "${e.name},": "${e.name}",
+                        textAlign: TextAlign.center,
+                        style:AppTextStyles.get14BoldText(height: AppLocalizations.of(context)!.isEnLocale?1.5:0)),
                     if(e.id==widget.genres.last.id&&widget.runTime!=0)
                       Wrap(
                         children: [

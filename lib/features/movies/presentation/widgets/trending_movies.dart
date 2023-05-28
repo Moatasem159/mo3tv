@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_error_list.dart';
 import 'package:mo3tv/core/widgets/media_loading/media_loading_list.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/trending_movie_cubit.dart';
@@ -12,7 +14,7 @@ class TrendingMovies extends StatelessWidget {
   const TrendingMovies({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    const String title="Trending movies today";
+    const String title=AppStrings.trendingMoviesToday;
     return BlocBuilder<TrendingMovieCubit, TrendingMovieStates>(
       builder: (context, state) {
         if (state is GetTrendingMoviesSuccessState) {
@@ -37,7 +39,7 @@ class TrendingMovies extends StatelessWidget {
             title: title,
             onPressed: () {
               BlocProvider.of<TrendingMovieCubit>(context)
-                  .getTrendingMoviesData();
+                  .getTrendingMoviesData(lang: AppLocalizations.of(context)!.getLang());
             },
           );
         }

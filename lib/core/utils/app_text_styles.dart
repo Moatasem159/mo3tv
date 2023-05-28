@@ -16,6 +16,13 @@ abstract class AppTextStyles{
       color:color,
       fontFamily: AppStrings.fontFamily);
   }
+  static TextStyle get18NormalText({Color color=Colors.white}){
+    return TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.normal,
+      color:color,
+      fontFamily: AppStrings.fontFamily);
+  }
   static TextStyle get14BoldText({Color color=Colors.white,double height=1.5}){
     return TextStyle(
       fontSize: 14,
@@ -25,10 +32,10 @@ abstract class AppTextStyles{
       color:color,
       fontFamily: AppStrings.fontFamily);
   }
-  static TextStyle get18BoldText({Color color=Colors.white}){
+  static TextStyle get18BoldText({Color color=Colors.white,double height=1.5}){
     return TextStyle(
       fontSize: 18,
-      height: 1.5,
+      height: height,
       fontWeight: FontWeight.bold,
       color:color,
       fontFamily: AppStrings.fontFamily);

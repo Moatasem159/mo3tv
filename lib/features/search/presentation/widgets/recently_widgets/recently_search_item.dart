@@ -34,6 +34,7 @@ class RecentlySearchItem extends StatelessWidget {
           Movie m=Movie(
             id: search.id,
             title: search.originalTitle,
+            originalTitle: search.originalTitle,
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );

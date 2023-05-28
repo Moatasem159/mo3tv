@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 class MainTextFormField extends StatelessWidget {
   final String hintText;
   final IconData ?prefixIcon;
@@ -46,10 +48,7 @@ class MainTextFormField extends StatelessWidget {
                   color: focusedErrorBorderColor),
               borderRadius: BorderRadius.circular(radius)),
           hintText: hintText,
-
-          hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-            fontSize: 11
-          ),
+          hintStyle:AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get10NormalText():AppTextStyles.get14NormalText(),
           focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                   width: 1,
