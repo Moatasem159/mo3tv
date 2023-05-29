@@ -14,7 +14,7 @@ class AppStrings {
   static const String noInternetConnection="No Internet Connections";
   static const String user="User";
   static const String score="Score";
-  static const String somethingWentWrong="Something_went_wrong";
+  static const String somethingWentWrong="something_went_wrong";
   static const String tryAgain="try_again";
   static const String loadMore="load_more";
   static const String noMore="no_more";
