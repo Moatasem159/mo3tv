@@ -11,6 +11,7 @@ class MainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
+        padding: MaterialStateProperty.all(EdgeInsets.zero),
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius:BorderRadius.circular(radius),
           )),
@@ -18,7 +19,7 @@ class MainButton extends StatelessWidget {
       ),
       onPressed:onPressed,
       child: Text(label,
-        style: AppTextStyles.get14NormalText()),
+        style: AppTextStyles.get14NormalText(height: 0)),
     );
   }
 }

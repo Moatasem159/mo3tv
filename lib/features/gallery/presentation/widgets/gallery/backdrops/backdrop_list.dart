@@ -44,7 +44,7 @@ class _BackdropsListState extends State<BackdropsList> {
             children: [
               if(_page!=0)
               MainButton(
-                size: const Size(70,35),
+                  size: const Size(70,20),
                   radius: 5,
                   onPressed: (){
                     setState(() {
@@ -56,7 +56,7 @@ class _BackdropsListState extends State<BackdropsList> {
               100.pw,
               if(((_page * _perPage) + _perPage)<widget.backdrops.length)
               MainButton(
-                  size: const Size(70,35),
+                  size: const Size(20,35),
                   radius: 5,
                   onPressed: (){
                         setState(() {
