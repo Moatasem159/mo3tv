@@ -561,10 +561,10 @@ packages:
     dependency: "direct main"
     description:
       name: restart_app
-      sha256: baab21e882b7d33666653e5bcc067da673bf654ab0f25de334c039b5288652a8
+      sha256: b37daeb1c02fcab30e19d9e30b6fdd215bd53577efd927042eb77cf6f09daadb
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.1"
   rxdart:
     dependency: "direct main"
     description:
