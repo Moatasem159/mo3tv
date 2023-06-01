@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class GenresWidget extends StatefulWidget {
@@ -47,9 +48,7 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
                       Wrap(
                         children: [
                           5.pw,
-                          const Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: CircleAvatar(radius: 3,backgroundColor: Colors.white)),
+                          const CircleAvatar(radius: 3,backgroundColor: Colors.white).addPadding(t:10),
                           5.pw,
                           Text("${widget.runTime ~/ 60==0?'':'${widget.runTime ~/ 60}h'}"
                               " ${widget.runTime % 60==0?"":"${widget.runTime % 60}m"}",

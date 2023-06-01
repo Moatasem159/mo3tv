@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
@@ -20,65 +21,53 @@ class TvShowPlayingNowCardWidget extends StatelessWidget {
               image: image
           )
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 1),
-                    decoration: BoxDecoration(color: Colors.black26,borderRadius: BorderRadius.circular(5)),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(AppStrings.nowPlaying.tr(context)!,style:AppTextStyles.get14BoldText()),
-                        4.pw,
-                        const Padding(
-                          padding: EdgeInsets.only(top: 3),
-                          child: Icon(
-                            Icons.circle,
-                            color: Colors.redAccent,
-                            size: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 1),
+                  decoration: BoxDecoration(color: Colors.black26,borderRadius: BorderRadius.circular(5)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(AppStrings.nowPlaying.tr(context)!,style:AppTextStyles.get14BoldText()),
+                      4.pw,
+                      const Icon(Icons.circle,color: Colors.redAccent,size: 12).addPadding(t: 3),
+                    ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 3),
-                    decoration: BoxDecoration(color: Colors.black26,borderRadius: BorderRadius.circular(5)),
-                    child: Text(tvShow.name!, style: AppTextStyles.get18BoldText())),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 2,vertical: 3),
+                  decoration: BoxDecoration(color: Colors.black26,borderRadius: BorderRadius.circular(5)),
+                  child: Text(tvShow.name!, style: AppTextStyles.get18BoldText())),
+              ],
+            ),
+          ),
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              decoration: BoxDecoration(
+                  color: Colors.black26,
+                  borderRadius: BorderRadius.circular(5)
+              ),
+              child: Row(
+                children: [
+                  Text(tvShow.voteAverage.toString(),style: AppTextStyles.get14BoldText()),
+                  2.pw,
+                  const Icon(Icons.star_rounded,size: 15,color: Colors.yellow).addPadding(t: 2)
                 ],
               ),
-            ),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                margin: const EdgeInsets.symmetric(horizontal: 2),
-                decoration: BoxDecoration(
-                    color: Colors.black26,
-                    borderRadius: BorderRadius.circular(5)
-                ),
-                child: Row(
-                  children: [
-                    Text(tvShow.voteAverage.toString(),style: AppTextStyles.get14BoldText()),
-                    2.pw,
-                    const Padding(
-                      padding: EdgeInsets.only(top: 2),
-                      child: Icon(Icons.star_rounded,size: 15,color: Colors.yellow))
-                  ],
-                ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        ],
+      ).addAllPadding(5),
     );
   }
 }

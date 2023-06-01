@@ -12,26 +12,23 @@ class LogoutButton extends StatelessWidget {
   const LogoutButton({super.key});
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10),
-      child: BlocConsumer<LogOutCubit, LogOutStates>(
-        listener: (context, state) {
-          if (state is LogOutSuccessState) {
-            GoRouter.of(context).pushReplacementNamed(Routes.initialRoute);
-            di.login();
-            LoginCubit.get(context).initial();
-          }
-        },
-        builder: (context, state) {
-          if (state is LogOutLoadingState) {
-            return const LogOutLoadingIndicator();
-          }
-          if (state is! LogOutLoadingState) {
-            return const LogOutButtonWidget();
-          }
-          return Container();
-        },
-      ),
+    return BlocConsumer<LogOutCubit, LogOutStates>(
+      listener: (context, state) {
+        if (state is LogOutSuccessState) {
+          GoRouter.of(context).pushReplacementNamed(Routes.initialRoute);
+          di.login();
+          LoginCubit.get(context).initial();
+        }
+      },
+      builder: (context, state) {
+        if (state is LogOutLoadingState) {
+          return const LogOutLoadingIndicator();
+        }
+        if (state is! LogOutLoadingState) {
+          return const LogOutButtonWidget();
+        }
+        return Container();
+      },
     );
   }
 }

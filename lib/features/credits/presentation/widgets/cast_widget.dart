@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 class CastMemberWidget extends StatelessWidget {
@@ -29,19 +30,13 @@ class CastMemberWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: FittedBox(
-                      child: Text(
-                        member.originalName!,
-                        style: AppTextStyles.get14BoldText(),
-                      )),
-                ),
+                FittedBox(
+                    child: Text(
+                      member.originalName!,
+                      style: AppTextStyles.get14BoldText(),
+                    )).addSymmetricPadding(h:5),
                 if(member.character!='')
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: FittedBox(child: Text(member.character!,style: AppTextStyles.get14NormalText(),)),
-                )
+                FittedBox(child: Text(member.character!,style: AppTextStyles.get14NormalText())).addSymmetricPadding(h:5)
               ],
             ),
           ),

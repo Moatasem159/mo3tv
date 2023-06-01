@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
@@ -58,15 +59,9 @@ class RecentlySearchItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if(search.mediaType=="tv")
-              const Padding(
-                padding: EdgeInsets.only(top: 3),
-                child: Icon(Icons.tv_outlined),
-              ),
+              const Icon(Icons.tv_outlined).addPadding(t:3),
             if(search.mediaType=="movie")
-              const Padding(
-                padding: EdgeInsets.only(top: 3),
-                child: Icon(Icons.movie_filter_rounded),
-              ),
+              const Icon(Icons.movie_filter_rounded).addPadding(t: 3),
             10.pw,
             SizedBox(
                 width: MediaQuery.of(context).size.width-89,
@@ -74,9 +69,7 @@ class RecentlySearchItem extends StatelessWidget {
                   style: AppTextStyles.get14BoldText(),
                   overflow: TextOverflow.ellipsis,)),
             GestureDetector(
-              onTap: () {
-                SearchListCubit.get(context).clearOneSearch(search: search);
-              },
+              onTap: () => SearchListCubit.get(context).clearOneSearch(search: search),
                 child: const Icon(Icons.clear_rounded,size: 15))
           ],
         ),

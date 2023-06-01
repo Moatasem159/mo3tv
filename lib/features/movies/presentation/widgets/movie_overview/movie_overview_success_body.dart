@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/keywords_widgets/genres_widget.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
@@ -12,18 +13,15 @@ class MovieOverViewSuccessBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          children: [
-            MovieDetailsWidget(movie:movie),
-            GenresWidget(genres:movie.genres!,runTime: movie.runtime),
-            MovieButtonsWidget(listType: listType,movie:movie),
-            MovieDescriptionWidget(movie:movie),
-            10.ph
-          ],
-        ),
-      ),
+      child: Column(
+        children: [
+          MovieDetailsWidget(movie:movie),
+          GenresWidget(genres:movie.genres!,runTime: movie.runtime),
+          MovieButtonsWidget(listType: listType,movie:movie),
+          MovieDescriptionWidget(movie:movie),
+          10.ph
+        ],
+      ).addSymmetricPadding(h:8),
     );
   }
 }

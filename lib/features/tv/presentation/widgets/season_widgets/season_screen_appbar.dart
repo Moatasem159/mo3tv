@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 class SeasonScreenAppBar extends StatelessWidget {
@@ -50,27 +51,21 @@ class SeasonScreenAppBar extends StatelessWidget {
         bottom: PreferredSize(
             preferredSize: const Size(0, 60),
             child: FittedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Column(
-                  children: [
-                    Text(
-                      tvShowName,
-                      style: AppTextStyles.get14BoldText()
-                    ),
-                    Text(
-                      season.name!,
-                      style: AppTextStyles.get14BoldText()
-                    ),
-                    Text(
-                      "(${season.airDate!.substring(0, 4)})",
-                      style: AppTextStyles.get14BoldText(),
-                    ),
-                  ],
-                ),
-              ),
-            )),
-      ),
-    );
+              child: Column(
+                children: [
+                  Text(
+                    tvShowName,
+                    style: AppTextStyles.get14BoldText()
+                  ),
+                  Text(
+                    season.name!,
+                    style: AppTextStyles.get14BoldText()
+                  ),
+                  Text(
+                    "(${season.airDate!.substring(0, 4)})",
+                    style: AppTextStyles.get14BoldText(),
+                  ),
+                ],
+              ).addAllPadding(5)))));
   }
 }

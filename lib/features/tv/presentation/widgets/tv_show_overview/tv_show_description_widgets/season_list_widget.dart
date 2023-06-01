@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -13,9 +14,7 @@ class SeasonsListWidget extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-         Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 10),
-             child: Text("${AppStrings.seasons.tr(context)!}:",style: AppTextStyles.get14BoldText())),
+         Text("${AppStrings.seasons.tr(context)!}:",style: AppTextStyles.get14BoldText()).addSymmetricPadding(h: 10),
          Wrap(
             crossAxisAlignment: WrapCrossAlignment.start,
             children: tvShow.seasons!.map((e) {

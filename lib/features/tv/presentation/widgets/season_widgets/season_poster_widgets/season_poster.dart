@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_poster_widgets/season_info.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_poster_widgets/season_poster_image.dart';
@@ -24,16 +25,12 @@ class SeasonPoster extends StatelessWidget {
           },
         );
       },
-      child: Padding(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width/43),
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            SeasonPosterImage(image: season.posterPath!),
-            SeasonInfo(season: season),
-          ],
-        ),
-      ),
-    );
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: [
+          SeasonPosterImage(image: season.posterPath!),
+          SeasonInfo(season: season),
+        ],
+      ).addAllPadding(MediaQuery.of(context).size.width/43));
   }
 }

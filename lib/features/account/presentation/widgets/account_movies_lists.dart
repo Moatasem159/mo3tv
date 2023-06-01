@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -13,9 +14,7 @@ class AccountMovieLists extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         10.ph,
-         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(AppStrings.moviesLists.tr(context)!,style:AppTextStyles.get25BoldText())),
+         Text(AppStrings.moviesLists.tr(context)!,style:AppTextStyles.get25BoldText()).addSymmetricPadding(h:20),
          SizedBox(
           height: 170,
           child: ListView(

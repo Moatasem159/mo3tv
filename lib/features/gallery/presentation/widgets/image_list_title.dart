@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class ImageListTitle extends StatelessWidget {
@@ -12,9 +13,7 @@ class ImageListTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 11),
-            child: Text("${title.tr(context)!}: $length",style: AppTextStyles.get18BoldText())),
+          Text("${title.tr(context)!}: $length",style: AppTextStyles.get18BoldText()).addSymmetricPadding(h:11),
           5.ph
         ],
       ),

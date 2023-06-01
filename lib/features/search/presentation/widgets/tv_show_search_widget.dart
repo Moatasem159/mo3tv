@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
@@ -78,7 +79,7 @@ class TvShowSearchWidget extends StatelessWidget {
                   if(tvShow.voteAverage!=0)
                   Row(
                     children:  [
-                      const Icon(Icons.star,color: Colors.yellow,),
+                      const Icon(Icons.star,color: Colors.yellow),
                       5.pw,
                       Text("${tvShow.voteAverage!.toStringAsFixed(1)}",style: AppTextStyles.get14BoldText())
                     ],
@@ -88,10 +89,7 @@ class TvShowSearchWidget extends StatelessWidget {
                     children: [
                       Text(AppStrings.inTv.tr(context)!,style: AppTextStyles.get14BoldText()),
                       5.pw,
-                      const Padding(
-                        padding: EdgeInsets.only(top: 4),
-                        child: Icon(Icons.tv_rounded,size: 18,),
-                      )
+                      const Icon(Icons.tv_rounded,size: 18).addPadding(t:4)
                     ],
                   ),
                 ],
