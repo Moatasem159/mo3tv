@@ -6,7 +6,4 @@ class GetSeasonDetailsSuccessState extends SeasonStates{
   final TvShowSeason season;
   GetSeasonDetailsSuccessState(this.season);
 }
-class GetSeasonDetailsErrorState extends SeasonStates{
-  final String msg;
-  GetSeasonDetailsErrorState({required this.msg});
-}
+class GetSeasonDetailsErrorState extends SeasonStates{}

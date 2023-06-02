@@ -5,7 +5,6 @@ import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
 class MarkTvShowUsecase{
   final TvRepository _tvRepository;
   MarkTvShowUsecase(this._tvRepository);
-  Future<Either<Failure, Message>> call({required int tvId,required bool mark,required String markType}) async{
-    return await _tvRepository.markTvShow(tvId:tvId,mark: mark,markType:markType);
-  }
+  Future<Either<Failure, Message>> call({required int tvId,required bool mark,required String markType}) async=>
+      await _tvRepository.markTvShow(tvId:tvId,mark: mark,markType:markType);
 }

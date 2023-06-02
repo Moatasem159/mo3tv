@@ -10,7 +10,7 @@ import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cub
 import 'package:mo3tv/features/gallery/presentation/screens/media_gallery_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/core/widgets/media_bottom_nav_bar.dart';
-import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/recommendations_tv_cubit.dart';

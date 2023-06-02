@@ -29,9 +29,12 @@ class MoviesRepositoryImpl implements MovieRepository {
           }
         else{
           try {
-            final result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType,lang: lang);
+            final List<Movie> result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType,lang: lang);
             result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-            await _movieLocalDataSource.saveMovieList(movies: result, listType: listType,lang: lang);
+            if(page==1)
+              {
+                await _movieLocalDataSource.saveMovieList(movies: result, listType: listType,lang: lang);
+              }
             return Right(result);
           } on ServerException catch (failure) {
             return Left(ServerFailure(failure.message!));
@@ -56,9 +59,11 @@ class MoviesRepositoryImpl implements MovieRepository {
       }
       else{
         try {
-          final result = await _movieRemoteDataSource.getTrendingMovies(page: page,lang: lang);
+          final List<Movie> result = await _movieRemoteDataSource.getTrendingMovies(page: page,lang: lang);
           result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
-          await _movieLocalDataSource.saveMovieList(movies: result, listType: "trending",lang: lang);
+          if(page==1){
+            await _movieLocalDataSource.saveMovieList(movies: result, listType: "trending",lang: lang);
+          }
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -89,7 +94,7 @@ class MoviesRepositoryImpl implements MovieRepository {
     if(await _networkInfo.isConnected)
       {
         try {
-          final result = await _movieRemoteDataSource.getMovieRecommendations(movieId: movieId,lang: lang);
+          final List<Movie> result = await _movieRemoteDataSource.getMovieRecommendations(movieId: movieId,lang: lang);
           result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
           return Right(result);
         } on ServerException catch (failure) {
@@ -105,7 +110,7 @@ class MoviesRepositoryImpl implements MovieRepository {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page,lang: lang);
+        final List<Movie> result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page,lang: lang);
         result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
         return Right(result);
       } on ServerException catch (failure) {
@@ -121,7 +126,7 @@ class MoviesRepositoryImpl implements MovieRepository {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _movieRemoteDataSource.deleteMovieRate(movieId: movieId);
+        final Message result = await _movieRemoteDataSource.deleteMovieRate(movieId: movieId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -136,7 +141,7 @@ class MoviesRepositoryImpl implements MovieRepository {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _movieRemoteDataSource.rateMovie(rate: rate,movieId: movieId);
+        final Message result = await _movieRemoteDataSource.rateMovie(rate: rate,movieId: movieId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
@@ -151,7 +156,7 @@ class MoviesRepositoryImpl implements MovieRepository {
     if(await _networkInfo.isConnected)
     {
       try {
-        final result = await _movieRemoteDataSource.markMovie(movieId: movieId,mark: mark,markType:markType);
+        final Message result = await _movieRemoteDataSource.markMovie(movieId: movieId,mark: mark,markType:markType);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

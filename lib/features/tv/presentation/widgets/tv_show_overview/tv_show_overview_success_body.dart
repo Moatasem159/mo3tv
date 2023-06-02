@@ -17,7 +17,7 @@ class TvShowOverviewSuccessBody extends StatelessWidget {
           TvShowDetails(tvShow: tvShow),
           GenresWidget(genres: tvShow.genres!,
               runTime: tvShow.episodeRunTime!.isNotEmpty ? tvShow
-                  .episodeRunTime![0] : 0),
+                  .episodeRunTime![0] : 0,link: tvShow.homepage!),
           TvShowButtonsWidget(tvShow: tvShow,listType:listType),
           TvShowDescriptionWidget(tvShow: tvShow)
         ],

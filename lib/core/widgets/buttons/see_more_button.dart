@@ -9,7 +9,10 @@ class SeeMoreButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: ElevatedButton(onPressed: onPressed,
-      child:Text(AppStrings.loadMore.tr(context)!,style: AppTextStyles.get14BoldText())).addAllPadding(8));
+      child:  Center(
+        child: ElevatedButton(onPressed: onPressed,
+        style: ButtonStyle(fixedSize: MaterialStateProperty.all(const Size(150,20))),
+        child:Text(AppStrings.loadMore.tr(context)!,style: AppTextStyles.get14BoldText())).addSymmetricPadding(v: 5),
+      ));
   }
 }

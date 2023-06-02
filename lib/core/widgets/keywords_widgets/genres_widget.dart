@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
@@ -7,7 +9,8 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 class GenresWidget extends StatefulWidget {
   final List<Keyword> genres;
   final num runTime;
-  const GenresWidget({Key? key, required this.genres, required this.runTime}) : super(key: key);
+  final String link;
+  const GenresWidget({Key? key, required this.genres, required this.runTime, required this.link}) : super(key: key);
   @override
   State<GenresWidget> createState() => _GenresWidgetState();
 }
@@ -53,6 +56,12 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
                           Text("${widget.runTime ~/ 60==0?'':'${widget.runTime ~/ 60}h'}"
                               " ${widget.runTime % 60==0?"":"${widget.runTime % 60}m"}",
                               style:AppTextStyles.get14BoldText()),
+                          8.pw,
+                          if(widget.link!="")
+                          GestureDetector(
+                            onTap:() => GoRouter.of(context).pushNamed( Routes.mediaWebPageRoute,queryParameters:{
+                              "link":widget.link}),
+                              child: const Icon(Icons.link_rounded))
                         ],)
                   ]
               );

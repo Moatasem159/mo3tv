@@ -4,7 +4,7 @@ import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/reviews/domain/entities/review.dart';
 import 'package:mo3tv/features/reviews/domain/usecases/get_media_reviews_usecase.dart';
-import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_state.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_state.dart';
 class ReviewsCubit extends Cubit<ReviewsStates> {
   ReviewsCubit(this._getMediaReviewsUsecase) : super(ReviewsInitialState());
   static ReviewsCubit get(context)=>BlocProvider.of(context);
@@ -21,7 +21,6 @@ class ReviewsCubit extends Cubit<ReviewsStates> {
             (failure) =>
             GetMediaReviewsErrorState(msg: mapFailureToMsg(failure)),
             (movieReviews) {
-          // this.movieReviews = movieReviews;
           return GetMediaReviewsSuccessState(movieReviews);
         }));
   }

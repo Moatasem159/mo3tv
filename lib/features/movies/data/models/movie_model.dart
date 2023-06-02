@@ -1,50 +1,42 @@
 import 'dart:convert';
-
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/core/models/video_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 //ignore: must_be_immutable
 class MovieModel extends Movie {
-   MovieModel(
-      {super.adult,
-      super.backdropPath,
-      super.budget,
-       super.genres,
-       super.keywords,
-      super.homepage,
-      super.id,
-       super.imdbId,
-       super.originalLanguage,
-       super.originalTitle,
-       super.overview,
-       super.popularity,
-       super.posterPath,
-       super.productionCompanies,
-       super.releaseDate,
-       super.revenue,
-       super.runtime,
-       super.status,
-       super.tagline,
-       super.title,
-       super.voteAverage,
-       super.voteCount,
-       super.belongsToCollection,
-       super.movieAccountDetails,
-        super.trailer,
-        super.videos
-      });
-
+   MovieModel({
+     super.backdropPath,
+     super.budget,
+     super.genres,
+     super.keywords,
+     super.homepage,
+     super.id,
+     super.originalLanguage,
+     super.originalTitle,
+     super.overview,
+     super.popularity,
+     super.posterPath,
+     super.productionCompanies,
+     super.releaseDate,
+     super.revenue,
+     super.runtime,
+     super.status,
+     super.tagline,
+     super.title,
+     super.voteAverage,
+     super.voteCount,
+     super.movieAccountDetails,
+     super.trailer,
+     super.videos
+   });
   factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
-      adult: json["adult"],
       backdropPath: json["backdrop_path"]??'',
-      belongsToCollection: json["belongs_to_collection"]??'',
       budget: json["budget"]??0,
       genres: json["genres"]==null?[]:List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
       keywords:json["keywords"]==null?[]:List<GenreModel>.from(json["keywords"]['keywords'].map((x) => GenreModel.fromJson(x))),
       homepage: json["homepage"]??'',
       id: json["id"],
-      imdbId: json["imdb_id"]??"",
       originalLanguage: json["original_language"]??'',
       originalTitle: json["original_title"]??'',
       overview: json["overview"]??'',
@@ -66,7 +58,6 @@ class MovieModel extends Movie {
      "backdrop_path":movieModel.backdropPath,
      "poster_path":movieModel.posterPath,
      'id':movieModel.id,
-     'imdb_id':movieModel.imdbId,
      "original_title":movieModel.originalTitle,
      "title":movieModel.title,
      "vote_average":movieModel.voteAverage,

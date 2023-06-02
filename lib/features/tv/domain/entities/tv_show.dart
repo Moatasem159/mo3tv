@@ -6,7 +6,6 @@ import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 //ignore: must_be_immutable
 class TvShow extends Equatable{
-  final bool ?adult;
   final String? backdropPath;
   final List<CreatedBy>? createdBy;
   final List<int> ?episodeRunTime;
@@ -38,7 +37,7 @@ class TvShow extends Equatable{
   Video? trailer;
   final List<Video>?videos;
    TvShow(
-      {this.adult,
+      {
       this.backdropPath,
       this.createdBy,
       this.episodeRunTime,
@@ -71,9 +70,9 @@ class TvShow extends Equatable{
       this.voteCount});
   @override
   List<Object?> get props => [
-    adult,
     backdropPath,
     createdBy,
+    keywords,
     episodeRunTime,
     firstAirDate,
     genres,
@@ -83,6 +82,8 @@ class TvShow extends Equatable{
     lastEpisodeToAir,
     lastAirDate,
     name,
+    tvShowAccountDetails,
+    numberOfEpisodes,
     nextEpisodeToAir,
     networks,
     numberOfSeasons,

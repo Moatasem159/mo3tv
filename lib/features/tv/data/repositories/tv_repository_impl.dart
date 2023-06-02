@@ -31,7 +31,9 @@ class TvShowRepositoryImpl implements TvRepository{
         try{
           final result = await _tvShowRemoteDataSource.getTvShowsList(page: page,listType: listType,lang: lang);
           result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-          await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: listType,lang: lang);
+          if(page==1) {
+            await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: listType,lang: lang);
+          }
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -58,7 +60,9 @@ class TvShowRepositoryImpl implements TvRepository{
         try {
           final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page,lang: lang);
           result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-          await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: "trending",lang: lang);
+          if(page==1) {
+            await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: "trending",lang: lang);
+          }
           return Right(result);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));

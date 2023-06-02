@@ -13,17 +13,9 @@ class RecommendationsMovieCubit extends Cubit<RecommendationsMovieStates> {
     emit(GetMovieRecommendationsLoadingState());
     Either<Failure, List<Movie>> response =
     await _getMovieRecommendationsUseCase.call(movieId: movieId,lang: lang);
-    List<Movie> movieRecommendations=[];
-    emit(response.fold((failure) => GetMovieRecommendationsErrorState(msg: mapFailureToMsg(failure)),
-            (recommendations) {
-          for (var element in recommendations) {
-            if(element.posterPath!=''&&element.backdropPath!="")
-            {
-              movieRecommendations.add(element);
-            }
-          }
-          return GetMovieRecommendationsSuccessState(movieRecommendations);
-        }));
+    emit(response.fold(
+        (failure) => GetMovieRecommendationsErrorState(msg: mapFailureToMsg(failure)),
+        (recommendations) =>GetMovieRecommendationsSuccessState(recommendations)));
   }
   bool isSuccess(){
     return state is GetMovieRecommendationsSuccessState;

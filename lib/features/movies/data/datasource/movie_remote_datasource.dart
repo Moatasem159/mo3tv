@@ -13,9 +13,17 @@ abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getMovieRecommendations({required int movieId,required String lang});
   Future<List<MovieModel>> getSimilarMovies({required int movieId,required int page,required String lang});
 }
-class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
+class MovieRemoteDataSourceImpl implements MovieRemoteDataSource{
   final ApiConsumer _apiConsumer;
   MovieRemoteDataSourceImpl(this._apiConsumer);
+  @override
+  Future<MovieModel> getMovieDetails({required int movieId,required String lang})async =>
+      MovieModel.fromJson(await _apiConsumer.get(EndPoints.mediaDetailsPath(movieId,AppStrings.sessionId,AppStrings.movie,lang)));
+  @override
+  Future<List<MovieModel>> getMovieRecommendations({required int movieId,required String lang})async {
+    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(movieId,AppStrings.movie,lang));
+    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
+  }
   @override
   Future<List<MovieModel>> getMoviesList({required int page,required String listType,required String lang}) async {
     final response = await _apiConsumer.get(EndPoints.mediaListsPath(AppStrings.movie,listType,page,lang));
@@ -27,42 +35,27 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override
-  Future<MovieModel> getMovieDetails({required int movieId,required String lang})async {
-    final response = await _apiConsumer.get(EndPoints.mediaDetailsPath(movieId,AppStrings.sessionId,AppStrings.movie,lang));
-    return MovieModel.fromJson(response);
-  }
-  @override
-  Future<List<MovieModel>> getMovieRecommendations({required int movieId,required String lang})async {
-    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(movieId,AppStrings.movie,lang));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
-  }
-  @override
   Future<List<MovieModel>> getSimilarMovies({required int movieId, required int page,required String lang})async {
     final response = await _apiConsumer.get(EndPoints.similarMediaPath(movieId,page,AppStrings.movie,lang));
     return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
   }
   @override
-  Future<MessageModel> deleteMovieRate({required int movieId}) async{
-    final response = await _apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,AppStrings.movie));
-    return MessageModel.fromJson(response);
-  }
+  Future<MessageModel> deleteMovieRate({required int movieId}) async=>
+   MessageModel.fromJson( await _apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,AppStrings.movie)));
   @override
-  Future<MessageModel> rateMovie({required rate,required int movieId})async {
-    final response = await _apiConsumer.post(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,AppStrings.movie),
+  Future<MessageModel> rateMovie({required rate,required int movieId})async =>
+     MessageModel.fromJson(await _apiConsumer.post(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,AppStrings.movie),
         body:{
           "value":rate,
-    });
-    return MessageModel.fromJson(response);
-  }
+        }),
+     );
   @override
-  Future<MessageModel> markMovie({required int movieId,required bool mark,required String markType})async {
-    final response = await _apiConsumer.post(EndPoints.markMediaPath(AppStrings.sessionId,markType),
+  Future<MessageModel> markMovie({required int movieId,required bool mark,required String markType})async=>
+     MessageModel.fromJson( await _apiConsumer.post(EndPoints.markMediaPath(AppStrings.sessionId,markType),
         body:{
           "media_type":AppStrings.movie,
           "media_id": movieId,
-           markType: mark
+          markType: mark
         }
-        );
-    return MessageModel.fromJson(response);
+    ));
   }
-}

@@ -62,7 +62,7 @@ import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart
 import 'package:mo3tv/features/reviews/data/repositories/reviews_repository_impl.dart';
 import 'package:mo3tv/features/reviews/domain/repositories/reviews_repository.dart';
 import 'package:mo3tv/features/reviews/domain/usecases/get_media_reviews_usecase.dart';
-import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 import 'package:mo3tv/features/search/data/datasources/search_local_data_source.dart';
 import 'package:mo3tv/features/search/data/datasources/search_remote_datasource.dart';
 import 'package:mo3tv/features/search/data/repositories/search_repository_impl.dart';

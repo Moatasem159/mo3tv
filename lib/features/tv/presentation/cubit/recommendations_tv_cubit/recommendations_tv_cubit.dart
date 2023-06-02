@@ -13,17 +13,9 @@ class RecommendationsTvCubit extends Cubit<RecommendationsTvStates> {
     emit(GetTvShowRecommendationsLoadingState());
     Either<Failure, List<TvShow>> response =
     await _getTvRecommendationsUseCase.call(tvId: tvId,lang: lang);
-    List<TvShow>? tvRecommendations=[];
-    emit(response.fold((failure) => GetTvShowRecommendationsErrorState(msg: mapFailureToMsg(failure)),
-            (recommendations) {
-          for (var element in recommendations) {
-            if(element.posterPath!=''&&element.backdropPath!="")
-            {
-              tvRecommendations.add(element);
-            }
-          }
-          return GetTvShowRecommendationsSuccessState(tvRecommendations);
-        }));
+    emit(response.fold(
+        (failure) => GetTvShowRecommendationsErrorState(msg: mapFailureToMsg(failure)),
+        (recommendations) => GetTvShowRecommendationsSuccessState(recommendations)));
   }
   bool isSuccess(){
     return state is GetTvShowRecommendationsSuccessState;

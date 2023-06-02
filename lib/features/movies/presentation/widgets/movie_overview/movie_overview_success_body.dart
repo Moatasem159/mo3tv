@@ -16,7 +16,7 @@ class MovieOverViewSuccessBody extends StatelessWidget {
       child: Column(
         children: [
           MovieDetailsWidget(movie:movie),
-          GenresWidget(genres:movie.genres!,runTime: movie.runtime),
+          GenresWidget(genres:movie.genres!,runTime: movie.runtime!,link: movie.homepage!),
           MovieButtonsWidget(listType: listType,movie:movie),
           MovieDescriptionWidget(movie:movie),
           10.ph

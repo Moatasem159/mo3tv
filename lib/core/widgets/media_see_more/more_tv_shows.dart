@@ -14,10 +14,12 @@ class MoreTvShows extends StatelessWidget {
   final String title;
   final int index;
   final List media;
-  const MoreTvShows({Key? key, required this.title, required this.index, required this.media}) : super(key: key);
+  final ScrollController ?controller;
+  const MoreTvShows({Key? key, required this.title, required this.index, required this.media, this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: controller,
       slivers: [
         CustomAppBar(
           title: title,

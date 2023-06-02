@@ -9,7 +9,6 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 //ignore: must_be_immutable
 class TvShowModel extends TvShow {
    TvShowModel({
-    super.adult,
     super.backdropPath,
     super.createdBy,
     super.episodeRunTime,
@@ -42,7 +41,6 @@ class TvShowModel extends TvShow {
   });
 
   factory TvShowModel.fromJson(Map<String, dynamic> json) => TvShowModel(
-    adult: json["adult"],
     backdropPath: json["backdrop_path"]??'',
     createdBy:json["created_by"]==null?[]:List<CreatedBy>.from(json["created_by"].map((x) => CreatedBy.fromJson(x))),
     episodeRunTime:json["episode_run_time"]==null?[]:List<int>.from(json["episode_run_time"].map((x) => x)),

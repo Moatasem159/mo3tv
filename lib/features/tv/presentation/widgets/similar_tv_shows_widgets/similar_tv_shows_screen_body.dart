@@ -12,12 +12,14 @@ import 'package:mo3tv/features/tv/presentation/widgets/similar_tv_shows_widgets/
 class SimilarTvShowsScreenBody extends StatelessWidget {
   final List<TvShow> recommendations;
   final int tvId;
-  const SimilarTvShowsScreenBody({super.key, required this.recommendations,required this.tvId});
+  final ScrollController ?controller;
+  const SimilarTvShowsScreenBody({super.key, required this.recommendations,required this.tvId, this.controller});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => di.sl<SimilarTvShowCubit>(),
       child: CustomScrollView(
+        controller: controller,
         slivers: [
           CustomAppBar(
             onPressed: () {

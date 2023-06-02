@@ -14,10 +14,12 @@ class MoreMovies extends StatelessWidget {
   final String title;
   final List media;
   final int index;
-  const MoreMovies({Key? key, required this.title, required this.index, required this.media}) : super(key: key);
+  final ScrollController ?controller;
+  const MoreMovies({Key? key, required this.title, required this.index, required this.media, this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: controller,
       slivers: [
         CustomAppBar(
           title: title,

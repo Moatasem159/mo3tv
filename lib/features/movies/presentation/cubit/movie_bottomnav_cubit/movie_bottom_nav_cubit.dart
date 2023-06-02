@@ -6,7 +6,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
-import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   MovieBottomNavCubit() : super(MovieBottomNavInitialState());
   static MovieBottomNavCubit get(context)=>BlocProvider.of(context);
@@ -18,11 +18,8 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
     const NavigationDestination(icon: Icon(Icons.comment), label: "Reviews"),
     NavigationDestination(icon: const Icon(FontAwesomeIcons.peopleGroup).addPadding(r: 7), label: "Cast"),
     NavigationDestination(icon: const Icon(FontAwesomeIcons.solidImages).addPadding(r: 7), label: "Gallery"),
-
   ];
-
   void changeScreen(int index,context,int movieId){
-    emit(MovieBottomNavChangingState());
     isGallery=false;
     if(index==2)
     {
@@ -46,6 +43,6 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
          }
       }
     this.index=index;
-    emit(MovieBottomNavDoneState());
+    emit(MovieBottomNavChangeState());
   }
 }

@@ -5,7 +5,7 @@ import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
-import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
 class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
   TvShowBottomNavCubit() : super(TvShowBottomNavInitialState());
@@ -20,7 +20,6 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
     NavigationDestination(icon: const Icon(FontAwesomeIcons.solidImages).addPadding(r: 7), label: "Gallery"),
   ];
   void changeScreen(int index,context,int tvId){
-    emit(TvShowBottomNavChangingState());
     isGallery=false;
     if(index==2)
     {
@@ -44,6 +43,6 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
         }
       }
     this.index=index;
-    emit(TvShowBottomNavDoneState());
+    emit(TvShowBottomNavChangeState());
   }
 }

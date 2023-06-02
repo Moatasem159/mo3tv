@@ -38,7 +38,7 @@ class _MovieInfoWidgetState extends State<MovieInfoWidget> with SingleTickerProv
             TitleWidget(title: widget.movie.title!,releaseDate: widget.movie.releaseDate!),
             TaglineWidget(tagline: widget.movie.tagline!),
             StatusWidget(status: widget.movie.status!),
-            BudgetWidget(budget: widget.movie.budget,revenue: widget.movie.revenue),
+            BudgetWidget(budget: widget.movie.budget!,revenue: widget.movie.revenue!),
           ],
         ),
       ),

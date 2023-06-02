@@ -19,7 +19,7 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.d
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_overview.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/recommendations/recommendations_movies.dart';
-import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit/reviews_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
 class MovieDetailsScreen extends StatefulWidget {
   final Movie movie;

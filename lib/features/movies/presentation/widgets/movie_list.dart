@@ -8,16 +8,11 @@ class MoviesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
-      delegate: SliverChildBuilderDelegate(
-        childCount: movieList.length,
-            (context, index) {
-          return MovieListItem(movie: movieList[index],listType:listType);
-        },
-      ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: .65,
           crossAxisCount: 3,
           mainAxisSpacing: 7),
-    );
+      delegate: SliverChildBuilderDelegate(childCount: movieList.length,
+        (context, index) =>MovieListItem(movie: movieList[index],listType:listType)));
   }
 }

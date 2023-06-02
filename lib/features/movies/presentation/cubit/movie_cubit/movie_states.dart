@@ -1,6 +1,6 @@
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 abstract class MovieStates{}
-class MoviesInitialState extends MovieStates{}
+class MovieInitialState extends MovieStates{}
 class GetMovieDetailsLoadingState extends MovieStates{}
 class GetMovieDetailsSuccessState extends MovieStates{
   final Movie movie;

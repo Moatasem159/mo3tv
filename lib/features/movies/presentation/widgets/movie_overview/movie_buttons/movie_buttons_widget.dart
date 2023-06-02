@@ -39,7 +39,7 @@ class _MovieButtonsWidgetState extends State<MovieButtonsWidget> with SingleTick
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              UserScoreWidget(vote: widget.movie.voteAverage),
+              UserScoreWidget(vote: widget.movie.voteAverage!),
               MovieFavButton(listType: widget.listType),
               MovieRatingButton(listType: widget.listType),
               AddMovieToWatchlistButton(listType: widget.listType),

@@ -4,43 +4,37 @@ import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 //ignore: must_be_immutable
-class Movie extends Equatable{
-  final bool ?adult;
-  final String ?backdropPath;
-  final dynamic belongsToCollection;
-  final dynamic budget;
+class Movie extends Equatable {
+  final String? backdropPath;
+  final num? budget;
   final List<GenreModel>? genres;
   final List<GenreModel>? keywords;
-  final String ?homepage;
-  final int ?id;
-  final String? imdbId;
-  final String ?originalLanguage;
-  final String ?originalTitle;
+  final String? homepage;
+  final int? id;
+  final String? originalLanguage;
+  final String? originalTitle;
   final String? overview;
-  final dynamic popularity;
+  final num? popularity;
   final String? posterPath;
-  final List<ProductionCompany> ?productionCompanies;
-  final String?releaseDate;
-  final  dynamic revenue;
-  final dynamic runtime;
+  final List<ProductionCompany>? productionCompanies;
+  final String? releaseDate;
+  final num? revenue;
+  final num? runtime;
   final String? status;
-  final String ?tagline;
+  final String? tagline;
   final String? title;
-  final dynamic voteAverage;
-  final dynamic voteCount;
+  final num? voteAverage;
+  final num? voteCount;
   MediaAccountDetails? movieAccountDetails;
   Video? trailer;
-  final List<Video>?videos;
+  final List<Video>? videos;
   Movie({
     this.videos,
-    this.adult,
     this.backdropPath,
-    this.belongsToCollection,
     this.budget,
     this.genres,
     this.homepage,
     this.id,
-    this.imdbId,
     this.originalLanguage,
     this.originalTitle,
     this.overview,
@@ -59,31 +53,31 @@ class Movie extends Equatable{
     this.movieAccountDetails,
     this.trailer,
   });
+
   @override
   List<Object?> get props => [
         id,
-        title,
         backdropPath,
-        overview,
-        voteAverage,
-        releaseDate,
-        adult,
-        backdropPath,
-        belongsToCollection,
         budget,
+        tagline,
+        title,
+        overview,
+        popularity,
+        posterPath,
+        productionCompanies,
+        releaseDate,
+        revenue,
+        runtime,
+        status,
         genres,
         homepage,
-        imdbId,
+        keywords,
+        movieAccountDetails,
+        trailer,
+        videos,
+        voteCount,
+        voteAverage,
         originalLanguage,
         originalTitle,
-        trailer
       ];
 }
-
-
-
-
-
-
-
-

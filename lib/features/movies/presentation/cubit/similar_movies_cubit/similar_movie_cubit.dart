@@ -8,31 +8,23 @@ import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/si
 class SimilarMovieCubit extends Cubit<SimilarMovieStates> {
   SimilarMovieCubit(this._getSimilarMovieUseCase) : super(SimilarMovieInitialState());
   final GetSimilarMovieUseCase _getSimilarMovieUseCase;
-  static SimilarMovieCubit get(context)=>BlocProvider.of(context);
-  List<Movie> movies=[];
-  bool allMovies=false;
-  int page=0;
-  Future<void> getSimilarMovies({required int movieId,required String lang}) async {
+  static SimilarMovieCubit get(context) => BlocProvider.of(context);
+  List<Movie> movies = [];
+  bool allMovies = false;
+  int page = 0;
+  Future<void> getSimilarMovies({required int movieId, required String lang}) async {
     emit(GetSimilarMoviesLoadingState());
     page++;
-    Either<Failure, List<Movie>> response = await _getSimilarMovieUseCase.call(movieId: movieId,page: page,lang: lang);
+    Either<Failure, List<Movie>> response = await _getSimilarMovieUseCase.call(movieId: movieId, page: page, lang: lang);
     emit(response.fold((failure) => GetSimilarMoviesErrorState(msg: mapFailureToMsg(failure)),
-            (similarMovies) {
-      if(similarMovies.isEmpty)
-        {
-          allMovies=true;
-           return GetSimilarMoviesSuccessState();
-        }
-          for (var element in similarMovies) {
-            if(element.posterPath!=''&&element.backdropPath!="")
-            {
-              if(!movies.contains(element))
-                {
-                  movies.add(element);
-                }
-            }
-          }
-          return GetSimilarMoviesSuccessState();
-        }));
+        (similarMovies) {
+      if (similarMovies.isEmpty) {
+        allMovies = true;
+        return GetSimilarMoviesSuccessState();
+      }
+      movies.addAll(similarMovies);
+      movies = movies.toSet().toList();
+      return GetSimilarMoviesSuccessState();
+    }));
   }
 }

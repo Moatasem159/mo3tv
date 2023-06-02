@@ -12,12 +12,15 @@ import 'package:mo3tv/features/movies/presentation/widgets/similar_movies_widget
 class SimilarMoviesScreenBody extends StatelessWidget {
   final List<Movie> recommendations;
   final int movieId;
-  const SimilarMoviesScreenBody({super.key, required this.recommendations,required this.movieId});
+  final ScrollController ?controller;
+  const SimilarMoviesScreenBody({super.key, required this.recommendations,required this.movieId,
+    this.controller});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => di.sl<SimilarMovieCubit>(),
       child: CustomScrollView(
+        controller: controller,
         slivers: [
           CustomAppBar(
             onPressed: ()=>GoRouter.of(context).pop(),
