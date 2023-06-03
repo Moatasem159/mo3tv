@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
@@ -49,6 +50,22 @@ class AccountRepositoryImpl implements AccountRepository{
         else{
           return Right(result);
         }
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Message>> createAccountList({required String sessionId,required Map<String,dynamic> body}) async{
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _accountDataSource.createCustomList(sessionId: sessionId, body: body);
+        return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
       }

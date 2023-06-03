@@ -7,7 +7,7 @@ import 'package:mo3tv/features/account/data/models/account_model.dart';
 abstract class AccountRemoteDataSource {
   Future<AccountModel> getAccountDetails({required String sessionId});
   Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page,required String lang});
-  Future<MessageModel> createCustomList({required String sessionId});
+  Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body});
 }
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
@@ -27,6 +27,6 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
     }
   }
   @override
-  Future<MessageModel> createCustomList({required String sessionId}) async=>
-  MessageModel.fromJson(await _apiConsumer.post(EndPoints.createMediaListPath(sessionId)));
+  Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body}) async=>
+  MessageModel.fromJson(await _apiConsumer.post(EndPoints.createMediaListPath(sessionId),body: body));
 }
