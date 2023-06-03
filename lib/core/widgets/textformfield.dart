@@ -3,7 +3,7 @@ import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class MainTextFormField extends StatelessWidget {
-  final String hintText;
+  final String ?hintText;
   final IconData ?prefixIcon;
   final TextEditingController ?controller;
   final String? Function(String ?value)? validator;
@@ -14,13 +14,14 @@ class MainTextFormField extends StatelessWidget {
   final ValueChanged<String>? onChange;
   const MainTextFormField({
     Key? key,
-    required this.hintText,
+    this.hintText,
     this.prefixIcon,
     this.controller,
     this.validator,
     this.suffixIcon,
-    required this.focusedBorderColor,
-    this.inputType, this.onChange}) : super(key: key);
+    this.focusedBorderColor=Colors.white,
+    this.inputType,
+    this.onChange}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double radius = 7;

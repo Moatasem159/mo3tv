@@ -5,8 +5,7 @@ import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/features/account/domain/usecases/create_account_list_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/create_list_cubit/create_list_state.dart';
 class CreateListCubit extends Cubit<CreateListStates> {
-  CreateListCubit(this._createAccountListUsecase)
-      : super(CreateListInitialState());
+  CreateListCubit(this._createAccountListUsecase) : super(CreateListInitialState());
   static CreateListCubit get(context) => BlocProvider.of(context);
   final CreateAccountListUsecase _createAccountListUsecase;
   Future<void> createAccountList(
@@ -19,6 +18,6 @@ class CreateListCubit extends Cubit<CreateListStates> {
         body: {"name": title, "description": description});
     emit(response.fold(
         (l) => CreateListErrorState(),
-            (r) => CreateListSuccessState()));
+        (r) => CreateListSuccessState()));
   }
 }

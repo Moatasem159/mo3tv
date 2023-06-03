@@ -68,5 +68,12 @@
   "seasons": "المواسم",
   "season": "موسم",
   "creator": "مخرج",
-  "type": "نوع"
+  "type": "نوع",
+  "your_lists": "قوائمك ",
+  "create_list": "انشاء قائمة ",
+  "create_new_list": "انشاء قائمة جديدة",
+  "description": "وصف القائمة",
+  "list_title": "اسم القائمة",
+  "create_list_dialog": "تم انشاء القائمة بنجاح",
+  "name_error": "يجب كتابة اسم القائمة"
 }

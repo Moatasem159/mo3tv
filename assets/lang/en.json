@@ -68,5 +68,13 @@
   "seasons": "Seasons",
   "season": "Season",
   "creator": "Creator",
-  "type": "Type"
+  "type": "Type",
+  "your_lists": "Your lists",
+  "create_list": "Create list",
+  "create_new_list": "Create new list",
+  "description": "Description",
+  "list_title": "List title",
+  "create_list_dialog": "List created successfully",
+  "name_error": "Name must be provided"
+
 }

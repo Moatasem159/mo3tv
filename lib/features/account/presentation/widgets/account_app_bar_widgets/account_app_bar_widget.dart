@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
+import 'package:mo3tv/features/account/presentation/widgets/create_list_button.dart';
 class AccountAppBarWidget extends StatelessWidget {
   final Account account;
   const AccountAppBarWidget({Key? key, required this.account}) : super(key: key);
@@ -40,8 +42,11 @@ class AccountAppBarWidget extends StatelessWidget {
           },
         ),
         Text(account.name == "" ? account.username! : account.name!,
-            style: AppTextStyles.get14NormalText()),
-      ],
+            style: AppTextStyles.get14NormalText(height: 0)),
+        const Spacer(),
+        const CreateListButton(),
+        12.pw
+      ]
     );
   }
 }

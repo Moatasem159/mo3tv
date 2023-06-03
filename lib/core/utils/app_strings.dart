@@ -78,4 +78,11 @@ class AppStrings {
   static const String season="season";
   static const String creator="creator";
   static const String type="type";
+  static const String createNewList="create_new_list";
+  static const String listTitle="list_title";
+  static const String description="description";
+  static const String yourLists="your_lists";
+  static const String createList="create_list";
+  static const String createListDialog="create_list_dialog";
+  static const String nameError="name_error";
 }
