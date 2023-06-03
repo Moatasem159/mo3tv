@@ -7,6 +7,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/data/datasources/account_local_datasource.dart';
 import 'package:mo3tv/features/account/data/datasources/account_remote_datasource.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
+import 'package:mo3tv/features/account/domain/entities/account_custom_media_list.dart';
 import 'package:mo3tv/features/account/domain/entities/account_list_entity.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
 class AccountRepositoryImpl implements AccountRepository{
@@ -65,6 +66,23 @@ class AccountRepositoryImpl implements AccountRepository{
     {
       try {
         final result = await _accountDataSource.createCustomList(sessionId: sessionId, body: body);
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AccountCustomMediaList>>> getAccountCustomLists(
+      {required String sessionId, required String accountId})async {
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _accountDataSource.getAccountCustomLists(sessionId: sessionId,accountId: accountId);
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
