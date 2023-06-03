@@ -11,10 +11,12 @@ import 'package:mo3tv/features/account/data/datasources/account_local_datasource
 import 'package:mo3tv/features/account/data/datasources/account_remote_datasource.dart';
 import 'package:mo3tv/features/account/data/repositories/account_repository_impl.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
+import 'package:mo3tv/features/account/domain/usecases/create_account_list_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_details_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_lists_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/create_list_cubit/create_list_cubit.dart';
 import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart';
 import 'package:mo3tv/features/credits/data/repositories/credits_repository_impl.dart';
 import 'package:mo3tv/features/credits/domain/repositories/credits_repository.dart';
@@ -154,7 +156,9 @@ Future external()async{
 account(){
   sl.registerFactory(() =>AccountCubit(sl()));
   sl.registerFactory(() =>AccountListsCubit(sl()));
+  sl.registerFactory(() =>CreateListCubit(sl()));
   sl.registerLazySingleton<GetAccountListsUsecase>(() => GetAccountListsUsecase(sl()));
+  sl.registerLazySingleton<CreateAccountListUsecase>(() => CreateAccountListUsecase(sl()));
   sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
   sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl(),sl()));
   sl.registerLazySingleton<AccountRemoteDataSource>(() => AccountRemoteDataSourceImpl(sl()));
