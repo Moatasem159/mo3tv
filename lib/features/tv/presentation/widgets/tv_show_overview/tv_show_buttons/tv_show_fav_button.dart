@@ -17,7 +17,7 @@ class TvShowFavButton extends StatelessWidget {
       listener: (context, state) {
         if(state is ActionErrorState&&state.where=="fav")
         {
-          CustomToast.showToast(context);
+          CustomToast.showToast(context,msg:AppStrings.somethingWentWrong);
         }
       },
       builder: (context, state) {
