@@ -2,12 +2,14 @@ import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/features/account/data/models/account_custom_media_list_model.dart';
 import 'package:mo3tv/features/account/data/models/account_list_model.dart';
 import 'package:mo3tv/features/account/data/models/account_model.dart';
 abstract class AccountRemoteDataSource {
   Future<AccountModel> getAccountDetails({required String sessionId});
   Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page,required String lang});
   Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body});
+  Future<List<AccountCustomMediaListModel>> getAccountCustomLists({required String sessionId,required int accountId});
 }
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
@@ -29,4 +31,10 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   @override
   Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body}) async=>
   MessageModel.fromJson(await _apiConsumer.post(EndPoints.createMediaListPath(sessionId),body: body));
+
+  @override
+  Future<List<AccountCustomMediaListModel>> getAccountCustomLists({required String sessionId, required int accountId})async{
+    final res = await _apiConsumer.get(EndPoints.getAccountCustomListsPath(sessionId, accountId));
+    return List.from(res as List).map((e) =>AccountCustomMediaListModel.fromJson(e)).toList();
+  }
 }
