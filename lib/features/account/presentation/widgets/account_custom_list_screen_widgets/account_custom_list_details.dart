@@ -26,6 +26,7 @@ class AccountCustomListDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          if(listInfo.description!='')
           Text(listInfo.description!,style: AppTextStyles.get18BoldText()),
           if(listInfo.itemCount!!=0)
             Text(getItem(context, listInfo.itemCount!),
