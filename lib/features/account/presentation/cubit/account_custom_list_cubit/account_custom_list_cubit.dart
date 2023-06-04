@@ -8,12 +8,22 @@ class AccountCustomListCubit extends Cubit<AccountCustomListStates> {
   AccountCustomListCubit(this._getAccountCustomListUseCase) : super(AccountCustomListInitialState());
   static AccountCustomListCubit get(context)=>BlocProvider.of(context);
   final GetAccountCustomListUseCase _getAccountCustomListUseCase;
+  AccountCustomMediaList ?list;
   Future<void> getAccountCustomList({required String listId,required String sessionId})async{
     emit(GetAccountCustomListLoadingState());
+    list = AccountCustomMediaList();
     Either<Failure,AccountCustomMediaList> response =
     await _getAccountCustomListUseCase.call(sessionId: sessionId, listId: listId);
     emit(response.fold(
         (l) =>GetAccountCustomListErrorState(),
-        (r) => GetAccountCustomListSuccessState(r)));
+        (r){
+          list =r;
+         return GetAccountCustomListSuccessState();
+        }));
+  }
+  clearList(){
+    list!.itemCount = 0;
+    list!.items!.clear();
+    emit(GetAccountCustomListSuccessState());
   }
 }

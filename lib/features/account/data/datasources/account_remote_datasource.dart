@@ -11,6 +11,7 @@ abstract class AccountRemoteDataSource {
   Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body});
   Future<List<AccountCustomMediaListModel>> getAccountCustomLists({required String sessionId,required String accountId});
   Future<AccountCustomMediaListModel> getAccountCustomList({required String sessionId,required String listId});
+  Future<MessageModel> clearAccountCustomList({required String sessionId,required String listId});
 }
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
@@ -43,4 +44,8 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   @override
   Future<AccountCustomMediaListModel> getAccountCustomList({required String sessionId, required String listId}) async =>
       AccountCustomMediaListModel.fromJson(await _apiConsumer.get(EndPoints.getAccountCustomListPath(sessionId,listId)));
+
+  @override
+  Future<MessageModel> clearAccountCustomList({required String sessionId, required String listId})async =>
+      MessageModel.fromJson(await _apiConsumer.post(EndPoints.clearAccountCustomListPath(sessionId,listId)));
 }

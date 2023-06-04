@@ -4,7 +4,6 @@ class AccountCustomListItem {
   String ?mediaType;
   String? originalTitle;
   String ?posterPath;
-  DateTime? releaseDate;
   String? title;
   String? name;
   String? originalName;
@@ -15,7 +14,6 @@ class AccountCustomListItem {
      this.mediaType,
      this.originalTitle,
      this.posterPath,
-     this.releaseDate,
      this.title,
      this.name,
      this.originalName,

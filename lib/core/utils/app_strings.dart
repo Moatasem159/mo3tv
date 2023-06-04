@@ -88,6 +88,7 @@ class AppStrings {
   static const String deleteList="delete_list";
   static const String clearList="clear_list";
   static const String items="items";
+  static const String noItems="no_items";
   static const String oneItem="one_item";
   static const String twoItems="two_items";
 }

@@ -80,5 +80,6 @@
   "clear_list": "مسح عناصر القائمة",
   "items": "اغراض",
   "one_item": "غرض",
-  "two_items": "غرضان"
+  "two_items": "غرضان",
+  "no_items": "لا يوجد اغراض"
 }

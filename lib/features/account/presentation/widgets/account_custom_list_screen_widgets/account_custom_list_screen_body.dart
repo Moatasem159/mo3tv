@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/features/account/domain/entities/account_custom_media_list.dart';
-import 'package:mo3tv/features/account/presentation/widgets/account_custom_list_screen_widgets/account_custom_list_details.dart';
+import 'package:mo3tv/features/account/presentation/widgets/account_custom_list_screen_widgets/account_custom_list_details_widgets/account_custom_list_details.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_custom_list_screen_widgets/items_list_widget.dart';
 class AccountCustomListScreenBody extends StatelessWidget {
   final AccountCustomMediaList listInfo;

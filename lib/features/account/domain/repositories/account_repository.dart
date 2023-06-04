@@ -13,6 +13,8 @@ abstract class AccountRepository{
       {required String sessionId,required String accountId});
   Future<Either<Failure,AccountCustomMediaList>> getAccountCustomList(
       {required String sessionId,required String listId});
+  Future<Either<Failure,Message>> clearAccountCustomList(
+      {required String sessionId,required String listId});
   Future<void> saveAccountData({required String sessionId,required String accountId});
   Future<void> getAccountData();
 }

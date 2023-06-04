@@ -52,5 +52,6 @@ class EndPoints{
       "${baseUrl}account/$accountId/lists?api_key=$_apiKey&session_id=$sessionid";
   static String getAccountCustomListPath(String sessionid,String listId)=>
       "${baseUrl}list/$listId?api_key=$_apiKey&session_id=$sessionid";
-
+  static String clearAccountCustomListPath(String sessionid,String listId)=>
+      "${baseUrl}list/$listId/clear?api_key=$_apiKey&session_id=$sessionid&confirm=true";
 }

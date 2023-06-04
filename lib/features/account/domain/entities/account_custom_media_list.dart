@@ -1,13 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:mo3tv/features/account/domain/entities/account_custom_list_item.dart';
+// ignore: must_be_immutable
 class AccountCustomMediaList extends Equatable {
   final String? description;
   final String? id;
-  final int? itemCount;
+  int? itemCount;
   final String? name;
   final String? posterPath;
-  final List<AccountCustomListItem>? items;
-  const AccountCustomMediaList(
+  List<AccountCustomListItem>? items;
+  AccountCustomMediaList(
       {this.description,
       this.items,
       this.posterPath,

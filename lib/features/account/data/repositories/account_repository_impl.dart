@@ -116,4 +116,19 @@ class AccountRepositoryImpl implements AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
+  @override
+  Future<Either<Failure, Message>> clearAccountCustomList({required String sessionId, required String listId})async {
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _accountDataSource.clearAccountCustomList(sessionId: sessionId,listId: listId);
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
 }
