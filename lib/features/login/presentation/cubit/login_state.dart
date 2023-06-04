@@ -12,7 +12,10 @@ class GetTokenErrorState extends LoginStates {
 }
 
 class GetSessionIdLoadingState extends LoginStates {}
-class GetSessionIdSuccessState extends LoginStates {}
+class GetSessionIdSuccessState extends LoginStates {
+  final String sessionId;
+  GetSessionIdSuccessState(this.sessionId);
+}
 class GetSessionIdErrorState extends LoginStates {
 
   final String msg;

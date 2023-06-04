@@ -11,5 +11,6 @@ abstract class AccountRepository{
   Future<Either<Failure,Message>> createAccountList({required String sessionId,required Map<String,dynamic> body});
   Future<Either<Failure,List<AccountCustomMediaList>>> getAccountCustomLists(
       {required String sessionId,required String accountId});
-
+  Future<void> saveAccountData({required String sessionId,required String accountId});
+  Future<void> getAccountData();
 }

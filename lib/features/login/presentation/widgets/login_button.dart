@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_state.dart';
 import 'package:mo3tv/features/login/presentation/widgets/login_button_widget.dart';
@@ -17,6 +18,7 @@ class LoginButton extends StatelessWidget {
       listener:(context,state){
         if(state is GetSessionIdSuccessState)
         {
+          AccountCubit.get(context).getAccountDetails(sessionId: state.sessionId);
           showDialog(context: context, builder:(context) => const LoginDialog());
         }
         if (state is GetTokenSuccessState)

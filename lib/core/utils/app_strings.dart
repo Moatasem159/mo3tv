@@ -1,6 +1,7 @@
 class AppStrings {
   static const String fontFamily="Montserrat";
   static String sessionId='';
+  static String accountId='';
   static const String locale="locale";
   static const String settings="settings_title";
   static const String arabicLang="arabic_language";
@@ -8,7 +9,6 @@ class AppStrings {
   static const String englishCode="en";
   static const String englishLang="english_language";
   static const String language="app_language";
-  static String id="SessionId";
   static const String movie="movie";
   static const String tv="tv";
   static const String noInternetConnection="No Internet Connections";

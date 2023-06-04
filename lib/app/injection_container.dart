@@ -12,9 +12,13 @@ import 'package:mo3tv/features/account/data/datasources/account_remote_datasourc
 import 'package:mo3tv/features/account/data/repositories/account_repository_impl.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
 import 'package:mo3tv/features/account/domain/usecases/create_account_list_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_account_custom_lists_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_account_data_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_details_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_lists_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/save_account_data_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_custom_lists_cubit/account_custom_lists_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/create_list_cubit/create_list_cubit.dart';
 import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart';
@@ -122,7 +126,7 @@ Future<void> init() async {
 login(){
   if (!GetIt.I.isRegistered<GetTokenUsecase>())
     {
-      sl.registerFactory<LoginCubit>(() =>LoginCubit(sl(),sl(),sl()));
+      sl.registerFactory<LoginCubit>(() =>LoginCubit(sl(),sl()));
       sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl()),);
       sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
       sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
@@ -154,11 +158,15 @@ Future external()async{
       ));
 }
 account(){
-  sl.registerFactory(() =>AccountCubit(sl()));
+  sl.registerFactory(() =>AccountCubit(sl(),sl(),sl()));
   sl.registerFactory(() =>AccountListsCubit(sl()));
   sl.registerFactory(() =>CreateListCubit(sl()));
+  sl.registerFactory(() =>AccountCustomListsCubit(sl()));
   sl.registerLazySingleton<GetAccountListsUsecase>(() => GetAccountListsUsecase(sl()));
+  sl.registerLazySingleton<SaveAccountDataUsecase>(() => SaveAccountDataUsecase(sl()));
+  sl.registerLazySingleton<GetAccountDataUsecase>(() => GetAccountDataUsecase(sl()));
   sl.registerLazySingleton<CreateAccountListUsecase>(() => CreateAccountListUsecase(sl()));
+  sl.registerLazySingleton<GetAccountCustomListsUseCase>(() => GetAccountCustomListsUseCase(sl()));
   sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
   sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl(),sl()));
   sl.registerLazySingleton<AccountRemoteDataSource>(() => AccountRemoteDataSourceImpl(sl()));

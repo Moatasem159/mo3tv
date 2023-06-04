@@ -5,6 +5,7 @@ import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/main_button.dart';
 import 'package:mo3tv/core/widgets/toast/custom_toast.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_custom_lists_cubit/account_custom_lists_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/create_list_cubit/create_list_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/create_list_cubit/create_list_state.dart';
 class CreateButton extends StatelessWidget {
@@ -23,6 +24,8 @@ class CreateButton extends StatelessWidget {
         listener: (context, state) {
           if (state is CreateListSuccessState) {
             GoRouter.of(context).pop();
+            AccountCustomListsCubit.get(context)
+                .getAccountCustomLists(sessionId: AppStrings.sessionId, accountId: AppStrings.accountId);
             CustomToast.showToast(context, msg: AppStrings.createListDialog);
           }
         },

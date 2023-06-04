@@ -35,6 +35,7 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   @override
   Future<List<AccountCustomMediaListModel>> getAccountCustomLists({required String sessionId, required String accountId})async{
     final res = await _apiConsumer.get(EndPoints.getAccountCustomListsPath(sessionId, accountId));
-    return List.from(res as List).map((e) =>AccountCustomMediaListModel.fromJson(e)).toList();
+    return res["results"]==null?[]:List<AccountCustomMediaListModel>.from((res["results"] as List)
+        .map((e) =>AccountCustomMediaListModel.fromJson(e)));
   }
 }

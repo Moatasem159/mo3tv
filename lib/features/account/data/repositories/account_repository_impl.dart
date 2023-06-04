@@ -92,4 +92,12 @@ class AccountRepositoryImpl implements AccountRepository{
       return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
+  @override
+  Future<void> saveAccountData({required String sessionId, required String accountId}) async{
+     await _accountLocalDataSource.saveAccountData(sessionId: sessionId, accountId: accountId);
+  }
+  @override
+  Future<void> getAccountData()async {
+   await _accountLocalDataSource.getAccountData();
+  }
 }

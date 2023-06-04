@@ -22,6 +22,7 @@ class AccountAppBar extends StatelessWidget {
             }
             if(state is GetAccountsDetailsSuccessState)
               {
+                AppStrings.accountId=state.account.id.toString();
                 return  AccountAppBarWidget(account: state.account);
               }
             return  Container();
