@@ -75,5 +75,10 @@
   "description": "وصف القائمة",
   "list_title": "اسم القائمة",
   "create_list_dialog": "تم انشاء القائمة بنجاح",
-  "name_error": "يجب كتابة اسم القائمة"
+  "name_error": "يجب كتابة اسم القائمة",
+  "delete_list": "إزالة القائمة",
+  "clear_list": "مسح عناصر القائمة",
+  "items": "اغراض",
+  "one_item": "غرض",
+  "two_items": "غرضان"
 }

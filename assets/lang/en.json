@@ -75,6 +75,11 @@
   "description": "Description",
   "list_title": "List title",
   "create_list_dialog": "List created successfully",
-  "name_error": "Name must be provided"
+  "name_error": "Name must be provided",
+  "delete_list": "Delete list",
+  "clear_list": "Clear list",
+  "items": "Items",
+  "one_item": "Item",
+  "two_items": "Items"
 
 }

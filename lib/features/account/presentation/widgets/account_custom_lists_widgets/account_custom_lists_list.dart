@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/account/domain/entities/account_custom_media_list.dart';
-import 'package:mo3tv/features/account/presentation/widgets/account_custom_lists_widgets/account_custom_list_item.dart';
+import 'package:mo3tv/features/account/presentation/widgets/account_custom_lists_widgets/account_custom_list_item_widget.dart';
 class AccountCustomListsList extends StatelessWidget {
   final List<AccountCustomMediaList> items;
   const AccountCustomListsList({super.key, required this.items});
@@ -14,6 +14,6 @@ class AccountCustomListsList extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: items.length,
-      itemBuilder: (context, index) =>AccountCustomListItem(item: items[index]));
+      itemBuilder: (context, index) =>AccountCustomListItemWidget(item: items[index]));
   }
 }

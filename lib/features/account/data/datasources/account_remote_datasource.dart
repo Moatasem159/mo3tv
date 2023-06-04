@@ -10,6 +10,7 @@ abstract class AccountRemoteDataSource {
   Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page,required String lang});
   Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body});
   Future<List<AccountCustomMediaListModel>> getAccountCustomLists({required String sessionId,required String accountId});
+  Future<AccountCustomMediaListModel> getAccountCustomList({required String sessionId,required String listId});
 }
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
@@ -38,4 +39,8 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
     return res["results"]==null?[]:List<AccountCustomMediaListModel>.from((res["results"] as List)
         .map((e) =>AccountCustomMediaListModel.fromJson(e)));
   }
+
+  @override
+  Future<AccountCustomMediaListModel> getAccountCustomList({required String sessionId, required String listId}) async =>
+      AccountCustomMediaListModel.fromJson(await _apiConsumer.get(EndPoints.getAccountCustomListPath(sessionId,listId)));
 }

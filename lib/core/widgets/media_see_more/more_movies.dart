@@ -22,7 +22,7 @@ class MoreMovies extends StatelessWidget {
       controller: controller,
       slivers: [
         CustomAppBar(
-          title: title,
+          title: title.tr(context)!,
           onPressed: () {
             GoRouter.of(context).pop();
           },

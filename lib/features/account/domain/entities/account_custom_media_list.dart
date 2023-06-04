@@ -1,19 +1,20 @@
 import 'package:equatable/equatable.dart';
+import 'package:mo3tv/features/account/domain/entities/account_custom_list_item.dart';
 class AccountCustomMediaList extends Equatable {
   final String? description;
-  final int? id;
+  final String? id;
   final int? itemCount;
   final String? name;
   final String? posterPath;
-  final List? list;
+  final List<AccountCustomListItem>? items;
   const AccountCustomMediaList(
       {this.description,
-      this.list,
+      this.items,
       this.posterPath,
       this.id,
       this.itemCount,
       this.name});
   @override
   List<Object?> get props => [
-    description, list, id, itemCount, name,posterPath];
+    description, items, id, itemCount, name,posterPath];
 }

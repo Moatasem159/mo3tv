@@ -48,7 +48,9 @@ class EndPoints{
   static String accountMediaListPath(String sessionid,String mediaType,String listType,int page,String lang)=>
      "${baseUrl}account/{account_id}/$listType/$mediaType?api_key=$_apiKey&session_id=$sessionid&page=$page&language=$lang";
   static String createMediaListPath(String sessionid)=>"${baseUrl}list?api_key=$_apiKey&session_id=$sessionid";
-  static String getAccountCustomListsPath(String sessionid,String accountId)=> "${baseUrl}account/$accountId/lists?api_key=$_apiKey&session_id=$sessionid";
-
+  static String getAccountCustomListsPath(String sessionid,String accountId)=>
+      "${baseUrl}account/$accountId/lists?api_key=$_apiKey&session_id=$sessionid";
+  static String getAccountCustomListPath(String sessionid,String listId)=>
+      "${baseUrl}list/$listId?api_key=$_apiKey&session_id=$sessionid";
 
 }

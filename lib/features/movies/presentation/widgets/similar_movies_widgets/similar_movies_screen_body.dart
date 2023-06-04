@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
@@ -24,7 +25,7 @@ class SimilarMoviesScreenBody extends StatelessWidget {
         slivers: [
           CustomAppBar(
             onPressed: ()=>GoRouter.of(context).pop(),
-            title: AppStrings.recommendations),
+            title: AppStrings.recommendations.tr(context)!),
           SliverToBoxAdapter(child: 5.ph),
           SimilarMoviesList(recommendations: recommendations),
           SimilarMoviesButton(movieId: movieId),

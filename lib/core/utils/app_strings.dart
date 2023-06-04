@@ -85,4 +85,9 @@ class AppStrings {
   static const String createList="create_list";
   static const String createListDialog="create_list_dialog";
   static const String nameError="name_error";
+  static const String deleteList="delete_list";
+  static const String clearList="clear_list";
+  static const String items="items";
+  static const String oneItem="one_item";
+  static const String twoItems="two_items";
 }

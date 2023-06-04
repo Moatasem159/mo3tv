@@ -100,4 +100,20 @@ class AccountRepositoryImpl implements AccountRepository{
   Future<void> getAccountData()async {
    await _accountLocalDataSource.getAccountData();
   }
+
+  @override
+  Future<Either<Failure, AccountCustomMediaList>> getAccountCustomList({required String sessionId, required String listId})async {
+    if(await _networkInfo.isConnected)
+    {
+      try {
+        final result = await _accountDataSource.getAccountCustomList(sessionId: sessionId,listId: listId);
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
+      }
+    }
+    else{
+      return left(const ServerFailure(AppStrings.noInternetConnection));
+    }
+  }
 }
