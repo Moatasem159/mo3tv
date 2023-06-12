@@ -12,9 +12,9 @@ import 'package:mo3tv/app/injection_container.dart'as di;
 class DioConsumer implements ApiConsumer {
   final Dio _client;
   DioConsumer(this._client){
-    (_client.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+    HttpClient client=HttpClient();
+    (_client.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };
     _client.options
@@ -37,7 +37,7 @@ class DioConsumer implements ApiConsumer {
     try {
       final response = await _client.get(path, queryParameters: queryParameters);
       return jsonDecode(response.data.toString());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       HandlingErrors.handleDioError(error);
     }
   }
@@ -46,7 +46,7 @@ class DioConsumer implements ApiConsumer {
     try {
       final response = await _client.post(path, data: formDataIsEnabled ? FormData.fromMap(body!) : body);
       return jsonDecode(response.data.toString());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       HandlingErrors.handleDioError(error);
     }
   }
@@ -55,7 +55,7 @@ class DioConsumer implements ApiConsumer {
     try {
       final response = await _client.put(path,data: body);
       return jsonDecode(response.data.toString());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       HandlingErrors.handleDioError(error);
     }
   }
@@ -64,7 +64,7 @@ class DioConsumer implements ApiConsumer {
     try {
       final response = await _client.delete(path, data: body);
       return jsonDecode(response.data.toString());
-    } on DioError catch (error) {
+    } on DioException catch (error) {
      HandlingErrors.handleDioError(error);
     }
   }
