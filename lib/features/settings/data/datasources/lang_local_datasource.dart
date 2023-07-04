@@ -2,7 +2,7 @@ import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 abstract class LangLocalDataSource {
   Future<bool> changeLang({required String langCode});
-  Future<String?> getSavedLang();
+  Future<String> getSavedLang();
 }
 class LangLocaleDataSourceImpl implements LangLocalDataSource{
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
@@ -13,7 +13,7 @@ class LangLocaleDataSourceImpl implements LangLocalDataSource{
   }
 
   @override
-  Future<String?> getSavedLang() async=>
+  Future<String> getSavedLang() async=>
       _sharedPrefrencesConsumer.containsKey(key: AppStrings.locale)?
       _sharedPrefrencesConsumer.getData(key:AppStrings.locale):AppStrings.englishCode;
 }

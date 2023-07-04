@@ -11,7 +11,7 @@ class OverViewWidget extends StatelessWidget {
     return Column(
       children: [
         10.ph,
-        Text(overview,style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14NormalText():AppTextStyles.get18NormalText()),
+        Text(overview,style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14NormalText():AppTextStyles.get18BoldText()),
         5.ph,
       ],
     ).addSymmetricPadding(h: 10);

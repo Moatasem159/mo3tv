@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class SearchEmptyWidget extends StatelessWidget {
@@ -8,7 +9,7 @@ class SearchEmptyWidget extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Center(
          child: Text(
-           AppStrings.noResults,
+           AppStrings.noResults.tr(context)!,
            style: AppTextStyles.get18BoldText())),
     );
   }

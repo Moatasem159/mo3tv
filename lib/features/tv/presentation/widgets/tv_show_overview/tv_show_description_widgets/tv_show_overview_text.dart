@@ -10,7 +10,7 @@ class TvShowOverviewText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(overview,style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()),
+        Text(overview,style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14NormalText():AppTextStyles.get18BoldText()),
         5.ph,
       ],
     ).addSymmetricPadding(h: 10);

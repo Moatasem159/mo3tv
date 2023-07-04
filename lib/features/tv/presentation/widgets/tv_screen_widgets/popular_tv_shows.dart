@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -35,9 +34,7 @@ class PopularTvShow extends StatelessWidget {
         if(state is GetPopularTvShowsErrorState){
           return MediaErrorList(
             title: title,
-            onPressed:() {
-              PopularTvShowCubit.get(context).getPopularTvShowsData(lang: AppLocalizations.of(context)!.getLang());
-            }, );
+            onPressed:() => PopularTvShowCubit.get(context).getPopularTvShowsData());
         }
         return  Container();
       },);

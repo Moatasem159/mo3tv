@@ -14,10 +14,10 @@ void main()async{
   await di.init();
   Bloc.observer=AppBlocObserver();
   await di.sl<GetAccountDataUsecase>().call();
-  String ?lang =await di.sl<LangLocalDataSource>().getSavedLang();
+  AppStrings.appLang=await di.sl<LangLocalDataSource>().getSavedLang();
   if(AppStrings.sessionId==""){
     login();
   }
-  runApp(Mo3Tv(lang: lang??"en"));
+  runApp(const Mo3Tv());
   FlutterNativeSplash.remove();
 }

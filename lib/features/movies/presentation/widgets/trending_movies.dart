@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -37,11 +36,7 @@ class TrendingMovies extends StatelessWidget {
         if (state is GetTrendingMoviesErrorState) {
           return MediaErrorList(
             title: title,
-            onPressed: () {
-              BlocProvider.of<TrendingMovieCubit>(context)
-                  .getTrendingMoviesData(lang: AppLocalizations.of(context)!.getLang());
-            },
-          );
+            onPressed: () => TrendingMovieCubit.get(context).getTrendingMoviesData());
         }
         return Container();
       },

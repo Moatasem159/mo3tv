@@ -2,6 +2,7 @@ class AppStrings {
   static const String fontFamily="Montserrat";
   static String sessionId='';
   static String accountId='';
+  static String appLang='';
   static const String locale="locale";
   static const String settings="settings_title";
   static const String arabicLang="arabic_language";

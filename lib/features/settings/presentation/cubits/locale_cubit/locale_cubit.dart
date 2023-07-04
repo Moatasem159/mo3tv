@@ -10,19 +10,18 @@ class LocaleCubit extends Cubit<LocaleStates> {
       : super(const ChangeLocaleState(Locale(AppStrings.englishCode)));
   final GetSavedLangUseCase _getSavedLangUseCase;
   final ChangeLangUseCase _changeLangUseCase;
-  String currentLangCode=AppStrings.englishCode;
   Future <void> getSavedLang() async{
     final response= await _getSavedLangUseCase.call();
-    response.fold((failure) => debugPrint("cache Failure"), (value){
-      currentLangCode=value;
-      emit(ChangeLocaleState(Locale(currentLangCode)));
+    response.fold((failure) => debugPrint(failure.message),(value){
+      AppStrings.appLang=value;
+      emit(ChangeLocaleState(Locale(value)));
     });
   }
   Future <void> _changeLang(String langCode) async{
     final response= await _changeLangUseCase.call(lang: langCode);
-    response.fold((failure) => debugPrint("cache Failure"),(value){
-      currentLangCode=langCode;
-      emit(ChangeLocaleState(Locale(currentLangCode)));
+    response.fold((failure) => debugPrint(failure.message),(value){
+      AppStrings.appLang=langCode;
+      emit(ChangeLocaleState(Locale(langCode)));
       Restart.restartApp();
     });
   }
