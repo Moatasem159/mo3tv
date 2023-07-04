@@ -1,5 +1,0 @@
-abstract class AccountCustomListStates {}
-class AccountCustomListInitialState extends AccountCustomListStates {}
-class GetAccountCustomListLoadingState extends AccountCustomListStates {}
-class GetAccountCustomListSuccessState extends AccountCustomListStates {}
-class GetAccountCustomListErrorState extends AccountCustomListStates {}

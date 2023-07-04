@@ -7,10 +7,7 @@ import 'package:mo3tv/config/routes/animations_route/slide_from_right_to_left.da
 import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
 import 'package:mo3tv/core/widgets/media_web_home_page/media_web_page_screen.dart';
-import 'package:mo3tv/features/account/domain/entities/account_custom_media_list.dart';
-import 'package:mo3tv/features/account/presentation/screens/account_custom_list_screen.dart';
 import 'package:mo3tv/features/account/presentation/screens/account_media_list_screen.dart';
-import 'package:mo3tv/features/account/presentation/screens/create_list_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/image_screen.dart';
 import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
 import 'package:mo3tv/features/login/domain/entities/token.dart';
@@ -41,8 +38,6 @@ abstract class Routes {
   static const String settingsRoute = "/settingsRoute";
   static const String languageRoute = "/languageRoute";
   static const String mediaWebPageRoute = "/mediaWebPageRoute";
-  static const String createListRoute = "/createListRoute";
-  static const String accountCustomListRoute = "/accountCustomListRoute";
 }
 abstract class AppRoute{
   static final router=GoRouter(
@@ -143,18 +138,6 @@ abstract class AppRoute{
         path: Routes.languageRoute,
         builder: (context, state) => const LanguageScreen(),
       ),
-      GoRoute(
-          name:  Routes.createListRoute,
-          path: Routes.createListRoute,
-          pageBuilder: (context, state) =>
-          AppLocalizations.of(context)!.isEnLocale?
-          SlideFromRightToLeft(child: const CreateListScreen()):
-          SlideFromLeftToRight(child: const CreateListScreen())),
-      GoRoute(
-          name: Routes.accountCustomListRoute,
-          path: Routes.accountCustomListRoute,
-          pageBuilder: (context, state) =>SlideFromDownToUp(
-              child: AccountCustomListScreen(listInfo: state.extra as AccountCustomMediaList))),
     ],
   );
 }

@@ -4,7 +4,6 @@ import 'package:mo3tv/config/lang/app_localizations_setup.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/config/themes/app_theme.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_custom_lists_cubit/account_custom_lists_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
@@ -38,7 +37,6 @@ class Mo3Tv extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<LoginCubit>()),
         BlocProvider(create: (context) => di.sl<LogOutCubit>()),
         BlocProvider( create: (context) => di.sl<AccountCubit>()),
-        BlocProvider( create: (context) => di.sl<AccountCustomListsCubit>()),
       ],
       child: BlocBuilder<LocaleCubit, LocaleStates>(
         buildWhen: (previous, current) {

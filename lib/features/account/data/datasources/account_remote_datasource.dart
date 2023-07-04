@@ -1,17 +1,11 @@
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/account/data/models/account_custom_media_list_model.dart';
 import 'package:mo3tv/features/account/data/models/account_list_model.dart';
 import 'package:mo3tv/features/account/data/models/account_model.dart';
 abstract class AccountRemoteDataSource {
   Future<AccountModel> getAccountDetails({required String sessionId});
   Future<AccountListModel> getAccountList({required String listType,required String mediaType,required int page,required String lang});
-  Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body});
-  Future<List<AccountCustomMediaListModel>> getAccountCustomLists({required String sessionId,required String accountId});
-  Future<AccountCustomMediaListModel> getAccountCustomList({required String sessionId,required String listId});
-  Future<MessageModel> clearAccountCustomList({required String sessionId,required String listId});
 }
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
@@ -30,22 +24,4 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
       return AccountListModel.tvShowListFromJson(res);
     }
   }
-  @override
-  Future<MessageModel> createCustomList({required String sessionId,required Map<String,dynamic> body}) async=>
-  MessageModel.fromJson(await _apiConsumer.post(EndPoints.createMediaListPath(sessionId),body: body));
-
-  @override
-  Future<List<AccountCustomMediaListModel>> getAccountCustomLists({required String sessionId, required String accountId})async{
-    final res = await _apiConsumer.get(EndPoints.getAccountCustomListsPath(sessionId, accountId));
-    return res["results"]==null?[]:List<AccountCustomMediaListModel>.from((res["results"] as List)
-        .map((e) =>AccountCustomMediaListModel.fromJson(e)));
-  }
-
-  @override
-  Future<AccountCustomMediaListModel> getAccountCustomList({required String sessionId, required String listId}) async =>
-      AccountCustomMediaListModel.fromJson(await _apiConsumer.get(EndPoints.getAccountCustomListPath(sessionId,listId)));
-
-  @override
-  Future<MessageModel> clearAccountCustomList({required String sessionId, required String listId})async =>
-      MessageModel.fromJson(await _apiConsumer.post(EndPoints.clearAccountCustomListPath(sessionId,listId)));
 }

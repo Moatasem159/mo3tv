@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_app_bar_widgets/account_appbar.dart';
-import 'package:mo3tv/features/account/presentation/widgets/account_custom_lists_widgets/account_cutsom_lists.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_movies_lists.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_tv_shows_lists.dart';
 class AccountScreen extends StatelessWidget {
@@ -15,7 +14,6 @@ class AccountScreen extends StatelessWidget {
           AccountAppBar(),
           AccountMovieLists(),
           AccountTvShowLists(),
-          AccountCustomLists()
         ],
       ),
     );
