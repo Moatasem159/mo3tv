@@ -157,10 +157,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: a9d76e72985d7087eb7c5e7903224ae52b337131518d127c554b9405936752b8
+      sha256: "3866d67f93523161b643187af65f5ac08bc991a5bcdaf41a2d587fe4ccb49993"
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.1+1"
+    version: "5.3.0"
   equatable:
     dependency: "direct main"
     description:
@@ -393,10 +393,10 @@ packages:
     dependency: "direct main"
     description:
       name: lottie
-      sha256: f461105d3a35887b27089abf9c292334478dd292f7b47ecdccb6ae5c37a22c80
+      sha256: "0793a5866062e5cc8a8b24892fa94c3095953ea914a7fdf790f550dd7537fe60"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.5.0"
   matcher:
     dependency: transitive
     description:
