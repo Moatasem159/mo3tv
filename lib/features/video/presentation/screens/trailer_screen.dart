@@ -9,10 +9,10 @@ class TrailerScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor:Theme.of(context).appBarTheme.backgroundColor,
           title: Text(title),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: YoutubePlayerVideo(url: url, title: title),
       ),
     );

@@ -15,18 +15,18 @@ class AppTheme {
       brightness: Brightness.dark,
       backgroundColor: AppColors.darkBackgroundColor,
     ),
-    appBarTheme:AppBarTheme(
+    appBarTheme:const AppBarTheme(
       backgroundColor: AppColors.darkBackgroundColor,
-      systemOverlayStyle: const SystemUiOverlayStyle(
+      systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.black,
         statusBarIconBrightness: Brightness.light
       ),
-      iconTheme: const IconThemeData(
+      iconTheme: IconThemeData(
           color: Colors.white
       ),
       elevation: 0,
       titleSpacing: 0,
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
         fontFamily: AppStrings.fontFamily,
         fontSize: 14,
         overflow: TextOverflow.ellipsis
@@ -43,9 +43,9 @@ class AppTheme {
         backgroundColor: MaterialStateProperty.all(AppColors.primaryColor)
       )
     ),
-    snackBarTheme: SnackBarThemeData(
+    snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.darkBackgroundColor,
-      contentTextStyle: const TextStyle(
+      contentTextStyle: TextStyle(
         fontFamily: AppStrings.fontFamily,
       )
     ),
