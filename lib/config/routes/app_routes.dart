@@ -26,18 +26,18 @@ import 'package:mo3tv/features/video/presentation/screens/trailer_screen.dart';
 abstract class Routes {
   static const String initialRoute= "/";
   static const String loginRoute= "/loginRoute";
-  static const String movieDetailsRoute= "/movieDetailsRoute";
-  static const String similarMoviesRoute= "/similarMoviesRoute";
-  static const String similarTvShowsRoute= "/similarTvShowsRoute";
-  static const String tvShowRoute= "/tvShowRoute";
+  static const String movieDetailsRoute= "/movieDetailsRoute/:listType";
+  static const String similarMoviesRoute= "/similarMoviesRoute/:movieId";
+  static const String similarTvShowsRoute= "/similarTvShowsRoute/:tvId";
+  static const String tvShowRoute= "/tvShowRoute/:listType";
   static const String seeMoreRoute= "/seeMoreRoute";
-  static const String seasonRoute= "/seasonRoute";
-  static const String accountMediaLists= "/accountMediaLists";
-  static const String imageScreenRoute= "/imageScreenRoute";
-  static const String trailerScreenRoute= "/trailerScreenRoute";
+  static const String seasonRoute= "/seasonRoute/:tvShowName/:tvShowId";
+  static const String accountMediaLists= "/accountMediaLists/:title/:listType/:mediaType";
+  static const String imageScreenRoute= "/imageScreenRoute/:image";
+  static const String trailerScreenRoute= "/trailerScreenRoute/:title/:url";
   static const String settingsRoute = "/settingsRoute";
   static const String languageRoute = "/languageRoute";
-  static const String mediaWebPageRoute = "/mediaWebPageRoute";
+  static const String mediaWebPageRoute = "/mediaWebPageRoute/:link";
 }
 abstract class AppRoute{
   static final router=GoRouter(
@@ -54,18 +54,18 @@ abstract class AppRoute{
         name: Routes.movieDetailsRoute,
         path: Routes.movieDetailsRoute,
         pageBuilder: (context, state) =>SlideFromDownToUp(child: MovieDetailsScreen(
-            listType: state.queryParameters["listType"]??'',
+            listType: state.pathParameters["listType"]!,
             movie: state.extra as Movie))),
       GoRoute(
         name: Routes.tvShowRoute,
         path: Routes.tvShowRoute,
        pageBuilder: (context, state) => SlideFromDownToUp(child: TvShowDetailsScreen(
-           listType: state.queryParameters["listType"]??'',
+           listType: state.pathParameters["listType"]??'',
            tvShow:  state.extra as TvShow))),
       GoRoute(
         name: Routes.mediaWebPageRoute,
         path: Routes.mediaWebPageRoute,
-        pageBuilder: (context, state) =>SlideFromDownToUp(child:MediaWebScreen(link: state.queryParameters["link"]!) ),
+        pageBuilder: (context, state) =>SlideFromDownToUp(child:MediaWebScreen(link: state.pathParameters["link"]!) ),
       ),
       GoRoute(
         name:  Routes.seeMoreRoute,
@@ -79,8 +79,8 @@ abstract class AppRoute{
         path: Routes.seasonRoute,
         builder: (context, state) =>  SeasonDetailsScreen(
             season:state.extra as TvShowSeason,
-            tvShowName:state.queryParameters["tvShowName"]!,
-            tvShowId:int.parse(state.queryParameters["tvShowId"]!))),
+            tvShowName:state.pathParameters["tvShowName"]!,
+            tvShowId:int.parse(state.pathParameters["tvShowId"]!))),
       GoRoute(
         name:  Routes.similarMoviesRoute,
         path: Routes.similarMoviesRoute,
@@ -88,10 +88,10 @@ abstract class AppRoute{
         AppLocalizations.of(context)!.isEnLocale?
             SlideFromRightToLeft(child: SimilarMoviesScreen(
             recommendations: state.extra as List<Movie>,
-            movieId:int.parse(state.queryParameters["movieId"]!))):
+            movieId:int.parse(state.pathParameters["movieId"]!))):
         SlideFromLeftToRight(child: SimilarMoviesScreen(
             recommendations: state.extra as List<Movie>,
-            movieId:int.parse(state.queryParameters["movieId"]!)))),
+            movieId:int.parse(state.pathParameters["movieId"]!)))),
       GoRoute(
         name:  Routes.similarTvShowsRoute,
         path: Routes.similarTvShowsRoute,
@@ -99,35 +99,35 @@ abstract class AppRoute{
         AppLocalizations.of(context)!.isEnLocale?
             SlideFromRightToLeft(child: SimilarTvShowsScreen(
             recommendations: state.extra as List<TvShow>,
-            tvId:int.parse(state.queryParameters["tvId"]!))):
+            tvId:int.parse(state.pathParameters["tvId"]!))):
         SlideFromLeftToRight(child: SimilarTvShowsScreen(
             recommendations: state.extra as List<TvShow>,
-            tvId:int.parse(state.queryParameters["tvId"]!)))),
+            tvId:int.parse(state.pathParameters["tvId"]!)))),
       GoRoute(
         name:  Routes.accountMediaLists,
         path: Routes.accountMediaLists,
         pageBuilder: (context, state) =>
         AppLocalizations.of(context)!.isEnLocale?
             SlideFromLeftToRight(child: AccountMediaListsScreen(
-          title: state.queryParameters["title"]!,
-          listType: state.queryParameters['listType']!,
-          mediaType: state.queryParameters["mediaType"]!,
+          title: state.pathParameters["title"]!,
+          listType: state.pathParameters['listType']!,
+          mediaType: state.pathParameters["mediaType"]!,
         )):
         SlideFromRightToLeft(child: AccountMediaListsScreen(
-          title: state.queryParameters["title"]!,
-          listType: state.queryParameters['listType']!,
-          mediaType: state.queryParameters["mediaType"]!,
+          title: state.pathParameters["title"]!,
+          listType: state.pathParameters['listType']!,
+          mediaType: state.pathParameters["mediaType"]!,
         ))),
       GoRoute(
         name:  Routes.imageScreenRoute,
         path: Routes.imageScreenRoute,
-        builder: (context, state) =>  ImageScreen(image: state.queryParameters["image"]!)),
+        builder: (context, state) =>  ImageScreen(image: state.pathParameters["image"]!)),
       GoRoute(
         name:  Routes.trailerScreenRoute,
         path: Routes.trailerScreenRoute,
         pageBuilder: (context, state) => ScaleFromCenter(child: TrailerScreen(
-            title:state.queryParameters["title"]!,
-            url:state.queryParameters["url"]!)),),
+            title:state.pathParameters["title"]!,
+            url:state.pathParameters["url"]!)),),
       GoRoute(
         name: Routes.settingsRoute,
         path: Routes.settingsRoute,

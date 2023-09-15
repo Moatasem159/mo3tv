@@ -33,7 +33,7 @@ class _PlayButtonWidgetState extends State<PlayButtonWidget> with SingleTickerPr
         child: GestureDetector(
           onTap: () {
             if(1 - widget.shrinkOffset / 130>0) {
-              GoRouter.of(context).pushNamed(Routes.trailerScreenRoute,queryParameters:
+              GoRouter.of(context).pushNamed(Routes.trailerScreenRoute,pathParameters:
             {
               "url":widget.url,
               "title":widget.name

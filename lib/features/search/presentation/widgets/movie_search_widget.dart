@@ -28,7 +28,7 @@ class MovieSearchWidget extends StatelessWidget {
           posterPath: movie.posterPath,
           backdropPath: movie.backdropPath,
         );
-        GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:m);
+        GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:m,pathParameters: {"listType":"?"});
       } ,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10,vertical:10),

@@ -12,7 +12,7 @@ class PlayingNowMovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra: movie),
+      onTap:()=>GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra: movie,pathParameters: {"listType":"?"}),
       child:CachedNetworkImage(
         imageUrl: EndPoints.backDropsUrl(movie.backdropPath!),
         imageBuilder: (context, imageProvider) =>MovieCard(movie: movie,image: imageProvider),

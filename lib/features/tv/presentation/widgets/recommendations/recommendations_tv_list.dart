@@ -34,7 +34,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
                         GoRouter.of(context).pushNamed(
                             Routes.similarTvShowsRoute,
                             extra: recommendationTvShows,
-                            queryParameters: {'tvId': tvId.toString()});
+                            pathParameters: {'tvId': tvId.toString()});
                       },
                       child:Row(
                         children: [

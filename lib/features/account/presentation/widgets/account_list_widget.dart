@@ -45,7 +45,7 @@ class _AccountListWidgetState extends State<AccountListWidget> {
         if(AppStrings.sessionId!='')
           {
             GoRouter.of(context).pushNamed(Routes.accountMediaLists,
-                queryParameters: {
+                pathParameters: {
                   "title":widget.title,
                   "mediaType":widget.mediaType,
                   "listType":widget.listType});

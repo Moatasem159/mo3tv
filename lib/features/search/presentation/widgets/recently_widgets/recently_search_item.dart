@@ -39,7 +39,7 @@ class RecentlySearchItem extends StatelessWidget {
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );
-          GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:m);
+          GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:m,pathParameters:{"listType":"?"});
         }
         else if(search.mediaType=="tv"){
           TvShow tv=TvShow(
@@ -49,7 +49,7 @@ class RecentlySearchItem extends StatelessWidget {
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );
-          GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tv);
+          GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tv,pathParameters: {"listType":"?"});
         }
       },
       child: Container(

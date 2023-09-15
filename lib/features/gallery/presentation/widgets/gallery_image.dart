@@ -11,7 +11,7 @@ class GalleryImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>GoRouter.of(context).pushNamed(Routes.imageScreenRoute,queryParameters:{"image":image.filePath}),
+      onTap:()=>GoRouter.of(context).pushNamed(Routes.imageScreenRoute,pathParameters:{"image":image.filePath!}),
       child: Hero(
         tag: image.filePath!,
         child: CachedNetworkImage(

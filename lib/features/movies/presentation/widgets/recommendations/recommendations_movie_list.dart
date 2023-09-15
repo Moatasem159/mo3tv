@@ -34,7 +34,7 @@ class RecommendationsMoviesList extends StatelessWidget {
                         GoRouter.of(context).pushNamed(
                             Routes.similarMoviesRoute,
                             extra: recommendationMovies,
-                            queryParameters: {'movieId': movieId.toString()});
+                            pathParameters: {'movieId': movieId.toString()});
                       },
                       child:  Row(
                         children: [

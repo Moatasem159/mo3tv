@@ -12,7 +12,7 @@ class PlayingNowTvShowCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow),
+      onTap:()=>GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tvShow,pathParameters: {"listType":"?"}),
       child: CachedNetworkImage(
         imageUrl: EndPoints.backDropsUrl(tvShow.backdropPath!),
         imageBuilder: (context, imageProvider)=>TvShowPlayingNowCardWidget(

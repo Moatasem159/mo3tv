@@ -28,7 +28,7 @@ class TvShowSearchWidget extends StatelessWidget {
           posterPath: tvShow.posterPath,
           backdropPath: tvShow.backdropPath,
         );
-        GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tv);
+        GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tv,pathParameters: {"listType":"?"});
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),

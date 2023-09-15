@@ -9,12 +9,12 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 class TvShowListItem extends StatelessWidget {
   final TvShow tvShow;
   final String listType;
-  const TvShowListItem({Key? key, required this.tvShow,this.listType=''}) : super(key: key);
+  const TvShowListItem({Key? key, required this.tvShow,this.listType='?'}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap:()=>GoRouter.of(context).pushNamed(Routes.tvShowRoute,
-          extra: tvShow,queryParameters: {"listType":listType}),
+          extra: tvShow,pathParameters: {"listType":listType}),
       child: CachedNetworkImage(
         imageUrl: EndPoints.posterUrl(tvShow.posterPath!),
         imageBuilder: (context, imageProvider) =>Container(

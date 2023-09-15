@@ -19,7 +19,7 @@ class SeasonPoster extends StatelessWidget {
         GoRouter.of(context).pushNamed(
           Routes.seasonRoute,
           extra: season,
-          queryParameters: {
+          pathParameters: {
             "tvShowName": tvShowName,
             "tvShowId":tvShowId.toString(),
           },

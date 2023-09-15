@@ -10,14 +10,11 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item/movie
 class MovieListItem extends StatelessWidget {
   final Movie movie;
   final String listType;
-  const MovieListItem({Key? key, required this.movie,this.listType=''}) : super(key: key);
+  const MovieListItem({Key? key, required this.movie,this.listType='?'}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=> GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:movie,queryParameters:
-      {
-        "listType":listType
-      }),
+      onTap: ()=> GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:movie,pathParameters:{"listType":listType}),
       child: CachedNetworkImage(
         imageUrl: EndPoints.posterUrl(movie.posterPath!),
         imageBuilder: (context, imageProvider)=>MovieImageBuilder(image: imageProvider),

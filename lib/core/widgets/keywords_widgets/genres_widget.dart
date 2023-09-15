@@ -59,7 +59,7 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
                           8.pw,
                           if(widget.link!="")
                           GestureDetector(
-                            onTap:() => GoRouter.of(context).pushNamed( Routes.mediaWebPageRoute,queryParameters:{
+                            onTap:() => GoRouter.of(context).pushNamed( Routes.mediaWebPageRoute,pathParameters:{
                               "link":widget.link}),
                               child: const Icon(Icons.link_rounded))
                         ],)
