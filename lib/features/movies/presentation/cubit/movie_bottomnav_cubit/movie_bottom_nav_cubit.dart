@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
@@ -12,15 +10,11 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   static MovieBottomNavCubit get(context)=>BlocProvider.of(context);
   int index=0;
   bool isGallery=false;
-  List<Widget> items=[
-    const NavigationDestination(icon: Icon(Icons.info_outline), label: "Overview",),
-    const NavigationDestination(icon: Icon(Icons.movie_outlined), label: "Movies",),
-    const NavigationDestination(icon: Icon(Icons.comment), label: "Reviews"),
-    NavigationDestination(icon: const Icon(FontAwesomeIcons.peopleGroup).addPadding(r: 7), label: "Cast"),
-    NavigationDestination(icon: const Icon(FontAwesomeIcons.solidImages).addPadding(r: 7), label: "Gallery"),
-  ];
-  void changeScreen(int index,context,int movieId){
+  late final int movieId;
+  ScrollController nestedController = ScrollController();
+  void changeScreen(int index,context){
     isGallery=false;
+    nestedController.animateTo(0, duration: const Duration(milliseconds: 500),curve: Curves.ease);
     if(index==2)
     {
       if(ReviewsCubit.get(context).isInitial()){
@@ -35,7 +29,7 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
       }
     }
     if(index==4)
-      {
+    {
         isGallery=true;
        if(GalleryCubit.get(context).isInitial())
          {
@@ -44,5 +38,10 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
       }
     this.index=index;
     emit(MovieBottomNavChangeState());
+  }
+  @override
+  Future<void> close() {
+    nestedController.dispose();
+    return super.close();
   }
 }

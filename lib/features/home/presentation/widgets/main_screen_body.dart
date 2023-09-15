@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_states.dart';
-import 'package:mo3tv/features/home/presentation/widgets/bottom_nav_bar.dart';
+import 'package:mo3tv/features/home/presentation/widgets/main_bottom_nav_bar.dart';
 class MainScreenBody extends StatelessWidget {
   const MainScreenBody({Key? key}) : super(key: key);
   @override
@@ -15,7 +15,7 @@ class MainScreenBody extends StatelessWidget {
           return WillPopScope(
             onWillPop: () async {
               if (cubit.index != 0){
-                cubit.changeIndex(0, context);
+                cubit.changeIndex(0);
                 return false;
               }
               else {
@@ -26,14 +26,7 @@ class MainScreenBody extends StatelessWidget {
               child: Scaffold(
                 backgroundColor: Theme.of(context).colorScheme.background,
                 body:cubit.screens[cubit.index],
-                bottomNavigationBar:CustomBottomNav(
-                  index: cubit.index,
-                  onTap1: () =>cubit.changeIndex(0, context),
-                  onTap2: () =>cubit.changeIndex(1, context),
-                  onTap3: () =>cubit.changeIndex(2, context),
-                  onTap4: () =>cubit.changeIndex(3, context),
-                  onTap5: () =>cubit.changeIndex(4, context)
-                ),
+                bottomNavigationBar:const MainBottomNavbar(),
               ),
             ),
           );

@@ -8,6 +8,7 @@ import 'package:mo3tv/features/settings/presentation/screens/settings_screen.dar
 import 'package:mo3tv/features/tv/presentation/screens/tv_screen.dart';
 class BottomNavCubit extends Cubit<BottomNavStates> {
   BottomNavCubit() : super(BottomNavInitialState());
+  static BottomNavCubit get(context)=>BlocProvider.of(context);
   int index=0;
   List<Widget> screens = [
     const MoviesScreen(),
@@ -16,7 +17,7 @@ class BottomNavCubit extends Cubit<BottomNavStates> {
     const AccountScreen(),
     const SettingsScreen()
   ];
-  changeIndex(int index, BuildContext context) {
+  changeIndex(int index) {
     emit(ChangeBottomNavLoadingState());
     this.index=index;
     emit(ChangeBottomNavSuccessState());

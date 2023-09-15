@@ -4,7 +4,7 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_list_item/movie
 class MoviesList extends StatelessWidget {
   final List<Movie> movieList;
   final String listType;
-  const MoviesList({super.key, required this.movieList,this.listType=''});
+  const MoviesList({super.key, required this.movieList,this.listType='?'});
   @override
   Widget build(BuildContext context) {
     return SliverGrid(

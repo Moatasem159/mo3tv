@@ -4,7 +4,7 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_list_item.dart';
 class TvList extends StatelessWidget {
   final List<TvShow>tvList;
   final String listType;
-  const TvList({super.key, required this.tvList,this.listType=''});
+  const TvList({super.key, required this.tvList,this.listType='?'});
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
