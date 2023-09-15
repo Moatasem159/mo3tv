@@ -13,17 +13,28 @@ class SearchLocalDataSourceImpl implements SearchLocalDataSource{
   Future<bool> saveSearch(SearchModel searchModel) async{
     final json=await _sharedPrefrencesConsumer.getData(key: "search");
     late List<SearchModel> searchList;
+    bool found=false;
     if(json!=null) {
       searchList=SearchModel.decode(json);
     }
     else{
       searchList=[];
     }
-    if(!searchList.contains(searchModel)) {
-      searchList.add(searchModel);
+    for (var element in searchList) {
+      if(element.id==searchModel.id){
+        found=true;
+        break;
+      }
     }
-    final res=await _sharedPrefrencesConsumer.saveData(key: "search", value: SearchModel.encode(searchList));
-    return res;
+    if(found)
+    {
+      searchList.remove(searchModel);
+      searchList.insert(0,searchModel);
+    }
+    else{
+      searchList.insert(0,searchModel);
+    }
+    return await _sharedPrefrencesConsumer.saveData(key: "search", value: SearchModel.encode(searchList));
   }
   @override
   Future<List<SearchModel>> getSearch() async{
