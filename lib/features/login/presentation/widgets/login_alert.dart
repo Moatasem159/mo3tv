@@ -7,7 +7,7 @@ class LoginAlert extends StatelessWidget {
   const LoginAlert({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return AlertDialog.adaptive(
       content: Text(AppStrings.youMustLoginFirst.tr(context)!,style: AppTextStyles.get14NormalText()),
       actions: [
         TextButton(
