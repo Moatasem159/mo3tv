@@ -122,39 +122,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                         ),
                       ),
                       bottomNavigationBar: const MovieBottomNavbar(),
-                      // MediaBottomNav(
-                      //   index: cubit.index,
-                      //   onTap1: () {
-                      //     nestedController.animateTo(0,
-                      //         duration: const Duration(milliseconds: 500),
-                      //         curve: Curves.ease);
-                      //     cubit.changeScreen(0, context, widget.movie.id!);
-                      //   },
-                      //   onTap2: () {
-                      //     nestedController.animateTo(0,
-                      //         duration: const Duration(milliseconds: 500),
-                      //         curve: Curves.ease);
-                      //     cubit.changeScreen(1, context, widget.movie.id!);
-                      //   },
-                      //   onTap3: () {
-                      //     nestedController.animateTo(0,
-                      //         duration: const Duration(milliseconds: 500),
-                      //         curve: Curves.ease);
-                      //     cubit.changeScreen(2, context, widget.movie.id!);
-                      //   },
-                      //   onTap4: () {
-                      //     nestedController.animateTo(0,
-                      //         duration: const Duration(milliseconds: 500),
-                      //         curve: Curves.ease);
-                      //     cubit.changeScreen(3, context, widget.movie.id!);
-                      //   },
-                      //   onTap5: () {
-                      //     nestedController.animateTo(0,
-                      //         duration: const Duration(milliseconds: 500),
-                      //         curve: Curves.ease);
-                      //     cubit.changeScreen(4, context, widget.movie.id!);
-                      //   },
-                      // ),
                     ),
                   ),
                 ),
