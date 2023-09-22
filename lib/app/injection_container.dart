@@ -21,12 +21,10 @@ import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart
 import 'package:mo3tv/features/credits/data/repositories/credits_repository_impl.dart';
 import 'package:mo3tv/features/credits/domain/repositories/credits_repository.dart';
 import 'package:mo3tv/features/credits/domain/usecases/get_media_credits_usecase.dart';
-import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/data/datasources/gallery_datasource.dart';
 import 'package:mo3tv/features/gallery/data/repositories/gallery_repository_impl.dart';
 import 'package:mo3tv/features/gallery/domain/repositories/gallery_repository.dart';
 import 'package:mo3tv/features/gallery/domain/usecases/get_media_gallery_usecase.dart';
-import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
 import 'package:mo3tv/features/login/data/datasources/login_datasource.dart';
 import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
 import 'package:mo3tv/features/logout/data/repositories/log_out_repository_impl.dart';
@@ -60,7 +58,6 @@ import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart
 import 'package:mo3tv/features/reviews/data/repositories/reviews_repository_impl.dart';
 import 'package:mo3tv/features/reviews/domain/repositories/reviews_repository.dart';
 import 'package:mo3tv/features/reviews/domain/usecases/get_media_reviews_usecase.dart';
-import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 import 'package:mo3tv/features/search/data/datasources/search_local_data_source.dart';
 import 'package:mo3tv/features/search/data/datasources/search_remote_datasource.dart';
 import 'package:mo3tv/features/search/data/repositories/search_repository_impl.dart';
@@ -94,13 +91,10 @@ import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/recommendations_tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/season_cubit/season_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/similar_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -173,7 +167,6 @@ search(){
   sl.registerLazySingleton<SearchLocalDataSource>(() => SearchLocalDataSourceImpl(sl()));
 }
 gallery(){
-  sl.registerFactory(() =>GalleryCubit(sl()));
   sl.registerLazySingleton<GetMediaGalleryUsecase>(() => GetMediaGalleryUsecase(sl()));
   sl.registerLazySingleton<GalleryRepository>(() => GalleryRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<GalleryDataSource>(() => GalleryDataSourceImpl(sl()));
@@ -203,10 +196,7 @@ movie(){
 }
 tv(){
   ///cubits
-  sl.registerFactory<TvCubit>(() => TvCubit(sl()));
-  sl.registerFactory<TvActionsBloc>(() => TvActionsBloc(sl(),sl(),sl()));
   sl.registerFactory<SeasonCubit>(() => SeasonCubit(sl()));
-  sl.registerFactory<RecommendationsTvCubit>(() => RecommendationsTvCubit(sl()));
   sl.registerFactory<SimilarTvShowCubit>(() => SimilarTvShowCubit(sl()));
   sl.registerFactory<PlayingNowTvShowCubit>(()=>PlayingNowTvShowCubit(sl()));
   sl.registerFactory<TrendingTvShowCubit>(()=>TrendingTvShowCubit(sl()));
@@ -231,13 +221,11 @@ tv(){
 }
 
 reviews(){
-  sl.registerFactory(() =>ReviewsCubit(sl()));
   sl.registerLazySingleton<GetMediaReviewsUsecase>(() => GetMediaReviewsUsecase(sl()));
   sl.registerLazySingleton<ReviewsRepository>(() => ReviewsRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<ReviewsDataSource>(() => ReviewsDataSourceImpl(sl()));
 }
 credits(){
-  sl.registerFactory(() =>CreditsCubit(sl()));
   sl.registerLazySingleton<GetMediaCreditsUsecase>(() => GetMediaCreditsUsecase(sl()));
   sl.registerLazySingleton<CreditsRepository>(() => CreditsRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<CreditsDataSource>(() => CreditsDataSourceImpl(sl()));

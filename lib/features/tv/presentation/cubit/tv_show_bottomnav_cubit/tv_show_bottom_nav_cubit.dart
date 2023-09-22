@@ -2,30 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
+import 'package:mo3tv/features/credits/presentation/screens/media_credits_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/screens/media_gallery_screen.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
+import 'package:mo3tv/features/reviews/presentation/screens/media_reviews.dart';
+import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_overview.dart';
 class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
-  TvShowBottomNavCubit() : super(TvShowBottomNavInitialState());
+  TvShowBottomNavCubit() : super(TvShowBottomNavInitialState()){
+    index=0;
+    isGallery=false;
+    nestedController=ScrollController();
+  }
   static TvShowBottomNavCubit get(context)=>BlocProvider.of(context);
-  int index=0;
-  bool isGallery=false;
-  late final int tvId;
-  ScrollController nestedController = ScrollController();
+  late int index;
+  late bool isGallery;
+  late final TvShow tvShow;
+  late final String listType;
+  late ScrollController nestedController;
+  late final List<Widget> screens;
+  initScreens(){
+    screens = [
+      TvShowOverview(tvShow: tvShow, listType: listType),
+      RecommendationsTvShows(tvId: tvShow.id!),
+      const MediaReviews(),
+      const MediaCredits(),
+      const MediaGalleryScreen(),
+    ];
+  }
   void changeScreen(int index,context){
     isGallery=false;
     nestedController.animateTo(0,duration: const Duration(milliseconds: 500),curve: Curves.ease);
     if(index==2)
     {
       if(ReviewsCubit.get(context).isInitial()){
-        ReviewsCubit.get(context).getMovieReviews(mediaId: tvId, mediaType: AppStrings.tv);
+        ReviewsCubit.get(context).getMovieReviews(mediaId: tvShow.id!, mediaType: AppStrings.tv);
       }
     }
     if(index==3)
     {
       if(CreditsCubit.get(context).isInitial())
       {
-        CreditsCubit.get(context).getMovieCredits(mediaId:tvId,mediaType:AppStrings.tv);
+        CreditsCubit.get(context).getMovieCredits(mediaId:tvShow.id!,mediaType:AppStrings.tv);
       }
     }
     if(index==4)
@@ -33,7 +54,7 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
         isGallery=true;
         if(GalleryCubit.get(context).isInitial())
         {
-          GalleryCubit.get(context).getMediaGallery(mediaId:tvId,mediaType:AppStrings.tv);
+          GalleryCubit.get(context).getMediaGallery(mediaId:tvShow.id!,mediaType:AppStrings.tv);
         }
       }
     this.index=index;

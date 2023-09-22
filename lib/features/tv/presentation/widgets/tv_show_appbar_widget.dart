@@ -8,8 +8,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_play_button.dart';
 class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
   final TvShow tvShow;
-  final GestureTapCallback onTap;
-  TvShowDetailsAppBar(this.tvShow,{required this.onTap});
+  TvShowDetailsAppBar(this.tvShow);
   final double maxSize = 200;
   final double minSize = 70;
   @override
@@ -36,7 +35,14 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
     final radius = 15 * p;
     final imageMargin = (minImageMargin * (p));
     return GestureDetector(
-      onTap: onTap,
+      onTap: (){
+        TvShowBottomNavCubit.get(context)
+            .nestedController
+            .animateTo(0,
+            duration:
+            const Duration(milliseconds: 500),
+            curve: Curves.ease);
+      },
       child: Container(
         color: Colors.black,
         child: Stack(

@@ -31,9 +31,9 @@ class MovieDetailsScreen extends StatelessWidget {
         BlocProvider(create: (context) => GalleryNavigatorCubit()),
         BlocProvider(create: (context) => MovieActionsBloc(di.sl(), di.sl(), di.sl())),
         BlocProvider(create: (context) => RecommendationsMovieCubit(di.sl())),
-        BlocProvider(create: (context) => di.sl<GalleryCubit>()),
-        BlocProvider(create: (context) => di.sl<ReviewsCubit>()),
-        BlocProvider(create: (context) => di.sl<CreditsCubit>()),
+        BlocProvider(create: (context) => GalleryCubit(di.sl())),
+        BlocProvider(create: (context) => ReviewsCubit(di.sl())),
+        BlocProvider(create: (context) => CreditsCubit(di.sl())),
       ],
       child: Builder(
         builder: (context) {
@@ -66,19 +66,9 @@ class MovieDetailsScreen extends StatelessWidget {
                           return [
                             SliverOverlapAbsorber(
                                 handle: appBar,
-                                sliver: SliverPersistentHeader(
-                                    delegate: MovieDetailsAppBar(movie),
-                                    pinned: true)),
+                                sliver: SliverPersistentHeader(pinned: true,delegate: MovieDetailsAppBar(movie))),
                             if (cubit.isGallery)
-                              SliverOverlapAbsorber(
-                                handle: disconnectBar,
-                                sliver: GalleryTabBar(
-                                  onTap: (value) {
-                                    GalleryNavigatorCubit.get(context).gallery(
-                                        value);
-                                  },
-                                ),
-                              ),
+                              SliverOverlapAbsorber(handle: disconnectBar, sliver: const GalleryTabBar()),
                           ];
                         },
                         body: CustomScrollView(
