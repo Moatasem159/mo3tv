@@ -8,8 +8,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/m
 import 'package:mo3tv/features/movies/presentation/widgets/movie_play_button.dart';
 class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
   final Movie movie;
-  final GestureTapCallback onTap;
-  MovieDetailsAppBar(this.movie, {required this.onTap});
+  MovieDetailsAppBar(this.movie);
   final double maxSize = 200;
   final double minSize = 70;
   @override
@@ -35,7 +34,12 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
     final textTop = maxTitleMargin + (1 - textTopMovement * p);
     final textLeft = maxMargin + (textLeftMovement * p);
     return GestureDetector(
-      onTap: onTap,
+      onTap: (){
+        MovieBottomNavCubit.get(context).nestedController.animateTo(0,
+            duration:
+            const Duration(milliseconds: 500),
+            curve: Curves.ease);
+      },
       child: Container(
         color: Colors.black,
         child: Stack(

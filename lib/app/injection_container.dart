@@ -27,7 +27,6 @@ import 'package:mo3tv/features/gallery/data/repositories/gallery_repository_impl
 import 'package:mo3tv/features/gallery/domain/repositories/gallery_repository.dart';
 import 'package:mo3tv/features/gallery/domain/usecases/get_media_gallery_usecase.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
-import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/login/data/datasources/login_datasource.dart';
 import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
 import 'package:mo3tv/features/logout/data/repositories/log_out_repository_impl.dart';
@@ -52,11 +51,8 @@ import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecas
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/top_rated_movies_cubit/top_rated_movies_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/trending_movie_cubit.dart';
@@ -178,17 +174,13 @@ search(){
 }
 gallery(){
   sl.registerFactory(() =>GalleryCubit(sl()));
-  sl.registerFactory(() =>GalleryNavigatorCubit());
   sl.registerLazySingleton<GetMediaGalleryUsecase>(() => GetMediaGalleryUsecase(sl()));
   sl.registerLazySingleton<GalleryRepository>(() => GalleryRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<GalleryDataSource>(() => GalleryDataSourceImpl(sl()));
 }
 movie(){
   ///cubits
-  sl.registerFactory<MovieCubit>(() => MovieCubit(sl()));
-  sl.registerFactory<MovieActionsBloc>(() => MovieActionsBloc(sl(),sl(),sl()));
   sl.registerFactory<PlayingNowMovieCubit>(()=>PlayingNowMovieCubit(sl()));
-  sl.registerFactory<RecommendationsMovieCubit>(()=>RecommendationsMovieCubit(sl()));
   sl.registerFactory<SimilarMovieCubit>(()=>SimilarMovieCubit(sl()));
   sl.registerFactory<TrendingMovieCubit>(()=>TrendingMovieCubit(sl()));
   sl.registerFactory<PopularMovieCubit>(()=>PopularMovieCubit(sl()));

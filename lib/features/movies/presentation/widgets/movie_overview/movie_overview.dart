@@ -16,23 +16,23 @@ class MovieOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieCubit, MovieStates>(
-      builder: (context, state) {
-        if (state is GetMovieDetailsLoadingState){
-          return SliverToBoxAdapter(
-              child: Center(child:
-              Lottie.asset(AppAssets.movieLoading,height: 80)));
-        }
-        if(state is GetMovieDetailsSuccessState){
-          MovieActionsBloc.get(context).initialRate= state.movie.movieAccountDetails!.ratedValue??0;
-          MovieActionsBloc.get(context).movie=state.movie;
-          return MovieOverViewSuccessBody(listType: listType,movie: state.movie);
-        }
-        if(state is GetMovieDetailsErrorState) {
-            return SliverToBoxAdapter(child: ErrorButton(onTap: () =>
-                MovieCubit.get(context).getMovieDetailsData(movieId: movie.id!,lang: AppLocalizations.of(context)!.getLang())));
+        builder: (context, state) {
+          if (state is GetMovieDetailsLoadingState){
+            return SliverToBoxAdapter(
+                child: Center(child:
+                Lottie.asset(AppAssets.movieLoading,height: 80)));
           }
-         return const SliverToBoxAdapter();
-      },
-    );
+          if(state is GetMovieDetailsSuccessState){
+            MovieActionsBloc.get(context).initialRate= state.movie.movieAccountDetails!.ratedValue??0;
+            MovieActionsBloc.get(context).movie=state.movie;
+            return MovieOverViewSuccessBody(listType: listType,movie: state.movie);
+          }
+          if(state is GetMovieDetailsErrorState) {
+              return SliverToBoxAdapter(child: ErrorButton(onTap: () =>
+                  MovieCubit.get(context).getMovieDetailsData(movieId: movie.id!,lang: AppLocalizations.of(context)!.getLang())));
+            }
+           return const SliverToBoxAdapter();
+        },
+      );
   }
 }
