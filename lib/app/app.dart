@@ -24,19 +24,19 @@ class Mo3Tv extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => di.sl<LocaleCubit>()..getSavedLang()),
-        BlocProvider(create: (context) => di.sl<PlayingNowMovieCubit>()..getNowPlayingMoviesData()),
-        BlocProvider(create: (context) => di.sl<PlayingNowTvShowCubit>()..getNowPlayingTvShowsData()),
-        BlocProvider(create: (context) => di.sl<PopularMovieCubit>()..getPopularMoviesData()),
-        BlocProvider(create: (context) => di.sl<PopularTvShowCubit>()..getPopularTvShowsData()),
-        BlocProvider(create: (context) => di.sl<TrendingMovieCubit>()..getTrendingMoviesData()),
-        BlocProvider(create: (context) => di.sl<TrendingTvShowCubit>()..getTrendingTvShowsData()),
-        BlocProvider(create: (context) => di.sl<TopRatedMoviesCubit>()..getTopRatedMoviesData()),
-        BlocProvider(create: (context) => di.sl<TopRatedTvShowsCubit>()..getTopRatedTvShowsData()),
-        BlocProvider(create: (context) => di.sl<AccountListsCubit>()),
-        BlocProvider(create: (context) => di.sl<LoginCubit>()),
-        BlocProvider(create: (context) => di.sl<LogOutCubit>()),
-        BlocProvider( create: (context) => di.sl<AccountCubit>()),
+        BlocProvider(create: (context) => LocaleCubit(di.sl(),di.sl())..getSavedLang()),
+        BlocProvider(create: (context) => PlayingNowMovieCubit(di.sl())..getNowPlayingMoviesData()),
+        BlocProvider(create: (context) => PlayingNowTvShowCubit(di.sl())..getNowPlayingTvShowsData()),
+        BlocProvider(create: (context) => PopularMovieCubit(di.sl())..getPopularMoviesData()),
+        BlocProvider(create: (context) => PopularTvShowCubit(di.sl())..getPopularTvShowsData()),
+        BlocProvider(create: (context) => TrendingMovieCubit(di.sl())..getTrendingMoviesData()),
+        BlocProvider(create: (context) => TrendingTvShowCubit(di.sl())..getTrendingTvShowsData()),
+        BlocProvider(create: (context) => TopRatedMoviesCubit(di.sl())..getTopRatedMoviesData()),
+        BlocProvider(create: (context) => TopRatedTvShowsCubit(di.sl())..getTopRatedTvShowsData()),
+        BlocProvider(create: (context) => AccountListsCubit(di.sl())),
+        BlocProvider(create: (context) => LoginCubit(di.sl(),di.sl())),
+        BlocProvider(create: (context) => LogOutCubit(di.sl(),di.sl())),
+        BlocProvider( create: (context) => AccountCubit(di.sl(),di.sl(),di.sl())),
       ],
       child: BlocBuilder<LocaleCubit, LocaleStates>(
         buildWhen: (previous, current) {

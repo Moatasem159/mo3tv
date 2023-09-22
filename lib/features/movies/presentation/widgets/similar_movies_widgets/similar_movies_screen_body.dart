@@ -19,7 +19,7 @@ class SimilarMoviesScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.sl<SimilarMovieCubit>(),
+      create: (context) => SimilarMovieCubit(di.sl()),
       child: CustomScrollView(
         controller: controller,
         slivers: [

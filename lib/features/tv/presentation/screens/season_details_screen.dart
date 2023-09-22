@@ -20,7 +20,7 @@ class SeasonDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
     return BlocProvider(
-      create: (context) => di.sl<SeasonCubit>(),
+      create: (context) => SeasonCubit(di.sl()),
       child: Builder(
         builder: (context) {
           SeasonCubit.get(context)

@@ -15,8 +15,9 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<SearchListCubit>(create: (context) => di.sl<SearchListCubit>()..getSearchList()),
-        BlocProvider<SearchBloc>(create: (context) => di.sl<SearchBloc>())
+        BlocProvider<SearchListCubit>(create: (context) => SearchListCubit(di.sl(),
+            di.sl(),di.sl(),di.sl())..getSearchList()),
+        BlocProvider<SearchBloc>(create: (context) => SearchBloc(di.sl()))
       ],
       child: BlocBuilder<SearchBloc, SearchStates>(
         builder: (context, state) {

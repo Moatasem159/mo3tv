@@ -18,7 +18,7 @@ class SimilarTvShowsScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.sl<SimilarTvShowCubit>(),
+      create: (context) =>SimilarTvShowCubit(di.sl()),
       child: CustomScrollView(
         controller: controller,
         slivers: [
