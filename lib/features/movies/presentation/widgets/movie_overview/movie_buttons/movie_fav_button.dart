@@ -26,20 +26,20 @@ class MovieFavButton extends StatelessWidget {
           onTap:(){
             if(AppStrings.sessionId!="")
             {
-              if(bloc.movie!.movieAccountDetails!.favorite==true)
+              if(bloc.movie.movieAccountDetails!.favorite==true)
                 {
-                  bloc.movie!.movieAccountDetails!.favorite =false;
+                  bloc.movie.movieAccountDetails!.favorite =false;
                   if(listType=="favorite") {
                     AccountListsCubit.get(context).list
-                    .removeWhere((element) => element.id==bloc.movie!.id);
+                    .removeWhere((element) => element.id==bloc.movie.id);
                     AccountListsCubit.get(context).update();
                   }
                   bloc.add(FavMovieEvent(false));
                 }
               else{
-                bloc.movie!.movieAccountDetails!.favorite=true;
+                bloc.movie.movieAccountDetails!.favorite=true;
                 if(listType=="favorite") {
-                  AccountListsCubit.get(context).list.add(bloc.movie!);
+                  AccountListsCubit.get(context).list.add(bloc.movie);
                   AccountListsCubit.get(context).update();
                 }
                 bloc.add(FavMovieEvent(true));
@@ -55,7 +55,7 @@ class MovieFavButton extends StatelessWidget {
             }
           },
           icon: Icon(Icons.favorite_rounded,
-              color:bloc.movie!.movieAccountDetails!.favorite!?Colors.red:Colors.white));
+              color:bloc.movie.movieAccountDetails!.favorite!?Colors.red:Colors.white));
       },
     );
   }

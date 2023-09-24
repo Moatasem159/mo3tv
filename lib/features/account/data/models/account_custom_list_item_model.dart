@@ -1,5 +1,4 @@
 import 'package:mo3tv/features/account/domain/entities/account_custom_list_item.dart';
-
 class AccountCustomListItemModel extends AccountCustomListItem{
   AccountCustomListItemModel({
      super.backdropPath,  super.id,  super.mediaType,  super.posterPath,  super.originalTitle, super.title,  super.name,  super.originalName});

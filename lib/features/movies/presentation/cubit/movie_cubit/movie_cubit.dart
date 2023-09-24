@@ -38,7 +38,4 @@ class MovieCubit extends Cubit<MovieStates> {
       return GetMovieDetailsSuccessState(movie);
         }));
   }
-  bool isSuccess(){
-    return state is GetMovieDetailsSuccessState;
-  }
 }

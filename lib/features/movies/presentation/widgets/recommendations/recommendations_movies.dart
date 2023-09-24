@@ -15,9 +15,6 @@ class RecommendationsMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        if(!RecommendationsMovieCubit.get(context).isSuccess()){
-          RecommendationsMovieCubit.get(context).getMovieRecommendations(movieId: movieId,lang: AppLocalizations.of(context)!.getLang());
-        }
         return BlocBuilder<RecommendationsMovieCubit, RecommendationsMovieStates>(
             builder: (context, state) {
               if (state is GetMovieRecommendationsLoadingState) {

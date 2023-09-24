@@ -15,6 +15,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
   MovieActionsBloc(this._deleteRateMovieUseCase,this._rateMovieUseCase,this._markMovieUsecase)
     :super(RateMovieInitialState()){
+    initialRate=0;
     on<RateMovieEvent>((event, emit) => rateMovie(emit,event.rate),
       transformer: (eventsStream, mapper) => eventsStream.distinct().switchMap(mapper));
     on<FavMovieEvent>((event, emit) => favMovie(emit,event.fav),
@@ -23,25 +24,25 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     transformer: (eventsStream, mapper) => eventsStream.distinct().switchMap(mapper));
   }
   static MovieActionsBloc get(context)=>BlocProvider.of(context);
-  Movie ?movie;
-  double initialRate=0;
+  late Movie movie;
+  late double initialRate;
   Future<void> rateMovie(emit,double rate)async{
     emit(ActionLoadingState());
-    bool watchList= movie!.movieAccountDetails!.watchlist!;
+    bool watchList= movie.movieAccountDetails!.watchlist!;
     Either<Failure, Message> response;
     if(rate>0) {
-      movie!.movieAccountDetails!.watchlist = false;
-      response=await _rateMovieUseCase.call(rate:rate, movieId: movie!.id!);
+      movie.movieAccountDetails!.watchlist = false;
+      response=await _rateMovieUseCase.call(rate:rate, movieId: movie.id);
     }
     else{
-      movie!.movieAccountDetails!.ratedValue=0.0;
-      movie!.movieAccountDetails!.watchlist = false;
-      response =await _deleteRateMovieUseCase.call(movieId: movie!.id!);
+      movie.movieAccountDetails!.ratedValue=0.0;
+      movie.movieAccountDetails!.watchlist = false;
+      response =await _deleteRateMovieUseCase.call(movieId: movie.id);
     }
     emit(response.fold(
             (l){
-              movie!.movieAccountDetails!.ratedValue=initialRate;
-              movie!.movieAccountDetails!.watchlist=watchList;
+              movie.movieAccountDetails!.ratedValue=initialRate;
+              movie.movieAccountDetails!.watchlist=watchList;
               return ActionErrorState(where: "rate");
             },
             (r)=> ActionSuccessState()));
@@ -49,10 +50,10 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   Future<void> favMovie(emit, bool fav)async{
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markMovieUsecase.call(movieId: movie!.id!, mark: fav,markType: "favorite");
+    await _markMovieUsecase.call(movieId: movie.id, mark: fav,markType: "favorite");
     emit(response.fold(
         (l){
-          movie!.movieAccountDetails!.favorite= !movie!.movieAccountDetails!.favorite!;
+          movie.movieAccountDetails!.favorite= !movie.movieAccountDetails!.favorite!;
           return ActionErrorState(where: "fav");
         },
         (r) => ActionSuccessState()));
@@ -60,10 +61,10 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   Future<void> addMovieToWatchList(emit, bool add) async {
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markMovieUsecase.call(movieId: movie!.id!, mark:add,markType: "watchlist");
+    await _markMovieUsecase.call(movieId: movie.id, mark:add,markType: "watchlist");
     emit(response.fold(
             (l){
-              movie!.movieAccountDetails!.watchlist= !movie!.movieAccountDetails!.watchlist!;
+              movie.movieAccountDetails!.watchlist= !movie.movieAccountDetails!.watchlist!;
               return ActionErrorState(where: "watchList");
             },
             (r) => ActionSuccessState()));

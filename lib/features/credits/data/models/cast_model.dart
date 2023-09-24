@@ -16,7 +16,6 @@ class CastMemberModel extends CastMember {
     super.department,
     super.job,
   });
-
   factory CastMemberModel.fromJson(Map<String, dynamic> json) =>
       CastMemberModel(
         adult: json["adult"] ?? '',

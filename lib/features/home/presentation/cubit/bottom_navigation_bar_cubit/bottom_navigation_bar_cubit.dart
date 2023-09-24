@@ -7,9 +7,11 @@ import 'package:mo3tv/features/search/presentation/screens/search_screen.dart';
 import 'package:mo3tv/features/settings/presentation/screens/settings_screen.dart';
 import 'package:mo3tv/features/tv/presentation/screens/tv_screen.dart';
 class BottomNavCubit extends Cubit<BottomNavStates> {
-  BottomNavCubit() : super(BottomNavInitialState());
+  BottomNavCubit() : super(BottomNavInitialState()){
+    index=0;
+  }
   static BottomNavCubit get(context)=>BlocProvider.of(context);
-  int index=0;
+  late int index;
   List<Widget> screens = [
     const MoviesScreen(),
     const TvScreen(),

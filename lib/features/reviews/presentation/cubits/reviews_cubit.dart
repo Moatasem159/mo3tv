@@ -9,11 +9,9 @@ class ReviewsCubit extends Cubit<ReviewsStates> {
   ReviewsCubit(this._getMediaReviewsUsecase) : super(ReviewsInitialState());
   static ReviewsCubit get(context)=>BlocProvider.of(context);
   final GetMediaReviewsUsecase _getMediaReviewsUsecase;
-  int ?mediaId;
-  String ?mediaType;
-  Future<void> getMovieReviews({required int mediaId,required String mediaType}) async {
-    this.mediaId=mediaId;
-    this.mediaType=mediaType;
+  late int mediaId;
+  late String mediaType;
+  Future<void> getMovieReviews() async {
     emit(GetMediaReviewsLoadingState());
     Either<Failure, List<Review>> response =
     await _getMediaReviewsUsecase.call(mediaId: mediaId,mediaType: mediaType);
@@ -23,11 +21,5 @@ class ReviewsCubit extends Cubit<ReviewsStates> {
             (movieReviews) {
           return GetMediaReviewsSuccessState(movieReviews);
         }));
-  }
-  initial(){
-    emit(ReviewsInitialState());
-  }
-  bool isInitial(){
-    return state is ReviewsInitialState;
   }
 }

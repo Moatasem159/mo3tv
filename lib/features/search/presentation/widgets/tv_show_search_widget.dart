@@ -22,7 +22,7 @@ class TvShowSearchWidget extends StatelessWidget {
         FocusManager.instance.primaryFocus!.unfocus();
         SearchListCubit.get(context).saveSearch(search: tvShow);
         TvShow tv=TvShow(
-          id: tvShow.id,
+          id: tvShow.id!,
           originalName :tvShow.originalName,
           name: tvShow.name,
           posterPath: tvShow.posterPath,

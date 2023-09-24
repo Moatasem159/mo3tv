@@ -41,7 +41,7 @@ class TvShowRatingButton extends StatelessWidget {
                       itemSize: 27,
                       allowHalfRating: true,
                       glowRadius: 2,
-                      initialRating: bloc.tvShow!.tvShowAccountDetails!.ratedValue,
+                      initialRating: bloc.tvShow.tvShowAccountDetails!.ratedValue,
                       minRating: .5,
                       maxRating: 10,
                       itemCount: 10,
@@ -52,7 +52,7 @@ class TvShowRatingButton extends StatelessWidget {
                         half: const Icon(Icons.star_half_rounded,color: Colors.yellow),
                       ),
                       onRatingUpdate: (double value) {
-                        bloc.tvShow!.tvShowAccountDetails!.ratedValue = value;
+                        bloc.tvShow.tvShowAccountDetails!.ratedValue = value;
                       },
                     ),
                     actions: [
@@ -63,7 +63,7 @@ class TvShowRatingButton extends StatelessWidget {
                             bloc.add(RateTvShowEvent(0.0));
                             if(listType=='rated'){
                               AccountListsCubit.get(context).list
-                              .removeWhere((element) => element.id == bloc.tvShow!.id);
+                              .removeWhere((element) => element.id == bloc.tvShow.id);
                               AccountListsCubit.get(context).update();
                             }
                             GoRouter.of(context).pop();
@@ -71,9 +71,9 @@ class TvShowRatingButton extends StatelessWidget {
                       TextButton(
                         child:Text(AppStrings.rate.tr(context)!),
                         onPressed: () {
-                          bloc.add(RateTvShowEvent(bloc.tvShow!.tvShowAccountDetails!.ratedValue));
+                          bloc.add(RateTvShowEvent(bloc.tvShow.tvShowAccountDetails!.ratedValue));
                           if(listType=='rated'){
-                            AccountListsCubit.get(context).list.add(bloc.tvShow!);
+                            AccountListsCubit.get(context).list.add(bloc.tvShow);
                             AccountListsCubit.get(context).update();
                           }
                           GoRouter.of(context).pop();
@@ -93,7 +93,7 @@ class TvShowRatingButton extends StatelessWidget {
               );
             }
           },
-          icon: bloc.tvShow!.tvShowAccountDetails!.ratedValue!=0.0 ?
+          icon: bloc.tvShow.tvShowAccountDetails!.ratedValue!=0.0 ?
           const Icon(Icons.star_rate_rounded,color: Colors.yellow,size: 30) :
           const Icon(Icons.star_border_rounded,size: 30),
         );

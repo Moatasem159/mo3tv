@@ -15,9 +15,6 @@ class RecommendationsTvShows extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        if(!RecommendationsTvCubit.get(context).isSuccess()){
-          RecommendationsTvCubit.get(context).getTvShowsRecommendations(tvId: tvId,lang: AppLocalizations.of(context)!.getLang());
-        }
         return BlocBuilder<RecommendationsTvCubit, RecommendationsTvStates>(
           builder: (context, state) {
             if (state is GetTvShowRecommendationsLoadingState) {

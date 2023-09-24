@@ -11,7 +11,7 @@ class MovieModel extends Movie {
      super.genres,
      super.keywords,
      super.homepage,
-     super.id,
+     required super.id,
      super.originalLanguage,
      super.originalTitle,
      super.overview,

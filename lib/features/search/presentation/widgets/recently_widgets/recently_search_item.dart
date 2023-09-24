@@ -33,7 +33,7 @@ class RecentlySearchItem extends StatelessWidget {
         FocusManager.instance.primaryFocus!.unfocus();
         if(search.mediaType=="movie") {
           Movie m=Movie(
-            id: search.id,
+            id: search.id!,
             title: search.originalTitle,
             originalTitle: search.originalTitle,
             posterPath: search.posterPath,
@@ -43,7 +43,7 @@ class RecentlySearchItem extends StatelessWidget {
         }
         else if(search.mediaType=="tv"){
           TvShow tv=TvShow(
-            id: search.id,
+            id: search.id!,
             originalName :search.originalName,
             name: search.name,
             posterPath: search.posterPath,

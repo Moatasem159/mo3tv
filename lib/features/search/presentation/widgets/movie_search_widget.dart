@@ -22,7 +22,7 @@ class MovieSearchWidget extends StatelessWidget {
         FocusManager.instance.primaryFocus!.unfocus();
         SearchListCubit.get(context).saveSearch(search: movie);
         Movie m=Movie(
-          id: movie.id,
+          id: movie.id!,
           title: movie.originalTitle,
           originalTitle: movie.originalTitle,
           posterPath: movie.posterPath,

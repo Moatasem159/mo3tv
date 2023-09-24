@@ -25,22 +25,22 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
         return MediaIconButton(
           onTap: () {
             if(AppStrings.sessionId!=''){
-              if(bloc.tvShow!.tvShowAccountDetails!.watchlist==true)
+              if(bloc.tvShow.tvShowAccountDetails!.watchlist==true)
                 {
-                  bloc.tvShow!.tvShowAccountDetails!.watchlist=false;
+                  bloc.tvShow.tvShowAccountDetails!.watchlist=false;
                   bloc.add(WatchListTvShowEvent(false));
                   if(listType=="watchlist")
                   {
                     AccountListsCubit.get(context).list
-                    .removeWhere((element) => element.id==bloc.tvShow!.id);
+                    .removeWhere((element) => element.id==bloc.tvShow.id);
                     AccountListsCubit.get(context).update();
                   }
                 }
               else{
-                bloc.tvShow!.tvShowAccountDetails!.watchlist=true;
+                bloc.tvShow.tvShowAccountDetails!.watchlist=true;
                 if(listType=="watchlist")
                 {
-                  AccountListsCubit.get(context).list.add(bloc.tvShow!);
+                  AccountListsCubit.get(context).list.add(bloc.tvShow);
                   AccountListsCubit.get(context).update();
                 }
                 bloc.add(WatchListTvShowEvent(true));
@@ -55,7 +55,7 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
               );
             }
           },
-          icon: bloc.tvShow!.tvShowAccountDetails!.watchlist!?
+          icon: bloc.tvShow.tvShowAccountDetails!.watchlist!?
           const Icon(Icons.bookmark_rounded,color: Colors.green):
           const Icon(Icons.bookmark_add_outlined));
       },

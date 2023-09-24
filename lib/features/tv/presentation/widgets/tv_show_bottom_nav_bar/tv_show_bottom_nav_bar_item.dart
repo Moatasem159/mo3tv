@@ -11,7 +11,7 @@ class TvShowBottomNavBarItem extends StatelessWidget {
     return BlocBuilder<TvShowBottomNavCubit, TvShowBottomNavStates>(
       builder: (context, state) {
         return GestureDetector(
-          onTap: () => TvShowBottomNavCubit.get(context).changeScreen(index,context),
+          onTap: () => TvShowBottomNavCubit.get(context).changeScreen(index),
           child: Container(
             width: MediaQuery.sizeOf(context).width / 5,
             height: 40,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
-import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
@@ -26,27 +26,23 @@ class MovieDetailsScreen extends StatelessWidget {
     final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MovieCubit(di.sl())),
-        BlocProvider(create: (context) => MovieBottomNavCubit()..movie = movie..listType = listType..initScreens()),
         BlocProvider(create: (context) => GalleryNavigatorCubit()),
-        BlocProvider(create: (context) => MovieActionsBloc(di.sl(), di.sl(), di.sl())),
-        BlocProvider(create: (context) => RecommendationsMovieCubit(di.sl())),
-        BlocProvider(create: (context) => GalleryCubit(di.sl())),
-        BlocProvider(create: (context) => ReviewsCubit(di.sl())),
-        BlocProvider(create: (context) => CreditsCubit(di.sl())),
+        BlocProvider(create: (context) => MovieBottomNavCubit()..movie = movie..listType = listType..initScreens()),
+        BlocProvider(create: (context) => MovieCubit(di.sl())..getMovieDetailsData(movieId: movie.id, lang: AppStrings.appLang)),
+        BlocProvider(create: (context) => MovieActionsBloc(di.sl(), di.sl(), di.sl())..movie=movie),
+        BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMediaGallery()),
+        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMovieReviews()),
+        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMovieCredits()),
+        BlocProvider(create: (context) => RecommendationsMovieCubit(di.sl())..getMovieRecommendations(movieId: movie.id, lang: AppStrings.appLang)),
       ],
-      child: Builder(
-        builder: (context) {
+      child: Builder(builder: (context) {
           return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
             builder: (context, state) {
               MovieBottomNavCubit cubit = MovieBottomNavCubit.get(context);
-              if (!MovieCubit.get(context).isSuccess()) {
-                MovieCubit.get(context).getMovieDetailsData(movieId: movie.id!,lang: AppLocalizations.of(context)!.getLang());
-              }
               return WillPopScope(
                 onWillPop: () async {
                   if (cubit.index != 0) {
-                    cubit.changeScreen(0, context);
+                    cubit.changeScreen(0);
                     return false;
                   }
                   else {

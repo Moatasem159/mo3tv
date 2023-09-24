@@ -18,7 +18,7 @@ class SeasonsListWidget extends StatelessWidget {
          Wrap(
             crossAxisAlignment: WrapCrossAlignment.start,
             children: tvShow.seasons!.map((e) {
-              return SeasonPoster(season: e,tvShowId: tvShow.id!,tvShowName: tvShow.originalName!);
+              return SeasonPoster(season: e,tvShowId: tvShow.id,tvShowName: tvShow.originalName!);
             }).toList(),
           )
         ],

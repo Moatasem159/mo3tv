@@ -6,12 +6,16 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_similar_movies_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_state.dart';
 class SimilarMovieCubit extends Cubit<SimilarMovieStates> {
-  SimilarMovieCubit(this._getSimilarMovieUseCase) : super(SimilarMovieInitialState());
+  SimilarMovieCubit(this._getSimilarMovieUseCase) : super(SimilarMovieInitialState()){
+    page=0;
+    allMovies=false;
+    movies=[];
+  }
   final GetSimilarMovieUseCase _getSimilarMovieUseCase;
   static SimilarMovieCubit get(context) => BlocProvider.of(context);
-  List<Movie> movies = [];
-  bool allMovies = false;
-  int page = 0;
+  late List<Movie> movies;
+  late bool allMovies;
+  late int page;
   Future<void> getSimilarMovies({required int movieId, required String lang}) async {
     emit(GetSimilarMoviesLoadingState());
     page++;

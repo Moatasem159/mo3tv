@@ -9,9 +9,7 @@ class MediaGalleryScreen extends StatelessWidget {
     return BlocBuilder<GalleryNavigatorCubit, GalleryNavigatorStates>(
       builder: (context, state) {
         return SliverToBoxAdapter(
-            child: BlocProvider.of<GalleryNavigatorCubit>(context)
-                    .movieGalleryList[
-                BlocProvider.of<GalleryNavigatorCubit>(context).index]);
+            child: GalleryNavigatorCubit.get(context).movieGalleryList[GalleryNavigatorCubit.get(context).index]);
       },
     );
   }

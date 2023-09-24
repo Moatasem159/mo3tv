@@ -10,7 +10,7 @@ class Movie extends Equatable {
   final List<GenreModel>? genres;
   final List<GenreModel>? keywords;
   final String? homepage;
-  final int? id;
+  final int id;
   final String? originalLanguage;
   final String? originalTitle;
   final String? overview;
@@ -34,7 +34,7 @@ class Movie extends Equatable {
     this.budget,
     this.genres,
     this.homepage,
-    this.id,
+    required this.id,
     this.originalLanguage,
     this.originalTitle,
     this.overview,

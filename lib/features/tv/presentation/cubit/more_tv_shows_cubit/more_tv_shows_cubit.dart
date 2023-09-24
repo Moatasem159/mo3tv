@@ -6,12 +6,15 @@ import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_shows_list_usecase.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_state.dart';
 class MoreTvShowsCubit extends Cubit<MoreTvShowsStates> {
-  MoreTvShowsCubit(this._getTvShowsListUsecase, this._getTrendingTvShowsUsecase) : super(MoreTvShowsInitialState());
+  MoreTvShowsCubit(this._getTvShowsListUsecase, this._getTrendingTvShowsUsecase) : super(MoreTvShowsInitialState()){
+    page=1;
+    moreTvShows=[];
+  }
   static MoreTvShowsCubit get(context) => BlocProvider.of(context);
   final GetTrendingTvShowsUsecase _getTrendingTvShowsUsecase;
   final GetTvShowsListUsecase _getTvShowsListUsecase;
-  List<TvShow> moreTvShows = [];
-  int page = 1;
+  late List<TvShow> moreTvShows;
+  late int page;
   seeMoreTvShows({required int index, required String lang}) async {
     emit(GetMoreTvShowsLoadingState());
     Either<Failure, List<TvShow>>? response;

@@ -11,7 +11,7 @@ class MovieBottomNavBarItem extends StatelessWidget {
     return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
       builder: (context, state) {
         return GestureDetector(
-          onTap: () => MovieBottomNavCubit.get(context).changeScreen(index,context),
+          onTap: () => MovieBottomNavCubit.get(context).changeScreen(index),
           child: Container(
             width: MediaQuery.sizeOf(context).width / 5,
             height: 40,

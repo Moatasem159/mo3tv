@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_assets.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
@@ -31,7 +31,7 @@ class TvShowOverview extends StatelessWidget {
     if(state is GetTvShowDetailsErrorState)
       {
         return SliverToBoxAdapter(child: ErrorButton(onTap: () =>
-            TvCubit.get(context).getTvShowDetailsData(tvShowId: tvShow.id!,lang: AppLocalizations.of(context)!.getLang())));
+            TvCubit.get(context).getTvShowDetailsData(tvShowId: tvShow.id,lang: AppStrings.appLang)));
       }
     return const SliverToBoxAdapter();
   },

@@ -4,11 +4,12 @@ import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cub
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/backdrops/media_backdrops.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/logos/media_logos.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/posters/media_posters.dart';
-
 class GalleryNavigatorCubit extends Cubit<GalleryNavigatorStates> {
-  GalleryNavigatorCubit() : super(GalleryNavigatorInitialState());
+  GalleryNavigatorCubit() : super(GalleryNavigatorInitialState()){
+    index=0;
+  }
   static GalleryNavigatorCubit get(context)=>BlocProvider.of(context);
-  int index =0;
+  late int index;
   List<Widget> movieGalleryList=[
     const MediaBackdrops(),
     const MediaPosters(),

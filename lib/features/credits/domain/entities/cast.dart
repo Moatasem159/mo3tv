@@ -13,7 +13,6 @@ class CastMember{
   final dynamic order;
   final String? department;
   final String? job;
-
   const CastMember(
       {this.id,
       this.adult,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
-import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
@@ -26,26 +26,23 @@ class TvShowDetailsScreen extends StatelessWidget {
     final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => TvShowBottomNavCubit()..tvShow = tvShow..listType=listType..initScreens()),
         BlocProvider(create: (context) => GalleryNavigatorCubit()),
-        BlocProvider(create: (context) => TvCubit(di.sl())),
-        BlocProvider(create: (context) => TvActionsBloc(di.sl(),di.sl(),di.sl())),
-        BlocProvider(create: (context) => RecommendationsTvCubit(di.sl())),
-        BlocProvider(create: (context) => GalleryCubit(di.sl())),
-        BlocProvider(create: (context) => ReviewsCubit(di.sl())),
-        BlocProvider(create: (context) => CreditsCubit(di.sl())),
+        BlocProvider(create: (context) => TvShowBottomNavCubit()..tvShow = tvShow..listType=listType..initScreens()),
+        BlocProvider(create: (context) => TvCubit(di.sl())..getTvShowDetailsData(tvShowId: tvShow.id, lang: AppStrings.appLang)),
+        BlocProvider(create: (context) => TvActionsBloc(di.sl(),di.sl(),di.sl())..tvShow=tvShow),
+        BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMediaGallery()),
+        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMovieReviews()),
+        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMovieCredits()),
+        BlocProvider(create: (context) => RecommendationsTvCubit(di.sl())..getTvShowsRecommendations(tvId: tvShow.id, lang: AppStrings.appLang)),
       ],
       child: Builder(builder: (context) {
-        if (!TvCubit.get(context).isSuccess()) {
-          TvCubit.get(context).getTvShowDetailsData(tvShowId: tvShow.id!, lang: AppLocalizations.of(context)!.getLang());
-        }
         return BlocBuilder<TvShowBottomNavCubit, TvShowBottomNavStates>(
           builder: (context, state) {
             TvShowBottomNavCubit cubit = TvShowBottomNavCubit.get(context);
             return WillPopScope(
               onWillPop: () async {
                 if (cubit.index != 0) {
-                  cubit.changeScreen(0, context);
+                  cubit.changeScreen(0);
                   return false;
                 }
                 else {

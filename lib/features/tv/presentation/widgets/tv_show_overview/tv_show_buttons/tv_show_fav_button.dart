@@ -26,20 +26,20 @@ class TvShowFavButton extends StatelessWidget {
           onTap:() {
             if(AppStrings.sessionId!='')
             {
-              if(bloc.tvShow!.tvShowAccountDetails!.favorite==true)
+              if(bloc.tvShow.tvShowAccountDetails!.favorite==true)
                 {
-                  bloc.tvShow!.tvShowAccountDetails!.favorite=false;
+                  bloc.tvShow.tvShowAccountDetails!.favorite=false;
                   if(listType=="favorite"){
                     AccountListsCubit.get(context).list
-                    .removeWhere((element) => element.id == bloc.tvShow!.id);
+                    .removeWhere((element) => element.id == bloc.tvShow.id);
                     AccountListsCubit.get(context).update();
                   }
                   bloc.add(FavTvShowEvent(false));
                 }
               else{
-                bloc.tvShow!.tvShowAccountDetails!.favorite=true;
+                bloc.tvShow.tvShowAccountDetails!.favorite=true;
                 if(listType=="favorite"){
-                  AccountListsCubit.get(context).list.add(bloc.tvShow!);
+                  AccountListsCubit.get(context).list.add(bloc.tvShow);
                   AccountListsCubit.get(context).update();
                 }
                 bloc.add(FavTvShowEvent(true));
@@ -55,7 +55,7 @@ class TvShowFavButton extends StatelessWidget {
             }
           },
           icon:Icon(Icons.favorite_rounded,
-              color: bloc.tvShow!.tvShowAccountDetails!.favorite!?Colors.red:Colors.white));
+              color: bloc.tvShow.tvShowAccountDetails!.favorite!?Colors.red:Colors.white));
       },
     );
   }

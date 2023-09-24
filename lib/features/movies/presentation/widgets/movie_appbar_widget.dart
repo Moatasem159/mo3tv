@@ -68,8 +68,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                 child: GestureDetector(
                     onTap: () {
                       if (MovieBottomNavCubit.get(context).index != 0) {
-                        MovieBottomNavCubit.get(context)
-                            .changeScreen(0, context);
+                        MovieBottomNavCubit.get(context).changeScreen(0);
                       } else {
                         GoRouter.of(context).pop();
                       }

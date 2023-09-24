@@ -26,22 +26,22 @@ class AddMovieToWatchlistButton extends StatelessWidget {
           onTap: (){
             if(AppStrings.sessionId!='')
             {
-              if(bloc.movie!.movieAccountDetails!.watchlist==true)
+              if(bloc.movie.movieAccountDetails!.watchlist==true)
                 {
-                  bloc.movie!.movieAccountDetails!.watchlist=false;
+                  bloc.movie.movieAccountDetails!.watchlist=false;
                   bloc.add(WatchListMovieEvent(false));
                   if(listType=="watchlist")
                   {
                     AccountListsCubit.get(context).list
-                    .removeWhere((element) => element.id==bloc.movie!.id);
+                    .removeWhere((element) => element.id==bloc.movie.id);
                     AccountListsCubit.get(context).update();
                   }
                 }
               else{
-                bloc.movie!.movieAccountDetails!.watchlist=true;
+                bloc.movie.movieAccountDetails!.watchlist=true;
                 if(listType=="watchlist")
                 {
-                  AccountListsCubit.get(context).list.add(bloc.movie!);
+                  AccountListsCubit.get(context).list.add(bloc.movie);
                   AccountListsCubit.get(context).update();
                 }
                 bloc.add(WatchListMovieEvent(true));
@@ -56,7 +56,7 @@ class AddMovieToWatchlistButton extends StatelessWidget {
               );
             }
           },
-          icon: bloc.movie!.movieAccountDetails!.watchlist!
+          icon: bloc.movie.movieAccountDetails!.watchlist!
               ? const Icon(Icons.bookmark_rounded, color: Colors.green)
               : const Icon(Icons.bookmark_add_outlined),
         );

@@ -24,12 +24,7 @@ class MediaReviews extends StatelessWidget {
         }
         if(state is GetMediaReviewsErrorState){
             return SliverToBoxAdapter(
-              child: ErrorButton(onTap: (){
-                ReviewsCubit.get(context).getMovieReviews(
-                    mediaId:ReviewsCubit.get(context).mediaId!,
-                    mediaType:ReviewsCubit.get(context).mediaType!);
-              }),
-            );
+              child: ErrorButton(onTap: ()=> ReviewsCubit.get(context).getMovieReviews()));
           }
         return const SliverToBoxAdapter();
       },

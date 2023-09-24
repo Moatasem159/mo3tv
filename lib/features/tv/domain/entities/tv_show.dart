@@ -13,7 +13,7 @@ class TvShow extends Equatable{
   final List<GenreModel> ?genres;
   final List<GenreModel>? keywords;
   final String ?homepage;
-  final int ?id;
+  final int id;
   final bool ?inProduction;
   final String ?lastAirDate;
   final LastEpisodeToAir? lastEpisodeToAir;
@@ -45,7 +45,7 @@ class TvShow extends Equatable{
       this.genres,
       this.keywords,
       this.homepage,
-      this.id,
+      required this.id,
       this.inProduction,
       this.lastAirDate,
       this.lastEpisodeToAir,

@@ -19,12 +19,7 @@ class MediaCredits extends StatelessWidget {
         }
         if(state is GetMediaCreditsErrorState) {
             return SliverToBoxAdapter(
-              child: ErrorButton(onTap: () {
-                CreditsCubit.get(context).getMovieCredits(
-                    mediaId: CreditsCubit.get(context).mediaId,
-                    mediaType: CreditsCubit.get(context).mediaType);
-              },),
-            );
+              child: ErrorButton(onTap: () => CreditsCubit.get(context).getMovieCredits()));
           }
         return const SliverToBoxAdapter();
       },

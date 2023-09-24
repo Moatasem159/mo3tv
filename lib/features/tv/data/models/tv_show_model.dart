@@ -16,7 +16,7 @@ class TvShowModel extends TvShow {
     super.genres,
     super.keywords,
     super.homepage,
-    super.id,
+    required super.id,
     super.inProduction,
     super.lastAirDate,
     super.lastEpisodeToAir,

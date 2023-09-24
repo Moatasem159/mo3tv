@@ -10,7 +10,7 @@ class TvCubit extends Cubit<TvStates> {
   static TvCubit get(context)=>BlocProvider.of(context);
   final GetTvShowDetailsUsecase _getTvShowDetailsUsecase;
   Future<void> getTvShowDetailsData({required int tvShowId,required String lang}) async {
-    TvShow tvShow= TvShow();
+    TvShow tvShow;
     emit(GetTvShowDetailsLoadingState());
     Either<Failure,TvShow> response =
     await _getTvShowDetailsUsecase.call(tvId: tvShowId,lang: lang);
@@ -57,8 +57,5 @@ class TvCubit extends Cubit<TvStates> {
               tvShow.videos!.clear();
           return GetTvShowDetailsSuccessState(tvShow);
         }));
-  }
-  bool isSuccess(){
-    return state is GetTvShowDetailsSuccessState;
   }
 }

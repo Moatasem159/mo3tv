@@ -6,13 +6,18 @@ import 'package:mo3tv/features/account/domain/entities/account_list_entity.dart'
 import 'package:mo3tv/features/account/domain/usecases/get_account_lists_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_state.dart';
 class AccountListsCubit extends Cubit<AccountListsStates> {
-  AccountListsCubit(this._getAccountListsUsecase) : super(AccountListsInitialState());
+  AccountListsCubit(this._getAccountListsUsecase) : super(AccountListsInitialState()){
+    page=0;
+    totalPage=0;
+    totalResult=0;
+    list=[];
+  }
   final GetAccountListsUsecase _getAccountListsUsecase;
   static AccountListsCubit get(context)=>BlocProvider.of(context);
-  int page=0;
-  int totalPage=0;
-  int totalResult=0;
-  List list=[];
+  late int page;
+  late int totalPage;
+  late int totalResult;
+  late List list;
   Future<void> getAccountList({required String listType,required String mediaType,int page=1,required String lang})async{
     emit(GetAccountListsLoadingState());
     Either<Failure, AccountListEntity> accountList =

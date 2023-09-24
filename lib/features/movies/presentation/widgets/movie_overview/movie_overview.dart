@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_assets.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
@@ -29,7 +29,7 @@ class MovieOverview extends StatelessWidget {
           }
           if(state is GetMovieDetailsErrorState) {
               return SliverToBoxAdapter(child: ErrorButton(onTap: () =>
-                  MovieCubit.get(context).getMovieDetailsData(movieId: movie.id!,lang: AppLocalizations.of(context)!.getLang())));
+                  MovieCubit.get(context).getMovieDetailsData(movieId: movie.id,lang: AppStrings.appLang)));
             }
            return const SliverToBoxAdapter();
         },

@@ -33,7 +33,4 @@ class AccountCubit extends Cubit<AccountStates> {
   bool isSuccess() {
     return state is GetAccountsDetailsSuccessState;
   }
-  initial() {
-    emit(AccountInitialState());
-  }
 }

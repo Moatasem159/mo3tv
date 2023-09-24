@@ -72,7 +72,7 @@ class TvShowDetailsAppBar extends SliverPersistentHeaderDelegate {
                     onTap: () {
                       if(TvShowBottomNavCubit.get(context).index!=0)
                         {
-                          TvShowBottomNavCubit.get(context).changeScreen(0, context);
+                          TvShowBottomNavCubit.get(context).changeScreen(0);
                         }
                       else{
                         GoRouter.of(context).pop();

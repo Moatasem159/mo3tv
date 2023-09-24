@@ -6,12 +6,15 @@ import 'package:mo3tv/features/movies/domain/usecases/get_movies_list_usecase.da
 import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_movies_state.dart';
 class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
-  MoreMoviesCubit(this._getTrendingMoviesUsecase, this._getMoviesListUsecase) : super(MoreMoviesInitialState());
+  MoreMoviesCubit(this._getTrendingMoviesUsecase, this._getMoviesListUsecase) : super(MoreMoviesInitialState()){
+    page=1;
+    moreMovies=[];
+  }
   final GetTrendingMoviesUsecase _getTrendingMoviesUsecase;
   final GetMoviesListUsecase _getMoviesListUsecase;
   static MoreMoviesCubit get(context) => BlocProvider.of(context);
-  List<Movie> moreMovies = [];
-  int page = 1;
+  late List<Movie> moreMovies;
+  late int page;
   seeMoreMovies({required int index, required String lang}) async {
     emit(GetMoreMoviesLoadingState());
     Either<Failure, List<Movie>>? response;

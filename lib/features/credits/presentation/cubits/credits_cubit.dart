@@ -8,22 +8,14 @@ class CreditsCubit extends Cubit<CreditsStates> {
   CreditsCubit(this._getMediaCreditsUsecase) : super(CreditsInitialState());
   static CreditsCubit get(context)=>BlocProvider.of(context);
   final GetMediaCreditsUsecase _getMediaCreditsUsecase;
-  int ?mediaId;
-  String ?mediaType;
-  Future<void> getMovieCredits({required mediaId,required mediaType}) async {
+  late int mediaId;
+  late String mediaType;
+  Future<void> getMovieCredits() async {
     emit(GetMediaCreditsLoadingState());
-    this.mediaId=mediaId;
-    this.mediaType=mediaType;
     Either<Failure, List<CastMember>> response =
     await _getMediaCreditsUsecase.call(mediaId: mediaId,mediaType:mediaType);
     emit(response.fold(
         (failure) => GetMediaCreditsErrorState(),
         (mediaCredits)=> GetMediaCreditsSuccessState(mediaCredits)));
-  }
-  initial(){
-    emit(CreditsInitialState());
-  }
-  bool isInitial(){
-    return state is CreditsInitialState;
   }
 }

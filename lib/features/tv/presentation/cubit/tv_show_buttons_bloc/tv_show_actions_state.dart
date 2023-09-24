@@ -6,4 +6,3 @@ class ActionErrorState extends TvShowActionsStates{
   final String where;
   ActionErrorState({required this.where});
 }
-

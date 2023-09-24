@@ -9,15 +9,12 @@ class RecommendationsMovieCubit extends Cubit<RecommendationsMovieStates> {
   RecommendationsMovieCubit(this._getMovieRecommendationsUseCase) : super(RecommendationsMovieInitialState());
   static RecommendationsMovieCubit get(context)=>BlocProvider.of(context);
   final GetMovieRecommendationsUseCase _getMovieRecommendationsUseCase;
-  Future<void> getMovieRecommendations({required  movieId,required String lang}) async {
+  Future<void> getMovieRecommendations({required int movieId,required String lang}) async {
     emit(GetMovieRecommendationsLoadingState());
     Either<Failure, List<Movie>> response =
     await _getMovieRecommendationsUseCase.call(movieId: movieId,lang: lang);
     emit(response.fold(
         (failure) => GetMovieRecommendationsErrorState(msg: mapFailureToMsg(failure)),
         (recommendations) =>GetMovieRecommendationsSuccessState(recommendations)));
-  }
-  bool isSuccess(){
-    return state is GetMovieRecommendationsSuccessState;
   }
 }

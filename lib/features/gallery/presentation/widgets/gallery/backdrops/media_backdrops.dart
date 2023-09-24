@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
-import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit.dart';
-import 'package:mo3tv/features/gallery/presentation/cubits/gallery_state.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit/gallery_cubit.dart';
+import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit/gallery_state.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/empty_image_list.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/backdrops/backdrop_list.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/backdrops/backdrops_loading_list.dart';
@@ -27,11 +27,7 @@ class MediaBackdrops extends StatelessWidget {
         }
         if(state is GetMediaGalleryErrorState)
           {
-            return ErrorButton(onTap:(){
-              GalleryCubit.get(context).getMediaGallery(
-                  mediaId: GalleryCubit.get(context).mediaId,
-                  mediaType: GalleryCubit.get(context).mediaType);
-            });
+            return ErrorButton(onTap:()=> GalleryCubit.get(context).getMediaGallery());
           }
         return Container();
       },
