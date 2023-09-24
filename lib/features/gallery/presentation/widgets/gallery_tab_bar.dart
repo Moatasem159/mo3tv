@@ -17,7 +17,7 @@ class GalleryTabBar extends StatelessWidget {
         preferredSize:  Size(0,AppLocalizations.of(context)!.isEnLocale?35:40),
         child: TabBar(
           indicatorWeight: 2,
-          indicatorColor: Colors.red,
+          indicatorColor: Theme.of(context).primaryColor,
           labelPadding: const EdgeInsets.only(bottom: 5),
           onTap: (value) {
             GalleryNavigatorCubit.get(context).gallery(value);

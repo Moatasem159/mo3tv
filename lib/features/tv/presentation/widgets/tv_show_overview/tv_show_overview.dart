@@ -19,8 +19,8 @@ class TvShowOverview extends StatelessWidget {
   builder: (context, state) {
     if(state is GetTvShowDetailsLoadingState)
       {
-        return SliverToBoxAdapter(child:  Center(child:
-        Lottie.asset(AppAssets.tvLoading,height: 100)),);
+        return SliverToBoxAdapter(child:Center(child:
+        Lottie.asset(AppAssets.tvLoading,height: 100)));
       }
     if(state is GetTvShowDetailsSuccessState)
       {

@@ -18,7 +18,7 @@ class AccountAppBarWidget extends StatelessWidget {
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
-                  border: Border.all(color: Colors.red[500]!, width: 2),
+                  border: Border.all(color: Theme.of(context).primaryColor, width: 2),
                   shape: BoxShape.circle,
                   image: DecorationImage(image: imageProvider)),
             );

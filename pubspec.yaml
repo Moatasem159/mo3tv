@@ -61,7 +61,7 @@ flutter:
     - assets/images/movie_cover.jpg
     - assets/images/tv_cover.jpg
     - assets/icons/movie_loading.json
-    - assets/icons/tv_loading
+    - assets/icons/tv_loading.json
   fonts:
   - family: Montserrat
     fonts:

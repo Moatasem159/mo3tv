@@ -22,12 +22,12 @@ class MainBottomNavBarItem extends StatelessWidget {
                 border: Border(
                     bottom: BorderSide(
                         color: BottomNavCubit.get(context).index == index
-                            ? Colors.red
+                            ? Theme.of(context).primaryColor
                             : Colors.transparent,
                         width: 2))),
             child: Icon(icon,
                 color: BottomNavCubit.get(context).index == index
-                    ? Colors.red
+                    ? Theme.of(context).primaryColor
                     : Colors.white),
           ),
         );

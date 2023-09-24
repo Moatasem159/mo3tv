@@ -22,12 +22,12 @@ class MovieBottomNavBarItem extends StatelessWidget {
                 border: Border(
                     bottom: BorderSide(
                         color: MovieBottomNavCubit.get(context).index == index
-                            ? Colors.red
+                            ? Theme.of(context).primaryColor
                             : Colors.transparent,
                         width: 2))),
             child: Icon(icon,
                 color: MovieBottomNavCubit.get(context).index == index
-                    ? Colors.red
+                    ? Theme.of(context).primaryColor
                     : Colors.white),
           ),
         );

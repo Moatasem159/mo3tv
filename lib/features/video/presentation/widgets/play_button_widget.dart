@@ -43,8 +43,8 @@ class _PlayButtonWidgetState extends State<PlayButtonWidget> with SingleTickerPr
           child: Container(
             width: 45,
             height: 45,
-            decoration: const BoxDecoration(
-                color: Colors.red, shape: BoxShape.circle),
+            decoration:  BoxDecoration(
+                color: Theme.of(context).primaryColor, shape: BoxShape.circle),
             child: const Icon(
               Icons.play_arrow,
               size: 30,

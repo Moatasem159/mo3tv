@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mo3tv/core/utils/app_colors.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-class AppTheme {
-  const AppTheme._();
+abstract class AppTheme {
   static final darkTheme = ThemeData(
     fontFamily: AppStrings.fontFamily,
-    primaryColor: AppColors.primaryColor,
+    primaryColor: AppColors.primaryColorDarkTheme,
     primaryColorLight: AppColors.primaryTextLight,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.dark,
     colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: AppColors.primaryColor,
       brightness: Brightness.dark,
       backgroundColor: AppColors.darkBackgroundColor,
     ),
@@ -35,12 +33,12 @@ class AppTheme {
     iconTheme: const IconThemeData(
       color: Colors.white
     ),
-    buttonTheme:  ButtonThemeData(
-      buttonColor:AppColors.primaryColor,
+    buttonTheme:  const ButtonThemeData(
+      buttonColor:AppColors.primaryColorDarkTheme,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(AppColors.primaryColor)
+        backgroundColor: MaterialStateProperty.all(AppColors.primaryColorDarkTheme)
       )
     ),
     snackBarTheme: const SnackBarThemeData(
@@ -50,4 +48,13 @@ class AppTheme {
       )
     ),
    );
+  static void systemChrome(){
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: AppColors.darkBackgroundColor,
+        systemNavigationBarColor: AppColors.darkBackgroundColor,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.light));
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,overlays:[SystemUiOverlay.bottom,SystemUiOverlay.top]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  }
 }
