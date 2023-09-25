@@ -8,6 +8,7 @@ import 'package:mo3tv/core/entities/see_more_parameters.dart';
 import 'package:mo3tv/core/widgets/media_see_more/media_see_more.dart';
 import 'package:mo3tv/core/widgets/media_web_home_page/media_web_page_screen.dart';
 import 'package:mo3tv/features/account/presentation/screens/account_media_list_screen.dart';
+import 'package:mo3tv/features/connectivity/presentation/screens/no_connection_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/image_screen.dart';
 import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
 import 'package:mo3tv/features/login/domain/entities/token.dart';
@@ -26,6 +27,7 @@ import 'package:mo3tv/features/video/presentation/screens/trailer_screen.dart';
 abstract class Routes {
   static const String initialRoute= "/";
   static const String loginRoute= "/loginRoute";
+  static const String noConnectionRoute= "/noConnectionRoute";
   static const String movieDetailsRoute= "/movieDetailsRoute/:listType";
   static const String similarMoviesRoute= "/similarMoviesRoute/:movieId";
   static const String similarTvShowsRoute= "/similarTvShowsRoute/:tvId";
@@ -40,7 +42,7 @@ abstract class Routes {
   static const String mediaWebPageRoute = "/mediaWebPageRoute/:link";
 }
 abstract class AppRoute{
-  static final router=GoRouter(
+  static final GoRouter router=GoRouter(
     routes: [
       GoRoute(
         path: Routes.initialRoute,
@@ -50,6 +52,10 @@ abstract class AppRoute{
         name: Routes.loginRoute,
         path: Routes.loginRoute,
         builder: (context, state) =>  LoginScreen(token:state.extra as Token)),
+      GoRoute(
+        name: Routes.noConnectionRoute,
+        path: Routes.noConnectionRoute,
+        builder: (context, state) =>  const NoConnectionScreen()),
       GoRoute(
         name: Routes.movieDetailsRoute,
         path: Routes.movieDetailsRoute,

@@ -27,4 +27,7 @@ class LocaleCubit extends Cubit<LocaleStates> {
   }
   void toEnglish()=>_changeLang(AppStrings.englishCode);
   void toArabic()=>_changeLang(AppStrings.arabicCode);
+   static bool buildWhen(previous, current){
+    return previous != current;
+  }
 }

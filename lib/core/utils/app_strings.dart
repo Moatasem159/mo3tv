@@ -92,4 +92,5 @@ class AppStrings {
   static const String noItems="no_items";
   static const String oneItem="one_item";
   static const String twoItems="two_items";
+  static const String noConnectionMsg="no_connection_msg";
 }

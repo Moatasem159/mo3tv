@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -14,7 +15,9 @@ void main()async{
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   AppTheme.systemChrome();
   await di.init();
-  Bloc.observer=AppBlocObserver();
+  if(kDebugMode) {
+    Bloc.observer=AppBlocObserver();
+  }
   await di.sl<GetAccountDataUsecase>().call();
   AppStrings.appLang=await di.sl<LangLocalDataSource>().getSavedLang();
   if(AppStrings.sessionId==""){

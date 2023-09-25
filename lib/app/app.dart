@@ -5,6 +5,7 @@ import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/config/themes/app_theme.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
+import 'package:mo3tv/features/connectivity/presentation/cubits/check_connectivity_cubit.dart';
 import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_cubit.dart';
@@ -24,7 +25,8 @@ class Mo3Tv extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LocaleCubit(di.sl(),di.sl())..getSavedLang()),
+        BlocProvider(create: (context) => CheckConnectivityCubit(di.sl())..checkConnectivity()),
+        BlocProvider(create: (context) => LocaleCubit(di.sl(), di.sl())..getSavedLang()),
         BlocProvider(create: (context) => PlayingNowMovieCubit(di.sl())..getNowPlayingMoviesData()),
         BlocProvider(create: (context) => PlayingNowTvShowCubit(di.sl())..getNowPlayingTvShowsData()),
         BlocProvider(create: (context) => PopularMovieCubit(di.sl())..getPopularMoviesData()),
@@ -34,24 +36,22 @@ class Mo3Tv extends StatelessWidget {
         BlocProvider(create: (context) => TopRatedMoviesCubit(di.sl())..getTopRatedMoviesData()),
         BlocProvider(create: (context) => TopRatedTvShowsCubit(di.sl())..getTopRatedTvShowsData()),
         BlocProvider(create: (context) => AccountListsCubit(di.sl())),
-        BlocProvider(create: (context) => LoginCubit(di.sl(),di.sl())),
-        BlocProvider(create: (context) => LogOutCubit(di.sl(),di.sl())),
-        BlocProvider(create: (context) => AccountCubit(di.sl(),di.sl(),di.sl())),
+        BlocProvider(create: (context) => LoginCubit(di.sl(), di.sl())),
+        BlocProvider(create: (context) => LogOutCubit(di.sl(), di.sl())),
+        BlocProvider(create: (context) => AccountCubit(di.sl(), di.sl(), di.sl())),
       ],
       child: BlocBuilder<LocaleCubit, LocaleStates>(
-        buildWhen: (previous, current) {
-          return previous != current;
-        },
+        buildWhen:LocaleCubit.buildWhen,
         builder: (context, state) {
           return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerConfig: AppRoute.router,
-            themeMode: ThemeMode.dark,
-            darkTheme: AppTheme.darkTheme,
-            locale: state.locale,
-            supportedLocales: AppLocalizationsSetup.supportedLocales,
-            localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
-            localeResolutionCallback: AppLocalizationsSetup.localeResolutionCallback);
+              debugShowCheckedModeBanner: false,
+              routerConfig: AppRoute.router,
+              themeMode: ThemeMode.dark,
+              darkTheme: AppTheme.darkTheme,
+              locale: state.locale,
+              supportedLocales: AppLocalizationsSetup.supportedLocales,
+              localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
+              localeResolutionCallback: AppLocalizationsSetup.localeResolutionCallback);
         },
       ),
     );

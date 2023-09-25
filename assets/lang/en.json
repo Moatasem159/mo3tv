@@ -81,6 +81,6 @@
   "items": "Items",
   "one_item": "Item",
   "two_items": "Items",
-  "no_items": "No items"
-
+  "no_items": "No items",
+  "no_connection_msg": "Failed to connect , please check your connection before trying again"
 }

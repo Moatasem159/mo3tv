@@ -62,7 +62,6 @@ import 'package:mo3tv/features/settings/data/repositories/lang_repository_impl.d
 import 'package:mo3tv/features/settings/domain/repositories/lang_repository.dart';
 import 'package:mo3tv/features/settings/domain/usecases/change_lang_usecase.dart';
 import 'package:mo3tv/features/settings/domain/usecases/get_saved_lang.dart';
-import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_cubit.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_local_datasource.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
@@ -111,7 +110,8 @@ Future external()async{
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl()));
   sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton<SharedPrefrencesConsumer>(() => SharedPrefrencesManager(sl()));
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+  sl.registerLazySingleton(() => InternetConnectionChecker.createInstance(
+    checkInterval: const Duration(milliseconds: 3500)));
   sl.registerLazySingleton(() => AppInterceptors());
   sl.registerLazySingleton(() => LogInterceptor(
         request: true,
@@ -191,7 +191,6 @@ credits(){
   sl.registerLazySingleton<CreditsDataSource>(() => CreditsDataSourceImpl(sl()));
 }
 lang()async {
-  sl.registerFactory(() =>LocaleCubit(sl(),sl()));
   sl.registerLazySingleton<ChangeLangUseCase>(() => ChangeLangUseCase(sl()));
   sl.registerLazySingleton<GetSavedLangUseCase>(() => GetSavedLangUseCase(sl()));
   sl.registerLazySingleton<LangRepository>(() => LangRepositoryImpl(sl()));
