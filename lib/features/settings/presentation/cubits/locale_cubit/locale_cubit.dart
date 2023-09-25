@@ -8,6 +8,7 @@ import 'package:restart_app/restart_app.dart';
 class LocaleCubit extends Cubit<LocaleStates> {
   LocaleCubit(this._getSavedLangUseCase, this._changeLangUseCase)
       : super(const ChangeLocaleState(Locale(AppStrings.englishCode)));
+ static LocaleCubit get(context)=>BlocProvider.of(context);
   final GetSavedLangUseCase _getSavedLangUseCase;
   final ChangeLangUseCase _changeLangUseCase;
   Future <void> getSavedLang() async{
@@ -27,7 +28,7 @@ class LocaleCubit extends Cubit<LocaleStates> {
   }
   void toEnglish()=>_changeLang(AppStrings.englishCode);
   void toArabic()=>_changeLang(AppStrings.arabicCode);
-   static bool buildWhen(previous, current){
+  static bool buildWhen(previous, current){
     return previous != current;
   }
 }

@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 abstract class AppTextStyles{
+  static TextStyle getNormalText({Color color=Colors.white,double fontSize=10}){
+    return TextStyle(
+        fontSize: fontSize,
+        height: 1.2,
+        fontWeight: FontWeight.normal,
+        color:color,
+        fontFamily: AppStrings.fontFamily);
+  }
   static TextStyle get10NormalText({Color color=Colors.white}){
     return TextStyle(
       fontSize: 10,

@@ -1,33 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_cubit.dart';
+import 'package:mo3tv/features/settings/presentation/widgets/language_screen_widgets/change_language_dialog.dart';
 import 'package:mo3tv/features/settings/presentation/widgets/settings_tile.dart';
 class BuildLanguageScreenBody extends StatelessWidget {
-  const BuildLanguageScreenBody({super.key,});
+  const BuildLanguageScreenBody({super.key});
   @override
   Widget build(BuildContext context) {
     return Column(
-      children:  [
+      children: [
         SettingsTile(
           title: AppStrings.englishLang,
           icon: FontAwesomeIcons.language,
-          onTap: (){
-            if(!AppLocalizations.of(context)!.isEnLocale)
-              {
-                BlocProvider.of<LocaleCubit>(context).toEnglish();
-              }
-          }),
+          onTap: () {
+            if (!AppLocalizations.of(context)!.isEnLocale) {
+              showAdaptiveDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return ChangeLanguageDialog(
+                    onTap: () {
+                      if (!AppLocalizations.of(context)!.isEnLocale) {
+                        LocaleCubit.get(context).toEnglish();
+                      }
+                    },
+                  );
+                },
+              );
+            }
+          },
+        ),
         SettingsTile(
           title: AppStrings.arabicLang,
           icon: FontAwesomeIcons.language,
-          onTap: (){
-            if(AppLocalizations.of(context)!.isEnLocale) {
-              BlocProvider.of<LocaleCubit>(context).toArabic();
+          onTap: () {
+            if (AppLocalizations.of(context)!.isEnLocale) {
+              showAdaptiveDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) {
+                  return ChangeLanguageDialog(
+                    onTap: () {
+                      if (AppLocalizations.of(context)!.isEnLocale) {
+                        LocaleCubit.get(context).toArabic();
+                      }
+                    },
+                  );
+                },
+              );
             }
-          }),
+          },
+        ),
       ],
     );
   }
