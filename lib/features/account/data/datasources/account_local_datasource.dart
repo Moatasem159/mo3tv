@@ -12,8 +12,7 @@ class AccountLocalDatasourceImpl implements AccountLocalDataSource{
   AccountLocalDatasourceImpl(this._sharedPrefrencesConsumer);
   @override
   Future<bool> saveUser({required  accountModel}) async{
-    final res=await _sharedPrefrencesConsumer.saveData(key: "account", value: AccountModel.toJsonString(accountModel));
-    return res;
+   return await _sharedPrefrencesConsumer.saveData(key: "account", value: AccountModel.toJsonString(accountModel));
   }
   @override
   Future getUser() async{
