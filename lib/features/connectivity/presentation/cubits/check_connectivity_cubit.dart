@@ -16,12 +16,10 @@ class CheckConnectivityCubit extends Cubit<CheckConnectivityStates> {
   static CheckConnectivityCubit get(context) => BlocProvider.of(context);
   Future<void> checkConnectivity() async {
     checkStream= _networkInfo.checkConnection().listen((event) {
-      switch(event){
-        case InternetConnectionStatus.connected:
-          emit(ConnectedState());
-        case InternetConnectionStatus.disconnected:
-          checkStream.cancel();
-          emit(DisconnectedState());
+      if(event== InternetConnectionStatus.disconnected)
+      {
+        checkStream.cancel();
+        emit(DisconnectedState());
       }
     });
   }
@@ -29,7 +27,7 @@ class CheckConnectivityCubit extends Cubit<CheckConnectivityStates> {
     emit(CheckConnectivityLoadingState());
     await Future.delayed(const Duration(milliseconds: 1000));
     if(await _networkInfo.isConnected){
-      emit(ConnectedDoneState());
+      emit(ConnectedState());
       checkConnectivity();
     }else{
       emit(ErrorState());
@@ -42,7 +40,7 @@ class CheckConnectivityCubit extends Cubit<CheckConnectivityStates> {
       }
       GoRouter.of(context).pushNamed(Routes.noConnectionRoute);
     }
-    if(state is ConnectedDoneState)
+    if(state is ConnectedState)
       {
       if(location==Routes.initialRoute)
           {
