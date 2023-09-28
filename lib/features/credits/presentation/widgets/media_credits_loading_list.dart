@@ -8,8 +8,7 @@ class MediaCreditsLoadingList extends StatelessWidget {
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: .65, crossAxisCount: 3, mainAxisSpacing: 7),
-      delegate:
-      SliverChildBuilderDelegate(
+      delegate: SliverChildBuilderDelegate(
           childCount: 10,
           (context, index) =>Shimmer.fromColors(
         baseColor: Colors.grey[700]!,

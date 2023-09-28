@@ -1,9 +1,8 @@
 import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 class CastMemberModel extends CastMember {
   const CastMemberModel({
-    super.id,
-    super.adult,
-    super.name,
+    required super.id,
+    required super.name,
     super.castId,
     super.character,
     super.creditId,
@@ -18,7 +17,6 @@ class CastMemberModel extends CastMember {
   });
   factory CastMemberModel.fromJson(Map<String, dynamic> json) =>
       CastMemberModel(
-        adult: json["adult"] ?? '',
         knownForDepartment: json["known_for_department"] ?? '',
         name: json["name"] ?? '',
         id: json["id"] ?? 0,

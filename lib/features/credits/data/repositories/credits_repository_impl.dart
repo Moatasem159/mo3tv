@@ -16,7 +16,6 @@ class CreditsRepositoryImpl implements CreditsRepository{
     {
       try {
         final result = await _creditsDataSource.getMediaCredits(mediaId: mediaId,mediaType: mediaType);
-        result.removeWhere((element) => element.profilePath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));

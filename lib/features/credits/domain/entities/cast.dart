@@ -1,9 +1,8 @@
 class CastMember{
-  final int? id;
-  final bool? adult;
+  final int id;
   final int? gender;
   final String? knownForDepartment;
-  final String? name;
+  final String name;
   final String? originalName;
   final dynamic popularity;
   final String? profilePath;
@@ -14,11 +13,10 @@ class CastMember{
   final String? department;
   final String? job;
   const CastMember(
-      {this.id,
-      this.adult,
+      {required this.id,
       this.gender,
       this.knownForDepartment,
-      this.name,
+      required this.name,
       this.originalName,
       this.popularity,
       this.profilePath,
