@@ -67,7 +67,7 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
               );
             }).toList()
         ),
-      ),
+      ).addSymmetricPadding(h: 8),
     );
   }
 }

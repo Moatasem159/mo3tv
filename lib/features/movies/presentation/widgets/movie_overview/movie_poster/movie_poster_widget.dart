@@ -33,9 +33,9 @@ class _MoviePosterWidgetState extends State<MoviePosterWidget> with SingleTicker
     return SlideTransition(
       position: _slideTransition,
       child: CachedNetworkImage(
+          height: MediaQuery.sizeOf(context).height/2.79,
+          width: MediaQuery.sizeOf(context).width/2,
           imageUrl: EndPoints.posterUrl(widget.movie.posterPath!),
-          height: 280,
-          width: 180,
           imageBuilder:(context, imageProvider) =>MoviePosterBuilder(poster: imageProvider),
           placeholder: (context, url) => const MovieImagePlaceHolder(),
           errorWidget: (context, url, error) => Image.asset(AppAssets.errorCover)
@@ -43,6 +43,3 @@ class _MoviePosterWidgetState extends State<MoviePosterWidget> with SingleTicker
     );
   }
 }
-
-
-

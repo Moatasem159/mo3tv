@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/core/widgets/empty_recommendations_media_widget.dart';
@@ -32,7 +31,7 @@ class RecommendationsTvShows extends StatelessWidget {
             if(state is GetTvShowRecommendationsErrorState){
               return SliverToBoxAdapter(
                 child: ErrorButton(onTap: (){
-                  RecommendationsTvCubit.get(context).getTvShowsRecommendations(tvId: tvId,lang: AppLocalizations.of(context)!.getLang());
+                  RecommendationsTvCubit.get(context).getTvShowsRecommendations(tvId: tvId);
                 }),
               );
             }

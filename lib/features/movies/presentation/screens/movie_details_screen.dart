@@ -28,12 +28,12 @@ class MovieDetailsScreen extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => GalleryNavigatorCubit()),
         BlocProvider(create: (context) => MovieBottomNavCubit()..movie = movie..listType = listType..initScreens()),
-        BlocProvider(create: (context) => MovieCubit(di.sl())..getMovieDetailsData(movieId: movie.id, lang: AppStrings.appLang)),
-        BlocProvider(create: (context) => MovieActionsBloc(di.sl(), di.sl(), di.sl())..movie=movie),
+        BlocProvider(create: (context) => MovieCubit(di.sl())..getMovieDetailsData(movieId: movie.id)),
+        BlocProvider(create: (context) => MovieActionsBloc(di.sl(), di.sl(), di.sl())..movie=movie..initialRate=movie.movieAccountDetails!.ratedValue??0),
         BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMediaGallery()),
         BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMovieReviews()),
         BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMovieCredits()),
-        BlocProvider(create: (context) => RecommendationsMovieCubit(di.sl())..getMovieRecommendations(movieId: movie.id, lang: AppStrings.appLang)),
+        BlocProvider(create: (context) => RecommendationsMovieCubit(di.sl())..getMovieRecommendations(movieId: movie.id)),
       ],
       child: Builder(builder: (context) {
           return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(

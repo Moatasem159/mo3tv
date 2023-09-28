@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_info_widgets/movie_info_widget.dart';
@@ -20,6 +21,6 @@ class MovieDetailsWidget extends StatelessWidget {
           ],
         ),
       ],
-    );
+    ).addSymmetricPadding(h:8,v:4);
   }
 }
