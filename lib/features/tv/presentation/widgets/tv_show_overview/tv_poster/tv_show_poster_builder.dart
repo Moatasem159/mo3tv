@@ -5,8 +5,6 @@ class TvShowPosterBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300,
-        width: 200,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(image: poster,fit: BoxFit.cover)));

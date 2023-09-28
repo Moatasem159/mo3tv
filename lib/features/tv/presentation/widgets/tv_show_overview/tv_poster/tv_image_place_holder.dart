@@ -8,8 +8,6 @@ class TvShowImagePlaceHolder extends StatelessWidget {
       baseColor: Colors.grey[850]!,
       highlightColor: Colors.grey[800]!,
       child: Container(
-        height: 300,
-        width: 200,
         decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(8.0))));
   }
 }
