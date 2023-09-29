@@ -33,7 +33,7 @@ class _MovieDescriptionWidgetState extends State<MovieDescriptionWidget>with Sin
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          OverViewWidget(overview: widget.movie.overview!),
+          MovieOverViewText(overview: widget.movie.overview!),
           KeywordListWidget(keywords:widget.movie.keywords!),
           MovieProductionCompaniesWidget(productionCompanies:widget.movie.productionCompanies!)
         ],
