@@ -23,19 +23,19 @@ class GalleryCubit extends Cubit<GalleryStates> {
     emit(response.fold((failure) => GetMediaGalleryErrorState(msg: mapFailureToMsg(failure)),
             (mediaGallery) {
           for (var element in mediaGallery.backdrops!){
-            if(element.iso6391=="en")
+            if(element.iso6391=="en"||element.iso6391=="ar")
             {
               gallery.backdrops!.add(element);
             }
           }
           for (var element in mediaGallery.posters!){
-            if(element.iso6391=="en")
+            if(element.iso6391=="en"||element.iso6391=="ar")
             {
               gallery.posters!.add(element);
             }
           }
           for (var element in mediaGallery.logos!){
-            if(element.iso6391=="en")
+            if(element.iso6391=="en"||element.iso6391=="ar")
             {
               gallery.logos!.add(element);
             }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_error_card.dart';
 import 'package:mo3tv/core/widgets/playing_now_media/playing_now_media_loading_carousal.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_cubit.dart';
@@ -27,6 +28,6 @@ class PlayingNowTvShows extends StatelessWidget {
         }
         return Container();
       },
-    );
+    ).addPadding(t: 20,b: 10);
   }
 }

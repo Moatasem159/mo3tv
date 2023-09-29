@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movies_screen_body.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/playing_now_movies/playing_now_movies.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/popular_movies.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/top_rated_movies.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/trending_movies.dart';
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const MoviesScreenBody();
+    return ListView(
+      physics: const BouncingScrollPhysics(),
+      children: const [
+        PlayingNowMovies(),
+        TrendingMovies(),
+        PopularMovies(),
+        TopRatedMovies(),
+      ],
+    );
   }
 }
