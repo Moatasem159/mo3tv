@@ -6,3 +6,4 @@ class GetSimilarMoviesErrorState extends SimilarMovieStates{
   final String msg;
   GetSimilarMoviesErrorState({required this.msg});
 }
+class ListenState extends SimilarMovieStates{}

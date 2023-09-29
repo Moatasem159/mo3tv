@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/widgets/buttons/arrow_up_button.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/similar_tv_shows_widgets/similar_tv_shows_screen_body.dart';
 class SimilarTvShowsScreen extends StatefulWidget {
@@ -9,7 +10,6 @@ class SimilarTvShowsScreen extends StatefulWidget {
   @override
   State<SimilarTvShowsScreen> createState() => _SimilarTvShowsScreenState();
 }
-
 class _SimilarTvShowsScreenState extends State<SimilarTvShowsScreen> {
   final ScrollController controller = ScrollController();
   bool showScrollButton = false;
@@ -38,18 +38,7 @@ class _SimilarTvShowsScreenState extends State<SimilarTvShowsScreen> {
           controller: controller,
             recommendations: widget.recommendations, tvId: widget.tvId),
         floatingActionButton: showScrollButton
-        ? SizedBox(
-          height: 30,
-          width: 30,
-          child: FloatingActionButton(
-            backgroundColor: Theme.of(context).primaryColor,
-            foregroundColor: Colors.white,
-            onPressed: () {
-              controller.animateTo(0, duration: const Duration(milliseconds: 700), curve: Curves.fastLinearToSlowEaseIn);
-            },
-            child: const Icon(Icons.arrow_upward_outlined),
-          ),
-    ): null,
+        ? ArrowUpButton(onTap: () => controller.animateTo(0, duration: const Duration(milliseconds: 700), curve: Curves.fastLinearToSlowEaseIn)): null,
       ),
     );
   }

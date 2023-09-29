@@ -9,8 +9,7 @@ import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_state.dart';
 class SimilarMoviesButton extends StatelessWidget {
-  final int movieId;
-  const SimilarMoviesButton({super.key, required this.movieId});
+  const SimilarMoviesButton({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SimilarMovieCubit, SimilarMovieStates>(
@@ -34,7 +33,7 @@ class SimilarMoviesButton extends StatelessWidget {
         }
         return SeeMoreButton(
           onPressed: () {
-            SimilarMovieCubit.get(context).getSimilarMovies(movieId: movieId,lang: AppLocalizations.of(context)!.getLang());
+            SimilarMovieCubit.get(context).getSimilarMovies();
           },
         );
       },
