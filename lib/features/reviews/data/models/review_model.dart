@@ -3,7 +3,7 @@ class ReviewModel extends Review {
   ReviewModel(
       {super.author,
       super.authorDetails,
-      super.content,
+      required super.content,
       super.createdAt,
       super.id,
       super.updatedAt,

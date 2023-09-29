@@ -1,7 +1,7 @@
 class Review{
   String? author;
   AuthorDetails? authorDetails;
-  String? content;
+  final String content;
   String ?createdAt;
   String ?id;
   String? updatedAt;
@@ -9,7 +9,7 @@ class Review{
   Review(
       {this.author,
       this.authorDetails,
-      this.content,
+      required this.content,
       this.createdAt,
       this.id,
       this.updatedAt,
@@ -20,7 +20,6 @@ class AuthorDetails{
   String ?username;
   String ?avatarPath;
   dynamic rating;
-
   AuthorDetails({this.name, this.username, this.avatarPath, this.rating});
   Map<String, dynamic> toJson() => {
     "name": name,

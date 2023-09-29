@@ -20,6 +20,7 @@ class AppStrings {
   static const String loadMore="load_more";
   static const String noMore="no_more";
   static const String seeMore="see_more";
+  static const String seeLess="see_less";
   static const String keywords="keywords";
   static const String moviesLists="movies_lists";
   static const String ratedMovies="rated_movies";
