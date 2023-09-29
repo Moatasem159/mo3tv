@@ -9,8 +9,7 @@ import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/similar_tv_show_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/similar_tv_shows_cubit/similar_tv_show_state.dart';
 class SimilarTvShowButton extends StatelessWidget {
-  final int tvId;
-  const SimilarTvShowButton({super.key, required this.tvId});
+  const SimilarTvShowButton({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SimilarTvShowCubit, SimilarTvShowStates>(
@@ -30,7 +29,7 @@ class SimilarTvShowButton extends StatelessWidget {
             ),
           );
         }
-        return SeeMoreButton(onPressed: () => cubit.getSimilarTvShows(tvId: tvId,lang: AppLocalizations.of(context)!.getLang()));
+        return SeeMoreButton(onPressed: () => cubit.getSimilarTvShows());
       },
     );
   }
