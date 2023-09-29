@@ -38,7 +38,7 @@ class Mo3Tv extends StatelessWidget {
         BlocProvider(create: (context) => AccountListsCubit(di.sl())),
         BlocProvider(create: (context) => LoginCubit(di.sl(), di.sl())),
         BlocProvider(create: (context) => LogOutCubit(di.sl(), di.sl())),
-        BlocProvider(create: (context) => AccountCubit(di.sl(), di.sl(), di.sl())),
+        BlocProvider(create: (context) => AccountCubit(di.sl(), di.sl())),
       ],
       child: BlocBuilder<LocaleCubit, LocaleStates>(
         buildWhen:LocaleCubit.buildWhen,

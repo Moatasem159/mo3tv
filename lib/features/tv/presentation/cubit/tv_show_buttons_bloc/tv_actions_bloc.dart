@@ -15,7 +15,6 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
   final DeleteTvShowRateUseCase _deleteTvShowRateUseCase;
   TvActionsBloc(this._deleteTvShowRateUseCase, this._markTvShowAsFavUsecase,this._rateTvShowUseCase)
       : super(TvShowActionsInitialState()){
-    initialRating=0;
     on<RateTvShowEvent>((event, emit) => rateTvShow(emit,event.rate),
       transformer: (eventsStream, mapper) => eventsStream.distinct().switchMap(mapper));
     on<FavTvShowEvent>((event, emit) => favTvShow(emit,event.fav),
@@ -25,10 +24,10 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
   }
   static TvActionsBloc get(context)=>BlocProvider.of(context);
   late TvShow tvShow;
-  late double initialRating;
   Future<void> rateTvShow(emit,rate)async{
     emit(ActionLoadingState());
     bool watchList= tvShow.tvShowAccountDetails!.watchlist!;
+    dynamic oldRate=tvShow.tvShowAccountDetails!.ratedValue!;
     Either<Failure, Message> response;
     if(rate>0){
       tvShow.tvShowAccountDetails!.watchlist = false;
@@ -41,7 +40,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     }
     emit(response.fold(
         (l){
-          tvShow.tvShowAccountDetails!.ratedValue=initialRating;
+          tvShow.tvShowAccountDetails!.ratedValue=oldRate;
           tvShow.tvShowAccountDetails!.watchlist=watchList;
           return ActionErrorState(where: "rate");
         },

@@ -58,11 +58,11 @@ class AccountRepositoryImpl implements AccountRepository{
     }
   }
   @override
-  Future<void> saveAccountData({required String sessionId, required String accountId}) async{
-     await _accountLocalDataSource.saveAccountData(sessionId: sessionId, accountId: accountId);
+  Future<void> saveSessionId({required String sessionId}) async{
+     await _accountLocalDataSource.saveSessionId(sessionId: sessionId);
   }
   @override
-  Future<void> getAccountData()async {
-   await _accountLocalDataSource.getAccountData();
+  Future<void> getSessionId()async {
+   await _accountLocalDataSource.getSessionId();
   }
 }

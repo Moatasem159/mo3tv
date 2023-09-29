@@ -11,10 +11,10 @@ import 'package:mo3tv/features/account/data/datasources/account_local_datasource
 import 'package:mo3tv/features/account/data/datasources/account_remote_datasource.dart';
 import 'package:mo3tv/features/account/data/repositories/account_repository_impl.dart';
 import 'package:mo3tv/features/account/domain/repositories/account_repository.dart';
-import 'package:mo3tv/features/account/domain/usecases/get_account_data_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_session_id_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_details_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_lists_usecase.dart';
-import 'package:mo3tv/features/account/domain/usecases/save_account_data_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/save_session_id_usecase.dart';
 import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart';
 import 'package:mo3tv/features/credits/data/repositories/credits_repository_impl.dart';
 import 'package:mo3tv/features/credits/domain/repositories/credits_repository.dart';
@@ -124,8 +124,8 @@ Future external()async{
 }
 account(){
   sl.registerLazySingleton<GetAccountListsUsecase>(() => GetAccountListsUsecase(sl()));
-  sl.registerLazySingleton<SaveAccountDataUsecase>(() => SaveAccountDataUsecase(sl()));
-  sl.registerLazySingleton<GetAccountDataUsecase>(() => GetAccountDataUsecase(sl()));
+  sl.registerLazySingleton<SaveSessionIdUsecase>(() => SaveSessionIdUsecase(sl()));
+  sl.registerLazySingleton<GetSavedSessionIdUsecase>(() => GetSavedSessionIdUsecase(sl()));
   sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
   sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl(),sl()));
   sl.registerLazySingleton<AccountRemoteDataSource>(() => AccountRemoteDataSourceImpl(sl()));

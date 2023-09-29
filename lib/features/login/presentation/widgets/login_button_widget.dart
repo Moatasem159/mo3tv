@@ -8,7 +8,7 @@ class LoginButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  ElevatedButton(
-      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
+      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
       onPressed: onTap,
       child:Text(title.tr(context)!,style: AppTextStyles.get14NormalText()),
     );

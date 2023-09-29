@@ -15,7 +15,6 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   final DeleteRateMovieUseCase _deleteRateMovieUseCase;
   MovieActionsBloc(this._deleteRateMovieUseCase,this._rateMovieUseCase,this._markMovieUsecase)
     :super(RateMovieInitialState()){
-    initialRate=0;
     on<RateMovieEvent>((event, emit) => rateMovie(emit,event.rate),
       transformer: (eventsStream, mapper) => eventsStream.distinct().switchMap(mapper));
     on<FavMovieEvent>((event, emit) => favMovie(emit,event.fav),
@@ -25,10 +24,10 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   }
   static MovieActionsBloc get(context)=>BlocProvider.of(context);
   late Movie movie;
-  late double initialRate;
   Future<void> rateMovie(emit,double rate)async{
     emit(ActionLoadingState());
     bool watchList= movie.movieAccountDetails!.watchlist!;
+    dynamic oldRate= movie.movieAccountDetails!.ratedValue;
     Either<Failure, Message> response;
     if(rate>0) {
       movie.movieAccountDetails!.watchlist = false;
@@ -41,7 +40,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     }
     emit(response.fold(
             (l){
-              movie.movieAccountDetails!.ratedValue=initialRate;
+              movie.movieAccountDetails!.ratedValue=oldRate;
               movie.movieAccountDetails!.watchlist=watchList;
               return ActionErrorState(where: "rate");
             },

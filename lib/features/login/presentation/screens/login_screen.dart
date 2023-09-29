@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginStates>(
       builder: (context, state) {
-        LoginCubit cubit=BlocProvider.of<LoginCubit>(context);
+        LoginCubit cubit=LoginCubit.get(context);
         return SafeArea(
           child: WillPopScope(
             onWillPop: () async{

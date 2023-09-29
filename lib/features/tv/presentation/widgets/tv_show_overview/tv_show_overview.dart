@@ -6,6 +6,7 @@ import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_cubit/tv_state.dart';
+import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_bloc.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_overview_success_body.dart';
 class TvShowOverview extends StatelessWidget {
   final TvShow tvShow;
@@ -20,6 +21,7 @@ class TvShowOverview extends StatelessWidget {
               child: Center(child: Lottie.asset(AppAssets.tvLoading, height: 100)));
         }
         if (state is GetTvShowDetailsSuccessState) {
+          TvActionsBloc.get(context).tvShow=state.tvShow;
           return TvShowOverviewSuccessBody(listType: listType, tvShow: state.tvShow);
         }
         if (state is GetTvShowDetailsErrorState) {

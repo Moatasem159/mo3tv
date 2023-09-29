@@ -8,7 +8,7 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_
 class MovieButtonsWidget extends StatefulWidget {
   final Movie movie;
   final String listType;
-  const MovieButtonsWidget({super.key,required this.movie, this.listType=''});
+  const MovieButtonsWidget({super.key,required this.movie, this.listType='?'});
   @override
   State<MovieButtonsWidget> createState() => _MovieButtonsWidgetState();
 }

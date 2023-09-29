@@ -8,7 +8,7 @@ import 'package:mo3tv/app/injection_container.dart';
 import 'package:mo3tv/config/themes/app_theme.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
-import 'package:mo3tv/features/account/domain/usecases/get_account_data_usecase.dart';
+import 'package:mo3tv/features/account/domain/usecases/get_session_id_usecase.dart';
 import 'package:mo3tv/features/settings/data/datasources/lang_local_datasource.dart';
 void main()async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +18,7 @@ void main()async{
   if(kDebugMode) {
     Bloc.observer=AppBlocObserver();
   }
-  await di.sl<GetAccountDataUsecase>().call();
+  await di.sl<GetSavedSessionIdUsecase>().call();
   AppStrings.appLang=await di.sl<LangLocalDataSource>().getSavedLang();
   if(AppStrings.sessionId==""){
     login();

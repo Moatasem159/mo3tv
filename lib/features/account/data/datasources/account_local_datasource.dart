@@ -4,8 +4,8 @@ import 'package:mo3tv/features/account/data/models/account_model.dart';
 abstract class AccountLocalDataSource{
   Future<bool> saveUser({required  accountModel});
   Future getUser();
-  Future<void> saveAccountData({required String sessionId, required String accountId});
-  Future<void> getAccountData();
+  Future<void> saveSessionId({required String sessionId});
+  Future<void> getSessionId();
 }
 class AccountLocalDatasourceImpl implements AccountLocalDataSource{
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
@@ -26,13 +26,11 @@ class AccountLocalDatasourceImpl implements AccountLocalDataSource{
     }
   }
   @override
-  Future<void> saveAccountData({required String sessionId, required String accountId}) async{
-   await _sharedPrefrencesConsumer.saveData(key: "accountId", value:accountId);
+  Future<void> saveSessionId({required String sessionId}) async{
    await _sharedPrefrencesConsumer.saveData(key: "sessionId", value:sessionId);
   }
   @override
-  Future<void> getAccountData() async{
+  Future<void> getSessionId() async{
     AppStrings.sessionId=await _sharedPrefrencesConsumer.getData(key: "sessionId")??'';
-    AppStrings.accountId=await _sharedPrefrencesConsumer.getData(key:"accountId")??'';
   }
 }
