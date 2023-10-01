@@ -12,14 +12,18 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
     index=0;
     isGallery=false;
     nestedController=ScrollController();
+    appBar=SliverOverlapAbsorberHandle();
+    disconnectBar=SliverOverlapAbsorberHandle();
   }
   static TvShowBottomNavCubit get(context)=>BlocProvider.of(context);
   late int index;
   late bool isGallery;
   late final TvShow tvShow;
   late final String listType;
-  late ScrollController nestedController;
+  late final ScrollController nestedController;
   late final List<Widget> screens;
+  late final SliverOverlapAbsorberHandle appBar;
+  late final SliverOverlapAbsorberHandle disconnectBar;
   initScreens(){
     screens = [
       TvShowOverview(tvShow: tvShow, listType: listType),
@@ -45,6 +49,8 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
   @override
   Future<void> close() {
     nestedController.dispose();
+    appBar.dispose();
+    disconnectBar.dispose();
     return super.close();
   }
 }

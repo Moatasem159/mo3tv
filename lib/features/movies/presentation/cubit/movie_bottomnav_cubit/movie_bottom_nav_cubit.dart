@@ -12,6 +12,8 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
    index=0;
    isGallery=false;
    nestedController=ScrollController();
+   appBar= SliverOverlapAbsorberHandle();
+   disconnectBar= SliverOverlapAbsorberHandle();
   }
   static MovieBottomNavCubit get(context) => BlocProvider.of(context);
   late int index;
@@ -19,7 +21,9 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   late final Movie movie;
   late final String listType;
   late final List<Widget> screens;
-  late ScrollController nestedController;
+  late final ScrollController nestedController;
+  late final SliverOverlapAbsorberHandle appBar;
+  late final SliverOverlapAbsorberHandle disconnectBar;
   initScreens() {
     screens = [
       MovieOverview(movie: movie, listType: listType),
@@ -44,7 +48,8 @@ class MovieBottomNavCubit extends Cubit<MovieBottomNavStates> {
   @override
   Future<void> close() {
     nestedController.dispose();
+    appBar.dispose();
+    disconnectBar.dispose();
     return super.close();
   }
-
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/media_details_appbar.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
@@ -17,14 +16,13 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_bottomnav_cubit/tv_show_bottom_nav_state.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_actions_bloc.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_bottom_nav_bar/tv_show_bottom_nav_bar.dart';
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_details_screen_body.dart';
 class TvShowDetailsScreen extends StatelessWidget {
   final TvShow tvShow;
   final String listType;
   const TvShowDetailsScreen({Key? key, required this.tvShow, this.listType = '?'}):super(key: key);
   @override
   Widget build(BuildContext context) {
-    final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
-    final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => GalleryNavigatorCubit()),
@@ -58,38 +56,29 @@ class TvShowDetailsScreen extends StatelessWidget {
                     bottomNavigationBar: const TvShowBottomNavbar(),
                     body: NestedScrollView(
                       controller: TvShowBottomNavCubit.get(context).nestedController,
-                      headerSliverBuilder: (context, innerBoxIsScrolled) {
-                        return [
-                          SliverOverlapAbsorber(
-                              handle: appBar,
-                              sliver: SliverPersistentHeader(
-                                  pinned: true,
-                                  delegate: MediaDetailsAppBar(
-                                    isMovie: false,
-                                    media: tvShow,
-                                    onTap: TvShowBottomNavCubit.get(context).resetList,
-                                    onBackTap: () {
-                                      if (TvShowBottomNavCubit.get(context).index != 0) {
-                                        TvShowBottomNavCubit.get(context).changeScreen(0);
-                                      } else {
-                                        GoRouter.of(context).pop();
-                                      }
-                                    },
-                                  ))),
-                          if (cubit.isGallery)
-                            SliverOverlapAbsorber(handle: disconnectBar, sliver: const GalleryTabBar())
-                        ];
-                      },
-                      body:CustomScrollView(
-                        physics: const ClampingScrollPhysics(),
-                        slivers: [
-                          SliverOverlapInjector(handle: appBar),
-                          if (cubit.isGallery)
-                            SliverOverlapInjector(handle: disconnectBar),
-                          SliverToBoxAdapter(child: 15.ph),
-                          cubit.screens[cubit.index]
+                      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                        SliverOverlapAbsorber(
+                          handle: cubit.appBar,
+                          sliver: SliverPersistentHeader(
+                            pinned: true,
+                            delegate: MediaDetailsAppBar(
+                              isMovie: false,
+                              media: tvShow,
+                              onTap: TvShowBottomNavCubit.get(context).resetList,
+                              onBackTap: () {
+                                if (TvShowBottomNavCubit.get(context).index != 0) {
+                                  TvShowBottomNavCubit.get(context).changeScreen(0);
+                                } else {
+                                  GoRouter.of(context).pop();
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        if (cubit.isGallery)
+                        SliverOverlapAbsorber(handle: cubit.disconnectBar, sliver: const GalleryTabBar())
                         ],
-                      ),
+                      body:const TvShowDetailsScreenBody(),
                     ),
                   ),
                 ),

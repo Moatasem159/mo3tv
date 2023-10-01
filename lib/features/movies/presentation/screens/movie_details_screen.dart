@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/media_details_appbar.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
@@ -16,6 +15,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_bottom_nav_bar/movie_bottom_nav_bar.dart';
+import 'package:mo3tv/features/movies/presentation/widgets/movie_details_screen_body.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 class MovieDetailsScreen extends StatelessWidget {
   final Movie movie;
@@ -23,8 +23,6 @@ class MovieDetailsScreen extends StatelessWidget {
   const MovieDetailsScreen({super.key, required this.movie,this.listType='?'});
   @override
   Widget build(BuildContext context) {
-    final SliverOverlapAbsorberHandle appBar = SliverOverlapAbsorberHandle();
-    final SliverOverlapAbsorberHandle disconnectBar = SliverOverlapAbsorberHandle();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => GalleryNavigatorCubit()),
@@ -59,35 +57,29 @@ class MovieDetailsScreen extends StatelessWidget {
                       body: NestedScrollView(
                         controller: MovieBottomNavCubit.get(context).nestedController,
                         physics: const ClampingScrollPhysics(),
-                        headerSliverBuilder: (context, innerBoxIsScrolled) {
-                          return [
-                            SliverOverlapAbsorber(
-                                handle: appBar,
-                                sliver: SliverPersistentHeader(pinned: true,
-                                    delegate: MediaDetailsAppBar(
-                                      isMovie: true,
-                                    media: movie,
-                                    onTap: MovieBottomNavCubit.get(context).resetList,
-                                      onBackTap: () {
-                                        if (MovieBottomNavCubit.get(context).index != 0) {
-                                          MovieBottomNavCubit.get(context).changeScreen(0);
-                                        } else {
-                                          GoRouter.of(context).pop();
-                                        }
-                                      },))),
-                            if (cubit.isGallery)
-                              SliverOverlapAbsorber(handle: disconnectBar, sliver: const GalleryTabBar()),
-                          ];
-                        },
-                        body: CustomScrollView(
-                          slivers: [
-                            SliverOverlapInjector(handle: appBar),
-                            if (cubit.isGallery)
-                            SliverOverlapInjector(handle: disconnectBar),
-                            SliverToBoxAdapter(child: 15.ph),
-                            cubit.screens[cubit.index],
-                          ],
-                        ),
+                        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                          SliverOverlapAbsorber(
+                            handle: cubit.appBar,
+                            sliver: SliverPersistentHeader(
+                              pinned: true,
+                              delegate: MediaDetailsAppBar(
+                                isMovie: true,
+                                media: movie,
+                                onTap: MovieBottomNavCubit.get(context).resetList,
+                                onBackTap: () {
+                                  if (MovieBottomNavCubit.get(context).index != 0) {
+                                    MovieBottomNavCubit.get(context).changeScreen(0);
+                                  } else {
+                                    GoRouter.of(context).pop();
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                          if (cubit.isGallery)
+                            SliverOverlapAbsorber(handle: cubit.disconnectBar, sliver: const GalleryTabBar()),
+                        ],
+                        body: const MovieDetailsScreenBody(),
                       ),
                     ),
                   ),
