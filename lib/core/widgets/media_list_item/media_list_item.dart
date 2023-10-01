@@ -17,8 +17,6 @@ class MediaListItem extends StatelessWidget {
     return GestureDetector(
       onTap: ()=>GoRouter.of(context).pushNamed(isMovie?Routes.movieDetailsRoute:Routes.tvShowDetailsRoute,extra:media,pathParameters:{"listType":listType}),
       child: CachedNetworkImage(
-        width: 120,
-        height:200,
         imageUrl: EndPoints.posterUrl(media.posterPath!),
         imageBuilder: (context, imageProvider)=>MediaImageBuilder(image: imageProvider),
         placeholder: (context, url) => const MediaListLoadingItem(),
