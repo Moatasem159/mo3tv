@@ -6,7 +6,6 @@ class ImageEntity {
   dynamic voteAverage;
   dynamic voteCount;
   dynamic width;
-
   ImageEntity(
       {this.aspectRatio = 0,
         this.height = 0,

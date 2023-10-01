@@ -9,7 +9,6 @@ class ImageModel extends ImageEntity {
     super.voteCount,
     super.width,
   });
-
   factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
     aspectRatio: json["aspect_ratio"] ?? 0,
     height: json["height"] ?? 0,

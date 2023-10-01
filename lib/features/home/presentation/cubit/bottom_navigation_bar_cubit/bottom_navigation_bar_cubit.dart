@@ -20,7 +20,6 @@ class BottomNavCubit extends Cubit<BottomNavStates> {
     const SettingsScreen()
   ];
   changeIndex(int index) {
-    emit(ChangeBottomNavLoadingState());
     this.index=index;
     emit(ChangeBottomNavSuccessState());
   }

@@ -67,7 +67,6 @@ class _MediaPostersListState extends State<MediaPostersList> {
               ],
             ),
           ),
-
       ],
     );
   }

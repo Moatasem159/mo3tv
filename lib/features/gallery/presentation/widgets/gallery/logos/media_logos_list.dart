@@ -49,7 +49,6 @@ class _MediaLogosListState extends State<MediaLogosList> {
                   return GalleryImage(image:_logos.length>4? pagination(_logos,_page,_perPage)[index]:
                   _logos[index]);
           }
-
         ),
         ),
         SliverToBoxAdapter(child: 20.ph),

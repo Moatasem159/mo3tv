@@ -5,7 +5,6 @@ import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
-import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/api/handling_errors.dart';
 import 'package:mo3tv/core/api/status_code.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
@@ -20,7 +19,6 @@ class DioConsumer implements ApiConsumer {
     _client.options
       ..connectTimeout=const Duration(seconds: 15)
       ..receiveTimeout=const Duration(seconds: 15)
-      ..baseUrl = EndPoints.baseUrl
       ..responseType = ResponseType.plain
       .. receiveDataWhenStatusError= true
       ..followRedirects = false

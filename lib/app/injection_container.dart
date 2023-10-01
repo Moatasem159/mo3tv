@@ -179,7 +179,6 @@ tv(){
   sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(sl()));
   sl.registerLazySingleton<TvShowLocalDataSource>(()=>TvShowLocalDataSourceImpl(sl()));
 }
-
 reviews(){
   sl.registerLazySingleton<GetMediaReviewsUsecase>(() => GetMediaReviewsUsecase(sl()));
   sl.registerLazySingleton<ReviewsRepository>(() => ReviewsRepositoryImpl(sl(),sl()));

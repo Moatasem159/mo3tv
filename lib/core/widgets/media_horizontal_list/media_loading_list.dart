@@ -12,7 +12,7 @@ class MediaLoadingList extends StatelessWidget {
         ListTitle(title: title),
         10.ph,
         SizedBox(
-          height: 200,
+          height: MediaQuery.sizeOf(context).height/3.9,
           child: ListView.builder(
             itemCount: 20,
             physics: const BouncingScrollPhysics(),
