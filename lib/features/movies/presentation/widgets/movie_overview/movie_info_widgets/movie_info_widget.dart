@@ -35,7 +35,7 @@ class _MovieInfoWidgetState extends State<MovieInfoWidget> with SingleTickerProv
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TitleWidget(title: widget.movie.title!,releaseDate: widget.movie.releaseDate!),
+            TitleWidget(title: widget.movie.name!,releaseDate: widget.movie.releaseDate!),
             TaglineWidget(tagline: widget.movie.tagline!),
             StatusWidget(status: widget.movie.status!),
             BudgetWidget(budget: widget.movie.budget!,revenue: widget.movie.revenue!),

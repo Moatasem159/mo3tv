@@ -31,7 +31,7 @@ abstract class Routes {
   static const String movieDetailsRoute= "/movieDetailsRoute/:listType";
   static const String similarMoviesRoute= "/similarMoviesRoute/:movieId";
   static const String similarTvShowsRoute= "/similarTvShowsRoute/:tvId";
-  static const String tvShowRoute= "/tvShowRoute/:listType";
+  static const String tvShowDetailsRoute= "/tvShowDetailsRoute/:listType";
   static const String seeMoreRoute= "/seeMoreRoute";
   static const String seasonRoute= "/seasonRoute/:tvShowName/:tvShowId";
   static const String accountMediaLists= "/accountMediaLists/:title/:listType/:mediaType";
@@ -63,8 +63,8 @@ abstract class AppRoute{
             listType: state.pathParameters["listType"]!,
             movie: state.extra as Movie))),
       GoRoute(
-        name: Routes.tvShowRoute,
-        path: Routes.tvShowRoute,
+        name: Routes.tvShowDetailsRoute,
+        path: Routes.tvShowDetailsRoute,
        pageBuilder: (context, state) => SlideFromDownToUp(child: TvShowDetailsScreen(
            listType: state.pathParameters["listType"]??'',
            tvShow:  state.extra as TvShow))),

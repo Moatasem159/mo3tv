@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/core/widgets/media_details_appbar.dart';
 import 'package:mo3tv/features/credits/presentation/cubits/credits_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_cubit/gallery_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
@@ -12,7 +14,6 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/m
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/recommendations_movie_cubit/recommendations_movie_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_appbar_widget.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_bottom_nav_bar/movie_bottom_nav_bar.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
@@ -62,7 +63,18 @@ class MovieDetailsScreen extends StatelessWidget {
                           return [
                             SliverOverlapAbsorber(
                                 handle: appBar,
-                                sliver: SliverPersistentHeader(pinned: true,delegate: MovieDetailsAppBar(movie))),
+                                sliver: SliverPersistentHeader(pinned: true,
+                                    delegate: MediaDetailsAppBar(
+                                      isMovie: true,
+                                    media: movie,
+                                    onTap: MovieBottomNavCubit.get(context).resetList,
+                                      onBackTap: () {
+                                        if (MovieBottomNavCubit.get(context).index != 0) {
+                                          MovieBottomNavCubit.get(context).changeScreen(0);
+                                        } else {
+                                          GoRouter.of(context).pop();
+                                        }
+                                      },))),
                             if (cubit.isGallery)
                               SliverOverlapAbsorber(handle: disconnectBar, sliver: const GalleryTabBar()),
                           ];

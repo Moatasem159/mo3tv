@@ -9,7 +9,7 @@ class MovieBottomNavbar extends StatelessWidget {
       height: 40,
       color: Theme.of(context).colorScheme.background,
       child: const Row(
-        children:  [
+        children: [
           MovieBottomNavBarItem(index: 0,icon:Icons.info_outline),
           MovieBottomNavBarItem(index: 1,icon:Icons.tv_rounded),
           MovieBottomNavBarItem(index: 2,icon:Icons.comment),

@@ -25,7 +25,7 @@ class BuildSettingsScreenBody extends StatelessWidget {
         const LoginButton(),
         10.ph,
         Text("Mo3Tv",style: AppTextStyles.get18BoldText(color: Colors.grey[700]!)),
-        Text("Version 3.1.1",style: AppTextStyles.get14BoldText(color: Colors.grey[800]!)),
+        Text("Version 3.2.1",style: AppTextStyles.get14BoldText(color: Colors.grey[800]!)),
         10.ph,
       ],
     );

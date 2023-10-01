@@ -26,22 +26,22 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   late Movie movie;
   Future<void> rateMovie(emit,double rate)async{
     emit(ActionLoadingState());
-    bool watchList= movie.movieAccountDetails!.watchlist!;
-    dynamic oldRate= movie.movieAccountDetails!.ratedValue;
+    bool watchList= movie.mediaAccountDetails!.watchlist!;
+    dynamic oldRate= movie.mediaAccountDetails!.ratedValue;
     Either<Failure, Message> response;
     if(rate>0) {
-      movie.movieAccountDetails!.watchlist = false;
+      movie.mediaAccountDetails!.watchlist = false;
       response=await _rateMovieUseCase.call(rate:rate, movieId: movie.id);
     }
     else{
-      movie.movieAccountDetails!.ratedValue=0.0;
-      movie.movieAccountDetails!.watchlist = false;
+      movie.mediaAccountDetails!.ratedValue=0.0;
+      movie.mediaAccountDetails!.watchlist = false;
       response =await _deleteRateMovieUseCase.call(movieId: movie.id);
     }
     emit(response.fold(
             (l){
-              movie.movieAccountDetails!.ratedValue=oldRate;
-              movie.movieAccountDetails!.watchlist=watchList;
+              movie.mediaAccountDetails!.ratedValue=oldRate;
+              movie.mediaAccountDetails!.watchlist=watchList;
               return ActionErrorState(where: "rate");
             },
             (r)=> ActionSuccessState()));
@@ -52,7 +52,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     await _markMovieUsecase.call(movieId: movie.id, mark: fav,markType: "favorite");
     emit(response.fold(
         (l){
-          movie.movieAccountDetails!.favorite= !movie.movieAccountDetails!.favorite!;
+          movie.mediaAccountDetails!.favorite= !movie.mediaAccountDetails!.favorite!;
           return ActionErrorState(where: "fav");
         },
         (r) => ActionSuccessState()));
@@ -63,7 +63,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     await _markMovieUsecase.call(movieId: movie.id, mark:add,markType: "watchlist");
     emit(response.fold(
             (l){
-              movie.movieAccountDetails!.watchlist= !movie.movieAccountDetails!.watchlist!;
+              movie.mediaAccountDetails!.watchlist= !movie.mediaAccountDetails!.watchlist!;
               return ActionErrorState(where: "watchList");
             },
             (r) => ActionSuccessState()));

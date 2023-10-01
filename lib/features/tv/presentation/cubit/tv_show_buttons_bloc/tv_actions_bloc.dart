@@ -26,22 +26,22 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
   late TvShow tvShow;
   Future<void> rateTvShow(emit,rate)async{
     emit(ActionLoadingState());
-    bool watchList= tvShow.tvShowAccountDetails!.watchlist!;
-    dynamic oldRate=tvShow.tvShowAccountDetails!.ratedValue!;
+    bool watchList= tvShow.mediaAccountDetails!.watchlist!;
+    dynamic oldRate=tvShow.mediaAccountDetails!.ratedValue!;
     Either<Failure, Message> response;
     if(rate>0){
-      tvShow.tvShowAccountDetails!.watchlist = false;
+      tvShow.mediaAccountDetails!.watchlist = false;
       response =await _rateTvShowUseCase.call(rate:rate, tvId: tvShow.id);
     }
     else{
-      tvShow.tvShowAccountDetails!.ratedValue=0.0;
-      tvShow.tvShowAccountDetails!.watchlist = false;
+      tvShow.mediaAccountDetails!.ratedValue=0.0;
+      tvShow.mediaAccountDetails!.watchlist = false;
       response=await _deleteTvShowRateUseCase.call(tvId: tvShow.id);
     }
     emit(response.fold(
         (l){
-          tvShow.tvShowAccountDetails!.ratedValue=oldRate;
-          tvShow.tvShowAccountDetails!.watchlist=watchList;
+          tvShow.mediaAccountDetails!.ratedValue=oldRate;
+          tvShow.mediaAccountDetails!.watchlist=watchList;
           return ActionErrorState(where: "rate");
         },
         (r)=>ActionSuccessState()));
@@ -52,7 +52,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     await _markTvShowAsFavUsecase.call(tvId: tvShow.id,mark: fav,markType: "favorite");
     emit(response.fold(
         (l){
-          tvShow.tvShowAccountDetails!.favorite=!tvShow.tvShowAccountDetails!.favorite!;
+          tvShow.mediaAccountDetails!.favorite=!tvShow.mediaAccountDetails!.favorite!;
           return ActionErrorState(where: "fav");
         },
         (r)=> ActionSuccessState()));
@@ -63,7 +63,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     await _markTvShowAsFavUsecase.call(tvId: tvShow.id,mark: watchlist,markType: "watchlist");
     emit(response.fold(
         (l){
-          tvShow.tvShowAccountDetails!.watchlist=!tvShow.tvShowAccountDetails!.watchlist!;
+          tvShow.mediaAccountDetails!.watchlist=!tvShow.mediaAccountDetails!.watchlist!;
           return ActionErrorState(where: "watchList");
         },
         (r)=>ActionSuccessState()));

@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
+import 'package:mo3tv/core/entities/media.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_play_button.dart';
-class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
-  final Movie movie;
-  MovieDetailsAppBar(this.movie);
+import 'package:mo3tv/features/tv/presentation/widgets/tv_show_play_button.dart';
+class MediaDetailsAppBar extends SliverPersistentHeaderDelegate {
+  final Media media;
+  final VoidCallback onTap;
+  final VoidCallback onBackTap;
+  final bool isMovie;
+  MediaDetailsAppBar({required this.media,required this.onTap,required this.onBackTap,required this.isMovie});
   final double maxSize = 200;
   final double minSize = 70;
   @override
@@ -34,12 +36,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
     final textTop = maxTitleMargin + (1 - textTopMovement * p);
     final textLeft = maxMargin + (textLeftMovement * p);
     return GestureDetector(
-      onTap: (){
-        MovieBottomNavCubit.get(context).nestedController.animateTo(0,
-            duration:
-            const Duration(milliseconds: 500),
-            curve: Curves.ease);
-      },
+      onTap: onTap,
       child: Container(
         color: Colors.black,
         child: Stack(
@@ -58,7 +55,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                          EndPoints.backDropsUrl(movie.backdropPath!),
+                          EndPoints.backDropsUrl(media.backdropPath!),
                         ),
                       )),
                 )),
@@ -66,13 +63,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                 left: 15,
                 top: 5,
                 child: GestureDetector(
-                    onTap: () {
-                      if (MovieBottomNavCubit.get(context).index != 0) {
-                        MovieBottomNavCubit.get(context).changeScreen(0);
-                      } else {
-                        GoRouter.of(context).pop();
-                      }
-                    },
+                    onTap: onBackTap,
                     child: Container(
                       width: iconSize,
                       height: iconSize,
@@ -95,7 +86,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
                   ),
                   child: FittedBox(
                     child: Text(
-                      movie.originalTitle!,
+                      media.originalName!,
                       maxLines: null,
                       overflow: TextOverflow.visible,
                       style: TextStyle(
@@ -108,7 +99,7 @@ class MovieDetailsAppBar extends SliverPersistentHeaderDelegate {
             Positioned(
                 top: maxSize - shrinkOffset-46/2,
                 right: 25,
-                child: MoviePlayButton(shrinkOffset: shrinkOffset))
+                child: isMovie?MoviePlayButton(shrinkOffset: shrinkOffset):TvShowPlayButton(shrinkOffset: shrinkOffset))
           ],
         ),
       ),

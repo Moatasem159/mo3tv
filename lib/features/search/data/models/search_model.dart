@@ -4,9 +4,8 @@ import 'package:mo3tv/features/search/domain/entities/search.dart';
 // ignore: must_be_immutable
 class SearchModel extends Search{
   SearchModel(
-      {super.adult,
-        super.backdropPath,
-        super.id,
+      {super.backdropPath,
+        required super.id,
         super.mediaType,
         super.originalTitle,
         super.popularity,
@@ -19,7 +18,6 @@ class SearchModel extends Search{
         super.originalName});
 
   factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
-        adult: json["adult"],
         backdropPath: json["backdrop_path"] ?? '',
         id: json["id"],
         mediaType: json["media_type"] ?? '',
@@ -44,7 +42,6 @@ class SearchModel extends Search{
   }
 
   static Map<String, dynamic> searchToJson(SearchModel searchModel) => {
-        "adult": searchModel.adult,
         "backdrop_path": searchModel.backdropPath,
         "id": searchModel.id,
         "media_type": searchModel.mediaType,

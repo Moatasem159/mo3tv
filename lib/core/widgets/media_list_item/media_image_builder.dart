@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-class MovieImageBuilder extends StatelessWidget {
+class MediaImageBuilder extends StatelessWidget {
   final ImageProvider image;
-  const MovieImageBuilder({super.key,required this.image});
+  const MediaImageBuilder({super.key,required this.image});
   @override
   Widget build(BuildContext context) {
     return Container(

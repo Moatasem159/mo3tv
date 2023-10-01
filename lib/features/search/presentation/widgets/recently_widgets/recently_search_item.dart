@@ -14,15 +14,15 @@ class RecentlySearchItem extends StatelessWidget {
   String name(Search search){
     if(search.name!='')
     {
-      return search.name!;
+      return "${search.name} ${search.releaseDate == "" ? '' : ((search.releaseDate!.substring(0, 4)))}";
     }
     else if(search.originalName!='')
     {
-      return search.originalName!;
+      return "${search.originalName} ${search.releaseDate == "" ? '' : ((search.releaseDate!.substring(0, 4)))}";
     }
     else if(search.originalTitle!='')
     {
-      return search.originalTitle!;
+      return "${search.originalTitle} ${search.releaseDate == "" ? '' : ((search.releaseDate!.substring(0, 4)))}";
     }
     return "";
   }
@@ -33,9 +33,9 @@ class RecentlySearchItem extends StatelessWidget {
         FocusManager.instance.primaryFocus!.unfocus();
         if(search.mediaType=="movie") {
           Movie m=Movie(
-            id: search.id!,
-            title: search.originalTitle,
-            originalTitle: search.originalTitle,
+            id: search.id,
+            name: search.originalTitle,
+            originalName: search.originalTitle,
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );
@@ -43,13 +43,13 @@ class RecentlySearchItem extends StatelessWidget {
         }
         else if(search.mediaType=="tv"){
           TvShow tv=TvShow(
-            id: search.id!,
+            id: search.id,
             originalName :search.originalName,
             name: search.name,
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );
-          GoRouter.of(context).pushNamed(Routes.tvShowRoute, extra: tv,pathParameters: {"listType":"?"});
+          GoRouter.of(context).pushNamed(Routes.tvShowDetailsRoute, extra: tv,pathParameters: {"listType":"?"});
         }
       },
       child: Container(

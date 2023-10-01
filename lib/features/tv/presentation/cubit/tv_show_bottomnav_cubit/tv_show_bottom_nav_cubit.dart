@@ -31,13 +31,16 @@ class TvShowBottomNavCubit extends Cubit<TvShowBottomNavStates> {
   }
   void changeScreen(int index){
     isGallery=false;
-    nestedController.animateTo(0,duration: const Duration(milliseconds: 500),curve: Curves.ease);
+    resetList();
     if(index==4)
       {
         isGallery=true;
       }
     this.index=index;
     emit(TvShowBottomNavChangeState());
+  }
+  resetList(){
+    nestedController.animateTo(0,duration: const Duration(milliseconds: 500), curve: Curves.ease);
   }
   @override
   Future<void> close() {

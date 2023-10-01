@@ -5,9 +5,9 @@ import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
-import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
+import 'package:mo3tv/core/widgets/media_vertical_list/media_vertical_list.dart';
+import 'package:mo3tv/core/widgets/media_vertical_list/sliver_loading_indicator.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_list.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_state.dart';
 class MoreTvShows extends StatelessWidget {
@@ -35,7 +35,7 @@ class MoreTvShows extends StatelessWidget {
             {
               cubit.moreTvShows.addAll(media as List<TvShow>);
             }
-            return TvList(tvList: cubit.moreTvShows);
+            return MediaVerticalList(mediaList: cubit.moreTvShows,isMovie: false);
           },
         ),
         BlocBuilder<MoreTvShowsCubit, MoreTvShowsStates>(
@@ -46,7 +46,7 @@ class MoreTvShows extends StatelessWidget {
             }
             return SeeMoreButton(onPressed: () {
               MoreTvShowsCubit.get(context)
-                  .seeMoreTvShows(index: index,lang: AppLocalizations.of(context)!.getLang());
+                  .seeMoreTvShows(index: index);
             },);
           },
         ),

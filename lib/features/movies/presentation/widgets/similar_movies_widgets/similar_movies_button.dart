@@ -5,7 +5,7 @@ import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
-import 'package:mo3tv/core/widgets/media_loading/sliver_loading_indicator.dart';
+import 'package:mo3tv/core/widgets/media_vertical_list/sliver_loading_indicator.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/similar_movies_cubit/similar_movie_state.dart';
 class SimilarMoviesButton extends StatelessWidget {

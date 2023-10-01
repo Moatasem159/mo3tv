@@ -6,8 +6,8 @@ import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
+import 'package:mo3tv/core/widgets/media_vertical_list/media_vertical_list.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_list.dart';
 class RecommendationsTvShowsList extends StatelessWidget {
   final List<TvShow> recommendationTvShows;
   final int tvId;
@@ -49,7 +49,7 @@ class RecommendationsTvShowsList extends StatelessWidget {
               ],
             ),
           ),
-          TvList(tvList: recommendationTvShows),
+          MediaVerticalList(mediaList: recommendationTvShows,isMovie: false),
           SliverToBoxAdapter(child: 10.ph)
         ],
       ),

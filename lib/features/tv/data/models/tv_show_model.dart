@@ -36,7 +36,7 @@ class TvShowModel extends TvShow {
     super.type,
     super.voteAverage,
     super.voteCount,
-    super.tvShowAccountDetails,
+    super.mediaAccountDetails,
    super.videos,
   });
 
@@ -48,7 +48,7 @@ class TvShowModel extends TvShow {
     genres: json["genres"]==null?[]:List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
     keywords:json["keywords"]==null?[]:List<GenreModel>.from(json["keywords"]['results'].map((x) => GenreModel.fromJson(x))),
     homepage: json["homepage"]??'',
-    tvShowAccountDetails:json["account_states"]==null?MediaAccountDetails():MediaAccountDetails.fromJson(json["account_states"]),
+    mediaAccountDetails:json["account_states"]==null?MediaAccountDetails():MediaAccountDetails.fromJson(json["account_states"]),
     id: json["id"],
     inProduction: json["in_production"],
     lastAirDate: json["last_air_date"]??'',

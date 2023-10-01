@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_shows_list_usecase.dart';
@@ -15,16 +16,16 @@ class MoreTvShowsCubit extends Cubit<MoreTvShowsStates> {
   final GetTvShowsListUsecase _getTvShowsListUsecase;
   late List<TvShow> moreTvShows;
   late int page;
-  seeMoreTvShows({required int index, required String lang}) async {
+  seeMoreTvShows({required int index}) async {
     emit(GetMoreTvShowsLoadingState());
     Either<Failure, List<TvShow>>? response;
     page++;
     if (index == 1) {
-      response = await _getTrendingTvShowsUsecase.call(page: page, lang: lang);
+      response = await _getTrendingTvShowsUsecase.call(page: page, lang: AppStrings.appLang);
     } else if (index == 2) {
-      response = await _getTvShowsListUsecase.call(page: page, listType: "popular", lang: lang);
+      response = await _getTvShowsListUsecase.call(page: page, listType: "popular", lang: AppStrings.appLang);
     } else if (index == 3) {
-      response = await _getTvShowsListUsecase.call(page: page, listType: "top_rated", lang: lang);
+      response = await _getTvShowsListUsecase.call(page: page, listType: "top_rated", lang: AppStrings.appLang);
     }
     emit(response!.fold((failure) => GetMoreTvShowsErrorState(),(moreTvShows) {
       this.moreTvShows.addAll(moreTvShows);

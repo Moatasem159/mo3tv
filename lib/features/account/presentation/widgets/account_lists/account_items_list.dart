@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/entities/media.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
-import 'package:mo3tv/core/widgets/media_loading/sliver_media_loading_list.dart';
+import 'package:mo3tv/core/widgets/media_vertical_list/media_vertical_list.dart';
+import 'package:mo3tv/core/widgets/media_vertical_list/sliver_media_loading_list.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_state.dart';
 import 'package:mo3tv/features/account/presentation/widgets/empty_account_list.dart';
-import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_list.dart';
-import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_list.dart';
 class AccountList extends StatelessWidget {
   final String mediaType;
   final String listType;
@@ -43,11 +41,11 @@ class AccountList extends StatelessWidget {
         {
           if(mediaType=="movies")
           {
-            return MoviesList(movieList: cubit.list as List<Movie>,listType:listType);
+            return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,isMovie:true);
           }
            else if(mediaType =="tv")
            {
-          return TvList(tvList: cubit.list as List<TvShow>,listType:listType);
+          return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,isMovie: false);
         }
         }
         if(state is GetAccountListsErrorState)
