@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/season_cubit/season_cubit.dart';
 import 'package:mo3tv/features/tv/presentation/cubit/season_cubit/season_state.dart';
@@ -24,7 +23,7 @@ class SeasonOverview extends StatelessWidget {
         if(state is GetSeasonDetailsErrorState)
           {
             return ErrorButton(onTap: () =>  SeasonCubit.get(context)
-                .getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: seasonNumber,lang: AppLocalizations.of(context)!.getLang()));
+                .getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: seasonNumber));
           }
         return const SliverToBoxAdapter();
       },
