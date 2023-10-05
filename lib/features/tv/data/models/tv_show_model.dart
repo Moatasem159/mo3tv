@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/core/models/video_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-
 //ignore: must_be_immutable
 class TvShowModel extends TvShow {
    TvShowModel({
@@ -39,7 +36,6 @@ class TvShowModel extends TvShow {
     super.mediaAccountDetails,
    super.videos,
   });
-
   factory TvShowModel.fromJson(Map<String, dynamic> json) => TvShowModel(
     backdropPath: json["backdrop_path"]??'',
     createdBy:json["created_by"]==null?[]:List<CreatedBy>.from(json["created_by"].map((x) => CreatedBy.fromJson(x))),
@@ -83,11 +79,20 @@ class TvShowModel extends TvShow {
      "last_air_date":tvShowModel.lastAirDate,
      "first_air_date":tvShowModel.firstAirDate
    };
-   static String encode(List<TvShowModel> tvShows) =>  json.encode(
-       tvShows.map<Map<String, dynamic>>((tvShow) => TvShowModel.tvShowToJson(tvShow)).toList());
-   static List<TvShowModel> decode(String tvShows) =>
-       (json.decode(tvShows) as List<dynamic>)
-           .map<TvShowModel>((tvShow) => TvShowModel.fromJson(tvShow)).toList();
+   static Map<String, dynamic> tvShowsListToMap(List<TvShowModel> tvShows) {
+     final Map<String, dynamic> tvShowMap = {};
+     for (var tvShow in tvShows) {
+       tvShowMap[tvShow.id.toString()] = TvShowModel.tvShowToJson(tvShow);
+     }
+     return tvShowMap;
+   }
+   static List<TvShowModel> mapToList(Map<String, dynamic> tvShowMap) {
+    final List<TvShowModel> tvShows = [];
+    tvShowMap.forEach((key, value) {
+      tvShows.add(TvShowModel.fromJson(value));
+    });
+    return tvShows;
+  }
 }
 class CreatedBy {
   CreatedBy({
@@ -97,13 +102,11 @@ class CreatedBy {
     this.gender,
     this.profilePath,
   });
-
   int ?id;
   String? creditId;
   String ?name;
   int ?gender;
   String? profilePath;
-
   factory CreatedBy.fromJson(Map<String, dynamic> json) => CreatedBy(
     id: json["id"],
     creditId: json["credit_id"],
@@ -111,7 +114,6 @@ class CreatedBy {
     gender: json["gender"],
     profilePath: json["profile_path"],
   );
-
   Map<String, dynamic> toJson() => {
     "id": id,
     "credit_id": creditId,
@@ -127,19 +129,16 @@ class Network {
     this.logoPath,
     this.originCountry,
   });
-
   int? id;
   String ?name;
   String ?logoPath;
   String ?originCountry;
-
   factory Network.fromJson(Map<String, dynamic> json) => Network(
     id: json["id"],
     name: json["name"],
     logoPath: json["logo_path"] ??'',
     originCountry: json["origin_country"],
   );
-
   Map<String, dynamic> toJson() => {
     "id": id,
     "name": name,
@@ -162,7 +161,6 @@ class LastEpisodeToAir {
     this.voteAverage,
     this.voteCount,
   });
-
   String ?airDate;
   int ?episodeNumber;
   int? id;
@@ -175,7 +173,6 @@ class LastEpisodeToAir {
   String ?stillPath;
   dynamic  voteAverage;
   dynamic voteCount;
-
   factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) => LastEpisodeToAir(
     airDate: json["air_date"]??'',
     episodeNumber: json["episode_number"],
@@ -190,7 +187,6 @@ class LastEpisodeToAir {
     voteAverage: json["vote_average"],
     voteCount: json["vote_count"],
   );
-
   Map<String, dynamic> toJson() => {
     "air_date": airDate,
     "episode_number": episodeNumber,

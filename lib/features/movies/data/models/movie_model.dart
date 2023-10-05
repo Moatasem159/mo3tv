@@ -66,17 +66,7 @@ class MovieModel extends Movie {
    static Map<String, dynamic> moviesListToMap(List<MovieModel> movies) {
      Map<String, dynamic> result = {};
      for (MovieModel movie in movies) {
-       result[movie.id.toString()] = {
-         "backdrop_path": movie.backdropPath,
-         "poster_path": movie.posterPath,
-         'id': movie.id,
-         "original_title": movie.originalName,
-         "title": movie.name,
-         "vote_average": movie.voteAverage,
-         "vote_count": movie.voteCount,
-         "popularity": movie.popularity,
-         "release_date": movie.releaseDate,
-       };
+       result[movie.id.toString()] = MovieModel.movieToJson(movie);
      }
      return result;
    }

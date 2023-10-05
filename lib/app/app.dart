@@ -10,10 +10,6 @@ import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
 import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_cubit.dart';
 import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_states.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_cubit.dart';
-import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_cubit.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class Mo3Tv extends StatelessWidget {
   const Mo3Tv({super.key});
@@ -23,13 +19,9 @@ class Mo3Tv extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => CheckConnectivityCubit(di.sl())..checkConnectivity()),
         BlocProvider(create: (context) => LocaleCubit(di.sl(), di.sl())..getSavedLang()),
-        BlocProvider(create: (context) => PlayingNowTvShowCubit(di.sl())..getNowPlayingTvShowsData()),
-        BlocProvider(create: (context) => PopularTvShowCubit(di.sl())..getPopularTvShowsData()),
-        BlocProvider(create: (context) => TrendingTvShowCubit(di.sl())..getTrendingTvShowsData()),
-        BlocProvider(create: (context) => TopRatedTvShowsCubit(di.sl())..getTopRatedTvShowsData()),
-        BlocProvider(create: (context) => AccountListsCubit(di.sl())),
         BlocProvider(create: (context) => LoginCubit(di.sl(), di.sl())),
         BlocProvider(create: (context) => LogOutCubit(di.sl(), di.sl())),
+        BlocProvider(create: (context) => AccountListsCubit(di.sl())),
         BlocProvider(create: (context) => AccountCubit(di.sl(), di.sl())),
       ],
       child: BlocBuilder<LocaleCubit, LocaleStates>(

@@ -4,40 +4,24 @@ import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/tv/data/datasource/tv_show_local_datasource.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
 class TvShowRepositoryImpl implements TvRepository{
   final TvShowRemoteDataSource _tvShowRemoteDataSource;
-  final TvShowLocalDataSource _tvShowLocalDataSource;
   final NetworkInfo _networkInfo;
-  TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo,this._tvShowLocalDataSource);
+  TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo);
   @override
   Future<Either<Failure, List<TvShow>>> getTvShowsList({required int page,required String listType,required String lang})async {
-    List<TvShow> cachedTvShows=[];
     if(await _networkInfo.isConnected)
     {
-      if(page==1)
-        {
-          cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: listType,currantLang: lang);
-        }
-      if(cachedTvShows.isNotEmpty)
-      {
-        return right(cachedTvShows);
-      }
-      else{
-        try{
-          final result = await _tvShowRemoteDataSource.getTvShowsList(page: page,listType: listType,lang: lang);
-          result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-          if(page==1) {
-            await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: listType,lang: lang);
-          }
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
+      try{
+        final result = await _tvShowRemoteDataSource.getTvShowsList(page: page,listType: listType,lang: lang);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
       }
     }
     else{
@@ -46,27 +30,14 @@ class TvShowRepositoryImpl implements TvRepository{
   }
   @override
   Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page,required String lang}) async{
-    List<TvShow> cachedTvShows=[];
     if(await _networkInfo.isConnected)
     {
-      if(page==1){
-        cachedTvShows=await _tvShowLocalDataSource.getCachedTvShowsList(listType: "trending",currantLang: lang);
-      }
-      if(cachedTvShows.isNotEmpty)
-      {
-        return right(cachedTvShows);
-      }
-      else{
-        try {
-          final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page,lang: lang);
-          result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-          if(page==1) {
-            await _tvShowLocalDataSource.saveTvShowsList(tvShows: result, listType: "trending",lang: lang);
-          }
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
+      try {
+        final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page,lang: lang);
+        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
       }
     }
     else{

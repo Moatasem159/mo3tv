@@ -62,7 +62,6 @@ import 'package:mo3tv/features/settings/data/repositories/lang_repository_impl.d
 import 'package:mo3tv/features/settings/domain/repositories/lang_repository.dart';
 import 'package:mo3tv/features/settings/domain/usecases/change_lang_usecase.dart';
 import 'package:mo3tv/features/settings/domain/usecases/get_saved_lang.dart';
-import 'package:mo3tv/features/tv/data/datasource/tv_show_local_datasource.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
 import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
@@ -175,10 +174,9 @@ tv(){
   sl.registerLazySingleton<RateTvShowUseCase>(() => RateTvShowUseCase(sl()));
   sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(() => GetTvShowSeasonDetailsUsecase(sl()));
   ///repository
-  sl.registerLazySingleton<TvRepository>(() => TvShowRepositoryImpl(sl(),sl(),sl()));
+  sl.registerLazySingleton<TvRepository>(() => TvShowRepositoryImpl(sl(),sl()));
   ///data source
   sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(sl()));
-  sl.registerLazySingleton<TvShowLocalDataSource>(()=>TvShowLocalDataSourceImpl(sl()));
 }
 reviews(){
   sl.registerLazySingleton<GetMediaReviewsUsecase>(() => GetMediaReviewsUsecase(sl()));
