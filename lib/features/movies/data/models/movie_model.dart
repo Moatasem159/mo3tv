@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/core/models/video_model.dart';
@@ -64,14 +63,30 @@ class MovieModel extends Movie {
      "vote_count":movieModel.voteCount,
      "popularity":movieModel.popularity,
      "release_date":movieModel.releaseDate};
-
-   static String encode(List<MovieModel> movies) =>  json.encode(
-       movies.map<Map<String, dynamic>>((movie) => MovieModel.movieToJson(movie)).toList());
-
-   static List<MovieModel> decode(String movies) =>
-       (json.decode(movies) as List<dynamic>)
-           .map<MovieModel>((movie) => MovieModel.fromJson(movie))
-           .toList();
+   static Map<String, dynamic> moviesListToMap(List<MovieModel> movies) {
+     Map<String, dynamic> result = {};
+     for (MovieModel movie in movies) {
+       result[movie.id.toString()] = {
+         "backdrop_path": movie.backdropPath,
+         "poster_path": movie.posterPath,
+         'id': movie.id,
+         "original_title": movie.originalName,
+         "title": movie.name,
+         "vote_average": movie.voteAverage,
+         "vote_count": movie.voteCount,
+         "popularity": movie.popularity,
+         "release_date": movie.releaseDate,
+       };
+     }
+     return result;
+   }
+   static List<MovieModel> mapToList(Map<String, dynamic> movieMap) {
+     List<MovieModel> movies = [];
+     movieMap.forEach((key, value) {
+       movies.add(MovieModel.fromJson(value));
+     });
+     return movies;
+   }
 }
 
 class ProductionCompany {

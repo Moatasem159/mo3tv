@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
@@ -32,7 +33,6 @@ import 'package:mo3tv/features/login/data/repositories/login_repository_impl.dar
 import 'package:mo3tv/features/login/domain/repositories/login_repository.dart';
 import 'package:mo3tv/features/login/domain/usecases/get_sessionid_usecase.dart';
 import 'package:mo3tv/features/login/domain/usecases/get_token_usecase.dart';
-import 'package:mo3tv/features/movies/data/datasource/movie_local_datasource.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/features/movies/data/repositories/movies_repository_impl.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
@@ -75,6 +75,7 @@ import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.da
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> init() async {
@@ -104,6 +105,7 @@ logout(){
   sl.registerLazySingleton<LogOutDataSource>(() => LogOutDataSourceImpl(sl()));
 }
 Future external()async{
+  HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
   final sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -157,10 +159,9 @@ movie(){
   sl.registerLazySingleton<DeleteRateMovieUseCase>(() => DeleteRateMovieUseCase(sl()));
   sl.registerLazySingleton<MarkMovieUsecase>(() => MarkMovieUsecase(sl()));
   ///repository
-  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl(),sl()));
+  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
   ///date source
   sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
-  sl.registerLazySingleton<MovieLocalDataSource>(() => MovieLocalDataSourceImpl(sl()));
 }
 tv(){
   ///usecases
