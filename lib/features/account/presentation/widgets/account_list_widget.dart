@@ -7,7 +7,7 @@ import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
-import 'package:mo3tv/features/login/presentation/widgets/login_alert.dart';
+import 'package:mo3tv/features/auth/presentation/widgets/login_widgets/login_alert.dart';
 class AccountListWidget extends StatefulWidget{
   final String image;
   final IconData icon;

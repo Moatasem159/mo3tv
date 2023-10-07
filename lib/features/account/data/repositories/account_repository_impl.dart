@@ -15,25 +15,17 @@ class AccountRepositoryImpl implements AccountRepository{
   AccountRepositoryImpl(this._networkInfo,this._accountDataSource, this._accountLocalDataSource);
   @override
   Future<Either<Failure,Account>> getAccountDetails({required String sessionId})async{
-    var result =await _accountLocalDataSource.getUser();
-    if(result !=null)
-      {
-        return right(result);
+    if(await _networkInfo.isConnected)
+    {
+      try {
+       final  result =await _accountDataSource.getAccountDetails(sessionId: sessionId);
+        return Right(result);
+      } on ServerException catch (failure) {
+        return Left(ServerFailure(failure.message!));
       }
+    }
     else{
-      if(await _networkInfo.isConnected)
-      {
-        try {
-          result =await _accountDataSource.getAccountDetails(sessionId: sessionId);
-          await _accountLocalDataSource.saveUser(accountModel: result);
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
-      }
-      else{
-        return left(const ServerFailure(AppStrings.noInternetConnection));
-      }
+      return left(const ServerFailure(AppStrings.noInternetConnection));
     }
   }
   @override
@@ -58,11 +50,5 @@ class AccountRepositoryImpl implements AccountRepository{
     }
   }
   @override
-  Future<void> saveSessionId({required String sessionId}) async{
-     await _accountLocalDataSource.saveSessionId(sessionId: sessionId);
-  }
-  @override
-  Future<void> getSessionId()async {
-   await _accountLocalDataSource.getSessionId();
-  }
+  Future<void> getSessionId()async =>_accountLocalDataSource.getSessionId();
 }

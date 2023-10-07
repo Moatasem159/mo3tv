@@ -6,16 +6,13 @@ class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AccountAppBar(),
-          AccountMovieLists(),
-          AccountTvShowLists(),
-        ],
-      ),
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AccountAppBar(),
+        AccountMovieLists(),
+        AccountTvShowLists(),
+      ],
     );
   }
 }

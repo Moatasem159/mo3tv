@@ -15,7 +15,6 @@ import 'package:mo3tv/features/account/domain/repositories/account_repository.da
 import 'package:mo3tv/features/account/domain/usecases/get_session_id_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_details_usecase.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_lists_usecase.dart';
-import 'package:mo3tv/features/account/domain/usecases/save_session_id_usecase.dart';
 import 'package:mo3tv/features/credits/data/datasources/credits_data_source.dart';
 import 'package:mo3tv/features/credits/data/repositories/credits_repository_impl.dart';
 import 'package:mo3tv/features/credits/domain/repositories/credits_repository.dart';
@@ -24,15 +23,17 @@ import 'package:mo3tv/features/gallery/data/datasources/gallery_datasource.dart'
 import 'package:mo3tv/features/gallery/data/repositories/gallery_repository_impl.dart';
 import 'package:mo3tv/features/gallery/domain/repositories/gallery_repository.dart';
 import 'package:mo3tv/features/gallery/domain/usecases/get_media_gallery_usecase.dart';
-import 'package:mo3tv/features/login/data/datasources/login_datasource.dart';
-import 'package:mo3tv/features/logout/data/datasources/log_out_datasource.dart';
-import 'package:mo3tv/features/logout/data/repositories/log_out_repository_impl.dart';
-import 'package:mo3tv/features/logout/domain/repositories/log_out_repository.dart';
-import 'package:mo3tv/features/logout/domain/usecases/log_out_usecase.dart';
-import 'package:mo3tv/features/login/data/repositories/login_repository_impl.dart';
-import 'package:mo3tv/features/login/domain/repositories/login_repository.dart';
-import 'package:mo3tv/features/login/domain/usecases/get_sessionid_usecase.dart';
-import 'package:mo3tv/features/login/domain/usecases/get_token_usecase.dart';
+import 'package:mo3tv/features/auth/data/datasources/login_local_datasource.dart';
+import 'package:mo3tv/features/auth/data/datasources/login_remote_datasource.dart';
+import 'package:mo3tv/features/auth/data/datasources/log_out_datasource.dart';
+import 'package:mo3tv/features/auth/data/datasources/log_out_local_datasource.dart';
+import 'package:mo3tv/features/auth/data/repositories/log_out_repository_impl.dart';
+import 'package:mo3tv/features/auth/domain/repositories/log_out_repository.dart';
+import 'package:mo3tv/features/auth/domain/usecases/log_out_usecase.dart';
+import 'package:mo3tv/features/auth/data/repositories/login_repository_impl.dart';
+import 'package:mo3tv/features/auth/domain/repositories/login_repository.dart';
+import 'package:mo3tv/features/auth/domain/usecases/get_sessionid_usecase.dart';
+import 'package:mo3tv/features/auth/domain/usecases/get_token_usecase.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
 import 'package:mo3tv/features/movies/data/repositories/movies_repository_impl.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
@@ -80,22 +81,24 @@ Future<void> init() async {
   reviews();
   credits();
   search();
+  login();
   logout();
   await external();
+  await sl<GetSavedSessionIdUsecase>().call();
 }
 login(){
-  if (!GetIt.I.isRegistered<GetTokenUsecase>())
-    {
-      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl()),);
+      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl(),sl()));
       sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
       sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
-      sl.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImpl(sl()));
-    }
+      sl.registerLazySingleton<LoginRemoteDataSource>(() => LoginRemoteDataSourceImpl(sl()));
+      sl.registerLazySingleton<LoginLocalDataSource>(() => LoginLocalDataSourceImpl(sl()));
 }
-logout(){
-  sl.registerLazySingleton<LogOutUsecase>(()=>LogOutUsecase(sl()));
-  sl.registerLazySingleton<LogOutRepository>(() => LogOutRepositoryImpl(sl(),sl()));
-  sl.registerLazySingleton<LogOutDataSource>(() => LogOutDataSourceImpl(sl()));
+logout() {
+    sl.registerLazySingleton<LogOutUsecase>(() => LogOutUsecase(sl()));
+    sl.registerLazySingleton<LogOutRepository>(() => LogOutRepositoryImpl(sl(), sl(),sl()));
+    sl.registerLazySingleton<LogOutRemoteDataSource>(() => LogOutRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<LogOutLocalDataSource>(() => LogOutLocalDataSourceImpl(sl()));
+
 }
 Future external()async{
   HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
@@ -119,7 +122,6 @@ Future external()async{
 }
 account(){
   sl.registerLazySingleton<GetAccountListsUsecase>(() => GetAccountListsUsecase(sl()));
-  sl.registerLazySingleton<SaveSessionIdUsecase>(() => SaveSessionIdUsecase(sl()));
   sl.registerLazySingleton<GetSavedSessionIdUsecase>(() => GetSavedSessionIdUsecase(sl()));
   sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
   sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl(),sl()));

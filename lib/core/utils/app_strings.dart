@@ -1,7 +1,7 @@
 class AppStrings {
   static const String fontFamily="Montserrat";
   static String sessionId='';
-  static String accountId='';
+  static String tokenSuccess='';
   static String appLang='en';
   static const String locale="locale";
   static const String settings="settings_title";
@@ -45,7 +45,7 @@ class AppStrings {
   static const String posters="posters";
   static const String youMustLoginFirst="You_must_login_first";
   static const String loginToEnjoyFullExperience="login_to_enjoy_full_experience";
-  static const String lastStep="last_step";
+  static const String loginConfirm="login_confirm";
   static const String loginSuccessfully="login_successfully";
   static const String loginSuccessfullyDialog="login_successfully_dialog";
   static const String ok="ok";

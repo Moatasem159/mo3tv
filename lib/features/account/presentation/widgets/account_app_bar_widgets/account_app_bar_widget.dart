@@ -13,7 +13,7 @@ class AccountAppBarWidget extends StatelessWidget {
         CachedNetworkImage(
           height: 70,
           width: 70,
-          imageUrl: EndPoints.logoUrl(account.avatar!),
+          imageUrl: EndPoints.logoUrl(account.avatar),
           imageBuilder: (context, imageProvider) {
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -33,13 +33,13 @@ class AccountAppBarWidget extends StatelessWidget {
               child: Center(
                   child: Text(
                       account.name == ""
-                          ? account.username![0]
-                          : account.name![0],
+                          ? account.username[0]
+                          : account.name[0],
                       style: AppTextStyles.get25BoldText())),
             );
           },
         ),
-        Text(account.name == "" ? account.username! : account.name!,
+        Text(account.name == "" ? account.username : account.name,
             style: AppTextStyles.get14NormalText(height: 0)),
       ]
     );

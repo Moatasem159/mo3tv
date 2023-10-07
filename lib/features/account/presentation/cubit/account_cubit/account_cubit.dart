@@ -1,33 +1,45 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
 import 'package:mo3tv/features/account/domain/usecases/get_account_details_usecase.dart';
-import 'package:mo3tv/features/account/domain/usecases/save_session_id_usecase.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_state.dart';
-class AccountCubit extends Cubit<AccountStates> {
-  AccountCubit(this._getAccountDetailsUsecase, this._saveAccountDataUsecase)
-      : super(AccountInitialState());
+class AccountCubit extends HydratedCubit<AccountStates> {
+  AccountCubit(this._getAccountDetailsUsecase) : super(AccountInitialState());
   static AccountCubit get(context) => BlocProvider.of(context);
   final GetAccountDetailsUsecase _getAccountDetailsUsecase;
-  final SaveSessionIdUsecase _saveAccountDataUsecase;
-  Future<void> getAccountDetails({required String sessionId}) async {
-    if (sessionId != "") {
+  Future<void> getAccountDetails() async {
+    if(state is! GetAccountsDetailsSuccessState){
       emit(GetAccountsDetailsLoadingState());
-      Either<Failure, Account> res =
-          await _getAccountDetailsUsecase.call(sessionId: sessionId);
+      Either<Failure, Account> res = await _getAccountDetailsUsecase.call(sessionId: AppStrings.sessionId);
       res.fold(
           (l) => emit(GetAccountsDetailsErrorState(msg: mapFailureToMsg(l))),
           (account) async {
-        await _saveAccountDataUsecase.call(sessionId: sessionId);
-        AppStrings.sessionId=sessionId;
-        emit(GetAccountsDetailsSuccessState(account));
+        emit(GetAccountsDetailsSuccessState(account,AppStrings.sessionId));
       });
     }
   }
-  bool isSuccess() {
-    return state is GetAccountsDetailsSuccessState;
+  @override
+  AccountStates? fromJson(Map<String, dynamic> json) {
+    if(json["sessionId"]==AppStrings.sessionId) {
+      return GetAccountsDetailsSuccessState.fromMap(json);
+    }
+    else{
+      clear();
+      return null;
+    }
+  }
+  @override
+  Map<String, dynamic>? toJson(AccountStates state) {
+    if (state is GetAccountsDetailsSuccessState)
+  {
+    return state.toMap();
+  }
+    else {
+      return null;
+    }
   }
 }

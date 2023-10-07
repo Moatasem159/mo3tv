@@ -10,8 +10,8 @@ class AccountAppBarLoadingWidget extends StatelessWidget {
           baseColor: Colors.grey[700]!,
           highlightColor: Colors.grey[600]!,
           child: Container(
-            height:50,
-            width:50,
+            height:70,
+            width:70,
             margin: const EdgeInsets.symmetric(horizontal: 10),
             decoration:const BoxDecoration(
                 shape: BoxShape.circle,

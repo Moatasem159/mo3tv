@@ -7,7 +7,6 @@ class AccountCustomListItem {
   String? title;
   String? name;
   String? originalName;
-
   AccountCustomListItem({
      this.backdropPath,
      this.id,

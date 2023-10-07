@@ -3,11 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/config/lang/app_localizations_setup.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/config/themes/app_theme.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_cubit/account_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/connectivity/presentation/cubits/check_connectivity_cubit.dart';
-import 'package:mo3tv/features/login/presentation/cubit/login_cubit.dart';
-import 'package:mo3tv/features/logout/presentation/cubit/log_out_cubit.dart';
 import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_cubit.dart';
 import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_states.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
@@ -17,12 +14,9 @@ class Mo3Tv extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => CheckConnectivityCubit(di.sl())..checkConnectivity()),
         BlocProvider(create: (context) => LocaleCubit()),
-        BlocProvider(create: (context) => LoginCubit(di.sl(), di.sl())),
-        BlocProvider(create: (context) => LogOutCubit(di.sl(), di.sl())),
+        BlocProvider(create: (context) => CheckConnectivityCubit(di.sl())..checkConnectivity()),
         BlocProvider(create: (context) => AccountListsCubit(di.sl())),
-        BlocProvider(create: (context) => AccountCubit(di.sl(), di.sl())),
       ],
       child: BlocBuilder<LocaleCubit, LocaleStates>(
         buildWhen:LocaleCubit.buildWhen,

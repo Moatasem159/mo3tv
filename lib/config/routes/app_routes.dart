@@ -11,8 +11,8 @@ import 'package:mo3tv/features/account/presentation/screens/account_media_list_s
 import 'package:mo3tv/features/connectivity/presentation/screens/no_connection_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/image_screen.dart';
 import 'package:mo3tv/features/home/presentation/screens/main_screen.dart';
-import 'package:mo3tv/features/login/domain/entities/token.dart';
-import 'package:mo3tv/features/login/presentation/screens/login_screen.dart';
+import 'package:mo3tv/features/auth/domain/entities/token.dart';
+import 'package:mo3tv/features/auth/presentation/screens/login_screen.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/screens/movie_details_screen.dart';
 import 'package:mo3tv/features/movies/presentation/screens/similar_movies_screen.dart';
