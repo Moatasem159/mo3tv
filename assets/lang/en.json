@@ -83,9 +83,5 @@
   "one_item": "Item",
   "two_items": "Items",
   "no_items": "No items",
-  "no_connection_msg": "Failed to connect , please check your connection before trying again",
-  "change_lang": "Change language",
-  "change_lang_dialog": "Change language requires closing the app and reopening it again. are you sure you want to do that?",
-  "agree": "agree",
-  "disagree": "disagree"
+  "no_connection_msg": "Failed to connect , please check your connection before trying again"
 }

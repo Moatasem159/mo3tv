@@ -18,7 +18,7 @@ class Mo3Tv extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => CheckConnectivityCubit(di.sl())..checkConnectivity()),
-        BlocProvider(create: (context) => LocaleCubit(di.sl(), di.sl())..getSavedLang()),
+        BlocProvider(create: (context) => LocaleCubit()),
         BlocProvider(create: (context) => LoginCubit(di.sl(), di.sl())),
         BlocProvider(create: (context) => LogOutCubit(di.sl(), di.sl())),
         BlocProvider(create: (context) => AccountListsCubit(di.sl())),
