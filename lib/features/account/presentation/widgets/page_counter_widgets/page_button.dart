@@ -9,12 +9,11 @@ class PageButton extends StatelessWidget {
   final String listType;
   final String mediaType;
   const PageButton(
-      {Key? key,
+      {super.key,
         required this.page,
         required this.currentPage,
         required this.listType,
-        required this.mediaType})
-      : super(key: key);
+        required this.mediaType});
 
   @override
   Widget build(BuildContext context) {

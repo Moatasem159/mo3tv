@@ -4,7 +4,7 @@ import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class EmptyImageList extends StatelessWidget {
   final String text;
-  const EmptyImageList({Key? key, required this.text}) : super(key: key);
+  const EmptyImageList({super.key, required this.text});
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -6,7 +6,7 @@ import 'package:mo3tv/features/credits/presentation/cubits/credits_state.dart';
 import 'package:mo3tv/features/credits/presentation/widgets/media_credits_list.dart';
 import 'package:mo3tv/features/credits/presentation/widgets/media_credits_loading_list.dart';
 class MediaCredits extends StatelessWidget {
-  const MediaCredits({Key? key}) : super(key: key);
+  const MediaCredits({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreditsCubit,CreditsStates>(

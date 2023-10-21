@@ -5,7 +5,7 @@ import 'package:mo3tv/core/widgets/read_more_widget.dart';
 import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/review_details.dart';
 class ReviewWidget extends StatelessWidget {
   final Review review;
-  const ReviewWidget({Key? key, required this.review}) : super(key: key);
+  const ReviewWidget({super.key, required this.review});
   @override
   Widget build(BuildContext context) {
     return Container(

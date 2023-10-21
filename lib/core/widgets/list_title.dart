@@ -6,7 +6,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 class ListTitle extends StatelessWidget {
   final String title;
   final VoidCallback? onPressed;
-  const ListTitle({Key? key, required this.title, this.onPressed}) : super(key: key);
+  const ListTitle({super.key, required this.title, this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -11,7 +11,7 @@ import 'package:mo3tv/features/credits/presentation/widgets/cast_widget/cast_wid
 import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
 class MediaCreditsList extends StatefulWidget {
   final List<CastMember> mediaCredits;
-  const MediaCreditsList({Key? key, required this.mediaCredits}) : super(key: key);
+  const MediaCreditsList({super.key, required this.mediaCredits});
   @override
   State<MediaCreditsList> createState() => _MediaCreditsListState();
 }

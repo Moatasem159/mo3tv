@@ -15,7 +15,7 @@ class MoreMovies extends StatelessWidget {
   final List media;
   final int index;
   final ScrollController ?controller;
-  const MoreMovies({Key? key, required this.title, required this.index, required this.media, this.controller}) : super(key: key);
+  const MoreMovies({super.key, required this.title, required this.index, required this.media, this.controller});
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_state.dart';
 class MediaGalleryScreen extends StatelessWidget {
-  const MediaGalleryScreen({Key? key}) : super(key: key);
+  const MediaGalleryScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryNavigatorCubit, GalleryNavigatorStates>(

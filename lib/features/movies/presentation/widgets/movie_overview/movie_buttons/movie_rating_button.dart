@@ -13,7 +13,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movi
 import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_state.dart';
 class MovieRatingButton extends StatelessWidget {
   final String listType;
-  const MovieRatingButton({Key? key,this.listType=''}) : super(key: key);
+  const MovieRatingButton({super.key,this.listType=''});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MovieActionsBloc, MovieActionsStates>(

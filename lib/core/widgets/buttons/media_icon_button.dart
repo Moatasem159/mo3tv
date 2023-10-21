@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 class MediaIconButton extends StatefulWidget {
   final Widget icon;
   final VoidCallback onTap;
-  const MediaIconButton({Key? key, required this.icon, required this.onTap}) : super(key: key);
-
+  const MediaIconButton({super.key, required this.icon, required this.onTap});
   @override
   State<MediaIconButton> createState() => _MediaIconButtonState();
 }
-
 class _MediaIconButtonState extends State<MediaIconButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _scaleController;
   late Animation<double> _scaleAnimation;
-
   @override
   void initState() {
     super.initState();

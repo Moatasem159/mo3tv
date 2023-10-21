@@ -4,7 +4,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/gallery/presentation/cubits/gallery_navigator_cubit/gallery_navigator_cubit.dart';
 class GalleryTabBar extends StatelessWidget {
-  const GalleryTabBar({Key? key}) : super(key: key);
+  const GalleryTabBar({super.key});
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 class SlideFromDownToUp extends CustomTransitionPage {
-  SlideFromDownToUp({required Widget child})
+  SlideFromDownToUp({required super.child})
       : super(
-          child: child,
           transitionDuration: const Duration(milliseconds: 400),
           reverseTransitionDuration: const Duration(milliseconds: 400),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {

@@ -7,7 +7,7 @@ import 'package:mo3tv/features/account/presentation/widgets/page_counter_widgets
 class PageCounterWidget extends StatelessWidget {
   final String mediaType;
   final String listType;
-  const PageCounterWidget({Key? key, required this.mediaType, required this.listType}) : super(key: key);
+  const PageCounterWidget({super.key, required this.mediaType, required this.listType});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AccountListsCubit, AccountListsStates>(

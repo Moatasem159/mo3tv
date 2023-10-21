@@ -8,7 +8,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit
 import 'package:mo3tv/features/movies/presentation/cubit/playing_now_movie_cubit/playing_now_movie_state.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class PlayingNowMovies extends StatelessWidget {
-  const PlayingNowMovies({Key? key}) : super(key: key);
+  const PlayingNowMovies({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

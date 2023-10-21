@@ -11,7 +11,7 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_
 class TvShowOverview extends StatelessWidget {
   final TvShow tvShow;
   final String listType;
-  const TvShowOverview({Key? key, required this.tvShow, this.listType = ''}) : super(key: key);
+  const TvShowOverview({super.key, required this.tvShow, this.listType = ''});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvCubit, TvStates>(

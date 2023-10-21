@@ -11,7 +11,7 @@ import 'package:mo3tv/core/widgets/media_horizontal_list/media_loading_list.dart
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_cubit.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/popular_movie_cubit/popular_movie_state.dart';
 class PopularMovies extends StatelessWidget {
-  const PopularMovies({Key? key}) : super(key: key);
+  const PopularMovies({super.key});
   @override
   Widget build(BuildContext context) {
     const String title = AppStrings.popularMovies;

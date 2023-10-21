@@ -8,7 +8,7 @@ class MediaHorizontalList extends StatelessWidget {
   final bool isMovie;
   final List<Media> media;
   final VoidCallback? onPressed;
-  const MediaHorizontalList({Key? key, required this.title,required this.media, this.onPressed,required this.isMovie}) : super(key: key);
+  const MediaHorizontalList({super.key, required this.title,required this.media, this.onPressed,required this.isMovie});
   @override
   Widget build(BuildContext context) {
     return Column(

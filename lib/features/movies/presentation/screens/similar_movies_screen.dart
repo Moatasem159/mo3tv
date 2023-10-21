@@ -9,7 +9,7 @@ import 'package:mo3tv/features/movies/presentation/widgets/similar_movies_widget
 class SimilarMoviesScreen extends StatelessWidget {
   final List<Movie> recommendations;
   final int movieId;
-  const SimilarMoviesScreen({Key? key, required this.recommendations, required this.movieId}) : super(key: key);
+  const SimilarMoviesScreen({super.key, required this.recommendations, required this.movieId});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

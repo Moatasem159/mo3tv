@@ -11,7 +11,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/tr
 import 'package:mo3tv/features/movies/presentation/cubit/trending_movie_cubit/trending_movie_state.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class TrendingMovies extends StatelessWidget {
-  const TrendingMovies({Key? key}) : super(key: key);
+  const TrendingMovies({super.key});
   @override
   Widget build(BuildContext context) {
     const String title = AppStrings.trendingMoviesToday;

@@ -4,7 +4,7 @@ import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class LoginAlert extends StatelessWidget {
-  const LoginAlert({Key? key}) : super(key: key);
+  const LoginAlert({super.key});
   @override
   Widget build(BuildContext context) {
     return AlertDialog.adaptive(

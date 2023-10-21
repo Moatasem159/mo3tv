@@ -8,7 +8,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/p
 import 'package:mo3tv/features/tv/presentation/cubit/playing_now_tv_show_cubit/playing_now_tv_show_state.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class PlayingNowTvShows extends StatelessWidget {
-  const PlayingNowTvShows({Key? key}) : super(key: key);
+  const PlayingNowTvShows({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

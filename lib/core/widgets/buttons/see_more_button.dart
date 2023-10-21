@@ -5,7 +5,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class SeeMoreButton extends StatelessWidget{
   final VoidCallback onPressed;
-  const SeeMoreButton({Key? key, required this.onPressed}) : super(key: key);
+  const SeeMoreButton({super.key, required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

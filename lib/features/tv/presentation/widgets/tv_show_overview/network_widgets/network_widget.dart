@@ -6,7 +6,7 @@ import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 class NetworkWidget extends StatelessWidget {
   final Network network;
-  const NetworkWidget({Key? key, required this.network}) : super(key: key);
+  const NetworkWidget({super.key, required this.network});
   @override
   Widget build(BuildContext context) {
     return SizedBox(

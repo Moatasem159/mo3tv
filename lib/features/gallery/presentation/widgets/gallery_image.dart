@@ -7,7 +7,7 @@ import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
 import 'package:shimmer/shimmer.dart';
 class GalleryImage extends StatelessWidget {
   final ImageEntity image;
-  const GalleryImage({Key? key, required this.image}) : super(key: key);
+  const GalleryImage({super.key, required this.image});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -6,7 +6,7 @@ import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cub
 import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_states.dart';
 import 'package:mo3tv/features/home/presentation/widgets/main_bottom_nav_bar.dart';
 class MainScreenBody extends StatelessWidget {
-  const MainScreenBody({Key? key}) : super(key: key);
+  const MainScreenBody({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

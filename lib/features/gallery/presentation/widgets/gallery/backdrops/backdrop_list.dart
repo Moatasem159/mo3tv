@@ -9,7 +9,7 @@ import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/image_list_title.dart';
 class BackdropsList extends StatefulWidget {
   final List<ImageEntity> backdrops;
-  const BackdropsList({Key? key, required this.backdrops}) : super(key: key);
+  const BackdropsList({super.key, required this.backdrops});
   @override
   State<BackdropsList> createState() => _BackdropsListState();
 }

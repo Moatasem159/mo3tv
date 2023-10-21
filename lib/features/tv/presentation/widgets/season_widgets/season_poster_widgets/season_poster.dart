@@ -9,9 +9,9 @@ class SeasonPoster extends StatelessWidget {
   final TvShowSeason season;
   final int tvShowId;
   final String tvShowName;
-  const SeasonPoster({Key? key,
+  const SeasonPoster({super.key,
     required this.season, required this.tvShowId,
-    required this.tvShowName}) : super(key: key);
+    required this.tvShowName});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

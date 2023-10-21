@@ -11,7 +11,7 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_
 class MovieOverview extends StatelessWidget {
   final String listType;
   final Movie movie;
-  const MovieOverview({Key? key,this.listType = '', required this.movie}) : super(key: key);
+  const MovieOverview({super.key,this.listType = '', required this.movie});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieCubit, MovieStates>(

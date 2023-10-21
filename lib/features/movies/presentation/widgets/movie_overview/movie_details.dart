@@ -6,7 +6,7 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_poster/movie_poster_widget.dart';
 class MovieDetailsWidget extends StatelessWidget {
   final Movie movie;
-  const MovieDetailsWidget({Key? key, required this.movie}) : super(key: key);
+  const MovieDetailsWidget({super.key, required this.movie});
   @override
   Widget build(BuildContext context) {
     return Column(

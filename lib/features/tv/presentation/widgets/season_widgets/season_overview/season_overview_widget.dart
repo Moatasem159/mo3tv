@@ -7,7 +7,7 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/episodes_widgets/episodes_list.dart';
 class SeasonOverviewWidget extends StatelessWidget {
   final TvShowSeason season;
-  const SeasonOverviewWidget({Key? key, required this.season}) : super(key: key);
+  const SeasonOverviewWidget({super.key, required this.season});
   @override
   Widget build(BuildContext context) {
     return  SliverToBoxAdapter(

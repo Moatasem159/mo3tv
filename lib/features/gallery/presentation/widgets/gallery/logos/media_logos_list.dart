@@ -9,7 +9,7 @@ import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/image_list_title.dart';
 class MediaLogosList extends StatefulWidget {
   final List<ImageEntity> logos;
-  const MediaLogosList({Key? key, required this.logos}) : super(key: key);
+  const MediaLogosList({super.key, required this.logos});
   @override
   State<MediaLogosList> createState() => _MediaLogosListState();
 }

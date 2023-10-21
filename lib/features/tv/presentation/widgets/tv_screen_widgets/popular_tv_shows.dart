@@ -11,7 +11,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popul
 import 'package:mo3tv/features/tv/presentation/cubit/popular_tv_show_cubit/popular_tv_show_state.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class PopularTvShow extends StatelessWidget {
-  const PopularTvShow({Key? key}) : super(key: key);
+  const PopularTvShow({super.key});
   @override
   Widget build(BuildContext context) {
     const String title = AppStrings.popularTvShows;

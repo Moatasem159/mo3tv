@@ -4,7 +4,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 class LoginButtonWidget extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
-  const LoginButtonWidget({Key? key, required this.title, required this.onTap}) : super(key: key);
+  const LoginButtonWidget({super.key, required this.title, required this.onTap});
   @override
   Widget build(BuildContext context) {
     return  ElevatedButton(

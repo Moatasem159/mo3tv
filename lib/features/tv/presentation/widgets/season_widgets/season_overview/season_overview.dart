@@ -8,7 +8,7 @@ import 'package:mo3tv/features/tv/presentation/widgets/season_widgets/season_ove
 class SeasonOverview extends StatelessWidget {
   final int seasonNumber;
   final int tvShowId;
-  const SeasonOverview({Key? key, required this.seasonNumber, required this.tvShowId}) : super(key: key);
+  const SeasonOverview({super.key, required this.seasonNumber, required this.tvShowId});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SeasonCubit, SeasonStates>(

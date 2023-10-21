@@ -10,7 +10,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_act
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_show_actions_state.dart';
 class AddTvShowToWatchlistButton extends StatelessWidget {
   final String listType;
-  const AddTvShowToWatchlistButton({Key? key, this.listType=''}) : super(key: key);
+  const AddTvShowToWatchlistButton({super.key, this.listType=''});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TvActionsBloc,TvShowActionsStates>(

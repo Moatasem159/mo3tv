@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/home/presentation/widgets/main_bottom_nav_bar_item.dart';
 class MainBottomNavbar extends StatelessWidget {
-  const MainBottomNavbar({Key? key,}) : super(key: key);
+  const MainBottomNavbar({super.key,});
   @override
   Widget build(BuildContext context) {
     return Container(

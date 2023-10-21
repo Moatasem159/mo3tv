@@ -11,7 +11,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top
 import 'package:mo3tv/features/tv/presentation/cubit/top_rated_tv_show_cubit/top_rated_tv_show_state.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class TopRatedTvShow extends StatelessWidget {
-  const TopRatedTvShow({Key? key}) : super(key: key);
+  const TopRatedTvShow({super.key});
   @override
   Widget build(BuildContext context) {
     const String title = AppStrings.topRaredTvShows;

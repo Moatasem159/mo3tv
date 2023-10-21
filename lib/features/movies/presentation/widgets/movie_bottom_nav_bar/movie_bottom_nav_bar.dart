@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_bottom_nav_bar/movie_bottom_nav_bar_item.dart';
 class MovieBottomNavbar extends StatelessWidget {
-  const MovieBottomNavbar({Key? key,}) : super(key: key);
+  const MovieBottomNavbar({super.key,});
   @override
   Widget build(BuildContext context) {
     return Container(

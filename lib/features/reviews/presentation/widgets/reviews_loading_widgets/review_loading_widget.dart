@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:shimmer/shimmer.dart';
 class ReviewLoadingWidget extends StatelessWidget {
-  const ReviewLoadingWidget({Key? key}) : super(key: key);
+  const ReviewLoadingWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(

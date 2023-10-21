@@ -11,7 +11,7 @@ import 'package:mo3tv/features/auth/presentation/widgets/login_widgets/login_but
 import 'package:mo3tv/features/auth/presentation/widgets/login_widgets/login_dialog.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class LoginButton extends StatelessWidget {
-  const LoginButton({Key? key}) : super(key: key);
+  const LoginButton({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

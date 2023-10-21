@@ -10,7 +10,7 @@ class GenresWidget extends StatefulWidget {
   final List<Keyword> genres;
   final num runTime;
   final String link;
-  const GenresWidget({Key? key, required this.genres, required this.runTime, required this.link}) : super(key: key);
+  const GenresWidget({super.key, required this.genres, required this.runTime, required this.link});
   @override
   State<GenresWidget> createState() => _GenresWidgetState();
 }

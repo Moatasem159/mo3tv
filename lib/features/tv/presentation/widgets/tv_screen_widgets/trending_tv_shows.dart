@@ -11,7 +11,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/tren
 import 'package:mo3tv/features/tv/presentation/cubit/trending_tv_show_cubit/trending_tv_show_state.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class TrendingTvShow extends StatelessWidget {
-  const TrendingTvShow({Key? key}) : super(key: key);
+  const TrendingTvShow({super.key});
   @override
   Widget build(BuildContext context) {
     const String title = AppStrings.trendingTvShows;

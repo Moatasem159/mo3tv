@@ -7,7 +7,7 @@ import 'package:mo3tv/features/auth/domain/entities/token.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 class LoginScreen extends StatefulWidget {
   final Token token;
-  const LoginScreen({Key? key, required this.token}) : super(key: key);
+  const LoginScreen({super.key, required this.token});
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }

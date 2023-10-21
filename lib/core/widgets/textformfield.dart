@@ -13,7 +13,7 @@ class MainTextFormField extends StatelessWidget {
   final TextInputType? inputType;
   final ValueChanged<String>? onChange;
   const MainTextFormField({
-    Key? key,
+    super.key,
     this.hintText,
     this.prefixIcon,
     this.controller,
@@ -21,7 +21,7 @@ class MainTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.focusedBorderColor=Colors.white,
     this.inputType,
-    this.onChange}) : super(key: key);
+    this.onChange});
   @override
   Widget build(BuildContext context) {
     double radius = 7;

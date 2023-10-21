@@ -6,7 +6,7 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 class ImageScreen extends StatelessWidget {
   final String image;
-  const ImageScreen({Key? key, required this.image}) : super(key: key);
+  const ImageScreen({super.key, required this.image});
   save(context) async {
     await GallerySaver.saveImage(EndPoints.hdUrl(image),
             toDcim: true, albumName: "Mo3tv")

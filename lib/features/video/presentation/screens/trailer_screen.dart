@@ -3,7 +3,7 @@ import 'package:mo3tv/features/video/presentation/widgets/youtube_video_player.d
 class TrailerScreen extends StatelessWidget {
   final String url;
   final String title;
-  const TrailerScreen({Key? key, required this.url, required this.title}) : super(key: key);
+  const TrailerScreen({super.key, required this.url, required this.title});
   @override
   Widget build(BuildContext context) {
     return SafeArea(

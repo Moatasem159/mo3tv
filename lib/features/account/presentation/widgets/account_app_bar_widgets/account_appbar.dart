@@ -7,7 +7,7 @@ import 'package:mo3tv/features/account/presentation/widgets/account_app_bar_widg
 import 'package:mo3tv/features/account/presentation/widgets/account_app_bar_widgets/account_app_bar_widget.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 class AccountAppBar extends StatelessWidget {
-  const AccountAppBar({Key? key}) : super(key: key);
+  const AccountAppBar({super.key});
   @override
   Widget build(BuildContext context) {
     if(AppStrings.sessionId!="") {

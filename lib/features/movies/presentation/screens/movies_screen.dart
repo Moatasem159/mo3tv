@@ -4,7 +4,7 @@ import 'package:mo3tv/features/movies/presentation/widgets/movie_screen_widgets/
 import 'package:mo3tv/features/movies/presentation/widgets/movie_screen_widgets/top_rated_movies.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_screen_widgets/trending_movies.dart';
 class MoviesScreen extends StatelessWidget {
-  const MoviesScreen({Key? key}) : super(key: key);
+  const MoviesScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return ListView(

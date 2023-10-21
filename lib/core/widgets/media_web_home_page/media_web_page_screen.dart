@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 class MediaWebScreen extends StatefulWidget {
   final String link;
-  const MediaWebScreen({Key? key, required this.link}) : super(key: key);
+  const MediaWebScreen({super.key, required this.link});
   @override
   State<MediaWebScreen> createState() => _MediaWebScreenState();
 }

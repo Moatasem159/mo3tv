@@ -7,7 +7,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 class ProductionCompanyWidget extends StatelessWidget {
   final ProductionCompany company;
-  const ProductionCompanyWidget({Key? key, required this.company}) : super(key: key);
+  const ProductionCompanyWidget({super.key, required this.company});
   @override
   Widget build(BuildContext context) {
     return SizedBox(

@@ -8,7 +8,7 @@ import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/review_list.dart';
 import 'package:mo3tv/features/reviews/presentation/widgets/reviews_loading_widgets/reviews_loading_list.dart';
 class MediaReviews extends StatelessWidget {
-  const MediaReviews({Key? key}) : super(key: key);
+  const MediaReviews({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ReviewsCubit, ReviewsStates>(

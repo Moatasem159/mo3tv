@@ -5,7 +5,7 @@ import 'package:mo3tv/core/widgets/media_playing_now/media_playing_now_card.dart
 class MediaPlayingNowCarousal extends StatelessWidget {
   final List<Media> media;
   final bool isMovie;
-  const MediaPlayingNowCarousal({Key? key, required this.media, required this.isMovie}) : super(key: key);
+  const MediaPlayingNowCarousal({super.key, required this.media, required this.isMovie});
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 class SliverLoadingIndicator extends StatelessWidget {
-  const SliverLoadingIndicator({Key? key}) : super(key: key);
+  const SliverLoadingIndicator({super.key});
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

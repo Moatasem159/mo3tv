@@ -10,7 +10,7 @@ import 'package:mo3tv/features/search/presentation/widgets/search_empty_widget.d
 import 'package:mo3tv/features/search/presentation/widgets/search_list.dart';
 import 'package:mo3tv/features/search/presentation/widgets/search_loading_widget.dart';
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

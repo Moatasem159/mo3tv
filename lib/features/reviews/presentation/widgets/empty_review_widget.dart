@@ -3,7 +3,7 @@ import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class ReviewEmptyWidget extends StatelessWidget {
   final String msg;
-  const ReviewEmptyWidget({Key? key, required this.msg}) : super(key: key);
+  const ReviewEmptyWidget({super.key, required this.msg});
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

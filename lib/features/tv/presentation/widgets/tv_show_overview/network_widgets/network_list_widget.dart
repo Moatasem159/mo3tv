@@ -6,7 +6,7 @@ import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/network_widgets/network_widget.dart';
 class NetworkListWidget extends StatelessWidget {
   final List<Network> networks;
-  const NetworkListWidget({Key? key, required this.networks}) : super(key: key);
+  const NetworkListWidget({super.key, required this.networks});
   @override
   Widget build(BuildContext context) {
     if(networks.isNotEmpty) {

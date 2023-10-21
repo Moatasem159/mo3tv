@@ -5,11 +5,11 @@ class AccountMediaListsScreen extends StatelessWidget {
   final String mediaType;
   final String listType;
   const AccountMediaListsScreen({
-    Key? key,
+    super.key,
     required this.title,
     required this.mediaType,
     required this.listType,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return SafeArea(

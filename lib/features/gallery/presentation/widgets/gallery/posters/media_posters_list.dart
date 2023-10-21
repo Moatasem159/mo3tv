@@ -9,7 +9,7 @@ import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/image_list_title.dart';
 class MediaPostersList extends StatefulWidget {
   final List<ImageEntity> posters;
-  const MediaPostersList ({Key? key, required this.posters}) : super(key: key);
+  const MediaPostersList ({super.key, required this.posters});
   @override
   State<MediaPostersList> createState() => _MediaPostersListState();
 }

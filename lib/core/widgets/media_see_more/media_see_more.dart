@@ -9,7 +9,7 @@ import 'package:mo3tv/features/movies/presentation/cubit/more_movies_cubit/more_
 import 'package:mo3tv/features/tv/presentation/cubit/more_tv_shows_cubit/more_tv_shows_cubit.dart';
 class MediaSeeMore extends StatefulWidget {
   final SeeMoreParameters parameters;
-  const MediaSeeMore({Key? key, required this.parameters}) : super(key: key);
+  const MediaSeeMore({super.key, required this.parameters});
   @override
   State<MediaSeeMore> createState() => _MediaSeeMoreState();
 }

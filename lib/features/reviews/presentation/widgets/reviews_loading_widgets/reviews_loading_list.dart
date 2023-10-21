@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/features/reviews/presentation/widgets/reviews_loading_widgets/review_loading_widget.dart';
 class ReviewsLoadingList extends StatelessWidget {
-  const ReviewsLoadingList({Key? key}) : super(key: key);
+  const ReviewsLoadingList({super.key});
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

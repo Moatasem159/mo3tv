@@ -9,7 +9,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/recommendations_tv_cubit/re
 import 'package:mo3tv/features/tv/presentation/widgets/recommendations/recommendations_tv_list.dart';
 class RecommendationsTvShows extends StatelessWidget {
   final int tvId;
-  const RecommendationsTvShows({Key? key, required this.tvId}) : super(key: key);
+  const RecommendationsTvShows({super.key, required this.tvId});
   @override
   Widget build(BuildContext context) {
     return Builder(

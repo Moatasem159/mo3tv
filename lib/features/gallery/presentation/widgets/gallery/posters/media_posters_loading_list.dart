@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 class MediaPosterLoadingList extends StatelessWidget {
-  const MediaPosterLoadingList({Key? key}) : super(key: key);
+  const MediaPosterLoadingList({super.key});
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(

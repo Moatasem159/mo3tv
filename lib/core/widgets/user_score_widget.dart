@@ -7,7 +7,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 class UserScoreWidget extends StatelessWidget {
   final num vote;
-  const UserScoreWidget({Key? key, required this.vote}) : super(key: key);
+  const UserScoreWidget({super.key, required this.vote});
   @override
   Widget build(BuildContext context) {
     return Row(

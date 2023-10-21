@@ -7,7 +7,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/core/widgets/keywords_widgets/keyword_widget.dart';
 class KeywordListWidget extends StatelessWidget {
   final List<Keyword> keywords;
-  const KeywordListWidget({Key? key, required this.keywords}) : super(key: key);
+  const KeywordListWidget({super.key, required this.keywords});
   @override
   Widget build(BuildContext context) {
     if(keywords.isNotEmpty)

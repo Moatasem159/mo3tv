@@ -3,7 +3,7 @@ import 'package:mo3tv/features/account/presentation/widgets/account_app_bar_widg
 import 'package:mo3tv/features/account/presentation/widgets/account_movies_lists.dart';
 import 'package:mo3tv/features/account/presentation/widgets/account_tv_shows_lists.dart';
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
+  const AccountScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return const Column(

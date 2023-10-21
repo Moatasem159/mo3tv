@@ -9,7 +9,7 @@ import 'package:mo3tv/core/widgets/media_playing_now/playing_now_media_loading_c
 class MediaPlayingNowCard extends StatelessWidget {
   final Media media;
   final bool isMovie;
-  const MediaPlayingNowCard({Key? key, required this.media, required this.isMovie}) : super(key: key);
+  const MediaPlayingNowCard({super.key, required this.media, required this.isMovie});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

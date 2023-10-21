@@ -4,7 +4,7 @@ import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/revie
 import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/reviews_count.dart';
 class MediaReviewsList extends StatelessWidget {
   final List<Review> reviews;
-  const MediaReviewsList({Key? key, required this.reviews}) : super(key: key);
+  const MediaReviewsList({super.key, required this.reviews});
   @override
   Widget build(BuildContext context) {
     return SliverList(

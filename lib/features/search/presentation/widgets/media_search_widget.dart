@@ -15,7 +15,7 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:shimmer/shimmer.dart';
 class MediaSearchWidget extends StatelessWidget {
   final Search mediaSearch;
-  const MediaSearchWidget({Key? key, required this.mediaSearch}) : super(key: key);
+  const MediaSearchWidget({super.key, required this.mediaSearch});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

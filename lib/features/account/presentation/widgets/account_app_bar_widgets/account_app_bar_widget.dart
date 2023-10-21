@@ -5,7 +5,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/account/domain/entities/account.dart';
 class AccountAppBarWidget extends StatelessWidget {
   final Account account;
-  const AccountAppBarWidget({Key? key, required this.account}) : super(key: key);
+  const AccountAppBarWidget({super.key, required this.account});
   @override
   Widget build(BuildContext context) {
     return Row(

@@ -5,7 +5,7 @@ import 'package:mo3tv/core/widgets/list_title.dart';
 class MediaErrorList extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
-  const MediaErrorList({Key? key, required this.title, required this.onPressed}) : super(key: key);
+  const MediaErrorList({super.key, required this.title, required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return SizedBox(

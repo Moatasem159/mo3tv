@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 class ScaleFromCenter extends CustomTransitionPage {
-  ScaleFromCenter({required Widget child}) : super(
-    child: child,
+  ScaleFromCenter({required super.child}) : super(
     transitionDuration: const Duration(milliseconds: 400),
     reverseTransitionDuration: const Duration(milliseconds: 400),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {

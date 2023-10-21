@@ -13,7 +13,7 @@ import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_act
 import 'package:mo3tv/features/tv/presentation/cubit/tv_show_buttons_bloc/tv_show_actions_state.dart';
 class TvShowRatingButton extends StatelessWidget {
   final String listType;
-  const TvShowRatingButton({Key? key, this.listType=''}) : super(key: key);
+  const TvShowRatingButton({super.key, this.listType=''});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TvActionsBloc,TvShowActionsStates>(

@@ -20,7 +20,7 @@ import 'package:mo3tv/features/tv/presentation/widgets/tv_show_details_screen_bo
 class TvShowDetailsScreen extends StatelessWidget {
   final TvShow tvShow;
   final String listType;
-  const TvShowDetailsScreen({Key? key, required this.tvShow, this.listType = '?'}):super(key: key);
+  const TvShowDetailsScreen({super.key, required this.tvShow, this.listType = '?'});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

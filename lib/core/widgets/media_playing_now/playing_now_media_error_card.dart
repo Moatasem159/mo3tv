@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 class PlayingNowMediaErrorCard extends StatelessWidget {
   final  VoidCallback onPressed;
-  const PlayingNowMediaErrorCard({Key? key,required this.onPressed}) : super(key: key);
+  const PlayingNowMediaErrorCard({super.key,required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 class SlideFromRightToLeft extends CustomTransitionPage {
-  SlideFromRightToLeft({required Widget child})
+  SlideFromRightToLeft({required super.child})
       : super(
-          child: child,
           transitionDuration: const Duration(milliseconds: 400),
           reverseTransitionDuration: const Duration(milliseconds: 400),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {

@@ -5,8 +5,8 @@ class MainButton extends StatelessWidget {
   final String label;
   final Size size;
   final double radius;
-  const MainButton({Key? key, required this.onPressed, required this.label,
-    this.size=const Size(130,40),this.radius=10}) : super(key: key);
+  const MainButton({super.key, required this.onPressed, required this.label,
+    this.size=const Size(130,40),this.radius=10});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

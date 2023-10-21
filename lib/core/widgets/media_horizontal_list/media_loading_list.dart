@@ -4,7 +4,7 @@ import 'package:mo3tv/core/widgets/list_title.dart';
 import 'package:mo3tv/core/widgets/media_list_item/media_list_loading_item.dart';
 class MediaLoadingList extends StatelessWidget {
   final String title;
-  const MediaLoadingList({Key? key,required this.title}) : super(key: key);
+  const MediaLoadingList({super.key,required this.title});
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -11,7 +11,7 @@ class MediaListItem extends StatelessWidget {
   final Media media;
   final bool isMovie;
   final String listType;
-  const MediaListItem({Key? key, required this.media,this.listType='?',required this.isMovie}) : super(key: key);
+  const MediaListItem({super.key, required this.media,this.listType='?',required this.isMovie});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

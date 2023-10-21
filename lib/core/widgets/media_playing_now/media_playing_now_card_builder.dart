@@ -8,7 +8,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 class MediaPlayingNowCardBuilder extends StatelessWidget {
   final ImageProvider image;
   final Media media;
-  const MediaPlayingNowCardBuilder({Key? key, required this.image,required this.media}) : super(key: key);
+  const MediaPlayingNowCardBuilder({super.key, required this.image,required this.media});
   @override
   Widget build(BuildContext context) {
     return Container(

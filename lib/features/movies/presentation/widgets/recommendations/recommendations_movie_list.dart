@@ -11,7 +11,7 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 class RecommendationsMoviesList extends StatelessWidget {
   final List<Movie> recommendationMovies;
   final int movieId;
-  const RecommendationsMoviesList({Key? key, required this.recommendationMovies, required this.movieId}) : super(key: key);
+  const RecommendationsMoviesList({super.key, required this.recommendationMovies, required this.movieId});
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

@@ -5,7 +5,7 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 class EmptyAccountList extends StatelessWidget {
   final String type;
-  const EmptyAccountList({Key? key, required this.type}) : super(key: key);
+  const EmptyAccountList({super.key, required this.type});
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

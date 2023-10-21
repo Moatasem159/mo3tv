@@ -10,7 +10,7 @@ class SeasonDetailsScreen extends StatelessWidget {
   final TvShowSeason season;
   final String tvShowName;
   final int tvShowId;
-  const SeasonDetailsScreen({Key? key, required this.season, required this.tvShowName, required this.tvShowId}) : super(key: key);
+  const SeasonDetailsScreen({super.key, required this.season, required this.tvShowName, required this.tvShowId});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

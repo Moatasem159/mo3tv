@@ -5,7 +5,7 @@ import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 import 'package:mo3tv/features/credits/presentation/widgets/cast_widget/cast_image/cast_image.dart';
 class CastMemberWidget extends StatelessWidget {
   final CastMember member;
-  const CastMemberWidget({Key? key, required this.member}) : super(key: key);
+  const CastMemberWidget({super.key, required this.member});
   @override
   Widget build(BuildContext context) {
     return Stack(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:shimmer/shimmer.dart';
 class MediaCreditsLoadingList extends StatelessWidget {
-  const MediaCreditsLoadingList({Key? key}) : super(key: key);
+  const MediaCreditsLoadingList({super.key});
   @override
   Widget build(BuildContext context) {
     return SliverGrid(

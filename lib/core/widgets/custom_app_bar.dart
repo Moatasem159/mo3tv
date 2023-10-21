@@ -3,7 +3,7 @@ import 'package:mo3tv/core/utils/app_text_styles.dart';
 class CustomAppBar extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
-  const CustomAppBar({Key? key, required this.onPressed, required this.title}) : super(key: key);
+  const CustomAppBar({super.key, required this.onPressed, required this.title});
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
