@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/features/home/presentation/widgets/main_screen_body.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/features/connectivity/presentation/cubits/check_connectivity_cubit.dart';
+import 'package:mo3tv/features/connectivity/presentation/cubits/check_connectivity_state.dart';
+import 'package:mo3tv/features/home/presentation/widgets/main_bottom_nav_bar.dart';
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  final StatefulNavigationShell navigationShell;
+  const MainScreen({super.key, required this.navigationShell});
   @override
   Widget build(BuildContext context) {
-    return const MainScreenBody();
+    return BlocListener<CheckConnectivityCubit, CheckConnectivityStates>(
+      listener: CheckConnectivityCubit.get(context).listen,
+      child: WillPopScope(
+        onWillPop: () async {
+          if (navigationShell.currentIndex != 0) {
+            navigationShell.goBranch(0);
+            return false;
+          } else {
+            return true;
+          }
+        },
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            body:navigationShell,
+            bottomNavigationBar:MainBottomNavbar(navigationShell: navigationShell),
+          ),
+        ),
+      )
+    );
   }
 }

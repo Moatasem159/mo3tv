@@ -1,37 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
-import 'package:mo3tv/features/home/presentation/cubit/bottom_navigation_bar_cubit/bottom_navigation_bar_states.dart';
+import 'package:go_router/go_router.dart';
 class MainBottomNavBarItem extends StatelessWidget {
   final IconData icon;
   final int index;
-  const MainBottomNavBarItem({super.key, required this.icon, required this.index});
+  final StatefulNavigationShell navigationShell;
+  const MainBottomNavBarItem({super.key, required this.icon, required this.index, required this.navigationShell});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomNavCubit, BottomNavStates>(
-      builder: (context, state) {
-        return GestureDetector(
-          onTap: () => BottomNavCubit.get(context).changeIndex(index),
-          child: Container(
-            width: MediaQuery.sizeOf(context).width / 5,
-            height: 40,
-            decoration: BoxDecoration(
-                color: BottomNavCubit.get(context).index == index
-                    ? Colors.white10
-                    : Colors.transparent,
-                border: Border(
-                    bottom: BorderSide(
-                        color: BottomNavCubit.get(context).index == index
-                            ? Theme.of(context).primaryColor
-                            : Colors.transparent,
-                        width: 2))),
-            child: Icon(icon,
-                color: BottomNavCubit.get(context).index == index
-                    ? Theme.of(context).primaryColor
-                    : Colors.white),
-          ),
-        );
-      },
+    return GestureDetector(
+      onTap: () =>navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex),
+      child: Container(
+        width: MediaQuery.sizeOf(context).width / 5,
+        height: 40,
+        decoration: BoxDecoration(
+            color: navigationShell.currentIndex == index
+                ? Colors.white10
+                : Colors.transparent,
+            border: Border(
+                bottom: BorderSide(
+                    color: navigationShell.currentIndex == index
+                        ? Theme.of(context).primaryColor
+                        : Colors.transparent,
+                    width: 2))),
+        child: Icon(icon,
+            color: navigationShell.currentIndex == index
+                ? Theme.of(context).primaryColor
+                : Colors.white),
+      ),
     );
   }
 }
