@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_cubit.dart';
+import 'package:mo3tv/features/settings/presentation/widgets/language_screen_widgets/change_language_dialog.dart';
 import 'package:mo3tv/features/settings/presentation/widgets/settings_tile.dart';
 class BuildLanguageScreenBody extends StatelessWidget {
   const BuildLanguageScreenBody({super.key});
@@ -15,7 +16,19 @@ class BuildLanguageScreenBody extends StatelessWidget {
           icon: FontAwesomeIcons.language,
           onTap: () {
             if (!AppLocalizations.of(context)!.isEnLocale) {
-              LocaleCubit.get(context).toEnglish();
+              showAdaptiveDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (_) {
+                  return ChangeLanguageDialog(
+                    onTap: () {
+                      if (!AppLocalizations.of(context)!.isEnLocale) {
+                        LocaleCubit.get(context).toEnglish();
+                      }
+                    },
+                  );
+                },
+              );
             }
           },
         ),
@@ -24,7 +37,19 @@ class BuildLanguageScreenBody extends StatelessWidget {
           icon: FontAwesomeIcons.language,
           onTap: () {
             if (AppLocalizations.of(context)!.isEnLocale) {
-              LocaleCubit.get(context).toArabic();
+              showAdaptiveDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (_) {
+                  return ChangeLanguageDialog(
+                    onTap: () {
+                      if (AppLocalizations.of(context)!.isEnLocale) {
+                        LocaleCubit.get(context).toArabic();
+                      }
+                    },
+                  );
+                },
+              );
             }
           },
         ),

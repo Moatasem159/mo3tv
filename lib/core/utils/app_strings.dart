@@ -94,4 +94,8 @@ class AppStrings {
   static const String oneItem="one_item";
   static const String twoItems="two_items";
   static const String noConnectionMsg="no_connection_msg";
+  static const String changeLang="change_lang";
+  static const String changeLangDialog="change_lang_dialog";
+  static const String agree="agree";
+  static const String disagree="disagree";
 }
