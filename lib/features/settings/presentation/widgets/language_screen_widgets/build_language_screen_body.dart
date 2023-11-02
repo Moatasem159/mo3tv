@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/settings/presentation/cubits/locale_cubit/locale_cubit.dart';
@@ -13,7 +12,7 @@ class BuildLanguageScreenBody extends StatelessWidget {
       children: [
         SettingsTile(
           title: AppStrings.englishLang,
-          icon: FontAwesomeIcons.language,
+          icon: Icons.language_outlined,
           onTap: () {
             if (!AppLocalizations.of(context)!.isEnLocale) {
               showAdaptiveDialog(
@@ -34,7 +33,7 @@ class BuildLanguageScreenBody extends StatelessWidget {
         ),
         SettingsTile(
           title: AppStrings.arabicLang,
-          icon: FontAwesomeIcons.language,
+          icon: Icons.language_outlined,
           onTap: () {
             if (AppLocalizations.of(context)!.isEnLocale) {
               showAdaptiveDialog(

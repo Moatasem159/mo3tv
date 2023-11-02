@@ -389,14 +389,6 @@ packages:
       url: "https://pub-web.flutter-io.cn"
     source: hosted
     version: "8.2.2"
-  font_awesome_flutter:
-    dependency: "direct main"
-    description:
-      name: font_awesome_flutter
-      sha256: "52671aea66da73b58d42ec6d0912b727a42248dd9a7c76d6c20f275783c48c08"
-      url: "https://pub-web.flutter-io.cn"
-    source: hosted
-    version: "10.6.0"
   frontend_server_client:
     dependency: transitive
     description:
