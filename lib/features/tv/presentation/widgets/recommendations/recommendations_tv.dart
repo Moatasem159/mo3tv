@@ -12,33 +12,29 @@ class RecommendationsTvShows extends StatelessWidget {
   const RecommendationsTvShows({super.key, required this.tvId});
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return BlocBuilder<RecommendationsTvCubit, RecommendationsTvStates>(
-          builder: (context, state) {
-            if (state is GetTvShowRecommendationsLoadingState) {
-              return const SliverMediaLoadingList();
-            }
-            if (state is GetTvShowRecommendationsSuccessState && state.tvShows.isEmpty){
-              return const RecommendationsMediaEmptyWidget(
-                msg: AppStrings.noRecommendations,
-                icon: Icons.tv_off,
-              );
-            }
-            if (state is GetTvShowRecommendationsSuccessState) {
-              return RecommendationsTvShowsList(recommendationTvShows:state.tvShows,tvId: tvId);
-            }
-            if(state is GetTvShowRecommendationsErrorState){
-              return SliverToBoxAdapter(
-                child: ErrorButton(onTap: (){
-                  RecommendationsTvCubit.get(context).getTvShowsRecommendations(tvId: tvId);
-                }),
-              );
-            }
-            return const SliverToBoxAdapter();
-          },
-        );
-      }
+    return BlocBuilder<RecommendationsTvCubit, RecommendationsTvStates>(
+      builder: (context, state) {
+        if (state is GetTvShowRecommendationsLoadingState) {
+          return const SliverMediaLoadingList();
+        }
+        if (state is GetTvShowRecommendationsSuccessState && state.tvShows.isEmpty){
+          return const RecommendationsMediaEmptyWidget(
+            msg: AppStrings.noRecommendations,
+            icon: Icons.tv_off,
+          );
+        }
+        if (state is GetTvShowRecommendationsSuccessState) {
+          return RecommendationsTvShowsList(recommendationTvShows:state.tvShows,tvId: tvId);
+        }
+        if(state is GetTvShowRecommendationsErrorState){
+          return SliverToBoxAdapter(
+            child: ErrorButton(onTap: (){
+              RecommendationsTvCubit.get(context).getTvShowsRecommendations(tvId: tvId);
+            }),
+          );
+        }
+        return const SliverToBoxAdapter();
+      },
     );
   }
 }

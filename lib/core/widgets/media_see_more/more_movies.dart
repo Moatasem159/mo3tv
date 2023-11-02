@@ -20,6 +20,7 @@ class MoreMovies extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: controller,
+      scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
       slivers: [
         CustomAppBar(
           title: title.tr(context)!,

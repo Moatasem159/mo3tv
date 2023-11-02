@@ -12,31 +12,27 @@ class RecommendationsMovies extends StatelessWidget {
   const RecommendationsMovies({super.key, required this.movieId});
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return BlocBuilder<RecommendationsMovieCubit, RecommendationsMovieStates>(
-            builder: (context, state) {
-              if (state is GetMovieRecommendationsLoadingState) {
-                return const SliverMediaLoadingList();
-              }
-              if (state is GetMovieRecommendationsSuccessState && state.recMovies.isEmpty){
-                return const RecommendationsMediaEmptyWidget(
-                  msg: AppStrings.noRecommendations,
-                  icon: Icons.movie_filter_outlined,
-                );
-              }
-              if (state is GetMovieRecommendationsSuccessState) {
-                return RecommendationsMoviesList(recommendationMovies:state.recMovies,movieId:movieId);
-              }
-              if(state is GetMovieRecommendationsErrorState){
-                return SliverToBoxAdapter(
-                  child: ErrorButton(onTap: ()=>RecommendationsMovieCubit.get(context).getMovieRecommendations(movieId:movieId)),
-                );
-              }
-              return const SliverToBoxAdapter();
-            },
-          );
-      }
-    );
+    return BlocBuilder<RecommendationsMovieCubit, RecommendationsMovieStates>(
+        builder: (context, state) {
+          if (state is GetMovieRecommendationsLoadingState) {
+            return const SliverMediaLoadingList();
+          }
+          if (state is GetMovieRecommendationsSuccessState && state.recMovies.isEmpty){
+            return const RecommendationsMediaEmptyWidget(
+              msg: AppStrings.noRecommendations,
+              icon: Icons.movie_filter_outlined,
+            );
+          }
+          if (state is GetMovieRecommendationsSuccessState) {
+            return RecommendationsMoviesList(recommendationMovies:state.recMovies,movieId:movieId);
+          }
+          if(state is GetMovieRecommendationsErrorState){
+            return SliverToBoxAdapter(
+              child: ErrorButton(onTap: ()=>RecommendationsMovieCubit.get(context).getMovieRecommendations(movieId:movieId)),
+            );
+          }
+          return const SliverToBoxAdapter();
+        },
+      );
   }
 }

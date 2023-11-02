@@ -13,6 +13,7 @@ class SimilarTvShowsScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: SimilarTvShowCubit.get(context).controller,
+      scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
       slivers: [
         CustomAppBar(
           onPressed: () {

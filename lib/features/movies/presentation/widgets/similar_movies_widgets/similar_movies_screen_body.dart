@@ -13,6 +13,7 @@ class SimilarMoviesScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       controller: SimilarMovieCubit.get(context).controller,
+      scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
       slivers: [
         CustomAppBar(
           onPressed: ()=>GoRouter.of(context).pop(),

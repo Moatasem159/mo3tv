@@ -60,7 +60,10 @@ class MediaPlayingNowCardBuilder extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    media.voteAverage.toString(),
+                    media.voteAverage!
+                        .toStringAsFixed(1)
+                        .replaceAll(RegExp(r'0*$'), '')
+                        .replaceAll(RegExp(r'\.$'), ''),
                     style:AppTextStyles.get14BoldText()),
                   4.pw,
                   const Icon(Icons.star_rounded,size: 15,color: Colors.yellow).addPadding(t: 3)
