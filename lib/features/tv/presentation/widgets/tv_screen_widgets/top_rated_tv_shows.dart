@@ -25,7 +25,7 @@ class TopRatedTvShow extends StatelessWidget {
               isMovie: false,
               title: title,
               onPressed: () {
-                GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
+                GoRouter.of(context).pushNamed(Routes.seeMoreTvSHowRoute,
                     extra: SeeMoreParameters(title: title, isMovie: false, index: 3, media: state.tvShows));
               },
             );

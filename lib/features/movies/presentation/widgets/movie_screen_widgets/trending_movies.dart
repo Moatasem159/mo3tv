@@ -25,7 +25,7 @@ class TrendingMovies extends StatelessWidget {
                 isMovie: true,
                 title: title,
                 onPressed: () {
-                  GoRouter.of(context).pushNamed(Routes.seeMoreRoute,
+                  GoRouter.of(context).pushNamed(Routes.seeMoreMoviesRoute,
                       extra: SeeMoreParameters(
                           title: title,
                           isMovie: true,

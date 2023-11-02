@@ -25,7 +25,7 @@ class PopularTvShow extends StatelessWidget {
               isMovie: false,
               title: title,
               onPressed: () {
-                GoRouter.of(context).pushNamed(Routes.seeMoreRoute, extra: SeeMoreParameters(title: title, isMovie: false, index: 2, media: state.tvShows));
+                GoRouter.of(context).pushNamed(Routes.seeMoreTvSHowRoute, extra: SeeMoreParameters(title: title, isMovie: false, index: 2, media: state.tvShows));
               },
             );
           }

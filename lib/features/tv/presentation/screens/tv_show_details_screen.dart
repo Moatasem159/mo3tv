@@ -30,8 +30,8 @@ class TvShowDetailsScreen extends StatelessWidget {
         BlocProvider(create: (context) => TvCubit(di.sl())..getTvShowDetailsData(tvShowId: tvShow.id)),
         BlocProvider(create: (context) => TvActionsBloc(di.sl(),di.sl(),di.sl())),
         BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMediaGallery()),
-        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMovieReviews()),
-        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMovieCredits()),
+        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMediaReviews()),
+        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=tvShow.id..mediaType=AppStrings.tv..getMediaCredits()),
         BlocProvider(create: (context) => RecommendationsTvCubit(di.sl())..getTvShowsRecommendations(tvId: tvShow.id)),
       ],
       child: Builder(builder: (context) {

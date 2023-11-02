@@ -30,8 +30,8 @@ class MovieDetailsScreen extends StatelessWidget {
         BlocProvider(create: (context) => MovieCubit(di.sl())..getMovieDetailsData(movieId: movie.id)),
         BlocProvider(create: (context) => MovieActionsBloc(di.sl(), di.sl(), di.sl())),
         BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMediaGallery()),
-        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMovieReviews()),
-        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMovieCredits()),
+        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMediaReviews()),
+        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=movie.id..mediaType=AppStrings.movie..getMediaCredits()),
         BlocProvider(create: (context) => RecommendationsMovieCubit(di.sl())..getMovieRecommendations(movieId: movie.id)),
       ],
       child: Builder(builder: (context) {

@@ -14,7 +14,7 @@ class LoginDialog extends StatelessWidget {
           style: AppTextStyles.get14NormalText()),
       actions: [
         TextButton(
-          onPressed:()=>GoRouter.of(context).pushReplacementNamed(Routes.initialRoute),
+          onPressed:()=>GoRouter.of(context).pushReplacementNamed(Routes.movieRoute),
           child:Text(AppStrings.ok.tr(context)!,style: AppTextStyles.get14NormalText()),
         )
       ],

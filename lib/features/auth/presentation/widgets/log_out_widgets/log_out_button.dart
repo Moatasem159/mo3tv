@@ -19,7 +19,7 @@ class LogoutButton extends StatelessWidget {
       child: BlocConsumer<LogOutCubit, LogOutStates>(
         listener: (context, state) {
           if (state is LogOutSuccessState) {
-            GoRouter.of(context).pushReplacementNamed(Routes.initialRoute);
+            GoRouter.of(context).pushReplacementNamed(Routes.movieRoute);
           }
         },
         builder: (context, state) {

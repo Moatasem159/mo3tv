@@ -10,7 +10,7 @@ class CreditsCubit extends Cubit<CreditsStates> {
   final GetMediaCreditsUsecase _getMediaCreditsUsecase;
   late int mediaId;
   late String mediaType;
-  Future<void> getMovieCredits() async {
+  Future<void> getMediaCredits() async {
     emit(GetMediaCreditsLoadingState());
     Either<Failure, List<CastMember>> response =
     await _getMediaCreditsUsecase.call(mediaId: mediaId,mediaType:mediaType);
