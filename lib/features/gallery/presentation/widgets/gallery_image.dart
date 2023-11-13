@@ -11,11 +11,11 @@ class GalleryImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>GoRouter.of(context).pushNamed(Routes.imageScreenRoute,pathParameters:{"image":image.filePath!}),
+      onTap:()=>GoRouter.of(context).pushNamed(Routes.imageScreenRoute,pathParameters:{"image":image.filePath}),
       child: Hero(
-        tag: image.filePath!,
+        tag: image.filePath,
         child: CachedNetworkImage(
-            imageUrl: EndPoints.posterUrl(image.filePath!),
+            imageUrl: EndPoints.posterUrl(image.filePath),
             placeholder: (context, url) => Shimmer.fromColors(
               baseColor: Colors.grey[700]!,
               highlightColor: Colors.grey[600]!,

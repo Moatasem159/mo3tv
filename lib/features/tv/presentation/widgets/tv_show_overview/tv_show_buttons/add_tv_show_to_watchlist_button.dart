@@ -55,7 +55,7 @@ class AddTvShowToWatchlistButton extends StatelessWidget {
               );
             }
           },
-          icon: bloc.tvShow.mediaAccountDetails!.watchlist!?
+          icon: bloc.tvShow.mediaAccountDetails!.watchlist?
           const Icon(Icons.bookmark_rounded,color: Colors.green):
           const Icon(Icons.bookmark_add_outlined));
       },

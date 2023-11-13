@@ -23,7 +23,7 @@ class _MediaLogosListState extends State<MediaLogosList> {
     super.initState();
     _logos=[];
     for (var element in widget.logos) {
-      if(getFileExtension(element.filePath!)!=".svg"){
+      if(getFileExtension(element.filePath)!=".svg"){
         _logos.add(element);
       }
     }

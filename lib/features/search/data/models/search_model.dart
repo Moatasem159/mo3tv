@@ -1,22 +1,20 @@
 import 'dart:convert';
-
 import 'package:mo3tv/features/search/domain/entities/search.dart';
-// ignore: must_be_immutable
-class SearchModel extends Search{
-  SearchModel(
-      {super.backdropPath,
-        required super.id,
-        super.mediaType,
-        super.originalTitle,
-        super.popularity,
-        super.posterPath,
-        super.releaseDate,
-        super.voteAverage,
-        super.voteCount,
-        super.firstAirDate,
-        super.name,
-        super.originalName});
-
+class SearchModel extends Search {
+  const SearchModel({
+    required super.backdropPath,
+    required super.id,
+    required super.mediaType,
+    required super.originalTitle,
+    required super.popularity,
+    required super.posterPath,
+    required super.releaseDate,
+    required super.voteAverage,
+    required super.voteCount,
+    required super.firstAirDate,
+    required super.name,
+    required super.originalName,
+  });
   factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
         backdropPath: json["backdrop_path"] ?? '',
         id: json["id"],
@@ -32,15 +30,13 @@ class SearchModel extends Search{
         originalName: json["original_name"] ?? '',
       );
   static SearchModel fromJsonString(String jsonString) {
-        Map<String, dynamic> json = jsonDecode(jsonString);
-        return SearchModel.fromJson(json);
+    Map<String, dynamic> json = jsonDecode(jsonString);
+    return SearchModel.fromJson(json);
   }
-
   static String toJsonString(SearchModel searchModel) {
-        Map<String, dynamic> json = searchToJson(searchModel);
-        return jsonEncode(json);
+    Map<String, dynamic> json = searchToJson(searchModel);
+    return jsonEncode(json);
   }
-
   static Map<String, dynamic> searchToJson(SearchModel searchModel) => {
         "backdrop_path": searchModel.backdropPath,
         "id": searchModel.id,
@@ -54,12 +50,10 @@ class SearchModel extends Search{
         "first_air_date": searchModel.firstAirDate,
         "name": searchModel.name,
         "original_name": searchModel.originalName,
-  };
-  static String encode(List<SearchModel> search) =>  json.encode(
-      search
-          .map<Map<String, dynamic>>((item) => SearchModel.searchToJson(item))
-          .toList());
-
+      };
+  static String encode(List<SearchModel> search) => json.encode(search
+      .map<Map<String, dynamic>>((item) => SearchModel.searchToJson(item))
+      .toList());
   static List<SearchModel> decode(String search) =>
       (json.decode(search) as List<dynamic>)
           .map<SearchModel>((item) => SearchModel.fromJson(item))

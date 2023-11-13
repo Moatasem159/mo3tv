@@ -26,7 +26,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
   late TvShow tvShow;
   Future<void> rateTvShow(emit,rate)async{
     emit(ActionLoadingState());
-    bool watchList= tvShow.mediaAccountDetails!.watchlist!;
+    bool watchList= tvShow.mediaAccountDetails!.watchlist;
     dynamic oldRate=tvShow.mediaAccountDetails!.ratedValue!;
     Either<Failure, Message> response;
     if(rate>0){
@@ -52,7 +52,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     await _markTvShowAsFavUsecase.call(tvId: tvShow.id,mark: fav,markType: "favorite");
     emit(response.fold(
         (l){
-          tvShow.mediaAccountDetails!.favorite=!tvShow.mediaAccountDetails!.favorite!;
+          tvShow.mediaAccountDetails!.favorite=!tvShow.mediaAccountDetails!.favorite;
           return ActionErrorState(where: "fav");
         },
         (r)=> ActionSuccessState()));
@@ -63,7 +63,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     await _markTvShowAsFavUsecase.call(tvId: tvShow.id,mark: watchlist,markType: "watchlist");
     emit(response.fold(
         (l){
-          tvShow.mediaAccountDetails!.watchlist=!tvShow.mediaAccountDetails!.watchlist!;
+          tvShow.mediaAccountDetails!.watchlist=!tvShow.mediaAccountDetails!.watchlist;
           return ActionErrorState(where: "watchList");
         },
         (r)=>ActionSuccessState()));

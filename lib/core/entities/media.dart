@@ -20,7 +20,7 @@ abstract class Media extends Equatable {
   final num? voteAverage;
   final num? voteCount;
   MediaAccountDetails? mediaAccountDetails;
-  Video? trailer;
+  Video ?trailer;
   final List<Video>? videos;
   Media({
       this.name,
@@ -39,6 +39,6 @@ abstract class Media extends Equatable {
        this.voteAverage,
        this.voteCount,
        this.mediaAccountDetails,
-       this.trailer,
+       required this.trailer,
        this.videos});
 }

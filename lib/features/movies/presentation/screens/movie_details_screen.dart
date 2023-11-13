@@ -55,6 +55,7 @@ class MovieDetailsScreen extends StatelessWidget {
                       backgroundColor: Theme.of(context).colorScheme.background,
                       bottomNavigationBar: const MovieBottomNavbar(),
                       body: NestedScrollView(
+                        scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
                         controller: MovieBottomNavCubit.get(context).nestedController,
                         physics: const ClampingScrollPhysics(),
                         headerSliverBuilder: (context, innerBoxIsScrolled) => [

@@ -55,6 +55,7 @@ class TvShowDetailsScreen extends StatelessWidget {
                     backgroundColor: Theme.of(context).colorScheme.background,
                     bottomNavigationBar: const TvShowBottomNavbar(),
                     body: NestedScrollView(
+                      scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
                       controller: TvShowBottomNavCubit.get(context).nestedController,
                       headerSliverBuilder: (context, innerBoxIsScrolled) => [
                         SliverOverlapAbsorber(

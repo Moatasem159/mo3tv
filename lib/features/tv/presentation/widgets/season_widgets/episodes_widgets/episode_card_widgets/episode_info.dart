@@ -16,11 +16,11 @@ class EpisodeInfo extends StatelessWidget {
           if (episode.name != "Episode ${episode.episodeNumber}")
             Text("${AppStrings.episode.tr(context)!} ${episode.episodeNumber}",style: AppTextStyles.get14BoldText(),),
           FittedBox(
-              child: Text("${episode.name}", style: AppTextStyles.get14BoldText(),maxLines: null)),
-          Text("${episode.airDate}", style:AppTextStyles.get14BoldText()),
-          if(episode.runtime!=null)
+              child: Text(episode.name, style: AppTextStyles.get14BoldText(),maxLines: null)),
+          Text(episode.airDate, style:AppTextStyles.get14BoldText()),
+          if(episode.runtime!=0)
             Text(
-              "${episode.runtime! ~/ 60 > 0 ? "${episode.runtime! ~/ 60}h " : ''}${episode.runtime! % 60==0?'':"${episode.runtime! % 60}m"}",
+              "${episode.runtime ~/ 60 > 0 ? "${episode.runtime ~/ 60}h " : ''}${episode.runtime % 60==0?'':"${episode.runtime % 60}m"}",
               style: AppTextStyles.get14BoldText(),
             )
         ],

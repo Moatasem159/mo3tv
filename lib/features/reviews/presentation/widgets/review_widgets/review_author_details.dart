@@ -16,13 +16,13 @@ class ReviewAuthorDetails extends StatelessWidget {
             children: [
               FittedBox(
                 child: Text(
-                    "${review.authorDetails!.name! == '' ?
-                    review.authorDetails!.username :
-                    review.authorDetails!.name}",
+                    review.authorDetails.name == '' ?
+                    review.authorDetails.username :
+                    review.authorDetails.name,
                     style: AppTextStyles.get14BoldText()),
               ),
               2.pw,
-              if(review.authorDetails!.rating!=0)
+              if(review.authorDetails.rating!=0)
                 Container(
                   decoration: BoxDecoration(
                       color: Colors.black87,
@@ -32,7 +32,7 @@ class ReviewAuthorDetails extends StatelessWidget {
                   child:  Row(
                     children: [
                       const Icon(Icons.star_rate,size: 10),
-                      Text("${review.authorDetails!.rating}",style: AppTextStyles.get14NormalText()),
+                      Text("${review.authorDetails.rating}",style: AppTextStyles.get14NormalText()),
                     ],
                   ),
                 )
@@ -40,12 +40,12 @@ class ReviewAuthorDetails extends StatelessWidget {
           ),
         ),
         FittedBox(
-          child: Text("Written By ${review.authorDetails!.name! == '' ?
-          review.authorDetails!.username :
-          review.authorDetails!.name}",style: AppTextStyles.get10NormalText()),
+          child: Text("Written By ${review.authorDetails.name == '' ?
+          review.authorDetails.username :
+          review.authorDetails.name}",style: AppTextStyles.get10NormalText()),
         ),
         2.ph,
-        Text("on ${review.createdAt!.substring(0,10)}",style:AppTextStyles.get10NormalText())
+        Text("on ${review.createdAt.substring(0,10)}",style:AppTextStyles.get10NormalText())
       ],
     );
   }

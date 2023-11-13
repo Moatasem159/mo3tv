@@ -14,15 +14,15 @@ class RecentlySearchItem extends StatelessWidget {
   String name(Search search){
     if(search.name!='')
     {
-      return "${search.name} ${search.releaseDate == "" ? '' : ((search.releaseDate!.substring(0, 4)))}";
+      return "${search.name} ${search.releaseDate == "" ? '' : ((search.releaseDate.substring(0, 4)))}";
     }
     else if(search.originalName!='')
     {
-      return "${search.originalName} ${search.releaseDate == "" ? '' : ((search.releaseDate!.substring(0, 4)))}";
+      return "${search.originalName} ${search.releaseDate == "" ? '' : ((search.releaseDate.substring(0, 4)))}";
     }
     else if(search.originalTitle!='')
     {
-      return "${search.originalTitle} ${search.releaseDate == "" ? '' : ((search.releaseDate!.substring(0, 4)))}";
+      return "${search.originalTitle} ${search.releaseDate == "" ? '' : ((search.releaseDate.substring(0, 4)))}";
     }
     return "";
   }

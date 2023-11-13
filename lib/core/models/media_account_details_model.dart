@@ -4,10 +4,10 @@ class MediaAccountDetails {
       this.rated = false,
       this.watchlist = false,
       this.ratedValue = 0.0});
-  bool? favorite;
+  bool favorite;
   dynamic rated;
   dynamic ratedValue;
-  bool? watchlist;
+  bool watchlist;
   factory MediaAccountDetails.fromJson(Map<String, dynamic> json) =>
       MediaAccountDetails(
         favorite: json["favorite"] ?? false,

@@ -1,6 +1,6 @@
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
-import 'package:mo3tv/core/models/video_model.dart';
+import 'package:mo3tv/features/video/data/video_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 //ignore: must_be_immutable
 class MovieModel extends Movie {
@@ -51,7 +51,7 @@ class MovieModel extends Movie {
       name: json["title"]??'',
       voteAverage: json["vote_average"]??0,
       voteCount: json["vote_count"]??0,
-      videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
+      videos: json["videos"]==null?[]:List<VideoModel>.from(json["videos"]["results"].map((x) => VideoModel.fromJson(x))),
   );
    static Map<String, dynamic> movieToJson(MovieModel movieModel) => {
      "backdrop_path":movieModel.backdropPath,

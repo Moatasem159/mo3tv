@@ -11,7 +11,7 @@ class CastMemberWidget extends StatelessWidget {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        CastImage(image: member.profilePath!),
+        CastImage(image: member.profilePath),
         Container(
           width: double.infinity,
           height: 45,
@@ -21,10 +21,10 @@ class CastMemberWidget extends StatelessWidget {
             children: [
               FittedBox(
                   child: Text(
-                    member.originalName!,
+                    member.originalName,
                     style: AppTextStyles.get14BoldText(),
                   )).addSymmetricPadding(h:5),
-              FittedBox(child: Text(member.character!!=''?member.character!:member.job!,style: AppTextStyles.get14NormalText())).addSymmetricPadding(h:5)
+              FittedBox(child: Text(member.character!=''?member.character:member.job,style: AppTextStyles.get14NormalText())).addSymmetricPadding(h:5)
             ],
           ),
         ),

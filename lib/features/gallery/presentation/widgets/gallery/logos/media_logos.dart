@@ -13,13 +13,13 @@ class MediaLogos extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryCubit, GalleryStates>(
       builder: (context, state) {
-        if(state is GetMediaGallerySuccessState&&state.gallery.logos!.isEmpty)
+        if(state is GetMediaGallerySuccessState&&state.gallery.logos.isEmpty)
           {
             return const EmptyImageList(text:AppStrings.noLogos);
           }
         if(state is GetMediaGallerySuccessState)
         {
-          return MediaLogosList(logos: state.gallery.logos!);
+          return MediaLogosList(logos: state.gallery.logos);
         }
         if(state is GetMediaGalleryLoadingState)
           {

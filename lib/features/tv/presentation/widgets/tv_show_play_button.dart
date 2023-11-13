@@ -19,8 +19,8 @@ class TvShowPlayButton extends StatelessWidget {
               {
                 if(state.tvShow.trailer!=null) {
                   return PlayButtonWidget(
-                    url: state.tvShow.trailer!.key!,
-                    name: state.tvShow.trailer!.name!,
+                    url: state.tvShow.trailer!.key,
+                    name: state.tvShow.trailer!.name,
                     shrinkOffset: shrinkOffset,
                   );
                 }

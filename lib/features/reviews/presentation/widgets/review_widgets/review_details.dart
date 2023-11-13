@@ -11,9 +11,9 @@ class ReviewDetails extends StatelessWidget {
     return Row(
       children: [
         ReviewImage(
-            name: review.authorDetails!.name!,
-            username: review.authorDetails!.username!,
-            image:review.authorDetails!.avatarPath! ),
+            name: review.authorDetails.name,
+            username: review.authorDetails.username,
+            image:review.authorDetails.avatarPath),
         5.pw,
         ReviewAuthorDetails(review: review),
       ],

@@ -24,7 +24,7 @@ class SeasonScreenAppBar extends StatelessWidget {
         pinned: true,
         expandedHeight: 540,
         flexibleSpace: Hero(
-          tag: "hero${season.posterPath!}",
+          tag: "hero${season.posterPath}",
           child: ShaderMask(
             shaderCallback: (rect) {
               return const LinearGradient(
@@ -44,7 +44,7 @@ class SeasonScreenAppBar extends StatelessWidget {
             blendMode: BlendMode.dstATop,
             child: CachedNetworkImage(
               fit: BoxFit.cover,
-              imageUrl: EndPoints.backDropsUrl(season.posterPath!),
+              imageUrl: EndPoints.backDropsUrl(season.posterPath),
             ),
           ),
         ),
@@ -58,11 +58,11 @@ class SeasonScreenAppBar extends StatelessWidget {
                     style: AppTextStyles.get14BoldText()
                   ),
                   Text(
-                    season.name!,
+                    season.name,
                     style: AppTextStyles.get14BoldText()
                   ),
                   Text(
-                    "(${season.airDate!.substring(0, 4)})",
+                    "(${season.airDate.substring(0, 4)})",
                     style: AppTextStyles.get14BoldText(),
                   ),
                 ],

@@ -56,7 +56,7 @@ class AddMovieToWatchlistButton extends StatelessWidget {
               );
             }
           },
-          icon: bloc.movie.mediaAccountDetails!.watchlist!
+          icon: bloc.movie.mediaAccountDetails!.watchlist
               ? const Icon(Icons.bookmark_rounded, color: Colors.green)
               : const Icon(Icons.bookmark_add_outlined),
         );

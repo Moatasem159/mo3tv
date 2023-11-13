@@ -55,7 +55,7 @@ class MovieFavButton extends StatelessWidget {
             }
           },
           icon: Icon(Icons.favorite_rounded,
-              color:bloc.movie.mediaAccountDetails!.favorite!?Colors.red:Colors.white));
+              color:bloc.movie.mediaAccountDetails!.favorite?Colors.red:Colors.white));
       },
     );
   }

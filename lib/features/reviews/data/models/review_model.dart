@@ -1,17 +1,16 @@
 import 'package:mo3tv/features/reviews/domain/entities/review.dart';
 class ReviewModel extends Review {
-  ReviewModel(
-      {super.author,
-      super.authorDetails,
+  const ReviewModel(
+      {required super.author,
+      required super.authorDetails,
       required super.content,
-      super.createdAt,
-      super.id,
-      super.updatedAt,
-      super.url});
+      required super.createdAt,
+      required super.id,
+      required super.updatedAt,
+      required super.url});
   factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
         author: json["author"] ?? '',
-        authorDetails:
-            AuthorModel.fromJson(json["author_details"] ?? AuthorDetails()),
+        authorDetails: AuthorModel.fromJson(json["author_details"]),
         content: json["content"] ?? '',
         createdAt: json["created_at"] ?? '',
         id: json["id"] ?? 0,
@@ -20,7 +19,12 @@ class ReviewModel extends Review {
       );
 }
 class AuthorModel extends AuthorDetails {
-  AuthorModel({super.name, super.username, super.avatarPath, super.rating});
+  const AuthorModel({
+    required super.name,
+    required super.username,
+    required super.avatarPath,
+    required super.rating,
+  });
   factory AuthorModel.fromJson(Map<String, dynamic> json) => AuthorModel(
         name: json["name"] ?? '',
         username: json["username"] ?? '',

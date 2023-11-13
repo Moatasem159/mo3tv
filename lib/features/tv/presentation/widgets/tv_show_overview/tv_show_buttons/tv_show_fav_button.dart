@@ -55,7 +55,7 @@ class TvShowFavButton extends StatelessWidget {
             }
           },
           icon:Icon(Icons.favorite_rounded,
-              color: bloc.tvShow.mediaAccountDetails!.favorite!?Colors.red:Colors.white));
+              color: bloc.tvShow.mediaAccountDetails!.favorite?Colors.red:Colors.white));
       },
     );
   }

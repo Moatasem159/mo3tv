@@ -1,6 +1,6 @@
 import 'package:mo3tv/features/auth/domain/entities/session.dart';
 class SessionModel extends Session {
-  SessionModel({
+  const SessionModel({
    required super.success,
    required super.sessionId,
   });

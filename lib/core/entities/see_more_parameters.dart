@@ -3,5 +3,5 @@ class SeeMoreParameters{
   final bool isMovie;
   final int index;
   final List media;
-  SeeMoreParameters({required this.media,required this.title,required this.isMovie,required this.index});
+  const SeeMoreParameters({required this.media,required this.title,required this.isMovie,required this.index});
 }

@@ -1,6 +1,6 @@
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
-import 'package:mo3tv/core/models/video_model.dart';
+import 'package:mo3tv/features/video/data/video_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 //ignore: must_be_immutable
@@ -65,7 +65,7 @@ class TvShowModel extends TvShow {
     type: json["type"]??'',
     voteAverage: json["vote_average"]==null?0: json["vote_average"].toDouble(),
     voteCount: json["vote_count"]??0,
-    videos: json["videos"]==null?[]:List<Result>.from(json["videos"]["results"].map((x) => Result.fromJson(x))),
+    videos: json["videos"]==null?[]:List<VideoModel>.from(json["videos"]["results"].map((x) => VideoModel.fromJson(x))),
   );
    static Map<String, dynamic> tvShowToJson(TvShowModel tvShowModel) => {
      "backdrop_path":tvShowModel.backdropPath,

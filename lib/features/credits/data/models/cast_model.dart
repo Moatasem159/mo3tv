@@ -2,18 +2,18 @@ import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 class CastMemberModel extends CastMember {
   const CastMemberModel({
     required super.id,
+    required super.gender,
+    required super.knownForDepartment,
     required super.name,
-    super.castId,
-    super.character,
-    super.creditId,
-    super.gender,
-    super.knownForDepartment,
-    super.order,
-    super.originalName,
-    super.popularity,
-    super.profilePath,
-    super.department,
-    super.job,
+    required super.originalName,
+    required super.popularity,
+    required super.profilePath,
+    required super.castId,
+    required super.character,
+    required super.creditId,
+    required super.order,
+    required super.department,
+    required super.job,
   });
   factory CastMemberModel.fromJson(Map<String, dynamic> json) =>
       CastMemberModel(

@@ -11,6 +11,7 @@ class TvShowDetailsScreenBody extends StatelessWidget {
       builder: (context, state) {
         return CustomScrollView(
           physics: const ClampingScrollPhysics(),
+          scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
           slivers: [
             SliverOverlapInjector(handle: TvShowBottomNavCubit.get(context).appBar),
             if (TvShowBottomNavCubit.get(context).isGallery)

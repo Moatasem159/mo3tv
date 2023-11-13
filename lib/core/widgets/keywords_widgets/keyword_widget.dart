@@ -12,6 +12,6 @@ class KeywordWidget extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.black38.withOpacity(.5),
             borderRadius: BorderRadius.circular(5)),
-        child: Text(keyword.name!,style:AppTextStyles.get14NormalText()));
+        child: Text(keyword.name,style:AppTextStyles.get14NormalText()));
   }
 }

@@ -13,13 +13,13 @@ class MediaBackdrops extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryCubit, GalleryStates>(
       builder: (context, state) {
-        if(state is GetMediaGallerySuccessState&&state.gallery.backdrops!.isEmpty)
+        if(state is GetMediaGallerySuccessState&&state.gallery.backdrops.isEmpty)
         {
           return const EmptyImageList(text:AppStrings.noBackdrops);
         }
         if(state is GetMediaGallerySuccessState)
         {
-          return BackdropsList(backdrops:state.gallery.backdrops!);
+          return BackdropsList(backdrops:state.gallery.backdrops);
         }
         if(state is GetMediaGalleryLoadingState)
         {

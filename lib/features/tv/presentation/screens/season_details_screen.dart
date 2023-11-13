@@ -14,7 +14,7 @@ class SeasonDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => SeasonCubit(di.sl())..getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: season.seasonNumber!),
+        create: (context) => SeasonCubit(di.sl())..getTvShowSeasonDetailsData(tvShowId: tvShowId, seasonNumber: season.seasonNumber),
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
@@ -28,7 +28,7 @@ class SeasonDetailsScreen extends StatelessWidget {
                   body: CustomScrollView(
                     slivers: [
                       SliverOverlapInjector(handle: SeasonCubit.get(context).appBar),
-                      SeasonOverview(seasonNumber: season.seasonNumber!, tvShowId: tvShowId),
+                      SeasonOverview(seasonNumber: season.seasonNumber, tvShowId: tvShowId),
                     ],
                   ),
                 );

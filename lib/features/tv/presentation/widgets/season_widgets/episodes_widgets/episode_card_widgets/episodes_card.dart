@@ -16,7 +16,7 @@ class EpisodeCard extends StatelessWidget {
         children: [
           EpisodeDetails(episode: episode),
           5.ph,
-          Text(episode.overview!,style: AppTextStyles.get14NormalText())
+          Text(episode.overview,style: AppTextStyles.get14NormalText())
         ],
       ),
     );

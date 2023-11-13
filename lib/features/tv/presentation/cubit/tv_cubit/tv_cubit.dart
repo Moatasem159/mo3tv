@@ -22,7 +22,7 @@ class TvCubit extends Cubit<TvStates> {
               {
                 tvShow.seasons!.removeAt(0);
               }
-              if(tvShow.seasons!.last.episodeCount==0||tvShow.seasons!.last.airDate==null)
+              if(tvShow.seasons!.last.episodeCount==0||tvShow.seasons!.last.airDate.isEmpty)
               {
                 tvShow.seasons!.removeLast();
                 }

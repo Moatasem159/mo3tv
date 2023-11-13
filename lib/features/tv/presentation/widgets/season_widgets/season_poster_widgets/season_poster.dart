@@ -28,7 +28,7 @@ class SeasonPoster extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
-          SeasonPosterImage(image: season.posterPath!),
+          SeasonPosterImage(image: season.posterPath),
           SeasonInfo(season: season),
         ],
       ).addAllPadding(MediaQuery.of(context).size.width/43));

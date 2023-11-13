@@ -15,10 +15,10 @@ class SeasonOverviewWidget extends StatelessWidget {
         children: [
           10.ph,
           if (season.overview != "")
-            Text(season.overview!,
+            Text(season.overview,
                 style:AppLocalizations.of(context)!.isEnLocale?
                 AppTextStyles.get14NormalText():AppTextStyles.get18NormalText()).addAllPadding(8),
-           EpisodesList(episodes: season.episodes!)
+           EpisodesList(episodes: season.episodes)
         ],
       ),
     );

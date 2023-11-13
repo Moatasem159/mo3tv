@@ -26,7 +26,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   late Movie movie;
   Future<void> rateMovie(emit,double rate)async{
     emit(ActionLoadingState());
-    bool watchList= movie.mediaAccountDetails!.watchlist!;
+    bool watchList= movie.mediaAccountDetails!.watchlist;
     dynamic oldRate= movie.mediaAccountDetails!.ratedValue;
     Either<Failure, Message> response;
     if(rate>0) {
@@ -52,7 +52,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     await _markMovieUsecase.call(movieId: movie.id, mark: fav,markType: "favorite");
     emit(response.fold(
         (l){
-          movie.mediaAccountDetails!.favorite= !movie.mediaAccountDetails!.favorite!;
+          movie.mediaAccountDetails!.favorite= !movie.mediaAccountDetails!.favorite;
           return ActionErrorState(where: "fav");
         },
         (r) => ActionSuccessState()));
@@ -63,7 +63,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     await _markMovieUsecase.call(movieId: movie.id, mark:add,markType: "watchlist");
     emit(response.fold(
             (l){
-              movie.mediaAccountDetails!.watchlist= !movie.mediaAccountDetails!.watchlist!;
+              movie.mediaAccountDetails!.watchlist= !movie.mediaAccountDetails!.watchlist;
               return ActionErrorState(where: "watchList");
             },
             (r) => ActionSuccessState()));

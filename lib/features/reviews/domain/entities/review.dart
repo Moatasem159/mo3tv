@@ -1,30 +1,30 @@
-class Review{
-  String? author;
-  AuthorDetails? authorDetails;
+class Review {
+  final String author;
+  final AuthorDetails authorDetails;
   final String content;
-  String ?createdAt;
-  String ?id;
-  String? updatedAt;
-  String ?url;
-  Review(
-      {this.author,
-      this.authorDetails,
-      required this.content,
-      this.createdAt,
-      this.id,
-      this.updatedAt,
-      this.url});
+  final String createdAt;
+  final String id;
+  final String updatedAt;
+  final String url;
+  const Review({
+    required this.author,
+    required this.authorDetails,
+    required this.content,
+    required this.createdAt,
+    required this.id,
+    required this.updatedAt,
+    required this.url,
+  });
 }
-class AuthorDetails{
-  String ?name;
-  String ?username;
-  String ?avatarPath;
-  dynamic rating;
-  AuthorDetails({this.name, this.username, this.avatarPath, this.rating});
-  Map<String, dynamic> toJson() => {
-    "name": name,
-    "username": username,
-    "avatar_path": avatarPath,
-    "rating": rating,
-  };
+class AuthorDetails {
+  final String name;
+  final String username;
+  final String avatarPath;
+  final dynamic rating;
+  const AuthorDetails({
+    required this.name,
+    required this.username,
+    required this.avatarPath,
+    required this.rating,
+  });
 }

@@ -22,22 +22,22 @@ class GalleryCubit extends Cubit<GalleryStates> {
     await _getMediaGalleryUsecase.call(mediaType: mediaType,mediaId: mediaId);
     emit(response.fold((failure) => GetMediaGalleryErrorState(msg: mapFailureToMsg(failure)),
             (mediaGallery) {
-          for (var element in mediaGallery.backdrops!){
+          for (var element in mediaGallery.backdrops){
             if(element.iso6391=="en"||element.iso6391=="ar")
             {
-              gallery.backdrops!.add(element);
+              gallery.backdrops.add(element);
             }
           }
-          for (var element in mediaGallery.posters!){
+          for (var element in mediaGallery.posters){
             if(element.iso6391=="en"||element.iso6391=="ar")
             {
-              gallery.posters!.add(element);
+              gallery.posters.add(element);
             }
           }
-          for (var element in mediaGallery.logos!){
+          for (var element in mediaGallery.logos){
             if(element.iso6391=="en"||element.iso6391=="ar")
             {
-              gallery.logos!.add(element);
+              gallery.logos.add(element);
             }
           }
           return GetMediaGallerySuccessState(gallery);

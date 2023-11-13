@@ -9,7 +9,7 @@ class EmptyImageList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        15.ph,
+        (MediaQuery.sizeOf(context).height*.18).ph,
         const Icon(Icons.image_not_supported_outlined, size: 100),
         Text(text.tr(context)!, style: AppTextStyles.get25BoldText()),
       ],

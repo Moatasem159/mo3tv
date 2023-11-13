@@ -10,6 +10,7 @@ class MovieDetailsScreenBody extends StatelessWidget {
     return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
       builder: (context, state) {
         return CustomScrollView(
+          scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
           slivers: [
             SliverOverlapInjector(handle: MovieBottomNavCubit.get(context).appBar),
             if (MovieBottomNavCubit.get(context).isGallery)

@@ -13,13 +13,13 @@ class MediaPosters extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryCubit, GalleryStates>(
       builder: (context, state) {
-        if(state is GetMediaGallerySuccessState&&state.gallery.posters!.isEmpty)
+        if(state is GetMediaGallerySuccessState&&state.gallery.posters.isEmpty)
         {
           return const EmptyImageList(text:AppStrings.noPosters);
         }
         if(state is GetMediaGallerySuccessState)
         {
-          return MediaPostersList(posters: state.gallery.posters!);
+          return MediaPostersList(posters: state.gallery.posters);
         }
         if(state is GetMediaGalleryLoadingState)
         {

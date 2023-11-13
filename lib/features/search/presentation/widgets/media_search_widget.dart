@@ -57,7 +57,7 @@ class MediaSearchWidget extends StatelessWidget {
             CachedNetworkImage(
               width: 120,
               height: 180,
-              imageUrl: EndPoints.posterUrl(mediaSearch.posterPath!),
+              imageUrl: EndPoints.posterUrl(mediaSearch.posterPath),
               imageBuilder: (context, imageProvider) {
                 return Container(
                   decoration: BoxDecoration(
@@ -82,7 +82,7 @@ class MediaSearchWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${mediaSearch.originalTitle != "" ? mediaSearch.originalTitle : mediaSearch.originalName != "" ? mediaSearch.originalName : mediaSearch.name} ${mediaSearch.releaseDate == "" ? '' : ((mediaSearch.releaseDate!.substring(0, 4)))}",
+                    "${mediaSearch.originalTitle != "" ? mediaSearch.originalTitle : mediaSearch.originalName != "" ? mediaSearch.originalName : mediaSearch.name} ${mediaSearch.releaseDate == "" ? '' : ((mediaSearch.releaseDate.substring(0, 4)))}",
                     style: AppTextStyles.get14BoldText(),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,

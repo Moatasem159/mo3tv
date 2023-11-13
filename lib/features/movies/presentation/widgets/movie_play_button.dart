@@ -19,8 +19,8 @@ class MoviePlayButton extends StatelessWidget {
                 {
                   if(state.movie.trailer!=null) {
                     return PlayButtonWidget(
-                      url: state.movie.trailer!.key!,
-                      name: state.movie.trailer!.name!,
+                      url: state.movie.trailer!.key,
+                      name: state.movie.trailer!.name,
                         shrinkOffset: shrinkOffset,
                     );
                   }

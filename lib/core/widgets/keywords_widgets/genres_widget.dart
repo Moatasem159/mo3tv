@@ -44,7 +44,7 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
               return Wrap(
                   children: [
                     Text(widget.genres.last.id !=e.id?
-                    "${e.name},": "${e.name}",
+                    "${e.name},": e.name,
                         textAlign: TextAlign.center,
                         style:AppTextStyles.get14BoldText(height: AppLocalizations.of(context)!.isEnLocale?1.5:0)),
                     if(e.id==widget.genres.last.id&&widget.runTime!=0)
