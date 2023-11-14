@@ -1,6 +1,6 @@
 import 'package:mo3tv/features/account/domain/entities/account.dart';
 class AccountModel extends Account {
-  AccountModel({
+  const AccountModel({
     required super.avatar,
     required super.id,
     required super.iso6391,

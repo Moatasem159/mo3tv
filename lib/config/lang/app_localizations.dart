@@ -19,14 +19,7 @@ class AppLocalizations {
   }
   String? translate(String key) => _localizedStrings[key];
   bool get isEnLocale => locale.languageCode == 'en';
-  String getLang(){
-    if(isEnLocale){
-      return "en";
-    }
-    else {
-      return 'ar';
-    }
-  }
+  String getLang()=> isEnLocale ?"en":"ar";
 }
 extension TranslateX on String {
   String? tr(BuildContext context) {

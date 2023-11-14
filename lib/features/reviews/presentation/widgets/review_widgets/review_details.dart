@@ -10,10 +10,7 @@ class ReviewDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ReviewImage(
-            name: review.authorDetails.name,
-            username: review.authorDetails.username,
-            image:review.authorDetails.avatarPath),
+        ReviewImage(review: review),
         5.pw,
         ReviewAuthorDetails(review: review),
       ],
