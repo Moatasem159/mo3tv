@@ -38,15 +38,10 @@ class MovieDetailsScreen extends StatelessWidget {
           return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(
             builder: (context, state) {
               MovieBottomNavCubit cubit = MovieBottomNavCubit.get(context);
-              return WillPopScope(
-                onWillPop: () async {
-                  if (cubit.index != 0) {
-                    cubit.changeScreen(0);
-                    return false;
-                  }
-                  else {
-                    return true;
-                  }
+              return PopScope(
+                canPop: cubit.index==0?true:false,
+                onPopInvoked: (didPop) async {
+                  cubit.changeScreen(0);
                 },
                 child: DefaultTabController(
                   length: 3,

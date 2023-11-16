@@ -36,7 +36,7 @@ class _ReadMoreWidgetState extends State<ReadMoreWidget> {
       TextPainter textPainter = TextPainter(
         text: link,
         textDirection: Directionality.of(context),
-        textScaleFactor:  MediaQuery.textScaleFactorOf(context),
+        textScaler:  MediaQuery.textScalerOf(context),
         maxLines: 4,
       );
       textPainter.layout(minWidth: 0, maxWidth: maxWidth);
@@ -77,11 +77,11 @@ class _ReadMoreWidgetState extends State<ReadMoreWidget> {
             : CrossFadeState.showFirst,
         firstChild: Text.rich(
           textSpan1,
-          textScaleFactor: MediaQuery.textScaleFactorOf(context),
+          textScaler: MediaQuery.textScalerOf(context),
         ),
         secondChild: Text.rich(
           textSpan1,
-          textScaleFactor: MediaQuery.textScaleFactorOf(context),
+          textScaler: MediaQuery.textScalerOf(context),
         ),
       );
     });

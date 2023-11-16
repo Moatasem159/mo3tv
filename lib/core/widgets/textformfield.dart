@@ -22,9 +22,16 @@ class MainTextFormField extends StatelessWidget {
     this.focusedBorderColor=Colors.white,
     this.inputType,
     this.onChange});
+   InputBorder formBorder({Color borderColor =Colors.white}){
+     return OutlineInputBorder(
+         borderSide: BorderSide(
+             width: 1,
+             style: BorderStyle.solid,
+             color: borderColor),
+         borderRadius: BorderRadius.circular(7));
+   }
   @override
   Widget build(BuildContext context) {
-    double radius = 7;
     return TextFormField(
       keyboardType: inputType,
       validator: validator,
@@ -35,34 +42,12 @@ class MainTextFormField extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(
             horizontal: 10, vertical: 7),
         suffixIcon: suffixIcon,
-        focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                width: 1,
-                style: BorderStyle.solid,
-                color: focusedErrorBorderColor),
-            borderRadius: BorderRadius.circular(radius)),
-        errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                width: 1,
-                style: BorderStyle.solid,
-                color: focusedErrorBorderColor),
-            borderRadius: BorderRadius.circular(radius)),
         hintText: hintText,
         hintStyle:AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get10NormalText():AppTextStyles.get14NormalText(),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                width: 1,
-                style: BorderStyle.solid,
-                color: focusedBorderColor),
-            borderRadius: BorderRadius.circular(radius)),
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                width: 1,
-                style: BorderStyle.solid,
-
-                color:Theme.of(context).primaryColorLight
-            ),
-            borderRadius: BorderRadius.circular(radius)),
+        focusedBorder: formBorder(borderColor: focusedBorderColor),
+        enabledBorder: formBorder(borderColor: Theme.of(context).primaryColorLight),
+        focusedErrorBorder:formBorder(borderColor: focusedErrorBorderColor),
+        errorBorder: formBorder(borderColor: focusedErrorBorderColor),
         prefixIcon: Icon(
           prefixIcon,
           color: Theme.of(context).textTheme.titleMedium!.color,

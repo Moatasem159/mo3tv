@@ -38,15 +38,10 @@ class TvShowDetailsScreen extends StatelessWidget {
         return BlocBuilder<TvShowBottomNavCubit, TvShowBottomNavStates>(
           builder: (context, state) {
             TvShowBottomNavCubit cubit = TvShowBottomNavCubit.get(context);
-            return WillPopScope(
-              onWillPop: () async {
-                if (cubit.index != 0) {
-                  cubit.changeScreen(0);
-                  return false;
-                }
-                else {
-                  return true;
-                }
+            return PopScope(
+              canPop: cubit.index==0?true:false,
+              onPopInvoked:  (didPop) async {
+                cubit.changeScreen(0);
               },
               child: DefaultTabController(
                 length: 3,

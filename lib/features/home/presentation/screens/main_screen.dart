@@ -11,13 +11,11 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<CheckConnectivityCubit, CheckConnectivityStates>(
       listener: CheckConnectivityCubit.get(context).listen,
-      child: WillPopScope(
-        onWillPop: () async {
+      child: PopScope(
+        canPop: navigationShell.currentIndex==0?true:false,
+        onPopInvoked: (_) async{
           if (navigationShell.currentIndex != 0) {
             navigationShell.goBranch(0);
-            return false;
-          } else {
-            return true;
           }
         },
         child: SafeArea(

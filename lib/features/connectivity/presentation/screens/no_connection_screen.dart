@@ -4,10 +4,8 @@ class NoConnectionScreen extends StatelessWidget {
   const NoConnectionScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
+    return PopScope(
+     canPop: false,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
