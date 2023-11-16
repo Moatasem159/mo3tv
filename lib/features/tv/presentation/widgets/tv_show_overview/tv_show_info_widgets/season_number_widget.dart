@@ -11,14 +11,14 @@ class SeasonNumberWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (tvShow.seasons!.isEmpty && tvShow.numberOfSeasons == 1)
+        if (tvShow.seasons.isEmpty && tvShow.numberOfSeasons == 1)
           Text("${tvShow.numberOfSeasons} ${AppStrings.season.tr(context)!}",style: AppTextStyles.get14BoldText()),
-        if (tvShow.seasons!.isEmpty && tvShow.numberOfSeasons! > 1)
+        if (tvShow.seasons.isEmpty && tvShow.numberOfSeasons > 1)
           Text("${tvShow.numberOfSeasons} ${AppStrings.seasons.tr(context)!}",style: AppTextStyles.get14BoldText()),
-        if (tvShow.seasons!.length > 1)
-          Text("${tvShow.seasons!.length} ${AppStrings.seasons.tr(context)!}", style: AppTextStyles.get14BoldText()),
-        if (tvShow.seasons!.length == 1)
-          Text("${tvShow.seasons!.length} ${AppStrings.season.tr(context)!}",style:AppTextStyles.get14BoldText()),
+        if (tvShow.seasons.length > 1)
+          Text("${tvShow.seasons.length} ${AppStrings.seasons.tr(context)!}", style: AppTextStyles.get14BoldText()),
+        if (tvShow.seasons.length == 1)
+          Text("${tvShow.seasons.length} ${AppStrings.season.tr(context)!}",style:AppTextStyles.get14BoldText()),
       ],
     );
   }

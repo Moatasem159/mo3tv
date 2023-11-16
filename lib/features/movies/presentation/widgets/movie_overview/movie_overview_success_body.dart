@@ -14,7 +14,7 @@ class MovieOverViewSuccessBody extends StatelessWidget {
     return SliverList(delegate: SliverChildListDelegate(
       [
         MovieDetailsWidget(movie:movie),
-        GenresWidget(genres:movie.genres!,runTime: movie.runtime!,link: movie.homepage!),
+        GenresWidget(genres:movie.genres,runTime: movie.runtime,link: movie.homepage),
         MovieButtonsWidget(listType: listType,movie:movie),
         MovieDescriptionWidget(movie:movie),
         10.ph

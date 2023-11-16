@@ -5,40 +5,41 @@ import 'package:mo3tv/features/video/domain/entities/video.dart';
 // ignore: must_be_immutable
 abstract class Media extends Equatable {
   final int id;
-  final String? name;
-  final String ?originalName;
-  final String? backdropPath;
-  final List<Keyword>? genres;
-  final List<Keyword>? keywords;
-  final String? homepage;
-  final String? status;
-  final String? tagline;
-  final String? originalLanguage;
-  final String? overview;
-  final num? popularity;
-  final String? posterPath;
-  final num? voteAverage;
-  final num? voteCount;
+  final num voteCount;
+  final num popularity;
+  final num voteAverage;
+  final String name;
+  final String status;
+  final String tagline;
+  final String overview;
+  final String homepage;
+  final String posterPath;
+  final String originalName;
+  final String backdropPath;
+  final String originalLanguage;
+  final List<Video> videos;
+  final List<Keyword> genres;
+  final List<Keyword> keywords;
+  Video? trailer;
   MediaAccountDetails? mediaAccountDetails;
-  Video ?trailer;
-  final List<Video>? videos;
   Media({
-      this.name,
-      this.originalName,
-      required this.id,
-       this.backdropPath,
-       this.genres,
-       this.keywords,
-       this.homepage,
-       this.status,
-       this.tagline,
-       this.originalLanguage,
-       this.overview,
-       this.popularity,
-       this.posterPath,
-       this.voteAverage,
-       this.voteCount,
-       this.mediaAccountDetails,
-       required this.trailer,
-       this.videos});
+    required this.name,
+    required this.originalName,
+    required this.id,
+    required this.backdropPath,
+    required this.posterPath,
+    this.genres=const[],
+    this.keywords=const[],
+    this.homepage='',
+    this.status='',
+    this.tagline='',
+    this.originalLanguage='',
+    this.overview='',
+    this.popularity=0,
+    this.voteAverage=0,
+    this.voteCount=0,
+    this.videos=const [],
+    this.mediaAccountDetails,
+    this.trailer,
+  });
 }

@@ -55,7 +55,7 @@ class MediaDetailsAppBar extends SliverPersistentHeaderDelegate {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                          EndPoints.backDropsUrl(media.backdropPath!),
+                          EndPoints.backDropsUrl(media.backdropPath),
                         ),
                       )),
                 )),
@@ -86,7 +86,7 @@ class MediaDetailsAppBar extends SliverPersistentHeaderDelegate {
                   ),
                   child: FittedBox(
                     child: Text(
-                      media.originalName!,
+                      media.originalName,
                       maxLines: null,
                       overflow: TextOverflow.visible,
                       style: TextStyle(

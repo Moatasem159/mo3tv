@@ -45,7 +45,7 @@ class MediaPlayingNowCardBuilder extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 2,vertical:3),
                   decoration: BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.circular(5)),
                   child: Text(
-                    media.name!,
+                    media.name,
                     maxLines: null,
                     style: AppTextStyles.get18BoldText()
                   ),
@@ -60,7 +60,7 @@ class MediaPlayingNowCardBuilder extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    media.voteAverage!
+                    media.voteAverage
                         .toStringAsFixed(1)
                         .replaceAll(RegExp(r'0*$'), '')
                         .replaceAll(RegExp(r'\.$'), ''),

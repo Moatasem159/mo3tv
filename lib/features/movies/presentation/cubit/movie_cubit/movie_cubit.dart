@@ -18,7 +18,7 @@ class MovieCubit extends Cubit<MovieStates> {
     emit(response.fold((failure) =>GetMovieDetailsErrorState(msg: mapFailureToMsg(failure))
         ,(movieData) {
           movie = movieData;
-          for (var element in movie.videos!) {
+          for (var element in movie.videos) {
             if(element.name=="Official Trailer")
             {
               movie.trailer =element;
@@ -35,7 +35,7 @@ class MovieCubit extends Cubit<MovieStates> {
               break;
             }
           }
-          movie.videos!.clear();
+          movie.videos.clear();
       return GetMovieDetailsSuccessState(movie);
         }));
   }

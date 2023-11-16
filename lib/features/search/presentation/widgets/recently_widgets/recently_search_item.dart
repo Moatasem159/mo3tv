@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/models/media_account_details_model.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
@@ -34,6 +35,7 @@ class RecentlySearchItem extends StatelessWidget {
         if(search.mediaType=="movie") {
           Movie m=Movie(
             id: search.id,
+            mediaAccountDetails: MediaAccountDetails(),
             name: search.originalTitle,
             originalName: search.originalTitle,
             posterPath: search.posterPath,

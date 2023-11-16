@@ -10,15 +10,15 @@ class SeasonsListWidget extends StatelessWidget {
   const SeasonsListWidget({super.key, required this.tvShow});
   @override
   Widget build(BuildContext context) {
-    if (tvShow.seasons!.isNotEmpty) {
+    if (tvShow.seasons.isNotEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
          Text("${AppStrings.seasons.tr(context)!}:",style: AppTextStyles.get14BoldText()).addSymmetricPadding(h: 10),
          Wrap(
             crossAxisAlignment: WrapCrossAlignment.start,
-            children: tvShow.seasons!.map((e) {
-              return SeasonPoster(season: e,tvShowId: tvShow.id,tvShowName: tvShow.originalName!);
+            children: tvShow.seasons.map((e) {
+              return SeasonPoster(season: e,tvShowId: tvShow.id,tvShowName: tvShow.originalName);
             }).toList(),
           )
         ],

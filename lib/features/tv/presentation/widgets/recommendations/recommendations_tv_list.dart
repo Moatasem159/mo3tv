@@ -14,37 +14,47 @@ class RecommendationsTvShowsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-      delegate: SliverChildListDelegate([
-        Row(
-      children: [
-      Text(
-      "${AppStrings.recommendations.tr(context)!} :${recommendationTvShows.length}",
-        style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()).addSymmetricPadding(h: 11),
-    const Spacer(),
-    GestureDetector(
-    onTap: () {
-    GoRouter.of(context).pushNamed(
-    Routes.similarTvShowsRoute,
-    extra: recommendationTvShows,
-    pathParameters: {'tvId': tvId.toString()});
-    },
-    child:Row(
-    children: [
-    Text(AppStrings.seeMore.tr(context)!, style: AppLocalizations.of(context)!.isEnLocale?AppTextStyles.get14BoldText():AppTextStyles.get18BoldText()),
-    const Icon(Icons.arrow_forward_ios_outlined,size: 15).addPadding(t: 3)
-    ],
-    ).addSymmetricPadding(h: 10),
-    )
-    ],
-    ).addSymmetricPadding(h: 11),
-        GridView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: recommendationTvShows.length ,
-            itemBuilder: (context, index) =>MediaListItem(media: recommendationTvShows[index], isMovie: false),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .65, crossAxisCount: 3, mainAxisSpacing: 7)),
-      ]),
+      delegate: SliverChildListDelegate(
+        [
+          Row(
+            children: [
+              Text("${AppStrings.recommendations.tr(context)!} :${recommendationTvShows.length}",
+                      style: AppLocalizations.of(context)!.isEnLocale
+                          ? AppTextStyles.get14BoldText()
+                          : AppTextStyles.get18BoldText()),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  GoRouter.of(context).pushNamed(Routes.similarTvShowsRoute,
+                      extra: recommendationTvShows,
+                      pathParameters: {'tvId': tvId.toString()});
+                },
+                child: Row(
+                  children: [
+                    Text(AppStrings.seeMore.tr(context)!,
+                        style: AppLocalizations.of(context)!.isEnLocale
+                            ? AppTextStyles.get14BoldText()
+                            : AppTextStyles.get18BoldText()),
+                    const Icon(Icons.arrow_forward_ios_outlined, size: 14)
+                        .addPadding(t: 3)
+                  ],
+                ),
+              )
+            ],
+          ).addSymmetricPadding(h: 11),
+          GridView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: recommendationTvShows.length,
+              itemBuilder: (context, index) => MediaListItem(
+                  media: recommendationTvShows[index], isMovie: false),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: .65,
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 7)),
+        ],
+      ),
     );
   }
 }

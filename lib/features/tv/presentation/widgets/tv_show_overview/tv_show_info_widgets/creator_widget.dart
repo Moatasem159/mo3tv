@@ -9,7 +9,7 @@ class CreatorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: tvShow.createdBy!.map((e) {
+      children: tvShow.createdBy.map((e) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

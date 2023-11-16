@@ -13,9 +13,9 @@ class TvShowOverviewSuccessBody extends StatelessWidget {
     return SliverList(delegate: SliverChildListDelegate(
         [
       TvShowDetails(tvShow: tvShow),
-      GenresWidget(genres: tvShow.genres!,
-          runTime: tvShow.episodeRunTime!.isNotEmpty ? tvShow
-              .episodeRunTime![0] : 0,link: tvShow.homepage!),
+      GenresWidget(genres: tvShow.genres,
+          runTime: tvShow.episodeRunTime.isNotEmpty ? tvShow
+              .episodeRunTime[0] : 0,link: tvShow.homepage),
       TvShowButtonsWidget(tvShow: tvShow,listType:listType),
       TvShowDescriptionWidget(tvShow: tvShow)
     ]));

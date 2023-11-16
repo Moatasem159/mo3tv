@@ -18,22 +18,22 @@ class TvCubit extends Cubit<TvStates> {
     emit(response.fold((failure)=>GetTvShowDetailsErrorState(msg: mapFailureToMsg(failure)),
             (tvShowData) {
                   tvShow = tvShowData;
-              if(tvShow.seasons!.first.seasonNumber==0)
+              if(tvShow.seasons.first.seasonNumber==0)
               {
-                tvShow.seasons!.removeAt(0);
+                tvShow.seasons.removeAt(0);
               }
-              if(tvShow.seasons!.last.episodeCount==0||tvShow.seasons!.last.airDate.isEmpty)
+              if(tvShow.seasons.last.episodeCount==0||tvShow.seasons.last.airDate.isEmpty)
               {
-                tvShow.seasons!.removeLast();
+                tvShow.seasons.removeLast();
                 }
-              for (var element in tvShow.seasons!){
+              for (var element in tvShow.seasons){
                 if(element.posterPath=='')
                   {
-                    tvShow.seasons!.clear();
+                    tvShow.seasons.clear();
                     break;
                   }
               }
-              for (var element in tvShow.videos!) {
+              for (var element in tvShow.videos) {
                 if(element.name=="Final Trailer")
                 {
                   tvShow.trailer =element;
@@ -55,7 +55,7 @@ class TvCubit extends Cubit<TvStates> {
                   break;
                 }
               }
-              tvShow.videos!.clear();
+              tvShow.videos.clear();
           return GetTvShowDetailsSuccessState(tvShow);
         }));
   }

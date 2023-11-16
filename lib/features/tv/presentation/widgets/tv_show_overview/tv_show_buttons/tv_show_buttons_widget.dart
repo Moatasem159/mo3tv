@@ -40,7 +40,7 @@ class _TvShowButtonsWidgetState extends State<TvShowButtonsWidget> with SingleTi
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              UserScoreWidget(vote:widget.tvShow.voteAverage!),
+              UserScoreWidget(vote:widget.tvShow.voteAverage),
               TvShowFavButton(listType:widget.listType),
               TvShowRatingButton(listType:widget.listType),
               AddTvShowToWatchlistButton(listType:widget.listType),

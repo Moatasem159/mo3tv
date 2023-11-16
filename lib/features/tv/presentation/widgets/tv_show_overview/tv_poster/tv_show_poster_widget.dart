@@ -39,7 +39,7 @@ class _TvShowPosterWidgetState extends State<TvShowPosterWidget>with SingleTicke
       child: CachedNetworkImage(
           height: MediaQuery.sizeOf(context).height/2.79,
           width: MediaQuery.sizeOf(context).width/2,
-          imageUrl: EndPoints.posterUrl(widget.tvShow.posterPath!),
+          imageUrl: EndPoints.posterUrl(widget.tvShow.posterPath),
           imageBuilder:(context, imageProvider) =>TvShowPosterBuilder(poster: imageProvider),
           placeholder: (context, url) => const TvShowImagePlaceHolder(),
           errorWidget: (context, url, error) => Image.asset(AppAssets.errorCover)

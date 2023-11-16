@@ -49,7 +49,7 @@ class MoviesRepositoryImpl implements MovieRepository {
     if(await _networkInfo.isConnected){
       try {
         final MovieModel result = await _movieRemoteDataSource.getMovieDetails(movieId: movieId,lang: lang);
-          result.productionCompanies!.removeWhere((e) =>e.logoPath=='');
+          result.productionCompanies.removeWhere((e) =>e.logoPath=='');
         return Right(result);
       } on ServerException catch (failure) {
         return Left(ServerFailure(failure.message!));
