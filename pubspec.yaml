@@ -3,16 +3,16 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 3.7.0
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: '>=3.2.2 <4.0.0'
 dependencies:
   flutter_localizations:
     sdk: flutter
   flutter:
     sdk: flutter
-  dio: ^5.3.3
+  dio: ^5.4.0
   intl: any
   dartz: ^0.10.1
-  envied: ^0.5.1
+  envied: ^0.5.2
   rxdart: ^0.27.7
   get_it: ^7.6.4
   lottie: ^2.7.0
@@ -40,8 +40,8 @@ dev_dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^3.0.1
-  envied_generator: ^0.5.1
-  build_runner: ^2.4.6
+  envied_generator: ^0.5.2
+  build_runner: ^2.4.7
 flutter_icons:
   android: true
   ios: true
