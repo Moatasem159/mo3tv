@@ -11,7 +11,7 @@ import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
 class TvShowRepositoryImpl implements TvRepository{
   final TvShowRemoteDataSource _tvShowRemoteDataSource;
   final NetworkInfo _networkInfo;
-  TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo);
+  const TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo);
   @override
   Future<Either<Failure, List<TvShow>>> getTvShowsList({required int page,required String listType,required String lang})async {
     if(await _networkInfo.isConnected)

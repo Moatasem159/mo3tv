@@ -1,4 +1,4 @@
-class AppStrings {
+abstract class AppStrings {
   static const String fontFamily="Montserrat";
   static String sessionId='';
   static String tokenSuccess='';

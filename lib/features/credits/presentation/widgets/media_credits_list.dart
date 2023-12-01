@@ -28,8 +28,7 @@ class _MediaCreditsListState extends State<MediaCreditsList> {
             children: [
               Text("${AppStrings.cast.tr(context)!} :${widget.mediaCredits
                   .length}",
-                  style: AppTextStyles.get18BoldText(height: 0))
-                  .addSymmetricPadding(h: 11),
+                  style: AppTextStyles.get18BoldText(height: 0)).addSymmetricPadding(h: 11),
               5.ph
             ],
           ),

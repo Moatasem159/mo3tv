@@ -8,7 +8,7 @@ abstract class SearchLocalDataSource{
 }
 class SearchLocalDataSourceImpl implements SearchLocalDataSource{
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
-  SearchLocalDataSourceImpl(this._sharedPrefrencesConsumer);
+  const SearchLocalDataSourceImpl(this._sharedPrefrencesConsumer);
   @override
   Future<bool> saveSearch(SearchModel searchModel) async{
     final json=await _sharedPrefrencesConsumer.getData(key: "search");

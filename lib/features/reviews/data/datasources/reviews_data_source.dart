@@ -6,7 +6,7 @@ abstract class ReviewsDataSource{
 }
 class ReviewsDataSourceImpl implements ReviewsDataSource {
   final ApiConsumer _apiConsumer;
-  ReviewsDataSourceImpl(this._apiConsumer);
+  const ReviewsDataSourceImpl(this._apiConsumer);
   @override
   Future<List<ReviewModel>> getMediaReviews({required int mediaId, required String mediaType}) async {
     final response = await _apiConsumer.get(EndPoints.mediaReviewsPath(mediaId, mediaType));

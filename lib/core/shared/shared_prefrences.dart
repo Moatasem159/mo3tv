@@ -1,8 +1,8 @@
 import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-class SharedPrefrencesManager extends SharedPrefrencesConsumer{
+class SharedPrefrencesManager implements SharedPrefrencesConsumer{
   final SharedPreferences _sharedPreferences;
-  SharedPrefrencesManager(this._sharedPreferences);
+  const SharedPrefrencesManager(this._sharedPreferences);
   @override
   Future<bool> saveData({required String key, required dynamic value}) async {
     if (value is String) return await _sharedPreferences.setString(key, value);

@@ -6,7 +6,7 @@ abstract class SearchRemoteDataSource{
 }
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource{
   final ApiConsumer _apiConsumer;
-  SearchRemoteDataSourceImpl(this._apiConsumer);
+  const SearchRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<List<SearchModel>> search({required String word,required int page,required String lang}) async{
     final response = await _apiConsumer.get(EndPoints.searchUrl(query: word,page: page,lang: lang));

@@ -9,7 +9,7 @@ import 'package:mo3tv/features/credits/domain/repositories/credits_repository.da
 class CreditsRepositoryImpl implements CreditsRepository{
   final NetworkInfo _networkInfo;
   final CreditsDataSource _creditsDataSource;
-  CreditsRepositoryImpl(this._networkInfo, this._creditsDataSource);
+  const CreditsRepositoryImpl(this._networkInfo, this._creditsDataSource);
   @override
   Future<Either<Failure,List<CastMember>>> getMediaCredits({required int mediaId,required String mediaType})async{
     if(await _networkInfo.isConnected)

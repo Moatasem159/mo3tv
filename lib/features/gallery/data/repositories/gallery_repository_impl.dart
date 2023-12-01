@@ -9,7 +9,7 @@ import 'package:mo3tv/features/gallery/domain/repositories/gallery_repository.da
 class GalleryRepositoryImpl implements GalleryRepository{
   final GalleryDataSource _galleryDataSource;
   final NetworkInfo _networkInfo;
-  GalleryRepositoryImpl(this._networkInfo,this._galleryDataSource);
+  const GalleryRepositoryImpl(this._networkInfo,this._galleryDataSource);
   @override
   Future<Either<Failure, Gallery>> getMediaGallery({required int mediaId,required String mediaType}) async{
     if(await _networkInfo.isConnected)

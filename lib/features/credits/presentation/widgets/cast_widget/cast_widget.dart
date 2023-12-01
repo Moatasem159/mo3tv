@@ -13,17 +13,13 @@ class CastMemberWidget extends StatelessWidget {
       children: [
         CastImage(image: member.profilePath),
         Container(
-          width: double.infinity,
+          width: double.maxFinite,
           height: 45,
           decoration: BoxDecoration(color: Colors.black45,borderRadius: BorderRadius.circular(10)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FittedBox(
-                  child: Text(
-                    member.originalName,
-                    style: AppTextStyles.get14BoldText(),
-                  )).addSymmetricPadding(h:5),
+              FittedBox(child: Text(member.originalName, style: AppTextStyles.get14BoldText())).addSymmetricPadding(h:5),
               FittedBox(child: Text(member.character!=''?member.character:member.job,style: AppTextStyles.get14NormalText())).addSymmetricPadding(h:5)
             ],
           ),
@@ -32,4 +28,3 @@ class CastMemberWidget extends StatelessWidget {
     );
   }
 }
-

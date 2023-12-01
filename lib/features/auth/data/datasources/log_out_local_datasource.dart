@@ -4,7 +4,7 @@ abstract class LogOutLocalDataSource{
 }
 class LogOutLocalDataSourceImpl implements LogOutLocalDataSource{
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
-  LogOutLocalDataSourceImpl(this._sharedPrefrencesConsumer);
+  const LogOutLocalDataSourceImpl(this._sharedPrefrencesConsumer);
   @override
   Future<void> clearSessionId()async {
     await _sharedPrefrencesConsumer.remove(key: "sessionId");

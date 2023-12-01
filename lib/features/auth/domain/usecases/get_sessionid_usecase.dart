@@ -4,7 +4,7 @@ import 'package:mo3tv/features/auth/domain/entities/session.dart';
 import 'package:mo3tv/features/auth/domain/repositories/login_repository.dart';
 class GetSessionIdUsecase{
   final LoginRepository _loginRepository;
-  GetSessionIdUsecase(this._loginRepository);
+  const GetSessionIdUsecase(this._loginRepository);
   Future<Either<Failure, Session>> call({required String token}) async{
     return await _loginRepository.getSessionId(token: token);
   }

@@ -6,7 +6,7 @@ abstract class LogOutRemoteDataSource{
 }
 class LogOutRemoteDataSourceImpl implements LogOutRemoteDataSource{
   final ApiConsumer _apiConsumer;
-  LogOutRemoteDataSourceImpl(this._apiConsumer);
+  const LogOutRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<LogOutModel> logOut({required String sessionId})async {
     final res=await _apiConsumer.delete(EndPoints.logOutPath,body:{"session_id":sessionId});

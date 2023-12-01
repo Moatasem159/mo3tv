@@ -15,7 +15,7 @@ abstract class MovieRemoteDataSource {
 }
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource{
   final ApiConsumer _apiConsumer;
-  MovieRemoteDataSourceImpl(this._apiConsumer);
+  const MovieRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<MovieModel> getMovieDetails({required int movieId,required String lang})async =>
       MovieModel.fromJson(await _apiConsumer.get(EndPoints.mediaDetailsPath(movieId,AppStrings.sessionId,AppStrings.movie,lang)));

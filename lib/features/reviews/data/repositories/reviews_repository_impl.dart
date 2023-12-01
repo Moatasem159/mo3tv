@@ -9,7 +9,7 @@ import 'package:mo3tv/features/reviews/domain/repositories/reviews_repository.da
 class ReviewsRepositoryImpl implements ReviewsRepository{
   final NetworkInfo _networkInfo;
   final ReviewsDataSource _reviewsDataSource;
-  ReviewsRepositoryImpl(this._networkInfo, this._reviewsDataSource);
+  const ReviewsRepositoryImpl(this._networkInfo, this._reviewsDataSource);
   @override
   Future<Either<Failure, List<Review>>> getMediaReviews({required int mediaId,required String mediaType}) async{
     if(await _networkInfo.isConnected)

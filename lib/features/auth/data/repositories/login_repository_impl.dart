@@ -12,7 +12,7 @@ class LoginRepositoryImpl implements LoginRepository{
   final NetworkInfo _networkInfo;
   final LoginRemoteDataSource _loginRemoteDataSource;
   final LoginLocalDataSource _loginLocalDataSource;
-  LoginRepositoryImpl(this._networkInfo,this._loginRemoteDataSource, this._loginLocalDataSource);
+  const LoginRepositoryImpl(this._networkInfo,this._loginRemoteDataSource, this._loginLocalDataSource);
   @override
   Future<Either<Failure, TokenModel>> getToken() async{
     if(await _networkInfo.isConnected)

@@ -4,7 +4,7 @@ abstract class LoginLocalDataSource{
 }
 class LoginLocalDataSourceImpl implements LoginLocalDataSource{
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
-  LoginLocalDataSourceImpl(this._sharedPrefrencesConsumer);
+  const LoginLocalDataSourceImpl(this._sharedPrefrencesConsumer);
   @override
   Future<void> saveSessionId({required String sessionId}) async{
     await _sharedPrefrencesConsumer.saveData(key: "sessionId", value:sessionId);

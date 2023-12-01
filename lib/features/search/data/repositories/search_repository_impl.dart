@@ -12,7 +12,7 @@ class SearchRepositoryImpl implements SearchRepository{
   final NetworkInfo _networkInfo;
   final SearchRemoteDataSource _searchDataSource;
   final SearchLocalDataSource _searchLocalDataSource;
-  SearchRepositoryImpl(this._networkInfo,this._searchDataSource, this._searchLocalDataSource);
+  const SearchRepositoryImpl(this._networkInfo,this._searchDataSource, this._searchLocalDataSource);
   @override
   Future<Either<Failure, List<Search>>> search({required int page, required String word,required String lang}) async {
     if (await _networkInfo.isConnected) {

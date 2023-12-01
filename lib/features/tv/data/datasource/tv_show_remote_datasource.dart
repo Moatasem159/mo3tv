@@ -17,7 +17,7 @@ abstract class TvShowRemoteDataSource {
 }
 class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
   final ApiConsumer _apiConsumer;
-  TvShowRemoteDataSourceImpl(this._apiConsumer);
+  const TvShowRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<TvShowModel> getTvShowDetails({required int tvShowId,required String lang})async=>
       TvShowModel.fromJson(await _apiConsumer.get(EndPoints.mediaDetailsPath(tvShowId,AppStrings.sessionId,AppStrings.tv,lang)));

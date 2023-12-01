@@ -6,7 +6,7 @@ abstract class CreditsDataSource{
 }
 class CreditsDataSourceImpl implements CreditsDataSource{
   final ApiConsumer _apiConsumer;
-  CreditsDataSourceImpl(this._apiConsumer);
+  const CreditsDataSourceImpl(this._apiConsumer);
   @override
   Future<List<CastMemberModel>> getMediaCredits({required int mediaId,required String mediaType})async {
     final response = await _apiConsumer.get(EndPoints.mediaCreditsPath(mediaId,mediaType));

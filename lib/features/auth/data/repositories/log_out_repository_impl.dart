@@ -11,7 +11,7 @@ class LogOutRepositoryImpl implements LogOutRepository{
   final NetworkInfo _networkInfo;
   final LogOutRemoteDataSource _logOutRemoteDataSource;
   final LogOutLocalDataSource _logOutLocalDataSource;
-  LogOutRepositoryImpl(this._networkInfo, this._logOutRemoteDataSource, this._logOutLocalDataSource);
+  const LogOutRepositoryImpl(this._networkInfo, this._logOutRemoteDataSource, this._logOutLocalDataSource);
   @override
   Future<Either<Failure, LogOutModel>> logOut({required String sessionId})async {
     if(await _networkInfo.isConnected)

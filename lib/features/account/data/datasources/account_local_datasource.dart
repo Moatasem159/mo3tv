@@ -5,7 +5,7 @@ abstract class AccountLocalDataSource{
 }
 class AccountLocalDatasourceImpl implements AccountLocalDataSource{
   final SharedPrefrencesConsumer _sharedPrefrencesConsumer;
-  AccountLocalDatasourceImpl(this._sharedPrefrencesConsumer);
+  const AccountLocalDatasourceImpl(this._sharedPrefrencesConsumer);
   @override
   Future<void> getSessionId() async{
     AppStrings.sessionId=await _sharedPrefrencesConsumer.getData(key: "sessionId")??'';

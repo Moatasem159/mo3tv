@@ -9,7 +9,7 @@ abstract class AccountRemoteDataSource {
 }
 class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   final ApiConsumer _apiConsumer;
-  AccountRemoteDataSourceImpl(this._apiConsumer);
+  const AccountRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<AccountModel> getAccountDetails({required String sessionId}) async=>
  AccountModel.fromJson(await _apiConsumer.get(EndPoints.accountPath(sessionId)));

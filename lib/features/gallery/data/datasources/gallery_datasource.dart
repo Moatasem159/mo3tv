@@ -6,7 +6,7 @@ abstract class GalleryDataSource{
 }
 class GalleryDataSourceImpl implements GalleryDataSource{
   final ApiConsumer _apiConsumer;
-  GalleryDataSourceImpl(this._apiConsumer);
+  const GalleryDataSourceImpl(this._apiConsumer);
   @override
   Future<GalleryModel> getMediaGallery({required int mediaId,required String mediaType}) async{
     final response = await _apiConsumer.get(EndPoints.mediaGalleryPath(mediaId,mediaType));

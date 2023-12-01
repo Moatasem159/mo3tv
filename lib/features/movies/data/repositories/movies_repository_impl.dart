@@ -9,9 +9,9 @@ import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
 class MoviesRepositoryImpl implements MovieRepository {
-  MoviesRepositoryImpl(this._networkInfo,this._movieRemoteDataSource);
   final MovieRemoteDataSource _movieRemoteDataSource;
   final NetworkInfo _networkInfo;
+  const MoviesRepositoryImpl(this._networkInfo,this._movieRemoteDataSource);
   @override
   Future<Either<Failure, List<Movie>>> getMoviesList({required int page,required String listType,required String lang}) async {
     if(await _networkInfo.isConnected)

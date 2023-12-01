@@ -7,8 +7,8 @@ abstract class LoginRemoteDataSource{
   Future<TokenModel> getTokenRequest();
 }
 class LoginRemoteDataSourceImpl implements LoginRemoteDataSource{
-   final ApiConsumer _apiConsumer;
-  LoginRemoteDataSourceImpl(this._apiConsumer);
+  final ApiConsumer _apiConsumer;
+  const LoginRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<SessionModel> getSessionId({required String token}) async{
     var res=await _apiConsumer.get(EndPoints.sessionIdPath(token));
