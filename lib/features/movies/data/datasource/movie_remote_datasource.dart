@@ -3,59 +3,62 @@ import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/core/models/message_model.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 abstract class MovieRemoteDataSource {
-  Future<MovieModel> getMovieDetails({required int movieId,required String lang});
-  Future<List<MovieModel>> getMoviesList({required int page,required String listType,required String lang});
-  Future<List<MovieModel>> getTrendingMovies({required int page,required String lang});
-  Future<MessageModel> rateMovie({required dynamic rate,required int movieId});
-  Future<MessageModel> markMovie({required int movieId,required bool mark,required String markType});
-  Future<MessageModel> deleteMovieRate({required int movieId});
-  Future<List<MovieModel>> getMovieRecommendations({required int movieId,required String lang});
-  Future<List<MovieModel>> getSimilarMovies({required int movieId,required int page,required String lang});
+  Future<MovieModel> getMovieDetails(MediaParams params);
+  Future<List<MovieModel>> getMoviesList(MediaParams params);
+  Future<List<MovieModel>> getTrendingMovies(MediaParams params);
+  Future<List<MovieModel>> getMovieRecommendations(MediaParams params);
+  Future<List<MovieModel>> getSimilarMovies(MediaParams params);
+  Future<MessageModel> rateMovie(MediaParams params);
+  Future<MessageModel> deleteMovieRate(MediaParams params);
+  Future<MessageModel> markMovie(MediaParams params);
 }
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource{
   final ApiConsumer _apiConsumer;
   const MovieRemoteDataSourceImpl(this._apiConsumer);
   @override
-  Future<MovieModel> getMovieDetails({required int movieId,required String lang})async =>
-      MovieModel.fromJson(await _apiConsumer.get(EndPoints.mediaDetailsPath(movieId,AppStrings.sessionId,AppStrings.movie,lang)));
-  @override
-  Future<List<MovieModel>> getMovieRecommendations({required int movieId,required String lang})async {
-    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(movieId,AppStrings.movie,lang));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
+  Future<MovieModel> getMovieDetails(MediaParams params)async{
+    final dynamic response=await _apiConsumer.get(EndPoints.mediaDetailsPath(AppStrings.sessionId,params));
+    return MovieModel.fromJson(response)..productionCompanies.removeWhere((e) =>e.logoPath=='');
   }
   @override
-  Future<List<MovieModel>> getMoviesList({required int page,required String listType,required String lang}) async {
-    final response = await _apiConsumer.get(EndPoints.mediaListsPath(AppStrings.movie,listType,page,lang));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
+  Future<List<MovieModel>> getMoviesList(MediaParams params) async {
+    final dynamic response = await _apiConsumer.get(EndPoints.mediaListsPath(params));
+    return List<MovieModel>.from((response['results'] as List).map((x)=> MovieModel.fromJson(x)))
+      ..removeWhere((element) => element.backdropPath==''||element.posterPath=='');
   }
   @override
-  Future<List<MovieModel>> getTrendingMovies({required int page,required String lang}) async{
-    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(page:page,mediaType:AppStrings.movie,lang: lang));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
+  Future<List<MovieModel>> getTrendingMovies(MediaParams params) async{
+    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(params));
+    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)))
+      ..removeWhere((element) => element.backdropPath==''||element.posterPath=='');
   }
   @override
-  Future<List<MovieModel>> getSimilarMovies({required int movieId, required int page,required String lang})async {
-    final response = await _apiConsumer.get(EndPoints.similarMediaPath(movieId,page,AppStrings.movie,lang));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)));
+  Future<List<MovieModel>> getMovieRecommendations(MediaParams params)async {
+    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(params));
+    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)))
+      ..removeWhere((element) => element.backdropPath==''||element.posterPath=='');
   }
   @override
-  Future<MessageModel> deleteMovieRate({required int movieId}) async=>
-   MessageModel.fromJson( await _apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,AppStrings.movie)));
+  Future<List<MovieModel>> getSimilarMovies(MediaParams params)async {
+    final response = await _apiConsumer.get(EndPoints.similarMediaPath(params));
+    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)))
+      ..removeWhere((element) => element.backdropPath==''||element.posterPath=='');
+  }
   @override
-  Future<MessageModel> rateMovie({required rate,required int movieId})async =>
-     MessageModel.fromJson(await _apiConsumer.post(EndPoints.rateMediaPath(AppStrings.sessionId,movieId,AppStrings.movie),
+  Future<MessageModel> deleteMovieRate(MediaParams params) async=>
+   MessageModel.fromJson(await _apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,params)));
+  @override
+  Future<MessageModel> rateMovie(MediaParams params)async =>
+      MessageModel.fromJson(await _apiConsumer.post(EndPoints.rateMediaPath(AppStrings.sessionId,params), body:{"value":params.rate}));
+  @override
+  Future<MessageModel> markMovie(MediaParams params)async=>
+     MessageModel.fromJson( await _apiConsumer.post(EndPoints.markMediaPath(AppStrings.sessionId,params.markType),
         body:{
-          "value":rate,
-        }),
-     );
-  @override
-  Future<MessageModel> markMovie({required int movieId,required bool mark,required String markType})async=>
-     MessageModel.fromJson( await _apiConsumer.post(EndPoints.markMediaPath(AppStrings.sessionId,markType),
-        body:{
-          "media_type":AppStrings.movie,
-          "media_id": movieId,
-          markType: mark
+          "media_type":params.mediaType,
+          "media_id": params.mediaId,
+          params.markType: params.mark
         }
     ));
   }

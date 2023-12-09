@@ -1,5 +1,6 @@
 import 'package:mo3tv/core/api/env.dart';
-class EndPoints{
+import 'package:mo3tv/core/entities/media_params.dart';
+abstract class EndPoints{
   static const String baseUrl="https://api.themoviedb.org/3/";
   static const String basePosterUrl = "https://image.tmdb.org/t/p/w500";
   static const String baseBackDropsUrl = "https://image.tmdb.org/t/p/w780";
@@ -11,16 +12,16 @@ class EndPoints{
   static String sessionIdPath(String token)=>
       "$baseUrl/authentication/session/new?api_key=${Env.apiKey}&request_token=$token";
   static String logOutPath= "$baseUrl/authentication/session?api_key=${Env.apiKey}";
-  static String mediaDetailsPath(int mediaId,String sessionId,String mediaType,String lang) =>
-      "$baseUrl/$mediaType/$mediaId?api_key=${Env.apiKey}&session_id=$sessionId&append_to_response=keywords,account_states,videos&language=$lang";
-  static String trendingMediaPath ({required int page,required String mediaType,required String lang})=>
-      "$baseUrl/trending/$mediaType/day?api_key=${Env.apiKey}&page=$page&language=$lang";
-  static String mediaListsPath(String mediaType,String listType,int page,String lang) =>
-      "$baseUrl/$mediaType/$listType?api_key=${Env.apiKey}&page=$page&language=$lang";
-  static String recommendationMediaPath(int mediaId,String mediaType,String lang) =>
-      "$baseUrl/$mediaType/$mediaId/recommendations?api_key=${Env.apiKey}&page=1&language=$lang";
-  static String similarMediaPath(int mediaId,int page,String mediaType,String lang) =>
-      "$baseUrl/$mediaType/$mediaId/similar?api_key=${Env.apiKey}&page=$page&language=$lang";
+  static String mediaDetailsPath(String sessionId, MediaParams params) =>
+      "$baseUrl/${params.mediaType}/${params.mediaId}?api_key=${Env.apiKey}&session_id=$sessionId&append_to_response=keywords,account_states,videos&language=${params.lang}";
+  static String trendingMediaPath (MediaParams params)=>
+      "$baseUrl/trending/${params.mediaType}/day?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
+  static String mediaListsPath(MediaParams params) =>
+      "$baseUrl/${params.mediaType}/${params.listType}?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
+  static String recommendationMediaPath(MediaParams params) =>
+      "$baseUrl/${params.mediaType}/${params.mediaId}/recommendations?api_key=${Env.apiKey}&page=1&language=${params.lang}";
+  static String similarMediaPath(MediaParams params) =>
+      "$baseUrl/${params.mediaType}/${params.mediaId}/similar?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
   static String mediaReviewsPath(int mediaId,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId/reviews?api_key=${Env.apiKey}";
   static String mediaCreditsPath(int mediaId,String mediaType) =>
@@ -29,8 +30,8 @@ class EndPoints{
       "$baseUrl/$mediaType/$movieId/images?api_key=${Env.apiKey}";
   static String markMediaPath(String sessionid,String markType)=>
       "${baseUrl}account/{account_id}/$markType?api_key=${Env.apiKey}&session_id=$sessionid";
-  static String rateMediaPath(String sessionid,int mediaId,String mediaType)=>
-      "$baseUrl/$mediaType/$mediaId/rating?api_key=${Env.apiKey}&session_id=$sessionid";
+  static String rateMediaPath(String sessionid,MediaParams params)=>
+      "$baseUrl/${params.mediaType}/${params.mediaId}/rating?api_key=${Env.apiKey}&session_id=$sessionid";
   static String tvShowSeasonDetailsPath(int tvId,int seasonNumber,String lang) =>
       "$baseUrl/tv/$tvId/season/$seasonNumber?api_key=${Env.apiKey}&language=$lang";
   static String searchUrl({required String query,required int page,required String lang})=>

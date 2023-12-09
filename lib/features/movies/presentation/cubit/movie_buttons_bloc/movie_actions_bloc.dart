@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_usecase.dart';
@@ -31,12 +33,12 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
     Either<Failure, Message> response;
     if(rate>0) {
       movie.mediaAccountDetails!.watchlist = false;
-      response=await _rateMovieUseCase.call(rate:rate, movieId: movie.id);
+      response=await _rateMovieUseCase.call(MediaParams(rate: rate ,mediaId: movie.id,mediaType: AppStrings.movie));
     }
     else{
       movie.mediaAccountDetails!.ratedValue=0.0;
       movie.mediaAccountDetails!.watchlist = false;
-      response =await _deleteRateMovieUseCase.call(movieId: movie.id);
+      response =await _deleteRateMovieUseCase.call(MediaParams(mediaId: movie.id,mediaType: AppStrings.movie));
     }
     emit(response.fold(
             (l){
@@ -49,7 +51,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   Future<void> favMovie(emit, bool fav)async{
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markMovieUsecase.call(movieId: movie.id, mark: fav,markType: "favorite");
+    await _markMovieUsecase.call(MediaParams(mediaId: movie.id, mediaType: AppStrings.movie,mark: fav,markType:'favorite'));
     emit(response.fold(
         (l){
           movie.mediaAccountDetails!.favorite= !movie.mediaAccountDetails!.favorite;
@@ -60,7 +62,7 @@ class MovieActionsBloc extends Bloc<MovieActionsEvents, MovieActionsStates>{
   Future<void> addMovieToWatchList(emit, bool add) async {
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markMovieUsecase.call(movieId: movie.id, mark:add,markType: "watchlist");
+    await _markMovieUsecase.call( MediaParams(mediaId: movie.id, mediaType: AppStrings.movie,mark: add,markType:'watchlist'));
     emit(response.fold(
             (l){
               movie.mediaAccountDetails!.watchlist= !movie.mediaAccountDetails!.watchlist;

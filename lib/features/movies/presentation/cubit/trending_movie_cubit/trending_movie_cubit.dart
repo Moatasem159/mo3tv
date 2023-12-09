@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -15,7 +16,8 @@ class TrendingMovieCubit extends HydratedCubit<TrendingMovieStates> {
     if (state is! GetTrendingMoviesSuccessState)
     {
       emit(GetTrendingMoviesLoadingState());
-      Either<Failure, List<Movie>> response = await _getTrendingMoviesUsecase.call(lang: AppStrings.appLang);
+      Either<Failure, List<Movie>> response = await _getTrendingMoviesUsecase
+          .call(MediaParams(lang: AppStrings.appLang,mediaType: AppStrings.movie));
       emit(response.fold(
           (failure) =>GetTrendingMoviesErrorState(msg: mapFailureToMsg(failure)),
           (trendingMovies) => GetTrendingMoviesSuccessState(trendingMovies, DateTime.now().toIso8601String(), AppStrings.appLang)));

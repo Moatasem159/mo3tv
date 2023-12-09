@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
 class GetMovieDetailsUseCase{
   final MovieRepository _movieRepository;
   const GetMovieDetailsUseCase(this._movieRepository);
-  Future<Either<Failure, Movie>> call({required int movieId,required String lang}) async =>
-      await _movieRepository.getMovieDetails(movieId: movieId,lang: lang);
+  Future<Either<Failure, Movie>> call(MediaParams params)async=>await _movieRepository.getMovieDetails(params);
 }

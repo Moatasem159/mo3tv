@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -27,7 +28,7 @@ class SimilarMovieCubit extends Cubit<SimilarMovieStates> {
   Future<void> getSimilarMovies() async {
     emit(GetSimilarMoviesLoadingState());
     page++;
-    Either<Failure, List<Movie>> response = await _getSimilarMovieUseCase.call(movieId: movieId, page: page, lang: AppStrings.appLang);
+    Either<Failure, List<Movie>> response = await _getSimilarMovieUseCase.call(MediaParams(mediaId: movieId,page: page,mediaType: AppStrings.movie,lang: AppStrings.appLang));
     emit(response.fold((failure) => GetSimilarMoviesErrorState(msg: mapFailureToMsg(failure)),
         (similarMovies) {
       if (similarMovies.isEmpty) {

@@ -1,139 +1,46 @@
 import 'package:dartz/dartz.dart';
-import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
+import 'package:mo3tv/core/functions/execute_and_handle_errors.dart';
 import 'package:mo3tv/core/network/network_info.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
-import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/core/entities/message.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
 class MoviesRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource _movieRemoteDataSource;
   final NetworkInfo _networkInfo;
   const MoviesRepositoryImpl(this._networkInfo,this._movieRemoteDataSource);
   @override
-  Future<Either<Failure, List<Movie>>> getMoviesList({required int page,required String listType,required String lang}) async {
-    if(await _networkInfo.isConnected)
-      {
-        try {
-          final List<Movie> result = await _movieRemoteDataSource.getMoviesList(page: page,listType: listType,lang: lang);
-          result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
-      }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,List<Movie>>> getMoviesList(MediaParams params) async {
+    return executeAndHandleError<List<Movie>>(() => _movieRemoteDataSource.getMoviesList(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, List<Movie>>> getTrendingMovies({required int page,required String lang})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final List<Movie> result = await _movieRemoteDataSource.getTrendingMovies(page: page,lang: lang);
-        result.removeWhere((element) =>element.backdropPath==''||element.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,List<Movie>>> getTrendingMovies(MediaParams params)async {
+    return executeAndHandleError<List<Movie>>(() => _movieRemoteDataSource.getTrendingMovies(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, Movie>> getMovieDetails({required int movieId,required String lang}) async {
-    if(await _networkInfo.isConnected){
-      try {
-        final MovieModel result = await _movieRemoteDataSource.getMovieDetails(movieId: movieId,lang: lang);
-          result.productionCompanies.removeWhere((e) =>e.logoPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,Movie>> getMovieDetails(MediaParams params) async {
+    return executeAndHandleError<Movie>(() => _movieRemoteDataSource.getMovieDetails(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, List<Movie>>> getMovieRecommendations({required int movieId,required String lang}) async {
-    if(await _networkInfo.isConnected)
-      {
-        try {
-          final List<Movie> result = await _movieRemoteDataSource.getMovieRecommendations(movieId: movieId,lang: lang);
-          result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-          return Right(result);
-        } on ServerException catch (failure) {
-          return Left(ServerFailure(failure.message!));
-        }
-      }
-    else{
-     return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,List<Movie>>> getMovieRecommendations(MediaParams params) async {
+    return executeAndHandleError<List<Movie>>(() => _movieRemoteDataSource.getMovieRecommendations(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, List<Movie>>> getSimilarMovies({required int movieId, required int page,required String lang}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final List<Movie> result = await _movieRemoteDataSource.getSimilarMovies(movieId: movieId,page: page,lang: lang);
-        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,List<Movie>>> getSimilarMovies(MediaParams params) async{
+    return executeAndHandleError<List<Movie>>(() => _movieRemoteDataSource.getSimilarMovies(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, Message>> deleteMovieRate({required int movieId})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final Message result = await _movieRemoteDataSource.deleteMovieRate(movieId: movieId);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,Message>> deleteMovieRate(MediaParams params)async {
+    return executeAndHandleError<Message>(() => _movieRemoteDataSource.deleteMovieRate(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, Message>> rateMovie({required rate,required int movieId})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final Message result = await _movieRemoteDataSource.rateMovie(rate: rate,movieId: movieId);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,Message>> rateMovie(MediaParams params)async {
+    return executeAndHandleError<Message>(() => _movieRemoteDataSource.rateMovie(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, Message>> markMovie({required int movieId, required bool mark,required String markType})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final Message result = await _movieRemoteDataSource.markMovie(movieId: movieId,mark: mark,markType:markType);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure,Message>> markMovie(MediaParams params)async {
+    return executeAndHandleError<Message>(() => _movieRemoteDataSource.markMovie(params),_networkInfo);
   }
 }

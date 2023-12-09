@@ -4,6 +4,7 @@ import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/movies/presentation/cubit/movie_cubit/movie_states.dart';
 class MovieCubit extends Cubit<MovieStates> {
@@ -13,8 +14,7 @@ class MovieCubit extends Cubit<MovieStates> {
   Future<void> getMovieDetailsData({required int movieId}) async {
     emit(GetMovieDetailsLoadingState());
     Movie movie;
-    Either<Failure,Movie> response =
-    await _getMovieDetailsUseCase.call(movieId: movieId,lang: AppStrings.appLang);
+    Either<Failure,Movie> response = await _getMovieDetailsUseCase.call(MediaParams(mediaType: AppStrings.movie,mediaId: movieId,lang:AppStrings.appLang));
     emit(response.fold((failure) =>GetMovieDetailsErrorState(msg: mapFailureToMsg(failure))
         ,(movieData) {
           movie = movieData;

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -13,7 +14,7 @@ class RecommendationsMovieCubit extends Cubit<RecommendationsMovieStates> {
   Future<void> getMovieRecommendations({required int movieId}) async {
     emit(GetMovieRecommendationsLoadingState());
     Either<Failure, List<Movie>> response =
-    await _getMovieRecommendationsUseCase.call(movieId: movieId,lang: AppStrings.appLang);
+    await _getMovieRecommendationsUseCase.call(MediaParams(mediaId: movieId,lang: AppStrings.appLang,mediaType: AppStrings.movie));
     emit(response.fold(
         (failure) => GetMovieRecommendationsErrorState(msg: mapFailureToMsg(failure)),
         (recommendations) =>GetMovieRecommendationsSuccessState(recommendations)));

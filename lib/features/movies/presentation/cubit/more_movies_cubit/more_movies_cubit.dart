@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
@@ -21,11 +22,11 @@ class MoreMoviesCubit extends Cubit<MoreMoviesStates> {
     Either<Failure, List<Movie>>? response;
     page++;
     if (index == 1) {
-      response = await _getTrendingMoviesUsecase.call(page: page, lang: AppStrings.appLang);
+      response = await _getTrendingMoviesUsecase.call(MediaParams(page: page, lang: AppStrings.appLang,mediaType: AppStrings.movie));
     } else if (index == 2) {
-      response = await _getMoviesListUsecase.call(page: page, listType: "popular", lang: AppStrings.appLang);
+      response = await _getMoviesListUsecase.call(MediaParams(page: page, lang: AppStrings.appLang,mediaType: AppStrings.movie,listType: "popular"));
     } else if (index == 3) {
-      response = await _getMoviesListUsecase.call(page: page, listType: "top_rated", lang: AppStrings.appLang);
+      response = await _getMoviesListUsecase.call(MediaParams(page: page, lang: AppStrings.appLang,mediaType: AppStrings.movie,listType: "top_rated"));
     }
     emit(response!.fold((failure) => GetMoreMoviesErrorState(),(moreMovies) {
       this.moreMovies.addAll(moreMovies);
