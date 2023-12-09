@@ -17,8 +17,8 @@ class LoginRepositoryImpl implements LoginRepository{
   Future<Either<Failure, TokenModel>> getToken() async{
     if(await _networkInfo.isConnected)
       {
-        final res = await _loginRemoteDataSource.getTokenRequest();
         try {
+          final res = await _loginRemoteDataSource.getTokenRequest();
           return Right(res);
         } on ServerException catch (failure) {
           return Left(ServerFailure(failure.message!));
@@ -32,8 +32,9 @@ class LoginRepositoryImpl implements LoginRepository{
   Future<Either<Failure, Session>> getSessionId({required String token}) async{
     if(await _networkInfo.isConnected)
     {
-      final res = await _loginRemoteDataSource.getSessionId(token: token);
+
       try {
+        final res = await _loginRemoteDataSource.getSessionId(token: token);
         await _loginLocalDataSource.saveSessionId(sessionId: res.sessionId);
         return Right(res);
       } on ServerException catch (failure) {

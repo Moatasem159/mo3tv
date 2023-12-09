@@ -24,8 +24,8 @@ abstract class EndPoints{
       "$baseUrl/${params.mediaType}/${params.mediaId}/similar?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
   static String mediaReviewsPath(int mediaId,String mediaType) =>
       "$baseUrl/$mediaType/$mediaId/reviews?api_key=${Env.apiKey}";
-  static String mediaCreditsPath(int mediaId,String mediaType) =>
-      "$baseUrl/$mediaType/$mediaId/credits?api_key=${Env.apiKey}";
+  static String mediaCreditsPath(MediaParams params) =>
+      "$baseUrl/${params.mediaType}/${params.mediaId}/credits?api_key=${Env.apiKey}";
   static String mediaGalleryPath(int movieId,String mediaType) =>
       "$baseUrl/$mediaType/$movieId/images?api_key=${Env.apiKey}";
   static String markMediaPath(String sessionid,String markType)=>
