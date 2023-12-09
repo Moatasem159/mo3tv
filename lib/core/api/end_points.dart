@@ -32,8 +32,8 @@ abstract class EndPoints{
       "${baseUrl}account/{account_id}/$markType?api_key=${Env.apiKey}&session_id=$sessionid";
   static String rateMediaPath(String sessionid,MediaParams params)=>
       "$baseUrl/${params.mediaType}/${params.mediaId}/rating?api_key=${Env.apiKey}&session_id=$sessionid";
-  static String tvShowSeasonDetailsPath(int tvId,int seasonNumber,String lang) =>
-      "$baseUrl/tv/$tvId/season/$seasonNumber?api_key=${Env.apiKey}&language=$lang";
+  static String tvShowSeasonDetailsPath(MediaParams params) =>
+      "$baseUrl/tv/${params.mediaId}/season/${params.seasonNumber}?api_key=${Env.apiKey}&language=${params.lang}";
   static String searchUrl({required String query,required int page,required String lang})=>
       "${baseUrl}search/multi?api_key=${Env.apiKey}&page=$page&query=$query&language=$lang";
   static String backDropsUrl(String path) =>

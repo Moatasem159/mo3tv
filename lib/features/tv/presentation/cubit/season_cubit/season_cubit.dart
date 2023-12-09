@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
@@ -16,7 +17,7 @@ class SeasonCubit extends Cubit<SeasonStates> {
   Future<void> getTvShowSeasonDetailsData({required int tvShowId, required int seasonNumber}) async {
     emit(GetSeasonDetailsLoadingState());
     Either<Failure, TvShowSeason> response =
-        await _getTvShowSeasonDetailsUsecase.call(seasonNumber: seasonNumber, tvId: tvShowId,lang: AppStrings.appLang);
+        await _getTvShowSeasonDetailsUsecase.call(MediaParams(mediaId: tvShowId, seasonNumber: seasonNumber,lang: AppStrings.appLang));
     emit(response.fold(
         (failure) => GetSeasonDetailsErrorState(),
         (tvShowSeason)=> GetSeasonDetailsSuccessState(tvShowSeason)));

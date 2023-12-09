@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -14,7 +15,7 @@ class TvCubit extends Cubit<TvStates> {
     TvShow tvShow;
     emit(GetTvShowDetailsLoadingState());
     Either<Failure,TvShow> response =
-    await _getTvShowDetailsUsecase.call(tvId: tvShowId,lang: AppStrings.appLang);
+    await _getTvShowDetailsUsecase.call(MediaParams(mediaId: tvShowId,lang: AppStrings.appLang,mediaType: AppStrings.tv));
     emit(response.fold((failure)=>GetTvShowDetailsErrorState(msg: mapFailureToMsg(failure)),
             (tvShowData) {
                   tvShow = tvShowData;

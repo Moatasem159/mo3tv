@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -14,7 +15,8 @@ class TopRatedTvShowsCubit extends HydratedCubit<TopRatedTvShowsStates> {
   Future<void> getTopRatedTvShowsData() async {
     if(state is!GetTopRatedTvShowsSuccessState){
       emit(GetTopRatedTvShowsLoadingState());
-      Either<Failure, List<TvShow>> response = await _getTopRatedTvShowUsecase.call(listType: "top_rated",lang:AppStrings.appLang);
+
+      Either<Failure, List<TvShow>> response = await _getTopRatedTvShowUsecase.call(MediaParams(lang: AppStrings.appLang,mediaType: AppStrings.tv,listType: "top_rated"));
       emit(response.fold(
               (failure) =>GetTopRatedTvShowsErrorState(msg: mapFailureToMsg(failure)),
               (topRatedTvShows) =>GetTopRatedTvShowsSuccessState(topRatedTvShows,DateTime.now().toIso8601String(),AppStrings.appLang)));

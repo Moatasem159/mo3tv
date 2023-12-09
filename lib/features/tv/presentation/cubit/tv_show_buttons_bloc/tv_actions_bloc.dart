@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_usecase.dart';
@@ -31,12 +33,12 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
     Either<Failure, Message> response;
     if(rate>0){
       tvShow.mediaAccountDetails!.watchlist = false;
-      response =await _rateTvShowUseCase.call(rate:rate, tvId: tvShow.id);
+      response =await _rateTvShowUseCase.call(MediaParams(rate: rate ,mediaId: tvShow.id,mediaType: AppStrings.tv));
     }
     else{
       tvShow.mediaAccountDetails!.ratedValue=0.0;
       tvShow.mediaAccountDetails!.watchlist = false;
-      response=await _deleteTvShowRateUseCase.call(tvId: tvShow.id);
+      response=await _deleteTvShowRateUseCase.call(MediaParams(mediaId: tvShow.id,mediaType: AppStrings.tv));
     }
     emit(response.fold(
         (l){
@@ -49,7 +51,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
   Future<void> favTvShow(emit,bool fav)async{
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markTvShowAsFavUsecase.call(tvId: tvShow.id,mark: fav,markType: "favorite");
+    await _markTvShowAsFavUsecase.call(MediaParams(mediaId: tvShow.id, mediaType: AppStrings.tv,mark: fav,markType:'favorite'));
     emit(response.fold(
         (l){
           tvShow.mediaAccountDetails!.favorite=!tvShow.mediaAccountDetails!.favorite;
@@ -60,7 +62,7 @@ class TvActionsBloc extends Bloc<TvActionsEvents,TvShowActionsStates>{
   Future<void> addTvShowToWatchList(emit,bool watchlist)async{
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markTvShowAsFavUsecase.call(tvId: tvShow.id,mark: watchlist,markType: "watchlist");
+    await _markTvShowAsFavUsecase.call(MediaParams(mediaId: tvShow.id, mediaType: AppStrings.tv,mark: watchlist,markType:'watchlist'));
     emit(response.fold(
         (l){
           tvShow.mediaAccountDetails!.watchlist=!tvShow.mediaAccountDetails!.watchlist;

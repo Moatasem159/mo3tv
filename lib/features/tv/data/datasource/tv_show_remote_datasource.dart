@@ -1,64 +1,66 @@
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/models/message_model.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 abstract class TvShowRemoteDataSource {
-  Future<List<TvShowModel>> getTvShowsList({required int page,required String listType,required String lang});
-  Future<List<TvShowModel>> getTrendingTvShows({required int page,required String lang});
-  Future<TvShowModel> getTvShowDetails({required int tvShowId,required String lang});
-  Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId,required int seasonNumber,required String lang});
-  Future<List<TvShowModel>> getTvShowRecommendations({required int tvId,required String lang});
-  Future<List<TvShowModel>> getSimilarTvShows({required int tvId,required int page,required String lang});
-  Future<MessageModel> markTvShow({required int tvId,required bool mark,required String markType});
-  Future<MessageModel> rateTvShow({required dynamic rate,required int tvId});
-  Future<MessageModel> deleteTvShowRate({required int tvId});
+  Future<List<TvShowModel>> getTvShowsList(MediaParams params);
+  Future<List<TvShowModel>> getTrendingTvShows(MediaParams params);
+  Future<TvShowModel> getTvShowDetails(MediaParams params);
+  Future<TvShowSeasonModel> getTvShowSeasonDetails(MediaParams params);
+  Future<List<TvShowModel>> getTvShowRecommendations(MediaParams params);
+  Future<List<TvShowModel>> getSimilarTvShows(MediaParams params);
+  Future<MessageModel> markTvShow(MediaParams params);
+  Future<MessageModel> rateTvShow(MediaParams params);
+  Future<MessageModel> deleteTvShowRate(MediaParams params);
 }
 class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
   final ApiConsumer _apiConsumer;
   const TvShowRemoteDataSourceImpl(this._apiConsumer);
   @override
-  Future<TvShowModel> getTvShowDetails({required int tvShowId,required String lang})async=>
-      TvShowModel.fromJson(await _apiConsumer.get(EndPoints.mediaDetailsPath(tvShowId,AppStrings.sessionId,AppStrings.tv,lang)));
+  Future<TvShowModel> getTvShowDetails(MediaParams params)async=>
+      TvShowModel.fromJson(await _apiConsumer.get(EndPoints.mediaDetailsPath(AppStrings.sessionId,params)));
   @override
-  Future<List<TvShowModel>> getTvShowsList({required int page,required String listType,required String lang}) async{
-    final response = await _apiConsumer.get(EndPoints.mediaListsPath(AppStrings.tv,listType,page,lang));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
+  Future<List<TvShowModel>> getTvShowsList(MediaParams params) async{
+    final response = await _apiConsumer.get(EndPoints.mediaListsPath(params));
+    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)))
+      ..removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
   }
   @override
-  Future<List<TvShowModel>> getTrendingTvShows({required int page,required String lang}) async{
-    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(page: page,mediaType: "tv",lang: lang));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
+  Future<List<TvShowModel>> getTrendingTvShows(MediaParams params) async{
+    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(params));
+    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)))
+      ..removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
   }
   @override
-  Future<List<TvShowModel>> getTvShowRecommendations({required int tvId,required String lang})async {
-    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(tvId,AppStrings.tv,lang));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
+  Future<List<TvShowModel>> getTvShowRecommendations(MediaParams params)async {
+    final response = await _apiConsumer.get(EndPoints.recommendationMediaPath(params));
+    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)))
+      ..removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
   }
   @override
-  Future<List<TvShowModel>> getSimilarTvShows({required int tvId, required int page,required String lang})async {
-    final response = await _apiConsumer.get(EndPoints.similarMediaPath(tvId,page,AppStrings.tv,lang));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)));
+  Future<List<TvShowModel>> getSimilarTvShows(MediaParams params)async {
+    final response = await _apiConsumer.get(EndPoints.similarMediaPath(params));
+    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)))
+      ..removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
   }
   @override
-  Future<TvShowSeasonModel> getTvShowSeasonDetails({required int tvShowId, required int seasonNumber,required String lang}) async=>
-     TvShowSeasonModel.fromJson(await _apiConsumer.get(EndPoints.tvShowSeasonDetailsPath(tvShowId,seasonNumber,lang)));
+  Future<TvShowSeasonModel> getTvShowSeasonDetails(MediaParams params) async=>
+     TvShowSeasonModel.fromJson(await _apiConsumer.get(EndPoints.tvShowSeasonDetailsPath(params)));
   @override
-  Future<MessageModel> markTvShow({required int tvId, required bool mark,required String markType}) async=>
-     MessageModel.fromJson(await _apiConsumer.post(EndPoints.markMediaPath(AppStrings.sessionId,markType),
-        body:{
-          "media_type":AppStrings.tv,
-          "media_id": tvId,
-          markType: mark
-        }));
+  Future<MessageModel> deleteTvShowRate(MediaParams params)async=>
+    MessageModel.fromJson(await _apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,params)));
   @override
-  Future<MessageModel> deleteTvShowRate({required int tvId})async=>
-    MessageModel.fromJson(await _apiConsumer.delete(EndPoints.rateMediaPath(AppStrings.sessionId,tvId,AppStrings.tv)));
+  Future<MessageModel> rateTvShow(MediaParams params) async=>
+     MessageModel.fromJson(await _apiConsumer.post(EndPoints.rateMediaPath(AppStrings.sessionId,params),body:{"value":params.rate}));
   @override
-  Future<MessageModel> rateTvShow({required rate, required int tvId}) async=>
-     MessageModel.fromJson(await _apiConsumer.post(EndPoints.rateMediaPath(AppStrings.sessionId,tvId,AppStrings.tv),
-        body:{
-          "value":rate,
-        }));
+  Future<MessageModel> markTvShow(MediaParams params) async=>
+      MessageModel.fromJson(await _apiConsumer.post(EndPoints.markMediaPath(AppStrings.sessionId,params.markType),
+          body:{
+            "media_type":params.mediaType,
+            "media_id": params.mediaId,
+            params.markType: params.mark
+          }));
 }

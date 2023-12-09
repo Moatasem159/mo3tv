@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -13,7 +14,7 @@ class RecommendationsTvCubit extends Cubit<RecommendationsTvStates> {
   Future<void> getTvShowsRecommendations({required int tvId})async{
     emit(GetTvShowRecommendationsLoadingState());
     Either<Failure, List<TvShow>> response =
-    await _getTvRecommendationsUseCase.call(tvId: tvId,lang: AppStrings.appLang);
+    await _getTvRecommendationsUseCase.call(MediaParams(mediaId: tvId,mediaType: AppStrings.tv,lang: AppStrings.appLang));
     emit(response.fold(
         (failure) => GetTvShowRecommendationsErrorState(msg: mapFailureToMsg(failure)),
         (recommendations) => GetTvShowRecommendationsSuccessState(recommendations)));

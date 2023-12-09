@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/entities/message.dart';
-import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
+import 'package:mo3tv/core/functions/execute_and_handle_errors.dart';
 import 'package:mo3tv/core/network/network_info.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
@@ -13,144 +13,39 @@ class TvShowRepositoryImpl implements TvRepository{
   final NetworkInfo _networkInfo;
   const TvShowRepositoryImpl(this._tvShowRemoteDataSource,this._networkInfo);
   @override
-  Future<Either<Failure, List<TvShow>>> getTvShowsList({required int page,required String listType,required String lang})async {
-    if(await _networkInfo.isConnected)
-    {
-      try{
-        final result = await _tvShowRemoteDataSource.getTvShowsList(page: page,listType: listType,lang: lang);
-        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, List<TvShow>>> getTvShowsList(MediaParams params)async {
+     return executeAndHandleError<List<TvShow>>(() => _tvShowRemoteDataSource.getTvShowsList(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getTrendingTvShows({required int page,required String lang}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getTrendingTvShows(page: page,lang: lang);
-        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, List<TvShow>>> getTrendingTvShows(MediaParams params) async{
+    return executeAndHandleError<List<TvShow>>(() => _tvShowRemoteDataSource.getTrendingTvShows(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, TvShow>> getTvShowDetails({required int tvShowId,required String lang})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final TvShow result = await _tvShowRemoteDataSource.getTvShowDetails(tvShowId: tvShowId,lang: lang);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, TvShow>> getTvShowDetails(MediaParams params)async {
+    return executeAndHandleError<TvShow>(() => _tvShowRemoteDataSource.getTvShowDetails(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails(
-      {required int tvShowId, required int seasonNumber,required String lang})async {
-    if(await _networkInfo.isConnected){
-      try {
-        final TvShowSeason result =
-        await _tvShowRemoteDataSource
-        .getTvShowSeasonDetails(tvShowId: tvShowId, seasonNumber: seasonNumber,lang: lang);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, TvShowSeason>> getTvShowSeasonDetails(MediaParams params)async {
+    return executeAndHandleError<TvShowSeason>(() => _tvShowRemoteDataSource.getTvShowSeasonDetails(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getTvShowRecommendations({required int tvId,required String lang})async {
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getTvShowRecommendations(tvId: tvId,lang: lang);
-        result.removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, List<TvShow>>> getTvShowRecommendations(MediaParams params)async {
+    return executeAndHandleError<List<TvShow>>(() => _tvShowRemoteDataSource.getTvShowRecommendations(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getSimilarTvShows({required int tvId, required int page,required String lang}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.getSimilarTvShows(tvId: tvId,page: page,lang: lang);
-        result.removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, List<TvShow>>> getSimilarTvShows(MediaParams params) async{
+    return executeAndHandleError<List<TvShow>>(() => _tvShowRemoteDataSource.getSimilarTvShows(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, Message>> markTvShow({required int tvId, required bool mark,required String markType}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.markTvShow(tvId: tvId,mark: mark,markType:markType);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, Message>> markTvShow(MediaParams params) async{
+    return executeAndHandleError<Message>(() => _tvShowRemoteDataSource.markTvShow(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, Message>> deleteTvShowRate({required int tvId}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.deleteTvShowRate(tvId: tvId);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, Message>> deleteTvShowRate(MediaParams params) async{
+    return executeAndHandleError<Message>(() => _tvShowRemoteDataSource.deleteTvShowRate(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, Message>> rateTvShow({required rate, required int tvId}) async{
-    if(await _networkInfo.isConnected)
-    {
-      try {
-        final result = await _tvShowRemoteDataSource.rateTvShow(rate: rate,tvId: tvId);
-        return Right(result);
-      } on ServerException catch (failure) {
-        return Left(ServerFailure(failure.message!));
-      }
-    }
-    else{
-      return left(const ServerFailure(AppStrings.noInternetConnection));
-    }
+  Future<Either<Failure, Message>> rateTvShow(MediaParams params) async{
+    return executeAndHandleError<Message>(() => _tvShowRemoteDataSource.rateTvShow(params),_networkInfo);
   }
 }

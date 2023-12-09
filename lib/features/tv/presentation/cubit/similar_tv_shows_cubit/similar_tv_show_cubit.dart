@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -33,7 +34,8 @@ class SimilarTvShowCubit extends Cubit<SimilarTvShowStates> {
   Future<void> getSimilarTvShows() async {
     emit(GetSimilarTvShowLoadingState());
     page++;
-    Either<Failure, List<TvShow>> response = await _getSimilarTvShowsUseCase.call(tvId: tvId, page: page, lang: AppStrings.appLang);
+
+    Either<Failure, List<TvShow>> response = await _getSimilarTvShowsUseCase.call(MediaParams(mediaId: tvId,page: page,mediaType: AppStrings.tv,lang: AppStrings.appLang));
     emit(response.fold((failure) => GetSimilarTvShowErrorState(),
         (similarTvShows) {
       if (similarTvShows.isEmpty) {

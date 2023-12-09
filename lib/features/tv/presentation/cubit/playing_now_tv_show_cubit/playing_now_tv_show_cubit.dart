@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -15,7 +16,7 @@ class PlayingNowTvShowCubit extends HydratedCubit<PlayingNowTvShowStates> {
     if(state is! GetNowPlayingTvShowsSuccessState)
     {
       emit(GetNowPlayingTvShowsLoadingState());
-      Either<Failure, List<TvShow>> response = await _getNowPlayingTvShowsUsecase.call(listType: "on_the_air",lang:AppStrings.appLang);
+      Either<Failure, List<TvShow>> response = await _getNowPlayingTvShowsUsecase.call(MediaParams(lang: AppStrings.appLang,mediaType: AppStrings.tv,listType: "on_the_air"));
       emit(response.fold(
               (failure) =>GetNowPlayingTvShowsErrorState(msg: mapFailureToMsg(failure)),
               (playingTvShows) =>GetNowPlayingTvShowsSuccessState(playingTvShows,DateTime.now().toIso8601String(),AppStrings.appLang)));

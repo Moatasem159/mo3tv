@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -21,11 +22,11 @@ class MoreTvShowsCubit extends Cubit<MoreTvShowsStates> {
     Either<Failure, List<TvShow>>? response;
     page++;
     if (index == 1) {
-      response = await _getTrendingTvShowsUsecase.call(page: page, lang: AppStrings.appLang);
+      response = await _getTrendingTvShowsUsecase.call(MediaParams(page: page, lang: AppStrings.appLang,mediaType: AppStrings.tv));
     } else if (index == 2) {
-      response = await _getTvShowsListUsecase.call(page: page, listType: "popular", lang: AppStrings.appLang);
+      response = await _getTvShowsListUsecase.call(MediaParams(page: page, lang: AppStrings.appLang,mediaType: AppStrings.tv,listType: "popular"));
     } else if (index == 3) {
-      response = await _getTvShowsListUsecase.call(page: page, listType: "top_rated", lang: AppStrings.appLang);
+      response = await _getTvShowsListUsecase.call(MediaParams(page: page, lang: AppStrings.appLang,mediaType: AppStrings.tv,listType: "top_rated"));
     }
     emit(response!.fold((failure) => GetMoreTvShowsErrorState(),(moreTvShows) {
       this.moreTvShows.addAll(moreTvShows);
