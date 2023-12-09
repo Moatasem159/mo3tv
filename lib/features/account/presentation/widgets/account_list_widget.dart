@@ -45,11 +45,8 @@ class _AccountListWidgetState extends State<AccountListWidget> {
         if(AppStrings.sessionId!='')
           {
             GoRouter.of(context).pushNamed(Routes.accountMediaLists,
-                pathParameters: {
-                  "title":widget.title,
-                  "mediaType":widget.mediaType,
-                  "listType":widget.listType});
-            AccountListsCubit.get(context).getAccountList(mediaType: widget.mediaType,listType:widget.listType,lang: AppLocalizations.of(context)!.getLang());
+                pathParameters: {"title":widget.title, "mediaType":widget.mediaType,"listType":widget.listType});
+            AccountListsCubit.get(context).getAccountList(mediaType: widget.mediaType,listType:widget.listType);
           }
         else{
           showDialog(context: context, builder:(context) => const LoginAlert());

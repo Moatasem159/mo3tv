@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/entities/media.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
@@ -50,8 +49,7 @@ class AccountList extends StatelessWidget {
         }
         if(state is GetAccountListsErrorState)
         {
-          return SliverToBoxAdapter(child: ErrorButton(onTap: () =>
-              cubit.getAccountList(mediaType:mediaType,listType: listType,lang:AppLocalizations.of(context)!.getLang())));
+          return SliverToBoxAdapter(child: ErrorButton(onTap: () => cubit.getAccountList(mediaType:mediaType,listType: listType)));
         }
         return const SliverToBoxAdapter();
       },

@@ -44,10 +44,9 @@ abstract class EndPoints{
       "$baseLogoUrl$path";
   static String hdUrl(String path) =>
       "$baseHdUrl$path";
-  static String accountPath(String sessionId) =>
-      "$baseUrl/account?api_key=${Env.apiKey}&session_id=$sessionId";
-  static String accountMediaListPath(String sessionid,String mediaType,String listType,int page,String lang)=>
-     "${baseUrl}account/{account_id}/$listType/$mediaType?api_key=${Env.apiKey}&session_id=$sessionid&page=$page&language=$lang";
+  static String accountPath(String sessionId) => "$baseUrl/account?api_key=${Env.apiKey}&session_id=$sessionId";
+  static String accountMediaListPath(String sessionid,MediaParams params)=>
+     "${baseUrl}account/{account_id}/${params.listType}/${params.mediaType}?api_key=${Env.apiKey}&session_id=$sessionid&page=${params.page}&language=${params.lang}";
   static String createMediaListPath(String sessionid)=>"${baseUrl}list?api_key=${Env.apiKey}&session_id=$sessionid";
   static String getAccountCustomListsPath(String sessionid,String accountId)=>
       "${baseUrl}account/$accountId/lists?api_key=${Env.apiKey}&session_id=$sessionid";
