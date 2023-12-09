@@ -3,8 +3,8 @@ import 'package:mo3tv/core/error/exceptions.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
-Future<Either<Failure,T>> executeAndHandleError<T>(Future<T> Function() function,NetworkInfo networkInfo)async{
-  if(await networkInfo.isConnected)
+Future<Either<Failure,T>> executeAndHandleError<T>(Future<T> Function() function,NetworkInfo ?networkInfo)async{
+  if((await networkInfo?.isConnected)??true)
   {
     try {
       final  result = await function();
