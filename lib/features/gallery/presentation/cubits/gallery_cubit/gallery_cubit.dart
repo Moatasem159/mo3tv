@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/gallery/domain/entities/gallery.dart';
@@ -19,7 +20,7 @@ class GalleryCubit extends Cubit<GalleryStates> {
       posters: [],
     );
     Either<Failure, Gallery> response =
-    await _getMediaGalleryUsecase.call(mediaType: mediaType,mediaId: mediaId);
+    await _getMediaGalleryUsecase.call(MediaParams(mediaId: mediaId, mediaType: mediaType));
     emit(response.fold((failure) => GetMediaGalleryErrorState(msg: mapFailureToMsg(failure)),
             (mediaGallery) {
           for (var element in mediaGallery.backdrops){
