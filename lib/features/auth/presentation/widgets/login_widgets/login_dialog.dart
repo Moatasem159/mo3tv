@@ -9,12 +9,14 @@ class LoginDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title:  Text(AppStrings.loginSuccessfully.tr(context)!,style: AppTextStyles.get14NormalText()),
-      content: Text(AppStrings.loginSuccessfullyDialog.tr(context)!,
-          style: AppTextStyles.get14NormalText()),
+      title:Text(AppStrings.loginSuccessfully.tr(context)!,style: AppTextStyles.get14NormalText()),
+      content:Text(AppStrings.loginSuccessfullyDialog.tr(context)!,style: AppTextStyles.get14NormalText()),
       actions: [
         TextButton(
-          onPressed:()=>GoRouter.of(context).pushReplacementNamed(Routes.movieRoute),
+          onPressed:(){
+            GoRouter.of(context).pop();
+            GoRouter.of(context).goNamed(Routes.movieRoute);
+          },
           child:Text(AppStrings.ok.tr(context)!,style: AppTextStyles.get14NormalText()),
         )
       ],
