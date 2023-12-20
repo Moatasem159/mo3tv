@@ -10,13 +10,15 @@ class SeasonInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 155,
+      width: MediaQuery.sizeOf(context).width/2.5,
       decoration:const BoxDecoration(
           color:Colors.black54,
           borderRadius:BorderRadius.vertical(bottom: Radius.circular(10))
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize:MainAxisSize.min,
         children: [
           Text(season.name, style: AppTextStyles.get14BoldText(),
               textAlign: TextAlign.center),

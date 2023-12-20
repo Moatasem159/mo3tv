@@ -13,8 +13,8 @@ class SeasonPosterImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: CachedNetworkImage(
-          width: 155,
-          height: 230,
+          width: MediaQuery.sizeOf(context).width/2.5,
+          height: MediaQuery.sizeOf(context).height/3,
           fit: BoxFit.cover,
           imageUrl: EndPoints.backDropsUrl(image),
           placeholder: (context, url) => Shimmer.fromColors(

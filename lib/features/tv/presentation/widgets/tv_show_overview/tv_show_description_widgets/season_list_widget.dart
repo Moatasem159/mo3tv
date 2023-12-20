@@ -10,20 +10,27 @@ class SeasonsListWidget extends StatelessWidget {
   const SeasonsListWidget({super.key, required this.tvShow});
   @override
   Widget build(BuildContext context) {
-    if (tvShow.seasons.isNotEmpty) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-         Text("${AppStrings.seasons.tr(context)!}:",style: AppTextStyles.get14BoldText()).addSymmetricPadding(h: 10),
-         Wrap(
-            crossAxisAlignment: WrapCrossAlignment.start,
-            children: tvShow.seasons.map((e) {
-              return SeasonPoster(season: e,tvShowId: tvShow.id,tvShowName: tvShow.originalName);
-            }).toList(),
-          )
-        ],
-      );
-    }
-    return Container();
+   if(tvShow.seasons.isNotEmpty)
+     {
+       return Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: [
+           Text("${AppStrings.seasons.tr(context)!}:",style: AppTextStyles.get14BoldText()).addSymmetricPadding(h: 10),
+           SizedBox(
+             height: MediaQuery.sizeOf(context).height/3,
+             child: ListView.builder(
+                 physics: const BouncingScrollPhysics(),
+                 padding:  EdgeInsets.only(left: AppLocalizations.of(context)!.isEnLocale?0:10,right: AppLocalizations.of(context)!.isEnLocale?10:0),
+                 itemCount: tvShow.seasons.length,
+                 scrollDirection: Axis.horizontal,
+                 itemBuilder: (context, index) => SeasonPoster(
+                     season: tvShow.seasons[index],
+                     tvShowId: tvShow.id,
+                     tvShowName: tvShow.originalName)),
+           ),
+         ],
+       );
+     }
+   return const SizedBox();
   }
 }

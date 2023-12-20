@@ -36,8 +36,8 @@ class _TvShowDescriptionWidgetState extends State<TvShowDescriptionWidget> with 
         children: [
           TvShowOverviewText(overview:widget.tvShow.overview),
           SeasonsListWidget(tvShow:widget.tvShow),
-          KeywordListWidget(keywords:widget.tvShow.keywords),
           NetworkListWidget(networks:widget.tvShow.networks),
+          KeywordListWidget(keywords:widget.tvShow.keywords),
         ],
       ),
     );
