@@ -22,9 +22,9 @@ class AccountList extends StatelessWidget {
           return const SliverMediaLoadingList();
         }
         if(cubit.list.isEmpty&&cubit.totalPage>1)
-          {
+        {
             return const SliverToBoxAdapter();
-          }
+        }
         if(cubit.list.isEmpty)
         {
           if(mediaType=="movies")

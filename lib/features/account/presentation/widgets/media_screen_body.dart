@@ -10,11 +10,7 @@ class MediaScreenBody extends StatelessWidget {
   final String title;
   final String mediaType;
   final String listType;
-  const MediaScreenBody({
-    super.key,
-    required this.title,
-    required this.mediaType,
-    required this.listType});
+  const MediaScreenBody({super.key,required this.title,required this.mediaType,required this.listType});
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
