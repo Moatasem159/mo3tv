@@ -2,16 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/utils/app_assets.dart';
-import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_poster/tv_image_place_holder.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_poster/tv_show_poster_builder.dart';
-class TvShowPosterWidget extends StatefulWidget {
-  const TvShowPosterWidget({super.key,required this.tvShow});
-  final TvShow tvShow;
+import 'package:shimmer/shimmer.dart';
+part 'poster_image_builder.dart';
+part 'poster_placeholder.dart';
+class MediaPoster extends StatefulWidget {
+  final String image;
+  const MediaPoster({super.key,required this.image});
   @override
-  State<TvShowPosterWidget> createState() => _TvShowPosterWidgetState();
+  State<MediaPoster> createState() => _MoviePosterWidgetState();
 }
-class _TvShowPosterWidgetState extends State<TvShowPosterWidget>with SingleTickerProviderStateMixin {
+class _MoviePosterWidgetState extends State<MediaPoster> with SingleTickerProviderStateMixin{
   late AnimationController _slideController;
   late Animation<Offset> _slideTransition;
   late CurvedAnimation _curveAnimations;
@@ -29,19 +29,15 @@ class _TvShowPosterWidgetState extends State<TvShowPosterWidget>with SingleTicke
     super.dispose();
   }
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-  @override
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _slideTransition,
       child: CachedNetworkImage(
           height: MediaQuery.sizeOf(context).height/2.79,
           width: MediaQuery.sizeOf(context).width/2,
-          imageUrl: EndPoints.posterUrl(widget.tvShow.posterPath),
-          imageBuilder:(context, imageProvider) =>TvShowPosterBuilder(poster: imageProvider),
-          placeholder: (context, url) => const TvShowImagePlaceHolder(),
+          imageUrl: EndPoints.posterUrl(widget.image),
+          imageBuilder:(context, imageProvider) =>_PosterImageBuilder(poster: imageProvider),
+          placeholder: (context, url) => const _PosterPlaceHolder(),
           errorWidget: (context, url, error) => Image.asset(AppAssets.errorCover)
       ),
     );
