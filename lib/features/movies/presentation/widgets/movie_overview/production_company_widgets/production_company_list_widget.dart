@@ -12,7 +12,7 @@ class ProductionCompanyListWidget extends StatelessWidget {
     return Column(
       children: [
          Center(child: Text(AppStrings.productionCompanies.tr(context)!,style:AppTextStyles.get14BoldText(),)),
-        Wrap(
+         Wrap(
           alignment: WrapAlignment.center,
           children: productionCompanies.map((e)=> ProductionCompanyWidget(company: e)).toList(),
         ),

@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
+import 'package:mo3tv/core/widgets/toast/custom_toast.dart';
 import 'package:mo3tv/core/widgets/user_score_widget.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
+import 'package:mo3tv/features/auth/presentation/widgets/login_widgets/login_alert.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/add_movie_to_watchlist_button.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/movie_fav_button.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_buttons/movie_rating_button.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_events.dart';
+import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_state.dart';
+part 'movie_fav_button.dart';
+part 'movie_rating_button.dart';
+part 'add_movie_to_watchlist_button.dart';
 class MovieButtonsWidget extends StatefulWidget {
   final Movie movie;
   final String listType;
@@ -40,9 +52,9 @@ class _MovieButtonsWidgetState extends State<MovieButtonsWidget> with SingleTick
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               UserScoreWidget(vote: widget.movie.voteAverage),
-              MovieFavButton(listType: widget.listType),
-              MovieRatingButton(listType: widget.listType),
-              AddMovieToWatchlistButton(listType: widget.listType),
+              _MovieFavButton(listType: widget.listType),
+              _MovieRatingButton(listType: widget.listType),
+              _AddMovieToWatchlistButton(listType: widget.listType),
             ],
           ),
         ],

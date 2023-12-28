@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/core/widgets/media_info/media_info.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_info_widgets/budget_widget.dart';
+part 'budget_widget.dart';
 class MovieInfoWidget extends StatefulWidget {
   final Movie movie;
   const MovieInfoWidget({super.key, required this.movie});
@@ -39,7 +43,7 @@ class _MovieInfoWidgetState extends State<MovieInfoWidget> with SingleTickerProv
                 tagline: widget.movie.tagline,
                 status: widget.movie.status,
             ),
-            BudgetWidget(budget: widget.movie.budget,revenue: widget.movie.revenue),
+            _BudgetWidget(budget: widget.movie.budget,revenue: widget.movie.revenue),
           ],
         ),
       ),

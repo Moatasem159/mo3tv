@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-class SeasonNumberWidget extends StatelessWidget {
+part of 'tv_show_info_widget.dart';
+class _SeasonNumberWidget extends StatelessWidget {
   final TvShow tvShow;
-  const SeasonNumberWidget({super.key,required this.tvShow});
+  const _SeasonNumberWidget({required this.tvShow});
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-class CreatorWidget extends StatelessWidget {
+part of 'tv_show_info_widget.dart';
+class _CreatorWidget extends StatelessWidget {
   final TvShow tvShow;
-  const CreatorWidget({super.key,required this.tvShow});
+  const _CreatorWidget({required this.tvShow});
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/reviews/domain/entities/review.dart';
-class ReviewAuthorDetails extends StatelessWidget {
+part of'review_widget.dart';
+class _ReviewAuthorDetails extends StatelessWidget {
   final Review review;
-  const ReviewAuthorDetails({super.key,required this.review});
+  const _ReviewAuthorDetails({required this.review});
   @override
   Widget build(BuildContext context) {
     return Column(

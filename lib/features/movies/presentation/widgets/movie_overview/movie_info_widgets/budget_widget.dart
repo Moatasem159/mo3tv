@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-class BudgetWidget extends StatelessWidget {
+part of'movie_info_widget.dart';
+class _BudgetWidget extends StatelessWidget {
   final num budget;
   final num revenue;
-  const BudgetWidget({super.key, required this.budget, required this.revenue});
+  const _BudgetWidget({required this.budget, required this.revenue});
   @override
   Widget build(BuildContext context) {
     NumberFormat myFormat = NumberFormat.decimalPattern('en_us');

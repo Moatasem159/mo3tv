@@ -1,16 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/widgets/buttons/media_icon_button.dart';
-import 'package:mo3tv/core/widgets/toast/custom_toast.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
-import 'package:mo3tv/features/auth/presentation/widgets/login_widgets/login_alert.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_bloc.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_events.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_buttons_bloc/movie_actions_state.dart';
-class AddMovieToWatchlistButton extends StatelessWidget {
+part of 'movie_buttons_widget.dart';
+class _AddMovieToWatchlistButton extends StatelessWidget {
   final String listType;
-  const AddMovieToWatchlistButton({super.key,this.listType=''});
+  const _AddMovieToWatchlistButton({this.listType=''});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MovieActionsBloc,MovieActionsStates>(

@@ -1,11 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_state.dart';
-class MovieBottomNavBarItem extends StatelessWidget {
+part of 'movie_bottom_nav_bar.dart';
+class _MovieBottomNavBarItem extends StatelessWidget {
   final IconData icon;
   final int index;
-  const MovieBottomNavBarItem({super.key, required this.icon, required this.index});
+  const _MovieBottomNavBarItem({required this.icon, required this.index});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieBottomNavCubit, MovieBottomNavStates>(

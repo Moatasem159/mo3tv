@@ -1,18 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/features/reviews/domain/entities/review.dart';
-import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/review_author_details.dart';
-import 'package:mo3tv/features/reviews/presentation/widgets/review_widgets/review_image.dart';
-class ReviewDetails extends StatelessWidget {
+part of'review_widget.dart';
+class _ReviewDetails extends StatelessWidget {
   final Review review;
-  const ReviewDetails({super.key,required this.review});
+  const _ReviewDetails({required this.review});
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ReviewImage(review: review),
+        _ReviewImage(review: review),
         5.pw,
-        ReviewAuthorDetails(review: review),
+        _ReviewAuthorDetails(review: review),
       ],
     );
   }

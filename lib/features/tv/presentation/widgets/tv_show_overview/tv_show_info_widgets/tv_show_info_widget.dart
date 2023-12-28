@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/core/widgets/media_info/media_info.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_info_widgets/creator_widget.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_info_widgets/season_number_widget.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_info_widgets/type_widget.dart';
+part 'season_number_widget.dart';
+part 'type_widget.dart';
+part 'creator_widget.dart';
 class TvShowInfoWidget extends StatefulWidget {
   final TvShow tvShow;
   const TvShowInfoWidget({super.key,required this.tvShow});
@@ -41,9 +44,9 @@ class _TvShowInfoWidgetState extends State<TvShowInfoWidget> with SingleTickerPr
               tagline: widget.tvShow.tagline,
               status: widget.tvShow.status,
             ),
-            SeasonNumberWidget(tvShow: widget.tvShow),
-            TypeWidget(type:widget.tvShow.type),
-            CreatorWidget(tvShow: widget.tvShow),
+            _SeasonNumberWidget(tvShow: widget.tvShow),
+            _TypeWidget(type:widget.tvShow.type),
+            _CreatorWidget(tvShow: widget.tvShow),
           ],
         ),
       ),

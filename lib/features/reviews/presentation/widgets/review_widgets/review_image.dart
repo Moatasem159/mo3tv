@@ -1,12 +1,7 @@
-import 'dart:math';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/reviews/domain/entities/review.dart';
-class ReviewImage extends StatelessWidget {
+part of'review_widget.dart';
+class _ReviewImage extends StatelessWidget {
   final Review review;
-  const ReviewImage({super.key, required this.review});
+  const _ReviewImage({required this.review});
   @override
   Widget build(BuildContext context) {
     List<Color>colors=[Colors.red,Colors.blue,Colors.yellow,Colors.teal,Colors.blueGrey,Colors.orange,Colors.indigo,];
