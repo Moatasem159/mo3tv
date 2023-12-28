@@ -65,7 +65,6 @@ import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
 import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_shows_list_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_similar_tv_shows_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_trending_tv_shows_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
 import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
@@ -163,7 +162,6 @@ movie(){
 tv(){
   ///usecases
   sl.registerLazySingleton<GetTvShowsListUsecase>(() => GetTvShowsListUsecase(sl()));
-  sl.registerLazySingleton<GetTrendingTvShowsUsecase>(() => GetTrendingTvShowsUsecase(sl()));
   sl.registerLazySingleton<GetTvShowDetailsUsecase>(() => GetTvShowDetailsUsecase(sl()));
   sl.registerLazySingleton<GetSimilarTvShowsUseCase>(() => GetSimilarTvShowsUseCase(sl()));
   sl.registerLazySingleton<GetTvRecommendationsUseCase>(() => GetTvRecommendationsUseCase(sl()));

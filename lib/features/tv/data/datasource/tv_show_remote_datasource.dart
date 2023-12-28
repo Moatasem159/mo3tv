@@ -7,7 +7,6 @@ import 'package:mo3tv/features/tv/data/models/tv_show_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 abstract class TvShowRemoteDataSource {
   Future<List<TvShowModel>> getTvShowsList(MediaParams params);
-  Future<List<TvShowModel>> getTrendingTvShows(MediaParams params);
   Future<TvShowModel> getTvShowDetails(MediaParams params);
   Future<TvShowSeasonModel> getTvShowSeasonDetails(MediaParams params);
   Future<List<TvShowModel>> getTvShowRecommendations(MediaParams params);
@@ -24,13 +23,14 @@ class TvShowRemoteDataSourceImpl implements TvShowRemoteDataSource{
       TvShowModel.fromJson(await _apiConsumer.get(EndPoints.mediaDetailsPath(AppStrings.sessionId,params)));
   @override
   Future<List<TvShowModel>> getTvShowsList(MediaParams params) async{
-    final response = await _apiConsumer.get(EndPoints.mediaListsPath(params));
-    return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)))
-      ..removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
-  }
-  @override
-  Future<List<TvShowModel>> getTrendingTvShows(MediaParams params) async{
-    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(params));
+    final dynamic response;
+    if(params.listType!=AppStrings.trending)
+      {
+        response=await _apiConsumer.get(EndPoints.mediaListsPath(params));
+      }
+   else{
+     response= await _apiConsumer.get(EndPoints.trendingMediaPath(params));
+    }
     return List<TvShowModel>.from((response['results'] as List).map((x) => TvShowModel.fromJson(x)))
       ..removeWhere((e) =>e.backdropPath==''||e.posterPath=='');
   }

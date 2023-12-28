@@ -6,7 +6,6 @@ import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show_season.dart';
 abstract class TvRepository{
   Future<Either<Failure,List<TvShow>>> getTvShowsList(MediaParams params);
-  Future<Either<Failure,List<TvShow>>> getTrendingTvShows(MediaParams params);
   Future<Either<Failure,TvShow>> getTvShowDetails(MediaParams params);
   Future<Either<Failure,List<TvShow>>> getTvShowRecommendations(MediaParams params);
   Future<Either<Failure,TvShowSeason>> getTvShowSeasonDetails(MediaParams params);

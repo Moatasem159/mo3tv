@@ -37,7 +37,7 @@ class _MediaSeeMoreState extends State<MediaSeeMore> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => MoreMoviesCubit(di.sl())),
-        BlocProvider(create: (context) => MoreTvShowsCubit(di.sl(), di.sl())),
+        BlocProvider(create: (context) => MoreTvShowsCubit(di.sl())),
       ],
       child: SafeArea(
         child: Scaffold(

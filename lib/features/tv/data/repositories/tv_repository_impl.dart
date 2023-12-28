@@ -17,10 +17,6 @@ class TvShowRepositoryImpl implements TvRepository{
      return executeAndHandleError<List<TvShow>>(() => _tvShowRemoteDataSource.getTvShowsList(params),_networkInfo);
   }
   @override
-  Future<Either<Failure, List<TvShow>>> getTrendingTvShows(MediaParams params) async{
-    return executeAndHandleError<List<TvShow>>(() => _tvShowRemoteDataSource.getTrendingTvShows(params),_networkInfo);
-  }
-  @override
   Future<Either<Failure, TvShow>> getTvShowDetails(MediaParams params)async {
     return executeAndHandleError<TvShow>(() => _tvShowRemoteDataSource.getTvShowDetails(params),_networkInfo);
   }
