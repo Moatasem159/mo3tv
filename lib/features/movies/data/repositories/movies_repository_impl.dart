@@ -16,10 +16,6 @@ class MoviesRepositoryImpl implements MovieRepository {
     return executeAndHandleError<List<Movie>>(() => _movieRemoteDataSource.getMoviesList(params),_networkInfo);
   }
   @override
-  Future<Either<Failure,List<Movie>>> getTrendingMovies(MediaParams params)async {
-    return executeAndHandleError<List<Movie>>(() => _movieRemoteDataSource.getTrendingMovies(params),_networkInfo);
-  }
-  @override
   Future<Either<Failure,Movie>> getMovieDetails(MediaParams params) async {
     return executeAndHandleError<Movie>(() => _movieRemoteDataSource.getMovieDetails(params),_networkInfo);
   }

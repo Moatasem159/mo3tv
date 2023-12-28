@@ -36,7 +36,7 @@ class _MediaSeeMoreState extends State<MediaSeeMore> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MoreMoviesCubit(di.sl(), di.sl())),
+        BlocProvider(create: (context) => MoreMoviesCubit(di.sl())),
         BlocProvider(create: (context) => MoreTvShowsCubit(di.sl(), di.sl())),
       ],
       child: SafeArea(

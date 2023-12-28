@@ -60,8 +60,11 @@ abstract class AppStrings {
   static const String recommendations="recommendations";
   static const String noRecommendations="no_recommendations";
   static const String popularMovies="popular_movies";
+  static const String popular="popular";
   static const String topRatedMovies="top_rated_movies";
+  static const String topRated="top_rated";
   static const String trendingMoviesToday="trending_movies_today";
+  static const String trending="trending";
   static const String reviews="reviews";
   static const String noReviews="no_reviews";
   static const String recent="recent";

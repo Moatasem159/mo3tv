@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mo3tv/app/bloc_observer.dart';
+import 'package:mo3tv/config/themes/app_theme.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
 import 'package:mo3tv/core/api/dio_consumer.dart';
@@ -42,7 +44,6 @@ import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.
 import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_movies_list_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/get_similar_movies_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_trending_movies_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/mark_movie_usecase.dart';
 import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
 import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart';
@@ -74,6 +75,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> init() async {
+  AppTheme.systemChrome();
+  Bloc.observer=AppBlocObserver();
   movie();
   tv();
   account();
@@ -146,7 +149,6 @@ gallery(){
 movie(){
   ///usecases
   sl.registerLazySingleton<GetMoviesListUsecase>(() => GetMoviesListUsecase(sl()));
-  sl.registerLazySingleton<GetTrendingMoviesUsecase>(() => GetTrendingMoviesUsecase(sl()));
   sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl()));
   sl.registerLazySingleton<GetMovieRecommendationsUseCase>(() => GetMovieRecommendationsUseCase(sl()));
   sl.registerLazySingleton<GetSimilarMovieUseCase>(() => GetSimilarMovieUseCase(sl()));

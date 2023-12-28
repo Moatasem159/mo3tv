@@ -7,7 +7,6 @@ import 'package:mo3tv/core/entities/media_params.dart';
 abstract class MovieRemoteDataSource {
   Future<MovieModel> getMovieDetails(MediaParams params);
   Future<List<MovieModel>> getMoviesList(MediaParams params);
-  Future<List<MovieModel>> getTrendingMovies(MediaParams params);
   Future<List<MovieModel>> getMovieRecommendations(MediaParams params);
   Future<List<MovieModel>> getSimilarMovies(MediaParams params);
   Future<MessageModel> rateMovie(MediaParams params);
@@ -24,14 +23,14 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource{
   }
   @override
   Future<List<MovieModel>> getMoviesList(MediaParams params) async {
-    final dynamic response = await _apiConsumer.get(EndPoints.mediaListsPath(params));
+    final dynamic response;
+     if(params.listType!=AppStrings.trending) {
+       response= await _apiConsumer.get(EndPoints.mediaListsPath(params));
+     }
+     else{
+       response =await _apiConsumer.get(EndPoints.trendingMediaPath(params));
+     }
     return List<MovieModel>.from((response['results'] as List).map((x)=> MovieModel.fromJson(x)))
-      ..removeWhere((element) => element.backdropPath==''||element.posterPath=='');
-  }
-  @override
-  Future<List<MovieModel>> getTrendingMovies(MediaParams params) async{
-    final response = await _apiConsumer.get(EndPoints.trendingMediaPath(params));
-    return List<MovieModel>.from((response['results'] as List).map((x) => MovieModel.fromJson(x)))
       ..removeWhere((element) => element.backdropPath==''||element.posterPath=='');
   }
   @override
