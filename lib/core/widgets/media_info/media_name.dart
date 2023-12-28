@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-class TitleWidget extends StatelessWidget {
+part of 'media_info.dart';
+class _NameWidget extends StatelessWidget {
   final String title;
   final String releaseDate;
-  const TitleWidget({super.key, required this.title, required this.releaseDate});
+  const _NameWidget({required this.title, required this.releaseDate});
   @override
   Widget build(BuildContext context) {
     return Text(

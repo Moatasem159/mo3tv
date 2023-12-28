@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/widgets/keywords_widgets/keyword_list_widget.dart';
+import 'package:mo3tv/core/widgets/media_info/media_description.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_description_widget/movie_companies_widget.dart';
-import 'package:mo3tv/features/movies/presentation/widgets/movie_overview/movie_description_widget/overview_widget.dart';
 class MovieDescriptionWidget extends StatefulWidget {
   final Movie movie;
   const MovieDescriptionWidget({super.key,required this.movie});
@@ -33,7 +33,7 @@ class _MovieDescriptionWidgetState extends State<MovieDescriptionWidget>with Sin
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MovieOverViewText(overview: widget.movie.overview),
+          MediaDescription(overview: widget.movie.overview),
           KeywordListWidget(keywords:widget.movie.keywords),
           MovieProductionCompaniesWidget(productionCompanies:widget.movie.productionCompanies)
         ],
