@@ -9,7 +9,7 @@ class TvShowModel extends TvShow {
     required super.backdropPath,
     required super.createdBy,
     required super.episodeRunTime,
-    required super.firstAirDate,
+    required super.releaseDate,
     required super.genres,
     required super.keywords,
     required super.homepage,
@@ -38,7 +38,7 @@ class TvShowModel extends TvShow {
   });
   factory TvShowModel.fromJson(Map<String, dynamic> json) => TvShowModel(
     backdropPath: json["backdrop_path"]??'',
-    firstAirDate: json["first_air_date"]??'',
+    releaseDate: json["first_air_date"]??'',
     homepage: json["homepage"]??'',
     id: json["id"],
     inProduction: json["in_production"]??false,
@@ -77,7 +77,7 @@ class TvShowModel extends TvShow {
      "vote_count":tvShowModel.voteCount,
      "popularity":tvShowModel.popularity,
      "last_air_date":tvShowModel.lastAirDate,
-     "first_air_date":tvShowModel.firstAirDate
+     "first_air_date":tvShowModel.releaseDate,
    };
    static Map<String, dynamic> tvShowsListToMap(List<TvShowModel> tvShows) {
      final Map<String, dynamic> tvShowMap = {};

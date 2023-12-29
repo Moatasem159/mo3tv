@@ -14,6 +14,7 @@ abstract class Media extends Equatable {
   final String overview;
   final String homepage;
   final String posterPath;
+  final String releaseDate;
   final String originalName;
   final String backdropPath;
   final String originalLanguage;
@@ -32,6 +33,7 @@ abstract class Media extends Equatable {
     this.keywords=const[],
     this.homepage='',
     this.status='',
+    this.releaseDate='',
     this.tagline='',
     this.originalLanguage='',
     this.overview='',

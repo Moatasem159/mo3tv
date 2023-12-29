@@ -5,7 +5,6 @@ class Movie extends Media{
   final num budget;
   final num revenue;
   final num runtime;
-  final String releaseDate;
   final List<ProductionCompany> productionCompanies;
   Movie({
     required super.id,
@@ -15,7 +14,7 @@ class Movie extends Media{
     required super.originalName,
     this.budget=0,
     this.productionCompanies=const [],
-    this.releaseDate='',
+    super.releaseDate,
     this.revenue=0,
     this.runtime=0,
     super.genres,

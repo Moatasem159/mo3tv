@@ -7,7 +7,6 @@ class TvShow extends Media{
   final int  numberOfEpisodes;
   final String type;
   final String lastAirDate;
-  final String firstAirDate;
   final bool inProduction;
   final dynamic nextEpisodeToAir;
   final List<Network>  networks;
@@ -23,7 +22,7 @@ class TvShow extends Media{
     required super.originalName,
     this.createdBy=const [],
     this.episodeRunTime=const [],
-    this.firstAirDate='',
+    super.releaseDate,
     this.inProduction=false,
     this.lastAirDate='',
     this.lastEpisodeToAir=const LastEpisodeToAir(),
@@ -51,7 +50,7 @@ class TvShow extends Media{
   List<Object?> get props => [
     createdBy,
     episodeRunTime,
-    firstAirDate,
+    releaseDate,
     inProduction,
     lastAirDate,
     lastEpisodeToAir,

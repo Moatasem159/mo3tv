@@ -40,7 +40,7 @@ class _TvShowInfoWidgetState extends State<TvShowInfoWidget> with SingleTickerPr
           children: [
             MediaInfo(
               name: widget.tvShow.name,
-              releaseDate: widget.tvShow.firstAirDate,
+              releaseDate: widget.tvShow.releaseDate,
               tagline: widget.tvShow.tagline,
               status: widget.tvShow.status,
             ),
