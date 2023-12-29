@@ -1,5 +1,6 @@
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
+import 'package:mo3tv/core/models/network_model.dart';
 import 'package:mo3tv/features/video/data/video_model.dart';
 import 'package:mo3tv/features/tv/data/models/tv_show_season_model.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
@@ -19,7 +20,7 @@ class TvShowModel extends TvShow {
     required super.lastEpisodeToAir,
     required super.name,
     required super.nextEpisodeToAir,
-    required super.networks,
+    required super.productionCompanies,
     required super.numberOfEpisodes,
     required super.numberOfSeasons,
     required super.originalLanguage,
@@ -60,7 +61,7 @@ class TvShowModel extends TvShow {
     mediaAccountDetails:json["account_states"]==null?MediaAccountDetails():MediaAccountDetails.fromJson(json["account_states"]),
     lastEpisodeToAir:json["last_episode_to_air"]==null?const LastEpisodeToAir():LastEpisodeToAir.fromJson(json["last_episode_to_air"]),
     genres: json["genres"]==null?[]:List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
-    networks:json["networks"]==null?[]: List<Network>.from(json["networks"].map((x) => Network.fromJson(x))),
+    productionCompanies:json["networks"]==null?[]: List<Network>.from(json["networks"].map((x) => Network.fromJson(x))),
     keywords:json["keywords"]==null?[]:List<GenreModel>.from(json["keywords"]['results'].map((x) => GenreModel.fromJson(x))),
     createdBy:json["created_by"]==null?[]:List<CreatedBy>.from(json["created_by"].map((x) => CreatedBy.fromJson(x))),
     episodeRunTime:json["episode_run_time"]==null?[]:List<int>.from(json["episode_run_time"].map((x) => x)),
@@ -109,19 +110,7 @@ class CreatedBy {
     profilePath: json["profile_path"]??'',
   );
 }
-class Network {
-  final int? id;
-  final String ?name;
-  final String ?logoPath;
-  final String ?originCountry;
-  const Network({this.id,this.name,this.logoPath,this.originCountry});
-  factory Network.fromJson(Map<String, dynamic> json) => Network(
-    id: json["id"]??0,
-    name: json["name"]??'',
-    logoPath: json["logo_path"] ??'',
-    originCountry: json["origin_country"]??'',
-  );
-}
+
 class LastEpisodeToAir {
   final int? id;
   final int ?episodeNumber;

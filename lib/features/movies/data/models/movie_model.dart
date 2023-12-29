@@ -1,5 +1,6 @@
 import 'package:mo3tv/core/models/keywords_model.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
+import 'package:mo3tv/core/models/network_model.dart';
 import 'package:mo3tv/features/video/data/video_model.dart';
 import 'package:mo3tv/features/movies/domain/entities/movie.dart';
 //ignore: must_be_immutable
@@ -51,7 +52,7 @@ class MovieModel extends Movie {
     genres: json["genres"]==null?[]:List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
     videos: json["videos"]==null?[]:List<VideoModel>.from(json["videos"]["results"].map((x) => VideoModel.fromJson(x))),
     keywords:json["keywords"]==null?[]:List<GenreModel>.from(json["keywords"]['keywords'].map((x) => GenreModel.fromJson(x))),
-    productionCompanies:json["production_companies"]==null?[]:List<ProductionCompany>.from(json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
+    productionCompanies:json["production_companies"]==null?[]:List<Network>.from(json["production_companies"].map((x) => Network.fromJson(x))),
 
   );
    static Map<String, dynamic> movieToJson(MovieModel movieModel) => {
@@ -78,22 +79,4 @@ class MovieModel extends Movie {
      });
      return movies;
    }
-}
-class ProductionCompany {
-  int id;
-  String logoPath;
-  String name;
-  String originCountry;
-  ProductionCompany({
-    required this.id,
-    required this.logoPath,
-    required this.name,
-    required this.originCountry,
-  });
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) => ProductionCompany(
-    id: json["id"],
-    logoPath: json["logo_path"]??'',
-    name: json["name"]??'',
-    originCountry: json["origin_country"]??'',
-  );
 }

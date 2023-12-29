@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/core/widgets/keywords_widgets/keyword_list_widget.dart';
 import 'package:mo3tv/core/widgets/media_info/media_description.dart';
+import 'package:mo3tv/core/widgets/media_production_company/media_production_company_list.dart';
 import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
-import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/network_widgets/network_list_widget.dart';
 import 'package:mo3tv/features/tv/presentation/widgets/tv_show_overview/tv_show_description_widgets/season_list_widget.dart';
 class TvShowDescriptionWidget extends StatefulWidget {
   final TvShow tvShow;
@@ -36,7 +36,7 @@ class _TvShowDescriptionWidgetState extends State<TvShowDescriptionWidget> with 
         children: [
           MediaDescription(overview:widget.tvShow.overview),
           SeasonsListWidget(tvShow:widget.tvShow),
-          NetworkListWidget(networks:widget.tvShow.networks),
+          MediaProductionCompanyList(productionCompanies:widget.tvShow.productionCompanies),
           KeywordListWidget(keywords:widget.tvShow.keywords),
         ],
       ),

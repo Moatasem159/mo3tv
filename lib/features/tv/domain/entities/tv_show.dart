@@ -9,7 +9,6 @@ class TvShow extends Media{
   final String lastAirDate;
   final bool inProduction;
   final dynamic nextEpisodeToAir;
-  final List<Network>  networks;
   final List<CreatedBy> createdBy;
   final List<int> episodeRunTime;
   final LastEpisodeToAir  lastEpisodeToAir;
@@ -27,7 +26,7 @@ class TvShow extends Media{
     this.lastAirDate='',
     this.lastEpisodeToAir=const LastEpisodeToAir(),
     this.nextEpisodeToAir,
-    this.networks= const [],
+    super.productionCompanies,
     this.numberOfEpisodes=0,
     this.numberOfSeasons=0,
     this.seasons=const [],
@@ -57,7 +56,6 @@ class TvShow extends Media{
     originalName,
     name,
     nextEpisodeToAir,
-    networks,
     numberOfEpisodes,
     numberOfSeasons,
     seasons,
@@ -72,6 +70,7 @@ class TvShow extends Media{
     super.originalLanguage,
     super.overview,
     super.popularity,
+    super.productionCompanies,
     super.posterPath,
     super.voteAverage,
     super.voteCount,

@@ -1,11 +1,9 @@
 import 'package:mo3tv/core/entities/media.dart';
-import 'package:mo3tv/features/movies/data/models/movie_model.dart';
 // ignore: must_be_immutable
 class Movie extends Media{
   final num budget;
   final num revenue;
   final num runtime;
-  final List<ProductionCompany> productionCompanies;
   Movie({
     required super.id,
     required super.name,
@@ -13,7 +11,7 @@ class Movie extends Media{
     required super.backdropPath,
     required super.originalName,
     this.budget=0,
-    this.productionCompanies=const [],
+    super.productionCompanies=const [],
     super.releaseDate,
     this.revenue=0,
     this.runtime=0,

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:mo3tv/core/entities/keyword.dart';
 import 'package:mo3tv/core/models/media_account_details_model.dart';
+import 'package:mo3tv/core/models/network_model.dart';
 import 'package:mo3tv/features/video/domain/entities/video.dart';
 // ignore: must_be_immutable
 abstract class Media extends Equatable {
@@ -21,6 +22,7 @@ abstract class Media extends Equatable {
   final List<Video> videos;
   final List<Keyword> genres;
   final List<Keyword> keywords;
+  final List<Network> productionCompanies;
   Video? trailer;
   MediaAccountDetails? mediaAccountDetails;
   Media({
@@ -31,6 +33,7 @@ abstract class Media extends Equatable {
     required this.posterPath,
     this.genres=const[],
     this.keywords=const[],
+    this.productionCompanies=const[],
     this.homepage='',
     this.status='',
     this.releaseDate='',
