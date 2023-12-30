@@ -59,6 +59,7 @@ abstract class AppStrings {
   static const String nowPlaying="now_playing";
   static const String onAir="on_the_air";
   static const String recommendations="recommendations";
+  static const String similar="similar";
   static const String noRecommendations="no_recommendations";
   static const String popularMovies="popular_movies";
   static const String popular="popular";

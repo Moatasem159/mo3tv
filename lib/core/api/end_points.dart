@@ -1,5 +1,5 @@
 import 'package:mo3tv/core/api/env.dart';
-import 'package:mo3tv/core/entities/media_params.dart';
+import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 abstract class EndPoints{
   static const String baseUrl="https://api.themoviedb.org/3/";
   static const String basePosterUrl = "https://image.tmdb.org/t/p/w500";
@@ -18,10 +18,10 @@ abstract class EndPoints{
       "$baseUrl/trending/${params.mediaType}/day?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
   static String mediaListsPath(MediaParams params) =>
       "$baseUrl/${params.mediaType}/${params.listType}?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
-  static String recommendationMediaPath(MediaParams params) =>
-      "$baseUrl/${params.mediaType}/${params.mediaId}/recommendations?api_key=${Env.apiKey}&page=1&language=${params.lang}";
+  // static String recommendationMediaPath(MediaParams params) =>
+  //     "$baseUrl/${params.mediaType}/${params.mediaId}/${params.moreType}?api_key=${Env.apiKey}&page=1&language=${params.lang}";
   static String similarMediaPath(MediaParams params) =>
-      "$baseUrl/${params.mediaType}/${params.mediaId}/similar?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
+      "$baseUrl/${params.mediaType}/${params.mediaId}/${params.moreType}?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
   static String mediaReviewsPath(MediaParams params) =>
       "$baseUrl/${params.mediaType}/${params.mediaId}/reviews?api_key=${Env.apiKey}";
   static String mediaCreditsPath(MediaParams params) =>

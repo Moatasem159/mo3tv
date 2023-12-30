@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/core/entities/media.dart';
+import 'package:mo3tv/features/media/domain/entities/media.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/widgets/buttons/error_button.dart';
 import 'package:mo3tv/core/widgets/media_vertical_list/media_vertical_list.dart';
-import 'package:mo3tv/core/widgets/media_vertical_list/sliver_media_loading_list.dart';
+import 'package:mo3tv/features/media/presentation/widgets/recommendations_media_widgets/sliver_media_loading_list.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_state.dart';
 import 'package:mo3tv/features/account/presentation/widgets/empty_account_list.dart';
@@ -40,11 +40,11 @@ class AccountList extends StatelessWidget {
         {
           if(mediaType=="movies")
           {
-            return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,isMovie:true);
+            return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,mediaType:mediaType);
           }
            else if(mediaType =="tv")
            {
-          return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,isMovie: false);
+          return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,mediaType: mediaType);
         }
         }
         if(state is GetAccountListsErrorState)

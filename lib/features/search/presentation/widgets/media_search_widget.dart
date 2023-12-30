@@ -8,10 +8,10 @@ import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/movies/domain/entities/movie.dart';
+import 'package:mo3tv/features/media/domain/entities/movie.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
-import 'package:mo3tv/features/tv/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/media/domain/entities/tv_show.dart';
 import 'package:shimmer/shimmer.dart';
 class MediaSearchWidget extends StatelessWidget {
   final Search mediaSearch;

@@ -36,16 +36,18 @@ import 'package:mo3tv/features/auth/data/repositories/login_repository_impl.dart
 import 'package:mo3tv/features/auth/domain/repositories/login_repository.dart';
 import 'package:mo3tv/features/auth/domain/usecases/get_sessionid_usecase.dart';
 import 'package:mo3tv/features/auth/domain/usecases/get_token_usecase.dart';
-import 'package:mo3tv/features/movies/data/datasource/movie_remote_datasource.dart';
-import 'package:mo3tv/features/movies/data/repositories/movies_repository_impl.dart';
-import 'package:mo3tv/features/movies/domain/repositories/movie_repository.dart';
-import 'package:mo3tv/features/movies/domain/usecases/delete_rate_movie_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_details_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movie_recommendations_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_movies_list_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/get_similar_movies_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/mark_movie_usecase.dart';
-import 'package:mo3tv/features/movies/domain/usecases/rate_movie_usecase.dart';
+import 'package:mo3tv/features/media/data/datasources/media_remote_datasource.dart';
+import 'package:mo3tv/features/media/data/repositories/media_repository_impl.dart';
+import 'package:mo3tv/features/media/domain/repositories/media_repository.dart';
+import 'package:mo3tv/features/media/domain/usecases/delete_rate_media_usecase.dart';
+import 'package:mo3tv/features/media/domain/usecases/get_media_list_usecase.dart';
+import 'package:mo3tv/features/media/domain/usecases/get_similar_media_usecase.dart';
+import 'package:mo3tv/features/media/domain/usecases/mark_media_usecase.dart';
+import 'package:mo3tv/features/media/domain/usecases/rate_media_usecase.dart';
+import 'package:mo3tv/features/media/data/datasources/movie_remote_datasource.dart';
+import 'package:mo3tv/features/media/data/repositories/movies_repository_impl.dart';
+import 'package:mo3tv/features/media/domain/repositories/movie_repository.dart';
+import 'package:mo3tv/features/media/domain/usecases/get_movie_details_usecase.dart';
 import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart';
 import 'package:mo3tv/features/reviews/data/repositories/reviews_repository_impl.dart';
 import 'package:mo3tv/features/reviews/domain/repositories/reviews_repository.dart';
@@ -59,50 +61,45 @@ import 'package:mo3tv/features/search/domain/usecases/clear_search_list_usecase.
 import 'package:mo3tv/features/search/domain/usecases/get_search_list_usecase.dart';
 import 'package:mo3tv/features/search/domain/usecases/save_search_usecase.dart';
 import 'package:mo3tv/features/search/domain/usecases/search_usecase.dart';
-import 'package:mo3tv/features/tv/data/datasource/tv_show_remote_datasource.dart';
-import 'package:mo3tv/features/tv/data/repositories/tv_repository_impl.dart';
-import 'package:mo3tv/features/tv/domain/repositories/tv_repository.dart';
-import 'package:mo3tv/features/tv/domain/usecases/delete_tv_show_rate_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_shows_list_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_similar_tv_shows_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_recommendations_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_details_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/get_tv_show_season_details_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/mark_tv_show_usecase.dart';
-import 'package:mo3tv/features/tv/domain/usecases/rate_tv_show_usecase.dart';
+import 'package:mo3tv/features/media/data/datasources/tv_show_remote_datasource.dart';
+import 'package:mo3tv/features/media/data/repositories/tv_repository_impl.dart';
+import 'package:mo3tv/features/media/domain/repositories/tv_repository.dart';
+import 'package:mo3tv/features/media/domain/usecases/get_tv_show_details_usecase.dart';
+import 'package:mo3tv/features/media/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> init() async {
   AppTheme.systemChrome();
   Bloc.observer=AppBlocObserver();
-  movie();
-  tv();
-  account();
-  gallery();
-  reviews();
-  credits();
-  search();
-  login();
-  logout();
-  await external();
+  _media();
+  _movie();
+  _tv();
+  _account();
+  _gallery();
+  _reviews();
+  _credits();
+  _search();
+  _login();
+  _logout();
+  await _external();
   await sl<GetSavedSessionIdUsecase>().call();
 }
-login(){
+_login(){
       sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl(),sl()));
       sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
       sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
       sl.registerLazySingleton<LoginRemoteDataSource>(() => LoginRemoteDataSourceImpl(sl()));
       sl.registerLazySingleton<LoginLocalDataSource>(() => LoginLocalDataSourceImpl(sl()));
 }
-logout() {
+_logout() {
     sl.registerLazySingleton<LogOutUsecase>(() => LogOutUsecase(sl()));
     sl.registerLazySingleton<LogOutRepository>(() => LogOutRepositoryImpl(sl(), sl(),sl()));
     sl.registerLazySingleton<LogOutRemoteDataSource>(() => LogOutRemoteDataSourceImpl(sl()));
     sl.registerLazySingleton<LogOutLocalDataSource>(() => LogOutLocalDataSourceImpl(sl()));
 
 }
-Future external()async{
+Future _external()async{
   HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
   final sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
@@ -122,7 +119,7 @@ Future external()async{
         error: true,
       ));
 }
-account(){
+_account(){
   sl.registerLazySingleton<GetAccountListsUsecase>(() => GetAccountListsUsecase(sl()));
   sl.registerLazySingleton<GetSavedSessionIdUsecase>(() => GetSavedSessionIdUsecase(sl()));
   sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
@@ -130,7 +127,7 @@ account(){
   sl.registerLazySingleton<AccountRemoteDataSource>(() => AccountRemoteDataSourceImpl(sl()));
   sl.registerLazySingleton<AccountLocalDataSource>(() => AccountLocalDatasourceImpl(sl()));
 }
-search(){
+_search(){
   sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl(),sl(),sl()));
   sl.registerLazySingleton<SearchUsecase>(() => SearchUsecase(sl()));
   sl.registerLazySingleton<SaveSearchUsecase>(() => SaveSearchUsecase(sl()));
@@ -140,47 +137,44 @@ search(){
   sl.registerLazySingleton<SearchRemoteDataSource>(() => SearchRemoteDataSourceImpl(sl()));
   sl.registerLazySingleton<SearchLocalDataSource>(() => SearchLocalDataSourceImpl(sl()));
 }
-gallery(){
+_gallery(){
   sl.registerLazySingleton<GetMediaGalleryUsecase>(() => GetMediaGalleryUsecase(sl()));
   sl.registerLazySingleton<GalleryRepository>(() => GalleryRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<GalleryDataSource>(() => GalleryDataSourceImpl(sl()));
 }
-movie(){
+_movie(){
   ///usecases
-  sl.registerLazySingleton<GetMoviesListUsecase>(() => GetMoviesListUsecase(sl()));
   sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl()));
-  sl.registerLazySingleton<GetMovieRecommendationsUseCase>(() => GetMovieRecommendationsUseCase(sl()));
-  sl.registerLazySingleton<GetSimilarMovieUseCase>(() => GetSimilarMovieUseCase(sl()));
-  sl.registerLazySingleton<RateMovieUseCase>(() => RateMovieUseCase(sl()));
-  sl.registerLazySingleton<DeleteRateMovieUseCase>(() => DeleteRateMovieUseCase(sl()));
-  sl.registerLazySingleton<MarkMovieUsecase>(() => MarkMovieUsecase(sl()));
   ///repository
   sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
   ///date source
   sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
 }
-tv(){
+_tv(){
   ///usecases
-  sl.registerLazySingleton<GetTvShowsListUsecase>(() => GetTvShowsListUsecase(sl()));
   sl.registerLazySingleton<GetTvShowDetailsUsecase>(() => GetTvShowDetailsUsecase(sl()));
-  sl.registerLazySingleton<GetSimilarTvShowsUseCase>(() => GetSimilarTvShowsUseCase(sl()));
-  sl.registerLazySingleton<GetTvRecommendationsUseCase>(() => GetTvRecommendationsUseCase(sl()));
-  sl.registerLazySingleton<MarkTvShowUsecase>(() => MarkTvShowUsecase(sl()));
-  sl.registerLazySingleton<DeleteTvShowRateUseCase>(() => DeleteTvShowRateUseCase(sl()));
-  sl.registerLazySingleton<RateTvShowUseCase>(() => RateTvShowUseCase(sl()));
   sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(() => GetTvShowSeasonDetailsUsecase(sl()));
   ///repository
   sl.registerLazySingleton<TvRepository>(() => TvShowRepositoryImpl(sl(),sl()));
   ///data source
   sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(sl()));
 }
-reviews(){
+_reviews(){
   sl.registerLazySingleton<GetMediaReviewsUsecase>(() => GetMediaReviewsUsecase(sl()));
   sl.registerLazySingleton<ReviewsRepository>(() => ReviewsRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<ReviewsDataSource>(() => ReviewsDataSourceImpl(sl()));
 }
-credits(){
+_credits(){
   sl.registerLazySingleton<GetMediaCreditsUsecase>(() => GetMediaCreditsUsecase(sl()));
   sl.registerLazySingleton<CreditsRepository>(() => CreditsRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<CreditsDataSource>(() => CreditsDataSourceImpl(sl()));
+}
+_media(){
+  sl.registerLazySingleton<GetMediaListUsecase>(() => GetMediaListUsecase(sl()));
+  sl.registerLazySingleton<GetSimilarMediaListUsecase>(() => GetSimilarMediaListUsecase(sl()));
+  sl.registerLazySingleton<DeleteRateMediaUseCase>(() => DeleteRateMediaUseCase(sl()));
+  sl.registerLazySingleton<MarkMediaUsecase>(() => MarkMediaUsecase(sl()));
+  sl.registerLazySingleton<RateMediaUseCase>(() => RateMediaUseCase(sl()));
+  sl.registerLazySingleton<MediaRepository>(()=>MediaRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<MediaRemoteDataSource>(() => MediaRemoteDataSourceImpl(sl()));
 }

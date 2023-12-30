@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:mo3tv/core/entities/media_params.dart';
+import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/execute_and_handle_errors.dart';
 import 'package:mo3tv/core/network/network_info.dart';

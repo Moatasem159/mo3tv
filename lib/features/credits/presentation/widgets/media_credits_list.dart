@@ -8,7 +8,7 @@ import 'package:mo3tv/core/widgets/buttons/main_button.dart';
 import 'package:mo3tv/features/credits/domain/entities/cast.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/features/credits/presentation/widgets/cast_widget/cast_widget.dart';
-import 'package:mo3tv/features/movies/presentation/cubit/movie_bottomnav_cubit/movie_bottom_nav_cubit.dart';
+import 'package:mo3tv/features/media/presentation/cubits/media_bottomnav_cubit/media_bottom_nav_cubit.dart';
 class MediaCreditsList extends StatefulWidget {
   final List<CastMember> mediaCredits;
   const MediaCreditsList({super.key, required this.mediaCredits});
@@ -60,7 +60,7 @@ class _MediaCreditsListState extends State<MediaCreditsList> {
                     onPressed: (){
                       setState(() {
                         _page -= 1;
-                        MovieBottomNavCubit.get(context).resetList();
+                        MediaBottomNavCubit.get(context).resetList();
                       });
                     },
                     label: AppStrings.previous.tr(context)!),
@@ -73,7 +73,7 @@ class _MediaCreditsListState extends State<MediaCreditsList> {
                     onPressed: (){
                       setState(() {
                         _page += 1;
-                        MovieBottomNavCubit.get(context).resetList();
+                        MediaBottomNavCubit.get(context).resetList();
                       });
                     }, label: AppStrings.next.tr(context)!),
             ],

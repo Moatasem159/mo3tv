@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mo3tv/core/entities/media_params.dart';
+import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/features/gallery/domain/entities/gallery.dart';

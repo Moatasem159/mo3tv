@@ -1,6 +1,6 @@
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/entities/media_params.dart';
+import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/features/credits/data/models/cast_model.dart';
 abstract class CreditsDataSource{
   Future<List<CastMemberModel>> getMediaCredits(MediaParams params);
