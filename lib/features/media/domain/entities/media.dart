@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:mo3tv/features/media/domain/entities/keyword.dart';
 import 'package:mo3tv/features/media/data/models/media_account_details_model.dart';
 import 'package:mo3tv/features/media/data/models/network_model.dart';
-import 'package:mo3tv/features/video/domain/entities/video.dart';
+import 'package:mo3tv/features/media/domain/entities/video.dart';
 // ignore: must_be_immutable
 abstract class Media extends Equatable {
   final int id;

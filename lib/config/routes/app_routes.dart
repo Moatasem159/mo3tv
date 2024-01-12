@@ -24,7 +24,7 @@ import 'package:mo3tv/features/settings/presentation/screens/language_screen.dar
 import 'package:mo3tv/features/settings/presentation/screens/settings_screen.dart';
 import 'package:mo3tv/features/media/domain/entities/tv_show_season.dart';
 import 'package:mo3tv/features/media/presentation/screens/season_details_screen.dart';
-import 'package:mo3tv/features/video/presentation/screens/trailer_screen.dart';
+import 'package:mo3tv/features/media/presentation/screens/trailer_screen.dart';
 abstract class Routes {
   static const String movieRoute = "/";
   static const String tvRoute = "/tvRoute";

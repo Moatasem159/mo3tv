@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/media/presentation/cubits/get_media_details_cubit/get_media_details_cubit.dart';
 import 'package:mo3tv/features/media/presentation/cubits/media_bottomnav_cubit/media_bottom_nav_cubit.dart';
-import 'package:mo3tv/features/video/presentation/widgets/play_button_widget.dart';
+import 'package:mo3tv/features/media/presentation/widgets/trailer_widgets/play_button_widget.dart';
 class MediaPlayButton extends StatelessWidget {
   final double shrinkOffset;
   final String mediaType;

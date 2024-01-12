@@ -1,4 +1,4 @@
-import 'package:mo3tv/features/video/domain/entities/video.dart';
+import 'package:mo3tv/features/media/domain/entities/video.dart';
 class VideoModel extends Video {
   const VideoModel({
     required super.name,

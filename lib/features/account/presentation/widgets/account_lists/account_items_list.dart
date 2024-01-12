@@ -23,29 +23,15 @@ class AccountList extends StatelessWidget {
         }
         if(cubit.list.isEmpty&&cubit.totalPage>1)
         {
-            return const SliverToBoxAdapter();
+          return const SliverToBoxAdapter();
         }
         if(cubit.list.isEmpty)
         {
-          if(mediaType=="movies")
-          {
-            return const EmptyAccountList(type:AppStrings.noMovies);
-          }
-          else if(mediaType =="tv")
-            {
-              return const EmptyAccountList(type:AppStrings.noTvShows);
-            }
+          return EmptyAccountList(type:mediaType=="movies"?AppStrings.noMovies:AppStrings.noTvShows);
         }
         if(cubit.list.isNotEmpty)
         {
-          if(mediaType=="movies")
-          {
-            return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,mediaType:mediaType);
-          }
-           else if(mediaType =="tv")
-           {
-          return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,mediaType: mediaType);
-        }
+          return MediaVerticalList(mediaList: cubit.list as List<Media>,listType:listType,mediaType:mediaType);
         }
         if(state is GetAccountListsErrorState)
         {

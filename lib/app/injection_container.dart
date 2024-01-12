@@ -7,6 +7,7 @@ import 'package:mo3tv/config/themes/app_theme.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/app_interceptors.dart';
 import 'package:mo3tv/core/api/dio_consumer.dart';
+import 'package:mo3tv/core/repository/base_repository.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/core/shared/shared_prefrences.dart';
 import 'package:mo3tv/core/shared/shared_prefrences_consumer.dart';
@@ -72,6 +73,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   AppTheme.systemChrome();
   Bloc.observer=AppBlocObserver();
+   await _external();
   _media();
   _movie();
   _tv();
@@ -82,11 +84,10 @@ Future<void> init() async {
   _search();
   _login();
   _logout();
-  await _external();
   await sl<GetSavedSessionIdUsecase>().call();
 }
 _login(){
-      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl(),sl()));
+      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl(),sl(),sl()));
       sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
       sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
       sl.registerLazySingleton<LoginRemoteDataSource>(() => LoginRemoteDataSourceImpl(sl()));
@@ -104,6 +105,7 @@ Future _external()async{
   final sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton<BaseRepository>(() => BaseRepositoryImpl(sl()));
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl()));
   sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton<SharedPrefrencesConsumer>(() => SharedPrefrencesManager(sl()));

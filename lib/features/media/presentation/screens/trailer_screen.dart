@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mo3tv/features/video/presentation/widgets/youtube_video_player.dart';
+import 'package:mo3tv/features/media/presentation/widgets/trailer_widgets/youtube_video_player.dart';
 class TrailerScreen extends StatelessWidget {
   final String url;
   final String title;

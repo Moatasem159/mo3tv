@@ -35,7 +35,7 @@ class PlayingNowMedia extends StatelessWidget {
             return const _PlayingNowMediaLoadingCarousal();
           }
           if (state is GetMediaListSuccessState) {
-            return _MediaPlayingNowCarousal(media: state.media, isMovie: true);
+            return _MediaPlayingNowCarousal(media: state.media, mediaType: params.mediaType);
           }
           if (state is GetMediaListErrorState) {
             return PlayingNowMediaErrorCard(onPressed: () => GetMediaListCubit.get(context).getMediaList());

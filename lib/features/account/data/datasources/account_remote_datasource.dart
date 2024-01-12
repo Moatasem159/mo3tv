@@ -16,12 +16,6 @@ class AccountRemoteDataSourceImpl implements AccountRemoteDataSource{
   @override
   Future<AccountListModel> getAccountList(MediaParams params)async {
     final res=await _apiConsumer.get(EndPoints.accountMediaListPath(AppStrings.sessionId,params));
-    if(params.mediaType=='movies')
-      {
-        return AccountListModel.movieListFromJson(res);
-      }
-    else{
-      return AccountListModel.tvShowListFromJson(res);
-    }
+    return AccountListModel.fromJson(res);
   }
 }

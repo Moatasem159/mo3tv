@@ -1,7 +1,7 @@
 import 'package:mo3tv/features/media/data/models/keywords_model.dart';
 import 'package:mo3tv/features/media/data/models/media_account_details_model.dart';
 import 'package:mo3tv/features/media/data/models/network_model.dart';
-import 'package:mo3tv/features/video/data/video_model.dart';
+import 'package:mo3tv/features/media/data/models/video_model.dart';
 import 'package:mo3tv/features/media/data/models/tv_show_season_model.dart';
 import 'package:mo3tv/features/media/domain/entities/tv_show.dart';
 //ignore: must_be_immutable

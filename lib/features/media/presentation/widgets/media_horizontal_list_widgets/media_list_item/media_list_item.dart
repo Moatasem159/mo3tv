@@ -14,9 +14,9 @@ class MediaListItem extends StatelessWidget {
   final String listType;
   const MediaListItem({super.key, required this.media,this.listType='?',required this.mediaType});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return GestureDetector(
-      onTap: ()=>GoRouter.of(context).pushNamed(mediaType==AppStrings.movie?Routes.movieDetailsRoute:Routes.tvShowDetailsRoute,extra:media,pathParameters:{"listType":listType}),
+      onTap: ()=>GoRouter.of(context).pushNamed(mediaType==AppStrings.movie||mediaType=="movies"?Routes.movieDetailsRoute:Routes.tvShowDetailsRoute,extra:media,pathParameters:{"listType":listType}),
       child: CachedNetworkImage(
         imageUrl: EndPoints.posterUrl(media.posterPath),
         imageBuilder: (context, imageProvider)=>MediaImageBuilder(image: imageProvider),
