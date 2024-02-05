@@ -1,6 +1,5 @@
-import 'package:mo3tv/features/credits/domain/entities/cast.dart';
+part of'credits_cubit.dart';
 abstract class CreditsStates {}
-class CreditsInitialState extends CreditsStates {}
 class GetMediaCreditsLoadingState extends CreditsStates{}
 class GetMediaCreditsSuccessState extends CreditsStates{
   final List<CastMember> credits;

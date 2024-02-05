@@ -41,63 +41,60 @@ class MediaDetailsScreen extends StatelessWidget {
             MediaParams(mediaId: media.id,mediaType:mediaType,moreType: AppStrings.recommendations)
         )..getMoreMedia()),
       ],
-      child: Builder(builder: (context) {
-          return BlocBuilder<MediaBottomNavCubit, MediaBottomNavStates>(
-            builder: (context, state) {
-              MediaBottomNavCubit cubit = MediaBottomNavCubit.get(context);
-              return PopScope(
-                canPop: cubit.index==0?true:false,
-                onPopInvoked: (didPop) async {
-                  cubit.changeScreen(0);
-                },
-                child: DefaultTabController(
-                  length: 3,
-                  child: SafeArea(
-                    child: Scaffold(
-                      backgroundColor: Theme.of(context).colorScheme.background,
-                      bottomNavigationBar: const MediaBottomNavbar(),
-                      body: NestedScrollView(
-                        controller: cubit.nestedController,
-                        physics: const ClampingScrollPhysics(),
-                        scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
-                        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                          SliverOverlapAbsorber(
-                            handle: cubit.appBar,
-                            sliver: SliverPersistentHeader(
-                              pinned: true,
-                              delegate: MediaDetailsAppBar(
-                                mediaType: mediaType,
-                                media: media,
-                                onTap: cubit.resetList,
-                                onBackTap: () {
-                                  if (cubit.index != 0) {
-                                    cubit.changeScreen(0);
-                                  } else {
-                                    GoRouter.of(context).pop();
-                                  }
-                                },
-                              ),
-                            ),
+      child: BlocBuilder<MediaBottomNavCubit, MediaBottomNavStates>(
+        builder: (context, state) {
+          MediaBottomNavCubit cubit = MediaBottomNavCubit.get(context);
+          return PopScope(
+            canPop: cubit.index==0?true:false,
+            onPopInvoked: (didPop) async {
+              cubit.changeScreen(0);
+            },
+            child: DefaultTabController(
+              length: 3,
+              child: SafeArea(
+                child: Scaffold(
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  bottomNavigationBar: const MediaBottomNavbar(),
+                  body: NestedScrollView(
+                    controller: cubit.nestedController,
+                    physics: const ClampingScrollPhysics(),
+                    scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
+                    headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                      SliverOverlapAbsorber(
+                        handle: cubit.appBar,
+                        sliver: SliverPersistentHeader(
+                          pinned: true,
+                          delegate: MediaDetailsAppBar(
+                            mediaType: mediaType,
+                            media: media,
+                            onTap: cubit.resetList,
+                            onBackTap: () {
+                              if (cubit.index != 0) {
+                                cubit.changeScreen(0);
+                              } else {
+                                GoRouter.of(context).pop();
+                              }
+                            },
                           ),
-                          if (cubit.isGallery)
-                            SliverOverlapAbsorber(handle: cubit.disconnectBar, sliver: const GalleryTabBar()),
-                        ],
-                        body: CustomScrollView(
-                          scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
-                          slivers: [
-                            SliverOverlapInjector(handle: cubit.appBar),
-                            if (cubit.isGallery)
-                            SliverOverlapInjector(handle: cubit.disconnectBar),
-                            SliverToBoxAdapter(child: 15.ph),
-                            cubit.screens[cubit.index],
-                          ],
                         ),
                       ),
+                      if (cubit.isGallery)
+                      SliverOverlapAbsorber(handle: cubit.disconnectBar, sliver: const GalleryTabBar()),
+                    ],
+                    body: CustomScrollView(
+                      scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
+                      slivers: [
+                        SliverOverlapInjector(handle: cubit.appBar),
+                        if (cubit.isGallery)
+                        SliverOverlapInjector(handle: cubit.disconnectBar),
+                        SliverToBoxAdapter(child: 15.ph),
+                        cubit.screens[cubit.index],
+                      ],
                     ),
                   ),
                 ),
-              );
-            },
+              ),
+            ),
           );
         },
       ),

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/utils/app_assets.dart';
+part of'../../../screens/media_credits_screen.dart';
 class CastImagePlaceholder extends StatelessWidget {
   const CastImagePlaceholder({super.key});
   @override

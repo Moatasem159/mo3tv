@@ -22,6 +22,7 @@ class MediaProductionCompanyList extends StatelessWidget {
               alignment: WrapAlignment.center,
               children: productionCompanies.map((e)=> _MediaProductionCompany(company: e)).toList(),
             ),
+            10.ph
           ],
         );
       }

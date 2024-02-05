@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of'../../../screens/media_credits_screen.dart';
 class CastImageBuilder extends StatelessWidget {
   final ImageProvider<Object> imageProvider;
   const CastImageBuilder({super.key, required this.imageProvider});
