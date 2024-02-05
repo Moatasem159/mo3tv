@@ -1,7 +1,7 @@
-part of'review_widget.dart';
+part of'../../screens/media_reviews.dart';
 class _ReviewImage extends StatelessWidget {
   final Review review;
-  const _ReviewImage({required this.review});
+  const _ReviewImage(this.review);
   @override
   Widget build(BuildContext context) {
     List<Color>colors=[Colors.red,Colors.blue,Colors.yellow,Colors.teal,Colors.blueGrey,Colors.orange,Colors.indigo,];

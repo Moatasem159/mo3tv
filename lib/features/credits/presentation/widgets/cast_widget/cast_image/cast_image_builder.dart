@@ -1,7 +1,7 @@
 part of'../../../screens/media_credits_screen.dart';
-class CastImageBuilder extends StatelessWidget {
+class _CastImageBuilder extends StatelessWidget {
   final ImageProvider<Object> imageProvider;
-  const CastImageBuilder({super.key, required this.imageProvider});
+  const _CastImageBuilder(this.imageProvider);
   @override
   Widget build(BuildContext context) {
     return Container(

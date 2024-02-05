@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/features/reviews/presentation/widgets/reviews_loading_widgets/review_loading_widget.dart';
-class ReviewsLoadingList extends StatelessWidget {
-  const ReviewsLoadingList({super.key});
+part of'../../screens/media_reviews.dart';
+class _ReviewsLoadingList extends StatelessWidget {
+  const _ReviewsLoadingList();
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -12,9 +11,7 @@ class ReviewsLoadingList extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: 3,
-            itemBuilder: (context, index) {
-              return const ReviewLoadingWidget();
-            },
+            itemBuilder: (_,__) =>const _ReviewLoadingWidget()
           ),
         ],
       ),

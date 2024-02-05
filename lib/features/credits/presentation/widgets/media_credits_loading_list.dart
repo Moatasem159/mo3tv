@@ -1,6 +1,6 @@
 part of '../screens/media_credits_screen.dart';
-class MediaCreditsLoadingList extends StatelessWidget {
-  const MediaCreditsLoadingList({super.key});
+class _MediaCreditsLoadingList extends StatelessWidget {
+  const _MediaCreditsLoadingList();
   @override
   Widget build(BuildContext context) {
     return SliverGrid.builder(

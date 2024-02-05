@@ -1,6 +1,5 @@
-import 'package:mo3tv/features/reviews/domain/entities/review.dart';
+part of'reviews_cubit.dart';
 abstract class ReviewsStates {}
-class ReviewsInitialState extends ReviewsStates{}
 class GetMediaReviewsLoadingState extends ReviewsStates{}
 class GetMediaReviewsSuccessState extends ReviewsStates{
   final List<Review> reviews;

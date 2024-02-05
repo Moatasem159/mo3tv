@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:shimmer/shimmer.dart';
-class ReviewLoadingWidget extends StatelessWidget {
-  const ReviewLoadingWidget({super.key});
+part of'../../screens/media_reviews.dart';
+class _ReviewLoadingWidget extends StatelessWidget {
+  const _ReviewLoadingWidget();
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
@@ -36,7 +34,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                         color: Colors.grey
                     ),),
                 ),
-               5.pw,
+                5.pw,
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,20 +83,7 @@ class ReviewLoadingWidget extends StatelessWidget {
                 ),
               ],
             ),
-          7.ph,
-            Shimmer.fromColors(
-              baseColor: Colors.grey[700]!,
-              highlightColor: Colors.grey[600]!,
-              child: Container(
-                height:25,
-                width: 320,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.grey
-                ),
-              ),
-            ),
-          10.ph,
+            7.ph,
             Shimmer.fromColors(
               baseColor: Colors.grey[700]!,
               highlightColor: Colors.grey[600]!,
@@ -124,19 +109,6 @@ class ReviewLoadingWidget extends StatelessWidget {
                 ),
               ),
             ),
-            10.ph,
-            Shimmer.fromColors(
-              baseColor: Colors.grey[700]!,
-              highlightColor: Colors.grey[600]!,
-              child: Container(
-                height:25,
-                width: 320,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.grey
-                ),
-              ),
-            )
           ],
         ),
       ),

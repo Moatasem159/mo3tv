@@ -1,13 +1,13 @@
 part of'../../screens/media_credits_screen.dart';
-class CastMemberWidget extends StatelessWidget {
+class _CastMemberWidget extends StatelessWidget {
   final CastMember member;
-  const CastMemberWidget({super.key, required this.member});
+  const _CastMemberWidget(this.member);
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        CastImage(image: member.profilePath),
+        _CastImage(member.profilePath),
         Container(
           width: double.maxFinite,
           height: 45,

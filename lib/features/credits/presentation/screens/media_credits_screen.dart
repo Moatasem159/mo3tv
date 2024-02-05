@@ -22,13 +22,13 @@ class MediaCredits extends StatelessWidget {
     return BlocBuilder<CreditsCubit,CreditsStates>(
       builder: (context, state) {
         if (state is GetMediaCreditsSuccessState) {
-          return MediaCreditsList(mediaCredits: state.credits);
+          return _MediaCreditsList(state.credits);
         }
         if(state is GetMediaCreditsErrorState) {
             return SliverToBoxAdapter(
               child: ErrorButton(onTap: () => CreditsCubit.get(context).getMediaCredits()));
           }
-        return const MediaCreditsLoadingList();
+        return const _MediaCreditsLoadingList();
       },
     );
   }

@@ -1,7 +1,7 @@
-part of'review_widget.dart';
+part of'../../screens/media_reviews.dart';
 class _ReviewAuthorDetails extends StatelessWidget {
   final Review review;
-  const _ReviewAuthorDetails({required this.review});
+  const _ReviewAuthorDetails(this.review);
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -1,6 +1,6 @@
 part of'../../../screens/media_credits_screen.dart';
-class CastImagePlaceholder extends StatelessWidget {
-  const CastImagePlaceholder({super.key});
+class _CastImagePlaceholder extends StatelessWidget {
+  const _CastImagePlaceholder();
   @override
   Widget build(BuildContext context) {
     return Container(
