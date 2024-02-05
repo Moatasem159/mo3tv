@@ -37,12 +37,12 @@ class _ReviewAuthorDetails extends StatelessWidget {
           ),
         ),
         FittedBox(
-          child: Text("Written By ${review.authorDetails.name == '' ?
+          child: Text("${AppStrings.writtenBY.tr(context)!} ${review.authorDetails.name == '' ?
           review.authorDetails.username :
           review.authorDetails.name}",style: AppTextStyles.get10NormalText()),
         ),
         2.ph,
-        Text("on ${review.createdAt.substring(0,10)}",style:AppTextStyles.get10NormalText())
+        Text("${AppStrings.on.tr(context)!} ${review.createdAt.substring(0,10)}",style:AppTextStyles.get10NormalText())
       ],
     );
   }

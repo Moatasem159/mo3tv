@@ -103,4 +103,6 @@ abstract class AppStrings {
   static const String changeLangDialog="change_lang_dialog";
   static const String agree="agree";
   static const String disagree="disagree";
+  static const String writtenBY="written_by";
+  static const String on="on";
 }
