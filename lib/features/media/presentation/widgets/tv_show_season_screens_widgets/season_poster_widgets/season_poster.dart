@@ -16,10 +16,11 @@ class SeasonPoster extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).pushNamed(
+        context.pushNamed(
           Routes.seasonRoute,
           extra: season,
           pathParameters: {
+            "listType":"?",
             "tvShowName": tvShowName,
             "tvShowId":tvShowId.toString(),
           },

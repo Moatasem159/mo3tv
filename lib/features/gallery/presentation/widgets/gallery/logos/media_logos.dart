@@ -8,7 +8,8 @@ import 'package:mo3tv/features/gallery/presentation/widgets/empty_image_list.dar
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/logos/media_logos_list.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/logos/media_logos_loading_list.dart';
 class MediaLogos extends StatelessWidget {
-  const MediaLogos({super.key});
+  final String mediaType;
+  const MediaLogos({super.key, required this.mediaType});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryCubit, GalleryStates>(
@@ -19,7 +20,7 @@ class MediaLogos extends StatelessWidget {
           }
         if(state is GetMediaGallerySuccessState)
         {
-          return MediaLogosList(logos: state.gallery.logos);
+          return MediaLogosList(mediaType: mediaType,logos: state.gallery.logos);
         }
         if(state is GetMediaGalleryLoadingState)
           {

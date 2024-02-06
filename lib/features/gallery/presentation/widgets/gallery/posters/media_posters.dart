@@ -8,7 +8,8 @@ import 'package:mo3tv/features/gallery/presentation/widgets/empty_image_list.dar
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/posters/media_posters_list.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/posters/media_posters_loading_list.dart';
 class MediaPosters extends StatelessWidget {
-  const MediaPosters({super.key});
+  final String mediaType;
+  const MediaPosters({super.key, required this.mediaType});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryCubit, GalleryStates>(
@@ -19,7 +20,7 @@ class MediaPosters extends StatelessWidget {
         }
         if(state is GetMediaGallerySuccessState)
         {
-          return MediaPostersList(posters: state.gallery.posters);
+          return MediaPostersList(mediaType:mediaType,posters: state.gallery.posters);
         }
         if(state is GetMediaGalleryLoadingState)
         {

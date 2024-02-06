@@ -23,10 +23,10 @@ class LoginButton extends StatelessWidget {
             showDialog(context: context, builder: (context) => const LoginDialog());
           }
           if (state is GetTokenSuccessState) {
-            GoRouter.of(context).pushNamed(Routes.loginRoute, extra: LogCubit.get(context).token);
+            context.pushNamed(Routes.loginRoute, extra: LogCubit.get(context).token);
           }
           if (state is LogOutSuccessState) {
-            GoRouter.of(context).goNamed(Routes.movieRoute);
+            context.goNamed(Routes.movieRoute);
           }
         },
         builder: (context, state) {

@@ -9,7 +9,8 @@ import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/image_list_title.dart';
 class BackdropsList extends StatefulWidget {
   final List<ImageEntity> backdrops;
-  const BackdropsList({super.key, required this.backdrops});
+  final String mediaType;
+  const BackdropsList({super.key, required this.backdrops, required this.mediaType});
   @override
   State<BackdropsList> createState() => _BackdropsListState();
 }
@@ -32,7 +33,7 @@ class _BackdropsListState extends State<BackdropsList> {
           delegate: SliverChildBuilderDelegate(
             childCount: widget.backdrops.length>10? pagination(widget.backdrops,_page,_perPage).length:widget.backdrops.length,
                 (context, index) {
-              return GalleryImage(image:widget.backdrops.length>10? pagination(widget.backdrops,_page,_perPage)[index]:
+              return GalleryImage(mediaType: widget.mediaType,image:widget.backdrops.length>10? pagination(widget.backdrops,_page,_perPage)[index]:
               widget.backdrops[index]);
             },
           ),

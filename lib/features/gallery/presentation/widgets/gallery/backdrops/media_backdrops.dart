@@ -8,7 +8,8 @@ import 'package:mo3tv/features/gallery/presentation/widgets/empty_image_list.dar
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/backdrops/backdrop_list.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery/backdrops/backdrops_loading_list.dart';
 class MediaBackdrops extends StatelessWidget {
-  const MediaBackdrops({super.key});
+  final String mediaType;
+  const MediaBackdrops({super.key, required this.mediaType});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GalleryCubit, GalleryStates>(
@@ -19,7 +20,7 @@ class MediaBackdrops extends StatelessWidget {
         }
         if(state is GetMediaGallerySuccessState)
         {
-          return BackdropsList(backdrops:state.gallery.backdrops);
+          return BackdropsList(backdrops:state.gallery.backdrops,mediaType: mediaType);
         }
         if(state is GetMediaGalleryLoadingState)
         {

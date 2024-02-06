@@ -6,7 +6,7 @@ import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/network/network_info.dart';
 import 'package:mo3tv/features/connectivity/presentation/cubits/check_connectivity_state.dart';
 import 'package:restart_app/restart_app.dart';
-class CheckConnectivityCubit extends Cubit<CheckConnectivityStates> {
+class CheckConnectivityCubit extends Cubit<CheckConnectivityStates>{
   CheckConnectivityCubit(this._networkInfo) : super(CheckConnectivityInitialState()){
     location='';
   }
@@ -48,7 +48,7 @@ class CheckConnectivityCubit extends Cubit<CheckConnectivityStates> {
           }
         else{
           location='';
-        GoRouter.of(context).pop();
+          context.pop();
         }
       }
 }

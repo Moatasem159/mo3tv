@@ -6,8 +6,10 @@ class _MediaPlayingNowCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>GoRouter.of(context).pushNamed(mediaType==AppStrings.movie?Routes.movieDetailsRoute:Routes.tvShowDetailsRoute,extra: media,pathParameters: {"listType":"?"}),
-      child:CachedNetworkImage(
+        onTap: () => context.pushNamed(mediaType == AppStrings.movie ? Routes.movieDetailsRoute : Routes.tvShowDetailsRoute,
+            extra: media,
+            pathParameters: {"listType": "?","mediaType":mediaType}),
+        child:CachedNetworkImage(
         imageUrl: EndPoints.backDropsUrl(media.backdropPath),
         imageBuilder: (context, imageProvider) =>_MediaPlayingNowCardBuilder(media: media,image: imageProvider),
         placeholder:(context, url) => const _PlayingNowMediaLoadingCard()));

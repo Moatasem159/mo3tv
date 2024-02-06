@@ -30,7 +30,7 @@ class MediaDetailsScreen extends StatelessWidget {
           mediaType: mediaType,listType: listType
         )..initScreens()),
         BlocProvider(create: (context) => GetMediaDetailsCubit(di.sl(),di.sl(),MediaParams(mediaId: media.id,mediaType: mediaType))..getMovieDetailsData()),
-        BlocProvider(create: (context) => GalleryNavigatorCubit()),
+        BlocProvider(create: (context) => GalleryNavigatorCubit()..mediaType=mediaType..initGallery()),
         BlocProvider(create: (context) => MediaActionsBloc(di.sl(), di.sl(), di.sl())),
         BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=media.id..mediaType=mediaType..getMediaGallery()),
         BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=media.id..mediaType=mediaType..getMediaReviews()),
@@ -72,7 +72,7 @@ class MediaDetailsScreen extends StatelessWidget {
                               if (cubit.index != 0) {
                                 cubit.changeScreen(0);
                               } else {
-                                GoRouter.of(context).pop();
+                                context.pop();
                               }
                             },
                           ),

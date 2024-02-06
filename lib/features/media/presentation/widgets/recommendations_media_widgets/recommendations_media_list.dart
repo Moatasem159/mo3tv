@@ -26,9 +26,9 @@ class RecommendationsMediaList extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                GoRouter.of(context).pushNamed(Routes.similarMediaRoute,
-                    extra: recommendationMedia,
-                    pathParameters: {"params": params.toJson()});
+                context.pushNamed(params.mediaType == AppStrings.movie?Routes.similarMoviesRoute:Routes.similarTvShowRoute,
+                        extra: recommendationMedia,
+                        pathParameters: {"params": params.toJson(),"listType":"?","mediaType":params.mediaType});
               },
               child: Row(
                 children: [

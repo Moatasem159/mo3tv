@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/media/presentation/widgets/media_over_view_widgets/keywords_widgets/genres_widget.dart';
 import 'package:mo3tv/features/media/presentation/widgets/media_over_view_widgets/media_buttons/media_buttons_widget.dart';
 import 'package:mo3tv/features/media/domain/entities/movie.dart';
@@ -14,7 +15,7 @@ class MovieOverViewSuccessBody extends StatelessWidget {
       delegate: SliverChildListDelegate(
         [
           MovieDetailsWidget(movie: movie),
-          GenresWidget(genres: movie.genres, runTime: movie.runtime, link: movie.homepage),
+          GenresWidget(genres: movie.genres, runTime: movie.runtime, link: movie.homepage,mediaType: AppStrings.movie),
           MediaButtonsWidget(listType: listType, movie: movie),
           MovieDescriptionWidget(movie: movie),
         ],

@@ -30,8 +30,8 @@ class MediaSearchWidget extends StatelessWidget {
             posterPath: mediaSearch.posterPath,
             backdropPath: mediaSearch.backdropPath,
           );
-          GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,
-              extra: m, pathParameters: {"listType": "?"});
+          context.pushNamed(Routes.movieDetailsRoute,
+              extra: m, pathParameters: {"listType": "?", "mediaType": AppStrings.movie});
         } else if (mediaSearch.mediaType == AppStrings.tv) {
           TvShow tv = TvShow(
             id: mediaSearch.id,
@@ -40,8 +40,8 @@ class MediaSearchWidget extends StatelessWidget {
             posterPath: mediaSearch.posterPath,
             backdropPath: mediaSearch.backdropPath,
           );
-          GoRouter.of(context).pushNamed(Routes.tvShowDetailsRoute,
-              extra: tv, pathParameters: {"listType": "?"});
+          context.pushNamed(Routes.tvShowDetailsRoute,
+              extra: tv, pathParameters: {"listType": "?","mediaType":AppStrings.tv});
         }
       },
       child: Container(

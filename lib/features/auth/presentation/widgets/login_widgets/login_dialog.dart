@@ -14,8 +14,8 @@ class LoginDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed:(){
-            GoRouter.of(context).pop();
-            GoRouter.of(context).goNamed(Routes.movieRoute);
+            context.pop();
+            context.goNamed(Routes.movieRoute);
           },
           child:Text(AppStrings.ok.tr(context)!,style: AppTextStyles.get14NormalText()),
         )

@@ -7,14 +7,20 @@ import 'package:mo3tv/features/gallery/presentation/widgets/gallery/posters/medi
 class GalleryNavigatorCubit extends Cubit<GalleryNavigatorStates> {
   GalleryNavigatorCubit() : super(GalleryNavigatorInitialState()){
     index=0;
+    mediaType='';
+    galleryList=[];
   }
   static GalleryNavigatorCubit get(context)=>BlocProvider.of(context);
   late int index;
-  List<Widget> movieGalleryList=[
-    const MediaBackdrops(),
-    const MediaPosters(),
-    const MediaLogos(),
-  ];
+  late String mediaType;
+  late List<Widget> galleryList;
+  initGallery(){
+    galleryList=[
+      MediaBackdrops(mediaType:mediaType),
+      MediaPosters(mediaType:mediaType),
+      MediaLogos(mediaType:mediaType),
+    ];
+  }
   gallery(value){
     index=value;
     emit(ChangeGallerySuccessState());

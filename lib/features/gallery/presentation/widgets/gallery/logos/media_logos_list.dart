@@ -9,7 +9,8 @@ import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
 import 'package:mo3tv/features/gallery/presentation/widgets/image_list_title.dart';
 class MediaLogosList extends StatefulWidget {
   final List<ImageEntity> logos;
-  const MediaLogosList({super.key, required this.logos});
+  final String mediaType;
+  const MediaLogosList({super.key, required this.logos, required this.mediaType});
   @override
   State<MediaLogosList> createState() => _MediaLogosListState();
 }
@@ -46,7 +47,7 @@ class _MediaLogosListState extends State<MediaLogosList> {
           delegate: SliverChildBuilderDelegate(
             childCount:_logos.length>4? pagination(_logos,_page,_perPage).length:_logos.length,
                 (context, index) {
-                  return GalleryImage(image:_logos.length>4? pagination(_logos,_page,_perPage)[index]:
+                  return GalleryImage(mediaType: widget.mediaType,image:_logos.length>4? pagination(_logos,_page,_perPage)[index]:
                   _logos[index]);
           }
         ),

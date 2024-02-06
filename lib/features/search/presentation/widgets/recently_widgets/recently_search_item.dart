@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/media/data/models/media_account_details_model.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/media/domain/entities/movie.dart';
@@ -41,7 +42,7 @@ class RecentlySearchItem extends StatelessWidget {
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );
-          GoRouter.of(context).pushNamed(Routes.movieDetailsRoute,extra:m,pathParameters:{"listType":"?"});
+          context.pushNamed(Routes.movieDetailsRoute,extra:m,pathParameters:{"listType":"?","mediaType":AppStrings.movie});
         }
         else if(search.mediaType=="tv"){
           TvShow tv=TvShow(
@@ -51,7 +52,7 @@ class RecentlySearchItem extends StatelessWidget {
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );
-          GoRouter.of(context).pushNamed(Routes.tvShowDetailsRoute, extra: tv,pathParameters: {"listType":"?"});
+          context.pushNamed(Routes.tvShowDetailsRoute, extra: tv,pathParameters: {"listType":"?","mediaType":AppStrings.tv});
         }
       },
       child: Container(

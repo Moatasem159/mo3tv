@@ -44,7 +44,7 @@ class _AccountListWidgetState extends State<AccountListWidget> {
       onTap: () {
         if(AppStrings.sessionId!='')
           {
-            GoRouter.of(context).pushNamed(Routes.accountMediaLists,
+            context.pushNamed(Routes.accountMediaLists,
                 pathParameters: {"title":widget.title, "mediaType":widget.mediaType,"listType":widget.listType});
             AccountListsCubit.get(context).getAccountList(mediaType: widget.mediaType,listType:widget.listType);
           }

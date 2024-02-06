@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/media/domain/entities/keyword.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
@@ -10,7 +11,8 @@ class GenresWidget extends StatefulWidget {
   final List<Keyword> genres;
   final num runTime;
   final String link;
-  const GenresWidget({super.key, required this.genres, required this.runTime, required this.link});
+  final String mediaType;
+  const GenresWidget({super.key, required this.genres, required this.runTime, required this.link, required this.mediaType});
   @override
   State<GenresWidget> createState() => _GenresWidgetState();
 }
@@ -59,7 +61,9 @@ class _GenresWidgetState extends State<GenresWidget> with SingleTickerProviderSt
                           8.pw,
                           if(widget.link!="")
                           GestureDetector(
-                            onTap:() => GoRouter.of(context).pushNamed( Routes.mediaWebPageRoute,pathParameters:{
+                            onTap:() => context.pushNamed( widget.mediaType==AppStrings.movie?Routes.movieWebPageRoute:Routes.tvShowWebPageRoute,pathParameters:{
+                              "listType":"?",
+                              "mediaType":widget.mediaType,
                               "link":widget.link}),
                               child: const Icon(Icons.link_rounded))
                         ],)

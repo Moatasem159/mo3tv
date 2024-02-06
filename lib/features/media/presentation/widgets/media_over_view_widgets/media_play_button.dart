@@ -19,6 +19,7 @@ class MediaPlayButton extends StatelessWidget {
                 if (mediaType==AppStrings.movie) {
                   if (GetMediaDetailsCubit.get(context).movie.trailer != null) {
                     return PlayButtonWidget(
+                      mediaType: mediaType,
                       url: GetMediaDetailsCubit.get(context).movie.trailer!.key,
                       name:
                           GetMediaDetailsCubit.get(context).movie.trailer!.name,
@@ -28,6 +29,7 @@ class MediaPlayButton extends StatelessWidget {
                 }else {
                   if (GetMediaDetailsCubit.get(context).tvShow.trailer != null) {
                     return PlayButtonWidget(
+                      mediaType: mediaType,
                       url: GetMediaDetailsCubit.get(context).tvShow.trailer!.key,
                       name:
                       GetMediaDetailsCubit.get(context).tvShow.trailer!.name,

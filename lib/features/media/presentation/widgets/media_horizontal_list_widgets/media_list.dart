@@ -36,9 +36,12 @@ class MediaList extends StatelessWidget {
               mediaType: params.mediaType,
               title: params.listTitle,
               onPressed: () {
-                GoRouter.of(context).pushNamed(Routes.seeMoreMediaRoute,
-                  extra: state.media,
-                  pathParameters: {"params":params.toJson()});
+                params.mediaType == AppStrings.movie
+                    ? context.pushNamed(Routes.seeMoreMoviesRoute,
+                        extra: state.media,pathParameters:{"params": params.toJson()})
+                    : context.pushNamed(Routes.seeMoreTvShowsRoute,
+                        extra: state.media,
+                        pathParameters: {"params": params.toJson()});
               },
             );
           }
