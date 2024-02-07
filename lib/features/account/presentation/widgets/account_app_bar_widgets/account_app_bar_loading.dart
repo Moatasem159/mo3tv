@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
-class AccountAppBarLoadingWidget extends StatelessWidget {
-  const AccountAppBarLoadingWidget({super.key});
+part of'../../screens/account_screen.dart';
+class _AccountAppBarLoadingWidget extends StatelessWidget {
+  const _AccountAppBarLoadingWidget();
   @override
   Widget build(BuildContext context) {
     return Row(

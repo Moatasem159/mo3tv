@@ -1,31 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
-import 'package:mo3tv/config/routes/app_routes.dart';
-import 'package:mo3tv/core/extension/custom_padding_extension.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/auth/presentation/widgets/login_widgets/login_alert.dart';
-class AccountListWidget extends StatefulWidget{
+part of'../screens/account_screen.dart';
+class _AccountListWidget extends StatefulWidget{
   final String image;
   final IconData icon;
   final Color iconColor;
   final String title;
   final String mediaType;
   final String listType;
-  const AccountListWidget(
-      {super.key,
-      required this.image,
+  const _AccountListWidget(
+      {required this.image,
       required this.icon,
       required this.iconColor,
       required this.title,
       required this.mediaType,
       required this.listType});
   @override
-  State<AccountListWidget> createState() => _AccountListWidgetState();
+  State<_AccountListWidget> createState() => _AccountListWidgetState();
 }
-class _AccountListWidgetState extends State<AccountListWidget> {
+class _AccountListWidgetState extends State<_AccountListWidget> {
   AssetImage ?assetImage;
   @override
   void initState() {
@@ -61,8 +52,7 @@ class _AccountListWidgetState extends State<AccountListWidget> {
               Colors.transparent,
             ],
             stops: [0, 0.5, 0.5, 1],
-          )
-              .createShader(
+          ).createShader(
             Rect.fromLTRB(0, 0, rect.width, rect.height),
           );
         },

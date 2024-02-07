@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/media/domain/entities/media.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
-import 'package:mo3tv/core/widgets/custom_app_bar.dart';
 import 'package:mo3tv/core/widgets/media_vertical_list/media_vertical_list.dart';
 import 'package:mo3tv/core/widgets/media_vertical_list/sliver_loading_indicator.dart';
 import 'package:mo3tv/features/media/presentation/cubits/get_more_media_cubit/get_more_media_cubit.dart';
@@ -21,21 +20,22 @@ class SeeMoreMediaScreenBody extends StatelessWidget {
       controller: controller,
       scrollBehavior: const ScrollBehavior().copyWith(overscroll: false),
       slivers: [
-        CustomAppBar(
-          title: listTitle.tr(context)!,
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
+        SliverAppBar(
+          leadingWidth: 50,
+          toolbarHeight: 50,
+          snap: true,
+          floating: true,
+          stretch: true,
+          leading:IconButton(onPressed:context.pop, icon: const Icon(Icons.arrow_back,size: 20)),
+          title: Text(listTitle.tr(context)!,style: AppTextStyles.get14BoldText()),
         ),
-        SliverToBoxAdapter(child: 7.ph),
         BlocBuilder<GetMoreMediaCubit, GetMoreMediaStates>(
           builder: (context, state) {
             GetMoreMediaCubit cubit = GetMoreMediaCubit.get(context);
             if (cubit.mediaList.isEmpty) {
               cubit.mediaList.addAll(media);
             }
-            return MediaVerticalList(
-                mediaList: cubit.mediaList, mediaType: mediaType);
+            return MediaVerticalList(mediaList: cubit.mediaList, mediaType: mediaType);
           },
         ),
         BlocBuilder<GetMoreMediaCubit, GetMoreMediaStates>(

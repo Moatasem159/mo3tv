@@ -1,11 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/account/domain/entities/account.dart';
-class AccountAppBarWidget extends StatelessWidget {
+part of'../../screens/account_screen.dart';
+class _AccountAppBarWidget extends StatelessWidget {
   final Account account;
-  const AccountAppBarWidget({super.key, required this.account});
+  const _AccountAppBarWidget(this.account);
   @override
   Widget build(BuildContext context) {
     return Row(

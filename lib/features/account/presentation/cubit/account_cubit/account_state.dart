@@ -1,7 +1,5 @@
-import 'package:mo3tv/features/account/data/models/account_model.dart';
-import 'package:mo3tv/features/account/domain/entities/account.dart';
+part of"account_cubit.dart";
 abstract class AccountStates {}
-class AccountInitialState extends AccountStates {}
 class GetAccountsDetailsLoadingState extends AccountStates {}
 class GetAccountsDetailsSuccessState extends AccountStates {
   final Account account;

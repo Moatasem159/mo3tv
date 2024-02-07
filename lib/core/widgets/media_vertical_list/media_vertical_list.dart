@@ -8,12 +8,9 @@ class MediaVerticalList extends StatelessWidget {
   const MediaVerticalList({super.key, required this.mediaList,this.listType='?', required this.mediaType});
   @override
   Widget build(BuildContext context) {
-    return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: .65,
-          crossAxisCount: 3,
-          mainAxisSpacing: 7),
-      delegate: SliverChildBuilderDelegate(childCount: mediaList.length,
-        (context, index) =>MediaListItem(media: mediaList[index],listType:listType,mediaType:mediaType)));
+    return SliverGrid.builder(
+      itemCount:mediaList.length,
+      itemBuilder: (context, index) => MediaListItem(media: mediaList[index],listType:listType,mediaType:mediaType),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .65,crossAxisCount: 3,mainAxisSpacing: 7));
   }
 }

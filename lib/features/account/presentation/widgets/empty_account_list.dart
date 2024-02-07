@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-class EmptyAccountList extends StatelessWidget {
+part of'../screens/account_media_list_screen.dart';
+class _EmptyAccountList extends StatelessWidget {
   final String type;
-  const EmptyAccountList({super.key, required this.type});
+  const _EmptyAccountList(this.type);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
