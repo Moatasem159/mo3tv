@@ -6,7 +6,6 @@ import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 import 'package:mo3tv/features/auth/presentation/widgets/login_widgets/login_alert.dart';
 class AccountListWidget extends StatefulWidget{
   final String image;
@@ -44,9 +43,7 @@ class _AccountListWidgetState extends State<AccountListWidget> {
       onTap: () {
         if(AppStrings.sessionId!='')
           {
-            context.pushNamed(Routes.accountMediaLists,
-                pathParameters: {"title":widget.title, "mediaType":widget.mediaType,"listType":widget.listType});
-            AccountListsCubit.get(context).getAccountList(mediaType: widget.mediaType,listType:widget.listType);
+            context.pushNamed(Routes.accountMediaLists,pathParameters: {"title":widget.title, "mediaType":widget.mediaType,"listType":widget.listType});
           }
         else{
           showDialog(context: context, builder:(context) => const LoginAlert());

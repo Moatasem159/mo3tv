@@ -18,6 +18,7 @@ part 'media_fav_button.dart';
 part 'user_score_widget.dart';
 part 'media_rating_button.dart';
 part 'add_media_to_watchlist_button.dart';
+part 'rating_dailog.dart';
 class MediaButtonsWidget extends StatefulWidget {
   final Media movie;
   final String listType;

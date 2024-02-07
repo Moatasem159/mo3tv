@@ -28,7 +28,7 @@ class RecommendationsMediaList extends StatelessWidget {
               onTap: () {
                 context.pushNamed(params.mediaType == AppStrings.movie?Routes.similarMoviesRoute:Routes.similarTvShowRoute,
                         extra: recommendationMedia,
-                        pathParameters: {"params": params.toJson(),"listType":"?","mediaType":params.mediaType});
+                        pathParameters: {"params": params.toJson()});
               },
               child: Row(
                 children: [

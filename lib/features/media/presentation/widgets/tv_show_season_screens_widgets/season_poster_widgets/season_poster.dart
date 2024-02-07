@@ -20,7 +20,6 @@ class SeasonPoster extends StatelessWidget {
           Routes.seasonRoute,
           extra: season,
           pathParameters: {
-            "listType":"?",
             "tvShowName": tvShowName,
             "tvShowId":tvShowId.toString(),
           },

@@ -8,6 +8,7 @@ import 'package:mo3tv/core/extension/custom_padding_extension.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
+import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/features/media/domain/entities/movie.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
@@ -30,8 +31,7 @@ class MediaSearchWidget extends StatelessWidget {
             posterPath: mediaSearch.posterPath,
             backdropPath: mediaSearch.backdropPath,
           );
-          context.pushNamed(Routes.movieDetailsRoute,
-              extra: m, pathParameters: {"listType": "?", "mediaType": AppStrings.movie});
+          context.pushNamed(Routes.movieDetailsRoute,extra: DetailsParams(media: m, listType: "?", mediaType: AppStrings.movie));
         } else if (mediaSearch.mediaType == AppStrings.tv) {
           TvShow tv = TvShow(
             id: mediaSearch.id,
@@ -40,8 +40,7 @@ class MediaSearchWidget extends StatelessWidget {
             posterPath: mediaSearch.posterPath,
             backdropPath: mediaSearch.backdropPath,
           );
-          context.pushNamed(Routes.tvShowDetailsRoute,
-              extra: tv, pathParameters: {"listType": "?","mediaType":AppStrings.tv});
+          context.pushNamed(Routes.tvShowDetailsRoute,extra: DetailsParams(media: tv, listType: "?", mediaType: AppStrings.tv));
         }
       },
       child: Container(

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/app/injection_container.dart' as di;
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/features/media/domain/entities/media.dart';
 import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/media/presentation/widgets/media_over_view_widgets/media_details_appbar.dart';
@@ -18,27 +17,23 @@ import 'package:mo3tv/features/media/presentation/widgets/media_bottom_nav_bar_w
 import 'package:mo3tv/features/gallery/presentation/widgets/gallery_tab_bar.dart';
 import 'package:mo3tv/features/reviews/presentation/cubits/reviews_cubit.dart';
 class MediaDetailsScreen extends StatelessWidget {
-  final Media media;
-  final String listType;
-  final String mediaType;
-  const MediaDetailsScreen({super.key, required this.media,this.listType='?', required this.mediaType});
+  final DetailsParams media;
+  const MediaDetailsScreen({super.key, required this.media});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => MediaBottomNavCubit()..media = media..params = MediaParams(
-          mediaType: mediaType,listType: listType
+        BlocProvider(create: (context) => MediaBottomNavCubit()..media = media.media..params = MediaParams(
+          mediaType: media.mediaType,listType: media.listType
         )..initScreens()),
-        BlocProvider(create: (context) => GetMediaDetailsCubit(di.sl(),di.sl(),MediaParams(mediaId: media.id,mediaType: mediaType))..getMovieDetailsData()),
-        BlocProvider(create: (context) => GalleryNavigatorCubit()..mediaType=mediaType..initGallery()),
-        BlocProvider(create: (context) => MediaActionsBloc(di.sl(), di.sl(), di.sl())),
-        BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=media.id..mediaType=mediaType..getMediaGallery()),
-        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=media.id..mediaType=mediaType..getMediaReviews()),
-        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=media.id..mediaType=mediaType..getMediaCredits()),
-        BlocProvider( create: (context)=> GetMoreMediaCubit(
-            di.sl(),
-            di.sl(),
-            MediaParams(mediaId: media.id,mediaType:mediaType,moreType: AppStrings.recommendations)
+        BlocProvider(create: (context) => GetMediaDetailsCubit(di.sl(),di.sl(),MediaParams(mediaId: media.media.id,mediaType: media.mediaType))..getMovieDetailsData()),
+        BlocProvider(create: (context) => GalleryNavigatorCubit()..mediaType=media.mediaType..initGallery()),
+        BlocProvider(create: (context) => MediaActionsBloc(di.sl(), di.sl(), di.sl())..mediaType=media.mediaType),
+        BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=media.media.id..mediaType=media.mediaType..getMediaGallery()),
+        BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=media.media.id..mediaType=media.mediaType..getMediaReviews()),
+        BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=media.media.id..mediaType=media.mediaType..getMediaCredits()),
+        BlocProvider( create: (context)=> GetMoreMediaCubit(di.sl(),di.sl(),
+            MediaParams(mediaId: media.media.id,mediaType:media.mediaType,moreType: AppStrings.recommendations)
         )..getMoreMedia()),
       ],
       child: BlocBuilder<MediaBottomNavCubit, MediaBottomNavStates>(
@@ -65,8 +60,8 @@ class MediaDetailsScreen extends StatelessWidget {
                         sliver: SliverPersistentHeader(
                           pinned: true,
                           delegate: MediaDetailsAppBar(
-                            mediaType: mediaType,
-                            media: media,
+                            mediaType: media.mediaType,
+                            media: media.media,
                             onTap: cubit.resetList,
                             onBackTap: () {
                               if (cubit.index != 0) {

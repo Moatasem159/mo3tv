@@ -4,7 +4,6 @@ import 'package:mo3tv/features/media/domain/entities/media.dart';
 import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/core/entities/message.dart';
 import 'package:mo3tv/core/error/failure.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/media/domain/usecases/delete_rate_media_usecase.dart';
 import 'package:mo3tv/features/media/domain/usecases/mark_media_usecase.dart';
 import 'package:mo3tv/features/media/domain/usecases/rate_media_usecase.dart';
@@ -26,6 +25,7 @@ class MediaActionsBloc extends Bloc<MediaActionsEvents, MediaActionsStates>{
   }
   static MediaActionsBloc get(context)=>BlocProvider.of(context);
   late Media media;
+  late String mediaType;
   Future<void> rateMedia(emit,double rate)async{
     emit(ActionLoadingState());
     bool watchList= media.mediaAccountDetails!.watchlist;
@@ -33,12 +33,12 @@ class MediaActionsBloc extends Bloc<MediaActionsEvents, MediaActionsStates>{
     Either<Failure, Message> response;
     if(rate>0) {
       media.mediaAccountDetails!.watchlist = false;
-      response=await _rateMediaUseCase.call(MediaParams(rate: rate ,mediaId: media.id,mediaType: AppStrings.movie));
+      response=await _rateMediaUseCase.call(MediaParams(rate: rate ,mediaId: media.id,mediaType: mediaType));
     }
     else{
       media.mediaAccountDetails!.ratedValue=0.0;
       media.mediaAccountDetails!.watchlist = false;
-      response =await _deleteRateMediaUseCase.call(MediaParams(mediaId: media.id,mediaType: AppStrings.movie));
+      response =await _deleteRateMediaUseCase.call(MediaParams(mediaId: media.id,mediaType: mediaType));
     }
     emit(response.fold(
             (l){
@@ -51,7 +51,7 @@ class MediaActionsBloc extends Bloc<MediaActionsEvents, MediaActionsStates>{
   Future<void> favMedia(emit, bool fav)async{
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markMediaUsecase.call(MediaParams(mediaId: media.id, mediaType: AppStrings.movie,mark: fav,markType:'favorite'));
+    await _markMediaUsecase.call(MediaParams(mediaId: media.id, mediaType: mediaType,mark: fav,markType:'favorite'));
     emit(response.fold(
         (l){
           media.mediaAccountDetails!.favorite= !media.mediaAccountDetails!.favorite;
@@ -62,7 +62,7 @@ class MediaActionsBloc extends Bloc<MediaActionsEvents, MediaActionsStates>{
   Future<void> addMediaToWatchList(emit, bool add) async {
     emit(ActionLoadingState());
     Either<Failure, Message> response =
-    await _markMediaUsecase.call( MediaParams(mediaId: media.id, mediaType: AppStrings.movie,mark: add,markType:'watchlist'));
+    await _markMediaUsecase.call( MediaParams(mediaId: media.id, mediaType: mediaType,mark: add,markType:'watchlist'));
     emit(response.fold(
             (l){
               media.mediaAccountDetails!.watchlist= !media.mediaAccountDetails!.watchlist;

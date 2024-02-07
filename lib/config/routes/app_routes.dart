@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/features/auth/domain/entities/token.dart';
@@ -25,6 +26,7 @@ import 'package:mo3tv/features/media/presentation/screens/see_more_media_screen.
 import 'package:mo3tv/features/media/presentation/screens/season_details_screen.dart';
 import 'package:mo3tv/features/account/presentation/screens/account_media_list_screen.dart';
 import 'package:mo3tv/features/connectivity/presentation/screens/no_connection_screen.dart';
+import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 abstract class Routes {
   static const String movieRoute = "movieRoute";
   static const String seeMoreMoviesRoute = "seeMoreMovieRoute";
@@ -51,9 +53,9 @@ abstract class Routes {
 }
 abstract class AppRoute {
   static final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
-  static final GoRouter router=GoRouter(
+  static final GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation:"/movieRoute",
+    initialLocation: "/movieRoute",
     routes: [
       StatefulShellRoute.indexedStack(
         builder: (context,
@@ -61,12 +63,13 @@ abstract class AppRoute {
             navigationShell) => MainScreen(navigationShell: navigationShell),
         branches: [
           StatefulShellBranch(
-            initialLocation:"/movieRoute",
+            initialLocation: "/movieRoute",
             routes: [
               GoRoute(
-                  path:"/movieRoute",
+                  path: "/movieRoute",
                   name: Routes.movieRoute,
-                  builder: (context, state)=>const MediaScreen(mediaType: AppStrings.movie),
+                  builder: (context, state) =>
+                  const MediaScreen(mediaType: AppStrings.movie),
                   routes: [
                     _movieDetailsRouter
                   ]
@@ -78,28 +81,29 @@ abstract class AppRoute {
             ],
           ),
           StatefulShellBranch(
-            initialLocation:"/tvRoute",
+            initialLocation: "/tvRoute",
             routes: [
               GoRoute(
-                  path:"/tvRoute",
-                  name:Routes.tvRoute,
-                  builder: (context, state)=>const MediaScreen(mediaType: AppStrings.tv),
+                  path: "/tvRoute",
+                  name: Routes.tvRoute,
+                  builder: (context, state) =>
+                  const MediaScreen(mediaType: AppStrings.tv),
                   routes: [
                     _tvDetailsRouter
                   ]
               ),
               GoRoute(
                   path: "/seeMoreTvShowRoute/:params",
-                  name:  Routes.seeMoreTvShowsRoute,
+                  name: Routes.seeMoreTvShowsRoute,
                   pageBuilder: _seeMoreMediaSubRoute)
             ],
           ),
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: "/searchRoute",
-                name: Routes.searchRoute,
-                builder: (context, state) => const SearchScreen())
+                  path: "/searchRoute",
+                  name: Routes.searchRoute,
+                  builder: (context, state) => const SearchScreen())
             ],
           ),
           StatefulShellBranch(
@@ -109,39 +113,45 @@ abstract class AppRoute {
                 path: "/accountRoute",
                 name: Routes.accountRoute,
                 builder: (context, state) => const AccountScreen(),
+                routes: [
+                  GoRoute(
+                    path: "accountMediaLists/:title/:listType/:mediaType",
+                    parentNavigatorKey: navigationKey,
+                    name: Routes.accountMediaLists,
+                    pageBuilder: (context, state) =>
+                    AppLocalizations.of(context)!.isEnLocale ?
+                    SlideFromLeftToRight(child: AccountMediaListsScreen(
+                      title: state.pathParameters["title"]!,
+                      listType: state.pathParameters['listType']!,
+                      mediaType: state.pathParameters["mediaType"]!,
+                    )) :
+                    SlideFromRightToLeft(child: AccountMediaListsScreen(
+                      title: state.pathParameters["title"]!,
+                      listType: state.pathParameters['listType']!,
+                      mediaType: state.pathParameters["mediaType"]!,
+                    )),
+                  ),
+                ]
               ),
-              GoRoute(
-                  path:"/accountMediaLists/:title/:listType/:mediaType",
-                  name: Routes.accountMediaLists,
-                  pageBuilder: (context, state) => AppLocalizations.of(context)!.isEnLocale ?
-                  SlideFromLeftToRight(child: AccountMediaListsScreen(
-                    title: state.pathParameters["title"]!,
-                    listType: state.pathParameters['listType']!,
-                    mediaType: state.pathParameters["mediaType"]!,
-                  )) :
-                  SlideFromRightToLeft(child: AccountMediaListsScreen(
-                    title: state.pathParameters["title"]!,
-                    listType: state.pathParameters['listType']!,
-                    mediaType: state.pathParameters["mediaType"]!,
-                  )),
-              ),
+
             ],
           ),
           StatefulShellBranch(
             initialLocation: "/settingsRoute",
             routes: [
               GoRoute(
-                path: "/settingsRoute",
-                name: Routes.settingsRoute,
-                builder: (context, state) => const SettingsScreen(),
-                routes: [
-                  GoRoute(
-                    path: "languageRoute",
-                    name: Routes.languageRoute,
-                    pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: LanguageScreen()),
-                  ),
-                ]
+                  path: "/settingsRoute",
+                  name: Routes.settingsRoute,
+                  builder: (context, state) => const SettingsScreen(),
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: navigationKey,
+                      path: "languageRoute",
+                      name: Routes.languageRoute,
+                      pageBuilder: (context, state) =>
+                      const NoTransitionPage(child: LanguageScreen()),
+                    ),
+                  ]
               ),
             ],
           ),
@@ -160,9 +170,9 @@ abstract class AppRoute {
           builder: (context, state) => const NoConnectionScreen()),
     ],
   );
-  static final GoRoute _movieDetailsRouter=GoRoute(
+  static final GoRoute _movieDetailsRouter = GoRoute(
       parentNavigatorKey: navigationKey,
-      path: "movieDetailsRoute/:listType/:mediaType",
+      path: "movieDetailsRoute",
       name: Routes.movieDetailsRoute,
       pageBuilder: _mediaDetailsSubRoute,
       routes: [
@@ -189,16 +199,16 @@ abstract class AppRoute {
             builder: _imageScreenSubRoute),
       ]
   );
-  static final GoRoute _tvDetailsRouter=GoRoute(
+  static final GoRoute _tvDetailsRouter = GoRoute(
       parentNavigatorKey: navigationKey,
-      path: "tvShowDetailsRoute/:listType/:mediaType",
+      path: "tvShowDetailsRoute",
       name: Routes.tvShowDetailsRoute,
       pageBuilder: _mediaDetailsSubRoute,
       routes: [
         GoRoute(
             parentNavigatorKey: navigationKey,
-            path:"trailerTvShowScreenRoute/:title/:url",
-            name:Routes.trailerTvShowScreenRoute,
+            path: "trailerTvShowScreenRoute/:title/:url",
+            name: Routes.trailerTvShowScreenRoute,
             pageBuilder: _mediaTrailerSubRoute),
         GoRoute(
           parentNavigatorKey: navigationKey,
@@ -210,7 +220,7 @@ abstract class AppRoute {
             parentNavigatorKey: navigationKey,
             path: "similarTvShowRoute/:params",
             name: Routes.similarTvShowRoute,
-            pageBuilder:_seeMoreMediaSubRoute
+            pageBuilder: _seeMoreMediaSubRoute
         ),
         GoRoute(
             parentNavigatorKey: navigationKey,
@@ -218,42 +228,48 @@ abstract class AppRoute {
             name: Routes.tvShowImageScreenRoute,
             builder: _imageScreenSubRoute),
         GoRoute(
-            parentNavigatorKey:navigationKey,
+            parentNavigatorKey: navigationKey,
             path: ":tvShowName/:tvShowId",
             name: Routes.seasonRoute,
-            builder: (context,state) =>
+            builder: (context, state) =>
                 SeasonDetailsScreen(
                     season: state.extra as TvShowSeason,
                     tvShowName: state.pathParameters["tvShowName"]!,
                     tvShowId: int.parse(state.pathParameters["tvShowId"]!))),
       ]
   );
-  static Page<dynamic> _seeMoreMediaSubRoute(context, state){
+  static Page<dynamic> _seeMoreMediaSubRoute(context, state) {
     return AppLocalizations.of(context)!.isEnLocale ?
     SlideFromRightToLeft(child: SeeMoreMediaScreen(
       media: state.extra as List<Media>,
       params: MediaParams.fromJson(state.pathParameters["params"]!),
-    )):
+    )) :
     SlideFromLeftToRight(child: SeeMoreMediaScreen(
       media: state.extra as List<Media>,
       params: MediaParams.fromJson(state.pathParameters["params"]!),
     ));
   }
-  static Page<dynamic> _mediaDetailsSubRoute(context, state){
-    return SlideFromDownToUp(child: MediaDetailsScreen(
-    mediaType: state.pathParameters["mediaType"]!,
-    listType: state.pathParameters["listType"]!,
-    media: state.extra as Media));
+  static Page<dynamic> _mediaDetailsSubRoute(context, state) {
+    DetailsParams params = state.extra as DetailsParams;
+    if (params.cubit == null) {
+      return SlideFromDownToUp(child:MediaDetailsScreen(media: params));
+    }
+    else {
+      return SlideFromDownToUp(child: BlocProvider.value(
+        value: params.cubit as AccountListsCubit,
+        child: MediaDetailsScreen(media: params)));
+    }
   }
-  static Page<dynamic> _mediaTrailerSubRoute(context, state){
+  static Page<dynamic> _mediaTrailerSubRoute(context, state) {
     return ScaleFromCenter(child: TrailerScreen(
         title: state.pathParameters["title"]!,
         url: state.pathParameters["url"]!));
   }
-  static Page<dynamic> _mediaWebPageSubRoute(context, state){
-    return SlideFromDownToUp(child: MediaWebScreen(link: state.pathParameters["link"]!));
+  static Page<dynamic> _mediaWebPageSubRoute(context, state) {
+    return SlideFromDownToUp(
+        child: MediaWebScreen(link: state.pathParameters["link"]!));
   }
-  static Widget _imageScreenSubRoute(context, state){
+  static Widget _imageScreenSubRoute(context, state) {
     return ImageScreen(image: state.pathParameters["image"]!);
   }
 }

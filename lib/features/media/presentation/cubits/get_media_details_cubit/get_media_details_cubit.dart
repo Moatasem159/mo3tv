@@ -60,17 +60,3 @@ class GetMediaDetailsCubit extends Cubit<GetMediaDetailsStates> {
     return await _getTvShowDetailsUsecase.call(MediaParams(mediaId: params.mediaId,mediaType: params.mediaType,lang: AppStrings.appLang));
   }
 }
-
-// for (var element in movie.videos) {
-// if (element.name == "Official Trailer") {
-// movie.trailer = element;
-// break;
-// } else if (element.name == "Official Teaser") {
-// movie.trailer = element;
-// break;
-// } else if (element.type == "Trailer") {
-// movie.trailer = element;
-// break;
-// }
-// }
-// movie.videos.clear();

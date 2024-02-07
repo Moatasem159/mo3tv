@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/features/media/domain/entities/media.dart';
 class MediaParams {
   final int mediaId;
   final String listTitle;
@@ -55,4 +57,11 @@ class MediaParams {
       moreType: map['moreType'],
     );
   }
+}
+class DetailsParams{
+  final Cubit ?cubit;
+  final Media media;
+  final String listType;
+  final String mediaType;
+  DetailsParams({this.cubit, required this.media, required this.listType, required this.mediaType});
 }
