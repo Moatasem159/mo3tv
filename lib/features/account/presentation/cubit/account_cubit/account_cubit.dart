@@ -14,7 +14,7 @@ class AccountCubit extends HydratedCubit<AccountStates> {
   final GetAccountDetailsUsecase _getAccountDetailsUsecase;
   Future<void> getAccountDetails() async {
     if(state is! GetAccountsDetailsSuccessState){
-      Either<Failure, Account> res = await _getAccountDetailsUsecase.call(sessionId: AppStrings.sessionId);
+      Either<Failure, Account> res = await _getAccountDetailsUsecase(sessionId: AppStrings.sessionId);
       res.fold(
           (l) => emit(GetAccountsDetailsErrorState(msg: mapFailureToMsg(l))),
           (account) async {

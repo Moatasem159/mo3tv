@@ -14,7 +14,7 @@ class ReviewsCubit extends Cubit<ReviewsStates> {
   late String mediaType;
   Future<void> getMediaReviews() async {
     Either<Failure, List<Review>> response =
-    await _getMediaReviewsUsecase.call(MediaParams(mediaType: mediaType, mediaId: mediaId));
+    await _getMediaReviewsUsecase(MediaParams(mediaType: mediaType, mediaId: mediaId));
     emit(response.fold(
             (failure) => GetMediaReviewsErrorState(msg: mapFailureToMsg(failure)),
             (mediaReviews) =>GetMediaReviewsSuccessState(mediaReviews)));

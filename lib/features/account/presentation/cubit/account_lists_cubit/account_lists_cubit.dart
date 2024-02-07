@@ -24,7 +24,7 @@ class AccountListsCubit extends Cubit<AccountListsStates> {
   Future<void> getAccountList({required String listType,required String mediaType})async{
     emit(GetAccountListsLoadingState(page==1?true:false));
     Either<Failure, AccountListEntity> accountList =
-    await _getAccountListsUsecase.call(MediaParams(listType: listType,mediaType: mediaType,page:page,lang: AppStrings.appLang));
+    await _getAccountListsUsecase(MediaParams(listType: listType,mediaType: mediaType,page:page,lang: AppStrings.appLang));
     accountList.fold((l){
       emit(GetAccountListsErrorState( msg: mapFailureToMsg(l)));
     },(r){
