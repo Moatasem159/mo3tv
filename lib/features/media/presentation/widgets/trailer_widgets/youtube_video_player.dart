@@ -33,22 +33,18 @@ class _YoutubePlayerVideoState extends State<YoutubePlayerVideo> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: YoutubePlayer(
-      showVideoProgressIndicator: true,
-      progressIndicatorColor: Colors.red,
-      liveUIColor: Colors.red,
-      bottomActions: [
-          CurrentPosition(),
-          ProgressBar(isExpanded: true),
-          RemainingDuration(),
-          const PlaybackSpeedButton(),
-        ],
-      progressColors:const ProgressBarColors(
-        playedColor: Colors.red,
-        handleColor: Colors.red,
-      ),
-      controller:controller,
-            ),
-    );
+        child: YoutubePlayer(
+            controller: controller,
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: Colors.red,
+            liveUIColor: Colors.red,
+            bottomActions: [
+              CurrentPosition(controller: controller),
+              ProgressBar(isExpanded: true, controller: controller),
+              RemainingDuration(controller: controller),
+              PlaybackSpeedButton(controller: controller),
+            ],
+            progressColors: const ProgressBarColors(
+                playedColor: Colors.red, handleColor: Colors.red)));
   }
 }
