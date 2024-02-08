@@ -4,7 +4,6 @@ import 'package:mo3tv/features/search/domain/repositories/search_repository.dart
 class ClearSearchListUsecase{
   final SearchRepository _searchRepository;
   const ClearSearchListUsecase(this._searchRepository);
-  Future<Either<Failure,bool>> call() async{
-    return await _searchRepository.clearListSearch();
-  }
+  Future<Either<Failure,bool>> call() async=>await _searchRepository.clearListSearch();
+
 }

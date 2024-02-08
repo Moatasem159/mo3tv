@@ -1,4 +1,4 @@
-import 'package:mo3tv/features/search/domain/entities/search.dart';
+part of'search_bloc.dart';
 abstract class SearchStates {}
 class SearchInitialState extends SearchStates {}
 class SearchLoadingState extends SearchStates {}

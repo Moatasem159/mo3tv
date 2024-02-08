@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-class SearchLoadingWidget extends StatelessWidget {
-  const SearchLoadingWidget({super.key});
+part of'../screens/search_screen.dart';
+class _SearchLoadingWidget extends StatelessWidget {
+  const _SearchLoadingWidget();
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(

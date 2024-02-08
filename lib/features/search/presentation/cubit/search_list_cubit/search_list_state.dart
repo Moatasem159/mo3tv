@@ -1,3 +1,4 @@
+part of'search_list_cubit.dart';
 abstract class SearchListStates {}
 class SearchListInitialState extends SearchListStates {}
 class SaveSearchLoadingState extends SearchListStates {}

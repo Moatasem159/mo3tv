@@ -1,22 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mo3tv/config/lang/app_localizations.dart';
-import 'package:mo3tv/config/routes/app_routes.dart';
-import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/extension/custom_padding_extension.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/media/domain/entities/media_params.dart';
-import 'package:mo3tv/features/media/domain/entities/movie.dart';
-import 'package:mo3tv/features/search/domain/entities/search.dart';
-import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
-import 'package:mo3tv/features/media/domain/entities/tv_show.dart';
-import 'package:shimmer/shimmer.dart';
-class MediaSearchWidget extends StatelessWidget {
+part of'../screens/search_screen.dart';
+class _MediaSearchWidget extends StatelessWidget {
   final Search mediaSearch;
-  const MediaSearchWidget({super.key, required this.mediaSearch});
+  const _MediaSearchWidget(this.mediaSearch);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -27,15 +12,16 @@ class MediaSearchWidget extends StatelessWidget {
           Movie m = Movie(
             id: mediaSearch.id,
             name: mediaSearch.name,
-            originalName: mediaSearch.originalTitle != "" ? mediaSearch.originalTitle : mediaSearch.originalName != "" ? mediaSearch.originalName : mediaSearch.name,
+            originalName: mediaSearch.originalName,
             posterPath: mediaSearch.posterPath,
             backdropPath: mediaSearch.backdropPath,
           );
           context.pushNamed(Routes.movieDetailsRoute,extra: DetailsParams(media: m, listType: "?", mediaType: AppStrings.movie));
-        } else if (mediaSearch.mediaType == AppStrings.tv) {
+        }
+        else if (mediaSearch.mediaType == AppStrings.tv) {
           TvShow tv = TvShow(
             id: mediaSearch.id,
-            originalName: mediaSearch.originalTitle != "" ? mediaSearch.originalTitle : mediaSearch.originalName != "" ? mediaSearch.originalName : mediaSearch.name,
+            originalName: mediaSearch.originalName,
             name: mediaSearch.name,
             posterPath: mediaSearch.posterPath,
             backdropPath: mediaSearch.backdropPath,
@@ -81,7 +67,7 @@ class MediaSearchWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${mediaSearch.originalTitle != "" ? mediaSearch.originalTitle : mediaSearch.originalName != "" ? mediaSearch.originalName : mediaSearch.name} ${mediaSearch.releaseDate == "" ? '' : ((mediaSearch.releaseDate.substring(0, 4)))}",
+                    "${mediaSearch.originalName != "" ? mediaSearch.originalName : mediaSearch.name} ${mediaSearch.releaseDate == "" ? '' : ((mediaSearch.releaseDate.substring(0, 4)))}",
                     style: AppTextStyles.get14BoldText(),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -92,7 +78,7 @@ class MediaSearchWidget extends StatelessWidget {
                       children: [
                         const Icon(Icons.star, color: Colors.yellow),
                         5.pw,
-                        Text(mediaSearch.voteAverage!.toStringAsFixed(1),
+                        Text(mediaSearch.voteAverage.toStringAsFixed(1),
                             style: AppTextStyles.get14BoldText())
                       ],
                     ),
@@ -106,8 +92,7 @@ class MediaSearchWidget extends StatelessWidget {
                               mediaSearch.mediaType == AppStrings.movie
                                   ? Icons.movie_filter_rounded
                                   : Icons.tv_rounded,
-                              size: 18)
-                          .addPadding(t: 4)
+                              size: 18).addPadding(t: 4)
                     ],
                   ),
                 ],

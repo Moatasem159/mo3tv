@@ -5,29 +5,21 @@ class SearchModel extends Search {
     required super.backdropPath,
     required super.id,
     required super.mediaType,
-    required super.originalTitle,
-    required super.popularity,
     required super.posterPath,
     required super.releaseDate,
-    required super.voteAverage,
-    required super.voteCount,
-    required super.firstAirDate,
     required super.name,
-    required super.originalName,
+    required super.voteAverage,
+    required super.originalName
   });
   factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
         backdropPath: json["backdrop_path"] ?? '',
         id: json["id"],
         mediaType: json["media_type"] ?? '',
-        originalTitle: json["original_title"] ?? '',
-        popularity: json["popularity"] ?? 0,
         posterPath: json["poster_path"] ?? '',
         releaseDate: json["release_date"] ?? '',
         voteAverage: json["vote_average"] ?? 0,
-        voteCount: json["vote_count"] ?? 0,
-        firstAirDate: json["first_air_date"] ?? '',
-        name: json["name"] ?? '',
-        originalName: json["original_name"] ?? '',
+        name: json["name"]??json["title"] ?? '',
+        originalName: json["original_name"] ??json["original_title"]??'',
       );
   static SearchModel fromJsonString(String jsonString) {
     Map<String, dynamic> json = jsonDecode(jsonString);
@@ -41,13 +33,9 @@ class SearchModel extends Search {
         "backdrop_path": searchModel.backdropPath,
         "id": searchModel.id,
         "media_type": searchModel.mediaType,
-        "original_title": searchModel.originalTitle,
-        "popularity": searchModel.popularity,
         "poster_path": searchModel.posterPath,
         "release_date": searchModel.releaseDate,
         "vote_average": searchModel.voteAverage,
-        "vote_count": searchModel.voteCount,
-        "first_air_date": searchModel.firstAirDate,
         "name": searchModel.name,
         "original_name": searchModel.originalName,
       };

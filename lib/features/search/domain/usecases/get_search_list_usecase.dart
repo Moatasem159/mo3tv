@@ -5,7 +5,6 @@ import 'package:mo3tv/features/search/domain/repositories/search_repository.dart
 class GetSearchListUsecase{
   final SearchRepository _searchRepository;
   const GetSearchListUsecase(this._searchRepository);
-  Future<Either<Failure,List<Search>>> call() async{
-    return await _searchRepository.getListSearch();
-  }
+  Future<Either<Failure,List<Search>>> call() async => await _searchRepository.getListSearch();
+
 }

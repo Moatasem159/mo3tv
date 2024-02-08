@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/features/search/domain/entities/search.dart';
 import 'package:mo3tv/features/search/domain/usecases/search_usecase.dart';
-import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_events.dart';
-import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_state.dart';
 import 'package:rxdart/rxdart.dart';
+part 'search_events.dart';
+part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvents, SearchStates> {
   SearchBloc(this._searchUsecase) : super(SearchInitialState()) {
     on<SearchEvent>(
@@ -27,7 +27,7 @@ class SearchBloc extends Bloc<SearchEvents, SearchStates> {
      emit(SearchLoadingState());
      List<Search> items=[];
      Either<Failure,List<Search>> response =
-     await _searchUsecase.call(page: page,word: word,lang: lang);
+     await _searchUsecase(page: page,word: word,lang: lang);
      emit(response.fold((l){
        return SearchErrorState();
      }, (searchItems){
@@ -54,5 +54,10 @@ class SearchBloc extends Bloc<SearchEvents, SearchStates> {
   clear(emit){
     controller.clear();
     emit(SearchInitialState());
+  }
+  @override
+  Future<void> close() {
+    controller.dispose();
+    return super.close();
   }
 }

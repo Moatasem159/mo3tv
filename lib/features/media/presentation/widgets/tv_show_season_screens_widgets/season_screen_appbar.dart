@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/utils/app_assets.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/media/domain/entities/tv_show_season.dart';
 class SeasonScreenAppBar extends StatelessWidget {
@@ -42,6 +43,7 @@ class SeasonScreenAppBar extends StatelessWidget {
             blendMode: BlendMode.dstATop,
             child: CachedNetworkImage(
               fit: BoxFit.cover,
+              errorWidget: (context, url, error) => Center(child: Image.asset(AppAssets.errorCover)),
               imageUrl: EndPoints.backDropsUrl(season.posterPath),
             ),
           ),

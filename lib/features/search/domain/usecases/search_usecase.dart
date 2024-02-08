@@ -5,7 +5,7 @@ import 'package:mo3tv/features/search/domain/repositories/search_repository.dart
 class SearchUsecase{
   final SearchRepository _searchRepository;
   const SearchUsecase(this._searchRepository);
-  Future<Either<Failure,List<Search>>> call({required int page,required String word,required String lang}) async{
-    return await _searchRepository.search(page: page, word: word,lang: lang);
-  }
+  Future<Either<Failure,List<Search>>> call({required int page,required String word,required String lang}) async=>
+      await _searchRepository.search(page: page, word: word,lang: lang);
+
 }

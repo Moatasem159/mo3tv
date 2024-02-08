@@ -1,19 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mo3tv/config/routes/app_routes.dart';
-import 'package:mo3tv/core/extension/custom_padding_extension.dart';
-import 'package:mo3tv/core/extension/empty_padding_extension.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/media/data/models/media_account_details_model.dart';
-import 'package:mo3tv/core/utils/app_text_styles.dart';
-import 'package:mo3tv/features/media/domain/entities/media_params.dart';
-import 'package:mo3tv/features/media/domain/entities/movie.dart';
-import 'package:mo3tv/features/search/domain/entities/search.dart';
-import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
-import 'package:mo3tv/features/media/domain/entities/tv_show.dart';
-class RecentlySearchItem extends StatelessWidget {
+part of'../../screens/search_screen.dart';
+class _RecentlySearchItem extends StatelessWidget {
   final Search search;
-  const RecentlySearchItem({super.key, required this.search});
+  const _RecentlySearchItem(this.search);
   String name(Search search){
     if(search.name!='')
     {
@@ -22,10 +10,6 @@ class RecentlySearchItem extends StatelessWidget {
     else if(search.originalName!='')
     {
       return "${search.originalName} ${search.releaseDate == "" ? '' : ((search.releaseDate.substring(0, 4)))}";
-    }
-    else if(search.originalTitle!='')
-    {
-      return "${search.originalTitle} ${search.releaseDate == "" ? '' : ((search.releaseDate.substring(0, 4)))}";
     }
     return "";
   }
@@ -37,9 +21,8 @@ class RecentlySearchItem extends StatelessWidget {
         if(search.mediaType=="movie") {
           Movie m=Movie(
             id: search.id,
-            mediaAccountDetails: MediaAccountDetails(),
-            name: search.originalTitle,
-            originalName: search.originalTitle,
+            name: search.name,
+            originalName: search.originalName,
             posterPath: search.posterPath,
             backdropPath: search.backdropPath,
           );

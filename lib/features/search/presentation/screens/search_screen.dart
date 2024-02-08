@@ -1,14 +1,32 @@
+import 'package:shimmer/shimmer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mo3tv/core/api/end_points.dart';
+import 'package:mo3tv/core/utils/app_strings.dart';
+import 'package:mo3tv/config/routes/app_routes.dart';
+import 'package:mo3tv/core/utils/app_text_styles.dart';
+import 'package:mo3tv/core/widgets/textformfield.dart';
 import 'package:mo3tv/app/injection_container.dart'as di;
+import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:mo3tv/features/media/domain/entities/movie.dart';
+import 'package:mo3tv/features/media/domain/entities/tv_show.dart';
+import 'package:mo3tv/features/search/domain/entities/search.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
+import 'package:mo3tv/core/extension/custom_padding_extension.dart';
+import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_bloc.dart';
-import 'package:mo3tv/features/search/presentation/cubit/search_bloc/search_state.dart';
 import 'package:mo3tv/features/search/presentation/cubit/search_list_cubit/search_list_cubit.dart';
-import 'package:mo3tv/features/search/presentation/widgets/recently_widgets/recently_search.dart';
-import 'package:mo3tv/features/search/presentation/widgets/search_bar_widget.dart';
-import 'package:mo3tv/features/search/presentation/widgets/search_empty_widget.dart';
-import 'package:mo3tv/features/search/presentation/widgets/search_list.dart';
-import 'package:mo3tv/features/search/presentation/widgets/search_loading_widget.dart';
+part '../widgets/search_list.dart';
+part '../widgets/search_bar_widget.dart';
+part '../widgets/media_search_widget.dart';
+part '../widgets/search_empty_widget.dart';
+part '../widgets/search_loading_widget.dart';
+part '../widgets/recently_widgets/clear_button.dart';
+part '../widgets/recently_widgets/recently_search.dart';
+part '../widgets/recently_widgets/recently_search_item.dart';
+part '../widgets/recently_widgets/recently_search_list.dart';
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
   @override
@@ -26,15 +44,15 @@ class SearchScreen extends StatelessWidget {
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                 const SearchBarWidget(),
+                 const _SearchBarWidget(),
                 if(state is SearchInitialState)
-                  const RecentlySearch(),
+                  const _RecentlySearch(),
                 if(state is SearchLoadingState)
-                 const SearchLoadingWidget(),
+                 const _SearchLoadingWidget(),
                 if (state is SearchSuccessEmptyState)
-                 const SearchEmptyWidget(),
+                 const _SearchEmptyWidget(),
                 if (state is SearchSuccessState)
-                 SearchList(items: state.items)
+                 _SearchList(state.items)
               ],
             ),
           );
