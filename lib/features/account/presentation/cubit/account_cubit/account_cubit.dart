@@ -13,6 +13,9 @@ class AccountCubit extends HydratedCubit<AccountStates> {
   static AccountCubit get(context) => BlocProvider.of(context);
   final GetAccountDetailsUsecase _getAccountDetailsUsecase;
   Future<void> getAccountDetails() async {
+    if(AppStrings.sessionId.isEmpty){
+      return emit(GetAccountsDetailsErrorState(msg: "No sessionId"));
+    }
     if(state is! GetAccountsDetailsSuccessState){
       Either<Failure, Account> res = await _getAccountDetailsUsecase(sessionId: AppStrings.sessionId);
       res.fold(

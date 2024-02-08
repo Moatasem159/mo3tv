@@ -42,13 +42,13 @@ class CheckConnectivityCubit extends Cubit<CheckConnectivityStates>{
     }
     if(state is ConnectedState)
       {
-      if(location==Routes.movieRoute)
+      if(location==Routes.initialRoute)
           {
             Restart.restartApp();
           }
         else{
           location='';
-          context.pop();
+          GoRouter.of(context).pop();
         }
       }
 }

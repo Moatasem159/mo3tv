@@ -28,6 +28,7 @@ import 'package:mo3tv/features/account/presentation/screens/account_media_list_s
 import 'package:mo3tv/features/connectivity/presentation/screens/no_connection_screen.dart';
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 abstract class Routes {
+  static const String initialRoute = "/movieRoute";
   static const String movieRoute = "movieRoute";
   static const String seeMoreMoviesRoute = "seeMoreMovieRoute";
   static const String tvRoute = "tvRoute";
@@ -48,19 +49,17 @@ abstract class Routes {
   static const String tvShowWebPageRoute = "tvShowWebPageRoute";
   static const String movieImageScreenRoute = "movieImageScreenRoute";
   static const String tvShowImageScreenRoute = "tvShowImageScreenRoute";
-  static const String loginRoute = "/loginRoute";
-  static const String noConnectionRoute = "/noConnectionRoute";
+  static const String loginRoute = "loginRoute";
+  static const String noConnectionRoute = "noConnectionRoute";
 }
 abstract class AppRoute {
   static final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
   static final GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation: "/movieRoute",
+    initialLocation: Routes.initialRoute,
     routes: [
       StatefulShellRoute.indexedStack(
-        builder: (context,
-            state,
-            navigationShell) => MainScreen(navigationShell: navigationShell),
+        builder: (context,state , navigationShell) => MainScreen(navigationShell: navigationShell),
         branches: [
           StatefulShellBranch(
             initialLocation: "/movieRoute",
@@ -68,8 +67,7 @@ abstract class AppRoute {
               GoRoute(
                   path: "/movieRoute",
                   name: Routes.movieRoute,
-                  builder: (context, state) =>
-                  const MediaScreen(mediaType: AppStrings.movie),
+                  builder: (context, state) => const MediaScreen(mediaType: AppStrings.movie),
                   routes: [
                     _movieDetailsRouter
                   ]
@@ -112,7 +110,9 @@ abstract class AppRoute {
               GoRoute(
                 path: "/accountRoute",
                 name: Routes.accountRoute,
-                builder: (context, state) => const AccountScreen(),
+                builder: (context, state) => AccountScreen(
+                  key: state.pageKey
+                ),
                 routes: [
                   GoRoute(
                     path: "accountMediaLists/:title/:listType/:mediaType",
@@ -133,7 +133,6 @@ abstract class AppRoute {
                   ),
                 ]
               ),
-
             ],
           ),
           StatefulShellBranch(
@@ -158,15 +157,14 @@ abstract class AppRoute {
         ],
       ),
       GoRoute(
-          parentNavigatorKey: navigationKey,
+          path: "/loginRoute",
           name: Routes.loginRoute,
-          path: Routes.loginRoute,
-          builder: (context, state) =>
-              LoginScreen(token: state.extra as Token)),
-      GoRoute(
           parentNavigatorKey: navigationKey,
+          builder: (context, state)=>LoginScreen(token: state.extra as Token)),
+      GoRoute(
+          path:"/noConnectionRoute",
           name: Routes.noConnectionRoute,
-          path: Routes.noConnectionRoute,
+          parentNavigatorKey: navigationKey,
           builder: (context, state) => const NoConnectionScreen()),
     ],
   );

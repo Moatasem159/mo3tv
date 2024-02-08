@@ -22,7 +22,7 @@ class LogoutButton extends StatelessWidget {
                     style: AppTextStyles.get14NormalText()),
                 actions: [
                   TextButton(
-                      onPressed: () => GoRouter.of(context).pop(),
+                      onPressed: GoRouter.of(context).pop,
                       child: Text(AppStrings.cancel.tr(context)!,
                           style: AppTextStyles.get14NormalText())),
                   TextButton(
