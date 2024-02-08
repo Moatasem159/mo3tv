@@ -14,7 +14,6 @@ class MediaBottomNavCubit extends Cubit<MediaBottomNavStates> {
    isGallery=false;
    nestedController=ScrollController();
    appBar= SliverOverlapAbsorberHandle();
-   disconnectBar= SliverOverlapAbsorberHandle();
   }
   static MediaBottomNavCubit get(context) => BlocProvider.of(context);
   late int index;
@@ -24,14 +23,13 @@ class MediaBottomNavCubit extends Cubit<MediaBottomNavStates> {
   late final List<Widget> screens;
   late final ScrollController nestedController;
   late final SliverOverlapAbsorberHandle appBar;
-  late final SliverOverlapAbsorberHandle disconnectBar;
   initScreens() {
     screens = [
       MediaOverview(movie: media, params:params),
       RecommendationsMedia(mediaId: media.id,mediaType: params.mediaType),
       const MediaReviews(),
       const MediaCredits(),
-      const MediaGalleryScreen()
+      MediaGalleryScreen(mediaType: params.mediaType)
     ];
   }
   changeScreen(int index) {
@@ -50,7 +48,6 @@ class MediaBottomNavCubit extends Cubit<MediaBottomNavStates> {
   Future<void> close() {
     nestedController.dispose();
     appBar.dispose();
-    disconnectBar.dispose();
     return super.close();
   }
 }

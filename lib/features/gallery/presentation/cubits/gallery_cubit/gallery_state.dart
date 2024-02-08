@@ -1,6 +1,5 @@
-import 'package:mo3tv/features/gallery/domain/entities/gallery.dart';
+part of'gallery_cubit.dart';
 abstract class GalleryStates {}
-class GalleryInitialState extends GalleryStates {}
 class GetMediaGalleryLoadingState extends GalleryStates{}
 class GetMediaGallerySuccessState extends GalleryStates{
   final Gallery gallery;

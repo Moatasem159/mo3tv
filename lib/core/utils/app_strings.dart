@@ -42,6 +42,7 @@ abstract class AppStrings {
   static const String logos="logos";
   static const String noLogos="no_logos";
   static const String noPosters="no_posters";
+  static const String noGallery="no_gallery";
   static const String posters="posters";
   static const String youMustLoginFirst="You_must_login_first";
   static const String loginToEnjoyFullExperience="login_to_enjoy_full_experience";

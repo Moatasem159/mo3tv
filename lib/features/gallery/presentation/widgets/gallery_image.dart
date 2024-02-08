@@ -1,33 +1,37 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:mo3tv/config/routes/app_routes.dart';
-import 'package:mo3tv/core/api/end_points.dart';
-import 'package:mo3tv/core/utils/app_strings.dart';
-import 'package:mo3tv/features/gallery/domain/entities/image_entity.dart';
-import 'package:shimmer/shimmer.dart';
-class GalleryImage extends StatelessWidget {
+part of'../screens/media_gallery_screen.dart';
+class _GalleryImage extends StatelessWidget with ImageTypes {
   final ImageEntity image;
   final String mediaType;
-  const GalleryImage({super.key, required this.image, required this.mediaType});
+  final ImageType imageType;
+  final bool isLoading;
+  const _GalleryImage({required this.image, required this.mediaType, required this.imageType, required this.isLoading});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:()=>context.pushNamed(
+      onTap: () => context.pushNamed(
           mediaType == AppStrings.movie
               ? Routes.movieImageScreenRoute
               : Routes.tvShowImageScreenRoute,
-          pathParameters: {"image": image.filePath, "listType": "?","mediaType":mediaType}),
+          pathParameters: {"image": image.filePath}),
       child: Hero(
         tag: image.filePath,
-        child: CachedNetworkImage(
+        child:CachedNetworkImage(
+            width: getWidth(context, imageType),
             imageUrl: EndPoints.posterUrl(image.filePath),
-            placeholder: (context, url) => Shimmer.fromColors(
-                  baseColor: Colors.grey[700]!,
-                  highlightColor: Colors.grey[600]!,
-                  child: Container(color: Colors.black),
-                )),
-      ),
+            imageBuilder: (_, imageProvider) {
+              return Container(
+                width: getWidth(context, imageType),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: imageType==ImageType.logos?BoxFit.contain:BoxFit.cover,
+                    )),
+              );
+            },
+            placeholder: (context, url) => _GalleryImageLoading(imageType: imageType,isLoading:isLoading),
+        ),
+      ).addSymmetricPadding(h: 5),
     );
   }
 }
