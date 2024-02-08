@@ -55,8 +55,6 @@ class _PlayButtonWidgetState extends State<PlayButtonWidget>
                       : Routes.trailerTvShowScreenRoute,
                   pathParameters: {
                     "url": widget.url,
-                    "listType": "?",
-                    "mediaType": widget.mediaType,
                     "title": widget.name
                   });
             }

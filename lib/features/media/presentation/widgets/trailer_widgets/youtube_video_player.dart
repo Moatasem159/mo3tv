@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class YoutubePlayerVideo extends StatefulWidget {
   final String url;
   final String title;
@@ -8,37 +8,47 @@ class YoutubePlayerVideo extends StatefulWidget {
   State<YoutubePlayerVideo> createState() => _YoutubePlayerVideoState();
 }
 class _YoutubePlayerVideoState extends State<YoutubePlayerVideo> {
-  late YoutubePlayerController controller;
+  late final YoutubePlayerController controller;
   @override
   void initState() {
     super.initState();
-    controller =YoutubePlayerController.fromVideoId(
-      videoId: YoutubePlayerController.convertUrlToId(widget.url)!,
-      params:const YoutubePlayerParams(
-        color: "red",
-        showVideoAnnotations: false
+    controller =YoutubePlayerController(
+      initialVideoId:widget.url,
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        showLiveFullscreenButton: false,
       ),
-      autoPlay: false,
     );
   }
   @override
   void deactivate() {
-    controller.pauseVideo();
+    controller.pause();
     super.deactivate();
   }
   @override
   void dispose() {
-    controller.stopVideo();
+    controller.dispose();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        child: YoutubePlayer(
-        controller:controller,
+      child: YoutubePlayer(
+      showVideoProgressIndicator: true,
+      progressIndicatorColor: Colors.red,
+      liveUIColor: Colors.red,
+      bottomActions: [
+          CurrentPosition(),
+          ProgressBar(isExpanded: true),
+          RemainingDuration(),
+          const PlaybackSpeedButton(),
+        ],
+      progressColors:const ProgressBarColors(
+        playedColor: Colors.red,
+        handleColor: Colors.red,
       ),
-      ),
+      controller:controller,
+            ),
     );
   }
 }
