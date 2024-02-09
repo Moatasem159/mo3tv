@@ -33,12 +33,12 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   cached_network_image: ^3.3.1
   youtube_player_flutter: ^8.1.2
-  flutter_native_splash: ^2.3.10
   internet_connection_checker: ^1.0.0+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.10
   flutter_lints: ^3.0.1
   envied_generator: ^0.5.3
   build_runner: ^2.4.8
