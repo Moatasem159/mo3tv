@@ -1,3 +1,4 @@
+part of'log_cubit.dart';
 abstract class LogStates {}
 class LogInitialState extends LogStates {}
 class GetTokenLoadingState extends LogStates {}

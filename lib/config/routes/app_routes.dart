@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
-import 'package:mo3tv/features/auth/domain/entities/token.dart';
+import 'package:mo3tv/features/auth/presentation/cubits/log_cubit/log_cubit.dart';
 import 'package:mo3tv/features/media/domain/entities/media.dart';
 import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 import 'package:mo3tv/features/media/domain/entities/tv_show_season.dart';
@@ -157,10 +157,13 @@ abstract class AppRoute {
         ],
       ),
       GoRoute(
-          path: "/loginRoute",
+          path: "/loginRoute/:token",
           name: Routes.loginRoute,
           parentNavigatorKey: navigationKey,
-          builder: (context, state)=>LoginScreen(token: state.extra as Token)),
+          builder: (context, state) => BlocProvider.value(
+                value: state.extra as LogCubit,
+                child: LoginScreen(token: state.pathParameters["token"]!),
+              )),
       GoRoute(
           path:"/noConnectionRoute",
           name: Routes.noConnectionRoute,

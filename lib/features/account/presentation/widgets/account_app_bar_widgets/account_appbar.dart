@@ -3,20 +3,17 @@ class _AccountAppBar extends StatelessWidget {
   const _AccountAppBar();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AccountCubit(di.sl())..getAccountDetails(),
-      child: BlocBuilder<AccountCubit, AccountStates>(
-        builder: (context, state) {
-          if (state is GetAccountsDetailsSuccessState) {
-            return _AccountAppBarWidget(state.account);
+    return BlocBuilder<AccountCubit, AccountStates>(
+      builder: (context, state) {
+        if (state is GetAccountsDetailsSuccessState) {
+          return _AccountAppBarWidget(state.account);
+        }
+        if(state is GetAccountsDetailsErrorState)
+          {
+            return const SizedBox();
           }
-          if(state is GetAccountsDetailsErrorState)
-            {
-              return const SizedBox();
-            }
-          return const _AccountAppBarLoadingWidget();
-        },
-      ),
+        return const _AccountAppBarLoadingWidget();
+      },
     );
   }
 }

@@ -8,7 +8,7 @@ import 'package:mo3tv/features/auth/domain/entities/token.dart';
 import 'package:mo3tv/features/auth/domain/usecases/get_sessionid_usecase.dart';
 import 'package:mo3tv/features/auth/domain/usecases/get_token_usecase.dart';
 import 'package:mo3tv/features/auth/domain/usecases/log_out_usecase.dart';
-import 'package:mo3tv/features/auth/presentation/cubits/login_cubit/log_state.dart';
+part 'log_state.dart';
 class LogCubit extends Cubit<LogStates> {
   LogCubit(this._getTokenUsecase,this._getSessionIdUsecase,this._logOutUsecase) : super(LogInitialState());
   static LogCubit get(context)=>BlocProvider.of(context);
@@ -19,7 +19,7 @@ class LogCubit extends Cubit<LogStates> {
   Future<void> getToken()async {
     emit(GetTokenLoadingState());
     Either<Failure, Token> response =
-    await _getTokenUsecase.call();
+    await _getTokenUsecase();
     response.fold((l){
       return emit(GetTokenErrorState(msg: l.message));
     }, (r){
@@ -30,7 +30,7 @@ class LogCubit extends Cubit<LogStates> {
   Future<void> getSessionId()async {
     emit(GetSessionIdLoadingState());
     Either<Failure, Session> response =
-    await _getSessionIdUsecase.call(token: token.token);
+    await _getSessionIdUsecase(token: token.token);
     emit(response.fold(
         (l) => GetSessionIdErrorState(msg: l.message),
         (r){
@@ -40,7 +40,7 @@ class LogCubit extends Cubit<LogStates> {
   }
   Future<void> logOut()async{
     emit(LogOutLoadingState());
-    Either<Failure, LogOut> res =await _logOutUsecase.call(sessionId: AppStrings.sessionId);
+    Either<Failure, LogOut> res =await _logOutUsecase(sessionId: AppStrings.sessionId);
     emit(res.fold(
             (l)=> LogOutErrorState(),
             (r){

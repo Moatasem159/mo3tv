@@ -8,7 +8,6 @@ import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
-import 'package:mo3tv/app/injection_container.dart' as di;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/extension/custom_padding_extension.dart';

@@ -6,6 +6,7 @@ class _AccountAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        (MediaQuery.sizeOf(context).width*0.025).pw,
         CachedNetworkImage(
           height: 70,
           width: 70,

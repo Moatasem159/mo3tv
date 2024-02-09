@@ -5,12 +5,14 @@ class MainButton extends StatelessWidget {
   final String label;
   final Size size;
   final double radius;
+  final Color ?color;
   const MainButton({super.key, required this.onPressed, required this.label,
-    this.size=const Size(130,40),this.radius=10});
+    this.size=const Size(130,40),this.radius=10, this.color});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
+        backgroundColor:MaterialStateProperty.all<Color?>(color),
         padding: MaterialStateProperty.all(EdgeInsets.zero),
           shape: MaterialStateProperty.all(RoundedRectangleBorder(
             borderRadius:BorderRadius.circular(radius),
