@@ -441,10 +441,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "07ee2436909f749d606f53521dc1725dd738dc5196e5ff815bc254253c594075"
+      sha256: "170c46e237d6eb0e6e9f0e8b3f56101e14fb64f787016e42edd74c39cf8b176a"
       url: "https://pub-web.flutter-io.cn"
     source: hosted
-    version: "13.1.0"
+    version: "13.2.0"
   graphs:
     dependency: transitive
     description:
@@ -713,10 +713,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: da3fdfeccc4d4ff2da8f8c556704c08f912542c5fb3cf2233ed75372384a034d
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
       url: "https://pub-web.flutter-io.cn"
     source: hosted
-    version: "2.1.6"
+    version: "2.1.8"
   pointycastle:
     dependency: transitive
     description:
@@ -866,6 +866,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: "725bc638d5e79df0c84658e1291449996943f93bacbc2cec49963dbbab48d8ae"
+      url: "https://pub-web.flutter-io.cn"
+    source: hosted
+    version: "1.1.0"
   source_gen:
     dependency: transitive
     description:
@@ -1030,10 +1038,10 @@ packages:
     dependency: "direct main"
     description:
       name: webview_flutter
-      sha256: d81b68e88cc353e546afb93fb38958e3717282c5ac6e5d3be4a4aef9fc3c1413
+      sha256: "25e1b6e839e8cbfbd708abc6f85ed09d1727e24e08e08c6b8590d7c65c9a8932"
       url: "https://pub-web.flutter-io.cn"
     source: hosted
-    version: "4.5.0"
+    version: "4.7.0"
   webview_flutter_android:
     dependency: transitive
     description:
@@ -1046,10 +1054,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
-      sha256: dbe745ee459a16b6fec296f7565a8ef430d0d681001d8ae521898b9361854943
+      sha256: d937581d6e558908d7ae3dc1989c4f87b786891ab47bb9df7de548a151779d8d
       url: "https://pub-web.flutter-io.cn"
     source: hosted
-    version: "2.9.0"
+    version: "2.10.0"
   webview_flutter_wkwebview:
     dependency: transitive
     description:

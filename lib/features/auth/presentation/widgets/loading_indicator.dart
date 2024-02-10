@@ -4,9 +4,9 @@ class _LoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 30,
-      margin: const EdgeInsets.all(15),
-      height: 30,
-      child: CircularProgressIndicator(strokeWidth: 1,color: Theme.of(context).primaryColor));
+        width: 30,
+        height: 30,
+        margin: const EdgeInsets.all(15),
+        child: CircularProgressIndicator(strokeWidth: 1,color: Theme.of(context).primaryColor));
   }
 }

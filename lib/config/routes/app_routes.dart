@@ -12,6 +12,7 @@ import 'package:mo3tv/features/auth/presentation/screens/login_screen.dart';
 import 'package:mo3tv/config/routes/animations_route/scale_from_center.dart';
 import 'package:mo3tv/features/media/presentation/screens/media_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/image_screen.dart';
+import 'package:mo3tv/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:mo3tv/features/search/presentation/screens/search_screen.dart';
 import 'package:mo3tv/features/media/presentation/screens/trailer_screen.dart';
 import 'package:mo3tv/config/routes/animations_route/slide_from_down_to_up.dart';
@@ -29,6 +30,7 @@ import 'package:mo3tv/features/connectivity/presentation/screens/no_connection_s
 import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/account_lists_cubit.dart';
 abstract class Routes {
   static const String initialRoute = "/movieRoute";
+  static const String onBoardingRoute = "onBoardingRoute";
   static const String movieRoute = "movieRoute";
   static const String seeMoreMoviesRoute = "seeMoreMovieRoute";
   static const String tvRoute = "tvRoute";
@@ -56,8 +58,22 @@ abstract class AppRoute {
   static final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
   static final GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation: Routes.initialRoute,
+    initialLocation: "/onBoardingRoute",
     routes: [
+      GoRoute(
+          path: "/onBoardingRoute",
+          name: Routes.onBoardingRoute,
+          parentNavigatorKey: navigationKey,
+          redirect: (context, state) {
+            if(AppStrings.sessionId!='')
+            {
+              return Routes.initialRoute;
+            }
+            else{
+              return "/onBoardingRoute";
+            }
+          },
+          builder: (context, state) => const OnBoardingScreen()),
       StatefulShellRoute.indexedStack(
         builder: (context,state , navigationShell) => MainScreen(navigationShell: navigationShell),
         branches: [

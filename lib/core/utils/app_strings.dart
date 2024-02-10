@@ -106,4 +106,11 @@ abstract class AppStrings {
   static const String disagree="disagree";
   static const String writtenBY="written_by";
   static const String on="on";
+  static const String onBoardingTitle1="onBoardingTitle1";
+  static const String onBoardingTitle2="onBoardingTitle2";
+  static const String onBoardingTitle3="onBoardingTitle3";
+  static const String onBoardingSubTitle1="onBoardingSubTitle1";
+  static const String onBoardingSubTitle2="onBoardingSubTitle2";
+  static const String onBoardingSubTitle3="onBoardingSubTitle3";
+  static const String skip="skip";
 }
