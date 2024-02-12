@@ -28,17 +28,31 @@ class _FinishButtonState extends State<_FinishButton> with SingleTickerProviderS
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _slideTransition,
-      child: BlocBuilder<GenresCubit, GenresState>(
+      child: BlocConsumer<GenresCubit, GenresState>(
+        listener: (context, state) {
+          if (state is SaveGenresSuccessState) {
+            context.goNamed(Routes.movieRoute);
+          }
+        },
         builder: (context, state) {
-          GenresCubit cubit=GenresCubit.get(context);
+          GenresCubit cubit = GenresCubit.get(context);
+          if (state is SaveGenresLoadingState) {
+            return const CircularProgressIndicator(strokeWidth: 1,color: Colors.white);
+          }
           return MainButton(
-              onPressed:(cubit.movieGenres.isNotEmpty&&cubit.tvGenres.isNotEmpty)?(){
-                context.goNamed(Routes.movieRoute);
-              }:null,
+              onPressed: (cubit.movieGenres.isNotEmpty && cubit.tvGenres.isNotEmpty)
+                  ? cubit.saveList
+                  : null,
               radius: 10,
-              color: (cubit.movieGenres.isNotEmpty&&cubit.tvGenres.isNotEmpty)?Colors.blue:Colors.white70,
+              color: (cubit.movieGenres.isNotEmpty && cubit.tvGenres.isNotEmpty)
+                  ? Colors.blue
+                  : Colors.white70,
               overlayColor: Colors.white24,
-              textStyle:AppTextStyles.get18BoldText(height: 0,color:(cubit.movieGenres.isNotEmpty&&cubit.tvGenres.isNotEmpty)?Colors.white:Colors.black),
+              textStyle: AppTextStyles.get18BoldText(
+                  height: 0,
+                  color: (cubit.movieGenres.isNotEmpty && cubit.tvGenres.isNotEmpty)
+                      ? Colors.white
+                      : Colors.black),
               label: AppStrings.finish.tr(context)!);
         },
       ),

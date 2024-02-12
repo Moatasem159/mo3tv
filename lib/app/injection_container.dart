@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mo3tv/app/bloc_observer.dart';
@@ -49,6 +50,10 @@ import 'package:mo3tv/features/media/data/datasources/movie_remote_datasource.da
 import 'package:mo3tv/features/media/data/repositories/movies_repository_impl.dart';
 import 'package:mo3tv/features/media/domain/repositories/movie_repository.dart';
 import 'package:mo3tv/features/media/domain/usecases/get_movie_details_usecase.dart';
+import 'package:mo3tv/features/on_boarding/data/datasources/genres_local_datasource.dart';
+import 'package:mo3tv/features/on_boarding/data/repositories/genres_repository_impl.dart';
+import 'package:mo3tv/features/on_boarding/domain/repositories/genres_repository.dart';
+import 'package:mo3tv/features/on_boarding/domain/usecases/save_genres_usecase.dart';
 import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart';
 import 'package:mo3tv/features/reviews/data/repositories/reviews_repository_impl.dart';
 import 'package:mo3tv/features/reviews/domain/repositories/reviews_repository.dart';
@@ -74,6 +79,7 @@ Future<void> init() async {
   AppTheme.systemChrome();
   Bloc.observer=AppBlocObserver();
    await _external();
+   _genres();
   _media();
   _movie();
   _tv();
@@ -101,6 +107,7 @@ _logout() {
 
 }
 Future _external()async{
+  await Hive.initFlutter();
   HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
   final sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
@@ -179,4 +186,9 @@ _media(){
   sl.registerLazySingleton<RateMediaUseCase>(() => RateMediaUseCase(sl()));
   sl.registerLazySingleton<MediaRepository>(()=>MediaRepositoryImpl(sl(),sl()));
   sl.registerLazySingleton<MediaRemoteDataSource>(() => MediaRemoteDataSourceImpl(sl()));
+}
+_genres(){
+  sl.registerLazySingleton<GenresLocalDataSource>(() => GenresLocalDataSourceImpl());
+  sl.registerLazySingleton<GenresRepository>(() => GenresRepositoryImpl(sl()));
+  sl.registerLazySingleton<SaveGenresUseCase>(() => SaveGenresUseCase(sl()));
 }

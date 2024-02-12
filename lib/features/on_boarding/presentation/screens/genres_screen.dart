@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mo3tv/app/injection_container.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/extension/empty_padding_extension.dart';
@@ -34,7 +35,7 @@ class GenresScreen extends StatelessWidget {
         systemNavigationBarContrastEnforced: false,
       ),
       child: BlocProvider(
-        create: (context) => GenresCubit(),
+        create: (_) => GenresCubit(sl()),
         child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           body: const _GenresScreenBody(),
