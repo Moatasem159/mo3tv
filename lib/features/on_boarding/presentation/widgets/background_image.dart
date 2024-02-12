@@ -1,7 +1,7 @@
-part of'../../screens/on_boarding_screen.dart';
-class _OnBoardingImage extends StatelessWidget {
+import 'package:flutter/material.dart';
+class BackgroundImage extends StatelessWidget {
   final String image;
-  const _OnBoardingImage(this.image);
+  const BackgroundImage(this.image,{super.key});
   @override
   Widget build(BuildContext context) {
     return ShaderMask(

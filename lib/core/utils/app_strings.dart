@@ -106,11 +106,16 @@ abstract class AppStrings {
   static const String disagree="disagree";
   static const String writtenBY="written_by";
   static const String on="on";
-  static const String onBoardingTitle1="onBoardingTitle1";
-  static const String onBoardingTitle2="onBoardingTitle2";
-  static const String onBoardingTitle3="onBoardingTitle3";
-  static const String onBoardingSubTitle1="onBoardingSubTitle1";
-  static const String onBoardingSubTitle2="onBoardingSubTitle2";
-  static const String onBoardingSubTitle3="onBoardingSubTitle3";
+  static const String onBoardingTitle1="on_Boarding_Title1";
+  static const String onBoardingTitle2="on_Boarding_Title2";
+  static const String onBoardingTitle3="on_Boarding_Title3";
+  static const String onBoardingSubTitle1="on_Boarding_SubTitle1";
+  static const String onBoardingSubTitle2="on_Boarding_SubTitle2";
+  static const String onBoardingSubTitle3="on_Boarding_SubTitle3";
   static const String skip="skip";
+  static const String chooseKeywordTitle="choose_Keyword_Title";
+  static const String moviesGenres="movie_genres";
+  static const String tvShowsGenres="tv_shows_genres";
+  static const String finish="finish";
+  static const String chooseYourGenres="choose_your_genres";
 }

@@ -12,6 +12,7 @@ import 'package:mo3tv/features/auth/presentation/screens/login_screen.dart';
 import 'package:mo3tv/config/routes/animations_route/scale_from_center.dart';
 import 'package:mo3tv/features/media/presentation/screens/media_screen.dart';
 import 'package:mo3tv/features/gallery/presentation/screens/image_screen.dart';
+import 'package:mo3tv/features/on_boarding/presentation/screens/genres_screen.dart';
 import 'package:mo3tv/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:mo3tv/features/search/presentation/screens/search_screen.dart';
 import 'package:mo3tv/features/media/presentation/screens/trailer_screen.dart';
@@ -31,6 +32,7 @@ import 'package:mo3tv/features/account/presentation/cubit/account_lists_cubit/ac
 abstract class Routes {
   static const String initialRoute = "/movieRoute";
   static const String onBoardingRoute = "onBoardingRoute";
+  static const String genresRoute = "genresRoute";
   static const String movieRoute = "movieRoute";
   static const String seeMoreMoviesRoute = "seeMoreMovieRoute";
   static const String tvRoute = "tvRoute";
@@ -58,7 +60,7 @@ abstract class AppRoute {
   static final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
   static final GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation: "/onBoardingRoute",
+    initialLocation: "/genresRoute",
     routes: [
       GoRoute(
           path: "/onBoardingRoute",
@@ -74,6 +76,14 @@ abstract class AppRoute {
             }
           },
           builder: (context, state) => const OnBoardingScreen()),
+      GoRoute(
+          path: "/genresRoute",
+          name: Routes.genresRoute,
+          parentNavigatorKey: navigationKey,
+        pageBuilder: (context, state) => AppLocalizations.of(context)!.isEnLocale ?
+        SlideFromRightToLeft(child: const GenresScreen()) :
+        SlideFromLeftToRight(child: const GenresScreen()),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context,state , navigationShell) => MainScreen(navigationShell: navigationShell),
         branches: [

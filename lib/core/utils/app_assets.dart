@@ -1,4 +1,5 @@
 abstract class AppAssets{
+  static const String appLogo="assets/images/splash_logo.png";
   static const String movieCover="assets/images/movie_cover.jpg";
   static const String tvCover="assets/images/tv_cover.jpg";
   static const String errorCover="assets/images/movieplaceholder.png";
@@ -8,4 +9,5 @@ abstract class AppAssets{
   static const String onBoarding1="assets/images/on_boarding/on_boarding1.jpg";
   static const String onBoarding2="assets/images/on_boarding/on_boarding2.jpg";
   static const String onBoarding3="assets/images/on_boarding/on_boarding3.jpg";
+  static const String genresBackground="assets/images/genres_background.jpg";
 }

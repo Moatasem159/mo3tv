@@ -55,7 +55,7 @@ class _OnBoardingScreenBodyState extends State<_OnBoardingScreenBody> {
         _CustomDots(controller),
         Positioned(
           top: context.height/1.25,
-          left: context.width / 2.82,
+          left: context.width / 2.47,
           child: MainButton(
             onPressed:(){
               if(currentPage!=2)
@@ -71,7 +71,7 @@ class _OnBoardingScreenBodyState extends State<_OnBoardingScreenBody> {
             label:currentPage!=2?AppStrings.next.tr(context)!:AppStrings.skip.tr(context)!,
             radius: 15,
             overlayColor: Colors.white24,
-            size: const Size(100, 30),
+            size: const Size(70, 30),
           ),
         ),
         if(currentPage==2)

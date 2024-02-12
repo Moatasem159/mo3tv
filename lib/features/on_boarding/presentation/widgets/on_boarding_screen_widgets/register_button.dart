@@ -10,7 +10,7 @@ class _RegisterButton extends StatelessWidget {
             AccountCubit.get(context).getAccountDetails();
             showDialog(context: context,
                 barrierDismissible: false,
-                builder: (_) => const LoginDialog(inOnBoarding: true));
+                builder: (_) => const LoginDialog());
           }
           if (state is GetTokenSuccessState) {
             context.pushNamed(Routes.loginRoute, extra: LogCubit.get(context),pathParameters: {"token":LogCubit.get(context).token.token});
@@ -21,7 +21,9 @@ class _RegisterButton extends StatelessWidget {
             return Positioned(
                 top: context.height/1.15,
                 left: context.width/2.24,
-                child: const CircularProgressIndicator());
+                child: const CircularProgressIndicator(
+                strokeWidth: 1,
+                ));
           }
           return Positioned(
             top: context.height/1.17,
@@ -36,7 +38,7 @@ class _RegisterButton extends StatelessWidget {
               label: AppStrings.loginToEnjoyFullExperience.tr(context)!,
             ),
           );
-        },),
+        }),
     );
   }
 }

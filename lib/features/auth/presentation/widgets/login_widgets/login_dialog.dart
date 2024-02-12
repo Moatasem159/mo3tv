@@ -1,7 +1,6 @@
 part of'login_button.dart';
 class LoginDialog extends StatelessWidget {
-  final bool ?inOnBoarding;
-  const LoginDialog({super.key, this.inOnBoarding=false});
+  const LoginDialog({super.key});
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -11,11 +10,7 @@ class LoginDialog extends StatelessWidget {
         TextButton(
           onPressed:(){
             context.pop();
-            if(inOnBoarding==true){
-
-            }else{
-              context.goNamed(Routes.movieRoute);
-            }
+            context.goNamed(Routes.genresRoute);
           },
           child:Text(AppStrings.ok.tr(context)!,style: AppTextStyles.get14NormalText()),
         )

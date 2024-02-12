@@ -9,7 +9,7 @@ class _OnBoardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        _OnBoardingImage(image),
+        BackgroundImage(image),
         Positioned(
           top:index==0?context.height/1.8:index==1?context.height/2.3:context.height/1.6,
           child: Column(

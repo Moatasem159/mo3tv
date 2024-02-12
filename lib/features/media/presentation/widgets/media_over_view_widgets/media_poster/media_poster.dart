@@ -26,6 +26,7 @@ class _MoviePosterWidgetState extends State<MediaPoster> with SingleTickerProvid
   @override
   void dispose() {
     _slideController.dispose();
+    _curveAnimations.dispose();
     super.dispose();
   }
   @override

@@ -4,30 +4,21 @@ class _SkipButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      right: 0,
-      top: context.height/5,
+      right: context.width/13,
+      top: context.height/11.6,
       child: Material(
         color: Colors.transparent,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(25),
-          bottomLeft: Radius.circular(25),
-        ),
+        borderRadius:BorderRadius.circular(10),
         child: InkWell(
-          onTap:()=>context.goNamed(Routes.movieRoute),
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(25),
-            bottomLeft: Radius.circular(25),
-          ),
+          // onTap:()=>context.goNamed(Routes.movieRoute),
+          borderRadius:BorderRadius.circular(10),
           child: Container(
-            width:70,
+            width:60,
             height:30,
             alignment: Alignment.center,
-            decoration: const BoxDecoration(
+            decoration:  BoxDecoration(
                 color: Colors.white24,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  bottomLeft: Radius.circular(25),
-                )
+                borderRadius:BorderRadius.circular(10)
             ),
             child: Text(AppStrings.skip.tr(context)!,style: AppTextStyles.get18BoldText()),
           ),
