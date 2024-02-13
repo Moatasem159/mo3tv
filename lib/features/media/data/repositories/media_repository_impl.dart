@@ -30,4 +30,8 @@ class MediaRepositoryImpl implements MediaRepository{
   Future<Either<Failure,Message>> markMedia(MediaParams params)async {
     return _baseRepository.execute<Message>(() => _mediaRemoteDataSource.markMedia(params));
   }
+  @override
+  Future<Either<Failure, List<Media>>> getDiscoverMediaList(MediaParams params) async{
+    return _baseRepository.execute<List<Media>>(() => _mediaRemoteDataSource.getDiscoverList(params));
+  }
 }

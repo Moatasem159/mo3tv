@@ -15,4 +15,13 @@ class GenresRepositoryImpl implements GenresRepository{
       return Left(CacheFailure(failure.message!));
     }
   }
+  @override
+  Future<Either<Failure,List<String>>> getGenres(bool isMovie)async {
+    try {
+      final List<String> result = await _genresLocalDataSource.getGenres(isMovie);
+      return Right(result);
+    } on CacheException catch (failure) {
+      return Left(CacheFailure(failure.message!));
+    }
+  }
 }

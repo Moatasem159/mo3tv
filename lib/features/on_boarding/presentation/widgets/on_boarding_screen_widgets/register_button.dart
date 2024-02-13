@@ -10,7 +10,7 @@ class _RegisterButton extends StatelessWidget {
             AccountCubit.get(context).getAccountDetails();
             showDialog(context: context,
                 barrierDismissible: false,
-                builder: (_) => const LoginDialog());
+                builder: (_) => const LoginDialog(inOnBoarding: true));
           }
           if (state is GetTokenSuccessState) {
             context.pushNamed(Routes.loginRoute, extra: LogCubit.get(context),pathParameters: {"token":LogCubit.get(context).token.token});

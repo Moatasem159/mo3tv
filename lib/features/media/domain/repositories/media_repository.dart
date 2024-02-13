@@ -9,4 +9,5 @@ abstract class MediaRepository{
   Future<Either<Failure,Message>> rateMedia(MediaParams params);
   Future<Either<Failure,Message>> deleteMediaRate(MediaParams params);
   Future<Either<Failure,Message>> markMedia(MediaParams params);
+  Future<Either<Failure,List<Media>>> getDiscoverMediaList(MediaParams params);
 }

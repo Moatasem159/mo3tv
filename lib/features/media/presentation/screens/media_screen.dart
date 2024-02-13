@@ -22,6 +22,15 @@ class MediaScreen extends StatelessWidget {
         MediaList(
           params: MediaParams(
             mediaType: mediaType,
+            listType: AppStrings.discover,
+            listTitle: mediaType == AppStrings.movie
+                ? AppStrings.moviesForYou
+                : AppStrings.tvShowsForYou,
+          ),
+        ),
+        MediaList(
+          params: MediaParams(
+            mediaType: mediaType,
             listType: AppStrings.trending,
             listTitle: mediaType == AppStrings.movie
                 ? AppStrings.trendingMoviesToday

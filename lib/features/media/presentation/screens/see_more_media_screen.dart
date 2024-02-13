@@ -35,7 +35,7 @@ class _SeeMoreMediaScreenState extends State<SeeMoreMediaScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetMoreMediaCubit(di.sl(),di.sl(),widget.params),
+      create: (_) => GetMoreMediaCubit(di.sl(),di.sl(),di.sl(),widget.params),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,

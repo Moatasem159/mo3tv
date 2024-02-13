@@ -24,7 +24,7 @@ class MediaList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetMediaListCubit(di.sl(),params)..getMediaList(),
+      create: (context) => GetMediaListCubit(di.sl(),di.sl(),params)..getMediaList(),
       child: BlocBuilder<GetMediaListCubit, GetMediaListStates>(
         builder: (context, state) {
           if (state is GetMediaListLoadingState) {

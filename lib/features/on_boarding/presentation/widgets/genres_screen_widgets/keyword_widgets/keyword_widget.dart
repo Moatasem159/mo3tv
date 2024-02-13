@@ -1,6 +1,6 @@
 part of'../../../screens/genres_screen.dart';
 class _KeyWordWidget extends StatelessWidget {
-  final String genre;
+  final Keyword genre;
   final bool isMovie;
   const _KeyWordWidget(this.genre, this.isMovie);
   @override
@@ -9,7 +9,7 @@ class _KeyWordWidget extends StatelessWidget {
       builder: (context, state) {
         GenresCubit cubit = GenresCubit.get(context);
         return GestureDetector(
-          onTap: () => cubit.addToList(isMovie: isMovie, genre: genre),
+          onTap: () => cubit.addToList(isMovie: isMovie, genre: genre.id.toString()),
           child: Container(
         alignment: Alignment.center,
         constraints: const BoxConstraints(maxWidth: 130,minWidth: 50),
@@ -17,14 +17,14 @@ class _KeyWordWidget extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             border: Border.all(
-                    color: (isMovie && cubit.movieGenres.contains(genre))
+                    color: (isMovie && cubit.movieGenres.contains(genre.id.toString()))
                         ? Colors.blue
-                        : !isMovie && cubit.tvGenres.contains(genre)
+                        : !isMovie && cubit.tvGenres.contains(genre.id.toString())
                             ? Colors.blue
                             : Colors.white54,
                     width: 2),
             color: Colors.black54),
-        child: Text(genre,textAlign: TextAlign.center, style: AppTextStyles.get14BoldText()),
+        child: Text(genre.name,textAlign: TextAlign.center, style: AppTextStyles.get14BoldText()),
       ),
         );
       },

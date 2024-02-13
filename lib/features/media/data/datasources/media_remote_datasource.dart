@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/features/media/domain/entities/media_params.dart';
@@ -10,6 +11,7 @@ abstract class MediaRemoteDataSource{
   Future<MessageModel> rateMedia(MediaParams params);
   Future<MessageModel> deleteMediaRate(MediaParams params);
   Future<MessageModel> markMedia(MediaParams params);
+  Future<List<MediaModel>> getDiscoverList(MediaParams params);
 }
 class MediaRemoteDataSourceImpl implements MediaRemoteDataSource{
   final ApiConsumer _apiConsumer;
@@ -47,4 +49,24 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource{
             params.markType: params.mark
           }
       ));
+  @override
+  Future<List<MediaModel>> getDiscoverList(MediaParams params)async {
+    String genres = await _getGenres(params.mediaType);
+    final response = await _apiConsumer.get(EndPoints.discoverPath(MediaParams(
+      mediaType: params.mediaType,
+      lang: params.lang,
+      page: params.page,
+      genres: genres
+    )));
+    return List<MediaModel>.from((response['results'] as List).map((x) => MediaModel.fromJson(x)))
+      ..removeWhere((element) => element.backdropPath==''||element.posterPath=='');
+  }
+  Future<String> _getGenres(String mediaType) async {
+    String boxName=mediaType==AppStrings.movie?"movieGenres":"tvGenres";
+    Box<String> mediaBox=await Hive.openBox<String>(boxName);
+    List<String> list=mediaBox.values.toList();
+    String genres=list.join(",");
+    mediaBox.close();
+    return genres;
+  }
 }

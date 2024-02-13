@@ -42,6 +42,7 @@ import 'package:mo3tv/features/media/data/datasources/media_remote_datasource.da
 import 'package:mo3tv/features/media/data/repositories/media_repository_impl.dart';
 import 'package:mo3tv/features/media/domain/repositories/media_repository.dart';
 import 'package:mo3tv/features/media/domain/usecases/delete_rate_media_usecase.dart';
+import 'package:mo3tv/features/media/domain/usecases/get_discover_media_list.dart';
 import 'package:mo3tv/features/media/domain/usecases/get_media_list_usecase.dart';
 import 'package:mo3tv/features/media/domain/usecases/get_similar_media_usecase.dart';
 import 'package:mo3tv/features/media/domain/usecases/mark_media_usecase.dart';
@@ -53,6 +54,7 @@ import 'package:mo3tv/features/media/domain/usecases/get_movie_details_usecase.d
 import 'package:mo3tv/features/on_boarding/data/datasources/genres_local_datasource.dart';
 import 'package:mo3tv/features/on_boarding/data/repositories/genres_repository_impl.dart';
 import 'package:mo3tv/features/on_boarding/domain/repositories/genres_repository.dart';
+import 'package:mo3tv/features/on_boarding/domain/usecases/get_genres_usecase.dart';
 import 'package:mo3tv/features/on_boarding/domain/usecases/save_genres_usecase.dart';
 import 'package:mo3tv/features/reviews/data/datasources/reviews_data_source.dart';
 import 'package:mo3tv/features/reviews/data/repositories/reviews_repository_impl.dart';
@@ -180,6 +182,7 @@ _credits(){
 }
 _media(){
   sl.registerLazySingleton<GetMediaListUsecase>(() => GetMediaListUsecase(sl()));
+  sl.registerLazySingleton<GetDiscoverMediaListUsecase>(() => GetDiscoverMediaListUsecase(sl()));
   sl.registerLazySingleton<GetSimilarMediaListUsecase>(() => GetSimilarMediaListUsecase(sl()));
   sl.registerLazySingleton<DeleteRateMediaUseCase>(() => DeleteRateMediaUseCase(sl()));
   sl.registerLazySingleton<MarkMediaUsecase>(() => MarkMediaUsecase(sl()));
@@ -188,7 +191,10 @@ _media(){
   sl.registerLazySingleton<MediaRemoteDataSource>(() => MediaRemoteDataSourceImpl(sl()));
 }
 _genres(){
+
+
   sl.registerLazySingleton<GenresLocalDataSource>(() => GenresLocalDataSourceImpl());
   sl.registerLazySingleton<GenresRepository>(() => GenresRepositoryImpl(sl()));
   sl.registerLazySingleton<SaveGenresUseCase>(() => SaveGenresUseCase(sl()));
+  sl.registerLazySingleton<GetGenresUseCase>(() => GetGenresUseCase(sl()));
 }

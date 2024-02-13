@@ -29,7 +29,7 @@ class MediaDetailsScreen extends StatelessWidget {
         BlocProvider(create: (context) => GalleryCubit(di.sl())..mediaId=media.media.id..mediaType=media.mediaType..getMediaGallery()),
         BlocProvider(create: (context) => ReviewsCubit(di.sl())..mediaId=media.media.id..mediaType=media.mediaType..getMediaReviews()),
         BlocProvider(create: (context) => CreditsCubit(di.sl())..mediaId=media.media.id..mediaType=media.mediaType..getMediaCredits()),
-        BlocProvider( create: (context)=> GetMoreMediaCubit(di.sl(),di.sl(),
+        BlocProvider( create: (context)=> GetMoreMediaCubit(di.sl(),di.sl(),di.sl(),
             MediaParams(mediaId: media.media.id,mediaType:media.mediaType,moreType: AppStrings.recommendations)
         )..getMoreMedia()),
       ],

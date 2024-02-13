@@ -51,7 +51,7 @@ class _OnBoardingScreenBodyState extends State<_OnBoardingScreenBody> {
           itemBuilder: (_, index) => _OnBoardingPage(image: images[index], title: titles[index], subtitle: subTitles[index],index: index),
         ),
         if(currentPage!=2)
-        const _SkipButton(),
+        _SkipButton(controller),
         _CustomDots(controller),
         Positioned(
           top: context.height/1.25,

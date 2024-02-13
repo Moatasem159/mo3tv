@@ -14,12 +14,12 @@ abstract class EndPoints{
   static String logOutPath= "$baseUrl/authentication/session?api_key=${Env.apiKey}";
   static String mediaDetailsPath(String sessionId, MediaParams params) =>
       "$baseUrl/${params.mediaType}/${params.mediaId}?api_key=${Env.apiKey}&session_id=$sessionId&append_to_response=keywords,account_states,videos&language=${params.lang}";
+  static String discoverPath(MediaParams params) =>
+      "$baseUrl/discover/${params.mediaType}?api_key=${Env.apiKey}&language=${params.lang}&with_genres=${params.genres}&page=${params.page}";
   static String trendingMediaPath (MediaParams params)=>
       "$baseUrl/trending/${params.mediaType}/day?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
   static String mediaListsPath(MediaParams params) =>
       "$baseUrl/${params.mediaType}/${params.listType}?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
-  // static String recommendationMediaPath(MediaParams params) =>
-  //     "$baseUrl/${params.mediaType}/${params.mediaId}/${params.moreType}?api_key=${Env.apiKey}&page=1&language=${params.lang}";
   static String similarMediaPath(MediaParams params) =>
       "$baseUrl/${params.mediaType}/${params.mediaId}/${params.moreType}?api_key=${Env.apiKey}&page=${params.page}&language=${params.lang}";
   static String mediaReviewsPath(MediaParams params) =>

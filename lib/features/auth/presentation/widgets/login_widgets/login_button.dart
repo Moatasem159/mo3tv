@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/config/routes/app_routes.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
@@ -20,17 +21,22 @@ class LoginButton extends StatelessWidget {
     return BlocProvider(
       create: (context) => LogCubit(di.sl(), di.sl(),di.sl()),
       child: BlocConsumer<LogCubit, LogStates>(
-        listener: (context, state) {
+        listener: (context, state) async{
           if (state is GetSessionIdSuccessState) {
             AccountCubit.get(context).getAccountDetails();
-            showDialog(context: context, barrierDismissible: false ,builder: (_) => const LoginDialog());
+            showDialog(context: context, barrierDismissible: false ,builder: (_) => const LoginDialog(inOnBoarding: false));
           }
           if (state is GetTokenSuccessState) {
             context.pushNamed(Routes.loginRoute, extra: LogCubit.get(context),pathParameters: {"token":LogCubit.get(context).token.token});
           }
           if (state is LogOutSuccessState) {
             AccountCubit.get(context).getAccountDetails();
-            context.goNamed(Routes.movieRoute);
+            Box box1=await Hive.openBox("movieGenres");
+            Box box2=await Hive.openBox("tvGenres");
+            await box1.clear();
+            await box2.clear();
+            await box1.close();
+            await box2.close().then((_) =>context.goNamed(Routes.movieRoute));
           }
         },
         builder: (context, state) {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
-class SettingsTile extends StatelessWidget {
+class CustomListTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback onTap;
-  const SettingsTile({super.key, required this.title,required this.icon,required this.onTap});
+  const CustomListTile({super.key, required this.title,required this.icon,required this.onTap});
   @override
   Widget build(BuildContext context) {
     return ListTile(

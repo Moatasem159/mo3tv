@@ -13,7 +13,9 @@ class MediaParams {
   final String markType;
   final int seasonNumber;
   final String moreType;
+  final String genres;
   const MediaParams({
+    this.genres='',
     this.listTitle='?',
     this.moreType='?',
     this.mediaType ='?',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
+import 'package:mo3tv/core/extension/empty_padding_extension.dart';
 import 'package:mo3tv/core/utils/app_text_styles.dart';
 import 'package:mo3tv/features/media/domain/entities/media.dart';
 import 'package:mo3tv/core/widgets/buttons/see_more_button.dart';
@@ -40,9 +41,14 @@ class SeeMoreMediaScreenBody extends StatelessWidget {
         ),
         BlocBuilder<GetMoreMediaCubit, GetMoreMediaStates>(
           builder: (context, state) {
+
             if (state is GetMoreMediaLoadingState) {
               return const SliverLoadingIndicator();
             }
+            if(state is GetMoreMediaSuccessState && state.isLast)
+              {
+                return  SliverToBoxAdapter(child: 10.ph);
+              }
             return SeeMoreButton(onPressed: GetMoreMediaCubit.get(context).getMoreMedia);
           },
         ),

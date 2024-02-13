@@ -60,7 +60,7 @@ abstract class AppRoute {
   static final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
   static final GoRouter router = GoRouter(
     navigatorKey: navigationKey,
-    initialLocation: "/genresRoute",
+    initialLocation: "/onBoardingRoute",
     routes: [
       GoRoute(
           path: "/onBoardingRoute",
