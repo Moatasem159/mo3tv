@@ -14,14 +14,14 @@ class MainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(overlayColor),
-        backgroundColor:MaterialStateProperty.all<Color?>(color),
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        overlayColor: WidgetStateProperty.all(overlayColor),
+        backgroundColor:WidgetStateProperty.all<Color?>(color),
+        padding: WidgetStateProperty.all(EdgeInsets.zero),
+        shape: WidgetStateProperty.all(RoundedRectangleBorder(
             borderRadius:BorderRadius.circular(radius!),
           )),
-        fixedSize: MaterialStateProperty.all(size),
-        minimumSize: MaterialStateProperty.all(Size.zero),
+        fixedSize: WidgetStateProperty.all(size),
+        minimumSize: WidgetStateProperty.all(Size.zero),
 
       ),
       onPressed:onPressed,

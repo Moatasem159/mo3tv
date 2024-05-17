@@ -9,9 +9,9 @@ abstract class AppTheme {
     primaryColorLight: AppColors.primaryTextLight,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.dark,
-    colorScheme: ColorScheme.fromSwatch(
+    colorScheme: const ColorScheme.dark(
       brightness: Brightness.dark,
-      backgroundColor: AppColors.darkBackgroundColor,
+      surface: AppColors.darkBackgroundColor,
     ),
     appBarTheme:const AppBarTheme(
       backgroundColor: AppColors.darkBackgroundColor,
@@ -38,7 +38,7 @@ abstract class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(AppColors.primaryColorDarkTheme)
+        backgroundColor: WidgetStateProperty.all(AppColors.primaryColorDarkTheme)
       )
     ),
     snackBarTheme: const SnackBarThemeData(

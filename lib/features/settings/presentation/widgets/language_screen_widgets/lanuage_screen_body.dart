@@ -9,7 +9,7 @@ class LanguageScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           appBar: AppBar(
             leadingWidth: 50,
             title:  Text(AppStrings.language.tr(context)!,style: AppTextStyles.get18BoldText(),),

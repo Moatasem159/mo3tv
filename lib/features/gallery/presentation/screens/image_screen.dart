@@ -22,12 +22,12 @@ class ImageScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor:Theme.of(context).colorScheme.background,
+          backgroundColor:Theme.of(context).colorScheme.surface,
           elevation: 0,
           title:IconButton(
               icon: const Icon(Icons.download), onPressed: () => save(context)),
         ),
-        backgroundColor:Theme.of(context).colorScheme.background,
+        backgroundColor:Theme.of(context).colorScheme.surface,
         body: Hero(
           tag: image,
           child: InteractiveViewer(

@@ -13,7 +13,7 @@ class _SearchBarWidget extends StatelessWidget {
           toolbarHeight: 70,
           flexibleSpace: Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             child: MainTextFormField(
               controller: cubit.controller,
               hintText: AppStrings.searchDialog.tr(context)!,

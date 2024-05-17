@@ -8,7 +8,7 @@ class MainBottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 40,
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       child: Row(
         children: [
           MainBottomNavBarItem(

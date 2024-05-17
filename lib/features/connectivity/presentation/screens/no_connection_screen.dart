@@ -8,7 +8,7 @@ class NoConnectionScreen extends StatelessWidget {
      canPop: false,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           body: const NoConnectionScreenBody(),
         ),
       ),
