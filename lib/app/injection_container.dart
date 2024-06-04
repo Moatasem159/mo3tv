@@ -111,7 +111,7 @@ _logout() {
 Future _external()async{
   await Hive.initFlutter();
   HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
-  final sharedPreference = await SharedPreferences.getInstance();
+  final SharedPreferences sharedPreference = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton<BaseRepository>(() => BaseRepositoryImpl(sl()));

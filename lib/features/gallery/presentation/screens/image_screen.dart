@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery_saver/gallery_saver.dart';
+import 'package:gallery_saver_updated/gallery_saver.dart';
 import 'package:mo3tv/config/lang/app_localizations.dart';
 import 'package:mo3tv/core/api/end_points.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
