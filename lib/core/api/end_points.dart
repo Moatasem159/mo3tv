@@ -1,7 +1,7 @@
 import 'package:mo3tv/core/api/env.dart';
 import 'package:mo3tv/features/media/domain/entities/media_params.dart';
 abstract class EndPoints{
-  static const String baseUrl="https://api.themoviedb.org/3/";
+  static const String baseUrl="https://api.themoviedb.org/3";
   static const String basePosterUrl = "https://image.tmdb.org/t/p/w500";
   static const String baseBackDropsUrl = "https://image.tmdb.org/t/p/w780";
   static const String baseLogoUrl = "https://image.tmdb.org/t/p/w185";
@@ -29,13 +29,13 @@ abstract class EndPoints{
   static String mediaGalleryPath(MediaParams params) =>
       "$baseUrl/${params.mediaType}/${params.mediaId}/images?api_key=${Env.apiKey}";
   static String markMediaPath(String sessionid,String markType)=>
-      "${baseUrl}account/{account_id}/$markType?api_key=${Env.apiKey}&session_id=$sessionid";
+      "$baseUrl/account/{account_id}/$markType?api_key=${Env.apiKey}&session_id=$sessionid";
   static String rateMediaPath(String sessionid,MediaParams params)=>
       "$baseUrl/${params.mediaType}/${params.mediaId}/rating?api_key=${Env.apiKey}&session_id=$sessionid";
   static String tvShowSeasonDetailsPath(MediaParams params) =>
       "$baseUrl/tv/${params.mediaId}/season/${params.seasonNumber}?api_key=${Env.apiKey}&language=${params.lang}";
   static String searchUrl({required String query,required int page,required String lang})=>
-      "${baseUrl}search/multi?api_key=${Env.apiKey}&page=$page&query=$query&language=$lang";
+      "$baseUrl/search/multi?api_key=${Env.apiKey}&page=$page&query=$query&language=$lang";
   static String backDropsUrl(String path) =>
       "$baseBackDropsUrl$path";
   static String posterUrl(String path) =>
@@ -46,12 +46,5 @@ abstract class EndPoints{
       "$baseHdUrl$path";
   static String accountPath(String sessionId) => "$baseUrl/account?api_key=${Env.apiKey}&session_id=$sessionId";
   static String accountMediaListPath(String sessionid,MediaParams params)=>
-     "${baseUrl}account/{account_id}/${params.listType}/${params.mediaType}?api_key=${Env.apiKey}&session_id=$sessionid&page=${params.page}&language=${params.lang}";
-  static String createMediaListPath(String sessionid)=>"${baseUrl}list?api_key=${Env.apiKey}&session_id=$sessionid";
-  static String getAccountCustomListsPath(String sessionid,String accountId)=>
-      "${baseUrl}account/$accountId/lists?api_key=${Env.apiKey}&session_id=$sessionid";
-  static String getAccountCustomListPath(String sessionid,String listId)=>
-      "${baseUrl}list/$listId?api_key=${Env.apiKey}&session_id=$sessionid";
-  static String clearAccountCustomListPath(String sessionid,String listId)=>
-      "${baseUrl}list/$listId/clear?api_key=${Env.apiKey}&session_id=$sessionid&confirm=true";
+     "$baseUrl/account/{account_id}/${params.listType}/${params.mediaType}?api_key=${Env.apiKey}&session_id=$sessionid&page=${params.page}&language=${params.lang}";
 }

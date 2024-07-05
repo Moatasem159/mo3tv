@@ -7,6 +7,7 @@ class _SearchBarWidget extends StatelessWidget {
       builder: (context, state) {
         SearchBloc cubit = SearchBloc.get(context);
         return SliverAppBar(
+          surfaceTintColor: Colors.transparent,
           pinned: true,
           elevation: 0,
           expandedHeight: 70,
