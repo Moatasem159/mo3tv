@@ -34,7 +34,7 @@ class OnBoardingScreen extends StatelessWidget {
         systemNavigationBarContrastEnforced: false,
       ),
       child:Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           body:const _OnBoardingScreenBody(),
       ),
     );

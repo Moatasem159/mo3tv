@@ -12,7 +12,7 @@ class TrailerScreen extends StatelessWidget {
           backgroundColor:Theme.of(context).appBarTheme.backgroundColor,
           title: Text(title),
         ),
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         body: YoutubePlayerVideo(url: url, title: title),
       ),
     );

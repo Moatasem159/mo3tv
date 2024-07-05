@@ -45,7 +45,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.mo3tv"
-        compileSdkVersion 33
+        compileSdkVersion 34
         minSdkVersion 21
         targetSdkVersion  34
         multiDexEnabled true

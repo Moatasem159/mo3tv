@@ -38,7 +38,7 @@ class _SeeMoreMediaScreenState extends State<SeeMoreMediaScreen> {
       create: (_) => GetMoreMediaCubit(di.sl(),di.sl(),di.sl(),widget.params),
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           body:SeeMoreMediaScreenBody(controller: controller, listTitle: widget.params.listTitle, media: widget.media,mediaType: widget.params.mediaType),
           floatingActionButton: showScrollButton ? ArrowUpButton(
                   onTap: () => controller.animateTo(0,

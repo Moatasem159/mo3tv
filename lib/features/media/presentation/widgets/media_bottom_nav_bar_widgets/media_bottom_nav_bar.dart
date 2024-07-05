@@ -8,7 +8,7 @@ class MediaBottomNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 40,
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       child: const Row(
         children: [
           _MediaBottomNavBarItem(index: 0,icon:Icons.info_outline),

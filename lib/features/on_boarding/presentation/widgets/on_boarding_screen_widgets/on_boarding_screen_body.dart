@@ -39,6 +39,7 @@ class _OnBoardingScreenBodyState extends State<_OnBoardingScreenBody> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.center,
       children: [
         PageView.builder(
           itemCount: 3,
@@ -55,7 +56,6 @@ class _OnBoardingScreenBodyState extends State<_OnBoardingScreenBody> {
         _CustomDots(controller),
         Positioned(
           top: context.height/1.25,
-          left: context.width / 2.47,
           child: MainButton(
             onPressed:(){
               if(currentPage!=2)
@@ -66,12 +66,13 @@ class _OnBoardingScreenBodyState extends State<_OnBoardingScreenBody> {
                 context.goNamed(Routes.movieRoute);
               }
             },
+            padding: const EdgeInsets.symmetric(vertical: 5),
             color: Colors.white54,
             textStyle: AppTextStyles.get14BoldText(),
             label:currentPage!=2?AppStrings.next.tr(context)!:AppStrings.skip.tr(context)!,
             radius: 15,
+            size: const Size(60, 30),
             overlayColor: Colors.white24,
-            size: const Size(70, 30),
           ),
         ),
         if(currentPage==2)

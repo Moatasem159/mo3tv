@@ -1,12 +1,16 @@
-part of'../../screens/search_screen.dart';
+part of '../../screens/search_screen.dart';
+
 class _RecentlySearchList extends StatelessWidget {
   final List<Search> recently;
-  const _RecentlySearchList( this.recently);
+
+  const _RecentlySearchList(this.recently);
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: recently.length,
-        itemBuilder: (context, index) =>_RecentlySearchItem(recently[index]));
+        itemBuilder: (context, index) => _RecentlySearchItem(recently[index]));
   }
 }

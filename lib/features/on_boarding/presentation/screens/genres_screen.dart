@@ -40,7 +40,7 @@ class GenresScreen extends StatelessWidget {
         child: BlocProvider(
           create: (_) => GenresCubit(sl(),sl())..getGenres(),
           child: Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             body: const _GenresScreenBody(),
           ),
         ),

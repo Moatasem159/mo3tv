@@ -26,7 +26,7 @@ class AccountMediaListsScreen extends StatelessWidget {
     return BlocProvider(create: (_) => AccountListsCubit(di.sl())..getAccountList(listType: listType, mediaType: mediaType),
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           body: _MediaScreenBody(title: title, listType: listType, mediaType: mediaType),
         ),
       ),
