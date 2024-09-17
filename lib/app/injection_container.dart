@@ -76,12 +76,14 @@ import 'package:mo3tv/features/media/domain/usecases/get_tv_show_details_usecase
 import 'package:mo3tv/features/media/domain/usecases/get_tv_show_season_details_usecase.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-final sl = GetIt.instance;
+
+final GetIt sl = GetIt.instance;
+
 Future<void> init() async {
   AppTheme.systemChrome();
-  Bloc.observer=AppBlocObserver();
-   await _external();
-   _genres();
+  Bloc.observer = AppBlocObserver();
+  await _external();
+  _genres();
   _media();
   _movie();
   _tv();
@@ -94,32 +96,44 @@ Future<void> init() async {
   _logout();
   await sl<GetSavedSessionIdUsecase>().call();
 }
-_login(){
-      sl.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(sl(),sl(),sl(),sl()));
-      sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase( sl()));
-      sl.registerLazySingleton<GetSessionIdUsecase>(() => GetSessionIdUsecase(sl()));
-      sl.registerLazySingleton<LoginRemoteDataSource>(() => LoginRemoteDataSourceImpl(sl()));
-      sl.registerLazySingleton<LoginLocalDataSource>(() => LoginLocalDataSourceImpl(sl()));
-}
-_logout() {
-    sl.registerLazySingleton<LogOutUsecase>(() => LogOutUsecase(sl()));
-    sl.registerLazySingleton<LogOutRepository>(() => LogOutRepositoryImpl(sl(), sl(),sl()));
-    sl.registerLazySingleton<LogOutRemoteDataSource>(() => LogOutRemoteDataSourceImpl(sl()));
-    sl.registerLazySingleton<LogOutLocalDataSource>(() => LogOutLocalDataSourceImpl(sl()));
 
+_login() {
+  sl.registerLazySingleton<LoginRepository>(
+      () => LoginRepositoryImpl(sl(), sl(), sl(), sl()));
+  sl.registerLazySingleton<GetTokenUsecase>(() => GetTokenUsecase(sl()));
+  sl.registerLazySingleton<GetSessionIdUsecase>(
+      () => GetSessionIdUsecase(sl()));
+  sl.registerLazySingleton<LoginRemoteDataSource>(
+      () => LoginRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<LoginLocalDataSource>(
+      () => LoginLocalDataSourceImpl(sl()));
 }
-Future _external()async{
+
+_logout() {
+  sl.registerLazySingleton<LogOutUsecase>(() => LogOutUsecase(sl()));
+  sl.registerLazySingleton<LogOutRepository>(
+      () => LogOutRepositoryImpl(sl(), sl(), sl()));
+  sl.registerLazySingleton<LogOutRemoteDataSource>(
+      () => LogOutRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<LogOutLocalDataSource>(
+      () => LogOutLocalDataSourceImpl(sl()));
+}
+
+Future _external() async {
   await Hive.initFlutter();
-  HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
-  final SharedPreferences sharedPreference = await SharedPreferences.getInstance();
+  HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
+  final SharedPreferences sharedPreference =
+      await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreference);
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerLazySingleton<BaseRepository>(() => BaseRepositoryImpl(sl()));
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl()));
   sl.registerLazySingleton(() => Dio());
-  sl.registerLazySingleton<SharedPrefrencesConsumer>(() => SharedPrefrencesManager(sl()));
+  sl.registerLazySingleton<SharedPrefrencesConsumer>(
+      () => SharedPrefrencesManager(sl()));
   sl.registerLazySingleton(() => InternetConnectionChecker.createInstance(
-    checkInterval: const Duration(milliseconds: 3500)));
+      checkInterval: const Duration(milliseconds: 3500)));
   sl.registerLazySingleton(() => AppInterceptors());
   sl.registerLazySingleton(() => LogInterceptor(
         request: true,
@@ -130,70 +144,116 @@ Future _external()async{
         error: true,
       ));
 }
-_account(){
-  sl.registerLazySingleton<GetAccountListsUsecase>(() => GetAccountListsUsecase(sl()));
-  sl.registerLazySingleton<GetSavedSessionIdUsecase>(() => GetSavedSessionIdUsecase(sl()));
-  sl.registerLazySingleton<GetAccountDetailsUsecase>(() => GetAccountDetailsUsecase(sl()));
-  sl.registerLazySingleton<AccountRepository>(() => AccountRepositoryImpl(sl(),sl(),sl()));
-  sl.registerLazySingleton<AccountRemoteDataSource>(() => AccountRemoteDataSourceImpl(sl()));
-  sl.registerLazySingleton<AccountLocalDataSource>(() => AccountLocalDatasourceImpl(sl()));
+
+_account() {
+  sl.registerLazySingleton<GetAccountListsUsecase>(
+      () => GetAccountListsUsecase(sl()));
+  sl.registerLazySingleton<GetSavedSessionIdUsecase>(
+      () => GetSavedSessionIdUsecase(sl()));
+  sl.registerLazySingleton<GetAccountDetailsUsecase>(
+      () => GetAccountDetailsUsecase(sl()));
+  sl.registerLazySingleton<AccountRepository>(
+      () => AccountRepositoryImpl(sl(), sl(), sl()));
+  sl.registerLazySingleton<AccountRemoteDataSource>(
+      () => AccountRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<AccountLocalDataSource>(
+      () => AccountLocalDatasourceImpl(sl()));
 }
-_search(){
-  sl.registerLazySingleton<SearchRepository>(() => SearchRepositoryImpl(sl(),sl(),sl()));
+
+_search() {
+  sl.registerLazySingleton<SearchRepository>(
+      () => SearchRepositoryImpl(sl(), sl(), sl()));
   sl.registerLazySingleton<SearchUsecase>(() => SearchUsecase(sl()));
   sl.registerLazySingleton<SaveSearchUsecase>(() => SaveSearchUsecase(sl()));
-  sl.registerLazySingleton<ClearSearchListUsecase>(() => ClearSearchListUsecase(sl()));
-  sl.registerLazySingleton<ClearOneSearchUsecase>(() => ClearOneSearchUsecase(sl()));
-  sl.registerLazySingleton<GetSearchListUsecase>(() => GetSearchListUsecase(sl()));
-  sl.registerLazySingleton<SearchRemoteDataSource>(() => SearchRemoteDataSourceImpl(sl()));
-  sl.registerLazySingleton<SearchLocalDataSource>(() => SearchLocalDataSourceImpl(sl()));
+  sl.registerLazySingleton<ClearSearchListUsecase>(
+      () => ClearSearchListUsecase(sl()));
+  sl.registerLazySingleton<ClearOneSearchUsecase>(
+      () => ClearOneSearchUsecase(sl()));
+  sl.registerLazySingleton<GetSearchListUsecase>(
+      () => GetSearchListUsecase(sl()));
+  sl.registerLazySingleton<SearchRemoteDataSource>(
+      () => SearchRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<SearchLocalDataSource>(
+      () => SearchLocalDataSourceImpl(sl()));
 }
-_gallery(){
-  sl.registerLazySingleton<GetMediaGalleryUsecase>(() => GetMediaGalleryUsecase(sl()));
-  sl.registerLazySingleton<GalleryRepository>(() => GalleryRepositoryImpl(sl(),sl()));
-  sl.registerLazySingleton<GalleryDataSource>(() => GalleryDataSourceImpl(sl()));
+
+_gallery() {
+  sl.registerLazySingleton<GetMediaGalleryUsecase>(
+      () => GetMediaGalleryUsecase(sl()));
+  sl.registerLazySingleton<GalleryRepository>(
+      () => GalleryRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<GalleryDataSource>(
+      () => GalleryDataSourceImpl(sl()));
 }
-_movie(){
+
+_movie() {
   ///usecases
-  sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl()));
+  sl.registerLazySingleton<GetMovieDetailsUseCase>(
+      () => GetMovieDetailsUseCase(sl()));
+
   ///repository
-  sl.registerLazySingleton<MovieRepository>(()=>MoviesRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<MovieRepository>(
+      () => MoviesRepositoryImpl(sl(), sl()));
+
   ///date source
-  sl.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<MovieRemoteDataSource>(
+      () => MovieRemoteDataSourceImpl(sl()));
 }
-_tv(){
+
+_tv() {
   ///usecases
-  sl.registerLazySingleton<GetTvShowDetailsUsecase>(() => GetTvShowDetailsUsecase(sl()));
-  sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(() => GetTvShowSeasonDetailsUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowDetailsUsecase>(
+      () => GetTvShowDetailsUsecase(sl()));
+  sl.registerLazySingleton<GetTvShowSeasonDetailsUsecase>(
+      () => GetTvShowSeasonDetailsUsecase(sl()));
+
   ///repository
-  sl.registerLazySingleton<TvRepository>(() => TvShowRepositoryImpl(sl(),sl()));
+  sl.registerLazySingleton<TvRepository>(
+      () => TvShowRepositoryImpl(sl(), sl()));
+
   ///data source
-  sl.registerLazySingleton<TvShowRemoteDataSource>(()=>TvShowRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<TvShowRemoteDataSource>(
+      () => TvShowRemoteDataSourceImpl(sl()));
 }
-_reviews(){
-  sl.registerLazySingleton<GetMediaReviewsUsecase>(() => GetMediaReviewsUsecase(sl()));
-  sl.registerLazySingleton<ReviewsRepository>(() => ReviewsRepositoryImpl(sl(),sl()));
-  sl.registerLazySingleton<ReviewsDataSource>(() => ReviewsDataSourceImpl(sl()));
+
+_reviews() {
+  sl.registerLazySingleton<GetMediaReviewsUsecase>(
+      () => GetMediaReviewsUsecase(sl()));
+  sl.registerLazySingleton<ReviewsRepository>(
+      () => ReviewsRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<ReviewsDataSource>(
+      () => ReviewsDataSourceImpl(sl()));
 }
-_credits(){
-  sl.registerLazySingleton<GetMediaCreditsUsecase>(() => GetMediaCreditsUsecase(sl()));
-  sl.registerLazySingleton<CreditsRepository>(() => CreditsRepositoryImpl(sl(),sl()));
-  sl.registerLazySingleton<CreditsDataSource>(() => CreditsDataSourceImpl(sl()));
+
+_credits() {
+  sl.registerLazySingleton<GetMediaCreditsUsecase>(
+      () => GetMediaCreditsUsecase(sl()));
+  sl.registerLazySingleton<CreditsRepository>(
+      () => CreditsRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<CreditsDataSource>(
+      () => CreditsDataSourceImpl(sl()));
 }
-_media(){
-  sl.registerLazySingleton<GetMediaListUsecase>(() => GetMediaListUsecase(sl()));
-  sl.registerLazySingleton<GetDiscoverMediaListUsecase>(() => GetDiscoverMediaListUsecase(sl()));
-  sl.registerLazySingleton<GetSimilarMediaListUsecase>(() => GetSimilarMediaListUsecase(sl()));
-  sl.registerLazySingleton<DeleteRateMediaUseCase>(() => DeleteRateMediaUseCase(sl()));
+
+_media() {
+  sl.registerLazySingleton<GetMediaListUsecase>(
+      () => GetMediaListUsecase(sl()));
+  sl.registerLazySingleton<GetDiscoverMediaListUsecase>(
+      () => GetDiscoverMediaListUsecase(sl()));
+  sl.registerLazySingleton<GetSimilarMediaListUsecase>(
+      () => GetSimilarMediaListUsecase(sl()));
+  sl.registerLazySingleton<DeleteRateMediaUseCase>(
+      () => DeleteRateMediaUseCase(sl()));
   sl.registerLazySingleton<MarkMediaUsecase>(() => MarkMediaUsecase(sl()));
   sl.registerLazySingleton<RateMediaUseCase>(() => RateMediaUseCase(sl()));
-  sl.registerLazySingleton<MediaRepository>(()=>MediaRepositoryImpl(sl(),sl()));
-  sl.registerLazySingleton<MediaRemoteDataSource>(() => MediaRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<MediaRepository>(
+      () => MediaRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<MediaRemoteDataSource>(
+      () => MediaRemoteDataSourceImpl(sl()));
 }
-_genres(){
 
-
-  sl.registerLazySingleton<GenresLocalDataSource>(() => GenresLocalDataSourceImpl());
+_genres() {
+  sl.registerLazySingleton<GenresLocalDataSource>(
+      () => GenresLocalDataSourceImpl());
   sl.registerLazySingleton<GenresRepository>(() => GenresRepositoryImpl(sl()));
   sl.registerLazySingleton<SaveGenresUseCase>(() => SaveGenresUseCase(sl()));
   sl.registerLazySingleton<GetGenresUseCase>(() => GetGenresUseCase(sl()));
