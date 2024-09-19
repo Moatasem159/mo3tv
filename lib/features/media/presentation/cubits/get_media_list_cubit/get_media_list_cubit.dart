@@ -1,9 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:mo3tv/core/api/api_result.dart';
 import 'package:mo3tv/features/media/domain/entities/media.dart';
 import 'package:mo3tv/features/media/domain/entities/media_params.dart';
-import 'package:mo3tv/core/error/failure.dart';
 import 'package:mo3tv/core/functions/map_failure_to_string.dart';
 import 'package:mo3tv/core/utils/app_strings.dart';
 import 'package:mo3tv/features/media/data/models/media_model.dart';
@@ -29,14 +28,16 @@ class GetMediaListCubit extends HydratedCubit<GetMediaListStates> {
           lang: AppStrings.appLang,
           mediaType: params.mediaType,
           listType: params.listType);
-      Either<Failure, List<Media>> response =
-          param.listType == AppStrings.discover
-              ? await _getDiscoverMediaListUsecase(param)
-              : await _getMediaListUsecase(param);
-      emit(response.fold(
-          (failure) => GetMediaListErrorState(msg: mapFailureToMsg(failure)),
-          (media) => GetMediaListSuccessState(
-              media, DateTime.now().toIso8601String(), AppStrings.appLang)));
+      ApiResult<List<Media>> response = param.listType == AppStrings.discover
+          ? await _getDiscoverMediaListUsecase(param)
+          : await _getMediaListUsecase(param);
+      switch (response) {
+        case ApiSuccess<List<Media>>():
+          emit(GetMediaListSuccessState(response.data,
+              DateTime.now().toIso8601String(), AppStrings.appLang));
+        case ApiFailure<List<Media>>():
+          emit(GetMediaListErrorState(msg: mapFailureToMsg(response.failure)));
+      }
     }
   }
 
