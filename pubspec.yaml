@@ -34,7 +34,7 @@ dependencies:
   shared_preferences: ^2.3.2
   cached_network_image: ^3.4.1
   smooth_page_indicator: ^1.2.0+3
-  gallery_saver_updated: ^3.0.0
+  gal: ^2.3.0
   youtube_player_flutter: ^9.0.3
   internet_connection_checker: ^2.0.0
 dev_dependencies:

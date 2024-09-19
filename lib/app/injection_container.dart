@@ -6,7 +6,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mo3tv/app/bloc_observer.dart';
 import 'package:mo3tv/config/themes/app_theme.dart';
 import 'package:mo3tv/core/api/api_consumer.dart';
-import 'package:mo3tv/core/api/app_interceptors.dart';
 import 'package:mo3tv/core/api/dio_consumer.dart';
 import 'package:mo3tv/core/repository/base_repository.dart';
 import 'package:mo3tv/core/network/network_info.dart';
@@ -134,15 +133,6 @@ Future _external() async {
       () => SharedPrefrencesManager(sl()));
   sl.registerLazySingleton(() => InternetConnectionChecker.createInstance(
       checkInterval: const Duration(milliseconds: 3500)));
-  sl.registerLazySingleton(() => AppInterceptors());
-  sl.registerLazySingleton(() => LogInterceptor(
-        request: true,
-        requestBody: true,
-        requestHeader: true,
-        responseBody: true,
-        responseHeader: true,
-        error: true,
-      ));
 }
 
 _account() {
