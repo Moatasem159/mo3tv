@@ -10,9 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^5.7.0
-  intl: any
+  gal: ^2.3.0
+  intl: ^0.19.0
   hive: ^2.2.3
-  dartz: ^0.10.1
   envied: ^0.5.4+1
   get_it: ^7.7.0
   lottie: ^3.1.2
@@ -34,7 +34,6 @@ dependencies:
   shared_preferences: ^2.3.2
   cached_network_image: ^3.4.1
   smooth_page_indicator: ^1.2.0+3
-  gal: ^2.3.0
   youtube_player_flutter: ^9.0.3
   internet_connection_checker: ^2.0.0
 dev_dependencies:
